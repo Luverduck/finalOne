@@ -1,7 +1,7 @@
 :city_sunset: 아지트(Ahzit)
 ===========================
 
-아지트(Ahzit) 프로젝트 소개
+:information_desk_person: 아지트(Ahzit) 프로젝트 소개
 ------------------------------
 ### :bulb: 개발 목적 
 
