@@ -3,16 +3,16 @@
 
 :information_desk_person: 아지트(Ahzit) 소개
 ------------------------------
-### :bulb: 개발 목적   
+#### :bulb: 개발 목적   
 * 1
 
-### :moneybag: 시장 조사   
+#### :moneybag: 시장 조사   
 * 1
 
-### :calendar: 개발 일정   
+#### :calendar: 개발 일정   
 * 1
 
-### :computer: 개발 환경   
+#### :computer: 개발 환경   
 * 1
 
 :clap: Contributor
