@@ -13,8 +13,8 @@
 
 Contributor :family:
 ---------------
-#### :man: 엄현용[https://github.com/Luverduck]
-#### :clap: 최지안 >https://github.com/public1992
-#### :clap: 송의중[https://github.com/sjtees]
-#### :clap: 방소정 >https://github.com/soo231
-#### :clap: 최승리 >https://github.com/seungrii
+#### :man: 엄현용 [:pushpin:][https://github.com/Luverduck]
+#### :clap: 최지안 [:pushpin:][https://github.com/public1992]
+#### :clap: 송의중 [:pushpin:][https://github.com/sjtees]
+#### :clap: 방소정 [:pushpin:][https://github.com/soo231]
+#### :clap: 최승리 [:pushpin:][https://github.com/seungrii]
