@@ -3,6 +3,7 @@
 
 ## 아지트(Ahzit) 프로젝트 소개
 ------------------------------
+
 ### 개발 목적 
 
 ### 시장 조사
@@ -13,6 +14,7 @@
 
 ## Contributor
 ---------------
+
 ### 엄현용 >https://github.com/Luverduck
 ### 최지안 >https://github.com/public1992
 ### 송의중 >https://github.com/sjtees
