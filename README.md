@@ -12,7 +12,7 @@
 ### :computer: 개발 환경 
 
 
-Contributor :boy: :woman: :man: :woman: :girl:
+Contributor :man: :woman: :boy: :woman: :girl:
 ---------------
 #### [:clap: 엄현용](https://github.com/Luverduck)
 * 1
