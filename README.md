@@ -13,8 +13,8 @@
 
 Contributor
 ---------------
-### 엄현용 >https://github.com/Luverduck
-### 최지안 >https://github.com/public1992
-### 송의중 >https://github.com/sjtees
-### 방소정 >https://github.com/soo231
-### 최승리 >https://github.com/seungrii
+##### 엄현용 >https://github.com/Luverduck
+##### 최지안 >https://github.com/public1992
+##### 송의중 >https://github.com/sjtees
+##### 방소정 >https://github.com/soo231
+##### 최승리 >https://github.com/seungrii
