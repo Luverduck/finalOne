@@ -13,17 +13,17 @@
 
 Contributor :boy: :woman: :man: :woman: :girl:
 ---------------
-#### 엄현용 [:point_right:](https://github.com/Luverduck)
+#### [엄현용 :clap:](https://github.com/Luverduck)
 * 1
 
-#### 최지안 [:point_right:](https://github.com/public1992)
+#### [최지안 :clap:](https://github.com/public1992)
 * 1
 
-#### 송의중 [:point_right:](https://github.com/sjtees)
+#### [송의중 :clap:](https://github.com/sjtees)
 * 1
 
-#### 방소정 [:point_right:](https://github.com/soo231)
+#### [방소정 :clap:](https://github.com/soo231)
 * 1
 
-#### 최승리 [:point_right:](https://github.com/seungrii)
+#### [최승리 :clap:](https://github.com/seungrii)
 * 1
