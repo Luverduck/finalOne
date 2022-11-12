@@ -23,11 +23,11 @@
 #### 최지안 https://github.com/public1992
 * 1   
 
-##### 송의중 https://github.com/sjtees
+#### 송의중 https://github.com/sjtees
 * 1   
 
-##### 방소정 https://github.com/soo231
+#### 방소정 https://github.com/soo231
 * 1   
 
-##### 최승리 https://github.com/seungrii
+#### 최승리 https://github.com/seungrii
 * 1   
