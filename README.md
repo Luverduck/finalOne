@@ -11,10 +11,10 @@
 
 ### 개발 환경 :computer:
 
-Contributor
+Contributor :family:
 ---------------
 #### :man: 엄현용[https://github.com/Luverduck]
-#### 최지안 >https://github.com/public1992
-#### :boy: 송의중[https://github.com/sjtees]
-#### :woman: 방소정 >https://github.com/soo231
-#### :girl: 최승리 >https://github.com/seungrii
+#### :clap: 최지안 >https://github.com/public1992
+#### :clap: 송의중[https://github.com/sjtees]
+#### :clap: 방소정 >https://github.com/soo231
+#### :clap: 최승리 >https://github.com/seungrii
