@@ -26,7 +26,7 @@
 ## 2022.11.22 회의 내용
 
 - 기능 정의 발표 및 토론
-- 기능 정의 정리 (세부 내용 : https://docs.google.com/spreadsheets/d/18KxSxBSDFEqM-EFH4wCCM2lNg64AaHzCTQwBiGtwg1Y/edit#gid=1588140002)
+- 기능 정의 정리
   - 메인 페이지
     - 로고 클릭시 홈으로 이동
     - 검색창을 이용한 소모임 검색 및 소모임 내 게시글 검색
@@ -56,7 +56,9 @@
     - 회원 정보 수정
     - 회원 탈퇴
   - 회원 기능
-    - 다른 회원 신
+    - 다른 회원 신고
+
+- 기능 정의  : https://docs.google.com/spreadsheets/d/18KxSxBSDFEqM-EFH4wCCM2lNg64AaHzCTQwBiGtwg1Y/edit#gid=1588140002  
   
   ### 다음 회의까지
   
