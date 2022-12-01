@@ -15,6 +15,6 @@ public class Test_soo231 {
 		int a; 
 		int b;
 		int c;
-		
+		int d;
 	}
 }
