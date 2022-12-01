@@ -11,6 +11,6 @@ public class Test_public1992 {
 
 	@Test
 	public void test() {
-		
+		String test="병합 테스트 12011705";
 	}
 }
