@@ -13,7 +13,8 @@ public class Test_soo231 {
 	public void test() {
 		String test="병합 테스트";
 		int a; 
-		int b;		
+		int b;
+		int c;
 		
 	}
 }
