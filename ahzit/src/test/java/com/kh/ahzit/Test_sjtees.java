@@ -13,5 +13,6 @@ public class Test_sjtees {
 	public void test() {
 		
 		int a;
+		int b;
 	}
 }
