@@ -12,6 +12,6 @@ public class Test_soo231 {
 	@Test
 	public void test() {
 		String test="병합 테스트";
-		
+		int a; //17:46
 	}
 }
