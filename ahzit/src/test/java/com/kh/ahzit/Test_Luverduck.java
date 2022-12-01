@@ -11,6 +11,6 @@ public class Test_Luverduck {
 
 	@Test
 	public void test() {
-		
+		int a = 1;
 	}
 }
