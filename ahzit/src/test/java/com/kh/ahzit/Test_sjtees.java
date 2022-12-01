@@ -12,5 +12,6 @@ public class Test_sjtees {
 	@Test
 	public void test() {
 		
+		int a;
 	}
 }
