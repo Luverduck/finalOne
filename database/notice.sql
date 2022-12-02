@@ -2,7 +2,7 @@
 -- 테이블 생성
 create table notice(
 notice_no number primary key,
-notice_writer references ahzit_user(user_id) on delete set null not null,
+notice_writer references ahzit_user(user_id) on delete set null,
 notice_title varchar(300) not null,
 notice_content varchar(4000) not null,
 notice_read number default 0 not null check(notice_read >= 0),
