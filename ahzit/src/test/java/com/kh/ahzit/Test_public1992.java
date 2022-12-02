@@ -28,9 +28,9 @@ public class Test_public1992 {
 												.ahzitLeader("tester111")
 												.ahzitSort("취미")
 												.ahzitName("테스트아지트생성메소드")
-												.ahzitInfo("인포메이션이면아지트소개문인가")
-												.ahzitRegionHigh("경기도")
-												.ahzitRegionLow("성남시")
+												.ahzitInfo("인원제한칼럼추가")
+												.ahzitRegionHigh("서울시")
+												.ahzitRegionLow("낙원구")
 												.ahzitIsPublic("Y")
 												.build();
 		sqlSession.insert("ahzit.ahzitInsert",ahzitDto);

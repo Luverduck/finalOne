@@ -14,6 +14,7 @@ public class AhzitDto {
 	private String ahzitName;
 	private String ahzitInfo;
 	private int ahzitHead;
+	private int ahzitHeadMax;
 	private String ahzitRegionHigh;
 	private String ahzitRegionLow;
 	private int ahzitLike;
