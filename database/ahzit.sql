@@ -25,3 +25,7 @@ create sequence ahzit_seq;
 
 -- 시퀀스 삭제
 drop sequence ahzit_seq;
+
+-- 소모임 더미 데이터
+insert into ahzit(ahzit_no, ahzit_leader, ahzit_sort, ahzit_name, ahzit_info, ahzit_headmax, ahzit_region_high, ahzit_region_low, ahzit_ispublic)
+values(ahzit_seq.nextval, 'tester111', '스터디', '테스트용아지트', '테스트용아지트', '50', '서울특별시', '강남구', 'Y');
