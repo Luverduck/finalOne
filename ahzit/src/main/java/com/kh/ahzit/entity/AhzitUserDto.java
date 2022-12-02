@@ -14,7 +14,6 @@ public class AhzitUserDto {
 	private String userPw;
 	private String userNick;
 	private String userEmail;
-	private String userInterest;
 	private String userGrade;
 	private Date userJoinDate;
 	private Date userLoginDate;
