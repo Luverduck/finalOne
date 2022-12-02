@@ -2,7 +2,7 @@
 -- 테이블 생성
 create table ahzit_member(
 member_nick varchar2(30) primary key,
-member_group_no references ahzit(ahzit_no) on delete cascade,
+member_ahzit_no references ahzit(ahzit_no) on delete cascade,
 member_id references ahzit_user(user_id) on delete set null,
 member_grade varchar2(9) default '일반' check(member_grade in ('일반', '개설자')) not null,
 member_score number default 0 check(member_score >= 0) not null,
