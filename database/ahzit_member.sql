@@ -17,3 +17,9 @@ create sequence ahzit_member_seq;
 
 -- 시퀀스 삭제
 drop sequence ahzit_member_seq;
+
+-- 소모임 회원 더미 데이터
+-- 개설자
+insert into ahzit_member(member_nick, member_ahzit_no, member_id, member_grade, member_joindate) values ('테스터111', 5, 'tester111', '개설자', sysdate);
+-- 회원
+insert into ahzit_member(member_nick, member_ahzit_no, member_id, member_joindate) values ('테스터222', 5, 'tester222', sysdate);
