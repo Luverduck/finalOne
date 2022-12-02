@@ -17,20 +17,19 @@ public class AhzitUserController {
 	@Autowired
 	private AhzitUserDao ahzitUserDao;
 	
+	// 회원가입
 	@GetMapping("/join")
 	public String insert() {
 		return "ahzitUser/join";
 	}
-
 	@PostMapping("/join")
 	public String insert(@ModelAttribute AhzitUserDto ahzitUserDto) {
 		ahzitUserDao.join(ahzitUserDto);
-		return "redirect:join_success";
+		return "redirect:joinSuccess";
 	}
-	
-	@GetMapping("/join_success")
+	@GetMapping("/joinSuccess")
 	public String joinSuccess() {
-		return "ahzitUser/join_success";
+		return "ahzitUser/joinSuccess";
 	}
 
 }

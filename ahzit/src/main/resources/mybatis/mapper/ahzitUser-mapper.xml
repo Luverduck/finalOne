@@ -6,6 +6,7 @@
 
 <mapper namespace="ahzitUser">
 	 	
+	 <!-- 회원 가입 -->
 	 <insert id="insert" parameterType="AhzitUserDto">
 	 	insert into ahzit_user(user_id, user_pw, user_nick, user_email) 
 	 	values(#{userId}, #{userPw}, #{userNick}, #{userEmail} )

@@ -15,11 +15,11 @@
 			닉네임 : <input name="userNick" placeholder="닉네임" type="text" required>
 		</div>
 		<div class="row center">
-			이메일 : <input  name="userEmail" type="text" required>
+			이메일 : <input name="userEmail" type="text" placeholder="이메일"  required>
 		</div>
 		
 		<div class="row center">
-			<button class="btn btn-positive" type="submit">가입하기</button>
+			<button type="submit">가입하기</button>
 		</div>
-	</div>
+	
 </form>

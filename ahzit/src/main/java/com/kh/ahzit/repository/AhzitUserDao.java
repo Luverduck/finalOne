@@ -4,7 +4,7 @@ import com.kh.ahzit.entity.AhzitUserDto;
 
 public interface AhzitUserDao {
 
-	void join(AhzitUserDto ahzitUserDto);
+	void join(AhzitUserDto ahzitUserDto); // 회원 가입
 
 	
 	
