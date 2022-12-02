@@ -2,7 +2,7 @@
 -- 테이블 생성
 create table ahzit_like(
 ahzit_like_no references ahzit(ahzit_no) on delete cascade not null,
-ahzit_like_id references ahzit_user(user_id) on delete set null not null,
+ahzit_like_id references ahzit_user(user_id) on delete set null,
 ahzit_like_date date default sysdate not null
 );
 

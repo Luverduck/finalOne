@@ -3,7 +3,7 @@
 create table ahzit_report(
 report_no number primary key,
 report_group references ahzit(ahzit_no) on delete cascade not null,
-report_id references ahzit_user(user_id) on delete set null not null,
+report_id references ahzit_user(user_id) on delete set null,
 report_type varchar(60) not null,
 report_content varchar(300) not null,
 report_state char(1) not null check(report_state in('Y','N'))

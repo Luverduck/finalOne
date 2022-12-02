@@ -3,7 +3,7 @@
 create table qna_reply(
 qna_reply_no number primary key,
 qna_origin_no references qna(qna_no) on delete cascade not null,
-qna_reply_writer references ahzit_user(user_id) on delete set null not null,
+qna_reply_writer references ahzit_user(user_id) on delete set null,
 qna_reply_content varchar(900) not null,
 qna_reply_writedate date default sysdate not null,
 qna_reply_updatedate date

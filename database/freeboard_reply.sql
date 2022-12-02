@@ -3,7 +3,7 @@
 create table freeboard_reply(
 freeboard_reply_no number primary key,
 freeboard_origin_no references freeboard(freeboard_no) on delete cascade not null,
-freeboard_reply_writer references ahzit_user(user_id) on delete set null not null,
+freeboard_reply_writer references ahzit_user(user_id) on delete set null,
 freeboard_reply_content varchar(900) not null,
 freeboard_reply_writedate date default sysdate not null,
 freeboard_reply_updatedate date
