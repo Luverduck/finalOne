@@ -17,4 +17,8 @@ public class AhzitUserDaoImpl implements AhzitUserDao{
 		sqlSession.insert("ahzitUser.insert", ahzitUserDto);
 	}
 
+	@Override
+	public AhzitUserDto selectOne(String userId) {
+		return sqlSession.selectOne("ahzitUser.get", userId);
+	}
 }

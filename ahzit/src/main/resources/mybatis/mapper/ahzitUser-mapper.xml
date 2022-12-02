@@ -12,4 +12,10 @@
 	 	values(#{userId}, #{userPw}, #{userNick}, #{userEmail} )
 	 </insert>
 	 
+	 <!-- 회원 단일 조회 -->
+	 <select id="get" parameterType="String" resultType="AhzitUserDto">
+		select * from ahzit_user where user_id = #{user_id}
+	</select>
+	
+	 
 </mapper>
