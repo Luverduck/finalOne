@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="ahzit">
+  
+  		<!-- 시퀀스 발행 -->
+  		<select id="ahzitSequence" resultType="int">
+  			select ahzit_seq.nextval from dual
+  		</select>
+  		
+  		<!-- 소모임 생성 -->
+  		<insert id="ahzitInsert" parameterType="AhzitDto">
+  			insert into ahzit(
+  			ahzit_no, ahzit_leader, ahzit_sort, ahzit_name, ahzit_info, ahzit_region_high, ahzit_region_low, ahzit_ispublic) 
+  			values(#{ahzitNo}, #{ahzitLeader}, #{ahzitSort}, #{ahzitName}, #{ahzitInfo}, #{ahzitRegionHigh}, #{ahzitRegionLow}, #{ahzitIsPublic})
+  		</insert>
+  
+  </mapper>
