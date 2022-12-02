@@ -13,3 +13,8 @@ user_state char(1) default 'N' check(user_state in('Y','N')) not null
 
 -- 테이블 삭제
 drop table ahzit_user;
+
+-- 회원 더미 데이터
+insert into ahzit_user(user_id, user_pw, user_nick, user_email, user_grade) values('admin123', 'admin123', '관리자', 'admin123@gmail.com', '관리자');
+insert into ahzit_user(user_id, user_pw, user_nick, user_email, user_grade) values('tester111', 'tester111', '테스터111', 'admin123@gmail.com', '일반');
+insert into ahzit_user(user_id, user_pw, user_nick, user_email, user_grade) values('tester222', 'tester222', '테스터222', 'admin123@gmail.com', '일반');
