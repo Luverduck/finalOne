@@ -12,7 +12,7 @@ public class Test_Luverduck {
 	@Test
 	public void test() {
 		int a = 1;
-		int b = 2;
+		int b = 2; 
 		int c = 1;
 	}
 }
