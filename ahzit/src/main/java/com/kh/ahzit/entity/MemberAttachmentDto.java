@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
-public class MemberAttachment {
+public class MemberAttachmentDto {
 	private String memberOriginNick;
 	private int memberAttachmentNo;
 

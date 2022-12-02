@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder	
-public class AhzitLike {
+public class AhzitLikeDto {
 	private int AhzitLikeNo;
 	private String AhzitLikeId;
 	private Date AhzitLikeDate;
