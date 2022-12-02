@@ -15,5 +15,11 @@
   			ahzit_no, ahzit_leader, ahzit_sort, ahzit_name, ahzit_info, ahzit_region_high, ahzit_region_low, ahzit_ispublic) 
   			values(#{ahzitNo}, #{ahzitLeader}, #{ahzitSort}, #{ahzitName}, #{ahzitInfo}, #{ahzitRegionHigh}, #{ahzitRegionLow}, #{ahzitIsPublic})
   		</insert>
+  		
+  		<!-- 소모임 수정(소모임이름, 소개, 최대멤버수, 공개여부, 프로필사진)-->
+  		<update id="ahzitUpdate" parameterType="AhzitDto">
+  			update ahzit 
+  				set ahzit_name=#{ahzitName},  ahzit_info=#{ahzitInfo}, ahzit_headmax=#{ahzitHeadMax}, ahzit_ispublic=#{ahzitIsPublic} where ahzit_no = #{ahzitNo}
+  		</update>
   
   </mapper>

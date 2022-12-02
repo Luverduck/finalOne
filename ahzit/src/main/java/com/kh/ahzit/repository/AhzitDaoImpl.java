@@ -23,4 +23,12 @@ public class AhzitDaoImpl implements AhzitDao {
 		
 	}
 
+	@Override
+	public boolean update(AhzitDto ahzitDto) {
+		int count = sqlSession.update("ahzit.ahzitUpdate", ahzitDto);
+		return count > 0;
+	}
+
+
+
 }
