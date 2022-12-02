@@ -48,7 +48,7 @@ public class NoticeDaoImpl implements NoticeDao{
 	
 	@Override
 	public List<NoticeDto> selectList() {
-		String sql = "select * from board order by notice_no desc";
+		String sql = "select * from notice order by notice_no desc";
 		return jdbcTemplate.query(sql, mapper);
 	}
 
@@ -64,7 +64,7 @@ public class NoticeDaoImpl implements NoticeDao{
 	
 	@Override
 	public void clear() {
-		String sql = "delecte notice";
+		String sql = "delete notice";
 		jdbcTemplate.update(sql);
 	}
 }

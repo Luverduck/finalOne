@@ -15,7 +15,6 @@ import com.kh.ahzit.repository.NoticeDao;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @SpringBootTest
 public class Test_seungrii {
 
@@ -28,7 +27,7 @@ public class Test_seungrii {
 			noticeDao.insert(NoticeDto.builder()
 						.noticeTitle("테스트"+i)
 						.noticeContent("테스트"+i)
-						.noticeWriter("hello1234")				
+						.noticeWriter("tester111")				
 					.build());
 		}
 	}
@@ -44,8 +43,8 @@ public class Test_seungrii {
 		assertEquals(list.size(), 5);
 	}
 	
-	@AfterEach
-	public void after() {
-		noticeDao.clear();
-	}
+	// @AfterEach
+	// public void after() {
+	// 	noticeDao.clear();
+	// }
 }
