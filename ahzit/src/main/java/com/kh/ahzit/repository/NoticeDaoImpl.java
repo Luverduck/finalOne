@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ahzit.entity.NoticeDto;
+import com.kh.ahzit.vo.NoticeListSearchVO;
 
 @Repository
 public class NoticeDaoImpl implements NoticeDao{
@@ -53,12 +54,12 @@ public class NoticeDaoImpl implements NoticeDao{
 	}
 
 	@Override
-	public List<NoticeDto> selectList(String type, String keyword) {
+	public List<NoticeDto> selectList(NoticeListSearchVO vo) {
 		String sql = "select * from notice "
 				+ "where instr(#1, ?) > 0 "
 				+ "order by notice_no desc";
-		sql = sql.replace("#1", type);
-		Object[] param = {keyword};
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
 	
