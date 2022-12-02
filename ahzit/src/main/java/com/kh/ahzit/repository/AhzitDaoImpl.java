@@ -4,6 +4,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ahzit.entity.AhzitDto;
+
 @Repository
 public class AhzitDaoImpl implements AhzitDao {
 	
@@ -13,6 +15,12 @@ public class AhzitDaoImpl implements AhzitDao {
 	@Override
 	public int sequence() {
 		return sqlSession.selectOne("ahzit.ahzitSequence");
+	}
+	
+	@Override
+	public void insert(AhzitDto ahzitDto) {
+		sqlSession.insert("ahzit.ahzitInsert",ahzitDto);
+		
 	}
 
 }
