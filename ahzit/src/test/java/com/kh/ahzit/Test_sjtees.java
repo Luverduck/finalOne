@@ -11,6 +11,9 @@ public class Test_sjtees {
 
 	@Test
 	public void test() {
-		
+		int d111;
+		int a;
+		int c123;
+		int b;
 	}
 }
