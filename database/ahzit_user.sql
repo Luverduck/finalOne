@@ -4,7 +4,7 @@ create table ahzit_user(
 user_id varchar2(20) primary key check(regexp_like(user_id,'^[a-z][a-z0-9_-]{7,19}$')),
 user_pw char(60) not null,
 user_nick varchar2(30) not null check(regexp_like(user_nick, '^[가-힣][가-힣0-9]{2,9}$')),
-user_email varchar2(320) not null check(regexp_like(user_email,'@')),
+user_email varchar2(320) not null check(regexp_like(user_email, '^[A-Za-z0-9]{6,30}@[0-9a-z]{4,252}.[a-z]{2,3}$')),
 user_grade varchar2(9) default '일반' not null check(user_grade in('일반','관리자')),
 user_joindate date default sysdate not null,
 user_logindate date,
