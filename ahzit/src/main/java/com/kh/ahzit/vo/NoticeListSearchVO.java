@@ -5,6 +5,7 @@ import lombok.ToString;
 
 @Data
 public class NoticeListSearchVO {
+	
 	private String type, keyword;
 	
 	@ToString.Include
