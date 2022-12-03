@@ -16,6 +16,16 @@
   			values(#{ahzitNo}, #{ahzitLeader}, #{ahzitSort}, #{ahzitName}, #{ahzitInfo}, #{ahzitRegionHigh}, #{ahzitRegionLow}, #{ahzitIsPublic})
   		</insert>
   		
+  		<!-- 소모임 목록 -->
+  		<select id="list" resultType="AhzitDto">
+  			select * from ahzit
+  		</select>
+  		
+  		<!-- 소모임 단일조회 -->
+  		<select id="one" parameterType="int" resultType="AhzitDto">
+  			select * from ahzit where ahzit_no = #{ahzitNo}
+  		</select>
+  		
   		<!-- 소모임 수정(소모임이름, 소개, 최대멤버수, 공개여부, 프로필사진)-->
   		<update id="ahzitUpdate" parameterType="AhzitDto">
   			update ahzit 

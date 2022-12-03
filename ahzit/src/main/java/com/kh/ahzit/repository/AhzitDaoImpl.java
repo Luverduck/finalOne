@@ -1,5 +1,7 @@
 package com.kh.ahzit.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,6 +24,11 @@ public class AhzitDaoImpl implements AhzitDao {
 		sqlSession.insert("ahzit.ahzitInsert",ahzitDto);
 		
 	}
+	
+	@Override
+	public List<AhzitDto> selectList() {
+		return sqlSession.selectList("ahzit.list");
+	}
 
 	@Override
 	public boolean update(AhzitDto ahzitDto) {
@@ -29,6 +36,9 @@ public class AhzitDaoImpl implements AhzitDao {
 		return count > 0;
 	}
 
-
+	@Override
+	public AhzitDto selectOne(int ahzitNo) {
+		return sqlSession.selectOne("ahzit.one", ahzitNo);
+	}
 
 }
