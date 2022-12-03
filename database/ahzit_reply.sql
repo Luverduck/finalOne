@@ -2,7 +2,7 @@
 -- 테이블 생성
 create table ahzit_reply (
 reply_no number primary key,
-reply_writer references ahzit_member(member_nick) on delete cascade,
+reply_writer_no references ahzit_member(member_no) on delete cascade,
 reply_origin_no references ahzit_board(board_no) on delete cascade,
 reply_content varchar2(300) not null,
 reply_writedate date default sysdate not null,
@@ -14,7 +14,7 @@ reply_state char(1) default 'N' check(reply_state in ('Y', 'N')) not null
 drop table ahzit_reply;
 
 -- 시퀀스 생성
-create sequence reply_no;
+create sequence ahzit_reply_seq;
 
 -- 시퀀스 삭제
-drop sequence reply_no;
+drop sequence ahzit_reply_seq;
