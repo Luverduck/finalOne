@@ -20,20 +20,26 @@ public class Test_public1992 {
 	@Autowired
 	private AhzitDao ahzitDao;
 
+	//삭제
+	//ahzitDao.delete(AhzitDto.builder().ahzitNo(4).ahzitLeader("tester111").build());
+	
+	//아지트생성
+//	int test=ahzitDao.sequence();
+//	sqlSession.insert("ahzit.insert", AhzitDto.builder()
+//												.ahzitNo(test)
+//												.ahzitLeader("tester222")
+//												.ahzitSort("스터디")
+//												.ahzitName("더이상미룰수없다우리들의취업")
+//												.ahzitInfo("부끄러움이 많은 인생이었습니다")
+//												.ahzitRegionHigh("황해도")
+//												.ahzitRegionLow("탄광촌")
+//												.ahzitIsPublic("Y")
+//												.build());
+	
 	@Test
 	public void test() {
-		int test=ahzitDao.sequence();
-		AhzitDto ahzitDto=AhzitDto.builder()
-												.ahzitNo(test)
-												.ahzitLeader("tester111")
-												.ahzitSort("취미")
-												.ahzitName("테스트아지트생성메소드")
-												.ahzitInfo("인원제한칼럼추가")
-												.ahzitRegionHigh("서울시")
-												.ahzitRegionLow("낙원구")
-												.ahzitIsPublic("Y")
-												.build();
-		sqlSession.insert("ahzit.ahzitInsert",ahzitDto);
+		System.out.println(ahzitDao.delete(AhzitDto.builder().ahzitNo(4).ahzitLeader("tester111").build()));
+		
 	}
 
 }
