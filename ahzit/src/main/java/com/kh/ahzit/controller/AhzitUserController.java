@@ -45,21 +45,20 @@ public class AhzitUserController {
 	}
 	@PostMapping("/login")
 	public String login(HttpSession session, @ModelAttribute AhzitUserDto ahzitUserDto) {
-		AhzitUserDto findDto = ahzitUserDao.selectOne(ahzitUserDto.getUserId());
-		System.out.println(findDto);
 		
-		if(findDto == null) {
-			return "redirect:login?error";
-		}
-		
-		boolean isLogin = ahzitUserDto.getUserPw().equals(findDto.getUserPw());
-		if(isLogin) {
-			session.setAttribute(SessionConstant.ID, findDto.getUserId());
+		// 1. 아이디 패스워드 비교 구문 
+		// 아이디조회, 비밀번호 조회
+		// 2. 암호화
+		// 끝
+		if(ahzitUserDao.login(ahzitUserDto)) {
+			session.setAttribute(SessionConstant.ID, ahzitUserDto.getUserId());
 			return "redirect:/";
 		}
 		else {
 			return "redirect:login?error";
 		}
+		
+		
 	}
 	
 	// 로그아웃

@@ -8,6 +8,8 @@ public interface AhzitUserDao {
 
 	AhzitUserDto selectOne(String userId); // 회원 단일 조회
 
+	boolean login(AhzitUserDto ahzitUserDto); // 로그인
+
 	
 	
 	
