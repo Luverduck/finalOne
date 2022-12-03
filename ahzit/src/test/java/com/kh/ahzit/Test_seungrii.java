@@ -27,7 +27,7 @@ public class Test_seungrii {
 			noticeDao.insert(NoticeDto.builder()
 						.noticeTitle("테스트"+i)
 						.noticeContent("테스트"+i)
-						.noticeWriter("tester222")				
+						.noticeWriter("admin123")				
 					.build());
 		}
 	}
@@ -43,8 +43,8 @@ public class Test_seungrii {
 		assertEquals(list.size(), 5);
 	}
 	
-	 @AfterEach
-	 public void after() {
-	 	noticeDao.clear();
-	 }
+//	 @AfterEach
+//	 public void after() {
+//	 	noticeDao.clear();
+//	 }
 }
