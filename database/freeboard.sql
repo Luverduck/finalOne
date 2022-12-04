@@ -2,7 +2,7 @@
 -- 테이블 생성
 create table freeboard(
 freeboard_no number primary key,
-freeboard_id references ahzit_user(user_id) on delete set null,
+freeboard_writer references ahzit_user(user_id) on delete set null,
 freeboard_title varchar(300) not null,
 freeboard_content varchar(4000) not null,
 freeboard_read number default 0 not null check(freeboard_read > = 0),
