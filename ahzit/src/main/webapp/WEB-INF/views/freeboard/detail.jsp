@@ -28,7 +28,14 @@
 		게시글 좋아요 : ${freeboardDto.freeboardLike}
 	</div>
 	<div class = "row">
-		게시글 작성일 : ${freeboardDto.freeboardWritedate}
+		<c:forEach var = "list" items = "${attachmentList}">
+			<img src = "/attachment/download/freeboard?attachmentNo=${list.attachmentNo}">
+		</c:forEach>
+	</div>
+	<div class = "row">
+		<div class = "col">
+			
+		</div>
 	</div>
 	<div>
 		<a href = "edit?freeboardNo=${freeboardDto.freeboardNo}">수정</a>

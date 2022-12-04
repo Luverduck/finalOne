@@ -24,9 +24,10 @@ public class FreeboardDaoImpl implements FreeboardDao {
 		return sqlSession.selectOne("freeboard.nextFreeboardNo");
 	}
 
-	// 추상 메소드 오버라이딩 - 자유게시판 게시글 등록
+	// 추상 메소드 오버라이딩 - 자유게시글 등록
 	@Override
 	public void insertFreeboard(FreeboardDto freeboardDto) {
+		// 게시글 등록
 		sqlSession.insert("freeboard.insert", freeboardDto);
 	}
 
@@ -58,14 +59,14 @@ public class FreeboardDaoImpl implements FreeboardDao {
 	// 추상 메소드 오버라이딩 - 자유게시글 전체 조회
 	@Override
 	public List<FreeboardDto> selectAll(FreeboardListSeachVO freeboardListSeachVO) {
-		// 전체 조회 후 결과 반환
+		// 게시글 전체 조회 후 결과 반환
 		return sqlSession.selectList("freeboard.allList");
 	}
 
 	// 추상 메소드 오버라이딩 - 자유게시글 상세 조회
 	@Override
 	public FreeboardDto detailFreeboard(int freeboardNo) {
-		// 단일 조회 후 결과 반환
+		// 게시글 단일 조회 후 결과 반환
 		return sqlSession.selectOne("freeboard.detail", freeboardNo);
 	}
 	
@@ -79,14 +80,21 @@ public class FreeboardDaoImpl implements FreeboardDao {
 	// 추상 메소드 오버라이딩 - 자유게시글 수정
 	@Override
 	public boolean updateFreeboard(FreeboardDto freeboardDto) {
-		// 게시글 수정 후 수정 여부 반환
+		// 게시글 수정 성공 여부 반환
 		return sqlSession.update("freeboard.update", freeboardDto) > 0;
 	}
 
 	// 추상 메소드 오버라이딩 - 자유게시글 비활성화
 	@Override
 	public boolean inactiveFreeboard(int freeboardNo) {
-		// 상태 수정 후 수정 여부 반환
+		// 게시글 비활성화 성공 여부 반환
 		return sqlSession.update("freeboard.inactive", freeboardNo) > 0;
+	}
+
+	// 추상 메소드 오버라이딩 - 자유게시글 삭제
+	@Override
+	public boolean deleteFreeboard(int freeboardNo) {
+		// 게시글 삭제 성공 여부 반환
+		return sqlSession.delete("freeboard.delete", freeboardNo) > 0;
 	}
 }

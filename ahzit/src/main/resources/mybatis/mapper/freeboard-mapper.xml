@@ -16,6 +16,11 @@
 		insert into freeboard(freeboard_no, freeboard_writer, freeboard_title, freeboard_content) values(#{freeboardNo}, #{freeboardWriter}, #{freeboardTitle}, #{freeboardContent})
 	</insert>
 	
+	<!-- 자유 게시글 첨부파일 등록 -->
+	<insert id = "insertAttachment" parameterType = "map">
+		insert into freeboard_attachment(freeboard_origin_no, freeboard_attachment_no) values(#{freeboardOriginNo}, #{freeboardAttachmentNo})
+	</insert>
+	
 	<!-- 자유 게시글 검색 조회 -->
 	<select id = "searchList" parameterType = "map" resultType = "FreeboardDto">
 		select freeboard_no, freeboard_writer, freeboard_title, freeboard_read, freeboard_like, freeboard_writedate from freeboard where instr(${type}, #{keyword}) > 0 and freeboard_state = 'N' order by freeboard_no desc
@@ -28,7 +33,7 @@
 	
 	<!-- 자유 게시글 단일 조회 -->
 	<select id = "detail" parameterType = "int" resultType = "FreeboardDto">
-		select freeboard_no, freeboard_writer, freeboard_title, freeboard_read, freeboard_like, freeboard_content, freeboard_writedate from freeboard where freeboard_no = #{freeboardNo}
+		select freeboard_no, freeboard_writer, freeboard_title, freeboard_read, freeboard_content, freeboard_like, freeboard_writedate from freeboard where freeboard_no = #{freeboardNo}
 	</select>
 	
 	<!-- 자유 게시글 조회수 증가 -->
@@ -45,5 +50,10 @@
 	<update id = "inactive" parameterType = "int">
 		update freeboard set freeboard_state = 'Y' where freeboard_no = #{freeboardNo}
 	</update>
+	
+	<!-- 자유 게시글 삭제 -->
+	<delete id = "delete" parameterType = "int">
+		delete freeboard where freeboard_no = #{freeboardNo}
+	</delete>
 	
 </mapper>
