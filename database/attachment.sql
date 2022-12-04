@@ -12,7 +12,7 @@ attachment_date date default sysdate not null
 drop table attachment;
 
 -- 시퀀스 생성
-create table attachment_seq;
+create sequence attachment_seq;
 
 -- 시퀀스 삭제
 drop sequence attachment_seq;
