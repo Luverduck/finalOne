@@ -22,8 +22,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ahzit.entity.AttachmentDto;
 import com.kh.ahzit.entity.FreeboardDto;
+import com.kh.ahzit.entity.FreeboardLikeDto;
 import com.kh.ahzit.repository.AttachmentDao;
 import com.kh.ahzit.repository.FreeboardDao;
+import com.kh.ahzit.repository.FreeboardLikeDao;
 import com.kh.ahzit.vo.FreeboardListSeachVO;
 
 @Controller // 자유 게시판에 대한 Controller
@@ -37,6 +39,10 @@ public class FreeboardController {
 	// 의존성 주입
 	@Autowired
 	private AttachmentDao attachmentDao;
+	
+	// 의존성 주입
+	@Autowired
+	private FreeboardLikeDao freeboardLikeDao;
 	
 	// 첨부파일 업로드 상위경로 설정
 	private final File directory = new File("D:/upload/kh10f/freeboardAttachment");
@@ -101,7 +107,7 @@ public class FreeboardController {
 	
 	// 게시글 상세 Mapping (회원)
 	@GetMapping("/detail")
-	public String detailFreeboard(HttpServletRequest request, HttpServletResponse response, Model model, @RequestParam int freeboardNo) {
+	public String detailFreeboard(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model, @RequestParam int freeboardNo) {
 		// 조회수 중복 증가 방지 처리
 		// HttpServletRequest에서 기존에 저장되어있는 전체 Cookie 반환
 		Cookie[] cookies = request.getCookies();
@@ -133,6 +139,14 @@ public class FreeboardController {
 		List<AttachmentDto> attachmentList = attachmentDao.selectFreeboardAttachment(freeboardNo);
 		// 조회 결과를 model에 추가
 		model.addAttribute("attachmentList", attachmentList);
+		// 로그인 중인 회원의 회원 아이디 반환
+		String loginId = (String)session.getAttribute("loginId");
+		if(loginId != null) {
+			// 좋아요 여부 조회
+			boolean isLike = freeboardLikeDao.freeboardLikeCheck(freeboardNo, loginId);
+			// 좋아요 여부를 model에 추가
+			model.addAttribute("isLike", isLike);
+		}
 		// 게시글 상세 페이지(detail.jsp)로 연결
 		return "freeboard/detail";
 	}
@@ -275,5 +289,25 @@ public class FreeboardController {
 		else { // 비활성화 실패시 
 			throw new Exception(); // 오류 발생
 		}
+	}
+	
+	// 게시글 좋아요 Mapping
+	@GetMapping("/like")
+	public String likeFreeboard(HttpSession session, @RequestParam int freeboardNo, RedirectAttributes attr) {
+		// 로그인 중인 회원 아이디 반환
+		String loginId = (String)session.getAttribute("loginId");
+		// 반환한 회원 아이디와 입력받은 freeboardNo로 FreeboardLikeDto의 인스턴스 생성
+		FreeboardLikeDto freeboardLikeDto = FreeboardLikeDto.builder().freeboardLikeNo(freeboardNo).freeboardLikeId(loginId).build();
+		// 해당 회원이 좋아요 했는지 여부
+		boolean isLike = freeboardLikeDao.freeboardLikeCheck(freeboardNo, loginId);
+		if(isLike) { // 좋아요를 한 경우라면
+			freeboardLikeDao.freeboardLikeDelete(freeboardLikeDto);
+		}
+		else { // 좋아요를 하지 않은 경우라면
+			freeboardLikeDao.freeboardLikeInsert(freeboardLikeDto);
+		}
+		// 좋아요 처리 후 해당 게시글의 상세 페이지로 강제 이동(redirect;
+		attr.addAttribute("freeboardNo", freeboardNo);
+		return "redirect:detail";
 	}
 }

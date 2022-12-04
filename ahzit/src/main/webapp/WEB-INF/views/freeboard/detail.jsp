@@ -26,6 +26,15 @@
 	</div>
 	<div class = "row">
 		게시글 좋아요 : ${freeboardDto.freeboardLike}
+		<c:if test = "${isLike == null}">
+			<a href = "like?freeboardNo=${freeboardDto.freeboardNo}"><i class="fa-regular fa-heart"></i></a>
+		</c:if>
+		<c:if test = "${isLike == true}">
+			<a href = "like?freeboardNo=${freeboardDto.freeboardNo}"><i class="fa-solid fa-heart"></i></a>
+		</c:if>
+		<c:if test = "${isLike == false}">
+			<a href = "like?freeboardNo=${freeboardDto.freeboardNo}"><i class="fa-regular fa-heart"></i></a>
+		</c:if>
 	</div>
 	<div class = "row">
 		<c:forEach var = "list" items = "${attachmentList}">
