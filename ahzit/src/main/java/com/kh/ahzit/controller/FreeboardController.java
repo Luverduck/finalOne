@@ -129,6 +129,10 @@ public class FreeboardController {
 		FreeboardDto freeboardDto = freeboardDao.detailFreeboard(freeboardNo);
 		// 조회 결과를 model에 추가
 		model.addAttribute("freeboardDto", freeboardDto);
+		// 입력받은 자유게시글 번호로 해당 번호에 연결된 첨부파일 조회
+		List<AttachmentDto> attachmentList = attachmentDao.selectFreeboardAttachment(freeboardNo);
+		// 조회 결과를 model에 추가
+		model.addAttribute("attachmentList", attachmentList);
 		// 게시글 상세 페이지(detail.jsp)로 연결
 		return "freeboard/detail";
 	}
@@ -140,10 +144,6 @@ public class FreeboardController {
 		FreeboardDto freeboardDto = freeboardDao.detailFreeboard(freeboardNo);
 		// 조회 결과를 model에 추가
 		model.addAttribute("freeboardDto", freeboardDto);
-		// 입력받은 자유게시글 번호로 해당 번호에 연결된 첨부파일 조회
-		List<AttachmentDto> attachmentList = attachmentDao.selectFreeboardAttachment(freeboardNo);
-		// 조회 결과를 model에 추가
-		model.addAttribute("attachmentList", attachmentList);
 		// 게시글 수정 페이지(edit.jsp)로 연결
 		return "freeboard/edit";
 	}

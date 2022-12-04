@@ -32,11 +32,6 @@
 			<img src = "/attachment/download/freeboard?attachmentNo=${list.attachmentNo}">
 		</c:forEach>
 	</div>
-	<div class = "row">
-		<div class = "col">
-			
-		</div>
-	</div>
 	<div>
 		<a href = "edit?freeboardNo=${freeboardDto.freeboardNo}">수정</a>
 		<a href = "inactive?freeboardNo=${freeboardDto.freeboardNo}">삭제</a>
