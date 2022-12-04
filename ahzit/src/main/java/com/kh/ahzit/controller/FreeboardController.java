@@ -120,6 +120,8 @@ public class FreeboardController {
 			freeboardDao.updateFreeboardRead(freeboardNo);
 			// 입력받은 게시글 번호를 이용하여 새로운 Cookie 생성
 			Cookie cookie = new Cookie("freeboardNo"+freeboardNo, "freeboardNo"+freeboardNo);
+			// Cookie 만료 시간을 24시간으로 설정
+			cookie.setMaxAge(24 * 60 * 60);
 			// 생성한 Cookie를 HttpServletResponse에 추가
 			response.addCookie(cookie);
 		}
