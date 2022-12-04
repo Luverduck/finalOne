@@ -16,3 +16,13 @@ create sequence attachment_seq;
 
 -- 시퀀스 삭제
 drop sequence attachment_seq;
+
+-- 다음 첨부파일 번호 반환
+select attachment_seq.nextval from dual;
+
+-- 첨부파일 등록
+-- insert into attachment(attachment_no, attachment_name, attachment_type, attachment_size) values(#{attachmentNo}, #{attachmentName}, #{attachmentSize})
+
+-- 첨부파일 조회
+-- select * from attachment where attachmen_no = #{attachmentNo}
+select * from attachment where attachment_no = 4;
