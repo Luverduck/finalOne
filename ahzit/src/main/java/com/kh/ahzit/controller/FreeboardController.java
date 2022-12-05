@@ -143,7 +143,7 @@ public class FreeboardController {
 		String loginId = (String)session.getAttribute("loginId");
 		if(loginId != null) {
 			// 좋아요 여부 조회
-			boolean isLike = freeboardLikeDao.freeboardLikeCheck(freeboardNo, loginId);
+			boolean isLike = freeboardLikeDao.checkFreeboardLike(freeboardNo, loginId);
 			// 좋아요 여부를 model에 추가
 			model.addAttribute("isLike", isLike);
 		}
@@ -299,13 +299,15 @@ public class FreeboardController {
 		// 반환한 회원 아이디와 입력받은 freeboardNo로 FreeboardLikeDto의 인스턴스 생성
 		FreeboardLikeDto freeboardLikeDto = FreeboardLikeDto.builder().freeboardLikeNo(freeboardNo).freeboardLikeId(loginId).build();
 		// 해당 회원이 좋아요 했는지 여부
-		boolean isLike = freeboardLikeDao.freeboardLikeCheck(freeboardNo, loginId);
+		boolean isLike = freeboardLikeDao.checkFreeboardLike(freeboardNo, loginId);
 		if(isLike) { // 좋아요를 한 경우라면
-			freeboardLikeDao.freeboardLikeDelete(freeboardLikeDto);
+			freeboardLikeDao.deleteFreeboardLike(freeboardLikeDto);
 		}
 		else { // 좋아요를 하지 않은 경우라면
-			freeboardLikeDao.freeboardLikeInsert(freeboardLikeDto);
+			freeboardLikeDao.insertFreeboardLike(freeboardLikeDto);
 		}
+		// 좋아요 총 갯수 갱신
+		freeboardLikeDao.updateFreeboardLikeCount(freeboardNo);
 		// 좋아요 처리 후 해당 게시글의 상세 페이지로 강제 이동(redirect;
 		attr.addAttribute("freeboardNo", freeboardNo);
 		return "redirect:detail";
