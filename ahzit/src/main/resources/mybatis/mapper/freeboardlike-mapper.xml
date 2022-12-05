@@ -21,4 +21,9 @@
 		delete freeboard_like where freeboard_like_no = #{freeboardLikeNo} and freeboard_like_id = #{freeboardLikeId}
 	</delete>
 	
+	<!-- 자유 게시글 좋아요 갯수 갱신 -->
+	<update id = "updateCount" parameterType = "map">
+		update freeboard set freeboard_like = (select count(*) from freeboard_like where freeboard_like_no = #{freeboardNo}) where freeboard_no = #{freeboardNo}
+	</update>
+	
 </mapper>
