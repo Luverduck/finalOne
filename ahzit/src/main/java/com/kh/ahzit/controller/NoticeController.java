@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.NoticeDao;
 import com.kh.ahzit.vo.NoticeListSearchVO;
 
@@ -41,6 +42,18 @@ public class NoticeController {
 		//detail
 		model.addAttribute("noticeDto", noticeDao.read(noticeNo));
 		return "notice/detail";
+	}
+	
+	@GetMapping("/delete")
+	public String delete(@RequestParam int noticeNo) {
+		boolean result = noticeDao.delete(noticeNo);
+		
+		if(result) {
+			return "redirect:list";
+		}
+		else {
+			throw new TargetNotFoundException();
+		}
 	}
 	
 }
