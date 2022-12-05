@@ -33,4 +33,7 @@ public interface FreeboardDao {
 	
 	// 추상 메소드 - 자유게시글 비활성화
 	public boolean inactiveFreeboard(int freeboardNo);
+	
+	// 추상 메소드 - 자유게시글 삭제
+	public boolean deleteFreeboard(int freeboardNo);
 }
