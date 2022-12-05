@@ -43,6 +43,7 @@
 		<c:otherwise>
 			<a href="/">홈</a>
 			<a href="/ahzitUser/login">로그인</a>
+			<a href="/ahzitUser/join">회원가입</a>
 		</c:otherwise>
 	</c:choose>
 
