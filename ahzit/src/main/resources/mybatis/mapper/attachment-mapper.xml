@@ -6,6 +6,13 @@
 
 <mapper namespace = "attachment">
 
+	<!--소모임 프로필 첨부파일 등록-->
+	<!--  
+	<insert id="insertAhzitAttachment" parameterType="AhzitAttachmentDto">
+		insert into ahzit_attachment(ahzit_origin_no, ahzit_attachment_no) values (#{ahzitOriginNo}, #{ahzitAttachmentNo})
+	</insert>
+	-->
+
 	<!-- 다음 첨부파일 번호 반환 -->
 	<select id = "nextAttachmentNo" resultType = "int">
 		select attachment_seq.nextval from dual
