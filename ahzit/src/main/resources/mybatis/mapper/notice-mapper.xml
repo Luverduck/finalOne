@@ -32,9 +32,8 @@
 
 	<update id="edit" parameterType="NoticeDto">
 		update notice set 
-		notice_writer = #{noticeWriter},
 		notice_title = #{noticeTitle},
-		notice_content = #{noticeContent},
+		notice_content = #{noticeContent}
     
 		where
 		notice_no = #{noticeNo}
