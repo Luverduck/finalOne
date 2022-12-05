@@ -21,7 +21,6 @@ public class NoticeDaoImpl implements NoticeDao{
 		sqlSession.insert("notice.insert", noticeDto);
 	}
 	
-	
 	//목록+검색
 	@Override
 	public List<NoticeDto> selectList() {
@@ -32,6 +31,16 @@ public class NoticeDaoImpl implements NoticeDao{
 	@Override
 	public List<NoticeDto> selectList(NoticeListSearchVO vo) {
 		return sqlSession.selectList("notice.list");
+    
+	//목록+검색
+	@Override
+	public List<NoticeDto> selectList() {
+		return sqlSession.selectList("music.list");
+	}
+
+	@Override
+	public List<NoticeDto> selectList(NoticeListSearchVO vo) {
+		return sqlSession.selectList("music.list");
 	}
 	
 	//상세
@@ -59,12 +68,17 @@ public class NoticeDaoImpl implements NoticeDao{
 		return count > 0;
 	}
 
+	//수정
+	@Override
+	public boolean edit(NoticeDto noticeDto) {
+		int count = sqlSession.update("notice.edit", noticeDto);
+		return count > 0;
+	}
+	
 	//삭제
 	@Override
 	public boolean delete(int noticeNo) {
 		int count = sqlSession.delete("notice.delete", noticeNo);
 		return count > 0;
 	}
-	
-
 }

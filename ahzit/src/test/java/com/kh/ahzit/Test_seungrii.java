@@ -2,6 +2,10 @@ package com.kh.ahzit;
 
 import org.apache.ibatis.session.SqlSession;
 
+import java.sql.Date;
+
+import org.apache.ibatis.session.SqlSession;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
