@@ -67,11 +67,20 @@
       $("button[name=thumbnail-delete]").click(function(){
           $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
       });
+	  //취소버튼 클릭 시, 이전 페이지로 이동(jquery)
+	  $(".btn-edit-cancel").click(function(){
+	     history.back();
+	    });
   });
+  
 </script>
 
 <div class="container">
 	<form action="create" method="post" enctype = "multipart/form-data">
+	
+	<div>
+		<p>소모임 리더 : ${AhzitUserDto.getUserId}</p>
+	</div>
 	
 		<div class = "row">
 			<p>만들고 싶은 아지트종류를 선택하세요</p>
@@ -126,8 +135,8 @@
 			</div>
 			
 			<div>
-				<button onclick="location.href='${pageContext.request.contextPath}/';" >취소</button>
-                 <button type="submit" >개설하기</button>
+				<a type="button"  class="btn-edit-cancel" >취소</a>
+                <button type="submit" >개설하기</button>
 			</div>
 			
 		</div>
