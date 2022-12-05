@@ -39,7 +39,8 @@ public class AhzitDaoImpl implements AhzitDao {
 	@Override
 	public AhzitDto selectOne(int ahzitNo) {
 		return sqlSession.selectOne("ahzit.one", ahzitNo);
-
+	}
+	
   @Override
 	public boolean delete(AhzitDto ahzitDto) {
 		int count=sqlSession.delete("ahzit.delete", ahzitDto);
