@@ -9,12 +9,15 @@
 <h1>자유 게시판 - 게시글 작성</h1>
 
 <div class = "container">
-	<form action = "write" method = "post">
+	<form action = "write" method = "post" enctype = "multipart/form-data">
 		<div class = "row">
 			제목 : <input type = "text" name = "freeboardTitle">
 		</div>
 		<div class = "row">
-			제목 : <input type = "text" name = "freeboardTitle">
+			내용 : <input type = "text" name = "freeboardContent">
+		</div>
+		<div class = "row">
+			첨부파일 : <input type = "file" name = "freeboardAttachment" multiple>
 		</div>
 		<button type = "submit">작성</button>
 	</form>
