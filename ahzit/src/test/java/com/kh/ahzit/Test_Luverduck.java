@@ -25,13 +25,13 @@ public class Test_Luverduck {
 //	게시글 등록	
 	@Test
 	public void test() {
-		for(int i = 0 ; i < 50 ; i ++) {
+		for(int i = 0 ; i < 100 ; i ++) {
 			int freeboardNo = freeboardDao.nextFreeboardNo();
 			sqlSession.insert("freeboard.insert", FreeboardDto.builder()
 					.freeboardNo(freeboardNo)
 					.freeboardWriter("test1231")
-					.freeboardTitle("테스트제목 " + i)
-					.freeboardContent("테스트내용 " + i)
+					.freeboardTitle("테스트입니다 " + i)
+					.freeboardContent("테스트입니다 " + i)
 					.build());
 		}
 	}

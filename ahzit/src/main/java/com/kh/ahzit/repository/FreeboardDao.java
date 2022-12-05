@@ -22,6 +22,15 @@ public interface FreeboardDao {
 	// 추상 메소드 - 자유게시글 전체 조회
 	public List<FreeboardDto> selectAll(FreeboardListSeachVO freeboardListSeachVO);
 	
+	// 추상 메소드 - 자유게시글 게시글 총 갯수 반환
+	public int countFreeboard(FreeboardListSeachVO freeboardListSeachVO);
+	
+	// 추상 메소드 - 자유게시글 검색 조회시 게시글 총 갯수 반환
+	public int searchCountFreeboard(FreeboardListSeachVO freeboardListSeachVO);
+	
+	// 추상 메소드 - 자유게시글 전체 조회시 게시글 총 갯수 반환
+	public int allCountFreeboard();
+	
 	// 추상 메소드 - 자유게시글 상세 조회
 	public FreeboardDto detailFreeboard(int freeboardNo);
 	
