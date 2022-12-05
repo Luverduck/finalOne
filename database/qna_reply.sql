@@ -6,8 +6,7 @@ qna_origin_no references qna(qna_no) on delete cascade not null,
 qna_reply_writer references ahzit_user(user_id) on delete set null,
 qna_reply_content varchar(900) not null,
 qna_reply_writedate date default sysdate not null,
-qna_reply_updatedate date,
-qna_reply_state char(1) default 'N' check(qna_reply_state in('Y','N')) not null
+qna_reply_updatedate date
 );
 
 -- 테이블 삭제
