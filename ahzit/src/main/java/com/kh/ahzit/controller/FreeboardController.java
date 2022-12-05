@@ -97,6 +97,10 @@ public class FreeboardController {
 	// 게시글 목록 Mapping (회원)
 	@GetMapping("/list")
 	public String selectFreeboard(Model model, @ModelAttribute FreeboardListSeachVO freeboardListSeachVO) {
+		// 게시글 총 갯수 반환
+		int total = freeboardDao.countFreeboard(freeboardListSeachVO);
+		// 반환한 총 갯수를 freeboardListVO의 total로 설정
+		freeboardListSeachVO.setTotal(total);
 		// 유형에 따른 게시글 조회 결과 반환
 		List<FreeboardDto> freeboardList = freeboardDao.searchFreeboard(freeboardListSeachVO);
 		// 조회 결과를 model에 추가

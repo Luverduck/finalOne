@@ -52,5 +52,68 @@
 	<button type = "submit">검색</button>
 </form>
 
+<%-- 페이지 네비게이터 --%>
+<ul class="pagination">
+	<c:choose>
+		<c:when test = "${freeboardListSeachVO.isFirst()}">
+			<li class="page-item">
+				<a class="page-link" href = "">&laquo;</a>
+			</li>
+		</c:when>
+		<c:otherwise>
+			<li class="page-item">
+				<a class="page-link" href = "list?p=${freeboardListSeachVO.blockFirst()}&${freeboardListSeachVO.queryString()}">&laquo;</a>
+			</li>
+		</c:otherwise>
+	</c:choose>
+	
+	<c:choose>
+		<c:when test = "${freeboardListSeachVO.hasPrev()}">
+			<li class="page-item">
+				<a class="page-link" href = "list?p=${freeboardListSeachVO.blockPrev()}&${freeboardListSeachVO.queryString()}">&lt;</a>
+			</li>
+		</c:when>
+		<c:otherwise>
+			<li class="page-item">
+				<a class="page-link" href = "">&lt;</a>
+			</li>
+		</c:otherwise>
+	</c:choose>
+	
+	<c:forEach var = "i" begin = "${freeboardListSeachVO.blockStart()}" end = "${freeboardListSeachVO.blockEnd()}" step = "1">
+		<li class="page-item">
+			<a class="page-link" href = "list?p=${i}&${freeboardListSeachVO.queryString()}">${i}</a>
+		</li>
+	</c:forEach>
+	
+	<c:choose>
+		<c:when test = "${freeboardListSeachVO.hasNext()}">
+			<li class="page-item">
+				<a class="page-link" href = "list?p=${freeboardListSeachVO.blockNext()}&${freeboardListSeachVO.queryString()}">&gt;</a>
+			</li>
+		</c:when>
+		<c:otherwise>
+			<li class="page-item">
+				<a class="page-link" href = "">&gt;</a>
+			</li>
+		</c:otherwise>
+	</c:choose>
+	
+	<c:choose>
+		<c:when test = "${freeboardListSeachVO.isLast()}">
+			<li class="page-item">
+				<a class="page-link" href = "">&raquo;</a>
+			</li>
+		</c:when>
+		<c:otherwise>
+			<li class="page-item">
+				<a class="page-link" href = "list?p=${freeboardListSeachVO.blockLast()}&${freeboardListSeachVO.queryString()}">&raquo;</a>
+			</li>
+		</c:otherwise>
+	</c:choose>
+</ul>
+
+&laquo; &lt; 1 2 3 4 5 6 7 8 9 10 &gt; &raquo;
+
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
