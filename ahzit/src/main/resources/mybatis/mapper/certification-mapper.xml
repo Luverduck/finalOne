@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="certification">
+	  <!-- 인증번호 등록 기능 -->
+	  <insert id="insert" parameterType="CertificationDto">
+	  	insert into certification(certification_no, certification_id, certification_key) values(certification_seq.nextval, #{certificationId}, #{certificationKey})
+	  </insert>
+	  
+	  <delete id="delete" parameterType="String">
+	  	delete certification where certification_id = #{certificationId}
+	  </delete>
+	  
+	  <!-- 인증번호 검사 기능 (5분 이내에 생성된 데이터인지까지 검사? -> 5분이면 5/24/60 , 5초면 5/24/60/60) -->
+	  <select id="check" parameterType="CertificationDto" resultType="CertificationDto">
+	  	select * from certification where certification_id = #{certificationId} and certification_key = #{certificationKey} and CERTIFICATION_ISSUEDATE >= sysdate -5/24/60
+	  </select>
+	  
+	  <!-- 인증 시간이 5분 이상 지난 인증 정보를 삭제 -->
+	  <delete id="clear">
+	  	<![CDATA[
+	  	delete certification where CERTIFICATION_ISSUEDATE < sysdate -5/24/60 
+	 	 ]]>
+	  </delete>
+	  
+	  
+</mapper>

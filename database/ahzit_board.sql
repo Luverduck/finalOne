@@ -2,8 +2,7 @@
 -- 테이블 생성
 create table ahzit_board (
 board_no number primary key,
-board_writer references ahzit_member(member_nick) on delete set null,
-board_title varchar2(300) not null,
+board_writer_no references ahzit_member(member_no) on delete set null,
 board_content varchar2(4000) not null,
 board_read number default 0 check(board_read >= 0) not null,
 board_like number default 0 check(board_like >= 0) not null,
@@ -20,3 +19,6 @@ create sequence ahzit_board_seq;
 
 -- 시퀀스 삭제
 drop sequence ahzit_board_seq;
+
+-- 게시글 번호 반환
+select ahzit_board_seq.nextval from dual;

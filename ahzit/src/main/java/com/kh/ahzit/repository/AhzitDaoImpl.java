@@ -16,12 +16,12 @@ public class AhzitDaoImpl implements AhzitDao {
 	
 	@Override
 	public int sequence() {
-		return sqlSession.selectOne("ahzit.ahzitSequence");
+		return sqlSession.selectOne("ahzit.sequence");
 	}
 	
 	@Override
 	public void insert(AhzitDto ahzitDto) {
-		sqlSession.insert("ahzit.ahzitInsert",ahzitDto);
+		sqlSession.insert("ahzit.insert",ahzitDto);
 		
 	}
 	
@@ -39,6 +39,12 @@ public class AhzitDaoImpl implements AhzitDao {
 	@Override
 	public AhzitDto selectOne(int ahzitNo) {
 		return sqlSession.selectOne("ahzit.one", ahzitNo);
+
+  @Override
+	public boolean delete(AhzitDto ahzitDto) {
+		int count=sqlSession.delete("ahzit.delete", ahzitDto);
+		return count>0;	
+
 	}
 
 }

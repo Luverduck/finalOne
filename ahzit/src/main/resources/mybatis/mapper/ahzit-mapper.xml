@@ -5,12 +5,12 @@
   <mapper namespace="ahzit">
   
   		<!-- 시퀀스 발행 -->
-  		<select id="ahzitSequence" resultType="int">
+  		<select id="sequence" resultType="int">
   			select ahzit_seq.nextval from dual
   		</select>
   		
   		<!-- 소모임 생성 -->
-  		<insert id="ahzitInsert" parameterType="AhzitDto">
+  		<insert id="insert" parameterType="AhzitDto">
   			insert into ahzit(
   			ahzit_no, ahzit_leader, ahzit_sort, ahzit_name, ahzit_info, ahzit_region_high, ahzit_region_low, ahzit_ispublic) 
   			values(#{ahzitNo}, #{ahzitLeader}, #{ahzitSort}, #{ahzitName}, #{ahzitInfo}, #{ahzitRegionHigh}, #{ahzitRegionLow}, #{ahzitIsPublic})
@@ -18,7 +18,7 @@
   		
   		<!-- 소모임 목록 -->
   		<select id="list" resultType="AhzitDto">
-  			select * from ahzit
+  			select * from ahzit 
   		</select>
   		
   		<!-- 소모임 단일조회 -->
@@ -31,5 +31,13 @@
   			update ahzit 
   				set ahzit_name=#{ahzitName},  ahzit_info=#{ahzitInfo}, ahzit_headmax=#{ahzitHeadMax}, ahzit_ispublic=#{ahzitIsPublic} where ahzit_no = #{ahzitNo}
   		</update>
+
+  		<!-- 소모임 삭제 -->
+  		<delete id="delete" parameterType="AhzitDto">
+  			 <![CDATA[
+  			delete ahzit where ahzit_no=#{ahzitNo} and ahzit_leader=#{ahzitLeader} and ahzit_head=1
+  			]]>
+  		</delete>
+
   
   </mapper>
