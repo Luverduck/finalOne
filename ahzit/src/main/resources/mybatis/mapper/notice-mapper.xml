@@ -43,5 +43,11 @@
 	<delete id="delete" parameterType="int">
 		delete notice where notice_no = #{noticeNo}
 	</delete>
+	
+	<!-- 조회수 증가 -->
+	<update id="read" parameterType="NoticeDto">
+		update notice set notice_read = notice_read + 1
+		where notice_no = #{noticeNo}
+	</update>
 
 </mapper>

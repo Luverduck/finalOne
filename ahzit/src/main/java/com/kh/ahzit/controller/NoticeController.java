@@ -34,7 +34,12 @@ public class NoticeController {
 	
 	@GetMapping("/detail")
 	public String detail(@RequestParam int noticeNo, Model model) {
-		model.addAttribute("noticeDto", noticeDao.selectOne(noticeNo));
+		
+		//조회수 증가
+		//noticeDao.updateReadCount(noticeNo);
+		
+		//detail
+		model.addAttribute("noticeDto", noticeDao.read(noticeNo));
 		return "notice/detail";
 	}
 	

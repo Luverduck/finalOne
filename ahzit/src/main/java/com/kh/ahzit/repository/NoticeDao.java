@@ -7,7 +7,7 @@ import com.kh.ahzit.vo.NoticeListSearchVO;
 
 public interface NoticeDao {
 
-	//insert
+	//등록
 	void insert(NoticeDto noticeDto);
 
 	//목록 + 검색
@@ -16,6 +16,10 @@ public interface NoticeDao {
 
 	//상세
 	NoticeDto selectOne(int noticeNo);
+	
+	//조회수 증가
+	boolean updateReadCount(int noticeNo);
+	NoticeDto read(int noticeNo); //조회수 증가
 
 	//수정
 	boolean edit(NoticeDto noticeDto);

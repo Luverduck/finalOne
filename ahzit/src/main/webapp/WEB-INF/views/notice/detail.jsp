@@ -42,10 +42,7 @@
 				</tr>
 				<tr height="200" valign="top">
 					<th>내용</th>
-					<td>
-						
-						${noticeDto.noticeContent}
-					</td>
+					<td>${noticeDto.noticeContent}</td>
 				</tr>
 
 				<tr>
@@ -69,6 +66,21 @@
 					</tr>
 				</c:if>
 			</tbody>
+
+			<tfoot>
+				<tr>
+					<td>
+						<c:if test="${loginId != null}">
+							<a class="btn btn-positive" href="write">글쓰기</a>
+						</c:if>
+						<a href="edit">수정하기</a>						
+						<a href="delete">삭제하기</a>
+					</td>
+				</tr>
+			</tfoot>
+
+
+
 		</table>
 	</div>
 

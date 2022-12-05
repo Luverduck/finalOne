@@ -39,6 +39,18 @@ public class NoticeDaoImpl implements NoticeDao{
 	public NoticeDto selectOne(int noticeNo) {
 		return sqlSession.selectOne("notice.one", noticeNo);
 	}
+	
+	//조회수 증가
+	@Override
+	public boolean updateReadCount(int noticeNo) {
+		int count = sqlSession.update("notice.read", noticeNo);
+		return count > 0;
+	}
+	@Override
+	public NoticeDto read(int noticeNo) {
+		this.updateReadCount(noticeNo);
+		return this.selectOne(noticeNo);
+	}
 
 	//수정
 	@Override
