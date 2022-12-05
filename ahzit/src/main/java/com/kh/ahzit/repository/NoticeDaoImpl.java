@@ -15,37 +15,29 @@ public class NoticeDaoImpl implements NoticeDao{
 	@Autowired
 	private SqlSession sqlSession;
 	
-
 	//등록
 	@Override
 	public void insert(NoticeDto noticeDto) {
 		sqlSession.insert("notice.insert", noticeDto);
 	}
 	
-
 	//목록+검색
 	@Override
 	public List<NoticeDto> selectList() {
-
 		return sqlSession.selectList("notice.list");
 	}	
 	
-
-
 	@Override
 	public List<NoticeDto> selectList(NoticeListSearchVO vo) {
-
 		return sqlSession.selectList("notice.list");
-
 	}
-	
+  
 	//상세
 	@Override
 	public NoticeDto selectOne(int noticeNo) {
 		return sqlSession.selectOne("notice.one", noticeNo);
 	}
-	
-
+  
 	//조회수 증가
 	@Override
 	public boolean updateReadCount(int noticeNo) {
@@ -57,7 +49,7 @@ public class NoticeDaoImpl implements NoticeDao{
 		this.updateReadCount(noticeNo);
 		return this.selectOne(noticeNo);
 	}
-
+  
 	//수정
 	@Override
 	public boolean edit(NoticeDto noticeDto) {

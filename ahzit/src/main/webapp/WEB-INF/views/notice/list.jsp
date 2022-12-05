@@ -9,14 +9,17 @@
 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>
 </c:set>
 
-<<<<<<< HEAD
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="공지게시판" name="title"/>
 </jsp:include>
 
+
 <div class="container-900 mt-40 mb-40">
 	<!-- 게시판 이름 -->
+
+<div class="container-900 mt-40 mb-40">
+
 	<div class="row center">
 		<h1>공지 게시판</h1>
 	</div>
@@ -31,11 +34,19 @@
 		
 			<thead align="center">
 				<tr>
+
+	
+	<div class="row center">
+		<table class="table table-border table-hover">
+			<thead>
+				<tr>
+
 					<th>번호</th>
 					<th width="45%">제목</th>
 					<th>작성자</th>
 					<th>작성일</th>
 					<th>조회수</th>
+
 				</tr>
 			</thead>
 			
@@ -88,27 +99,6 @@
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-=======
-
-
-
-<div class="container-900 mt-40 mb-40">
-	<div class="row center">
-		<h1>공지 게시판</h1>
-	</div>
-	
-
-	
-	<div class="row center">
-		<table class="table table-border table-hover">
-			<thead>
-				<tr>
-					
-					<th>번호</th>
-					<th width="45%">제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
 					
 				</tr>
 			</thead>
@@ -167,6 +157,5 @@
 		<input type="search" name="keyword" placeholder="검색어">
 		<button>검색</button>
 	</form>
-</div>
 
->>>>>>> refs/remotes/origin/main
+</div>
