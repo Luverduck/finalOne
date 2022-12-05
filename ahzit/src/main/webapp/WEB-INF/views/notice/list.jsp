@@ -11,7 +11,7 @@
 
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="자유게시판 - 게시글 상세" name="title"/>
+	<jsp:param value="공지게시판" name="title"/>
 </jsp:include>
 
 <div class="container-900 mt-40 mb-40">

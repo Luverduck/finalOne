@@ -25,13 +25,13 @@ public class NoticeDaoImpl implements NoticeDao{
 	//목록+검색
 	@Override
 	public List<NoticeDto> selectList() {
-		return sqlSession.selectList("music.list");
+		return sqlSession.selectList("notice.list");
 	}	
 	
 
 	@Override
 	public List<NoticeDto> selectList(NoticeListSearchVO vo) {
-		return sqlSession.selectList("music.list");
+		return sqlSession.selectList("notice.list");
 	}
 	
 	//상세
