@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DOCTYPE 설정을 통해 자동완성 + 문법검사 수행 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+	mapper 내부에 SQL 구문을 배치
+	- namespace : 외부에서 부르기 위한 별칭(테이블명으로 작성)
+-->
+<mapper namespace="notice">
+
+	<insert id="insert" parameterType="NoticeDto">
+		insert into notice(
+			notice_no, notice_writer, notice_title,
+			notice_content, notice_writedate, notice_read
+		)
+		values(
+			notice_seq.nextval, #{noticeWriter}, #{noticeTitle},
+			#{noticeContent}, sysdate, 0
+		)
+	</insert>
+
+	<select id="list" resultType="NoticeDto">
+		select * from notice
+	</select>
+
+	<select id="one" parameterType="int" resultType="NoticeDto">
+		select * from notice where notice_no = #{noticeNo}
+	</select>
+
+	<update id="edit" parameterType="NoticeDto">
+		update notice set 
+		notice_writer = #{noticeWriter},
+		notice_title = #{noticeTitle},
+		notice_content = #{noticeContent},
+
+		where
+		notice_no = #{noticeNo}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete notice where notice_no = #{noticeNo}
+	</delete>
+
+</mapper>

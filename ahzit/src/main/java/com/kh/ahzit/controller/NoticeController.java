@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.ahzit.repository.NoticeDao;
 import com.kh.ahzit.vo.NoticeListSearchVO;
@@ -30,4 +31,11 @@ public class NoticeController {
 		model.addAttribute("list", noticeDao.selectList());
 		return "notice/list";
 	}
+	
+	@GetMapping("/detail")
+	public String detail(@RequestParam int noticeNo, Model model) {
+		model.addAttribute("noticeDto", noticeDao.selectOne(noticeNo));
+		return "notice/detail";
+	}
+	
 }
