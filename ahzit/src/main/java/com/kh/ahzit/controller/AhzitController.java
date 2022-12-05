@@ -49,6 +49,7 @@ public class AhzitController {
 		ahzitDto.setAhzitLeader(ahzitLeader);
 		
 		//AhzitService에서 번호를 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
+		//inth ahzitNo = ahzit
 		
 		
 		return "redirect:detail";
