@@ -32,7 +32,7 @@ public class GmailService implements EmailService {
 		// 2) 이메일 발송
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(email);
-		message.setSubject("[KH정보교육원] 이메일 인증 번호입니다");
+		message.setSubject("[AHZIT] 회원 가입 이메일 인증 번호입니다");
 		message.setText("인증번호 : " + serial);
 		javaMailSender.send(message);
 

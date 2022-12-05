@@ -27,13 +27,13 @@ public class AsyncController {
 	@PostMapping("/async2")
 	@ResponseBody
 	public void async2(@RequestParam String certificationId) {
-		System.out.println("123");
 		emailService.sendCertMail(certificationId);
 	}
 	
 	@PostMapping("/async3")
 	@ResponseBody
 	public boolean async3(@ModelAttribute CertificationDto certificationDto) {
+		// System.out.println("async3 확인");
 		return emailService.checkCert(certificationDto);
 		
 	}
