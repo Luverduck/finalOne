@@ -27,28 +27,17 @@ public class NoticeDaoImpl implements NoticeDao{
 		return sqlSession.selectList("notice.list");
 	}	
 	
-
 	@Override
 	public List<NoticeDto> selectList(NoticeListSearchVO vo) {
 		return sqlSession.selectList("notice.list");
-    
-	//목록+검색
-	@Override
-	public List<NoticeDto> selectList() {
-		return sqlSession.selectList("music.list");
 	}
-
-	@Override
-	public List<NoticeDto> selectList(NoticeListSearchVO vo) {
-		return sqlSession.selectList("music.list");
-	}
-	
+  
 	//상세
 	@Override
 	public NoticeDto selectOne(int noticeNo) {
 		return sqlSession.selectOne("notice.one", noticeNo);
 	}
-	
+  
 	//조회수 증가
 	@Override
 	public boolean updateReadCount(int noticeNo) {
@@ -60,7 +49,7 @@ public class NoticeDaoImpl implements NoticeDao{
 		this.updateReadCount(noticeNo);
 		return this.selectOne(noticeNo);
 	}
-
+  
 	//수정
 	@Override
 	public boolean edit(NoticeDto noticeDto) {
@@ -68,17 +57,11 @@ public class NoticeDaoImpl implements NoticeDao{
 		return count > 0;
 	}
 
-	//수정
-	@Override
-	public boolean edit(NoticeDto noticeDto) {
-		int count = sqlSession.update("notice.edit", noticeDto);
-		return count > 0;
-	}
-	
 	//삭제
 	@Override
 	public boolean delete(int noticeNo) {
 		int count = sqlSession.delete("notice.delete", noticeNo);
 		return count > 0;
 	}
+
 }

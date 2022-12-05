@@ -14,6 +14,7 @@
 	<jsp:param value="공지게시판" name="title"/>
 </jsp:include>
 
+
 <div class="container-900 mt-40 mb-40">
 	<!-- 게시판 이름 -->
 
@@ -156,4 +157,5 @@
 		<input type="search" name="keyword" placeholder="검색어">
 		<button>검색</button>
 	</form>
+
 </div>
