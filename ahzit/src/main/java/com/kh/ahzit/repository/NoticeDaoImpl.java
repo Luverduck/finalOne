@@ -1,13 +1,9 @@
 package com.kh.ahzit.repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ahzit.entity.NoticeDto;
@@ -19,13 +15,23 @@ public class NoticeDaoImpl implements NoticeDao{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	
 	//등록
 	@Override
 	public void insert(NoticeDto noticeDto) {
 		sqlSession.insert("notice.insert", noticeDto);
 	}
 	
+	//목록+검색
+	@Override
+	public List<NoticeDto> selectList() {
+		return sqlSession.selectList("notice.list");
+	}	
+	
+
+	@Override
+	public List<NoticeDto> selectList(NoticeListSearchVO vo) {
+		return sqlSession.selectList("notice.list");
+    
 	//목록+검색
 	@Override
 	public List<NoticeDto> selectList() {
@@ -43,6 +49,25 @@ public class NoticeDaoImpl implements NoticeDao{
 		return sqlSession.selectOne("notice.one", noticeNo);
 	}
 	
+	//조회수 증가
+	@Override
+	public boolean updateReadCount(int noticeNo) {
+		int count = sqlSession.update("notice.read", noticeNo);
+		return count > 0;
+	}
+	@Override
+	public NoticeDto read(int noticeNo) {
+		this.updateReadCount(noticeNo);
+		return this.selectOne(noticeNo);
+	}
+
+	//수정
+	@Override
+	public boolean edit(NoticeDto noticeDto) {
+		int count = sqlSession.update("notice.edit", noticeDto);
+		return count > 0;
+	}
+
 	//수정
 	@Override
 	public boolean edit(NoticeDto noticeDto) {
@@ -56,6 +81,4 @@ public class NoticeDaoImpl implements NoticeDao{
 		int count = sqlSession.delete("notice.delete", noticeNo);
 		return count > 0;
 	}
-
-	
 }

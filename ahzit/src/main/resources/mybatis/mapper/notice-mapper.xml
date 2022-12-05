@@ -21,6 +21,14 @@
 			#{noticeContent}, sysdate, 0
 		)
 	</insert>
+
+	<select id="list" resultType="NoticeDto">
+		select * from notice
+	</select>
+
+	<select id="one" parameterType="int" resultType="NoticeDto">
+		select * from notice where notice_no = #{noticeNo}
+	</select>
 	
 	<select id="list" resultType="NoticeDto">
 		select * from notice
@@ -35,6 +43,20 @@
 		notice_writer = #{noticeWriter},
 		notice_title = #{noticeTitle},
 		notice_content = #{noticeContent},
+
+		where
+		notice_no = #{noticeNo}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete notice where notice_no = #{noticeNo}
+	</delete>
+	
+	<!-- 조회수 증가 -->
+	<update id="read" parameterType="NoticeDto">
+		update notice set notice_read = notice_read + 1
+		where notice_no = #{noticeNo}
+	</update>
 		
 		where
 		notice_no = #{noticeNo}
