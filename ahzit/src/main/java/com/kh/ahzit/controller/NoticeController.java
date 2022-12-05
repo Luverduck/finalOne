@@ -19,7 +19,7 @@ public class NoticeController {
 	
 	@GetMapping("/list")
 	public String list(Model model,
-			@ModelAttribute NoticeListSearchVO vo) {
+			@ModelAttribute (name="vo") NoticeListSearchVO vo) {
 		if(vo.isSearch()) {
 			model.addAttribute("list", noticeDao.selectList(vo));
 		}
