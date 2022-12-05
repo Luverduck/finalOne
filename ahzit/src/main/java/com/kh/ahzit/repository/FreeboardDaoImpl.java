@@ -47,11 +47,13 @@ public class FreeboardDaoImpl implements FreeboardDao {
 	// 추상 메소드 오버라이딩 - 자유게시글 검색 조회
 	@Override
 	public List<FreeboardDto> selectSearch(FreeboardListSeachVO freeboardListSeachVO) {
-		// 바인딩 변수로 사용할 Map 생성
+		// 바인딩 변수를 저장할 Map 생성
 		Map<String, String> param = new HashMap<>();
-		// 생성한 Map의 type과 keyword를 freeboardListSeachVO의 type과 keyword로 설정
+		// 바인딩 변수로 사용할 값 저장
 		param.put("type", freeboardListSeachVO.getType());
 		param.put("keyword", freeboardListSeachVO.getKeyword());
+		param.put("rownumStart", String.valueOf(freeboardListSeachVO.rownumStart()));
+		param.put("rownumEnd", String.valueOf(freeboardListSeachVO.rownumEnd()));
 		// Map을 바인딩 변수로 하여 검색 조회 후 결과 반환
 		return sqlSession.selectList("freeboard.searchList", param);
 	}
@@ -59,10 +61,44 @@ public class FreeboardDaoImpl implements FreeboardDao {
 	// 추상 메소드 오버라이딩 - 자유게시글 전체 조회
 	@Override
 	public List<FreeboardDto> selectAll(FreeboardListSeachVO freeboardListSeachVO) {
+		// 바인딩 변수를 저장할 Map 생성
+		Map<String, String> param = new HashMap<>();
+		// 바인딩 변수로 사용할 값 저장
+		param.put("rownumStart", String.valueOf(freeboardListSeachVO.rownumStart()));
+		param.put("rownumEnd", String.valueOf(freeboardListSeachVO.rownumEnd()));
 		// 게시글 전체 조회 후 결과 반환
-		return sqlSession.selectList("freeboard.allList");
+		return sqlSession.selectList("freeboard.allList", param);
 	}
-
+	
+	// 추상 메소드 오버라이딩 - 자유게시글 게시글 총 갯수 반환
+	@Override
+	public int countFreeboard(FreeboardListSeachVO freeboardListSeachVO) {
+		// 검색 조회인지 여부에 따라 다른 메소드 실행
+		if(freeboardListSeachVO.isSearch()) { // 검색 조회라면
+			return searchCountFreeboard(freeboardListSeachVO);
+		}
+		else { // 전체 조회라면
+			return allCountFreeboard();
+		}
+	}
+	
+	// 추상 메소드 오버라이딩 - 자유게시글 검색 조회시 게시글 총 갯수 반환
+	@Override
+	public int searchCountFreeboard(FreeboardListSeachVO freeboardListSeachVO) {
+		// 바인딩 변수를 저장할 Map 생성
+		Map<String, String> param = new HashMap<>();
+		// 바인딩 변수로 사용할 값 저장
+		param.put("type", freeboardListSeachVO.getType());
+		param.put("keyword", freeboardListSeachVO.getKeyword());
+		return sqlSession.selectOne("freeboard.searchCount", param);
+	}
+	
+	// 추상 메소드 오버라이딩 - 자유게시글 전체 조회시 게시글 총 갯수 반환
+	@Override
+	public int allCountFreeboard() {
+		return sqlSession.selectOne("freeboard.allCount");
+	}
+	
 	// 추상 메소드 오버라이딩 - 자유게시글 상세 조회
 	@Override
 	public FreeboardDto detailFreeboard(int freeboardNo) {
