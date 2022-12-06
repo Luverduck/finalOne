@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="회원 가입" name="title"/>
+	<jsp:param value="비밀번호 찾기" name="title"/>
 </jsp:include>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
@@ -42,6 +43,7 @@
 						var serial = input.val();
 						if(serial.length != 6) return;
 						alert("인증이 완료되었습니다.");
+						window.open("${pageContext.request.contextPath}/ahzitUser/checkPwSuccess?userId=" + ${userId} + "width=500,height=600");
 					//	alert(serial);
 						$.ajax({
 							url:"${pageContext.request.contextPath}/async3",
@@ -74,29 +76,30 @@
 	});
 
 </script>  
-<h1>회원가입</h1>
 
+<form action="checkPw" method="post" autocomplete="off">
 
-<form action="join" method="post" >
+	<div>
+
 		<div>
-			아이디 : <input name="userId" placeholder="아이디" type="text" required>
+			<h1>비밀번호 찾기</h1>
 		</div>
-		
-		<div>
-			비밀번호 : <input name="userPw" placeholder="비밀번호"  type="password" required>
+
+		<div class="row">
+			<label>아이디 : 
+				<input name="userId" type="text" required placeholder="아이디">
+			</label>
 		</div>
-		
-		<div>
-			닉네임 : <input name="userNick" placeholder="닉네임" type="text" required>
-		</div>
-		
-		<div>
-			이메일 : <input type="text" name="userEmail" placeholder="이메일" required>
-			<button class="send-btn" type="button" >인증하기</button> 
+		<div class="row">
+			<label>Email : 
+				<input name="userEmail" type="text" required placeholder="이메일">
+			</label>
 			<div class="cert"></div>
-		</div> 
+		</div>
+
+			<button class="send-btn" type="submit">확인</button>
+		</div>
 		
-	<button type="submit">가입</button>
 </form>
 
 <%-- footer --%>
