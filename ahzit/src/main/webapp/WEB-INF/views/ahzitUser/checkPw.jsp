@@ -17,15 +17,20 @@
 		//목표 : 확인 버튼을 누르면 이메일 발송 컨트롤러로 비동기 요청
 		$(".send-btn").click(function(){
 			var email = $("[name=userEmail]").val();
+			var userId = $("[name=userId]").val();
 			if(email.length == 0) return;
+			
 			
 			var btn = $(this);
 			btn.prop("disabled", true);
-			
+
 			$.ajax({
-				url:"${pageContext.request.contextPath}/async2",
+				url:"/ahzitUser/checkPw",
 				method:"post",
-				data:{certificationId:email},
+				data:{
+					userEmail:email,
+					userId:userId
+					},
 				success:function() {
 					//성공했다면 메일은 전송되었다고 볼 수 있다
 					console.log("메일 전송 완료");
@@ -41,15 +46,16 @@
 					//button을 클릭하면 input에 있는 인증번호와 이메일을 사용해서 검사요청
 					button.click(function(){
 						var serial = input.val();
+						var userId =  $("[name=userId]").val();
 						if(serial.length != 6) return;
 						alert("인증이 완료되었습니다.");
-						window.open("${pageContext.request.contextPath}/ahzitUser/checkPwSuccess?userId=" + ${userId} + "width=500,height=600");
+						window.open("${pageContext.request.contextPath}/ahzitUser/checkPwSuccess?userId=" + userId);
 					//	alert(serial);
 						$.ajax({
 							url:"${pageContext.request.contextPath}/async3",
 							method:"post",
 							data:{
-								certificationId:email,
+								userEmail:email,
 								certificationKey:serial
 							},
 							success:function(resp){
@@ -85,22 +91,27 @@
 			<h1>비밀번호 찾기</h1>
 		</div>
 
-		<div class="row">
+		<div>
 			<label>아이디 : 
 				<input name="userId" type="text" required placeholder="아이디">
 			</label>
 		</div>
-		<div class="row">
-			<label>Email : 
-				<input name="userEmail" type="text" required placeholder="이메일">
-			</label>
+		<div >
+			Email : <input name="userEmail" type="text" required placeholder="이메일">
+			<button class="send-btn" type="submit">인증하기</button>
 			<div class="cert"></div>
 		</div>
 
-			<button class="send-btn" type="submit">확인</button>
-		</div>
+	
+	</div>
 		
 </form>
+
+<c:if test="${param.error != null}">
+	<div class="row center mt-30">
+		<span style="color: darkred;">아이디와 이메일을 확인해주세요.</span>
+	</div>
+</c:if>
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

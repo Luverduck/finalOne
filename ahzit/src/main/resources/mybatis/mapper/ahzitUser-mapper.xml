@@ -12,7 +12,7 @@
 	 	values(#{userId}, #{userPw}, #{userNick}, #{userEmail})
 	 </insert>
 	 
-	 <!-- 회원 단일 조회 -->
+	 <!-- 회원 단일 조회(mypage) -->
 	 <select id="get" parameterType="String" resultType="AhzitUserDto">
 		select * from ahzit_user where user_id = #{userId}
 	</select>
@@ -48,7 +48,7 @@
 	  	select count(*) from ahzit_user where user_id = #{userId} and user_email= #{userEmail}
 	</select>
 	
-	<!-- 비밀 번호 변경 -->
+	<!-- 비밀 번호 찾기 후 변경 -->
 	<update id ="checkPwSuccess" parameterType ="AhzitUserDto">
 		update ahzit_user set user_pw=#{userPw} where user_id=#{userId}
 	</update>
