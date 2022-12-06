@@ -55,6 +55,12 @@ public class AhzitDaoImpl implements AhzitDao {
 
 	}
 
+	//소모임 프로필 첨부파일
+	@Override
+	public void ahzitAttachment(AhzitAttachmentDto ahzitAttachmentDto) {
+		sqlSession.insert("attachment.insert", ahzitAttachmentDto);
+	}
+
   	//소모임 프로필 첨부파일
 //	@Override
 //	public void ahzitAttachment(AhzitAttachmentDto ahzitAttachmentDto) {

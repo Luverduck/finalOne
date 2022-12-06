@@ -9,7 +9,7 @@ public interface AhzitDao {
 	int sequence();//ahzit_no 시퀀스 번호 발행
 	
 	//이미지첨부 관련 메소드
-	//void ahzitAttachment(AhzitAttachmentDto ahzitAttachmentDto); //ahzit_attachment 테이블에 첨부파일 정보 연결
+	void ahzitAttachment(AhzitAttachmentDto ahzitAttachmentDto); //ahzit_attachment 테이블에 첨부파일 정보 연결
   
 	void insert(AhzitDto ahzitDto);//아지트 생성
 	List<AhzitDto> selectList();//아지트 목록
