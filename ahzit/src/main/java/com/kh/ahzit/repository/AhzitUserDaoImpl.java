@@ -57,8 +57,10 @@ public class AhzitUserDaoImpl implements AhzitUserDao{
 
 	// 비밀번호 변경
 	@Override
-	public boolean changePw(String userPw, String userId) {
-		return sqlSession.update("ahzitUser.changePw", userId) > 0;
+	public boolean changePw(AhzitUserDto ahzitUserDto) {
+		
+		return sqlSession.update("ahzitUser.changePw", ahzitUserDto) > 0;
+		
 		
 	}
 

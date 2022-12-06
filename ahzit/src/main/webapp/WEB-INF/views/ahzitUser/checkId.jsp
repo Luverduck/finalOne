@@ -14,7 +14,7 @@
 			<h1>아이디 찾기</h1>
 		</div>
 
-		<div class="row">
+		<div>
 			<label>Email : 
 				<input name="userEmail" type="text" required placeholder="이메일">
 			</label>

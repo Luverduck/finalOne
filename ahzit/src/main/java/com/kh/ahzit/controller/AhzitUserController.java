@@ -36,6 +36,7 @@ public class AhzitUserController {
 	
 	@Autowired
 	private PasswordEncoder encoder;
+	
 	@Autowired
 	private RandomGenerator randomGenerator; // 랜덤번호 생성
 
@@ -47,6 +48,8 @@ public class AhzitUserController {
 	
 	@Autowired
 	private AhzitUserDao ahzitUserDao;
+	
+	
 
 	// 회원가입
 	@GetMapping("/join")
@@ -124,35 +127,52 @@ public class AhzitUserController {
 			return "redirect:edit?error";
 		}
 	}
-
+	
 	// 마이페이지 비밀번호 변경
 	@GetMapping("/password")
-	public String password() {
+	public String password(@RequestParam String userId, Model model) {
+		model.addAttribute("userId", userId);
 		return "ahzitUser/password";
 	}
-
+	
 	@PostMapping("/password")
-	public String password(HttpSession session, @RequestParam String beforePw, // 사용자가 입력한 기존 비밀번호
+	public String password(AhzitUserDto ahzitUserDto, HttpSession session, @RequestParam String beforePw, // 사용자가 입력한 기존 비밀번호
 			@RequestParam String afterPw) { // 사용자가 입력한 바꿀 비밀번호
-		String userId = (String) session.getAttribute(SessionConstant.ID);
-		try {
+			String userId = (String) session.getAttribute(SessionConstant.ID);
+
 			// 비밀번호 검사
-			AhzitUserDto ahzitUserDto = ahzitUserDao.selectOne(userId);
-			boolean passwordMatch = beforePw.equals(ahzitUserDto.getUserPw());
-		
-			//System.out.println(beforePw);
-			//System.out.println(ahzitUserDto);
+			AhzitUserDto ahzitUserDto1 = ahzitUserDao.selectOne(userId);
+			
+			boolean passwordMatch = encoder.matches(beforePw, ahzitUserDto1.getUserPw()); // 원본 비밀번호 랑 찾은 비밀번호랑 비교
+//			System.out.println("userId"+ ahzitUserDto1.getUserPw());
+//			System.out.println("beforePw"+ beforePw);
 			
 			if (!passwordMatch) {
-				throw new Exception();
+				return "redirect:password?error";
 			}
-
-			ahzitUserDao.changePw(userId, afterPw); // 변경
+			else {
+		//	ahzitUserDto.setUserId(beforePw);
+			ahzitUserDto.setUserPw(afterPw);
+			
+		//	System.out.println("userId"+ userId);
+		//	System.out.println("입력 비밀번호"+afterPw);
+		//	System.out.println("기존 비밀번호"+beforePw);
+			System.out.println("getUserId = "+ahzitUserDto.getUserId());
+			System.out.println("getUserPw = "+ahzitUserDto.getUserPw());
+			
+			// 암호화 과정
+			String pw = ahzitUserDto.getUserPw(); 
+			String enc = encoder.encode(pw); 
+			ahzitUserDto.setUserPw(enc); 
+		//	System.out.println("22"+userId);
+		//	System.out.println("33"+afterPw);
+			ahzitUserDao.changePw(ahzitUserDto); // 변경
+		
 			return "redirect:mypage";
-		} catch (Exception e) {
-			return "redirect:password?error";
-		}
+		} 
 	}
+	
+	
 	
 	// 회원 탈퇴
 	@GetMapping("/goodbye")
@@ -167,8 +187,8 @@ public class AhzitUserController {
 
 //		System.out.println(userPw);
 //		System.out.println(ahzitUserDto.getUserPw());
-//		
-		boolean passwordMatch = userPw.equals(ahzitUserDto.getUserPw());
+		boolean passwordMatch = encoder.matches(userPw, ahzitUserDto.getUserPw()); // 원본 비밀번호 랑 찾은 비밀번호랑 비교
+	//	boolean passwordMatch = userPw.equals(ahzitUserDto.getUserPw());
 	
 		if(passwordMatch) {
 			//회원 탈퇴
@@ -221,13 +241,16 @@ public class AhzitUserController {
 		public String checkPw(
 				@RequestParam String userEmail, @RequestParam String userId, Model model) {
 			
+			// System.out.println("아이디 확인 = "+userId);
 				Map<String,String>map = new HashMap<String,String>();
 				map.put("userId", userId);
 				map.put("userEmail", userEmail);
 				
+			//	System.out.println("아이디 확인 = "+userId);
+			//	System.out.println("이메일 확인 = "+userEmail);
 				int checkPw = ahzitUserDao.checkPw(map);
-				
-				//System.out.println("비밀번호 = "+checkPw());
+			
+		//		System.out.println("아이디, 이메일 확인 = "+checkPw);
 				
 				// 이메일 인증
 				if(checkPw > 0) {
@@ -247,34 +270,35 @@ public class AhzitUserController {
 					certificationDao.insert(certificationDto);
 					model.addAttribute("userId", userId);
 					System.out.println("성공");
+					return "redirect:checkPw";
 					}
 				else {
 					System.out.println("실패");
 					String message = "실패하였습니다";
 					model.addAttribute("YN", "N");
 					model.addAttribute("message", message);
+					return "redirect:checkPw?error";
 				}
-				return"ahzitUser/checkPw";
 		}
 		
+
 		// 이메일 인증 후 비밀번호 변경
 		@GetMapping("/checkPwSuccess")
 		public String checkPwSuccess(@RequestParam String userId, Model model) {
-			System.out.println("아이디 값 = " + userId);
+		//	System.out.println("아이디 값 = " + userId);
 			model.addAttribute("userId", userId);
 			return"ahzitUser/checkPwSuccess";
 		}
 		
 		@PostMapping("/checkPwSuccess")
 		public String checkPwSuccess(AhzitUserDto ahzitUserDto, @RequestParam String userId, @RequestParam String userPw) {
-			// 1. 안된것 jsp에 있는 userId값을 checkPwSuccess로 전달해야되고 /
-			// 2. 전달한 값을 id를 userId라고 했을때 ahzitUserDto.set~~ 해서 담아서 넘겨야됨.
 			
 			ahzitUserDto.setUserId(userId);
-			
-			String pw = ahzitUserDto.getUserPw(); // 사용자가 입력한 비밀번호 꺼내오고
-			String enc = encoder.encode(pw); // 암호화 시키고
-			ahzitUserDto.setUserPw(enc); // 암호화된 비밀번호으로 Dto 에 넣어서
+		
+			// 암호화 과정
+			String pw = ahzitUserDto.getUserPw(); 
+			String enc = encoder.encode(pw); 
+			ahzitUserDto.setUserPw(enc); 
 			
 			boolean result = ahzitUserDao.checkPwSuccess(ahzitUserDto);
 			if (result) {

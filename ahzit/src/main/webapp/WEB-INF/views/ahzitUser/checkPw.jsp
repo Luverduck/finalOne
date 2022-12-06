@@ -17,15 +17,20 @@
 		//목표 : 확인 버튼을 누르면 이메일 발송 컨트롤러로 비동기 요청
 		$(".send-btn").click(function(){
 			var email = $("[name=userEmail]").val();
+			var userId = $("[name=userId]").val();
 			if(email.length == 0) return;
+			
 			
 			var btn = $(this);
 			btn.prop("disabled", true);
-			
+
 			$.ajax({
-				url:"${pageContext.request.contextPath}/async2",
+				url:"/ahzitUser/checkPw",
 				method:"post",
-				data:{certificationId:email},
+				data:{
+					userEmail:email,
+					userId:userId
+					},
 				success:function() {
 					//성공했다면 메일은 전송되었다고 볼 수 있다
 					console.log("메일 전송 완료");
@@ -50,7 +55,7 @@
 							url:"${pageContext.request.contextPath}/async3",
 							method:"post",
 							data:{
-								certificationId:email,
+								userEmail:email,
 								certificationKey:serial
 							},
 							success:function(resp){
@@ -93,7 +98,7 @@
 		</div>
 		<div >
 			Email : <input name="userEmail" type="text" required placeholder="이메일">
-			<button class="send-btn" type="button">인증하기</button>
+			<button class="send-btn" type="submit">인증하기</button>
 			<div class="cert"></div>
 		</div>
 
@@ -101,6 +106,12 @@
 	</div>
 		
 </form>
+
+<c:if test="${param.error != null}">
+	<div class="row center mt-30">
+		<span style="color: darkred;">아이디와 이메일을 확인해주세요.</span>
+	</div>
+</c:if>
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

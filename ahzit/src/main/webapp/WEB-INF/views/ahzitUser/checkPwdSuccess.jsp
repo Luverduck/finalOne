@@ -15,7 +15,7 @@
 	
 	<div>
 		<a href="/">홈으로 이동</a>
-		<a href="login">홈으로 이동</a>
+		<a href="login">로그인 하기</a>
 	</div>
 </div>
 
