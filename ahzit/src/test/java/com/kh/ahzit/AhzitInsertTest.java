@@ -21,19 +21,16 @@ public class AhzitInsertTest {
 	@Test
 	public void test() {
 		int test=ahzitDao.sequence();
-		AhzitDto ahzitDto=AhzitDto.builder()
+		sqlSession.insert("ahzit.insert", AhzitDto.builder()
 												.ahzitNo(test)
-												.ahzitLeader("test123test")
+												.ahzitLeader("test1231")
 												.ahzitSort("스터디")
-												.ahzitName("테스트용아지트4")
-												.ahzitInfo("테스트용아지트소개4")
-												.ahzitHeadMax(50)
-												.ahzitRegionHigh("서울특별시")
-												.ahzitRegionLow("강남구")
+												.ahzitName("테스트용아지트")
+												.ahzitInfo("테스트용아지트소개")
+												.ahzitRegionHigh("인천광역시")
+												.ahzitRegionLow("부평구")
 												.ahzitIsPublic("Y")
-												.build();
-		sqlSession.insert("ahzit.ahzitInsert",ahzitDto);
+											.build());
 	}
-
 
 }
