@@ -8,3 +8,17 @@
 </jsp:include>
 
 <h1>홈 화면</h1>
+
+<c:set var="login" value="${loginId != null}"></c:set>
+
+<div>
+	<c:choose>
+		<c:when test="${login}">
+			<a href="/ahzit/create">아지트 개설</a>
+		</c:when>
+		<c:otherwise>
+		</c:otherwise>
+	</c:choose>
+</div>
+
+
