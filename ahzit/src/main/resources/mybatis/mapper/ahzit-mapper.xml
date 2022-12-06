@@ -10,10 +10,10 @@
   		</select>
   		
   		<!-- 소모임 생성 -->
-  		<insert id="insert" parameterType="AhzitDto">
+  		<insert id="insert" parameterType="AhzitDto" >
   			insert into ahzit(
   			ahzit_no, ahzit_leader, ahzit_sort, ahzit_name, ahzit_info, ahzit_region_high, ahzit_region_low, ahzit_ispublic) 
-  			values(#{ahzitNo}, #{ahzitLeader}, #{ahzitSort}, #{ahzitName}, #{ahzitInfo}, #{ahzitRegionHigh}, #{ahzitRegionLow}, #{ahzitIsPublic})
+  			values (#{ahzitNo}, #{ahzitLeader}, #{ahzitSort}, #{ahzitName}, #{ahzitInfo}, #{ahzitRegionHigh}, #{ahzitRegionLow}, #{ahzitIsPublic})
   		</insert>
   		
   		<!-- 소모임 목록 -->

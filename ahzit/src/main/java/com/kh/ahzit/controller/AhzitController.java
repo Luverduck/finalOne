@@ -1,6 +1,7 @@
 package com.kh.ahzit.controller;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.repository.AhzitDao;
+import com.kh.ahzit.service.AhzitService;
 
 @Controller
 @RequestMapping("/ahzit")
@@ -25,6 +27,9 @@ public class AhzitController {
 	
 	@Autowired
 	private AhzitDao ahzitDao;
+	
+	@Autowired
+	private AhzitService ahzitService;
 	
 	private final File dir = new File("D:/upload/kh10f/ahzit");
 	
@@ -44,13 +49,19 @@ public class AhzitController {
 			@ModelAttribute AhzitMemberDto ahzitMemberDto,
 			@RequestParam MultipartFile attachment,
 			RedirectAttributes attr,
-			HttpSession session) {
+			HttpSession session) throws IllegalStateException, IOException {
 		String ahzitLeader = (String)session.getAttribute("loginId");
 		ahzitDto.setAhzitLeader(ahzitLeader);
 		
 		//AhzitService에서 번호를 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
+		int ahzitNo = ahzitService.create(ahzitDto, attachment);
 		
+		//소모임에 개설자 자동 추가
+		ahzitMemberDto.setMemberAhzitNo(ahzitNo);
+		ahzitMemberDto.setMemberId(ahzitLeader);
 		
+		//redirect
+		attr.addAttribute("ahzitNo", ahzitNo);
 		return "redirect:detail";
 	}
 

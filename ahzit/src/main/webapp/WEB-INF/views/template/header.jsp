@@ -17,6 +17,9 @@
 	<!-- Bootstrap CDN -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	
+	<!-- jQuery CDN -->
+    <script src = "https://code.jquery.com/jquery-3.6.1.js"></script>
+	
 <title>
 	<c:choose>
 		<%-- title이라는 변수의 값이 있다면(null이 아니면) title에 입력될 값은 해당 title 변수의 값으로  --%>
