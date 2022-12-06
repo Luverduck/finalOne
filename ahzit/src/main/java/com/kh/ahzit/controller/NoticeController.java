@@ -110,9 +110,7 @@ public class NoticeController {
 		//return "redirect:list";
 		
 		//번호 생성 후 등록
-		int noticeNo = noticeDao.sequence();
-		noticeDto.setNoticeNo(noticeNo);
-		noticeDao.insert2(noticeDto);
+		int noticeNo = noticeDao.insert2(noticeDto);
 		attr.addAttribute("noticeNo", noticeNo);
 		
 		return "redirect:detail";

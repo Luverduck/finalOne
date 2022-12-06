@@ -23,7 +23,7 @@
 	</insert>
 
 	<select id="list" resultType="NoticeDto">
-		select * from notice
+		select * from notice order by notice_no desc
 	</select>
 
 	<select id="one" parameterType="int" resultType="NoticeDto">
