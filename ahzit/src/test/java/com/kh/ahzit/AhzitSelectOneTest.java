@@ -8,8 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.kh.ahzit.entity.AhzitDto;
 
 @SpringBootTest
-public class Test_soo231 {
-
+public class AhzitSelectOneTest {
+	
 	@Autowired
 	private SqlSession sqlSession;
 
@@ -19,4 +19,5 @@ public class Test_soo231 {
 		AhzitDto dto = sqlSession.selectOne("ahzit.one", ahzitNo);
 		System.out.println(dto);
 	}
+
 }

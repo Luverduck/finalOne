@@ -9,13 +9,48 @@
 	 <!-- 회원 가입 -->
 	 <insert id="insert" parameterType="AhzitUserDto">
 	 	insert into ahzit_user(user_id, user_pw, user_nick, user_email) 
-	 	values(#{userId}, #{userPw}, #{userNick}, #{userEmail} )
+	 	values(#{userId}, #{userPw}, #{userNick}, #{userEmail})
 	 </insert>
 	 
 	 <!-- 회원 단일 조회 -->
 	 <select id="get" parameterType="String" resultType="AhzitUserDto">
-		select * from ahzit_user where user_id = #{user_id}
+		select * from ahzit_user where user_id = #{userId}
 	</select>
 	
-	 
+	<!-- 회원 정보 수정 -->
+	<update id ="edit" parameterType ="AhzitUserDto">
+		update ahzit_user set user_nick = #{userNick}, user_email = #{userEmail} where user_id = #{userId}
+	</update>
+	
+	<!-- 회원 로그인 시간 갱신 -->
+	<update id ="loginTime" parameterType ="String">
+		update ahzit_user set user_logindate = sysdate where user_id=#{userId}
+	</update>
+	
+	<!-- 마이페이지 비밀 번호 변경 -->
+	<update id ="changePw" parameterType ="AhzitUserDto">
+		update ahzit_user set user_pw=#{userPw} where user_id=#{userId}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="delete" parameterType="String">
+		delete ahzit_user where user_id=#{userId}
+	</delete>
+	
+	<!-- 아이디 찾기 -->
+	<!-- parameterType : 입력값 / resultType : 반환값 -->
+	 <select id="checkId" parameterType="String" resultType="String">
+	 	select user_id from ahzit_user where user_email=#{userEmail}
+	</select>
+	
+	 <!-- 비밀번호 찾기 -->
+	 <select id="checkPw" parameterType="hashmap" resultType="int">
+	  	select count(*) from ahzit_user where user_id = #{userId} and user_email= #{userEmail}
+	</select>
+	
+	<!-- 비밀 번호 변경 -->
+	<update id ="checkPwSuccess" parameterType ="AhzitUserDto">
+		update ahzit_user set user_pw=#{userPw} where user_id=#{userId}
+	</update>
+	
 </mapper>
