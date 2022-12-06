@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "freeboard_reply">
+
+	<!-- 자유게시글 다음 댓글 번호 반환 -->
+	<select id = "nextFreeboardReplyNo" resultType = "int">
+		select freeboard_reply_seq.nextval from dual	
+	</select>
+
+	<!-- 자유게시글 댓글 등록 -->
+	<insert id = "insert" parameterType = "FreeboardReplyDto">
+		insert into freeboard_reply(freeboard_reply_no, freeboard_origin_no, freeboard_reply_writer, freeboard_reply_content) values(#{freeboardReplyNo}, #{freeboardOriginNo}, #{freeboardReplyWriter}, #{freeboardReplyContent})
+	</insert>
+
+	<!-- 자유게시글 댓글 목록 + 페이징 -->
+	<select id = "selectList" parameterType = "map" resultType = "FreeboardReplyDto">
+		select * from (select tmp.*, rownum rn from (select freeboard_reply_no, freeboard_reply_writer, freeboard_reply_content, freeboard_reply_writedate from freeboard_reply where freeboard_origin_no = #{freeboardOriginNo} order by freeboard_reply_no desc)tmp) where rn between #{rownumStart} and #{rownumEnd}
+	</select>
+	
+	<!-- 자유게시글 댓글 - 특정 게시글에 달린 댓글의 총 수 -->
+	<select id = "count" parameterType = "int" resultType = "int">
+		select count(*) from freeboard_reply where freeboard_origin_no = #{freeboardOriginNo}
+	</select>
+	
+	<!-- 자유게시글 댓글 수정 -->
+	<update id = "update" parameterType = "FreeboardReplyDto">
+		update freeboard_reply set freeboard_reply_content = #{freeboardReplyContent}, freeboard_reply_updatedate = sysdate where freeboard_reply_no = #{freeboardReplyNo}
+	</update>
+	
+	<!-- 자유게시글 댓글 비활성화 -->
+	<update id = "inactive" parameterType = "int">
+		update freeboard_reply set freeboard_reply_state = 'Y' where freeboard_reply_no = #{freeboardReplyNo}
+	</update>
+</mapper>

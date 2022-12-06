@@ -23,10 +23,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.ahzit.entity.AttachmentDto;
 import com.kh.ahzit.entity.FreeboardDto;
 import com.kh.ahzit.entity.FreeboardLikeDto;
+import com.kh.ahzit.entity.FreeboardReplyDto;
 import com.kh.ahzit.repository.AttachmentDao;
 import com.kh.ahzit.repository.FreeboardDao;
 import com.kh.ahzit.repository.FreeboardLikeDao;
+import com.kh.ahzit.repository.FreeboardReplyDao;
 import com.kh.ahzit.vo.FreeboardListSeachVO;
+import com.kh.ahzit.vo.FreeboardReplyListVO;
 
 @Controller // 자유 게시판에 대한 Controller
 @RequestMapping("/freeboard")
@@ -43,6 +46,10 @@ public class FreeboardController {
 	// 의존성 주입
 	@Autowired
 	private FreeboardLikeDao freeboardLikeDao;
+	
+	// 의존성 주입
+	@Autowired
+	private FreeboardReplyDao freeboardReplyDao;
 	
 	// 첨부파일 업로드 상위경로 설정
 	private final File directory = new File("D:/upload/kh10f/freeboardAttachment");
@@ -111,7 +118,7 @@ public class FreeboardController {
 	
 	// 게시글 상세 Mapping (회원)
 	@GetMapping("/detail")
-	public String detailFreeboard(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model, @RequestParam int freeboardNo) {
+	public String detailFreeboard(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model, @RequestParam int freeboardNo, @ModelAttribute FreeboardReplyListVO freeboardReplyListVO) {
 		// 조회수 중복 증가 방지 처리
 		// HttpServletRequest에서 기존에 저장되어있는 전체 Cookie 반환
 		Cookie[] cookies = request.getCookies();
@@ -143,8 +150,16 @@ public class FreeboardController {
 		List<AttachmentDto> attachmentList = attachmentDao.selectFreeboardAttachment(freeboardNo);
 		// 조회 결과를 model에 추가
 		model.addAttribute("attachmentList", attachmentList);
+		// 입력받은 자유게시글 번호로 해당 게시글에 달린 댓글의 총 수 반환
+		int total = freeboardReplyDao.countFreeboardReply(freeboardNo);
+		// 반환한 댓글의 총 수를 freeboardReplyListVO의 total로 설정
+		freeboardReplyListVO.setTotal(total);
+		// 입력받은 자유게시글 번호로 해당 번호와 연결된 댓글 조회
+		List<FreeboardReplyDto> freeboardReplyList = freeboardReplyDao.selectFreeboardReply(freeboardNo, freeboardReplyListVO);
 		// 로그인 중인 회원의 회원 아이디 반환
 		String loginId = (String)session.getAttribute("loginId");
+		// 조회 결과를 model에 추가
+		model.addAttribute("freeboardReplyList", freeboardReplyList);
 		if(loginId != null) {
 			// 좋아요 여부 조회
 			boolean isLike = freeboardLikeDao.checkFreeboardLike(freeboardNo, loginId);
@@ -170,9 +185,9 @@ public class FreeboardController {
 	@PostMapping("/edit")
 	public String editFreeboard(@ModelAttribute FreeboardDto freeboardDto, List<MultipartFile> freeboardAttachment, RedirectAttributes attr) throws Exception {
 		// 입력받은 freeboardDto로 게시글 수정 처리 후 결과 반환
-		boolean isEditted = freeboardDao.updateFreeboard(freeboardDto);		
+		boolean isEdited = freeboardDao.updateFreeboard(freeboardDto);		
 		// 수정 성공 여부에 따라 서로 다른 처리
-		if(isEditted) { // 수정 성공시
+		if(isEdited) { // 수정 성공시
 			
 			// ** 게시글 수정시 첨부파일을 수정하려면 기존 첨부파일 정보를 모두 지우고 새로 첨부파일을 등록해야함
 			// 문제는 첨부파일을 수정하지 않으려고 할 때 첨부파일에 아무것도 입력하지 않으면 NullPointException 발생
