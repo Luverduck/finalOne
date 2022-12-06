@@ -48,6 +48,8 @@
 		update notice set notice_read = notice_read + 1
 		where notice_no = #{noticeNo}
 	</update>
- 
+	
+	<!-- 검색창 -->
+ 	
 
 </mapper>

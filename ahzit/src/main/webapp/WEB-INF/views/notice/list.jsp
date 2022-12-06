@@ -91,8 +91,9 @@
 				<option value="notice_content"
 					<c:if test="${vo.type=='notice_content'}">selected</c:if>>내용</option>
 
-			</select> <input type="search" name="keyword" placeholder="검색어">
-			<button>검색</button>
+			</select> 
+			<input type="search" name="keyword" placeholder="검색어" required value="${vo.keyword}">
+			<button type="submit">검색</button>
 		</form>
 
 	</div>
