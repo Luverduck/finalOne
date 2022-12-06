@@ -59,7 +59,7 @@ public class AhzitUserController {
 		ahzitUserDao.join(ahzitUserDto);
 		return "redirect:joinSuccess";
 	}
-
+	
 	// 가입완료
 	@GetMapping("/joinSuccess")
 	public String joinSuccess() {
@@ -81,10 +81,8 @@ public class AhzitUserController {
 		// 끝
 		if (ahzitUserDao.login(ahzitUserDto)) {
 			session.setAttribute(SessionConstant.ID, ahzitUserDto.getUserId());
-			
 		//로그인 시간 갱신
 		ahzitUserDao.updateLoginTime(findDto.getUserId());
-		
 			return "redirect:/";
 		} else {
 			return "redirect:login?error";
@@ -97,7 +95,6 @@ public class AhzitUserController {
 		session.removeAttribute(SessionConstant.ID);
 		return "redirect:login";
 	}
-
 	
 	// 마이페이지
 	@GetMapping("/mypage")
@@ -105,9 +102,7 @@ public class AhzitUserController {
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
 		model.addAttribute("ahzitUserDto", ahzitUserDao.selectOne(loginId));
 		AhzitUserDto ahzitUserDto = ahzitUserDao.selectOne(loginId);
-
 		model.addAttribute("ahzitUserDto", ahzitUserDto);
-
 		return "ahzitUser/mypage";
 	}
 
@@ -116,10 +111,9 @@ public class AhzitUserController {
 	public String edit(Model model, @RequestParam String userId, HttpSession session) {
 		AhzitUserDto ahzitUserDto = ahzitUserDao.selectOne(userId);
 		model.addAttribute("ahzitUserDto", ahzitUserDto);
-
 		return "ahzitUser/edit";
 	}
-
+	
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute AhzitUserDto ahzitUserDto, RedirectAttributes attr) {
 		boolean result = ahzitUserDao.update(ahzitUserDto);
@@ -131,7 +125,7 @@ public class AhzitUserController {
 		}
 	}
 
-	// 비밀번호 변경
+	// 마이페이지 비밀번호 변경
 	@GetMapping("/password")
 	public String password() {
 		return "ahzitUser/password";
@@ -205,9 +199,15 @@ public class AhzitUserController {
 			@RequestParam String userEmail, Model model) {
 		
 			List<Object> checkId = ahzitUserDao.checkId(userEmail);
-			model.addAttribute("checkId", checkId);	
-	//		System.out.println("dddddd" + model.getAttribute("checkId"));
-			
+		//	model.addAttribute("checkId", checkId);	
+
+			if(checkId.isEmpty()) {
+				return "redirect:checkId?error";
+			}
+			else {
+				model.addAttribute("checkId", checkId);	
+			}
+			// System.out.println("아이디 값 = " + model.getAttribute("checkId"));
 			return"ahzitUser/checkId";
 	}
 	
@@ -227,65 +227,67 @@ public class AhzitUserController {
 				
 				int checkPw = ahzitUserDao.checkPw(map);
 				
-				System.out.println("aaaaaa"+checkPw());
+				//System.out.println("비밀번호 = "+checkPw());
 				
 				// 이메일 인증
 				if(checkPw > 0) {
-				// 1) 랜덤 인증 번호 생성 수정 구문
-				String serial = randomGenerator.generatSerial(6);
-
-				// 2) 이메일 발송
-				SimpleMailMessage message = new SimpleMailMessage();
-				message.setTo(userEmail);
-				message.setSubject("[AHZIT] 회원 가입 이메일 인증 번호입니다");
-				message.setText("인증번호 : " + serial);
-				javaMailSender.send(message);
-
-				// 3) 데이터베이스 등록 수정 구문
-				certificationDao.delete(userEmail);
-				CertificationDto certificationDto = CertificationDto.builder().certificationId(userEmail).certificationKey(serial).build();
-				certificationDao.insert(certificationDto);
-				model.addAttribute("userId", userId);
-				System.out.println("성공");
-				
-				
-				}
+					// 1) 랜덤 인증 번호 생성 수정 구문
+					String serial = randomGenerator.generatSerial(6);
+	
+					// 2) 이메일 발송
+					SimpleMailMessage message = new SimpleMailMessage();
+					message.setTo(userEmail);
+					message.setSubject("[AHZIT] 비밀번호 확인 인증 번호입니다");
+					message.setText("인증번호 : " + serial);
+					javaMailSender.send(message);
+	
+					// 3) 데이터베이스 등록 수정 구문
+					certificationDao.delete(userEmail);
+					CertificationDto certificationDto = CertificationDto.builder().certificationId(userEmail).certificationKey(serial).build();
+					certificationDao.insert(certificationDto);
+					model.addAttribute("userId", userId);
+					System.out.println("성공");
+					}
 				else {
 					System.out.println("실패");
 					String message = "실패하였습니다";
 					model.addAttribute("YN", "N");
 					model.addAttribute("message", message);
 				}
-				
-				//model.addAttribute("checkPw", checkPw);	
-				
 				return"ahzitUser/checkPw";
 		}
+		
 		// 이메일 인증 후 비밀번호 변경
 		@GetMapping("/checkPwSuccess")
 		public String checkPwSuccess(@RequestParam String userId, Model model) {
-			System.out.println("ddeeeeedd" + userId);
+			System.out.println("아이디 값 = " + userId);
 			model.addAttribute("userId", userId);
 			return"ahzitUser/checkPwSuccess";
 		}
 		
 		@PostMapping("/checkPwSuccess")
-		public String checkPwSuccess111(AhzitUserDto ahzitUserDto, @RequestParam String userId, @RequestParam String userPw) {
-			// 1. 안된것 jsp에 있는 userId값을 checkPwSuccess로 전달해야되고
+		public String checkPwSuccess(AhzitUserDto ahzitUserDto, @RequestParam String userId, @RequestParam String userPw) {
+			// 1. 안된것 jsp에 있는 userId값을 checkPwSuccess로 전달해야되고 /
 			// 2. 전달한 값을 id를 userId라고 했을때 ahzitUserDto.set~~ 해서 담아서 넘겨야됨.
-			// ahzitUserDto.setUserId(userId);
+			
+			ahzitUserDto.setUserId(userId);
 			
 			String pw = ahzitUserDto.getUserPw(); // 사용자가 입력한 비밀번호 꺼내오고
 			String enc = encoder.encode(pw); // 암호화 시키고
 			ahzitUserDto.setUserPw(enc); // 암호화된 비밀번호으로 Dto 에 넣어서
 			
-			boolean result = ahzitUserDao.chkPwSuccess(ahzitUserDto);
+			boolean result = ahzitUserDao.checkPwSuccess(ahzitUserDto);
 			if (result) {
-
+				return "redirect:checkPwdSuccess";
 			} else {
-				return "redirect:edit?error";
+				return "redirect:checkPwSuccess?error";
 			}
-			return"ahzitUser/checkPwSuccess";
+		}
+		
+		// 이메일 인증 후 비밀번호 변경 성공 페이지
+		@GetMapping("/checkPwdSuccess")
+		public String checkPwdSuccess() {
+			return "ahzitUser/checkPwdSuccess";
 		}
 		
 

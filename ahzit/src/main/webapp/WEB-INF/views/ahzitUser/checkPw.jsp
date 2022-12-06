@@ -41,9 +41,10 @@
 					//button을 클릭하면 input에 있는 인증번호와 이메일을 사용해서 검사요청
 					button.click(function(){
 						var serial = input.val();
+						var userId =  $("[name=userId]").val();
 						if(serial.length != 6) return;
 						alert("인증이 완료되었습니다.");
-						window.open("${pageContext.request.contextPath}/ahzitUser/checkPwSuccess?userId=" + ${userId} + "width=500,height=600");
+						window.open("${pageContext.request.contextPath}/ahzitUser/checkPwSuccess?userId=" + userId);
 					//	alert(serial);
 						$.ajax({
 							url:"${pageContext.request.contextPath}/async3",
@@ -85,20 +86,19 @@
 			<h1>비밀번호 찾기</h1>
 		</div>
 
-		<div class="row">
+		<div>
 			<label>아이디 : 
 				<input name="userId" type="text" required placeholder="아이디">
 			</label>
 		</div>
-		<div class="row">
-			<label>Email : 
-				<input name="userEmail" type="text" required placeholder="이메일">
-			</label>
+		<div >
+			Email : <input name="userEmail" type="text" required placeholder="이메일">
+			<button class="send-btn" type="button">인증하기</button>
 			<div class="cert"></div>
 		</div>
 
-			<button class="send-btn" type="submit">확인</button>
-		</div>
+	
+	</div>
 		
 </form>
 

@@ -5,16 +5,17 @@
 
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="회원 탈퇴 완료" name="title"/>
+	<jsp:param value="비밀번호 변경 완료" name="title"/>
 </jsp:include>
 
 <div>
 	<div>
-		<h1>그동안 AHZIT를 이용해주셔서 감사합니다</h1>
+		<h1>비밀번호 변경이 완료 되었습니다.</h1>
 	</div>
 	
 	<div>
 		<a href="/">홈으로 이동</a>
+		<a href="login">홈으로 이동</a>
 	</div>
 </div>
 

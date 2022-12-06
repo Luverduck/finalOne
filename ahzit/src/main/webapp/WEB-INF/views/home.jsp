@@ -8,3 +8,6 @@
 </jsp:include>
 
 <h1>홈 화면</h1>
+
+<%-- footer --%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
