@@ -1,6 +1,8 @@
 package com.kh.ahzit.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +34,11 @@ public class NoticeDaoImpl implements NoticeDao {
 		int noticeNo = jdbcTemplate.queryForObject(sql, int.class);
 
 		// 등록
-		sql = "insert into notice(" 
-				+ "notice_no, notice_writer, notice_title, "
-				+ "notice_content, notice_writedate, notice_read) " 
-				+ "values(?, ?, ?, ?, sysdate, 0)";
+		sql = "insert into notice(" + "notice_no, notice_writer, notice_title, "
+				+ "notice_content, notice_writedate, notice_read) " + "values(?, ?, ?, ?, sysdate, 0)";
 
-		Object[] param = { 
-			noticeNo, noticeDto.getNoticeWriter(), noticeDto.getNoticeTitle(), 
-			noticeDto.getNoticeContent() 
-		};
+		Object[] param = { noticeNo, noticeDto.getNoticeWriter(), noticeDto.getNoticeTitle(),
+				noticeDto.getNoticeContent() };
 		jdbcTemplate.update(sql, param);
 		return noticeNo;
 	}
@@ -55,6 +53,16 @@ public class NoticeDaoImpl implements NoticeDao {
 	public List<NoticeDto> selectList(NoticeListSearchVO vo) {
 		return sqlSession.selectList("notice.list");
 	}
+
+//	@Override
+//	public List<NoticeDto> selectListSearch(NoticeListSearchVO vo) {
+//		Map<String, String> param = new HashMap<>();
+//
+//		param.put("type", vo.getType());
+//		param.put("keyword", vo.getKeyword());
+//
+//		return sqlSession.selectList("notice.search", param);
+//	}
 
 	// 상세
 	@Override

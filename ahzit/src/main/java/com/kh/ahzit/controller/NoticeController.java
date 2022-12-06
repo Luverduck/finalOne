@@ -1,5 +1,8 @@
 package com.kh.ahzit.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,19 +37,36 @@ public class NoticeController {
 		else {
 			model.addAttribute("list", noticeDao.selectList());
 		}
-				
-		model.addAttribute("list", noticeDao.selectList());
+		
+//		model.addAttribute("list", noticeDao.selectList(vo));
 		return "notice/list";
 	}
 	
 	@GetMapping("/detail")
-	public String detail(@RequestParam int noticeNo, Model model) {
+	public String detail(@RequestParam int noticeNo, Model model,
+			HttpSession session) {
 		
 		//조회수 증가
 		//noticeDao.updateReadCount(noticeNo);
 		
-		//detail
-		model.addAttribute("noticeDto", noticeDao.read(noticeNo));
+		//데이터를 읽도록 처리
+		//model.addAttribute("noticeDto", noticeDao.read(noticeNo));
+		
+		//조회수 중복 방지 처리
+		//현재 history가 있는지 없는지 모르니까 꺼내서 없으면 생성
+		Set<Integer> history = (Set<Integer>) session.getAttribute("history");
+		if(history == null) { //없으면 생성
+			history = new HashSet<>();
+		}
+		//현재 글 번호를 읽은적이 있는지 검사
+		if(history.add(noticeNo)) { //처음 읽은 번호
+			model.addAttribute("noticeDto", noticeDao.read(noticeNo));
+		}
+		else { //읽은 적이 있는 번
+			model.addAttribute("noticeDto", noticeDao.selectOne(noticeNo));
+		}
+		session.setAttribute("history", history);
+		
 		return "notice/detail";
 	}
 	

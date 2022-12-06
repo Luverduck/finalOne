@@ -50,6 +50,9 @@
 	</update>
 	
 	<!-- 검색 -->
- 
+	<select id="search" parameterType="map" resultType="NoticeDto">
+		select * from notice where instr(${type}, #{keyword}) > 0
+		order by ${type} asc
+	</select>
 
 </mapper>

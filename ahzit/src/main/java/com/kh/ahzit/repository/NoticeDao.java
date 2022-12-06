@@ -16,7 +16,11 @@ public interface NoticeDao {
 	//목록 + 검색
 	List<NoticeDto> selectList();
 	List<NoticeDto> selectList(NoticeListSearchVO vo);
+	
 
+	//검색
+	//List<NoticeDto> selectListSearch(NoticeListSearchVO vo);
+	
 	//상세
 	NoticeDto selectOne(int noticeNo);
 	

@@ -83,7 +83,7 @@
 
 
 
-		<!-- 검색창 -->
+
 		<form action="list" method="get">
 			<select name="type" required>
 				<option value="notice_title"

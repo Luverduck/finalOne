@@ -1,36 +1,34 @@
 package com.kh.ahzit;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
+
+import com.kh.ahzit.entity.NoticeDto;
 
 
 @SpringBootTest
 public class Test_seungrii {
 	
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	private SqlSession sqlSession;
 	
-
 	@Test
 	public void test() {
-		//번호 생성
-		String sql = "select notice_seq.nextval from dual";
-		int noticeNo = jdbcTemplate.queryForObject(sql, int.class);
-		System.out.println("noticeNo" + noticeNo);
+		Map<String, String> param = new HashMap<>();
 		
-		//등록
-		sql = "insert into notice("
-				+ "notice_no, notice_writer, notice_title, "
-				+ "notice_content, notice_writedate, notice_read) "
-				+ "values(?, ?, ?, ?, sysdate, 0)";
+		param.put("type", "notice_title");
+		param.put("keyword", "1");
 		
-		Object[] param = {
-				noticeNo, "test1231", "제목", "내용"
-		};
-		jdbcTemplate.update(sql, param);
-
+		List<NoticeDto> list = sqlSession.selectList("notice.search", param);
 		
+		for(NoticeDto noticeDto : list) {
+			System.out.println(noticeDto);
+		}
 	}
 }
