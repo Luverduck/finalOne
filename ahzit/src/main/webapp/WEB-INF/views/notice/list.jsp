@@ -25,7 +25,7 @@
 
 		<!-- 글쓰기 버튼 -->
 		<div class="row">
-			<a class="btn btn-neutral" href="insert">글쓰기</a>
+			<a class="btn btn-neutral" href="write">글쓰기</a>
 		</div>
 
 		<div class="row center">

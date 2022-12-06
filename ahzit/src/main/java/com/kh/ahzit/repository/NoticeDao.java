@@ -9,6 +9,10 @@ public interface NoticeDao {
 
 	//등록
 	void insert(NoticeDto noticeDto);
+	
+	//번호+등록
+	int sequence();//시퀀스 발행 메소드
+	void insert2(NoticeDto noticeDto);//번호까지 합쳐서 등록하는 메소드
 
 	//목록 + 검색
 	List<NoticeDto> selectList();

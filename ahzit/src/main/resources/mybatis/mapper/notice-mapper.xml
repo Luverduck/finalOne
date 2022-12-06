@@ -49,7 +49,7 @@
 		where notice_no = #{noticeNo}
 	</update>
 	
-	<!-- 검색창 -->
- 	
+	<!-- 검색 -->
+ 
 
 </mapper>
