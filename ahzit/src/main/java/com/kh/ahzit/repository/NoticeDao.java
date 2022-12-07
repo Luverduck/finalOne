@@ -18,8 +18,6 @@ public interface NoticeDao {
 	List<NoticeDto> selectList(NoticeListSearchVO vo);
 	
 
-	//검색
-	//List<NoticeDto> selectListSearch(NoticeListSearchVO vo);
 	
 	//상세
 	NoticeDto selectOne(int noticeNo);
@@ -33,4 +31,8 @@ public interface NoticeDao {
 
 	//삭제
 	boolean delete(int noticeNo);
+	
+	//test clear
+	void clear();
+	
 }

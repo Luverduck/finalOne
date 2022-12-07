@@ -37,8 +37,6 @@ public class NoticeController {
 		else {
 			model.addAttribute("list", noticeDao.selectList());
 		}
-		
-//		model.addAttribute("list", noticeDao.selectList(vo));
 		return "notice/list";
 	}
 	

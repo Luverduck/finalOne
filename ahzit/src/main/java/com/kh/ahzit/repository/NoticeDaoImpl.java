@@ -51,25 +51,20 @@ public class NoticeDaoImpl implements NoticeDao {
 
 	@Override
 	public List<NoticeDto> selectList(NoticeListSearchVO vo) {
-		return sqlSession.selectList("notice.list");
-	}
+		Map<String, String> param = new HashMap<>();
 
-//	@Override
-//	public List<NoticeDto> selectListSearch(NoticeListSearchVO vo) {
-//		Map<String, String> param = new HashMap<>();
-//
-//		param.put("type", vo.getType());
-//		param.put("keyword", vo.getKeyword());
-//
-//		return sqlSession.selectList("notice.search", param);
-//	}
+		param.put("type", vo.getType());
+		param.put("keyword", vo.getKeyword());
+		
+		return sqlSession.selectList("notice.search", param);
+	}
 
 	// 상세
 	@Override
 	public NoticeDto selectOne(int noticeNo) {
 		return sqlSession.selectOne("notice.one", noticeNo);
 	}
-
+	
 	// 조회수 증가
 	@Override
 	public boolean updateReadCount(int noticeNo) {
@@ -95,6 +90,13 @@ public class NoticeDaoImpl implements NoticeDao {
 	public boolean delete(int noticeNo) {
 		int count = sqlSession.delete("notice.delete", noticeNo);
 		return count > 0;
+	}
+	
+	@Override
+	public void clear() {
+		String sql = "delete notice";
+		jdbcTemplate.update(sql);
+		
 	}
 
 }
