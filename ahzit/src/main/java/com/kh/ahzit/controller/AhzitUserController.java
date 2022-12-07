@@ -35,7 +35,7 @@ public class AhzitUserController {
 	private SqlSession sqlSession;
 	
 	@Autowired
-	private PasswordEncoder encoder;
+	private PasswordEncoder encoder; // 암호화복호화
 	
 	@Autowired
 	private RandomGenerator randomGenerator; // 랜덤번호 생성
@@ -53,12 +53,12 @@ public class AhzitUserController {
 
 	// 회원가입
 	@GetMapping("/join")
-	public String insert() {
+	public String join() {
 		return "ahzitUser/join";
 	}
 
 	@PostMapping("/join")
-	public String insert(@ModelAttribute AhzitUserDto ahzitUserDto) {
+	public String join(@ModelAttribute AhzitUserDto ahzitUserDto) {
 		ahzitUserDao.join(ahzitUserDto);
 		return "redirect:joinSuccess";
 	}
@@ -157,8 +157,8 @@ public class AhzitUserController {
 		//	System.out.println("userId"+ userId);
 		//	System.out.println("입력 비밀번호"+afterPw);
 		//	System.out.println("기존 비밀번호"+beforePw);
-			System.out.println("getUserId = "+ahzitUserDto.getUserId());
-			System.out.println("getUserPw = "+ahzitUserDto.getUserPw());
+		//	System.out.println("getUserId = "+ahzitUserDto.getUserId());
+		//	System.out.println("getUserPw = "+ahzitUserDto.getUserPw());
 			
 			// 암호화 과정
 			String pw = ahzitUserDto.getUserPw(); 
@@ -171,8 +171,6 @@ public class AhzitUserController {
 			return "redirect:mypage";
 		} 
 	}
-	
-	
 	
 	// 회원 탈퇴
 	@GetMapping("/goodbye")
@@ -313,6 +311,4 @@ public class AhzitUserController {
 		public String checkPwdSuccess() {
 			return "ahzitUser/checkPwdSuccess";
 		}
-		
-
 }

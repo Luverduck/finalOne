@@ -46,6 +46,8 @@
 	<a href="edit?userId=${loginId}">내 정보 수정</a>
 	<a href="password?userId=${loginId}">비밀번호 변경</a>
 	<a href="goodbye?userId=${loginId}">회원 탈퇴</a>
+	<a href="/inquire/list?inquireId=${loginId}">1:1 문의</a>
+	
 	<a href="/">메인페이지로 이동</a>
 	</div>
 
