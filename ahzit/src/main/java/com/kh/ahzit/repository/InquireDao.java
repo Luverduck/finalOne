@@ -3,6 +3,7 @@ package com.kh.ahzit.repository;
 import java.util.List;
 
 import com.kh.ahzit.entity.InquireDto;
+import com.kh.ahzit.entity.NoticeDto;
 
 public interface InquireDao {
 
@@ -14,5 +15,7 @@ public interface InquireDao {
 	
 	List<InquireDto> selectList(String inquireId); // 문의 리스트
 	
+	boolean edit(InquireDto inquireDto); // 문의 수정
 	
+	boolean delete(int inquireNo); // 문의 삭제
 }

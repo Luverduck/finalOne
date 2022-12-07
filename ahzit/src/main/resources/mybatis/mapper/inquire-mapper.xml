@@ -28,5 +28,14 @@
 		select * from inquire where inquire_id = #{inquireId}
 	</select>
 	
+	<!--  1:1 문의 수정 -->
+	<update id = "edit" parameterType = "InquireDto">
+		update inquire set inquire_title = #{inquireTitle}, inquire_content = #{inquireContent}, inquire_updatedate = sysdate where inquire_no = #{inquireNo}
+	</update>
+	
+	<!--  1:1 문의 삭제 -->
+	<delete id = "delete" parameterType = "int">
+		delete inquire where inquire_no = #{inquireNo}
+	</delete>
 	
 </mapper>

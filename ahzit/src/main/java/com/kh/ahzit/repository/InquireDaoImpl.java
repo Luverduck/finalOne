@@ -37,6 +37,18 @@ public class InquireDaoImpl implements InquireDao {
 		return sqlSession.selectList("inquire.list", inquireId);
 	}
 
+	@Override
+	public boolean edit(InquireDto inquireDto) {
+		int count = sqlSession.update("inquire.edit", inquireDto);
+		return count > 0;
+	}
+
+	@Override
+	public boolean delete(int inquireNo) {
+		int count = sqlSession.delete("inquire.delete", inquireNo);
+		return count > 0;
+	}
+
 
 	
 

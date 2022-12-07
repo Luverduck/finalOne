@@ -52,8 +52,9 @@
 				<tr>
 					<td>
 						<c:if test = "${loginId == inquireDto.inquireId}">
-							<a href = "edit?freeboardNo=${inquireDto.inquireNo}">수정</a>
-							<a href = "delete?freeboardNo=${inquireDto.inquireNo}">삭제</a>
+							<a href = "edit?inquireNo=${inquireDto.inquireNo}">수정</a>
+							<a href = "delete?inquireNo=${inquireDto.inquireNo}">삭제</a>
+							<a href = "list?inquireId=${inquireDto.inquireId}">목록</a>
 						</c:if>
 					</td>
 				</tr>

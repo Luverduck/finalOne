@@ -35,7 +35,7 @@ public class AhzitUserController {
 	private SqlSession sqlSession;
 	
 	@Autowired
-	private PasswordEncoder encoder;
+	private PasswordEncoder encoder; // 암호화복호화
 	
 	@Autowired
 	private RandomGenerator randomGenerator; // 랜덤번호 생성
