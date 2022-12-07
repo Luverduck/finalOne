@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ahzit.entity.AhzitBoardDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
-import com.kh.ahzit.vo.AhzitBoardListSearchVO;
+import com.kh.ahzit.vo.AhzitBoardVO;
 
 @Repository
 public class AhzitBoardDaoImpl implements AhzitBoardDao {
@@ -30,12 +30,6 @@ public class AhzitBoardDaoImpl implements AhzitBoardDao {
 		return sqlSession.selectOne("ahzitBoard.selectMemberInfo", param);
 	}
 	
-	// 추상 메소드 오버라이딩 - 등록을 위한 다음 게시글 번호 반환
-	@Override
-	public int nextBoardNo() {
-		return sqlSession.selectOne("ahzitBoard.nextBoardNo");
-	}
-
 	// 추상 메소드 오버라이딩 - 소모임 게시글 등록
 	@Override
 	public void insertBoard(AhzitBoardDto ahzitBoardDto) {
@@ -44,7 +38,18 @@ public class AhzitBoardDaoImpl implements AhzitBoardDao {
 
 	// 추상 메소드 오버라이딩 - 특정 소모임 내 게시글 조회
 	@Override
-	public List<AhzitBoardListSearchVO> selectBoardList(int boardAhzitNo) {
-		return sqlSession.selectList("ahzitBoard.selectList", boardAhzitNo);
+	public List<AhzitBoardVO> allBoardList(int boardAhzitNo) {
+		return sqlSession.selectList("ahzitBoard.allList", boardAhzitNo);
+	}
+
+	// 추상 메소드 - 특정 소모임 내 게시글 검색 조회
+	@Override
+	public List<AhzitBoardVO> searchBoardList(int memberAhzitNo, String keyword) {
+		// 바인딩 변수를 저장할 Map 생성
+		Map<String, String> param = new HashMap<>();
+		// 바인딩 변수로 사용할 값 저장
+		param.put("memberAhzitNo", String.valueOf(memberAhzitNo));
+		param.put("keyword", keyword);
+		return sqlSession.selectList("ahzitBoard.searchList", param);
 	}
 }

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.kh.ahzit.entity.AhzitBoardDto;
 import com.kh.ahzit.repository.AhzitBoardDao;
 import com.kh.ahzit.repository.FreeboardDao;
 
@@ -27,9 +28,16 @@ public class Test_Luverduck {
 	@Autowired
 	private AhzitBoardDao ahzitBoardDao;
 	
+	// 소모임 내 게시글 등록
 	@Test
 	public void test() {
-		ahzitBoardDao.searchMemberInfo(84, "tester111");
+		for(int i = 0 ; i < 10 ; i ++) {
+			ahzitBoardDao.insertBoard(AhzitBoardDto.builder()
+					.boardWriterNo(23)
+					.boardAhzitNo(84)
+					.boardContent("테스트 내용 " + i)
+					.build());
+		}
 	}
 	
 	

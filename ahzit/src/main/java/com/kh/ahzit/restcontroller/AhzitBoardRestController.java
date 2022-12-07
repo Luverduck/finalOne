@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.ahzit.entity.AhzitBoardDto;
 import com.kh.ahzit.repository.AhzitBoardDao;
-import com.kh.ahzit.vo.AhzitBoardListSearchVO;
+import com.kh.ahzit.vo.AhzitBoardVO;
 
 @RestController
 @RequestMapping("/rest_board")
@@ -28,9 +28,9 @@ public class AhzitBoardRestController {
 		ahzitBoardDao.insertBoard(ahzitBoardDto);
 	}
 	
-	// 소모임 게시글 조회 Mapping
-	@GetMapping("/list")
-	public List<AhzitBoardListSearchVO> selectList(@RequestParam int ahzitNo) {
-		return ahzitBoardDao.selectBoardList(ahzitNo);
+	// 소모임 게시글 검색 조회 Mapping
+	@GetMapping("/search")
+	public List<AhzitBoardVO> selectList(@RequestParam int memberAhzitNo, @RequestParam String keyword) {
+		return ahzitBoardDao.searchBoardList(memberAhzitNo, keyword);
 	}
 }

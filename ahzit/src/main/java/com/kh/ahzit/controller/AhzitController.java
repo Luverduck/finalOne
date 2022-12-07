@@ -64,5 +64,4 @@ public class AhzitController {
 		attr.addAttribute("ahzitNo", ahzitNo);
 		return "redirect:detail";
 	}
-
 }

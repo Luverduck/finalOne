@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.repository.AhzitBoardDao;
-import com.kh.ahzit.vo.AhzitBoardListSearchVO;
+import com.kh.ahzit.vo.AhzitBoardVO;
 
 @Controller
 @RequestMapping("/ahzit_in")
@@ -33,9 +33,11 @@ public class AhzitInController {
 		// 조회한 정보를 model에 추가
 		model.addAttribute("ahzitMemberDto", ahzitMemberDto);
 		// 입력받은 소모임 번호로 해당 소모임 내 모든 게시글 조회
-		List<AhzitBoardListSearchVO> ahzitBoardList = ahzitBoardDao.selectBoardList(ahzitNo);
+		List<AhzitBoardVO> ahzitBoardList = ahzitBoardDao.allBoardList(ahzitNo);
 		// 조회한 정보를 model에 추가
 		model.addAttribute("ahzitBoardList", ahzitBoardList);
+		// 편의를 위해 ahzitNo를 model에 추가
+		model.addAttribute("ahzitNo", ahzitNo);
 		// 소모임 홈 화면(board.jsp)로 연결
 		return "ahzit_in/board";
 	}
