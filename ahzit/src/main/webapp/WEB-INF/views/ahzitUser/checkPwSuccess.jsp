@@ -6,7 +6,7 @@
 
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="비밀번호 확인" name="title"/>
+	<jsp:param value="비밀번호 변경" name="title"/>
 </jsp:include>
 
 
@@ -18,7 +18,7 @@
 		</div>
 		<input type="text" name="userId" value="${userId}" >
 		<div>
-			새로운 비밀번호 : <input name="checkPwSuccess" type="password" required placeholder="변경할비밀번호">
+			새로운 비밀번호 : <input name="userPw" type="password" required placeholder="변경할비밀번호">
 		</div>
 		
 		<div>
