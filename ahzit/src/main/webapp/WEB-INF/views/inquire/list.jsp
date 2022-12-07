@@ -14,11 +14,8 @@
 		<h1>내 문의 목록</h1>
 	</div>
 	
-	<div >
-		<a href="insert">글쓰기</a>
-	</div>
 	
-	<div class="row center">
+	<div>
 		<table class="table table-border table-hover">
 			<thead>
 				<tr>
@@ -30,9 +27,10 @@
 				</tr>
 			</thead>
 			
-			<tbody align="center">
-				<c:forEach var="inquireDto" items="${list}">
+			<tbody>
+				<c:forEach var="inquireDto" items="${inquireList}">
 				<tr>
+				
 				<td>${inquireDto.inquireNo}</td>
 					<td align="left">
 					<!-- 제목을 누르면 상세 페이지로 이동하도록 처리 -->
@@ -60,13 +58,88 @@
 				</c:forEach>
 			</tbody>
 			
-			<tfoot>
-			
-			</tfoot>
+	<tfoot>
+		<tr class = "right" >
+			<td colspan="6">
+				<a href = "insert">글쓰기</a>
+			</td>
+		</tr>
+	</tfoot>
+</table>
 
-		</table>
 	</div>
 	
+<%-- 검색창 --%>
+<form action = "list" method = "get">
+	<select name = "type" required>
+		<option value = "inquire_title">제목</option>
+		<option value = "inquire_content">내용</option>
+	</select>
+	<input name = "keyword" placeholder = "검색어" value = "${inquireListSearchVO.keyword}">
+	<button type = "submit">검색</button>
+</form>
+
+<%-- 페이지 네비게이터 --%>
+<ul class="pagination">
+	<c:choose>
+		<c:when test = "${inquireListSearchVO.isFirst()}">
+			<li class="page-item">
+				<a class="page-link" href = "">&laquo;</a>
+			</li>
+		</c:when>
+		<c:otherwise>
+			<li class="page-item">
+				<a class="page-link" href = "list?p=${inquireListSearchVO.firstBlock()}&${inquireListSearchVO.parameter()}">&laquo;</a>
+			</li>
+		</c:otherwise>
+	</c:choose>
+	
+	<c:choose>
+		<c:when test = "${inquireListSearchVO.hasPrev()}">
+			<li class="page-item">
+				<a class="page-link" href = "list?p=${inquireListSearchVO.prevBlock()}&${inquireListSearchVO.parameter()}">&lt;</a>
+			</li>
+		</c:when>
+		<c:otherwise>
+			<li class="page-item">
+				<a class="page-link" href = "">&lt;</a>
+			</li>
+		</c:otherwise>
+	</c:choose>
+	
+	<c:forEach var = "i" begin = "${inquireListSearchVO.startBlock()}" end = "${inquireListSearchVO.endBlock()}" step = "1">
+		<li class="page-item">
+			<a class="page-link" href = "list?p=${i}&${inquireListSearchVO.parameter()}">${i}</a>
+		</li>
+	</c:forEach>
+	
+	<c:choose>
+		<c:when test = "${inquireListSearchVO.hasNext()}">
+			<li class="page-item">
+				<a class="page-link" href = "list?p=${inquireListSearchVO.nextBlock()}&${inquireListSearchVO.parameter()}">&gt;</a>
+			</li>
+		</c:when>
+		<c:otherwise>
+			<li class="page-item">
+				<a class="page-link" href = "">&gt;</a>
+			</li>
+		</c:otherwise>
+	</c:choose>
+	
+	<c:choose>
+		<c:when test = "${inquireListSearchVO.isLast()}">
+			<li class="page-item">
+				<a class="page-link" href = "">&raquo;</a>
+			</li>
+		</c:when>
+		<c:otherwise>
+			<li class="page-item">
+				<a class="page-link" href = "list?p=${inquireListSearchVO.lastBlock()}&${inquireListSearchVO.parameter()}">&raquo;</a>
+			</li>
+		</c:otherwise>
+	</c:choose>
+</ul>
+
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 		

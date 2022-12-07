@@ -1,6 +1,7 @@
 package com.kh.ahzit.controller;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ahzit.constant.SessionConstant;
+import com.kh.ahzit.entity.FreeboardDto;
 import com.kh.ahzit.entity.InquireDto;
 import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AttachmentDao;
 import com.kh.ahzit.repository.InquireDao;
+import com.kh.ahzit.vo.FreeboardListSeachVO;
+import com.kh.ahzit.vo.InquireListSearchVO;
 
 @Controller
 @RequestMapping("/inquire")
@@ -62,10 +66,24 @@ public class InquireController {
 	}
 	
 	// 문의 목록
-	@GetMapping("/list")
-	public String list(Model model, @RequestParam String inquireId) {
-		model.addAttribute("list", inquireDao.selectList(inquireId));
+	@GetMapping("/list")	
+	public String list(Model model, @RequestParam String inquireId, HttpSession session
+			,@ModelAttribute InquireListSearchVO inquireListSearchVO) {
+		
+		System.out.println(inquireId);
+		
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		// 게시글 총 갯수 반환
+		int count = inquireDao.countInquire(inquireListSearchVO);
+		// 반환한 총 갯수를 freeboardListVO의 total로 설정
+		inquireListSearchVO.setCount(count);
+		// 유형에 따른 게시글 조회 결과 반환
+		List<InquireDto> inquireList = inquireDao.selectList(inquireListSearchVO);
+		// 조회 결과를 model에 추가
+		model.addAttribute("inquireList", inquireList);
+		
 		return "inquire/list";
+	
 	}
 	
 	// 문의 수정

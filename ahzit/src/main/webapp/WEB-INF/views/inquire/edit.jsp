@@ -8,21 +8,23 @@
 	<jsp:param value="1:1 문의글 수정" name="title"/>
 </jsp:include>
 
+<h1>1:1 문의 수정</h1>
+
 <div>
 	<form action = "edit" method = "post" enctype="multipart/form-data">
 		<input type = "hidden" name = "inquireNo" value = "${inquireDto.inquireNo}">
-		<div class = "row">
+		<div>
 			제목 : <input type = "text" name = "inquireTitle" value = "${inquireDto.inquireTitle}">
 		</div>
-		<div class = "row">
+		<div>
 			내용 : <input type = "text" name = "inquireContent" value = "${inquireDto.inquireContent}">
 		</div>
 		
-		<div class = "row">
+		<div>
 			<button type = "submit">수정</button>
 		</div>
 	</form>
-	<div class = "row">
+	<div>
 		<a href = "list?inquireId=${inquireDto.inquireId}">목록</a>		
 	</div>
 </div>
