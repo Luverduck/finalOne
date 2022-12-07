@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.repository.AhzitBoardDao;
+import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.vo.AhzitBoardVO;
 
 @Controller
@@ -22,6 +24,9 @@ public class AhzitInController {
 	// 의존성 주입
 	@Autowired
 	private AhzitBoardDao ahzitBoardDao;
+	
+	@Autowired
+	private AhzitDao ahzitDao;
 	
 	// 소모임 홈 화면 Mapping
 	@GetMapping("/{ahzitNo}")
@@ -36,6 +41,10 @@ public class AhzitInController {
 		List<AhzitBoardVO> ahzitBoardList = ahzitBoardDao.allBoardList(ahzitNo);
 		// 조회한 정보를 model에 추가
 		model.addAttribute("ahzitBoardList", ahzitBoardList);
+		
+		//개설한 아지트 정보를 조회
+		model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));
+
 		// 편의를 위해 ahzitNo를 model에 추가
 		model.addAttribute("ahzitNo", ahzitNo);
 		// 소모임 홈 화면(board.jsp)로 연결

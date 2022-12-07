@@ -8,14 +8,39 @@
 	<jsp:param value="소모임 게시글" name="title"/>
 </jsp:include>
 
+<%-- 아지트 가입을 위한 폼 --%>
+
 <div class = "container">
 	<div class = "row">
 	
 		<%-- 왼쪽 사이드바 --%>
 		<div class = "col-3" style="background-color: green;">
-		사이드1
-		</div>
+		사이드1 <br>
 		
+		<%-- 아지트 정보 --%>
+		${ahzitVO.getAhzitNo()}<br>
+		아지트 이름 : ${ahzitVO.getAhzitName()} <br>
+		아지트 소개 : ${ahzitVO.getAhzitInfo()}<br>
+		아지트 멤버 : ${ahzitVO.getAhzitHead()} 명<br>
+		아지트 종류 : ${ahzitVO.getAhzitSort()}<br>
+		아지트 리더 : ${ahzitVO.getAhzitLeader()}<br>
+
+<form action="insert" method="post">	
+	<input type="hidden" name="ahzitNo"  value="${ahzitVO.getAhzitNo()}">
+	
+		<%-- 아지트 가입버튼 --%>
+		<c:choose>
+			<c:when test="${ahzitMemberDto.getMemberId() == null}"><%-- 소모임 회원이 아니면 --%>
+				<button type="submit">아지트 가입</button>
+			</c:when>
+			<c:otherwise>
+				<button type="submit"  disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
+			</c:otherwise>
+		</c:choose>
+	</div>
+</form>
+		
+
 		<%-- 가운데 내용 --%>
 		<div class = "col-6">
 		

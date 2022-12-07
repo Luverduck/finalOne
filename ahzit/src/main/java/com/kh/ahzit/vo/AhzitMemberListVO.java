@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
 public class AhzitMemberListVO {
-	private AhzitMemberDto clubMemberDto;
+	private AhzitMemberDto ahzitMemberDto;
 	private AhzitUserDto ahzitUserDto;
 }
