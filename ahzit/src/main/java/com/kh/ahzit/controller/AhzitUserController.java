@@ -157,8 +157,8 @@ public class AhzitUserController {
 		//	System.out.println("userId"+ userId);
 		//	System.out.println("입력 비밀번호"+afterPw);
 		//	System.out.println("기존 비밀번호"+beforePw);
-			System.out.println("getUserId = "+ahzitUserDto.getUserId());
-			System.out.println("getUserPw = "+ahzitUserDto.getUserPw());
+		//	System.out.println("getUserId = "+ahzitUserDto.getUserId());
+		//	System.out.println("getUserPw = "+ahzitUserDto.getUserPw());
 			
 			// 암호화 과정
 			String pw = ahzitUserDto.getUserPw(); 
@@ -171,8 +171,6 @@ public class AhzitUserController {
 			return "redirect:mypage";
 		} 
 	}
-	
-	
 	
 	// 회원 탈퇴
 	@GetMapping("/goodbye")
@@ -313,6 +311,4 @@ public class AhzitUserController {
 		public String checkPwdSuccess() {
 			return "ahzitUser/checkPwdSuccess";
 		}
-		
-
 }
