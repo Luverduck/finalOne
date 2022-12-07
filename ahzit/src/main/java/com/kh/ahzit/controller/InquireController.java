@@ -67,16 +67,19 @@ public class InquireController {
 	
 	// 문의 목록
 	@GetMapping("/list")	
-	public String list(Model model, @RequestParam String inquireId, HttpSession session
+	public String list(Model model, HttpSession session
 			,@ModelAttribute InquireListSearchVO inquireListSearchVO) {
 		
-		System.out.println(inquireId);
-		
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
+		
+		//System.out.println("1번"+inquireListSearchVO.getInquireId());
+		//System.out.println("2번"+inquireListSearchVO);
+		
 		// 게시글 총 갯수 반환
 		int count = inquireDao.countInquire(inquireListSearchVO);
 		// 반환한 총 갯수를 freeboardListVO의 total로 설정
 		inquireListSearchVO.setCount(count);
+		inquireListSearchVO.setInquireId(loginId);
 		// 유형에 따른 게시글 조회 결과 반환
 		List<InquireDto> inquireList = inquireDao.selectList(inquireListSearchVO);
 		// 조회 결과를 model에 추가

@@ -68,7 +68,7 @@ public class InquireDaoImpl implements InquireDao {
 	public List<InquireDto> selectSearch(InquireListSearchVO inquireListSearchVO) {
 		// map 생성
 		Map<String, String> param = new HashMap<>();
-		
+		param.put("inquireId", inquireListSearchVO.getInquireId());
 		param.put("type", inquireListSearchVO.getType());
 		param.put("keyword", inquireListSearchVO.getKeyword());
 		param.put("startRow", String.valueOf(inquireListSearchVO.startRow()));
@@ -79,7 +79,7 @@ public class InquireDaoImpl implements InquireDao {
 	@Override
 	public List<InquireDto> selectAll(InquireListSearchVO inquireListSearchVO) {
 		Map<String, String> param = new HashMap<>();
-
+		param.put("inquireId", inquireListSearchVO.getInquireId());
 		param.put("startRow", String.valueOf(inquireListSearchVO.startRow()));
 		param.put("endRow", String.valueOf(inquireListSearchVO.endRow()));
 
@@ -92,21 +92,22 @@ public class InquireDaoImpl implements InquireDao {
 			return searchCountInquire(inquireListSearchVO);
 		}
 		else { // 전체 조회라면
-			return listCountInquire();
+			return listCountInquire(inquireListSearchVO);
 		}
 	}
 
 	@Override
 	public int searchCountInquire(InquireListSearchVO inquireListSearchVO) {
 				Map<String, String> param = new HashMap<>();
+				param.put("inquireId", inquireListSearchVO.getInquireId());
 				param.put("type", inquireListSearchVO.getType());
 				param.put("keyword", inquireListSearchVO.getKeyword());
 				return sqlSession.selectOne("inquire.searchCount", param);
 			}
 
 	@Override
-	public int listCountInquire() {
-		return sqlSession.selectOne("inquire.allCount");
+	public int listCountInquire(InquireListSearchVO inquireListSearchVO) {
+		return sqlSession.selectOne("inquire.allCount", inquireListSearchVO);
 	}
 
 

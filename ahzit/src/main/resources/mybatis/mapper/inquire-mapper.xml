@@ -25,7 +25,7 @@
 
 	<!-- 1:1 문의 목록 -->
 	<select id = "allList" parameterType = "map" resultType = "InquireDto">
-		select * from (select tmp.*, rownum rn from (select * from inquire order by inquire_no desc)TMP) where rn between #{startRow} and #{endRow}
+		select * from (select tmp.*, rownum rn from (select * from inquire where inquire_id =#{inquireId} order by inquire_no desc)TMP) where rn between #{startRow} and #{endRow}
 	</select>	
 	
 	<!-- 1:1 문의 검색 -->
@@ -40,7 +40,7 @@
 	
 	<!--전체 조회시 게시글 총 갯수 반환 -->
 	<select id = "allCount" parameterType = "String" resultType = "int">
-		select count(*) from inquire 
+		select count(*) from inquire where inquire_id =#{inquireId}
 	</select>
 	
 	<!--  1:1 문의 수정 -->

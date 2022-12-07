@@ -75,6 +75,7 @@
 		<option value = "inquire_title">제목</option>
 		<option value = "inquire_content">내용</option>
 	</select>
+	<input name = "inquireId" type="hidden" value = "${inquireListSearchVO.inquireId}">
 	<input name = "keyword" placeholder = "검색어" value = "${inquireListSearchVO.keyword}">
 	<button type = "submit">검색</button>
 </form>
@@ -89,7 +90,7 @@
 		</c:when>
 		<c:otherwise>
 			<li class="page-item">
-				<a class="page-link" href = "list?p=${inquireListSearchVO.firstBlock()}&${inquireListSearchVO.parameter()}">&laquo;</a>
+				<a class="page-link" href = "list?inquireId=${inquireListSearchVO.inquireId}&p=${inquireListSearchVO.firstBlock()}&${inquireListSearchVO.parameter()}">&laquo;</a>
 			</li>
 		</c:otherwise>
 	</c:choose>
@@ -97,7 +98,7 @@
 	<c:choose>
 		<c:when test = "${inquireListSearchVO.hasPrev()}">
 			<li class="page-item">
-				<a class="page-link" href = "list?p=${inquireListSearchVO.prevBlock()}&${inquireListSearchVO.parameter()}">&lt;</a>
+				<a class="page-link" href = "list?inquireId=${inquireListSearchVO.inquireId}&p=${inquireListSearchVO.prevBlock()}&${inquireListSearchVO.parameter()}">&lt;</a>
 			</li>
 		</c:when>
 		<c:otherwise>
@@ -109,14 +110,14 @@
 	
 	<c:forEach var = "i" begin = "${inquireListSearchVO.startBlock()}" end = "${inquireListSearchVO.endBlock()}" step = "1">
 		<li class="page-item">
-			<a class="page-link" href = "list?p=${i}&${inquireListSearchVO.parameter()}">${i}</a>
+			<a class="page-link" href = "list?inquireId=${inquireListSearchVO.inquireId}&p=${i}&${inquireListSearchVO.parameter()}">${i}</a>
 		</li>
 	</c:forEach>
 	
 	<c:choose>
 		<c:when test = "${inquireListSearchVO.hasNext()}">
 			<li class="page-item">
-				<a class="page-link" href = "list?p=${inquireListSearchVO.nextBlock()}&${inquireListSearchVO.parameter()}">&gt;</a>
+				<a class="page-link" href = "list?inquireId=${inquireListSearchVO.inquireId}&p=${inquireListSearchVO.nextBlock()}&${inquireListSearchVO.parameter()}">&gt;</a>
 			</li>
 		</c:when>
 		<c:otherwise>
@@ -134,7 +135,7 @@
 		</c:when>
 		<c:otherwise>
 			<li class="page-item">
-				<a class="page-link" href = "list?p=${inquireListSearchVO.lastBlock()}&${inquireListSearchVO.parameter()}">&raquo;</a>
+				<a class="page-link" href = "list?inquireId=${inquireListSearchVO.inquireId}&p=${inquireListSearchVO.lastBlock()}&${inquireListSearchVO.parameter()}">&raquo;</a>
 			</li>
 		</c:otherwise>
 	</c:choose>

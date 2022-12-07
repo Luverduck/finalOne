@@ -21,11 +21,11 @@ public interface InquireDao {
 		
 	public List<InquireDto> selectAll(InquireListSearchVO inquireListSearchVO); // 문의 전체 목록
 		
-	public int countInquire(InquireListSearchVO inquireListSearchVO); // 추상 메소드 - 자유게시글 게시글 총 갯수 반환
+	public int countInquire(InquireListSearchVO inquireListSearchVO); //  게시글 총 갯수 반환
 		
-	public int searchCountInquire(InquireListSearchVO inquireListSearchVO); // 추상 메소드 - 자유게시글 검색 조회시 게시글 총 갯수 반환
+	public int searchCountInquire(InquireListSearchVO inquireListSearchVO); //  검색 조회시 게시글 총 갯수 반환
 		
-	public int listCountInquire(); // 추상 메소드 - 자유게시글 전체 조회시 게시글 총 갯수 반환
+	public int listCountInquire(InquireListSearchVO inquireListSearchVO); //  전체 조회시 게시글 총 갯수 반환
 
 	boolean edit(InquireDto inquireDto); // 문의 수정
 	
