@@ -28,9 +28,16 @@ public class AhzitBoardRestController {
 		ahzitBoardDao.insertBoard(ahzitBoardDto);
 	}
 	
-	// 소모임 게시글 검색 조회 Mapping
+	// 소모임 게시글 목록 Mapping
+	@GetMapping("/list")
+	public List<AhzitBoardVO> allList(@RequestParam int ahzitNo) {
+		return ahzitBoardDao.allBoardList(ahzitNo);
+	}
+	
+	// 소모임 게시글 조회 Mapping
 	@GetMapping("/search")
-	public List<AhzitBoardVO> selectList(@RequestParam int memberAhzitNo, @RequestParam String keyword) {
-		return ahzitBoardDao.searchBoardList(memberAhzitNo, keyword);
+	public List<AhzitBoardVO> selectList(@RequestParam int ahzitNo, @RequestParam(required = false) String keyword) {
+		
+		return ahzitBoardDao.selectBoardList(ahzitNo, keyword);
 	}
 }

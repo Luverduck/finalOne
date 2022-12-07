@@ -14,9 +14,12 @@ public interface AhzitBoardDao {
 	// 추상 메소드 - 소모임 게시글 등록
 	public void insertBoard(AhzitBoardDto ahzitBoardDto);
 	
+	// 추상 메소드 - 특정 소모임 내 게시글 조회
+	public List<AhzitBoardVO> selectBoardList(int boardAhzitNo, String keyword);
+	
 	// 추상 메소드 - 특정 소모임 내 게시글 전체 조회
 	public List<AhzitBoardVO> allBoardList(int boardAhzitNo);
 	
 	// 추상 메소드 - 특정 소모임 내 게시글 검색 조회
-	public List<AhzitBoardVO> searchBoardList(int memberAhzitNo, String keyword);
+	public List<AhzitBoardVO> searchBoardList(int boardAhzitNo, String keyword);
 }

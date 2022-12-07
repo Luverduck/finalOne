@@ -35,8 +35,20 @@ public class AhzitBoardDaoImpl implements AhzitBoardDao {
 	public void insertBoard(AhzitBoardDto ahzitBoardDto) {
 		sqlSession.insert("ahzitBoard.insert", ahzitBoardDto);
 	}
+	
+	// 추상 메소드 - 특정 소모임 내 게시글 조회
+	@Override
+	public List<AhzitBoardVO> selectBoardList(int boardAhzitNo, String keyword) {
+		// 검색어 존재 여부에 따라 다른 처리
+		if(keyword.equals("")) { // 검색어가 없을 경우
+			return allBoardList(boardAhzitNo); // 전체 조회
+		}
+		else { // 검색어가 있을 경우
+			return searchBoardList(boardAhzitNo, keyword); // 검색 조회
+		}
+	}
 
-	// 추상 메소드 오버라이딩 - 특정 소모임 내 게시글 조회
+	// 추상 메소드 오버라이딩 - 특정 소모임 내 게시글 전체 조회
 	@Override
 	public List<AhzitBoardVO> allBoardList(int boardAhzitNo) {
 		return sqlSession.selectList("ahzitBoard.allList", boardAhzitNo);
@@ -44,11 +56,11 @@ public class AhzitBoardDaoImpl implements AhzitBoardDao {
 
 	// 추상 메소드 - 특정 소모임 내 게시글 검색 조회
 	@Override
-	public List<AhzitBoardVO> searchBoardList(int memberAhzitNo, String keyword) {
+	public List<AhzitBoardVO> searchBoardList(int boardAhzitNo, String keyword) {
 		// 바인딩 변수를 저장할 Map 생성
 		Map<String, String> param = new HashMap<>();
 		// 바인딩 변수로 사용할 값 저장
-		param.put("memberAhzitNo", String.valueOf(memberAhzitNo));
+		param.put("memberAhzitNo", String.valueOf(boardAhzitNo));
 		param.put("keyword", keyword);
 		return sqlSession.selectList("ahzitBoard.searchList", param);
 	}

@@ -114,10 +114,10 @@
 		
 		// 게시글 검색 비동기 처리
 		$("#btn-search").click(function(){
-			var memberAhzitNo = $("#div-member-info").data("ahzitno");
+			var ahzitNo = $("#div-member-info").data("ahzitno");
 			var keyword = $("#input-search").val();
 			axios({
-				url : "http://localhost:8888/rest_board/search?memberAhzitNo=" + memberAhzitNo + "&keyword=" + keyword,
+				url : "http://localhost:8888/rest_board/search?ahzitNo=" + ahzitNo + "&keyword=" + keyword,
 				method : "get"
 			})
 			.then(function(response){
