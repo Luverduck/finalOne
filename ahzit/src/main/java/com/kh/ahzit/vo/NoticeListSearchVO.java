@@ -26,4 +26,40 @@ public class NoticeListSearchVO {
 	public int endRow() {
 		return p * size;
 	}
+	
+	//총 게시글 수
+	private int count;
+	
+	//화면에 표시할 블럭 개수
+	private int blockSize = 10;
+	
+	@ToString.Include
+	public int pageCount() {
+		return (count + size - 1) / size;
+	}
+	@ToString.Include
+	public int startBlock() {
+		return (p - 1) / blockSize * blockSize + 1;
+	}
+	@ToString.Include
+	public int endBlock() {
+		int value = startBlock() + blockSize - 1;
+		return Math.min(value, lastBlock());
+	}
+	@ToString.Include
+	public int prevBlock() {
+		return startBlock() - 1;
+	}
+	@ToString.Include
+	public int nextBlock() {
+		return endBlock() + 1;
+	}
+	@ToString.Include 
+	public int firstBlock() {
+		return 1;
+	}
+	@ToString.Include
+	public int lastBlock() {
+		return pageCount();
+	}	
 }

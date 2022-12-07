@@ -51,14 +51,63 @@ public class NoticeDaoImpl implements NoticeDao {
 
 	@Override
 	public List<NoticeDto> selectList(NoticeListSearchVO vo) {
+		
+		if(vo.isSearch()) {
+			return search(vo);
+		}
+		else {
+			return list(vo);
+		}
+	}
+	
+	@Override
+	public List<NoticeDto> list(NoticeListSearchVO vo) {
 		Map<String, String> param = new HashMap<>();
 
+		param.put("startRow", String.valueOf(vo.startRow()));
+		param.put("endRow", String.valueOf(vo.endRow()));
+		
+		return sqlSession.selectList("notice.pagelist", param);
+	}
+	
+	@Override
+	public List<NoticeDto> search(NoticeListSearchVO vo) {
+		Map<String, String> param = new HashMap<>();
+		
+		param.put("type", vo.getType());
+		param.put("keyword", vo.getKeyword());
+		param.put("startRow", String.valueOf(vo.startRow()));
+		param.put("endRow", String.valueOf(vo.endRow()));
+
+		
+		return sqlSession.selectList("notice.pageSearch", param);
+	}
+	
+	//검색과 목록의 총 데이터 개수를 구하는 메소드
+	@Override
+	public int count(NoticeListSearchVO vo) {
+		if(vo.isSearch()) {
+			return searchCount(vo);
+		}
+		else {
+			return listCount(vo);
+		}
+	}
+	@Override
+	public int listCount(NoticeListSearchVO vo) {
+		return sqlSession.selectOne("notice.pageListCount", vo);
+	}
+
+	@Override
+	public int searchCount(NoticeListSearchVO vo) {
+		Map<String, String> param = new HashMap<>();
+		
 		param.put("type", vo.getType());
 		param.put("keyword", vo.getKeyword());
 		
-		return sqlSession.selectList("notice.search", param);
+		return sqlSession.selectOne("notice.pageSearchCount", param);
 	}
-
+	
 	// 상세
 	@Override
 	public NoticeDto selectOne(int noticeNo) {
