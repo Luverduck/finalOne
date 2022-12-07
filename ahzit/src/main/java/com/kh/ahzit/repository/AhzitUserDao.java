@@ -15,7 +15,7 @@ public interface AhzitUserDao {
 
 	boolean update(AhzitUserDto ahzitUserDto); // 회원 정보 수정
 
-	boolean changePw(String userId, String userPw); //비밀번호 변경
+	boolean changePw(AhzitUserDto ahzitUserDto); // 마이페이지 비밀번호 변경
 
 	boolean delete(String userId); // 회원 탈퇴
 
@@ -25,7 +25,7 @@ public interface AhzitUserDao {
 	
 	int checkPw(Map map); // 비밀번호 찾기
 
-	boolean chkPwSuccess(AhzitUserDto ahzitUserDto); // 비밀번호 변경
+	boolean checkPwSuccess(AhzitUserDto ahzitUserDto); // 비밀번호 변경
 	
 	
 }
