@@ -1,5 +1,7 @@
 package com.kh.ahzit.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,6 +25,20 @@ public class InquireDaoImpl implements InquireDao {
 	 sqlSession.insert("inquire.insert", inquireDto);
 	}
 
+	// 문의 상세
+	@Override
+	public InquireDto detail(int inquireNo) {
+		return sqlSession.selectOne("inquire.detail", inquireNo);
+	}
+
+	// 문의 목록
+	@Override
+	public List<InquireDto> selectList(String inquireId) {
+		return sqlSession.selectList("inquire.list", inquireId);
+	}
+
+
+	
 
 	
 }

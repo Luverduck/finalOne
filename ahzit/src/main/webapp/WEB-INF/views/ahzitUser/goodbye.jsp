@@ -28,7 +28,8 @@
 
 </form>
 	<c:if test="${param.error != null}">
-			<div class="row center mt-30">
+<%-- 		<c:if test="<%=request.getParameter("error") != null %>"> --%>
+			<div class="">
 				<span style="color: darkred;">비밀번호를 다시 확인해주세요.</span>
 			</div>
 		</c:if>

@@ -13,9 +13,20 @@
 	</select>
 	
 	<!-- 1:1 문의 등록 -->
-	<insert id = "insert" parameterType = "InquireDto">
+	<insert id ="insert" parameterType ="InquireDto">
 		insert into inquire (inquire_no, inquire_id, inquire_title, inquire_content) 
 		values (#{inquireNo}, #{inquireId}, #{inquireTitle}, #{inquireContent})
 	</insert>
+	
+	<!-- 1:1 문의 상세 페이지 -->
+	<select id ="detail" parameterType ="int" resultType = "InquireDto">
+		select * from inquire where inquire_no = #{inquireNo}
+	</select>
+	
+	<!-- 1:1 문의 목록  -->
+	<select id="list" parameterType ="String" resultType="InquireDto">
+		select * from inquire where inquire_id = #{inquireId}
+	</select>
+	
 	
 </mapper>
