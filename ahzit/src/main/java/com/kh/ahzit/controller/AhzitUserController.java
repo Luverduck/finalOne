@@ -53,12 +53,12 @@ public class AhzitUserController {
 
 	// 회원가입
 	@GetMapping("/join")
-	public String insert() {
+	public String join() {
 		return "ahzitUser/join";
 	}
 
 	@PostMapping("/join")
-	public String insert(@ModelAttribute AhzitUserDto ahzitUserDto) {
+	public String join(@ModelAttribute AhzitUserDto ahzitUserDto) {
 		ahzitUserDao.join(ahzitUserDto);
 		return "redirect:joinSuccess";
 	}
