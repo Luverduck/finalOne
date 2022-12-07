@@ -68,8 +68,8 @@ public class AhzitController {
 	}
 	
 	//소모임 관리 페이지
-	@GetMapping("/setting")
-	public String setting(@RequestParam int AhzitNo) {
+	@GetMapping("/edit")
+	public String ahzitEdit(@RequestParam int AhzitNo) {
 		return "ahzit/detail_edit";
 	}
 	
