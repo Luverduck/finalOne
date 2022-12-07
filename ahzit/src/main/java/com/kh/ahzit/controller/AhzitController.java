@@ -66,6 +66,30 @@ public class AhzitController {
 		return "redirect:/ahzit_in/" + ahzitNo;
 	}
 	
+	//소모임 가입
+	@GetMapping("/insert")
+	public String insert() {
+		return "ahzit/insert";
+	}
+	
+	@PostMapping("/insert")
+	public String insert(
+			@ModelAttribute AhzitMemberDto ahzitMemberDto,
+			HttpSession session,
+			RedirectAttributes attr			
+			) {
+		attr.addAttribute("ahzitNo", ahzitMemberDto.getMemberAhzitNo());
+		String userId = (String) session.getAttribute(SessionConstant.ID);
+		ahzitMemberDto.setMemberId(userId);
+		ahzitDao.insertMember(ahzitMemberDto);
+		
+		int ahzitNo = ahzitMemberDto.getMemberAhzitNo();		
+		
+		//소모임가입자 증가 메소드
+		ahzitDao.updateAhzitPerson(ahzitMemberDto.getMemberAhzitNo());
+		return "redirect:/ahzit_in/" + ahzitNo;
+	}
+	
     //소모임 관리 페이지
     @GetMapping("/edit")
     public String ahzitEdit(@RequestParam int AhzitNo) {

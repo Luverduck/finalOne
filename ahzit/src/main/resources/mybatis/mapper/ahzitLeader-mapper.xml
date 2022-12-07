@@ -2,20 +2,14 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="ahzitMember">
+  <mapper namespace="ahzitLeader">
  
 	<insert id="insert" parameterType="AhzitMemberDto" >
   		insert into ahzitMember(
   			member_no, member_ahzit_no, member_id, member_joindate, member_nick
   		values (
-  			ahzit_member_seq.nextval, #{memberAhzitNo}, #{memberId}, sysdate, #{memberNick} )
+  			#{memberNo}, #{memberAhzitNo}, #{memberId}, sysdate, #{memberNick} )
    </insert>
-   
-   <update id="edit" parameterType="AhzitMemberDto">
-   		update ahzit
-   			set
-   		ahzit_head = ahzit_head + 1 where ahzit_no = #{ahzitNo}
-   </update>
    
 
   </mapper>

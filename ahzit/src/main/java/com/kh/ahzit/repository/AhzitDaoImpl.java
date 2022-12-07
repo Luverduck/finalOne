@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ahzit.entity.AhzitAttachmentDto;
 import com.kh.ahzit.entity.AhzitDto;
+import com.kh.ahzit.entity.AhzitMemberDto;
 
 @Repository
 public class AhzitDaoImpl implements AhzitDao {
@@ -59,6 +60,27 @@ public class AhzitDaoImpl implements AhzitDao {
 	@Override
 	public void ahzitAttachment(AhzitAttachmentDto ahzitAttachmentDto) {
 		sqlSession.insert("attachment.insert", ahzitAttachmentDto);
+	}
+
+	//아지트생성에 개설자 자동 추가
+	@Override
+	public void addMember(AhzitMemberDto ahzitMemberDto) {
+		sqlSession.insert("ahzitLeader.insert", ahzitMemberDto);
+		
+	}
+
+	//아지트가입하기 메소드
+	@Override
+	public void insertMember(AhzitMemberDto ahzitMemberDto) {
+		sqlSession.insert("ahzitMember.insert", ahzitMemberDto);
+		
+	}
+
+	//아지트 가입자 증가 메소드
+	@Override
+	public boolean updateAhzitPerson(int ahzitNo) {
+		int count = sqlSession.update("ahzitMember.update", ahzitNo);
+		return count > 0;
 	}
 
 
