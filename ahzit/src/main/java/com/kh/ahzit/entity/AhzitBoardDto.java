@@ -15,10 +15,9 @@ public class AhzitBoardDto {
 
 	// 필드
 	private int boardNo;
-	private String boardWriter;
-	private String boardTitle;
+	private int boardWriterNo;
+	private int boardAhzitNo;
 	private String boardContent;
-	private int boardRead;
 	private int boardLike;
 	private Date boardWritedate;
 	private Date boardUpdatedate;

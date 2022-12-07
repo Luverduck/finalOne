@@ -61,8 +61,6 @@ public class AhzitController {
 		ahzitMemberDto.setMemberId(ahzitLeader);
 		
 		//redirect
-		attr.addAttribute("ahzitNo", ahzitNo);
-		return "redirect:detail";
+		return "redirect:/ahzit_in/" + ahzitNo;
 	}
-
 }

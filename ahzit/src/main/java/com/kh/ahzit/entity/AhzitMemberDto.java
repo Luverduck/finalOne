@@ -7,13 +7,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @AllArgsConstructor @NoArgsConstructor @Builder 
+@Data 
+@AllArgsConstructor 
+@NoArgsConstructor 
+@Builder 
 public class AhzitMemberDto {
-	private String memberNick; 
+	
+	// 필드
+	private int memberNo;
 	private int memberAhzitNo;
-	private String memberId;
+	private String memberId;	
+	private String memberNick;
 	private String memberGrade;
-	private int  memberScore;
-	private Date memberJoinDate;
-
+	private int memberScore;
+	private Date memberJoindate;
 }
