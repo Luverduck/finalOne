@@ -36,16 +36,16 @@ public class AhzitDaoImpl implements AhzitDao {
 
 	//소모임 수정
 	@Override
-	public boolean update(AhzitDto ahzitDto) {
-		int count = sqlSession.update("ahzit.ahzitUpdate", ahzitDto);
-		return count > 0;
+	public int ahzitEdit(AhzitDto ahzitDto) {
+		// sql에서 소모임장 여부도 같이 판단
+		return sqlSession.update("ahzit.edit",ahzitDto);
 	}
-
+	
 	//소모임 단일조회
 	@Override
 	public AhzitDto selectOne(int ahzitNo) {
 		return sqlSession.selectOne("ahzit.one", ahzitNo);
-	}
+	}	
 	
 	//소모임 삭제
   @Override
@@ -61,11 +61,5 @@ public class AhzitDaoImpl implements AhzitDao {
 		sqlSession.insert("attachment.insert", ahzitAttachmentDto);
 	}
 
-  	//소모임 프로필 첨부파일
-//	@Override
-//	public void ahzitAttachment(AhzitAttachmentDto ahzitAttachmentDto) {
-//		sqlSession.insert("attachment.insert", ahzitAttachmentDto);
-//		
-//	}
 
 }

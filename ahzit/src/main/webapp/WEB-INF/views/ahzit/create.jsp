@@ -5,10 +5,10 @@
 
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="소모임 개설" name="title"/>
+	<jsp:param value="아지트 개설" name="title"/>
 </jsp:include>
 
-<h1>소모임 개설</h1>
+<h1>아지트 개설</h1>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
