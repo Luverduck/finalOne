@@ -29,7 +29,7 @@ public class NoticeListSearchVO {
 	
 	//총 게시글 수
 	private int count;
-	
+
 	//화면에 표시할 블럭 개수
 	private int blockSize = 10;
 	
@@ -61,5 +61,34 @@ public class NoticeListSearchVO {
 	@ToString.Include
 	public int lastBlock() {
 		return pageCount();
-	}	
+	}
+	@ToString.Include
+	public boolean isFirst() {
+		return p == 1;
+	}
+	@ToString.Include
+	public boolean isLast() {
+		return endBlock() == lastBlock();
+	}
+	@ToString.Include
+	public boolean hasPrev() {
+		return startBlock() > 1;
+	}
+	@ToString.Include
+	public boolean hasNext() {
+		return endBlock() < lastBlock();
+	}
+	
+	//검색이나 크기 등이 유지될 수 있도록 Query String을 생성
+	//- p를 제외한 나머지 항목들에 대한 파라미터 생성
+	@ToString.Include
+	public String parameter() {
+		if(isSearch()) {
+			return "size="+size+"&type="+type+"&keyword="+keyword;
+		}
+		else {
+			return "size="+size;
+		}
+		
+	}
 }

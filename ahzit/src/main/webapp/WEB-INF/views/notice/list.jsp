@@ -14,8 +14,7 @@
 	<jsp:param value="공지게시판" name="title" />
 </jsp:include>
 
-<!-- 테스트용 데이터 출력 -->
-<h3>${vo}</h3>
+
 
 
 <div class="container">
@@ -82,25 +81,64 @@
 			</table>
 		</div>
 
-<!-- 페이지 네비게이터 -->
-<h3> 
-<a href="list?p=${vo.firstBlock()}">&laquo;</a>
 
-<!-- 이전을 누르면 이전 구간의 마지막 페이지로 안내 -->
-<a href="list?p=${vo.prevBlock()}">&lt;</a>
+<!-- 페이징 -->
+<div class="row center">
+		<ul class="pagination">
+			<!-- 이전 -->
+			<c:choose>
+				<c:when test="${not vo.isFirst()}">
+					<li><a href="list?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="#">&laquo;</a></li>
+				</c:otherwise>
+			</c:choose>
+			
+			<c:choose>
+				<c:when test="${vo.hasPrev()}">
+					<li><a href="list?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="#">&lt;</a></li>
+				</c:otherwise>
+			</c:choose>
+			
+			<!-- 숫자 -->
+			<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
+				<c:choose>
+					<c:when test="${vo.p == i}">
+						<li class="on"><a href="#">${i}</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="list?p=${i}&${vo.parameter()}">${i}</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			
+			<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
+			<c:choose>
+				<c:when test="${vo.hasNext()}">
+					<li><a href="list?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="#">&gt;</a></li>
+				</c:otherwise>
+			</c:choose>
+			
+			<c:choose>
+				<c:when test="${not vo.isLast()}">
+					<li><a href="list?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="#">&raquo;</a></li>
+				</c:otherwise>
+			</c:choose>
+		</ul>
+	</div>
 
-<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
-	<a href="list?p=${i}">${i}</a>
-</c:forEach>
 
-<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
-<a href="list?p=${vo.nextBlock()}">&gt;</a>
-
-<a href="list?p=${vo.lastBlock()}">&raquo;</a>
-</h3>
-
-
-
+<!-- 검색창 -->
 		<form action="list" method="get">
 			<select name="type" required>
 				<option value="notice_title"
