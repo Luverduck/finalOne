@@ -17,6 +17,7 @@ public class InquireDaoImpl implements InquireDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	// 시퀀스 등록
 	@Override
 	public int sequence() {
 		return sqlSession.selectOne("inquire.sequence");
