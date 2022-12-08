@@ -26,4 +26,8 @@ public interface AttachmentDao {
 	
 	// 추상 메소드 - 자유게시글 첨부파일 삭제
 	public boolean deleteFreeboardAttachment(int freeboardAttachmentNo);
+	
+	// 1:1 문의 게시판 첨부파일 등록
+	public void insertInquireAttachment(int inquireOriginNo, int inquireAttachmentNo);
+			
 }

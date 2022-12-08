@@ -67,4 +67,13 @@ public class AttachmentDaoImpl implements AttachmentDao {
 		// 해당 첨부파일 번호로 자유게시글 첨부파일 정보 삭제 후 결과 반환
 		return sqlSession.delete("attachment.deleteFreeboardAttachment", freeboardAttachmentNo) > 0;
 	}
+
+	@Override
+	public void insertInquireAttachment(int inquireOriginNo, int inquireAttachmentNo) {
+		Map<String, String> param = new HashMap<>();
+		// 생성한 Map의 type과 keyword를 freeboardListSeachVO의 type과 keyword로 설정
+		param.put("inquireOriginNo", String.valueOf(inquireOriginNo));
+		param.put("inquireAttachmentNo", String.valueOf(inquireAttachmentNo));
+		sqlSession.insert("attachment.insertInquireAttachment", param);
+			}
 }

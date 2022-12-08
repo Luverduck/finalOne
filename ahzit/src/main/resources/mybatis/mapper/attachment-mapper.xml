@@ -46,4 +46,10 @@
 		delete freeboard_attachment where freeboard_attachment_no = #{attachmentNo}
 	</delete>
 	
+	<!-- 1:1 문의 게시판 첨부파일 등록 -->
+	<insert id = "insertInquireAttachment" parameterType = "map">
+		insert into inquire_attachment(inquire_origin_no, inquire_attachment_no) values(#{inquireOriginNo}, #{inquireAttachmentNo})
+	</insert>
+	
+	
 </mapper>
