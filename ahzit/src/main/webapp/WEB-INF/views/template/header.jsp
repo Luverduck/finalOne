@@ -6,7 +6,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">	
+	<title>
+		<c:choose>
+			<%-- title이라는 변수의 값이 있다면(null이 아니면) title에 입력될 값은 해당 title 변수의 값으로  --%>
+			<c:when test = "${param.title != null}">
+				${param.title}
+			</c:when>
+			<c:otherwise>
+				Ahzit
+			</c:otherwise>
+		</c:choose>
+	</title>
+	
+	<!-- Font CDN - Noto Sans Korean -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 	<!-- Font Awesome Link -->
 	<link rel="stylesheet" type = "text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
@@ -19,18 +35,12 @@
 	
 	<!-- jQuery CDN -->
     <script src = "https://code.jquery.com/jquery-3.6.1.js"></script>
-	
-<title>
-	<c:choose>
-		<%-- title이라는 변수의 값이 있다면(null이 아니면) title에 입력될 값은 해당 title 변수의 값으로  --%>
-		<c:when test = "${param.title != null}">
-			${param.title}
-		</c:when>
-		<c:otherwise>
-			Ahzit
-		</c:otherwise>
-	</c:choose>
-</title>
+    
+    <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+    </style>
 </head>
 <body>
 
