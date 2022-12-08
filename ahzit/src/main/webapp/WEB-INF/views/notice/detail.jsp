@@ -73,8 +73,8 @@
 						<c:if test="${loginId != null}">
 							<a class="btn btn-positive" href="write">글쓰기</a>
 						</c:if>
-						<a href="edit">수정하기</a>						
-						<a href="delete">삭제하기</a>
+						<a href="edit?noticeNo=${noticeDto.noticeNo}">수정하기</a>	
+						<a href="delete?noticeNo=${noticeDto.noticeNo}">삭제하기</a>
 					</td>
 				</tr>
 			</tfoot>

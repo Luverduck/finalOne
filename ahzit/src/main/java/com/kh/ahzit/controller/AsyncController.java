@@ -28,6 +28,7 @@ public class AsyncController {
 	@ResponseBody
 	public void async2(@RequestParam String certificationId) {
 		emailService.sendCertMail(certificationId);
+		//System.out.println("타나?");
 	}
 	
 	@PostMapping("/async3")

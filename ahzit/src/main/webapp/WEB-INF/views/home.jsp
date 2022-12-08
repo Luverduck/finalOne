@@ -9,6 +9,19 @@
 
 <h1>홈 화면</h1>
 
+<c:set var="login" value="${loginId != null}"></c:set>
+
+<div>
+	<c:choose>
+		<c:when test="${login}">
+			<a href="/ahzit/create">아지트 개설</a>
+		</c:when>
+		<c:otherwise>
+		</c:otherwise>
+	</c:choose>
+</div>
+
+
 <a href = "/ahzit_in/84">소모임 84번 - 개설자 : tester111 개설자 / 회원 : tester2222, tester3333</a>
 
 <%-- footer --%>

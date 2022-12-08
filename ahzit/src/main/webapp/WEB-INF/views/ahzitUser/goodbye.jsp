@@ -27,6 +27,11 @@
 </div>
 
 </form>
-
+	<c:if test="${param.error != null}">
+<%-- 		<c:if test="<%=request.getParameter("error") != null %>"> --%>
+			<div class="">
+				<span style="color: darkred;">비밀번호를 다시 확인해주세요.</span>
+			</div>
+		</c:if>
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

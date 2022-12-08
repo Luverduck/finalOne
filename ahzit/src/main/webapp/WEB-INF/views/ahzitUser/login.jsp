@@ -37,8 +37,8 @@
 	</div>
 
 	<c:if test="${param.error != null}">
-		<div class="row center mt-20">
-			<span style="color:darkred;">아이디 / 비밀번호를 잘못 입력했습니다.</span>
+		<div>
+			<span style="color:darkred;">아이디 또는 비밀번호를 잘못 입력했습니다.</span>
 		</div>
 	</c:if>
 </form>

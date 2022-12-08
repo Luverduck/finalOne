@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ahzit.entity.AhzitAttachmentDto;
 import com.kh.ahzit.entity.AhzitDto;
+import com.kh.ahzit.entity.AhzitMemberDto;
 
 @Repository
 public class AhzitDaoImpl implements AhzitDao {
@@ -36,16 +37,16 @@ public class AhzitDaoImpl implements AhzitDao {
 
 	//소모임 수정
 	@Override
-	public boolean update(AhzitDto ahzitDto) {
-		int count = sqlSession.update("ahzit.ahzitUpdate", ahzitDto);
-		return count > 0;
+	public int ahzitEdit(AhzitDto ahzitDto) {
+		// sql에서 소모임장 여부도 같이 판단
+		return sqlSession.update("ahzit.edit",ahzitDto);
 	}
-
+	
 	//소모임 단일조회
 	@Override
 	public AhzitDto selectOne(int ahzitNo) {
 		return sqlSession.selectOne("ahzit.one", ahzitNo);
-	}
+	}	
 	
 	//소모임 삭제
   @Override
@@ -61,11 +62,26 @@ public class AhzitDaoImpl implements AhzitDao {
 		sqlSession.insert("attachment.insert", ahzitAttachmentDto);
 	}
 
-  	//소모임 프로필 첨부파일
-//	@Override
-//	public void ahzitAttachment(AhzitAttachmentDto ahzitAttachmentDto) {
-//		sqlSession.insert("attachment.insert", ahzitAttachmentDto);
-//		
-//	}
+	//아지트생성에 개설자 자동 추가
+	@Override
+	public void addMember(AhzitMemberDto ahzitMemberDto) {
+		sqlSession.insert("ahzitLeader.insert", ahzitMemberDto);
+		
+	}
+
+	//아지트가입하기 메소드
+	@Override
+	public void insertMember(AhzitMemberDto ahzitMemberDto) {
+		sqlSession.insert("ahzitMember.insert", ahzitMemberDto);
+		
+	}
+
+	//아지트 가입자 증가 메소드
+	@Override
+	public boolean updateAhzitPerson(int ahzitNo) {
+		int count = sqlSession.update("ahzitMember.update", ahzitNo);
+		return count > 0;
+	}
+
 
 }

@@ -37,21 +37,49 @@
 	}
 </style>
 
+<%-- 아지트 가입을 위한 폼 --%>
+
 <div class = "container">
 	<div class = "row">
 	
 		<%-- 왼쪽 사이드바 --%>
 		<div class = "col col-3" style="background-color: green;">
-			<div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitNo}">
-				<div class = "col">
-					<div class = "row">${ahzitMemberDto.memberNo}</div>
-					<div class = "row">${ahzitMemberDto.memberAhzitNo}</div>
-					<div class = "row">${ahzitMemberDto.memberId}</div>
-					<div class = "row">${ahzitMemberDto.memberNick}</div>
-					<div class = "row">${ahzitMemberDto.memberGrade}</div>
-					<div class = "row">${ahzitMemberDto.memberScore}</div>
-					<div class = "row">${ahzitMemberDto.memberJoindate}</div>
-				</div>
+			<h1>왼쪽 사이드바</h1> 
+			
+			<br>
+			
+			<div class = "row">
+				<%-- 아지트 정보 --%>
+				${ahzitVO.getAhzitNo()}<br>
+				아지트 이름 : ${ahzitVO.getAhzitName()} <br>
+				아지트 소개 : ${ahzitVO.getAhzitInfo()}<br>
+				아지트 멤버 : ${ahzitVO.getAhzitHead()} 명<br>
+				아지트 종류 : ${ahzitVO.getAhzitSort()}<br>
+				아지트 리더 : ${ahzitVO.getAhzitLeader()}<br>
+				
+				<%-- 아지트 가입 폼 --%>
+				<form action="insert" method="post">	
+					<input type="hidden" name="ahzitNo"  value="${ahzitVO.getAhzitNo()}">
+					<%-- 아지트 가입버튼 --%>
+					<c:choose>
+					<c:when test="${ahzitMemberDto.getMemberId() == null}"><%-- 소모임 회원이 아니면 --%>
+					<button type="submit">아지트 가입</button>
+					</c:when>
+					<c:otherwise>
+					<button type="submit"  disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
+					</c:otherwise>
+					</c:choose>
+				</form>
+			</div>
+			
+			<div class = "row">
+				로그인 중인 회원 번호 : ${ahzitMemberDto.memberNo}<br>
+				회원이 가입한 아지트 번호 : ${ahzitMemberDto.memberAhzitNo}<br>
+				로그인 중인 회원 아이디 : ${ahzitMemberDto.memberId}<br>
+				로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberId}<br>
+				로그인 중인 회원 등급 : ${ahzitMemberDto.memberGrade}<br>
+				로그인 중인 회원 활동 점수 : ${ahzitMemberDto.memberGrade}<br>
+				소모임 가입일 : ${ahzitMemberDto.memberJoindate}
 			</div>
 		</div>
 		
@@ -361,7 +389,3 @@
 
 <!-- Summer Note CSS -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.css" rel="stylesheet">
-
-
-<%-- footer --%>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

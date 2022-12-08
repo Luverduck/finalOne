@@ -57,9 +57,8 @@ public class AhzitUserDaoImpl implements AhzitUserDao{
 
 	// 비밀번호 변경
 	@Override
-	public boolean changePw(String userPw, String userId) {
-		return sqlSession.update("ahzitUser.changePw", userId) > 0;
-		
+	public boolean changePw(AhzitUserDto ahzitUserDto) {
+		return sqlSession.update("ahzitUser.changePw", ahzitUserDto) > 0;
 	}
 
 	// 회원 탈퇴
@@ -88,7 +87,7 @@ public class AhzitUserDaoImpl implements AhzitUserDao{
 
 	// 비밀번호 찾기 비밀번호 변경
 	@Override
-	public boolean chkPwSuccess(AhzitUserDto ahzitUserDto) {
-		return sqlSession.update("ahzitUser.edit", ahzitUserDto) > 0;
+	public boolean checkPwSuccess(AhzitUserDto ahzitUserDto) {
+		return sqlSession.update("ahzitUser.checkPwSuccess", ahzitUserDto) > 0;
 	}
 }
