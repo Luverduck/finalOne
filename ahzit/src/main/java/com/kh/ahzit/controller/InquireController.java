@@ -43,6 +43,7 @@ public class InquireController {
 	@Autowired
 	private InquireReplyDao inquireReplyDao;
 	
+	
 	private final File directory = new File("D:/upload/kh10f/inquireAttachment");
 	
 	// 1:1 문의 등록
