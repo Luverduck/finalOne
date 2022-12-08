@@ -4,12 +4,17 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="ahzitLeader">
  
-	<insert id="insert" parameterType="AhzitMemberDto" >
-  		insert into ahzitMember(
-  			member_no, member_ahzit_no, member_id, member_joindate, member_nick
+	<insert id="insert" parameterType="map" >
+  		insert into ahzit_member(
+  			member_no, member_ahzit_no, member_id, member_nick, member_grade, member_joindate) 
   		values (
-  			#{memberNo}, #{memberAhzitNo}, #{memberId}, sysdate, #{memberNick} )
+  			ahzit_member_seq.nextval, #{memberAhzitNo}, #{memberId}, #{memberNick}, '개설자', sysdate
+  			)
    </insert>
+   
+   <select id="one" parameterType="String" resultType="AhzitUserDto">
+		select * from ahzit_user where user_id = #{userId}
+   </select>
    
 
   </mapper>

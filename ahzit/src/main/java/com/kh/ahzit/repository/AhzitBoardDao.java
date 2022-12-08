@@ -22,4 +22,10 @@ public interface AhzitBoardDao {
 	
 	// 추상 메소드 - 특정 소모임 내 게시글 검색 조회
 	public List<AhzitBoardVO> searchBoardList(int boardAhzitNo, String keyword);
+	
+	// 추상 메소드 - 소모임 게시글 수정
+	public boolean editBoard(AhzitBoardDto ahzitBoardDto);
+	
+	// 추상 메소드 - 소모임 게시글 삭제
+	public boolean deleteBoard(int boardNo, int boardWriterNo);
 }

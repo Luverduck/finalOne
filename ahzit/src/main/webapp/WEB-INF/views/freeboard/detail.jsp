@@ -56,43 +56,43 @@
 <div class = "container mt-10">
 	<h3>댓글 목록</h3>
 	<c:forEach var = "freeboardReplyList" items = "${freeboardReplyList}">
-		<div class = "row">
-			<div class = "col">
-				댓글 번호 : ${freeboardReplyList.freeboardReplyNo}
-			</div>
-			<div class = "col">
-				댓글 작성자 : ${freeboardReplyList.freeboardReplyWriter}
-			</div>
-			<div class = "col">
-				댓글 내용 : ${freeboardReplyList.freeboardReplyContent}
-			</div>
-			<div class = "col">
-				댓글 작성일 : ${freeboardReplyList.freeboardReplyWritedate}
-			</div>
-			<c:if test = "${loginId == freeboardReplyList.freeboardReplyWriter}">
-				<div class = "col">
-					<button type = "button" name = "btn-edit-on">수정</button>
-				</div>
-				<div class = "col">
-					<button type = "button">삭제</button>
-				</div>
-			</c:if>
+	<div class = "row">
+		<div class = "col">
+			댓글 번호 : ${freeboardReplyList.freeboardReplyNo}
+		</div>
+		<div class = "col">
+			댓글 작성자 : ${freeboardReplyList.freeboardReplyWriter}
+		</div>
+		<div class = "col">
+			댓글 내용 : ${freeboardReplyList.freeboardReplyContent}
+		</div>
+		<div class = "col">
+			댓글 작성일 : ${freeboardReplyList.freeboardReplyWritedate}
 		</div>
 		<c:if test = "${loginId == freeboardReplyList.freeboardReplyWriter}">
-			<div class = "row" class = "div-input">
-				<form action = "/freeboard_reply/edit" method = "post">
-					<div class = "col-9">
-						<input type = "hidden" name = "freeboardReplyNo" value = "${freeboardReplyList.freeboardReplyNo}">
-						<input type = "hidden" name = "freeboardOriginNo" value = "${freeboardDto.freeboardNo}">
-						<input type = "text" class = "w-100" name = "freeboardReplyContent" value = "${freeboardReplyList.freeboardReplyContent}">
-					</div>
-					<div class = "col-3">
-						<button type = "submit">수정</button>
-						<button type = "button" id = "btn-edit-off">취소</button>
-					</div>
-				</form>
+			<div class = "col">
+				<button type = "button" name = "btn-edit-on">수정</button>
+			</div>
+			<div class = "col">
+				<button type = "button">삭제</button>
 			</div>
 		</c:if>
+	</div>
+	<c:if test = "${loginId == freeboardReplyList.freeboardReplyWriter}">
+	<div class = "row div-input">
+		<form action = "/freeboard_reply/edit" method = "post">
+			<div class = "col-9">
+				<input type = "hidden" name = "freeboardReplyNo" value = "${freeboardReplyList.freeboardReplyNo}">
+				<input type = "hidden" name = "freeboardOriginNo" value = "${freeboardDto.freeboardNo}">
+				<input type = "text" class = "w-100" name = "freeboardReplyContent" value = "${freeboardReplyList.freeboardReplyContent}">
+			</div>
+			<div class = "col-3">
+				<button type = "submit">수정</button>
+				<button type = "button" name = "btn-edit-off">취소</button>
+			</div>
+		</form>
+	</div>
+	</c:if>
 	</c:forEach>
 </div>
 
@@ -106,7 +106,7 @@
 		</c:when>
 		<c:otherwise>
 			<li class="page-item">
-				<a class="page-link" href = "list?p=${freeboardReplyListVO.blockFirst()}">&laquo;</a>
+				<a class="page-link" href = "detail?freeboardNo=${freeboardDto.freeboardNo}&p=${freeboardReplyListVO.blockFirst()}">&laquo;</a>
 			</li>
 		</c:otherwise>
 	</c:choose>
@@ -114,7 +114,7 @@
 	<c:choose>
 		<c:when test = "${freeboardReplyListVO.hasPrev()}">
 			<li class="page-item">
-				<a class="page-link" href = "list?p=${freeboardReplyListVO.blockPrev()}">&lt;</a>
+				<a class="page-link" href = "detail?freeboardNo=${freeboardDto.freeboardNo}&p=${freeboardReplyListVO.blockPrev()}">&lt;</a>
 			</li>
 		</c:when>
 		<c:otherwise>
@@ -126,14 +126,14 @@
 	
 	<c:forEach var = "i" begin = "${freeboardReplyListVO.blockStart()}" end = "${freeboardReplyListVO.blockEnd()}" step = "1">
 		<li class="page-item">
-			<a class="page-link" href = "list?p=${i}">${i}</a>
+			<a class="page-link" href = "detail?freeboardNo=${freeboardDto.freeboardNo}&p=${i}">${i}</a>
 		</li>
 	</c:forEach>
 	
 	<c:choose>
 		<c:when test = "${freeboardReplyListVO.hasNext()}">
 			<li class="page-item">
-				<a class="page-link" href = "list?p=${freeboardReplyListVO.blockNext()}">&gt;</a>
+				<a class="page-link" href = "detail?freeboardNo=${freeboardDto.freeboardNo}&p=${freeboardReplyListVO.blockNext()}">&gt;</a>
 			</li>
 		</c:when>
 		<c:otherwise>
@@ -151,7 +151,7 @@
 		</c:when>
 		<c:otherwise>
 			<li class="page-item">
-				<a class="page-link" href = "list?p=${freeboardReplyListVO.blockLast()}">&raquo;</a>
+				<a class="page-link" href = "detail?freeboardNo=${freeboardDto.freeboardNo}&p=${freeboardReplyListVO.blockLast()}">&raquo;</a>
 			</li>
 		</c:otherwise>
 	</c:choose>
@@ -172,12 +172,18 @@
 <script type = "text/javascript">
 	//댓글 수정 입력창 제어
 	$(function(){
-	    $("[name=btn-edit-on]").click(function(e){
-	        //$(this).parents(".div-input");
+		// 초기에 댓글 수정 입력창 숨김
+		$(".div-input").hide();
+		// 특정 댓글의 수정 버튼을 누를 때 
+	    $("[name=btn-edit-on]").click(function(){
+	    	// 해당 수정 버튼과 묶여있는 수정 입력창 표시/숨김(토글)
+            $(this).parent().parent().next().toggle();
 	    });
 	
-	    $("#btn-edit-off").click(function(){
-	        //$("#div-input").hide();
+		// 댓글 수정창의 취소 버튼을 누를 때
+	    $("[name=btn-edit-off]").click(function(){
+	    	// 해당 수정 입력창 숨김
+            $(this).parent().parent().next().hide();
 	    });
 	});
 	

@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ahzit.entity.AhzitAttachmentDto;
 import com.kh.ahzit.entity.AhzitDto;
+import com.kh.ahzit.entity.AhzitMemberDto;
+import com.kh.ahzit.entity.AhzitUserDto;
 import com.kh.ahzit.entity.AttachmentDto;
 import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.repository.AttachmentDao;
@@ -28,7 +30,7 @@ public class AhzitServiceImpl implements AhzitService{
 	private final File dir = new File("D:/upload/kh10f");
 
 	@Override
-	public int create(AhzitDto ahzitDto, MultipartFile attachment) throws IllegalStateException, IOException {
+	public int create(AhzitDto ahzitDto, AhzitMemberDto ahzitMemberDto, MultipartFile attachment, String memberId) throws IllegalStateException, IOException {
 		//번호 미리 생성
 		int ahzitNo = ahzitDao.sequence();
 		ahzitDto.setAhzitNo(ahzitNo);
@@ -58,6 +60,15 @@ public class AhzitServiceImpl implements AhzitService{
 			//??에 insert
 			ahzitDao.ahzitAttachment(ahzitAttachmentDto);
 		}
+		
+		
+		AhzitUserDto userDto = ahzitDao.selectOne(memberId);
+		
+		ahzitMemberDto.setMemberAhzitNo(ahzitNo);
+		ahzitMemberDto.setMemberId(memberId);
+		ahzitMemberDto.setMemberNick(userDto.getUserNick());
+		ahzitDao.addMember(ahzitMemberDto);
+		
 		return ahzitNo;
 	}
 
