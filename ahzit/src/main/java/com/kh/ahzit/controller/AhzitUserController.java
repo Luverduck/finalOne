@@ -84,6 +84,7 @@ public class AhzitUserController {
 		// 끝
 		if (ahzitUserDao.login(ahzitUserDto)) {
 			session.setAttribute(SessionConstant.ID, ahzitUserDto.getUserId());
+			session.setAttribute(SessionConstant.GRADE, findDto.getUserGrade());
 		//로그인 시간 갱신
 		ahzitUserDao.updateLoginTime(findDto.getUserId());
 			return "redirect:/";
@@ -96,6 +97,7 @@ public class AhzitUserController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute(SessionConstant.ID);
+		session.removeAttribute(SessionConstant.GRADE);
 		return "redirect:login";
 	}
 	

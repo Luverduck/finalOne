@@ -17,13 +17,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ahzit.constant.SessionConstant;
-import com.kh.ahzit.entity.FreeboardDto;
+import com.kh.ahzit.entity.FreeboardReplyDto;
 import com.kh.ahzit.entity.InquireDto;
+import com.kh.ahzit.entity.InquireReplyDto;
 import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AttachmentDao;
 import com.kh.ahzit.repository.InquireDao;
-import com.kh.ahzit.vo.FreeboardListSeachVO;
+import com.kh.ahzit.repository.InquireReplyDao;
 import com.kh.ahzit.vo.InquireListSearchVO;
+import com.kh.ahzit.vo.InquireReplyListSearchVO;
 
 @Controller
 @RequestMapping("/inquire")
@@ -37,6 +39,9 @@ public class InquireController {
 	
 	@Autowired
 	private InquireDao inquireDao;
+	
+	@Autowired
+	private InquireReplyDao inquireReplyDao;
 	
 	private final File directory = new File("D:/upload/kh10f/inquireAttachment");
 	
@@ -59,9 +64,23 @@ public class InquireController {
 	
 	// 문의 상세
 	@GetMapping("/detail")
-	public String detail(Model model, @RequestParam int inquireNo) {
+	public String detail(Model model, @RequestParam int inquireNo,HttpSession session,
+			@ModelAttribute InquireReplyListSearchVO inquireReplyListSearchVO) {
 		InquireDto inquireDto = inquireDao.detail(inquireNo);
 		model.addAttribute("inquireDto", inquireDto);
+		
+		// 입력받은 게시글 번호로 해당 게시글에 달린 댓글의 총 수 반환
+		int count = inquireReplyDao.countInquireReply(inquireNo);
+		// 반환한 댓글의 총 수를 inquireReplyListSearchVO의 count로 설정
+		inquireReplyListSearchVO.setCount(count);
+		// 입력받은 게시글 번호로 해당 번호와 연결된 댓글 조회
+		List<InquireReplyDto> inquireReplyList = inquireReplyDao.selectInquireReply(inquireNo, inquireReplyListSearchVO);
+		// 로그인 중인 회원의 회원 아이디 반환
+		String loginId = (String)session.getAttribute("loginId");
+		String loginGrade = (String)session.getAttribute("loginGrade");
+		// 조회 결과를 model에 추가
+		model.addAttribute("inquireReplyList", inquireReplyList);
+		
 		return "inquire/detail";
 	}
 	
