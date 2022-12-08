@@ -9,5 +9,6 @@ public interface AhzitMemberDao {
 	
 	AhzitMemberDto one(int ahzitNo, int memberNo); //소모임 회원 단일조회
 	List<AhzitMemberListVO> select(int ahzitNo); //소모임 회원 조회
+	
 
 }
