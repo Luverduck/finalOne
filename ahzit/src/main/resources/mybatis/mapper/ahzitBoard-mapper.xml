@@ -11,8 +11,8 @@
 		select * from ahzit_member where member_ahzit_no = #{memberAhzitNo} and member_id = #{memberId}
 	</select>
 	
-	<!-- 게시글 등록-->
-	<insert id = "insert" parameterType = "AhzitBoardDto">
+	<!-- 소모임 게시글 등록-->
+	<insert id = "insertBoard" parameterType = "AhzitBoardDto">
 		insert into ahzit_board(board_no, board_writer_no, board_ahzit_no, board_content) values(ahzit_board_seq.nextval, #{boardWriterNo}, #{boardAhzitNo}, #{boardContent})
 	</insert>
 	
@@ -25,5 +25,15 @@
 	<select id = "searchList" parameterType = "map" resultType = "AhzitBoardVO">
 		select ab.board_no, ab.board_content, ab.board_like, ab.board_writedate, am.member_no, am.member_nick, am.member_grade from ahzit_board ab inner join ahzit_member am on ab.board_writer_no = am.member_no where am.member_ahzit_no = #{memberAhzitNo} and ab.board_state != 'Y' and instr(ab.board_content, #{keyword}) > 0 order by board_no desc
 	</select>
+	
+	<!-- 소모임 게시글 수정 -->
+	<update id = "updateBoard" parameterType = "map">
+		update ahzit_board set board_content = #{boardContent} where board_no = #{boardNo} and board_writer_no = #{boardWriterNo}
+	</update>
+	
+	<!-- 소모임 게시글 삭제 -->
+	<delete id = "deleteBoard" parameterType = "map">
+		delete ahzit_board where board_no = #{boardNo} and board_writer_no = #{boardWriterNo}
+	</delete>
 	
 </mapper>

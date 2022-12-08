@@ -35,6 +35,7 @@
 	#profile-member {
 		border-radius: 50%;
 	}
+
 </style>
 
 <%-- 아지트 가입을 위한 폼 --%>
@@ -72,7 +73,7 @@
 				</form>
 			</div>
 			
-			<div class = "row">
+			<div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}">
 				로그인 중인 회원 번호 : ${ahzitMemberDto.memberNo}<br>
 				회원이 가입한 아지트 번호 : ${ahzitMemberDto.memberAhzitNo}<br>
 				로그인 중인 회원 아이디 : ${ahzitMemberDto.memberId}<br>
@@ -88,7 +89,7 @@
 			
 			<%-- 게시글 작성창 --%>
 			<div class = "row">
-				<label class = "input-group editor-open-insert" data-bs-toggle="modal" data-bs-target="#modal-insert">
+				<label class = "input-group editor-open-insert" data-bs-toggle="modal" data-bs-target="#modal-editor">
 				 	<span class="form-control"></span>
 				 	<button class="input-group-text"><i class="fa-solid fa-pen-to-square fa-2x"></i></button>
 				</label>	
@@ -101,15 +102,15 @@
 					<c:forEach var = "ahzitBoardList" items = "${ahzitBoardList}">
 					<%-- 게시글 한 개 --%>
 					<div class = "row mt-3 ps-2 pe-2 pt-3 pb-3 d-flex align-items-center" id = "ahzit-board-outer">
-						<div class = "col" id = "ahzit-board" data-boardno = "${ahzitBoardList.boardNo}" data-memberno = "${ahzitBoardList.memberNo}">
-							<div class = "row">
+						<div class = "col" id = "ahzit-board">
+							<div class = "row ahzit-board-btn">
 								<div class = "col col-2 pe-2">
 									<img id = "profile-member" src = "https://placeimg.com/65/65/any">
 								</div>
 								<div class = "col col-10">
 									<div class = "row">
 										<div class = "col col-11">
-											<p id = "p-member-name">${ahzitBoardList.memberNick} [${ahzitBoardList.memberGrade}]</p>
+											<p>${ahzitBoardList.memberNick} [${ahzitBoardList.memberGrade}]</p>
 										</div>
 										<div class = "col col-1">
 											<div class="dropdown">
@@ -117,10 +118,11 @@
 										        <ul class="dropdown-menu" aria-labelledby="ahzitBoardDropDown">
 										            <li>
 										            	<%-- 게시글 수정 입력창 열기 --%>
-										            	<a class="dropdown-item editor-open-edit" data-bs-toggle="modal" data-bs-target="#modal-editor">수정</a>
+										            	<a class="dropdown-item editor-open-edit" data-bs-toggle="modal" data-bs-target="#modal-editor" 
+										            	data-boardno = "${ahzitBoardList.boardNo}" data-memberno = "${ahzitBoardList.memberNo}">수정</a>
 										            </li>
 										            <li>
-										            	<a class="dropdown-item">삭제</a>
+										            	<a class="dropdown-item btn-delete" data-boardno = "${ahzitBoardList.boardNo}">삭제</a>
 										            </li>
 										        </ul>
 								    		</div>
@@ -132,7 +134,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</div><%-- ahzit-board-btn --%>
 							<div class = "row mt-4 mb-3 ms-1 me-1" id = "ahzit-board-content">
 								${ahzitBoardList.boardContent}
 							</div>
@@ -164,12 +166,13 @@
                         <h5 class="modal-title-insert">게시글 작성</h5>
                         <h5 class="modal-title-edit">게시글 수정</h5>
                         <!-- X 버튼 -->
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close editor-close-insert" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close editor-close-edit" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <!-- 모달 바디 -->
                     <div class="modal-body">
                         <!-- Summer Note 영역 -->
-                        <textarea class = "input-content"></textarea>
+                        <textarea id = "summernote"></textarea>
                     </div>
                     <!-- 모달 푸터 -->
                     <div class="modal-footer">
@@ -210,9 +213,9 @@
 	$(function(){
 		
 		// 게시글 작성 비동기 처리
-		// - 게시글 작성 영역 클릭시 게시글 작성 입력창 열기
+		// - 게시글 작성 영역 클릭시 게시글 입력창 열기
         $(".editor-open-insert").click(function(){
-        	// 게시글 등록 입력창 열기
+        	// 게시글 입력창 열기
             $("#modal-editor").modal("show");
          	// Modal에서 게시글 작성 요소 표시 및 수정 요소 숨김 처리
         	// - 게시글 작성 제목 표시
@@ -228,16 +231,17 @@
         	// - 게시글 수정의 닫기 버튼 숨김
         	$(".editor-close-edit").hide();
             // Summer Note 불러오기
-            $(".input-content").summernote({
+            $("#summernote").summernote({
                 height:500,
                 minHeight:500,
-                maxHeight:500,
-                placeholder:"새로운 소식을 남겨보세요",
+                maxHeight:500
             });
+         	// Summer Note 초기화
+        	$("#summernote").summernote("reset");
         });
 
         // - 확인 버튼 클릭시 비동기로 게시글 등록 요청 전송
-        $(".btn-editor-confirm").click(function(){
+        $(".editor-confirm-insert").click(function(){
         	// 로그인 중인 회원의 회원 번호
 			var boardWriterNo = $("#div-member-info").data("memberno");
 			// 현재 접속중인 소모임 페이지의 소모임 번호
@@ -255,19 +259,17 @@
 				}
 			})
 			.then(function(response){
+				// 게시글 입력창 닫기
+				$("#modal-editor").modal("hide");
 				// 게시글 목록 갱신
 				loadList();
-				// 게시글 등록 입력창 비우기
-				$(".note-editable").html("");
-				// 게시글 등록창 닫기
-				$("#modal-editor").modal("hide");
 			});
         });	
 		
      	// 게시글 수정 비동기 처리
-        // - 게시글 수정 클릭시 게시글 등록 입력창 열기
+        // - 게시글 수정 클릭시 게시글 입력창 열기
         $(".editor-open-edit").click(function(){
-        	// 게시글 수정 입력창 열기
+        	// 게시글 입력창 열기
             $("#modal-editor").modal("show");
         	// Modal에서 게시글 수정 요소 표시 및 작성 요소 숨김 처리
         	// - 게시글 수정 제목 표시
@@ -282,44 +284,84 @@
         	$(".editor-confirm-insert").hide();
         	// - 게시글 작성의 닫기 버튼 표시
         	$(".editor-close-insert").hide();
+        	// - 클릭한 게시글 수정 버튼의 data 값을 Modal의 data 값으로 설정
+        	$(".editor-confirm-edit").attr("data-boardno", $(this).data("boardno"));
             // Summer Note 불러오기
-            $(".input-content").summernote({
+            $("#summernote").summernote({
                 height:500,
                 minHeight:500,
-                maxHeight:500,
-                placeholder:"새로운 소식을 남겨보세요",
+                maxHeight:500
             });
+         	// Summer Note 초기화
+        	$("#summernote").summernote("reset");
+         	// 게시글 내용을 Summer Note의 내용으로 설정
+        	var boardContent = $(this).parents(".ahzit-board-btn").next().html();
+        	$(".note-editable").html(boardContent);
         });
 
         // - 확인 버튼 클릭시 비동기로 게시글 수정 요청 전송
-        $(".btn-editor-confirm").click(function(){
+        $(".editor-confirm-edit").click(function(){
+        	// 수정하려는 게시글 번호
+			var boardNo = $(this).data("boardno");
+        	// 로그인 중인 회원의 회원 번호
+			var boardWriterNo = $("#div-member-info").data("memberno");
+			// 현재 접속중인 소모임 페이지의 소모임 번호
+			var boardAhzitNo = $("#div-member-info").data("ahzitno");
             // 태그를 포함하여 내용 지정
-            var content = $(".note-editable").html();
+            var boardContent = $(".note-editable").html();
             // 비동기 통신을 이용한 게시글 수정
-            
-         	// 게시글 수정 입력창 비우기
-            $(".note-editable").html("");
-         	// 게시글 수정 입력창 닫기
-            $("#modal-editor").modal("hide");
-         	// 게시글 목록 갱신
-			loadList();
+            axios({
+				url : "http://localhost:8888/rest_board/edit",
+				method : "put",
+				data : {
+					boardNo : boardNo,
+					boardWriterNo : boardWriterNo,
+					boardAhzitNo : boardAhzitNo,
+					boardContent : boardContent
+				}
+			})
+			.then(function(response){
+	         	// 게시글 입력창 닫기
+	            $("#modal-editor").modal("hide");
+	         	// 게시글 목록 갱신
+				loadList();
+			});
         });
 
         // - 게시글 작성의 닫기 버튼을 클릭할 경우 confirm 메시지
         $(".editor-close-insert").click(function(e){
             var choice = window.confirm("글 작성을 취소하시겠습니까?");
             if(choice == false) return;
+            $("#summernote").summernote("undo");
             $("#modal-editor").modal("hide");
-            $(".note-editable").html("");
         });
         
      	// - 게시글 수정의 닫기 버튼을 클릭할 경우 confirm 메시지
         $(".editor-close-edit").click(function(e){
             var choice = window.confirm("글 수정을 취소하시겠습니까?");
             if(choice == false) return;
+            $("#summernote").summernote("undo");
             $("#modal-editor").modal("hide");
-            $(".note-editable").html("");
         });
+     	
+    	// 게시글 삭제 비동기 처리
+		$(".btn-delete").click(function(e){
+			var choice = window.confirm("글을 삭제하시겠습니까?");
+			if(choice == false) return;
+			// 삭제하려는 게시글 번호
+			var boardNo = $(this).data("boardno");
+        	// 로그인 중인 회원의 회원 번호
+			var boardWriterNo = $("#div-member-info").data("memberno");
+			// 비동기 통신을 이용한 게시글 삭제
+			axios({
+				url : "http://localhost:8888/rest_board/delete?boardNo=" + boardNo + "&boardWriterNo=" + boardWriterNo,
+				method : "delete"
+			})
+			.then(function(response){
+				// 게시글 목록 갱신
+				loadList();
+			});
+		});
 		
 		// 게시글 검색 비동기 처리
 		$("#btn-search").click(function(){
