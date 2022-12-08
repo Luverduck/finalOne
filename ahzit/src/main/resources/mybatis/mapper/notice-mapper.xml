@@ -23,7 +23,7 @@
 	</insert>
 
 	<select id="list" resultType="NoticeDto">
-		select * from notice
+		select * from notice order by notice_no desc
 	</select>
 
 	<select id="one" parameterType="int" resultType="NoticeDto">
@@ -32,9 +32,8 @@
 
 	<update id="edit" parameterType="NoticeDto">
 		update notice set 
-		notice_writer = #{noticeWriter},
 		notice_title = #{noticeTitle},
-		notice_content = #{noticeContent},
+		notice_content = #{noticeContent}
     
 		where
 		notice_no = #{noticeNo}
@@ -49,6 +48,41 @@
 		update notice set notice_read = notice_read + 1
 		where notice_no = #{noticeNo}
 	</update>
- 
-
+	
+	<!-- 검색 -->
+	<select id="search" parameterType="map" resultType="NoticeDto">
+		select * from notice where instr(${type}, #{keyword}) > 0
+		order by ${type} asc
+	</select>
+	
+	<!-- 통합 리스트 -->
+	<select id="pagelist" parameterType="map" resultType="NoticeDto">
+		select * from (
+		select rownum rn, TMP.* from (
+			select * from notice order by notice_no desc
+		)TMP
+		)where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<!-- 통합 검색 -->
+	<select id="pageSearch" parameterType="map" resultType="NoticeDto">
+		select * from (
+		select rownum rn, TMP.* from (
+			select * from notice
+			where instr(${type}, #{keyword}) > 0
+			order by notice_no desc
+		)TMP
+		)where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<!-- 검색과 목록의 총 데이터 수 -->
+	<select id="pageListCount" resultType="int">
+		select count(*) from notice
+	</select>
+	
+	<select id="pageSearchCount"  resultType="NoticeDto">
+		select count(*) from notice
+		where instr(${type}, #{keyword}) > 0
+	</select>
+	
 </mapper>
