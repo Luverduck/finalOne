@@ -50,7 +50,6 @@
 			
 			<div class = "row">
 				<%-- 아지트 정보 --%>
-				${ahzitVO.getAhzitNo()}<br>
 				아지트 이름 : ${ahzitVO.getAhzitName()} <br>
 				아지트 소개 : ${ahzitVO.getAhzitInfo()}<br>
 				아지트 멤버 : ${ahzitVO.getAhzitHead()} 명<br>

@@ -51,6 +51,7 @@ public class AhzitController {
 			@ModelAttribute AhzitDto ahzitDto,
 			@ModelAttribute AhzitUserDto ahzitUserDto,
 			@ModelAttribute AhzitMemberDto ahzitMemberDto,
+			@RequestParam MultipartFile attachment,
 			RedirectAttributes attr,
 			HttpSession session) throws IllegalStateException, IOException {
 		String ahzitLeader = (String)session.getAttribute("loginId");
@@ -59,7 +60,7 @@ public class AhzitController {
 		ahzitDto.setAhzitLeader(ahzitLeader);
 		//AhzitService에서 번호를 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
 		
-		int ahzitNo = ahzitService.create(ahzitDto, ahzitMemberDto, ahzitLeader);
+		int ahzitNo = ahzitService.create(ahzitDto, ahzitMemberDto,  attachment, ahzitLeader);
 		
 //		//소모임에 개설자 자동 추가
 //		ahzitMemberDto.setMemberAhzitNo(ahzitNo);
