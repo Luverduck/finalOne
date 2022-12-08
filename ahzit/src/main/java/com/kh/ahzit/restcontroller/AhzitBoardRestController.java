@@ -3,8 +3,10 @@ package com.kh.ahzit.restcontroller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +26,7 @@ public class AhzitBoardRestController {
 	
 	// 소모임 게시글 등록 DB 처리 Mapping
 	@PostMapping("/write")
-	public void insert(@RequestBody AhzitBoardDto ahzitBoardDto) {
+	public void insertBoard(@RequestBody AhzitBoardDto ahzitBoardDto) {
 		ahzitBoardDao.insertBoard(ahzitBoardDto);
 	}
 	
@@ -37,7 +39,18 @@ public class AhzitBoardRestController {
 	// 소모임 게시글 조회 Mapping
 	@GetMapping("/search")
 	public List<AhzitBoardVO> selectList(@RequestParam int ahzitNo, @RequestParam(required = false) String keyword) {
-		
 		return ahzitBoardDao.selectBoardList(ahzitNo, keyword);
+	}
+	
+	// 소모임 게시글 수정 DB 처리 Mapping
+	@PutMapping("/edit")
+	public boolean updateBoard(@RequestBody AhzitBoardDto ahzitBoardDto) {
+		return ahzitBoardDao.editBoard(ahzitBoardDto);
+	}
+	
+	// 소모임 게시글 삭제 DB 처리 Mapping
+	@DeleteMapping("/delete")
+	public boolean deleteBoard(@RequestParam int boardNo, @RequestParam int boardWriterNo) {
+		return ahzitBoardDao.deleteBoard(boardNo, boardWriterNo);
 	}
 }
