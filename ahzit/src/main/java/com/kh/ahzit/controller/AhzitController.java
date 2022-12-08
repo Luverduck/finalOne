@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.ahzit.constant.SessionConstant;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
+import com.kh.ahzit.entity.AhzitUserDto;
 import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.service.AhzitService;
 
@@ -48,21 +49,25 @@ public class AhzitController {
 	@PostMapping("/create")
 	private String create(
 			@ModelAttribute AhzitDto ahzitDto,
+			@ModelAttribute AhzitUserDto ahzitUserDto,
 			@ModelAttribute AhzitMemberDto ahzitMemberDto,
 			@RequestParam MultipartFile attachment,
 			RedirectAttributes attr,
 			HttpSession session) throws IllegalStateException, IOException {
 		String ahzitLeader = (String)session.getAttribute("loginId");
+		AhzitUserDto userDto = ahzitDao.selectOne(ahzitLeader);
+
 		ahzitDto.setAhzitLeader(ahzitLeader);
-		
 		//AhzitService에서 번호를 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
-		int ahzitNo = ahzitService.create(ahzitDto, attachment);
 		
-		//소모임에 개설자 자동 추가
-		ahzitMemberDto.setMemberAhzitNo(ahzitNo);
-		ahzitMemberDto.setMemberId(ahzitLeader);
+		int ahzitNo = ahzitService.create(ahzitDto, ahzitMemberDto,  attachment, ahzitLeader);
 		
-		//redirect
+//		//소모임에 개설자 자동 추가
+//		ahzitMemberDto.setMemberAhzitNo(ahzitNo);
+//		ahzitMemberDto.setMemberId(ahzitLeader);
+//		ahzitMemberDto.setMemberNick(userDto.getUserNick());
+//		ahzitDao.addMember(ahzitMemberDto);
+		
 		return "redirect:/ahzit_in/" + ahzitNo;
 	}
 	

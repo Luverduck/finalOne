@@ -1,6 +1,8 @@
 package com.kh.ahzit.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.ahzit.entity.AhzitAttachmentDto;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
+import com.kh.ahzit.entity.AhzitUserDto;
 
 @Repository
 public class AhzitDaoImpl implements AhzitDao {
@@ -25,7 +28,7 @@ public class AhzitDaoImpl implements AhzitDao {
 	//소모임 등록
 	@Override
 	public void insert(AhzitDto ahzitDto) {
-		sqlSession.insert("ahzit.insert",ahzitDto);
+		sqlSession.insert("ahzit.insert", ahzitDto);
 		
 	}
 	
@@ -65,10 +68,19 @@ public class AhzitDaoImpl implements AhzitDao {
 	//아지트생성에 개설자 자동 추가
 	@Override
 	public void addMember(AhzitMemberDto ahzitMemberDto) {
+		Map<String, String> param = new HashMap<>();	
+		param.put("memberAhzitNo", String.valueOf(ahzitMemberDto.getMemberAhzitNo()));
+		param.put("memberId", ahzitMemberDto.getMemberId());
+		param.put("memberNick",ahzitMemberDto.getMemberNick());
 		sqlSession.insert("ahzitLeader.insert", ahzitMemberDto);
 		
 	}
-
+	
+	@Override
+	public AhzitUserDto selectOne(String userId) {
+		return sqlSession.selectOne("ahzitLeader.one", userId);
+	}
+	
 	//아지트가입하기 메소드
 	@Override
 	public void insertMember(AhzitMemberDto ahzitMemberDto) {
@@ -82,6 +94,7 @@ public class AhzitDaoImpl implements AhzitDao {
 		int count = sqlSession.update("ahzitMember.update", ahzitNo);
 		return count > 0;
 	}
+
 
 
 }

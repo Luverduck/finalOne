@@ -32,4 +32,6 @@ public class AhzitMemberDaoImpl implements AhzitMemberDao {
 		return sqlSession.selectList("ahzitMember.ahzitMemberList",ahzitNo);
 	}
 
+
+
 }
