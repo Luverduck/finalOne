@@ -63,27 +63,28 @@ public class InquireController {
 		inquireDto.setInquireId(loginId);
 		inquireDao.insert(inquireDto);
 		
-		// 첨부파일에 대한 처리
-		for(MultipartFile file : inquireAttachment) {
-			// 다음 첨부파일 번호 반환
-			int attachmentNo = attachmentDao.nextAttachmentNo();
-			// 첨부파일 등록 DB 처리
-			attachmentDao.insertAttachment(AttachmentDto.builder()
-						.attachmentNo(attachmentNo)
-						.attachmentName(file.getOriginalFilename())
-						.attachmentType(file.getContentType())
-						.attachmentSize(file.getSize())
-					.build());
-			// 디렉토리 생성
-			directory.mkdirs();
-			// 첨부파일 저장 하위경로 설정
-			File target = new File(directory, String.valueOf(attachmentNo));
-			// 첨부파일 전송
-			file.transferTo(target);
-			// 자유 게시글 첨부파일 등록 DB 처리
-			attachmentDao.insertInquireAttachment(inquireNo, attachmentNo);
-		}
-		
+		if(!inquireAttachment.get(0).isEmpty()) { // 첨부파일이 비어있지않으면 파일 선택 후 같이 등록, 없으면 첨부파일 등록은 제외 
+			// 첨부파일에 대한 처리
+			for(MultipartFile file : inquireAttachment) {
+				// 다음 첨부파일 번호 반환
+				int attachmentNo = attachmentDao.nextAttachmentNo();
+				// 첨부파일 등록 DB 처리
+				attachmentDao.insertAttachment(AttachmentDto.builder()
+							.attachmentNo(attachmentNo)
+							.attachmentName(file.getOriginalFilename())
+							.attachmentType(file.getContentType())
+							.attachmentSize(file.getSize())
+						.build());
+				// 디렉토리 생성
+				directory.mkdirs();
+				// 첨부파일 저장 하위경로 설정
+				File target = new File(directory, String.valueOf(attachmentNo));
+				// 첨부파일 전송
+				file.transferTo(target);
+				// 자유 게시글 첨부파일 등록 DB 처리
+				attachmentDao.insertInquireAttachment(inquireNo, attachmentNo);
+				}
+			}
 		attr.addAttribute("inquireNo", inquireNo);
 		return "redirect:detail";
 	}

@@ -46,14 +46,16 @@
 						</td>
 					</tr>
 				</c:if>
-				<tr>
-				<th>첨부파일</th>
-				<td>
-					<c:forEach var = "list" items = "${attachmentList}">
-						<img src = "/attachment/download/inquire?attachmentNo=${list.attachmentNo}" width="300">
-					</c:forEach>
-				</td>
-				</tr>
+				<c:if test="${attachmentList != null}">
+					<tr>
+					<th>첨부파일</th>
+					<td>
+						<c:forEach var = "list" items = "${attachmentList}">
+							<img src = "/attachment/download/inquire?attachmentNo=${list.attachmentNo}" width="300">
+						</c:forEach>
+					</td>
+					</tr>
+				</c:if>
 			</tbody>
 
 			<tfoot>
