@@ -16,6 +16,9 @@
 		<div >
 			내용 : <input type = "text" name = "inquireContent">
 		</div>
+		<div >
+			첨부파일 등록 : <input type = "file" name = "inquireAttachment" multiple>
+		</div>
 		<button type = "submit">작성</button>
 	</form>
 </div>
