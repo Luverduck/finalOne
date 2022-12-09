@@ -82,4 +82,10 @@ public class AttachmentDaoImpl implements AttachmentDao {
 		// 해당 게시글 번호로 첨부파일 전체 조회 후 결과 반환
 				return sqlSession.selectList("attachment.selectInquireAttachment", inquireOriginNo);
 			}
+
+	@Override
+	public boolean deleteInquireAttachment(int inquireAttachmentNo) {
+	// 해당 첨부파일 번호로 자유게시글 첨부파일 정보 삭제 후 결과 반환
+		return sqlSession.delete("attachment.deleteInquireAttachment", inquireAttachmentNo) > 0;
+		}
 }

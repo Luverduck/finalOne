@@ -57,4 +57,10 @@
 		(select * from inquire_attachment ia inner join attachment a on ia.inquire_attachment_no = a.attachment_no) iaa on i.inquire_no = iaa.inquire_origin_no where i.inquire_no = #{inquireAttachmentNo}
 	</select>
 	
+	<!-- 게시글 수정 시 첨부파일 재등록 위한 첨부파일 삭제 -->
+	<delete id = "deleteInquireAttachment" parameterType = "int">
+		delete inquire_attachment where inquire_attachment_no = #{attachmentNo}
+	</delete>
+	
+	
 </mapper>

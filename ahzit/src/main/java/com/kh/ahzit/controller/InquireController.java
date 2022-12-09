@@ -147,9 +147,59 @@ public class InquireController {
 	}
 		
 	@PostMapping("/edit")
-	public String edit(@ModelAttribute InquireDto inquireDto, RedirectAttributes attr) {
+	public String edit(@ModelAttribute InquireDto inquireDto,
+			List<MultipartFile> inquireAttachment, RedirectAttributes attr) throws Exception {
 		boolean result = inquireDao.edit(inquireDto);
+		
 		if(result) {
+			// 첨부파일에 대한 처리
+			if(!inquireAttachment.get(0).isEmpty()) { // 첨부파일 변화가 있다면
+				// 기존 첨부파일 조회
+				List<AttachmentDto> attachmentList = attachmentDao.selectInquireAttachment(inquireDto.getInquireNo());
+				// ** 이상하게 null도 하나의 원소 취급을 하는 것 같다
+				if(attachmentList.get(0) != null) { // 기존 첨부파일이 있다면
+					// 기존 첨부파일 삭제
+					for(AttachmentDto attachmentDto : attachmentList) {
+						// attachmentDto에서 첨부파일 번호를 반환
+						int attachmentNo = attachmentDto.getAttachmentNo();
+						// 첨부파일 정보 삭제
+						attachmentDao.deleteAttachment(attachmentNo);
+						// 자유게시판 첨부파일 정보 삭제
+						attachmentDao.deleteInquireAttachment(attachmentNo);
+						// 삭제할 첨부파일명 반환
+						String fileName = String.valueOf(attachmentDto.getAttachmentNo());
+						// 삭제할 첨부파일 경로 설정
+						File target = new File(directory, fileName);
+						// 첨부파일 삭제
+						target.delete();
+					}
+				}
+				// 첨부파일 재등록
+				// 게시글 원본 번호 반환
+				int inquireNo = inquireDto.getInquireNo();
+				// 새로 입력된 첨부파일에 대한 처리
+				for(MultipartFile file : inquireAttachment) {
+					// 다음 첨부파일 번호 반환
+					int attachmentNo = attachmentDao.nextAttachmentNo();
+					// 첨부파일 등록 DB 처리
+					attachmentDao.insertAttachment(AttachmentDto.builder()
+								.attachmentNo(attachmentNo)
+								.attachmentName(file.getOriginalFilename())
+								.attachmentType(file.getContentType())
+								.attachmentSize(file.getSize())
+							.build());
+					// 디렉토리 생성
+					directory.mkdirs();
+					// 첨부파일 저장 하위경로 설정
+					File target = new File(directory, String.valueOf(attachmentNo));
+					// 첨부파일 전송
+					file.transferTo(target);
+					// 자유 게시글 첨부파일 등록 DB 처리
+					attachmentDao.insertInquireAttachment(inquireNo, attachmentNo);
+				}
+			}
+			
+			
 			attr.addAttribute("inquireNo", inquireDto.getInquireNo());
 			return "redirect:detail";
 		}

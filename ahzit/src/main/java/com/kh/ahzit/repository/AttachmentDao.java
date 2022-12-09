@@ -32,4 +32,7 @@ public interface AttachmentDao {
 		
 	//  1:1 문의 게시글 원본 번호와 연결된 첨부파일 조회
 	public List<AttachmentDto> selectInquireAttachment(int inquireOriginNo);
+	
+	// 게시글 수정 시 첨부파일 재등록 위한 첨부파일 삭제 
+	public boolean deleteInquireAttachment(int inquireAttachmentNo);
 }
