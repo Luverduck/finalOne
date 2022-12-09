@@ -76,4 +76,10 @@ public class AttachmentDaoImpl implements AttachmentDao {
 		param.put("inquireAttachmentNo", String.valueOf(inquireAttachmentNo));
 		sqlSession.insert("attachment.insertInquireAttachment", param);
 			}
+
+	@Override
+	public List<AttachmentDto> selectInquireAttachment(int inquireOriginNo) {
+		// 해당 게시글 번호로 첨부파일 전체 조회 후 결과 반환
+				return sqlSession.selectList("attachment.selectInquireAttachment", inquireOriginNo);
+			}
 }

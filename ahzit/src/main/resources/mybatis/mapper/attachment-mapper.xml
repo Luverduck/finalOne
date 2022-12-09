@@ -51,5 +51,10 @@
 		insert into inquire_attachment(inquire_origin_no, inquire_attachment_no) values(#{inquireOriginNo}, #{inquireAttachmentNo})
 	</insert>
 	
+	<!-- 1:1 문의 게시글 원본 번호와 연결된 첨부파일 조회  -->
+	<select id = "selectInquireAttachment" parameterType = "int" resultType = "AttachmentDto">
+		select iaa.attachment_no, iaa.attachment_name, iaa.attachment_type, iaa.attachment_size, iaa.attachment_date from inquire i left outer join
+		(select * from inquire_attachment ia inner join attachment a on ia.inquire_attachment_no = a.attachment_no) iaa on i.inquire_no = iaa.inquire_origin_no where i.inquire_no = #{inquireAttachmentNo}
+	</select>
 	
 </mapper>

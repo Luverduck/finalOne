@@ -95,6 +95,11 @@ public class InquireController {
 		InquireDto inquireDto = inquireDao.detail(inquireNo);
 		model.addAttribute("inquireDto", inquireDto);
 		
+		// 입력받은 inquireNo 번호로 해당 번호에 연결된 첨부파일 조회
+		List<AttachmentDto> attachmentList = attachmentDao.selectInquireAttachment(inquireNo);
+		// 조회 결과를 model에 추가
+		model.addAttribute("attachmentList", attachmentList);
+		
 		// 입력받은 게시글 번호로 해당 게시글에 달린 댓글의 총 수 반환
 		int count = inquireReplyDao.countInquireReply(inquireNo);
 		// 반환한 댓글의 총 수를 inquireReplyListSearchVO의 count로 설정
