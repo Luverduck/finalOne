@@ -162,7 +162,8 @@ public class AhzitUserController {
 //			System.out.println("beforePw"+ beforePw);
 			
 			if (!passwordMatch) {
-				return "redirect:password?error";
+				System.out.println("dddddddddddddddd");
+				return "redirect:password?error&userId=" + userId;
 			}
 			else {
 		//	ahzitUserDto.setUserId(beforePw);

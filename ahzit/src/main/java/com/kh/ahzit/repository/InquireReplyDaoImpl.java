@@ -23,8 +23,9 @@ public class InquireReplyDaoImpl implements InquireReplyDao {
 		}
 
 	@Override
-	public void insert(InquireReplyDto inquireReplyDto) {
-		 sqlSession.insert("inquireReply.insert", inquireReplyDto);
+	public boolean insert(InquireReplyDto inquireReplyDto) {
+		return sqlSession.insert("inquireReply.insert", inquireReplyDto) > 0;
+		  
 		}
 
 	@Override
@@ -53,5 +54,11 @@ public class InquireReplyDaoImpl implements InquireReplyDao {
 		int count = sqlSession.delete("inquireReply.delete", inquireReplyDto);
 		return count > 0;
 	}
+	
+	@Override
+	public boolean updateReply(InquireReplyDto inquireReplyDto) {
+		return sqlSession.update("inquireReply.ansUpdate", inquireReplyDto) > 0;
+		}
+	
 
 }
