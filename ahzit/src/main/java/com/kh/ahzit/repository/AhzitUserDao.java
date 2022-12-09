@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.entity.AhzitUserInterestDto;
 
 public interface AhzitUserDao {
 
