@@ -9,7 +9,7 @@
 </jsp:include>
 
  <form action="password" method="post">
-	<div>
+	<div>s
 		<div>
 			<h1>마이페이지 비밀번호 변경</h1>
 		</div>

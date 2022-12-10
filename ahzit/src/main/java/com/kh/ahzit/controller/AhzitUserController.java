@@ -162,7 +162,7 @@ public class AhzitUserController {
 //			System.out.println("beforePw"+ beforePw);
 			
 			if (!passwordMatch) {
-				System.out.println("dddddddddddddddd");
+				//System.out.println("dddddddddddddddd");
 				return "redirect:password?error&userId=" + userId;
 			}
 			else {
@@ -262,7 +262,8 @@ public class AhzitUserController {
 			//	System.out.println("아이디 확인 = "+userId);
 			//	System.out.println("이메일 확인 = "+userEmail);
 				int checkPw = ahzitUserDao.checkPw(map);
-			
+				model.addAttribute("checkPw", checkPw);
+				System.out.println(checkPw);
 		//		System.out.println("아이디, 이메일 확인 = "+checkPw);
 				
 				// 이메일 인증
@@ -288,7 +289,6 @@ public class AhzitUserController {
 				else {
 					System.out.println("실패");
 					String message = "실패하였습니다";
-					model.addAttribute("YN", "N");
 					model.addAttribute("message", message);
 					return "redirect:checkPw?error";
 				}
