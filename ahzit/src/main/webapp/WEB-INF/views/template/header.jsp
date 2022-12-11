@@ -35,7 +35,7 @@
 	
 	<!-- jQuery CDN -->
     <script src = "https://code.jquery.com/jquery-3.6.1.js"></script>
-    
+  	
     <style>
         * {
             font-family: 'Noto Sans KR', sans-serif;
