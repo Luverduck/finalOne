@@ -57,7 +57,7 @@ public class AhzitBoardRestController {
 	@PostMapping("/search")
 	public AhzitBoardListRestResponseVO selectList(@RequestBody AhzitBoardListRestRequestVO ahzitBoardListRestRequestVO) {
 		// 소모임 내 모든 게시글 리스트
-		List<AhzitBoardVO> boardList = ahzitBoardDao.searchBoardList(ahzitBoardListRestRequestVO);
+		List<AhzitBoardVO> boardList = ahzitBoardDao.selectBoardList(ahzitBoardListRestRequestVO);
 		// 반환용 VO 생성
 		AhzitBoardListRestResponseVO ahzitBoardListRestResponseVO = new AhzitBoardListRestResponseVO();
 		ahzitBoardListRestResponseVO.setBoardList(boardList);
