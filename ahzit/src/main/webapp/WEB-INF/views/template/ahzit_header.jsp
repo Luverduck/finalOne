@@ -44,7 +44,8 @@
 	
 	<style>
         * {
-            font-family: 'Noto Sans KR', sans-serif;/
+            font-family: 'Noto Sans KR', sans-serif;
+            /* border: gray 1px dotted; */
         }
     </style>
 </head>
@@ -52,40 +53,64 @@
 
 <c:set var="login" value="${loginId != null}"></c:set>
 
-<div class = "container" style="background-color: #FED164;">
-	<div class = "row">
-		<div class = "col right">
-			<a href="/">홈</a>
+<div class = "container-fluid py-2" style="background-color: #FED164;">
+
+	<div class = "row mt-1">
+		<div class = "col-1 offset-1 d-flex justify-content-center">
+			<a href="/" class = "d-flex align-items-center">홈(로고)</a>
+		</div>
+		
+		<div class = "col-2 d-flex bg-white rounded py-1">
+			<div class = "col-11 me-1">
+				<input class = "w-100 border-0 bg-white ps-3" placeholder = "아지트, 게시글 검색">
+			</div>
+			<div class = "col-1 bg-white">
+				<button class = "fa-solid fa-magnifying-glass w-100 btn-allsearch-submit border-0 bg-white"></button>
+			</div>
+		</div>
+	
+		<div class = "col-3 offset-3 d-flex">
+			<div class = "col d-flex justify-content-center align-items-center">
+				<a href = "" class = "d-flex align-items-center">찾기</a>
+			</div>
 			<c:choose>
-				<c:when test="${login}">
-					<a href="/ahzitUser/logout">로그아웃</a>
-					<a href="/ahzitUser/mypage">마이페이지</a>
-				</c:when>
-				<c:otherwise>
-					<a href="/ahzitUser/login">로그인</a>
-					<a href="/ahzitUser/join">회원가입</a>
-				</c:otherwise>
+			<c:when test="${login}">
+				<div class = "col d-flex justify-content-center">
+					<a href="/ahzitUser/logout" class = "d-flex align-items-center">로그아웃</a>
+				</div>
+				<div class = "col d-flex justify-content-center">
+					<a href="/ahzitUser/mypage" class = "d-flex align-items-center">마이페이지</a>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class = "col d-flex justify-content-center">
+					<a href="/ahzitUser/login" class = "d-flex align-items-center">로그인</a>
+				</div>
+				<div class = "col d-flex justify-content-center">
+					<a href="/ahzitUser/join" class = "d-flex align-items-center">회원가입</a>
+				</div>
+			</c:otherwise>
 			</c:choose>
 		</div>
 	</div>
-	<div class = "row">
-		<div class = "col">
-			<a href = "/ahzit_in/84">게시글</a>
+	
+	<div class = "row mt-3">
+		<div class = "col-2 offset-1 d-flex justify-content-center">
+			<a href = "/ahzit_in/84" class = "p-2">게시글</a>
 			<!-- <a href = "/ahzit_in/${ahzitDto.ahzitNo}">게시글</a> -->
 		</div>
-		<div class = "col">
-			<a href = "/ahzit_in/84/album">사진첩</a>
+		<div class = "col-2 d-flex justify-content-center">
+			<a href = "/ahzit_in/84/album" class = "p-2">사진첩</a>
 		</div>
-		<div class = "col">
-			<a href = "/ahzit_in/84/calendar">일정</a>
+		<div class = "col-2 d-flex justify-content-center">
+			<a href = "/ahzit_in/84/calendar" class = "p-2">일정</a>
 		</div>
-		<div class = "col">
-			<a href = "/ahzit_in/84/attachment">첨부</a>
+		<div class = "col-2 d-flex justify-content-center">
+			<a href = "/ahzit_in/84/attachment" class = "p-2">첨부</a>
 		</div>
-		<div class = "col">
-			<a href = "/ahzit_in/84/member">멤버</a>
+		<div class = "col-2 d-flex justify-content-center">
+			<a href = "/ahzit_in/84/member" class = "p-2">멤버</a>
 		</div>
 	</div>
+	
 </div>
-
-<hr>

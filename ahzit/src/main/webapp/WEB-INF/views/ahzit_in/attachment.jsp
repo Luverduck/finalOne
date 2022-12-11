@@ -6,33 +6,36 @@
 	<jsp:param value="소모임 첨부파일" name="title"/>
 </jsp:include>
 
-<div class = "container">
+<style>
+	body {
+		background-color: rgba(230, 230, 230, 100);
+	}
+</style>
+
+<div class = "container-fluid mt-3">
 	<div class = "row">
-	
-		<%-- 왼쪽 사이드바 --%>
-		<div class = "col-3" style="background-color: green;">
-		사이드1
-		</div>
 		
-		<%-- 가운데 내용 --%>
-		<div class = "col-6">
-		
-			<h1>첨부파일</h1>
-		
-			<%-- 검색창 --%>
-			<input type = "text" >
+		<div class = "col-8 offset-2 main">
 			
-			<%-- 게시글 작성창 --%>
+			<div class = "row">
 			
-			<%-- 게시글 목록 --%>
-		
+				<%-- 왼쪽 사이드바 --%>
+				<div class = "col col-3" style="background-color: green;">
+					왼쪽
+				</div>
+				
+				<%-- 가운데 내용 --%>
+				<div class = "col col-6">
+					첨부파일 관리
+				</div>
+				
+				<%-- 오른쪽 사이드바 --%>
+				<div class = "col-3" style="background-color: green;">
+					
+					오른쪽
+				</div>
+			</div>
 		</div>
-		
-		<%-- 오른쪽 사이드바 --%>
-		<div class = "col-3" style="background-color: green;">
-		사이드2
-		</div>
-		
 	</div>
 </div>
 

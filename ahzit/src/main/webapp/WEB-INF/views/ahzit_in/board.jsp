@@ -9,9 +9,9 @@
 </jsp:include>
 
 <style>
-	* {
+	/* * {
 		border: gray 1px dotted;
-	}
+	} */
 	
 	a {
 		text-decoration: none;
@@ -32,10 +32,15 @@
 		width: 100%;
 	}
 
-	.div-editor-opener {
+	.div-editor-opener,
+	.div-editor-input {
 		border-radius: 10px;
+		border-color : rgba(210, 210, 210);
+		background-color: rgba(240, 240, 240, 50);
+		padding-left: 2%;
+		color: rgba(140, 140, 140, 140);
 	}
-
+	
 	.div-board {
 		background-color: white;
 	}
@@ -77,10 +82,10 @@
 
 <%-- 아지트 가입을 위한 폼 --%>
 
-<div class = "container-fluid">
+<div class = "container-fluid mt-3">
 	<div class = "row">
 		
-		<div class = "col-10 offset-1 main">
+		<div class = "col-8 offset-2 main">
 			
 			<div class = "row">
 			
@@ -130,29 +135,32 @@
 					<%-- 게시글 작성창 --%>
 					<div class = "row">
 						<div class = "col">
-							<div class = "d-flex px-3 py-2 bg-white div-editor-opener editor-open-insert">
-								<input class="d-flex flex-fill div-editor-opener"></input>
-								<span class="d-flex align-items-center fa-solid fa-pen-to-square border-0 bg-white px-3 icon-editor-opener"></span>
-								<span class="d-flex align-items-center fa-regular fa-image border-0 bg-white icon-editor-opener"></span>
+							<div class = "d-flex ps-3 py-3 bg-white div-editor-opener">
+								<button class="col-11 d-flex flex-fill div-editor-opener editor-open-insert  py-1 px-2">새 소식을 남겨보세요</button>
+								<button class="col-1 d-flex align-items-center justify-content-center border-0 bg-white icon-editor-opener editor-open-insert">
+									<i class = "fa-solid fa-pen-to-square w-100"></i>
+								</button>
 							</div>
 						</div>
 					</div>
 					
 					<%-- 게시글 검색창 --%>
 					<div class = "row mt-3">
-						<div class = "col-9">
-							<input type = "text" class = "input-search" class = "w-100" placeholder = "검색어 입력">
-						</div>
-						<div class = "col-3">
-							<button type = "button" class = "btn-search-submit">검색</button>
+						<div class = "col">
+							<div class = "d-flex ps-3 py-3 bg-white div-editor-opener">
+								<input type = "text" class = "input-search col-11 d-flex flex-fill div-editor-input py-1 px-2" placeholder = "검색어 입력">
+								<button class="col-1 d-flex align-items-center justify-content-center border-0 bg-white icon-editor-opener btn-search-submit">
+									<i class="fa-solid fa-magnifying-glass w-100"></i>
+								</button>
+							</div>
 						</div>
 					</div>
 					
 					<%-- 게시글 목록 --%>
 					<div class = "row">
-						<div class = "col" id = "div-board-list">
+						<div class = "col" id = "div-board-list"> <%-- 게시글 목록이 표시될 영역 --%>
 							
-						</div> <!-- col -->			
+						</div>		
 					</div>
 				
 					<%-- 게시글 입력창 Modal --%>
@@ -203,6 +211,9 @@
 	// 초기 1페이지
 	var p = 1;
 	
+	// 초기 검색어
+	var keyword = "";
+	
 	// 초기 게시글 목록 비동기 조회
 	loadList();
 	
@@ -212,7 +223,7 @@
     	//$(document).on("click", ".btn-search-submit", function(e){
     	$(".btn-search-submit").click(function(e){
 			var ahzitNo = $("#div-member-info").data("ahzitno");
-			var keyword = $(".input-search").val();
+			keyword = $(".input-search").val();
 			//var p = 1;
 			axios({
 				url : "http://localhost:8888/rest_board/search",
@@ -292,7 +303,7 @@
 					$("#div-board-list").append(divbottom);
 				}
 				
-				$("#input-search").val("");
+				$(".input-search").val("");
 			});
 		});
 	});
@@ -305,10 +316,11 @@
 			var ahzitNo = $("#div-member-info").data("ahzitno");
 			//var p = 1;
 			axios({
-				url : "http://localhost:8888/rest_board/list",
+				url : "http://localhost:8888/rest_board/search",
 				method : "post",
 				data : {
 					ahzitNo : ahzitNo,
+					keyword : keyword,
 					p : p
 				}
 			})
@@ -439,6 +451,9 @@
 				}
 			})
 			.then(function(response){
+				p = 1;
+				loadList();
+				
 				// 태그 요소 생성
 				// - 상단
 				var divtop_outer = $("<div>").attr("class", "d-flex align-items-start px-3 pt-3 mt-3 div-board div-board-top")
@@ -625,7 +640,7 @@
 	// 게시글 목록 갱신 함수
 	function loadList(){
 		var ahzitNo = $("#div-member-info").data("ahzitno");
-		//var p = 1;
+		p = 1;
 		axios({
 			url : "http://localhost:8888/rest_board/list",
 			method : "post",
