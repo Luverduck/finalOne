@@ -34,8 +34,8 @@ public class AsyncController {
 	@PostMapping("/async3")
 	@ResponseBody
 	public boolean async3(@ModelAttribute CertificationDto certificationDto) {
+		System.out.println(certificationDto);
 		// System.out.println("async3 확인");
 		return emailService.checkCert(certificationDto);
-		
 	}
 }

@@ -75,6 +75,35 @@
 		});
 	});
 
+	  function submitChk() {
+		    
+		    var userInterestSort = [];
+		    $("input[name='userInterestSort']:checked").each(function(i) {
+		    	userInterestSort.push($(this).val());
+		    });
+		    
+		    var userId = $("input[name='userId']").val();
+		    var userPw = $("input[name='userPw']").val();
+		    var userEmail = $("input[name='userEmail']").val();
+		    var userNick = $("input[name='userNick']").val();
+		    
+		    var allData = { "userId": userId, "userPw":userPw , "userEmail": userEmail , "userNick":userNick , "userInterestSort": userInterestSort };
+		    
+		    $.ajax({
+		        url:"join",
+		        type:'POST',
+		        data: allData,
+		 
+		 
+		//데이터 전송이 완료되면 출력되는 메시지
+		 
+		        success:function(data){
+		            alert("완료!");
+		        },
+		    
+		    }) 
+		  }
+	
 </script>  
 <h1>회원가입</h1>
 
@@ -94,7 +123,7 @@
 		</div>
 		<input type="hidden" name="certificationId" value="${certificationId}">	
 		<div>
-			이메일 : <input type="text" name="userEmail" placeholder="이메일" required>
+			이메일 : <input type="text" name="userEmail" placeholder="이메일" >
 			<button class="send-btn" type="button" >인증하기</button> 
 			<div class="cert"></div>
 		</div> 
@@ -127,7 +156,7 @@
 	        
 	    </div>
 		
-	<button type="submit">가입</button>
+	<input type="button" value="button"  onclick="submitChk();"/>
 </form>
 
 <%-- footer --%>

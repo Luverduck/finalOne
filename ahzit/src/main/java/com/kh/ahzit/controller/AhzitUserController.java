@@ -1,5 +1,6 @@
 package com.kh.ahzit.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ahzit.component.RandomGenerator;
@@ -62,17 +64,27 @@ public class AhzitUserController {
 	}
 
 	@PostMapping("/join")
-	public String join(@ModelAttribute AhzitUserDto ahzitUserDto,@ModelAttribute AhzitUserInterestDto ahzitUserInterestDto) {
+	public String join(@ModelAttribute AhzitUserDto ahzitUserDto, @ModelAttribute AhzitUserInterestDto ahzitUserInterestDto, @RequestParam(value="userInterestSort[]") String[] userInterestSort) {
+		System.out.println("123123" + ahzitUserDto);
 		//회원 정보 회원 테이블 저장
 		ahzitUserDao.join(ahzitUserDto);
+		System.out.println("78788" +Arrays.toString(userInterestSort));
+		System.out.println("dto" + ahzitUserDto);
+		System.out.println("ahzitUserInterestDto = " + ahzitUserInterestDto);
 		//입력한 회원아이디 추출
 		ahzitUserInterestDto.setUserInterestId(ahzitUserDto.getUserId());
-		// 관심사번호 생성
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@" + ahzitUserInterestDto.getUserInterestId());
+
+		
+		// 관심사 저장
+	for( int i = 0; i < userInterestSort.length; i++) {
 		int userInterestNo = ahzitUserInterestDao.sequence();
 		// 추출한 아이디 관심사 테이블에 입력
 		ahzitUserInterestDto.setUserInterestNo(userInterestNo);
-		// 관심사 저장
+		ahzitUserInterestDto.setUserInterestSort(userInterestSort[i]);
 		ahzitUserInterestDao.insert(ahzitUserInterestDto);
+	}
+	
 		return "redirect:joinSuccess";
 	}
 	// 가입완료
@@ -132,13 +144,31 @@ public class AhzitUserController {
 	}
 	
 	@PostMapping("/edit")
-	public String edit(@ModelAttribute AhzitUserDto ahzitUserDto, RedirectAttributes attr) {
+	public String edit(@ModelAttribute AhzitUserDto ahzitUserDto, @ModelAttribute AhzitUserInterestDto ahzitUserInterestDto, RedirectAttributes attr, @RequestParam(value="userInterestSort[]") String[] userInterestSort) {
+		//System.out.println(ahzitUserDto.getUserId());
+		//System.out.println("11"+userInterestSort);
+		System.out.println(userInterestSort);
 		boolean result = ahzitUserDao.update(ahzitUserDto);
-		if (result) {
+		System.out.println(ahzitUserDto.getUserId());
+		
+		
+		ahzitUserInterestDto.setUserInterestId(ahzitUserDto.getUserId());
+		System.out.println(ahzitUserInterestDto.getUserInterestId());
+		boolean result1 = ahzitUserInterestDao.edit(ahzitUserInterestDto);
+		
+		
+		if (result&&result1) {
+			System.out.println(ahzitUserDto.getUserId());
 			attr.addAttribute("userId", ahzitUserDto.getUserId());
+			
+			
+			
+			for( int i = 0; i < userInterestSort.length; i++) {
+				 ahzitUserDao.update(ahzitUserDto);
+				 ahzitUserInterestDao.edit(ahzitUserInterestDto);}
 			return "redirect:mypage";
 		} else {
-			return "redirect:edit?error";
+			return "redirect:mypage";
 		}
 	}
 	
@@ -251,7 +281,8 @@ public class AhzitUserController {
 		}
 		
 		@PostMapping("/checkPw")
-		public String checkPw(
+		@ResponseBody
+		public Object checkPw(
 				@RequestParam String userEmail, @RequestParam String userId, Model model) {
 			
 			// System.out.println("아이디 확인 = "+userId);
@@ -262,7 +293,6 @@ public class AhzitUserController {
 			//	System.out.println("아이디 확인 = "+userId);
 			//	System.out.println("이메일 확인 = "+userEmail);
 				int checkPw = ahzitUserDao.checkPw(map);
-				model.addAttribute("checkPw", checkPw);
 				System.out.println(checkPw);
 		//		System.out.println("아이디, 이메일 확인 = "+checkPw);
 				
@@ -282,15 +312,18 @@ public class AhzitUserController {
 					certificationDao.delete(userEmail);
 					CertificationDto certificationDto = CertificationDto.builder().certificationId(userEmail).certificationKey(serial).build();
 					certificationDao.insert(certificationDto);
-					model.addAttribute("userId", userId);
+					
+					map.put("ddd", "성공");
+					//model.addAttribute("userId", userId);
 					System.out.println("성공");
 					return "redirect:checkPw";
 					}
 				else {
+					map.put("ddd", "실패");
 					System.out.println("실패");
-					String message = "실패하였습니다";
-					model.addAttribute("message", message);
-					return "redirect:checkPw?error";
+					model.addAttribute("ddd", checkPw);
+					System.out.println("실패시 " + checkPw);
+					return map;
 				}
 		}
 		
