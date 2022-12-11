@@ -11,19 +11,29 @@
 		select * from ahzit_member where member_ahzit_no = #{memberAhzitNo} and member_id = #{memberId}
 	</select>
 	
+	<!-- 등록을 위한 다음 게시글 번호 반환 -->
+	<select id = "nextBoardNo" resultType = "int">
+		select ahzit_board_seq.nextval from dual
+	</select>
+	
 	<!-- 소모임 게시글 등록-->
 	<insert id = "insertBoard" parameterType = "AhzitBoardDto">
-		insert into ahzit_board(board_no, board_writer_no, board_ahzit_no, board_content) values(ahzit_board_seq.nextval, #{boardWriterNo}, #{boardAhzitNo}, #{boardContent})
+		insert into ahzit_board(board_no, board_writer_no, board_ahzit_no, board_content) values(${boardNo}, #{boardWriterNo}, #{boardAhzitNo}, #{boardContent})
 	</insert>
 	
+	<!-- 소모임 게시글 등록 후 반환을 위한 조회 처리 -->
+	<select id = "selectInsertBoard" parameterType = "map" resultType = "AhzitBoardVO">
+		select ab.board_no, ab.board_writer_no, ab.board_content, ab.board_like, ab.board_writedate, am.member_no, am.member_nick, am.member_grade from ahzit_board ab inner join ahzit_member am on ab.board_writer_no = am.member_no where ab.board_no = #{BoardNo} and ab.board_state != 'Y' order by board_no desc
+	</select>
+	
 	<!-- 특정 소모임 내 모든 게시글 전체 조회 -->
-	<select id = "allList" parameterType = "int" resultType = "AhzitBoardVO">
-		select ab.board_no, ab.board_content, ab.board_like, ab.board_writedate, am.member_no, am.member_nick, am.member_grade from ahzit_board ab inner join ahzit_member am on ab.board_writer_no = am.member_no where am.member_ahzit_no = #{memberAhzitNo} and ab.board_state != 'Y' order by board_no desc
+	<select id = "allList" parameterType = "map" resultType = "AhzitBoardVO">
+		select * from (select tmp.*, rownum rn from (select ab.board_no, ab.board_writer_no, ab.board_content, ab.board_like, ab.board_writedate, am.member_no, am.member_nick, am.member_grade from ahzit_board ab inner join ahzit_member am on ab.board_writer_no = am.member_no where am.member_ahzit_no = #{memberAhzitNo} and ab.board_state != 'Y' order by board_no desc)tmp) where rn between #{rownumStart} and #{rownumEnd}
 	</select>
 	
 	<!-- 특정 소모임 내 모든 게시글 검색 조회 -->
 	<select id = "searchList" parameterType = "map" resultType = "AhzitBoardVO">
-		select ab.board_no, ab.board_content, ab.board_like, ab.board_writedate, am.member_no, am.member_nick, am.member_grade from ahzit_board ab inner join ahzit_member am on ab.board_writer_no = am.member_no where am.member_ahzit_no = #{memberAhzitNo} and ab.board_state != 'Y' and instr(ab.board_content, #{keyword}) > 0 order by board_no desc
+		select * from (select tmp.*, rownum rn from (select ab.board_no, ab.board_writer_no, ab.board_content, ab.board_like, ab.board_writedate, am.member_no, am.member_nick, am.member_grade from ahzit_board ab inner join ahzit_member am on ab.board_writer_no = am.member_no where am.member_ahzit_no = #{memberAhzitNo} and ab.board_state != 'Y' and instr(ab.board_content, #{keyword}) > 0 order by board_no desc)tmp) where rn between #{rownumStart} and #{rownumEnd}
 	</select>
 	
 	<!-- 소모임 게시글 수정 -->
