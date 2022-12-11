@@ -10,6 +10,7 @@ public class AhzitBoardVO {
 	// 필드
 	// - AhzitBoardDto 관련
 	private int boardNo;
+	private int boardWriterNo;
 	private String boardContent;
 	private int boardLike;
 	private Date boardWritedate;

@@ -6,31 +6,42 @@
 	<jsp:param value="소모임 회원" name="title"/>
 </jsp:include>
 
-<div class = "container">
+<style>
+	.main {
+		background-color: gray;
+	}
+</style>
+
+<div class = "container-fluid">
 	<div class = "row">
-	
-		<%-- 왼쪽 사이드바 --%>
-		<div class = "col-3" style="background-color: green;">
-		사이드1
-		</div>
 		
-		<%-- 가운데 내용 --%>
-		<div class = "col-6">
-		
-			<h1>회원</h1>
-		
-			<%-- 검색창 --%>
-			<input type = "text" >
+		<div class = "col-10 offset-1 main">
 			
-			<%-- 게시글 작성창 --%>
-			
-			<%-- 게시글 목록 --%>
-		
-		</div>
-		
-		<%-- 오른쪽 사이드바 --%>
-		<div class = "col-3" style="background-color: green;">
-		사이드2
+			<div class = "row">
+				<%-- 왼쪽 사이드바 --%>
+				<div class = "col col-3" style="background-color: green;">
+				사이드1
+				</div>
+				
+				<%-- 가운데 내용 --%>
+				<div class = "col col-6">
+				
+					<h1>회원</h1>
+				
+					<%-- 검색창 --%>
+					<input type = "text" >
+					
+					<%-- 게시글 작성창 --%>
+					
+					<%-- 게시글 목록 --%>
+				
+				</div>
+				
+				<%-- 오른쪽 사이드바 --%>
+				<div class = "col-3" style="background-color: green;">
+				사이드2
+				</div>
+			</div>
 		</div>
 		
 	</div>
