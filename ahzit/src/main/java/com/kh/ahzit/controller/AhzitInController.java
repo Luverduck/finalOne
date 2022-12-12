@@ -23,7 +23,7 @@ public class AhzitInController {
 	
 	@Autowired
 	private AhzitDao ahzitDao;
-	
+	 
 	// 소모임 홈 화면 Mapping
 	@GetMapping("/{ahzitNo}")
 	public String home(@PathVariable int ahzitNo, HttpSession session, Model model) {
