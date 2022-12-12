@@ -13,6 +13,7 @@ import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AhzitUserDto;
 
+
 @Repository
 public class AhzitDaoImpl implements AhzitDao {
 	
@@ -59,12 +60,6 @@ public class AhzitDaoImpl implements AhzitDao {
 
 	}
 
-	//소모임 프로필 첨부파일
-	@Override
-	public void ahzitAttachment(AhzitAttachmentDto ahzitAttachmentDto) {
-		sqlSession.insert("attachment.insert", ahzitAttachmentDto);
-	}
-
 	//아지트생성에 개설자 자동 추가
 	@Override
 	public void addMember(AhzitMemberDto ahzitMemberDto) {
@@ -94,7 +89,5 @@ public class AhzitDaoImpl implements AhzitDao {
 		int count = sqlSession.update("ahzitMember.update", ahzitNo);
 		return count > 0;
 	}
-
-
 
 }

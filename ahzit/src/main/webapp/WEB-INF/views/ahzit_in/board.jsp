@@ -73,21 +73,20 @@
 		color: black;
 		font-size: 20px;
 	}
-	
-	.icon-board-like-on {
-		color: #FF8681;
+	.chal-img {
+	width : 250px;
+	height : 250px;		
+	}
+  
+ .icon-board-like-on {
+	color: #FF8681;
 	}
 
 </style>
 
-<%-- 아지트 가입을 위한 폼 --%>
 
 <div class = "container-fluid mt-3">
 	<div class = "row">
-		
-		<div class = "col-8 offset-2 main">
-			
-			<div class = "row">
 			
 				<%-- 왼쪽 사이드바 --%>
 				<div class = "col col-3" style="background-color: green;">
@@ -97,6 +96,9 @@
 					
 					<div class = "row">
 						<%-- 아지트 정보 --%>
+            <c:forEach var = "list" items = "${attachmentList}">
+              <img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" > 					
+             </c:forEach>	
 						아지트 이름 : ${ahzitVO.getAhzitName()} <br>
 						아지트 소개 : ${ahzitVO.getAhzitInfo()}<br>
 						아지트 멤버 : ${ahzitVO.getAhzitHead()} 명<br>
@@ -397,6 +399,12 @@
 	}, 100));
 	
 	$(function(){
+		
+		//소모임프로필이 없으면 기본이미지로 대체
+	      $(".ahzit-img").on("error", function() {
+	         $(this).attr("src", "/images/bg_default.jpg");
+	      });
+
 		// 게시글 작성 비동기 처리
 		// - 게시글 작성 영역 클릭시 게시글 입력창 열기
 		$(".editor-open-insert").click(function(){
@@ -635,6 +643,36 @@
 				bottom.remove();
 			});
 		});
+
+		
+		// 게시글 목록 갱신 함수
+		function loadList(){
+			var ahzitNo = $("#div-member-info").data("ahzitno");
+			axios({
+				url : "http://localhost:8888/rest_board/list?ahzitNo=" + ahzitNo,
+				method : "get"
+			})
+			.then(function(response){
+				$("#ahzit-board-list").empty();
+				
+				for(var i = 0 ; i < response.data.length ; i ++){
+					var outer = $("<div>").attr("class", "row mt-3");
+					var inner = $("<div>").attr("class", "col");
+					var boardNo = $("<div>").attr("class", "row").text("게시글 번호 : " + response.data[i].boardNo);
+					var boardContent = $("<div>").attr("class", "row").html("게시글 내용 : " + response.data[i].boardContent);
+					var boardLike = $("<div>").attr("class", "row").text("게시글 좋아요 : " + response.data[i].boardLike);
+					var boardWritedate = $("<div>").attr("class", "row").text("게시글 작성일 : " + response.data[i].boardWritedate);
+					var memberNo = $("<div>").attr("class", "row").text("작성자 번호 : " + response.data[i].memberNo);
+					var memberNick = $("<div>").attr("class", "row").text("작성자 닉네임 : " + response.data[i].memberNick);
+					var memberGrade = $("<div>").attr("class", "row").text("작성자 등급 : " + response.data[i].memberGrade);
+					
+					inner.append(boardNo).append(boardContent).append(boardLike).append(boardWritedate).append(memberNo).append(memberNick).append(memberGrade);
+
+					outer.append(inner);
+					$("#ahzit-board-list").append(outer);
+				}
+			});
+		};	
 	});
 	
 	// 게시글 목록 갱신 함수

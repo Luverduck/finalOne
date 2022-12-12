@@ -6,11 +6,6 @@
 
 <mapper namespace = "attachment">
 
-	<!--소모임 프로필 첨부파일 등록-->
-	<insert id="insertAhzitAttachment" parameterType="AhzitAttachmentDto">
-		insert into ahzit_attachment(ahzit_origin_no, ahzit_attachment_no) values (#{ahzitOriginNo}, #{ahzitAttachmentNo})
-	</insert>
-
 	<!-- 다음 첨부파일 번호 반환 -->
 	<select id = "nextAttachmentNo" resultType = "int">
 		select attachment_seq.nextval from dual
@@ -46,6 +41,22 @@
 		delete freeboard_attachment where freeboard_attachment_no = #{attachmentNo}
 	</delete>
 	
+
+	<!-- 소모임프로필 등록 -->
+ 	<insert id="insertAhzitAttachment" parameterType="map">
+		insert into ahzit_attachment(ahzit_origin_no, ahzit_attachment_no) values (#{ahzitOriginNo}, #{ahzitAttachmentNo})
+	</insert> 
+	
+	<!-- 소모임프로필 조회 -->
+	<select id="selectAhzitAttachment" parameterType="int" resultType = "AttachmentDto">
+		<!-- select * from ahzit_attachment_view where ahzit_origin_no = #{ahzitOriginNo} -->
+		select 
+			a.ahzit_no, iaa.attachment_no, iaa.attachment_name, iaa.attachment_type, iaa.attachment_size, iaa.attachment_date 
+		from ahzit a left outer join
+			(select * from ahzit_attachment aa inner join attachment a on 
+        	aa.ahzit_attachment_no = a.attachment_no) iaa on a.ahzit_no = iaa.ahzit_origin_no where ahzit_origin_no= #{ahzitOriginNo}
+	</select> 
+
 	<!-- 1:1 문의 게시판 첨부파일 등록 -->
 	<insert id = "insertInquireAttachment" parameterType = "map">
 		insert into inquire_attachment(inquire_origin_no, inquire_attachment_no) values(#{inquireOriginNo}, #{inquireAttachmentNo})
@@ -61,6 +72,6 @@
 	<delete id = "deleteInquireAttachment" parameterType = "int">
 		delete inquire_attachment where inquire_attachment_no = #{attachmentNo}
 	</delete>
-	
+
 	
 </mapper>
