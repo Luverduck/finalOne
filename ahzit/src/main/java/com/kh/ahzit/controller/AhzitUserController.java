@@ -70,21 +70,21 @@ public class AhzitUserController {
 		ahzitUserDao.join(ahzitUserDto);
 		System.out.println("78788" +Arrays.toString(userInterestSort));
 		System.out.println("dto" + ahzitUserDto);
-		System.out.println("ahzitUserInterestDto = " + ahzitUserInterestDto);
+		
 		//입력한 회원아이디 추출
 		ahzitUserInterestDto.setUserInterestId(ahzitUserDto.getUserId());
-	//	System.out.println("@@@@@@@@@@@@@@@@@@@@@" + ahzitUserInterestDto.getUserInterestId());
-
 		
-		// 관심사 저장
-	for( int i = 0; i < userInterestSort.length; i++) {
+	//	System.out.println("@@@@@@@@@@@@@@@@@@@@@" + ahzitUserInterestDto.getUserInterestId());
 		int userInterestNo = ahzitUserInterestDao.sequence();
-		// 추출한 아이디 관심사 테이블에 입력
 		ahzitUserInterestDto.setUserInterestNo(userInterestNo);
-		ahzitUserInterestDto.setUserInterestSort(userInterestSort[i]);
+		System.out.println("ahzitUserInterestDto = " + ahzitUserInterestDto);
+		
+//		// 관심사 저장
+//		for( int i = 0; i < userInterestSort.length; i++) {	
+		ahzitUserInterestDto.setUserInterestSort(Arrays.toString(userInterestSort));
 		ahzitUserInterestDao.insert(ahzitUserInterestDto);
-	}
 	
+//		
 		return "redirect:joinSuccess";
 	}
 	// 가입완료
