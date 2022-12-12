@@ -28,15 +28,20 @@ public class AhzitBoardRestController {
 	
 	// 소모임 게시글 등록 DB 처리 Mapping
 	@PostMapping("/write")
-	public AhzitBoardVO insertBoard(@RequestBody AhzitBoardDto ahzitBoardDto) {
+	public AhzitBoardVO insertBoard(@RequestBody AhzitBoardListRestRequestVO ahzitBoardListRestRequestVO) {
 		// 다음 게시글 번호 반환
 		int boardNo = ahzitBoardDao.nextBoardNo();
 		// 입력받은 DTO의 boardNo를 반환한 게시글 번호로 설정
-		ahzitBoardDto.setBoardNo(boardNo);
+		AhzitBoardDto ahzitBoardDto = AhzitBoardDto.builder()
+				.boardNo(boardNo)
+				.boardAhzitNo(ahzitBoardListRestRequestVO.getAhzitNo())
+				.boardWriterNo(ahzitBoardListRestRequestVO.getMemberNo())
+				.boardContent(ahzitBoardListRestRequestVO.getBoardContent())
+				.build();
 		// 게시글 등록 실행
 		ahzitBoardDao.insertBoard(ahzitBoardDto);
 		// 등록한 게시글 조회
-		AhzitBoardVO ahzitBoardVO = ahzitBoardDao.selectInsertBoard(boardNo);
+		AhzitBoardVO ahzitBoardVO = ahzitBoardDao.selectInsertBoard(boardNo, ahzitBoardListRestRequestVO);
 		// 조회 정보 반환 
 		return ahzitBoardVO;
 	}

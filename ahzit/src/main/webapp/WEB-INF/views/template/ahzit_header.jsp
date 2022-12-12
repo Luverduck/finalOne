@@ -59,7 +59,7 @@
 
 <c:set var="login" value="${loginId != null}"></c:set>
 
-<div class = "container-fluid py-2" style="background-color: #FED164;">
+<div class = "container-fluid py-2" style="background-color: #FEC260;">
 
 	<div class = "row mt-1">
 		<div class = "col-1 offset-2 d-flex justify-content-center">

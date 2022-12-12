@@ -19,7 +19,7 @@ public interface AhzitBoardDao {
 	public void insertBoard(AhzitBoardDto ahzitBoardDto);
 	
 	// 추상 메소드 - 소모임 게시글 등록 처리 후 반환을 위한 조회
-	public AhzitBoardVO selectInsertBoard(int boardNo);
+	public AhzitBoardVO selectInsertBoard(int boardNo, AhzitBoardListRestRequestVO ahzitBoardListRestRequestVO);
 	
 	// 추상 메소드 - 특정 소모임 내 게시글 조회
 	public List<AhzitBoardVO> selectBoardList(AhzitBoardListRestRequestVO ahzitBoardListRestRequestVO);
