@@ -89,16 +89,16 @@
 	<div class = "row">
 			
 				<%-- 왼쪽 사이드바 --%>
-				<div class = "col col-3" style="background-color: green;">
+				<div class = "col col-3" style="background-color: #EDEEF0;">
 					<h1>왼쪽 사이드바</h1> 
 				
 					<br>
 					
 					<div class = "row">
 						<%-- 아지트 정보 --%>
-            <c:forEach var = "list" items = "${attachmentList}">
-              <img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" > 					
-             </c:forEach>	
+		            <c:forEach var = "list" items = "${attachmentList}">
+		              <img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" > 					
+		             </c:forEach>	
 						아지트 이름 : ${ahzitVO.getAhzitName()} <br>
 						아지트 소개 : ${ahzitVO.getAhzitInfo()}<br>
 						아지트 멤버 : ${ahzitVO.getAhzitHead()} 명<br>
@@ -108,6 +108,7 @@
 						<%-- 아지트 가입 폼 --%>
 						<form action="insert" method="post">	
 							<input type="hidden" name="ahzitNo"  value="${ahzitVO.getAhzitNo()}">
+				
 							<%-- 아지트 가입버튼 --%>
 							<c:choose>
 							<c:when test="${ahzitMemberDto.getMemberId() == null}"><%-- 소모임 회원이 아니면 --%>
@@ -127,8 +128,11 @@
 						로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberId}<br>
 						로그인 중인 회원 등급 : ${ahzitMemberDto.memberGrade}<br>
 						로그인 중인 회원 활동 점수 : ${ahzitMemberDto.memberGrade}<br>
-						소모임 가입일 : ${ahzitMemberDto.memberJoindate}
+						소모임 가입일 : ${ahzitMemberDto.memberJoindate}<br>
 					</div>
+					<c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
+						<a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i></i>아지트 수정</a>					
+					</c:if>
 				</div>
 				
 				<%-- 가운데 내용 --%>
@@ -195,7 +199,7 @@
 				</div>
 				
 				<%-- 오른쪽 사이드바 --%>
-				<div class = "col-3" style="background-color: green;">
+				<div class = "col-3" style="background-color: #EDEEF0;">
 					
 					
 					<%-- 공지사항 목록 --%>

@@ -18,10 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ahzit.constant.SessionConstant;
-import com.kh.ahzit.entity.AhzitAttachmentDto;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.service.AhzitService;
 
@@ -89,10 +89,27 @@ public class AhzitController {
 		return "redirect:/ahzit_in/" + ahzitNo;
 	}
 	
-    //소모임 관리 페이지
+    //소모임 관리 페이지(수정)
     @GetMapping("/edit")
-    public String ahzitEdit(@RequestParam int AhzitNo) {
-      return "ahzit/detail_edit";
+    public String ahzitEdit(@RequestParam int ahzitNo, 
+    										Model model
+    									) {
+    	model.addAttribute("ahzitDto", ahzitDao.selectOne(ahzitNo));
+    	return "ahzit/edit";
+    }
+    
+    @PostMapping("/edit")
+    public String edit(@ModelAttribute AhzitDto ahzitDto,
+    							  @RequestParam MultipartFile attachment
+    							) {
+    	boolean result = ahzitDao.update(ahzitDto);
+    	if(result) {
+    		return "redirect:/ahzit_in/" +ahzitDto.getAhzitNo();
+    	}
+    	else {//실패했다면 오류 발생
+    		throw new TargetNotFoundException();
+    	}
+    			
     }
 	
     //소모임 회원 관리페이지

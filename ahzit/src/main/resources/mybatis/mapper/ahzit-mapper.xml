@@ -27,7 +27,7 @@
   		</select>
   		
   		<!-- 소모임 수정(소모임이름, 소개, 최대멤버수, 공개여부, 프로필사진)-->		
-  		 <update id="edit" parameterType="ahzitDto">
+  		 <update id="update" parameterType="AhzitDto" >
 	  		update ahzit 
 	  			set
 	  				ahzit_name = #{ahzitName} , 
@@ -35,7 +35,7 @@
 	  				ahzit_headmax = #{ahzitHeadMax}, 
 	  				ahzit_isPublic = #{ahzitIsPublic}
 	  			where
-	  				ahzit_no = #{ahzitNo}  and ahzitLeader = #{ahzitLeader}
+	  				ahzit_no = #{ahzitNo}
   		 </update>
 
   		<!-- 소모임 삭제 -->

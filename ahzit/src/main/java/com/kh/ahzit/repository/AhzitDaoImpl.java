@@ -39,18 +39,18 @@ public class AhzitDaoImpl implements AhzitDao {
 		return sqlSession.selectList("ahzit.list");
 	}
 
-	//소모임 수정
-	@Override
-	public int ahzitEdit(AhzitDto ahzitDto) {
-		// sql에서 소모임장 여부도 같이 판단
-		return sqlSession.update("ahzit.edit",ahzitDto);
-	}
-	
 	//소모임 단일조회
 	@Override
 	public AhzitDto selectOne(int ahzitNo) {
 		return sqlSession.selectOne("ahzit.one", ahzitNo);
 	}	
+	
+	//아지트 수정 메소드
+	@Override
+	public boolean update(AhzitDto ahzitDto) {
+		int count = sqlSession.update("ahzit.update", ahzitDto);
+		return count > 0;
+	}
 	
 	//소모임 삭제
   @Override
@@ -89,5 +89,7 @@ public class AhzitDaoImpl implements AhzitDao {
 		int count = sqlSession.update("ahzitMember.update", ahzitNo);
 		return count > 0;
 	}
+
+
 
 }
