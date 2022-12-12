@@ -119,5 +119,18 @@ public class AhzitController {
           ) {
       return "ahzit/detail_member_management";
 	}
+    
+    //소모임 삭제
+    //소모임 관리페이지(수정) 안에서 삭제 가능
+    @GetMapping("/delete")
+    public String delete(@RequestParam int ahzitNo) {
+    	boolean result = ahzitDao.delete(ahzitNo);
+    	if(result) {
+    		return "redirect:/";
+    	}
+    	else { //소모임 삭제 취소하면 제자리
+    		return "redirect:/ahzit_in/" +ahzitNo;
+    	}
+    }
 	
 }

@@ -36,10 +36,10 @@ public class Test_public1992 {
 //												.ahzitIsPublic("Y")
 //												.build());
 	
-	@Test
-	public void test() {
-		System.out.println(ahzitDao.delete(AhzitDto.builder().ahzitNo(4).ahzitLeader("tester111").build()));
-		
-	}
+//	@Test
+//	public void test() {
+//		System.out.println(ahzitDao.delete(AhzitDto.builder().ahzitNo(4).ahzitLeader("tester111").build()));
+//		
+//	}
 
 }

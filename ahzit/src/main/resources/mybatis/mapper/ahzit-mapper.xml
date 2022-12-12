@@ -40,9 +40,10 @@
 
   		<!-- 소모임 삭제 -->
   		<delete id="delete" parameterType="AhzitDto">
-  			 <![CDATA[
+  			delete ahzit where ahzit_no=#{ahzitNo}
+  			<!--  <![CDATA[
   			delete ahzit where ahzit_no=#{ahzitNo} and ahzit_leader=#{ahzitLeader} and ahzit_head=1
-  			]]>
+  			]]> -->
   		</delete>
 
   

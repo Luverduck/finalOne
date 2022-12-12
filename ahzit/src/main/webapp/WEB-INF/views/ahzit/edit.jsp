@@ -71,7 +71,7 @@
 			<p>아지트 이미지를 등록해주세요</p>
 				<div>
                      <input id="input-file" type="file" name="attachment" class="thumbnail">
-		              <img class="preview" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br>
+		              	<img class="preview" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br> 
                      <div class="row img-btns">
                          <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
                      </div>
@@ -86,9 +86,10 @@
 			<a type="button"  class="btn-edit-cancel" >취소</a>
             <button type="submit" >수정하기</button>
 		</div>	
-		
-		
 	</form>
+	
+	<%--아지트 삭제 --%>
+		<a href="/ahzit/delete?ahzitNo= ${ahzitDto.ahzitNo}" onclick="return checkout();"><i class="fa-solid fa-trash" style="color:red;"></i><span style="color:red">아지트 삭제</span></a>	
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -172,12 +173,16 @@ $(function(){
 	     history.back();
 	    });
 	  
-	//소모임프로필이 없으면 기본이미지로 대체
-      $(".ahzit-img").on("error", function() {
-         $(this).attr("src", "/images/bg_default.jpg");
+	  //인증샷이 없으면 기본 이미지 노출
+      $(".preview").on("error", function(){
+          $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
       });
-
 });
+	//소모임 삭제 확인창
+	function checkout(){
+	    var choice = confirm("정말 삭제하시겠습니까? 해당 아지트의 모든 정보가 삭제됩니다");
+	    return choice;
+	}
 </script>
 
 

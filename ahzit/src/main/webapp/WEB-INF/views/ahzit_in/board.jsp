@@ -131,7 +131,7 @@
 						소모임 가입일 : ${ahzitMemberDto.memberJoindate}<br>
 					</div>
 					<c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
-						<a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i></i>아지트 수정</a>					
+						<a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i></i><span>아지트 수정</span></a><br>
 					</c:if>
 				</div>
 				

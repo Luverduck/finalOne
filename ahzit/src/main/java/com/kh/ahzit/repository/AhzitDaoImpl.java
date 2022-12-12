@@ -54,9 +54,9 @@ public class AhzitDaoImpl implements AhzitDao {
 	
 	//소모임 삭제
   @Override
-	public boolean delete(AhzitDto ahzitDto) {
-		int count=sqlSession.delete("ahzit.delete", ahzitDto);
-		return count>0;	
+	public boolean delete(int ahzitNo) {
+		int count=sqlSession.delete("ahzit.delete", ahzitNo);
+		return count > 0;	
 
 	}
 
