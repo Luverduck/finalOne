@@ -104,5 +104,32 @@ public class AttachmentController {
 				.header("Content-Type", attachmentDto.getAttachmentType())
 				.body(resource);
 	}
+	
+	@GetMapping("/download")
+	public ResponseEntity<ByteArrayResource> download(@RequestParam int attachmentNo) throws IOException{
+		// 파일 탐색(DB)
+		AttachmentDto attachmentDto = attachmentDao.selectAttachment(attachmentNo);
+		if(attachmentDto == null) {//파일이 없으면
+			throw new TargetNotFoundException("존재하지 않는 파일");
+		}
+		
+		// 파일 생성 위치
+		File directory = new File("D:/upload/kh10f");
+		// 디렉토리 생성
+		directory.mkdirs();
+		
+		// 파일 불러오기
+		File target = new File(directory, String.valueOf(attachmentNo));
+		byte[] data = FileUtils.readFileToByteArray(target);
+		ByteArrayResource resource = new ByteArrayResource(data);
+		
+		// 응답 객체를 만들어 데이터를 전송
+		return ResponseEntity.ok()
+				.header("Content-Encoding", "UTF-8")
+				.header("Content-Length", String.valueOf(attachmentDto.getAttachmentSize()))
+				.header("Content-Disposition", "attachment; filename=" + attachmentDto.getAttachmentName())
+				.header("Content-Type", attachmentDto.getAttachmentType())
+				.body(resource);
+	}
 
 }
