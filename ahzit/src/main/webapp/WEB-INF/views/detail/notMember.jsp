@@ -5,7 +5,7 @@
     
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/ahzit_header.jsp">
-	<jsp:param value="소모임 게시글" name="title"/>
+	<jsp:param value="소모임 홈 - 비회원" name="title"/>
 </jsp:include>
 
 <style>
@@ -36,8 +36,8 @@
 		border-radius: 50%;
 	}
 	.chal-img {
-	width : 250px;
-	height : 250px;		
+		width : 250px;
+		height : 250px;		
 	}
 </style>
 
@@ -52,17 +52,14 @@
 			<br>
 			
 			<div class = "row">
-				<%-- 아지트 정보 --%>	
-				<c:forEach var = "list" items = "${attachmentList}">
-					<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" > 					
-				</c:forEach>			
-
+				<%-- 아지트 정보 --%>
+				 <img src="detail/download?AhzitNo=${ahzitDto.getAhzitNo()}" class="chal-img " onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" >
 				아지트 이름 : ${ahzitVO.getAhzitName()} <br>
 				아지트 소개 : ${ahzitVO.getAhzitInfo()}<br>
 				아지트 멤버 : ${ahzitVO.getAhzitHead()} 명<br>
 				아지트 종류 : ${ahzitVO.getAhzitSort()}<br>
 				아지트 리더 : ${ahzitVO.getAhzitLeader()}<br>
-
+				
 				<%-- 아지트 가입 폼 --%>
 				<form action="insert" method="post">	
 					<input type="hidden" name="ahzitNo"  value="${ahzitVO.getAhzitNo()}">
@@ -214,11 +211,6 @@
 <script type="text/javascript">
 	
 	$(function(){
-		
-		//소모임프로필이 없으면 기본이미지로 대체
-	      $(".ahzit-img").on("error", function() {
-	         $(this).attr("src", "/images/bg_default.jpg");
-	      });
 		
 		// 게시글 작성 비동기 처리
 		// - 게시글 작성 영역 클릭시 게시글 작성 입력창 열기
@@ -390,8 +382,15 @@
 					$("#ahzit-board-list").append(outer);
 				}
 			});
-		};		
+		};
 	});
+
+	   $(function() {
+	      //아지트 소모임이 없으면 기본 이미지로 대체
+	      $(".chal-img").on("error", function() {
+	         $(this).attr("src", "${pageContext.request.contextPath}/images/bg_default.jpg");
+	      });
+	   });
 	
 </script>
 
