@@ -75,15 +75,16 @@ public class AhzitUserController {
 		ahzitUserInterestDto.setUserInterestId(ahzitUserDto.getUserId());
 		
 	//	System.out.println("@@@@@@@@@@@@@@@@@@@@@" + ahzitUserInterestDto.getUserInterestId());
-		int userInterestNo = ahzitUserInterestDao.sequence();
-		ahzitUserInterestDto.setUserInterestNo(userInterestNo);
+	
 		System.out.println("ahzitUserInterestDto = " + ahzitUserInterestDto);
 		
 //		// 관심사 저장
-//		for( int i = 0; i < userInterestSort.length; i++) {	
-		ahzitUserInterestDto.setUserInterestSort(Arrays.toString(userInterestSort));
+		for( int i = 0; i < userInterestSort.length; i++) {	
+//		int userInterestNo = ahzitUserInterestDao.sequence();
+//		ahzitUserInterestDto.setUserInterestNo(userInterestNo);
+		ahzitUserInterestDto.setUserInterestSort(userInterestSort[i]);
 		ahzitUserInterestDao.insert(ahzitUserInterestDto);
-	
+	}	
 //		
 		return "redirect:joinSuccess";
 	}
@@ -137,38 +138,39 @@ public class AhzitUserController {
 
 	// 회원 정보 수정
 	@GetMapping("/edit")
-	public String edit(Model model, @RequestParam String userId, HttpSession session) {
+	public String edit(Model model, @RequestParam String userId) {
 		AhzitUserDto ahzitUserDto = ahzitUserDao.selectOne(userId);
 		model.addAttribute("ahzitUserDto", ahzitUserDto);
 		return "ahzitUser/edit";
 	}
 	
 	@PostMapping("/edit")
-	public String edit(@ModelAttribute AhzitUserDto ahzitUserDto, @ModelAttribute AhzitUserInterestDto ahzitUserInterestDto, RedirectAttributes attr, @RequestParam(value="userInterestSort[]") String[] userInterestSort) {
-		//System.out.println(ahzitUserDto.getUserId());
-		//System.out.println("11"+userInterestSort);
-		System.out.println(userInterestSort);
+	public String edit(@ModelAttribute AhzitUserDto ahzitUserDto, HttpSession session, @RequestParam String userInterestId,
+			@ModelAttribute AhzitUserInterestDto ahzitUserInterestDto, RedirectAttributes attr, @RequestParam(value="userInterestSort[]") String[] userInterestSort) {
+	//	System.out.println(userInterestSort);
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
 		boolean result = ahzitUserDao.update(ahzitUserDto);
-		System.out.println(ahzitUserDto.getUserId());
+	//	System.out.println("result  = " + result );
 		
+		ahzitUserInterestDto.setUserInterestId(loginId);
+	//	System.out.println(ahzitUserInterestDto);
 		
-		ahzitUserInterestDto.setUserInterestId(ahzitUserDto.getUserId());
-		System.out.println(ahzitUserInterestDto.getUserInterestId());
-		boolean result1 = ahzitUserInterestDao.edit(ahzitUserInterestDto);
-		
+		boolean result1 = ahzitUserInterestDao.delete(loginId);
+	
+	//	System.out.println("result1 = " + result1);
 		
 		if (result&&result1) {
-			System.out.println(ahzitUserDto.getUserId());
+		//	System.out.println(ahzitUserDto.getUserId());
 			attr.addAttribute("userId", ahzitUserDto.getUserId());
 			
 			
-			
 			for( int i = 0; i < userInterestSort.length; i++) {
-				 ahzitUserDao.update(ahzitUserDto);
-				 ahzitUserInterestDao.edit(ahzitUserInterestDto);}
+//				 ahzitUserDao.update(ahzitUserDto);
+				 ahzitUserInterestDto.setUserInterestSort(userInterestSort[i]);
+				ahzitUserInterestDao.insert(ahzitUserInterestDto);}
 			return "redirect:mypage";
 		} else {
-			return "redirect:mypage";
+			return "redirect:edit?error&userId=";
 		}
 	}
 	
