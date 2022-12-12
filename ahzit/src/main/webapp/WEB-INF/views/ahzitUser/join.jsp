@@ -332,41 +332,63 @@
 				이메일 
 				<i class="fa-solid fa-asterisk text-danger"></i>
 				</label>
-				<button class="send-btn btn btn-warning btn-lg rounded text-light" type="button" >인증번호 발송</button> 
+				
+				</div>
+				<button class="send-btn btn btn-warning btn-lg rounded text-light " type="button" >인증번호 발송</button> 
+		
 				<div class="valid-feedback">올바른 이메일 형식입니다.</div>
 				<div class="invalid-feedback">이메일 형식을 확인해주세요</div>
 				<div class="cert"></div>
 			</div>
 		</div>
-	</div>
+
             
 		
-		  <div class="row mt-4">
-		   	<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-	        <label>
-	            <input class="rounded" type="checkbox" name="userInterestSort" value="취미">취미
-	        </label>
-	        <label>
-	            <input class="rounded"  type="checkbox" name="userInterestSort" value="스터디">스터디
-	        </label>
-	        <label>
-	            <input  class="rounded"  type="checkbox" name="userInterestSort" value="일상">일상
-	        </label>
-	        <label>
-	            <input class="rounded"  type="checkbox" name="userInterestSort" value="팬클럽">팬클럽
-	        </label>
-	        <label>
-	            <input class="rounded"  type="checkbox" name="userInterestSort" value="음악">음악
-	        </label>
-	        <label>
-	            <input class="rounded"  type="checkbox" name="userInterestSort" value="스포츠">스포츠
-	        </label>
-	          <label>
-	            <input class="rounded"  type="checkbox" name="userInterestSort" value="여행">여행
-	        </label>
-	          <label>
-	            <input class="rounded"  type="checkbox" name="userInterestSort" value="맛집">맛집
-	        </label>
+	 <div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="p-4 text-dark bg-Light rounded">
+				<h3 class="text-center">관심사</h3>
+			</div>	
+		
+	            <input class=" form-check-input" type="checkbox" name="userInterestSort" value="취미" id ="sort1" >
+	            	<label class="form-check-label" for="sort1">
+    				취미
+  					</label>
+	        
+	            <input class="form-check-input"  type="checkbox" name="userInterestSort" value="스터디" id ="sort2" >
+					<label class="form-check-label" for="sort2">
+    				스터디
+  					</label>
+
+	            <input  class="form-check-input"   type="checkbox" name="userInterestSort" value="일상"  id ="sort3" >
+					<label class="form-check-label" for="sort3">
+	    			일상
+	  				</label>
+
+	            <input class="form-check-input"   type="checkbox" name="userInterestSort" value="팬클럽" id ="sort4" >
+					<label class="form-check-label" for="sort4">
+    				팬클럽
+  					</label>
+
+	            <input class="form-check-input"   type="checkbox" name="userInterestSort" value="음악" id ="sort5" >
+					<label class="form-check-label" for="sort5">
+    				음악
+  					</label>
+
+	            <input class="form-check-input"  type="checkbox" name="userInterestSort" value="스포츠" id ="sort6" >
+					<label class="form-check-label" for="sort6">
+    				스포츠
+  					</label>
+	
+	            <input class="form-check-input"  type="checkbox" name="userInterestSort" value="여행" id ="sort7" >
+     				<label class="form-check-label" for="sort7">
+    				여행
+  					</label>
+	  
+	            <input class="form-check-input"   type="checkbox" name="userInterestSort" value="맛집" id ="sort8" >
+					<label class="form-check-label" for="sort8">
+    				맛집
+  					</label>
 	        </div>
 	    </div>
 	    
