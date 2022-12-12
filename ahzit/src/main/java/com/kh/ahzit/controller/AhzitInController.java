@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.ahzit.entity.AhzitMemberDto;
+import com.kh.ahzit.entity.AttachmentDto;
 import com.kh.ahzit.repository.AhzitBoardDao;
 import com.kh.ahzit.repository.AhzitDao;
+
+import com.kh.ahzit.repository.AttachmentDao;
+import com.kh.ahzit.vo.AhzitBoardVO;
 
 @Controller
 @RequestMapping("/ahzit_in")
@@ -23,7 +27,10 @@ public class AhzitInController {
 	
 	@Autowired
 	private AhzitDao ahzitDao;
-	 
+	
+	@Autowired
+	private AttachmentDao attachmentDao;
+	
 	// 소모임 홈 화면 Mapping
 	@GetMapping("/{ahzitNo}")
 	public String home(@PathVariable int ahzitNo, HttpSession session, Model model) {
@@ -35,6 +42,11 @@ public class AhzitInController {
 		model.addAttribute("ahzitMemberDto", ahzitMemberDto);
 		//개설한 아지트 정보를 조회
 		model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));
+
+		
+		//입력받은 아지트번호로 연결되는 첨부파일 조회
+		model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
+
 		// 편의를 위해 ahzitNo를 model에 추가
 		model.addAttribute("ahzitNo", ahzitNo);
 		// 소모임 홈 화면(board.jsp)로 연결
