@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ahzit.entity.AhzitUserDto;
-import com.kh.ahzit.entity.FreeboardDto;
+import com.kh.ahzit.entity.AhzitUserInterestDto;
 
 @Repository
 public class AhzitUserDaoImpl implements AhzitUserDao{
@@ -27,7 +27,6 @@ public class AhzitUserDaoImpl implements AhzitUserDao{
 		String enc = encoder.encode(pw); // 암호화 시키고
 		ahzitUserDto.setUserPw(enc); // 암호화된 비밀번호으로 Dto 에 넣어서
 		sqlSession.insert("ahzitUser.insert", ahzitUserDto); // 만들어둔 insert 문에 작성
-
 	}
 	
 	//로그인

@@ -40,8 +40,9 @@
 					//button을 클릭하면 input에 있는 인증번호와 이메일을 사용해서 검사요청
 					button.click(function(){
 						var serial = input.val();
+						
 						if(serial.length != 6) return;
-						alert("인증이 완료되었습니다.");
+						
 					//	alert(serial);
 						$.ajax({
 							url:"${pageContext.request.contextPath}/async3",
@@ -56,6 +57,7 @@
 								//결과를 외부에 저장하고 더이상 인증버튼을 못누르게 해야한다
 								judge.emailValid = resp;
 								btn.prop("disabled", true);
+								alert("인증이 완료되었습니다.");
 							}
 						});
 					});
@@ -78,6 +80,7 @@
 
 
 <form action="join" method="post" >
+  	
 		<div>
 			아이디 : <input name="userId" placeholder="아이디" type="text" required>
 		</div>
@@ -89,12 +92,40 @@
 		<div>
 			닉네임 : <input name="userNick" placeholder="닉네임" type="text" required>
 		</div>
-		
+		<input type="hidden" name="certificationId" value="${certificationId}">	
 		<div>
 			이메일 : <input type="text" name="userEmail" placeholder="이메일" required>
 			<button class="send-btn" type="button" >인증하기</button> 
 			<div class="cert"></div>
 		</div> 
+		
+		<div class="row">
+	        <label>
+	            <input type="checkbox" name="userInterestSort" value="취미">취미
+	        </label>
+	        <label>
+	            <input type="checkbox" name="userInterestSort" value="스터디">스터디
+	        </label>
+	        <label>
+	            <input type="checkbox" name="userInterestSort" value="일상">일상
+	        </label>
+	        <label>
+	            <input type="checkbox" name="userInterestSort" value="팬클럽">팬클럽
+	        </label>
+	        <label>
+	            <input type="checkbox" name="userInterestSort" value="음악">음악
+	        </label>
+	        <label>
+	            <input type="checkbox" name="userInterestSort" value="스포츠">스포츠
+	        </label>
+	          <label>
+	            <input type="checkbox" name="userInterestSort" value="여행">여행
+	        </label>
+	          <label>
+	            <input type="checkbox" name="userInterestSort" value="맛집">맛집
+	        </label>
+	        
+	    </div>
 		
 	<button type="submit">가입</button>
 </form>

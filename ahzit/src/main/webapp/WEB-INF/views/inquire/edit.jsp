@@ -19,7 +19,9 @@
 		<div>
 			내용 : <input type = "text" name = "inquireContent" value = "${inquireDto.inquireContent}">
 		</div>
-		
+		<div>
+			첨부파일 : <input type = "file" name = "inquireAttachment" multiple>
+		</div>
 		<div>
 			<button type = "submit">수정</button>
 		</div>

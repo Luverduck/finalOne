@@ -23,8 +23,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.ahzit.component.RandomGenerator;
 import com.kh.ahzit.constant.SessionConstant;
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.entity.AhzitUserInterestDto;
 import com.kh.ahzit.entity.CertificationDto;
 import com.kh.ahzit.repository.AhzitUserDao;
+import com.kh.ahzit.repository.AhzitUserInterestDao;
 import com.kh.ahzit.repository.CertificationDao;
 
 @Controller
@@ -49,6 +51,8 @@ public class AhzitUserController {
 	@Autowired
 	private AhzitUserDao ahzitUserDao;
 	
+	@Autowired
+	private AhzitUserInterestDao ahzitUserInterestDao;
 	
 
 	// 회원가입
@@ -58,11 +62,19 @@ public class AhzitUserController {
 	}
 
 	@PostMapping("/join")
-	public String join(@ModelAttribute AhzitUserDto ahzitUserDto) {
+	public String join(@ModelAttribute AhzitUserDto ahzitUserDto,@ModelAttribute AhzitUserInterestDto ahzitUserInterestDto) {
+		//회원 정보 회원 테이블 저장
 		ahzitUserDao.join(ahzitUserDto);
+		//입력한 회원아이디 추출
+		ahzitUserInterestDto.setUserInterestId(ahzitUserDto.getUserId());
+		// 관심사번호 생성
+		int userInterestNo = ahzitUserInterestDao.sequence();
+		// 추출한 아이디 관심사 테이블에 입력
+		ahzitUserInterestDto.setUserInterestNo(userInterestNo);
+		// 관심사 저장
+		ahzitUserInterestDao.insert(ahzitUserInterestDto);
 		return "redirect:joinSuccess";
 	}
-	
 	// 가입완료
 	@GetMapping("/joinSuccess")
 	public String joinSuccess() {
@@ -84,6 +96,7 @@ public class AhzitUserController {
 		// 끝
 		if (ahzitUserDao.login(ahzitUserDto)) {
 			session.setAttribute(SessionConstant.ID, ahzitUserDto.getUserId());
+			session.setAttribute(SessionConstant.GRADE, findDto.getUserGrade());
 		//로그인 시간 갱신
 		ahzitUserDao.updateLoginTime(findDto.getUserId());
 			return "redirect:/";
@@ -96,6 +109,7 @@ public class AhzitUserController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute(SessionConstant.ID);
+		session.removeAttribute(SessionConstant.GRADE);
 		return "redirect:login";
 	}
 	
