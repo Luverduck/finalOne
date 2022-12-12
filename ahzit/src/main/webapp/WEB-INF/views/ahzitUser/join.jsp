@@ -40,7 +40,7 @@
 					//button을 클릭하면 input에 있는 인증번호와 이메일을 사용해서 검사요청
 					button.click(function(){
 						var serial = input.val();
-						
+						var email = $("[name=userEmail]").val();
 						if(serial.length != 6) return;
 						
 					//	alert(serial);
@@ -52,12 +52,18 @@
 								certificationKey:serial
 							},
 							success:function(resp){
-								//console.log(resp);
+							console.log(resp);
+							if(resp == false){
+								alert("인증번호를 다시 확인해주세요");
+							}
 								//resp가 true면 이메일 인증이 성공한 것
 								//결과를 외부에 저장하고 더이상 인증버튼을 못누르게 해야한다
+							
+								else{
 								judge.emailValid = resp;
 								btn.prop("disabled", true);
 								alert("인증이 완료되었습니다.");
+								}
 							}
 						});
 					});
@@ -98,7 +104,8 @@
 		//데이터 전송이 완료되면 출력되는 메시지
 		 
 		        success:function(data){
-		            alert("완료!");
+		            alert("가입이 완료되었습니다.");
+		            window.location = ("${pageContext.request.contextPath}/ahzitUser/login");
 		        },
 		    
 		    }) 

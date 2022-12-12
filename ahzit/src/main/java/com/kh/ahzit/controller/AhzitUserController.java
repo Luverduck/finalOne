@@ -73,7 +73,7 @@ public class AhzitUserController {
 		System.out.println("ahzitUserInterestDto = " + ahzitUserInterestDto);
 		//입력한 회원아이디 추출
 		ahzitUserInterestDto.setUserInterestId(ahzitUserDto.getUserId());
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@" + ahzitUserInterestDto.getUserInterestId());
+	//	System.out.println("@@@@@@@@@@@@@@@@@@@@@" + ahzitUserInterestDto.getUserInterestId());
 
 		
 		// 관심사 저장
@@ -313,16 +313,16 @@ public class AhzitUserController {
 					CertificationDto certificationDto = CertificationDto.builder().certificationId(userEmail).certificationKey(serial).build();
 					certificationDao.insert(certificationDto);
 					
-					map.put("ddd", "성공");
+					map.put("message", "확인");
 					//model.addAttribute("userId", userId);
 					System.out.println("성공");
 					return "redirect:checkPw";
 					}
 				else {
-					map.put("ddd", "실패");
+					map.put("message", "아이디 또는 이메일을 다시 확인해주세요");
 					System.out.println("실패");
 					model.addAttribute("ddd", checkPw);
-					System.out.println("실패시 " + checkPw);
+				//	System.out.println("실패시 " + checkPw);
 					return map;
 				}
 		}

@@ -11,13 +11,10 @@
 
 <form action="checkPw" method="post" autocomplete="off">
 
-checkPw : ${checkPw}
-
 	<div>
 		<div>
 			<h1>비밀번호 찾기</h1>
 		</div>
-
 		<div>
 			<label>아이디 : 
 				<input name="userId" type="text" required placeholder="아이디">
@@ -28,7 +25,6 @@ checkPw : ${checkPw}
 			<button class="send-btn" type="submit">인증하기</button>
 			<div class="cert"></div>
 		</div>
-
 	
 	</div>
 		
@@ -54,27 +50,26 @@ checkPw : ${checkPw}
 			
 			
 			if(email.length == 0) return;
-			
-			
 			var btn = $(this);
 			btn.prop("disabled", true);
 
 			$.ajax({
 				url:"/ahzitUser/checkPw",
-				method:"post",
+				method:"POST",
 				data:{
 					userEmail:email,
 					userId:userId
 					},
 				success:function(map) {
 					
-					if(map.ddd == "실패"){
-						alert(map.ddd);
+					if(map.message == "아이디 또는 이메일을 다시 확인해주세요"){
+						alert(map.message);
+						btn.prop("disabled", false);
 						return false;
 					}
 					
-					var checkPw =${checkPw}
-					console.log(checkPw);
+				
+					
 					//성공했다면 메일은 전송되었다고 볼 수 있다
 					console.log("메일 전송 완료");
 					btn.prop("disabled", false);
@@ -89,10 +84,12 @@ checkPw : ${checkPw}
 					//button을 클릭하면 input에 있는 인증번호와 이메일을 사용해서 검사요청
 					button.click(function(){
 						var serial = input.val();
+					
 						var userId =  $("[name=userId]").val();
 						var email = $("[name=userEmail]").val();
-						if(serial.length != 6) return;
+						var email = $("[name=userEmail]").val();
 						
+						if(serial.length != 6) return;
 					//	alert(serial);
 						$.ajax({
 							url:"${pageContext.request.contextPath}/async3",
@@ -102,13 +99,18 @@ checkPw : ${checkPw}
 								certificationKey:serial
 							},
 							success:function(resp){
-								//console.log(resp);
+								console.log(resp);
+								if(resp == false){
+									alert("인증번호를 다시 확인해주세요");
+								}
+								else{
 								//resp가 true면 이메일 인증이 성공한 것
 								//결과를 외부에 저장하고 더이상 인증버튼을 못누르게 해야한다
 								alert("인증이 완료되었습니다.");
-							window.open("${pageContext.request.contextPath}/ahzitUser/checkPwSuccess?userId=" + userId);
-								judge.emailValid = resp;
-								btn.prop("disabled", true);
+							   window.location = ("${pageContext.request.contextPath}/ahzitUser/checkPwSuccess?userId=" + userId);
+							judge.emailValid = resp;
+							btn.prop("disabled", true);
+							}
 							}
 						});
 					});

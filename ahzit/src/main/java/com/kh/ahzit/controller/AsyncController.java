@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ahzit.entity.CertificationDto;
+import com.kh.ahzit.repository.CertificationDao;
 import com.kh.ahzit.service.EmailService;
 
 @Controller
@@ -16,6 +17,10 @@ public class AsyncController {
 	
 	@Autowired
 	private EmailService emailService;
+	@Autowired
+	private CertificationDao certificationDao;
+	
+
 
 	@RequestMapping("/async1")
 	public String async1() {
@@ -34,8 +39,15 @@ public class AsyncController {
 	@PostMapping("/async3")
 	@ResponseBody
 	public boolean async3(@ModelAttribute CertificationDto certificationDto) {
-		System.out.println(certificationDto);
-		// System.out.println("async3 확인");
+	//CertificationDto certificationDto1 = certificationDao.selectOne(certificationId);
+	//System.out.println(certificationDto1);
+	//String key = certificationDto1.getCertificationKey();
+	
+	//System.out.println(key);
+	//System.out.println(certificationKey);
+	//boolean passwordMatch = key.equals(certificationKey);
+	//System.out.println(passwordMatch);
+
 		return emailService.checkCert(certificationDto);
 	}
 }
