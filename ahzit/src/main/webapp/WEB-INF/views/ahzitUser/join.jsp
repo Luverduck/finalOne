@@ -5,9 +5,147 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="회원 가입" name="title"/>
 </jsp:include>
+<style>
+.NNNNN{
+        border: 1px;
+         color: red;
+    }
+</style>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script>
+ <script>
+        $(function(){
+        	$("[name=userId]").next().next().next().next().hide();
+        	
+            //상태 객체
+            var validChecker = {
+                userIdValid : false, idRegex : /^[a-z][a-z0-9]{7,19}$/,
+                userPwValid : false, passwordRegex : /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$])[a-zA-Z0-9!@#$]{8,16}$/,
+                userPwReValid : false,
+                userInterestSort : false,
+                userNickValid : false, nicknameRegex : /^[가-힣0-9]{2,10}$/,
+                userEmailValid : false, userEmailRegex : /^[A-Za-z0-9]{6,30}@[0-9a-z]{4,252}.[a-z]{2,3}$/,
+                isAllValid : function(){
+                    return this.userIdValid 
+                                && this.userPwValid 
+                                && this.userPwReValid 
+                                && this.userNickValid
+                                && this.userInterestSort
+                                && this.userEmailValid;
+                }
+            };
+            
+            $(".join").submit(function(){
+    	        if(!validChecker.isAllValid()){
+    	            return false;
+    	        }
+    	        return true;
+    	    });
+
+			    $("[name=userId]").blur(function(){
+	                
+			    var name = $(this).attr("name");
+                var value = $(this).val();
+                var regex = validChecker.idRegex;
+                var judge = regex.test(value);
+          
+                
+             //   $(this).removeClass("is-valid is-invalid");
+                if(judge) {
+                    //+비동기통신(중복검사)
+                    validChecker.idValid = true;
+                    $(this).removeClass("is-valid is-invalid").addClass("is-valid");
+                    var that = this;
+                    $.ajax({
+    	                url: "${pageContext.request.contextPath}/rest/ahzitUser/userId",
+    	                method: "post",
+    	                data: {
+    	                	value : value
+    	                },
+    	                success:function(resp){
+    	                    if(resp == "NNNNY"){
+    	                        validChecker.userIdValid = true;
+    	                        $(".NNNNN").hide();
+    	                    }
+    	                    else{
+    	                        validChecker.userIdValid = false;
+    	                        $(that).removeClass("is-valid is-invalid");
+    	                        $(".NNNNN").show();
+    	                    }
+    	                }
+    	            });
+                }
+                else {
+                    validChecker.userIdValid = false;
+                    $(this).removeClass("is-valid is-invalid").addClass("is-invalid");
+                }
+            });
+         
+
+            $("[name=userPw]").blur(function(){
+                var value = $(this).val();
+                var regex = validChecker.passwordRegex;
+                if(regex.test(value)) {
+                    validChecker.userPwValid = true;
+                    $(this).removeClass("is-valid is-invalid").addClass("is-valid");
+                }
+                else {
+                    validChecker.userPwValid = false;
+                    $(this).removeClass("is-valid is-invalid").addClass("is-invalid");
+                }
+            });
+            $("[name=userNick]").blur(function(){
+                var value = $(this).val();
+                var regex = validChecker.nicknameRegex;
+                if(regex.test(value)) {
+                    validChecker.userNickValid = true;
+                    $(this).removeClass("is-valid is-invalid").addClass("is-valid");
+                }
+                else {
+                    validChecker.userNickValid = false;
+                    $(this).removeClass("is-valid is-invalid").addClass("is-invalid");
+                }
+            });
+            $("[name=userEmail]").blur(function(){
+                var value = $(this).val();
+                var regex = validChecker.userEmailRegex;
+                if(regex.test(value)) {
+                    validChecker.userEmailValid = true;
+                    $(this).removeClass("is-valid is-invalid").addClass("is-valid");
+                }
+                else {
+                    validChecker.userEmailValid = false;
+                    $(this).removeClass("is-valid is-invalid").addClass("is-invalid");
+                }
+            });
+            
+            $("#userPw-re").blur(function(){
+                var value1 = $(this).val();
+                var value2 = $("[name=userPw]").val();
+
+                if(value1 == value2){
+                    validChecker.userPwReValid = true;
+                    $(this).removeClass("is-valid is-invalid ").addClass("is-valid");
+                }
+                else {
+                    validChecker.userPwReValid = false;
+                    $(this).removeClass("is-valid is-invalid").addClass("is-invalid");
+                }
+            });
+
+            $(".join").submit(function(e){
+                e.preventDefault();
+
+                $(this).find("input, textarea, select, checkbox").blur();//모든 입력창
+                //$(this).find("[name]").blur();//name을 가진 입력창
+
+                //console.log(validChecker.isAllValid());
+                if(validChecker.isAllValid()){
+                    this.submit();//전송
+                }
+            });
+            
+        });
 	$(function(){
 		var judge = {
 			emailValid : false,
@@ -34,8 +172,8 @@
 					//(1) 만들든가 (2) 숨겨놨다 보여주든가
 					
 					var div = $("<div>");
-					var input = $("<input>");
-					var button = $("<button>").attr("type", "button").text("인증하기");
+					var input = $("<input>").attr("class" , "form-control rounded");
+					var button = $("<button>").attr("type", "button").attr("class", "btn btn-warning btn-lg rounded text-light").text("확인");
 					
 					//button을 클릭하면 input에 있는 인증번호와 이메일을 사용해서 검사요청
 					button.click(function(){
@@ -111,59 +249,133 @@
 		    }) 
 		  }
 	
-</script>  
-<h1>회원가입</h1>
+</script>
+
 
 
 <form action="join" method="post" >
   	
-		<div>
-			아이디 : <input name="userId" placeholder="아이디" type="text" required>
+  	 <div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="p-4 text-dark bg-Light rounded">
+				<h1 class="text-center">회원 가입</h1>
+			</div>
+		</div>
+	</div>
+  	
+  	
+  	<div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="form-floating">
+				<input type="text" name="userId" class="form-control rounded" placeholder="아이디" >
+                	<label>
+						아이디
+						<i class="fa-solid fa-asterisk text-danger"></i>
+					</label>
+				<div class="valid-feedback">올바른 아이디 형식입니다</div>
+				<div class="invalid-feedback">영문 소문자로 시작하고 숫자가 포함된 8~20자로 작성하세요</div>
+				<div class="NNNNN">이미 사용 중인 아이디입니다.</div>
+			</div>
+		</div>
+	 </div>
+            
+		
+	<div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="form-floating">
+				<input type="text" name="userPw" class="form-control rounded" placeholder="비밀번호" >
+					<label>
+					비밀번호
+ 					<i class="fa-solid fa-asterisk text-danger"></i>
+					</label>
+					<div class="valid-feedback">올바른 비밀번호 형식입니다</div>
+					<div class="invalid-feedback">비밀번호는 특수문자, 숫자, 영문 대소문자가 반드시 1개 이상 포함된 8~16자로 작성하세요</div>
+				</div>
+			</div>
 		</div>
 		
-		<div>
-			비밀번호 : <input name="userPw" placeholder="비밀번호"  type="password" required>
+
+	 <div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="form-floating">
+				<input type="text" id="userPw-re" class="form-control rounded" placeholder="비밀번호 확인" >
+					<label>
+ 					비밀번호 확인
+					<i class="fa-solid fa-asterisk text-danger"></i>
+					</label>
+					<div class="valid-feedback">비밀번호가 일치합니다</div>
+					<div class="invalid-feedback">비밀번호가 일치하지 않습니다</div>
+			</div>
 		</div>
-		
-		<div>
-			닉네임 : <input name="userNick" placeholder="닉네임" type="text" required>
+	</div>
+    
+	<div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="form-floating">
+    			<input type="text" name="userNick" class="form-control rounded" placeholder="닉네임" >
+              		<label>
+                    닉네임
+                    <i class="fa-solid fa-asterisk text-danger"></i>
+                    </label>
+                    <div class="valid-feedback">멋진 닉네임입니다!</div>
+                    <div class="invalid-feedback">닉네임은 한글 3~10글자로 작성하세요</div>
+			</div>
 		</div>
-		<input type="hidden" name="certificationId" value="${certificationId}">	
-		<div>
-			이메일 : <input type="text" name="userEmail" placeholder="이메일" >
-			<button class="send-btn" type="button" >인증하기</button> 
-			<div class="cert"></div>
-		</div> 
+ 	</div>
 		
-		<div class="row">
+	<input type="hidden" name="certificationId" value="${certificationId}">	
+	<div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="form-floating">
+				<input type="text" name="userEmail" class="form-control rounded" placeholder="이메일" >
+				<label>
+				이메일 
+				<i class="fa-solid fa-asterisk text-danger"></i>
+				</label>
+				<button class="send-btn btn btn-warning btn-lg rounded text-light" type="button" >인증번호 발송</button> 
+				<div class="valid-feedback">올바른 이메일 형식입니다.</div>
+				<div class="invalid-feedback">이메일 형식을 확인해주세요</div>
+				<div class="cert"></div>
+			</div>
+		</div>
+	</div>
+            
+		
+		  <div class="row mt-4">
+		   	<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 	        <label>
-	            <input type="checkbox" name="userInterestSort" value="취미">취미
+	            <input class="rounded" type="checkbox" name="userInterestSort" value="취미">취미
 	        </label>
 	        <label>
-	            <input type="checkbox" name="userInterestSort" value="스터디">스터디
+	            <input class="rounded"  type="checkbox" name="userInterestSort" value="스터디">스터디
 	        </label>
 	        <label>
-	            <input type="checkbox" name="userInterestSort" value="일상">일상
+	            <input  class="rounded"  type="checkbox" name="userInterestSort" value="일상">일상
 	        </label>
 	        <label>
-	            <input type="checkbox" name="userInterestSort" value="팬클럽">팬클럽
+	            <input class="rounded"  type="checkbox" name="userInterestSort" value="팬클럽">팬클럽
 	        </label>
 	        <label>
-	            <input type="checkbox" name="userInterestSort" value="음악">음악
+	            <input class="rounded"  type="checkbox" name="userInterestSort" value="음악">음악
 	        </label>
 	        <label>
-	            <input type="checkbox" name="userInterestSort" value="스포츠">스포츠
+	            <input class="rounded"  type="checkbox" name="userInterestSort" value="스포츠">스포츠
 	        </label>
 	          <label>
-	            <input type="checkbox" name="userInterestSort" value="여행">여행
+	            <input class="rounded"  type="checkbox" name="userInterestSort" value="여행">여행
 	        </label>
 	          <label>
-	            <input type="checkbox" name="userInterestSort" value="맛집">맛집
+	            <input class="rounded"  type="checkbox" name="userInterestSort" value="맛집">맛집
 	        </label>
-	        
+	        </div>
 	    </div>
-		
-	<input type="button" value="button"  onclick="submitChk();"/>
+	    
+	<div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+		<input class="btn btn-warning w-100 btn-lg rounded text-light" type="button" value="가입하기"  onclick="submitChk();"/>
+		 </div>
+	</div>
+              
 </form>
 
 <%-- footer --%>
