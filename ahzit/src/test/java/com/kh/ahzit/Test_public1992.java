@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.kh.ahzit.entity.AhzitDto;
+import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.repository.AhzitDao;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,9 @@ public class Test_public1992 {
 	
 	@Autowired
 	private AhzitDao ahzitDao;
+	
+	@Autowired
+	
 
 	//삭제
 	//ahzitDao.delete(AhzitDto.builder().ahzitNo(4).ahzitLeader("tester111").build());
@@ -36,10 +40,10 @@ public class Test_public1992 {
 //												.ahzitIsPublic("Y")
 //												.build());
 	
-//	@Test
-//	public void test() {
-//		System.out.println(ahzitDao.delete(AhzitDto.builder().ahzitNo(4).ahzitLeader("tester111").build()));
-//		
-//	}
+	@Test
+	public void test() {
+		sqlSession.update("ahzitMember.updateMember", AhzitMemberDto.builder().memberNo(112).memberNick("수정테스트").build());
+		
+	}
 
 }

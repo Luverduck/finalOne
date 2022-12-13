@@ -5,16 +5,21 @@
   <mapper namespace="ahzitMember">
  
 	<insert id="insert" parameterType="AhzitMemberDto" >
-  		insert into ahzitMember(
-  			member_no, member_ahzit_no, member_id, member_joindate, member_nick
+  		insert into ahzit_member(
+  			member_no, member_ahzit_no, member_id, member_joindate, member_nick )
   		values (
   			ahzit_member_seq.nextval, #{memberAhzitNo}, #{memberId}, sysdate, #{memberNick} )
    </insert>
    
-   <update id="edit" parameterType="AhzitMemberDto">
+   <update id="update" parameterType="AhzitMemberDto">
    		update ahzit
    			set
    		ahzit_head = ahzit_head + 1 where ahzit_no = #{ahzitNo}
+   </update>
+   
+   <!-- 소모임 회원이 자기 프로필(닉네임)을 수정하는 메소드 -->
+   <update id="updateMember" parameterType="AhzitMemberDto">
+   		update ahzit_member set member_nick = #{memberNick} where member_no = #{memberNo}
    </update>
    
 
