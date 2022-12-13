@@ -62,7 +62,26 @@
 				
 				<%-- 가운데 내용 --%>
 				<div class = "col col-6">
-					첨부파일 관리
+						<h2>첨부 모아보기</h2>
+						<div>
+							<form action="attach" method="get" enctype="multipart/form-data">
+								<input type="file" name="attachment" multiple>
+								<button type="submit">첨부하기</button>
+							</form>
+						</div>
+						
+						
+				<c:if test="${not list.isEmpty()}">
+					<ul>
+						<c:forEach var="attachmentDto" items="${attachmentList}">
+							<li>${attachmentDto.attachmentName} <br>
+							(${attachmentDto.attachmentSize} bytes) &nbsp; · &nbsp;
+							 ${attachmentDto.attachmentDate} &nbsp; &nbsp;
+							<a href="/attachment/download?attachmentNo=${attachmentDto.attachmentNo}"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+							</li>
+						</c:forEach>
+					</ul>
+				</c:if>
 				</div>
 				
 				<%-- 오른쪽 사이드바 --%>
