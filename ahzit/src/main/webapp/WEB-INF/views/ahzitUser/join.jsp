@@ -323,15 +323,15 @@
 		</div>
  	</div>
 		
-	<input type="hidden" name="certificationId" value="${certificationId}">	
-	<div class="row mt-4">
-		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<div class="form-floating">
-				<input type="text" name="userEmail" class="form-control rounded" placeholder="이메일" >
-				<label>
-				이메일 
-				<i class="fa-solid fa-asterisk text-danger"></i>
-				</label>
+		<input type="hidden" name="certificationId" value="${certificationId}">	
+		<div class="row mt-4">
+			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+				<div class="form-floating">
+					<input type="text" name="userEmail" class="form-control rounded" placeholder="이메일" >
+					<label>
+					이메일 
+					<i class="fa-solid fa-asterisk text-danger"></i>
+					</label>
 				
 				</div>
 				<button class="send-btn btn btn-warning btn-lg rounded text-light " type="button" >인증번호 발송</button> 
@@ -402,3 +402,16 @@
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+
+<script>
+$(document).ready(function(){
+	$("input[type='checkbox']").on("click", function(){
+		let count = $("input:checked[type='checkbox']").length;
+		if(count >3){
+			$(this).prop("checked", false);
+			alert("관심사는 3개까지만 선택할 수 있습니다")
+		}
+	});
+});
+
+</script>

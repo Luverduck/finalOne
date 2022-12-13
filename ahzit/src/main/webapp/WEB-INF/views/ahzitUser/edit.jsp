@@ -106,6 +106,18 @@
 		  }
 	
 </script>  
+<script>
+$(document).ready(function(){
+	$("input[type='checkbox']").on("click", function(){
+		let count = $("input:checked[type='checkbox']").length;
+		if(count >3){
+			$(this).prop("checked", false);
+			alert("관심사는 3개까지만 선택할 수 있습니다")
+		}
+	});
+});
+
+</script>
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
