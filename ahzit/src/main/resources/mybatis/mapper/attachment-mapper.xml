@@ -16,6 +16,12 @@
 		insert into attachment(attachment_no, attachment_name, attachment_type, attachment_size) values(#{attachmentNo}, #{attachmentName}, #{attachmentType}, #{attachmentSize})
 	</insert>
 	
+	<!-- 첨부파일 목록 -->
+	<select id="selectAttachmentList" resultType="AttachmentDto">
+		select * from attachment order by attachment_no desc 
+	</select>
+	
+	
 	<!-- 첨부파일 조회 -->
 	<select id = "selectAttachment" parameterType = "int" resultType = "AttachmentDto">
 		select * from attachment where attachment_no = #{attachmentNo}

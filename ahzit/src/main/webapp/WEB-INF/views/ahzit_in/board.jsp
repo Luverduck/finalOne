@@ -124,7 +124,7 @@
    <div class = "row">
          
       <%-- 왼쪽 사이드바 --%>
-      <div class = "col col-3" style="background-color: green;">
+      <div class = "col col-3" style="background-color: #EDEEF0;">
          <h1>왼쪽 사이드바</h1> 
       
          <br>
@@ -134,10 +134,10 @@
 			<c:if test="${attachmentList.isEmpty()}"> <%--미설정시 기본 프로필 --%>
 				 <img src = "/images/bg_default.jpg" class="ahzit-img">
 			</c:if>
-            <c:forEach var = "list" items = "${attachmentList}">  <%--설정한 프로필 --%>
+			<c:forEach var = "list" items = "${attachmentList}">  <%--설정한 프로필--%>
               <img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img"  > 					
-             </c:forEach>	
-            아지트 이름 : ${ahzitVO.getAhzitName()} <br>
+             </c:forEach>
+         
             아지트 소개 : ${ahzitVO.getAhzitInfo()}<br>
             아지트 멤버 : ${ahzitVO.getAhzitHead()} 명<br>
             아지트 종류 : ${ahzitVO.getAhzitSort()}<br>
@@ -256,7 +256,7 @@
       </div>
             
       <%-- 오른쪽 사이드바 --%>
-      <div class = "col-3" style="background-color: green;">
+      <div class = "col-3" style="background-color: #EDEEF0;">
 
          <%-- 공지사항 목록 --%>
          <div>

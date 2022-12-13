@@ -105,6 +105,7 @@ public class AttachmentController {
 				.body(resource);
 	}
 	
+	
 	@GetMapping("/download")
 	public ResponseEntity<ByteArrayResource> download(@RequestParam int attachmentNo) throws IOException{
 		// 파일 탐색(DB)
@@ -114,7 +115,7 @@ public class AttachmentController {
 		}
 		
 		// 파일 생성 위치
-		File directory = new File("D:/upload/kh10f");
+		File directory = new File("D:/upload/kh10f/ahzit");
 		// 디렉토리 생성
 		directory.mkdirs();
 		

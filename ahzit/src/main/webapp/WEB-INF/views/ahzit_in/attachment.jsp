@@ -11,6 +11,9 @@
 	body {
 		background-color: rgba(230, 230, 230, 100);
 	}
+	a {
+	 text-decoration : none;
+	}
 </style>
 
 <div class = "container-fluid mt-3">
@@ -21,13 +24,20 @@
 			<div class = "row">
 			
 				<%-- 왼쪽 사이드바 --%>
-				<div class = "col col-3" style="background-color: green;">
+				<div class = "col col-3" style="background-color: #EDEEF0;">
 					<h1>왼쪽 사이드바</h1> 
 				
 					<br>
 					
 					<div class = "row">
 						<%-- 아지트 정보 --%>
+						<%--아지트 프로필 사진 --%>
+						<c:if test="${attachmentList.isEmpty()}"> <%--미설정시 기본 프로필 --%>
+							 <img src = "/images/bg_default.jpg" class="ahzit-img">
+						</c:if>
+						<c:forEach var = "list" items = "${attachmentList}">  <%--설정한 프로필--%>
+			              <img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img"  > 					
+			             </c:forEach>
 						아지트 이름 : ${ahzitVO.getAhzitName()} <br>
 						아지트 소개 : ${ahzitVO.getAhzitInfo()}<br>
 						아지트 멤버 : ${ahzitVO.getAhzitHead()} 명<br>
@@ -64,28 +74,32 @@
 				<div class = "col col-6">
 						<h2>첨부 모아보기</h2>
 						<div>
-							<form action="attach" method="get" enctype="multipart/form-data">
-								<input type="file" name="attachment" multiple>
-								<button type="submit">첨부하기</button>
+							<form action="attachment" method="post" enctype="multipart/form-data">
+								<input type="file" name="attachment" >
+								<button type="submit">업로드</button>
 							</form>
+							
+							
 						</div>
 						
 						
 				<c:if test="${not list.isEmpty()}">
+				<c:forEach var="attachmentDto" items="${list}">
 					<ul>
-						<c:forEach var="attachmentDto" items="${attachmentList}">
-							<li>${attachmentDto.attachmentName} <br>
-							(${attachmentDto.attachmentSize} bytes) &nbsp; · &nbsp;
-							 ${attachmentDto.attachmentDate} &nbsp; &nbsp;
-							<a href="/attachment/download?attachmentNo=${attachmentDto.attachmentNo}"><i class="fa-solid fa-ellipsis-vertical"></i></a>
-							</li>
-						</c:forEach>
+						<a href="/attachment/download?attachmentNo=${attachmentDto.attachmentNo}">
+								<!-- <i class="fa-solid fa-file fa-3x" ></i> -->
+								<li>${attachmentDto.attachmentName} <br>
+								(${attachmentDto.attachmentSize} bytes) &nbsp; · &nbsp;
+								 ${attachmentDto.attachmentDate} &nbsp; · &nbsp; ${ahzitMemberDto.memberId}
+								</li>
+						</a>
 					</ul>
+				</c:forEach>
 				</c:if>
 				</div>
 				
 				<%-- 오른쪽 사이드바 --%>
-				<div class = "col-3" style="background-color: green;">
+				<div class = "col-3" style="background-color: #EDEEF0;">
 					
 					오른쪽
 				</div>

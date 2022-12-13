@@ -13,6 +13,9 @@ public interface AttachmentDao {
 	// 추상 메소드 - 첨부파일 등록
 	public void insertAttachment(AttachmentDto attachmentDto);
 	
+	// 추상 메소드 - 첨부파일 목록
+	public List<AttachmentDto> selectList();
+	
 	// 추상 메소드 - 첨부파일 조회
 	public AttachmentDto selectAttachment(int attachmentNo);
 	

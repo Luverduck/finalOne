@@ -29,6 +29,12 @@ public class AttachmentDaoImpl implements AttachmentDao {
 		sqlSession.insert("attachment.insertAttachment", attachmentDto);
 	}
 	
+	// 추상 메소드 오버라이딩 - 첨부파일 목록
+	@Override
+	public List<AttachmentDto> selectList() {
+		return sqlSession.selectList("attachment.selectAttachmentList");
+	}	
+	
 	// 추상 메소드 오버라이딩 - 첨부파일 조회
 	@Override
 	public AttachmentDto selectAttachment(int attachmentNo) {
@@ -106,5 +112,7 @@ public class AttachmentDaoImpl implements AttachmentDao {
 	// 해당 첨부파일 번호로 자유게시글 첨부파일 정보 삭제 후 결과 반환
 		return sqlSession.delete("attachment.deleteInquireAttachment", inquireAttachmentNo) > 0;
 		}
+
+
 
 }
