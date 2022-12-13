@@ -37,7 +37,17 @@
 						<a href="detail?inquireNo=${inquireDto.inquireNo}">
 							${inquireDto.inquireTitle}
 						</a>
+						<c:if test=""></c:if>
+						<c:choose>
+							<c:when test="${ inquireDto.inquireState  == 'Y'}">
+							[답변 완료]
+							</c:when>
+							<c:otherwise>
+							[답변 예정]
+							</c:otherwise>
+						</c:choose>
 					</td>
+				
 					
 					<td>${inquireDto.inquireId}</td>
 					

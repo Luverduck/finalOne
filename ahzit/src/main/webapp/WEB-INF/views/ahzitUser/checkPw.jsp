@@ -7,6 +7,35 @@
 	<jsp:param value="비밀번호 찾기" name="title"/>
 </jsp:include>
 
+
+
+<form action="checkPw" method="post" autocomplete="off">
+
+	<div>
+		<div>
+			<h1>비밀번호 찾기</h1>
+		</div>
+		<div>
+			<label>아이디 : 
+				<input name="userId" type="text" required placeholder="아이디">
+			</label>
+		</div>
+		<div >
+			Email : <input name="userEmail" type="text" required placeholder="이메일">
+			<button class="send-btn" type="submit">인증하기</button>
+			<div class="cert"></div>
+		</div>
+	
+	</div>
+		
+</form>
+
+<c:if test="${param.error != null}">
+	<div class="row center mt-30">
+		<span style="color: darkred;">아이디와 이메일을 확인해주세요.</span>
+	</div>
+</c:if>
+
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 	$(function(){
@@ -18,20 +47,29 @@
 		$(".send-btn").click(function(){
 			var email = $("[name=userEmail]").val();
 			var userId = $("[name=userId]").val();
+			
+			
 			if(email.length == 0) return;
-			
-			
 			var btn = $(this);
 			btn.prop("disabled", true);
 
 			$.ajax({
 				url:"/ahzitUser/checkPw",
-				method:"post",
+				method:"POST",
 				data:{
 					userEmail:email,
 					userId:userId
 					},
-				success:function() {
+				success:function(map) {
+					
+					if(map.message == "아이디 또는 이메일을 다시 확인해주세요"){
+						alert(map.message);
+						btn.prop("disabled", false);
+						return false;
+					}
+					
+				
+					
 					//성공했다면 메일은 전송되었다고 볼 수 있다
 					console.log("메일 전송 완료");
 					btn.prop("disabled", false);
@@ -46,31 +84,40 @@
 					//button을 클릭하면 input에 있는 인증번호와 이메일을 사용해서 검사요청
 					button.click(function(){
 						var serial = input.val();
+					
 						var userId =  $("[name=userId]").val();
+						var email = $("[name=userEmail]").val();
+						var email = $("[name=userEmail]").val();
+						
 						if(serial.length != 6) return;
-						alert("인증이 완료되었습니다.");
-						window.open("${pageContext.request.contextPath}/ahzitUser/checkPwSuccess?userId=" + userId);
 					//	alert(serial);
 						$.ajax({
 							url:"${pageContext.request.contextPath}/async3",
-							method:"post",
+							method:"POST",
 							data:{
-								userEmail:email,
+								certificationId:email,
 								certificationKey:serial
 							},
 							success:function(resp){
-								//console.log(resp);
+								console.log(resp);
+								if(resp == false){
+									alert("인증번호를 다시 확인해주세요");
+								}
+								else{
 								//resp가 true면 이메일 인증이 성공한 것
 								//결과를 외부에 저장하고 더이상 인증버튼을 못누르게 해야한다
-								judge.emailValid = resp;
-								btn.prop("disabled", true);
+								alert("인증이 완료되었습니다.");
+							   window.location = ("${pageContext.request.contextPath}/ahzitUser/checkPwSuccess?userId=" + userId);
+							judge.emailValid = resp;
+							btn.prop("disabled", true);
+							}
 							}
 						});
 					});
 					
 					div.append(input).append(button);
 					$(".cert").html(div);
-				}
+				},
 			});
 		});
 		
@@ -82,36 +129,6 @@
 	});
 
 </script>  
-
-<form action="checkPw" method="post" autocomplete="off">
-
-	<div>
-
-		<div>
-			<h1>비밀번호 찾기</h1>
-		</div>
-
-		<div>
-			<label>아이디 : 
-				<input name="userId" type="text" required placeholder="아이디">
-			</label>
-		</div>
-		<div >
-			Email : <input name="userEmail" type="text" required placeholder="이메일">
-			<button class="send-btn" type="submit">인증하기</button>
-			<div class="cert"></div>
-		</div>
-
-	
-	</div>
-		
-</form>
-
-<c:if test="${param.error != null}">
-	<div class="row center mt-30">
-		<span style="color: darkred;">아이디와 이메일을 확인해주세요.</span>
-	</div>
-</c:if>
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
