@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.ahzit.entity.AttachmentDto;
+import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AttachmentDao;
 
 @RestController
@@ -50,5 +52,30 @@ public class AttachmentController {
 				.header("Content-Disposition", "attachment; filename=" + attachmentDto.getAttachmentName())
 				.header("Content-Type", attachmentDto.getAttachmentType())
 				.body(resource);
+	}
+	
+	//공지게시판 첨부파일 다운로드 mapping
+	@GetMapping("/download/{attachmentNo}")
+	public ResponseEntity<ByteArrayResource> download(@PathVariable int attachmentNo) throws IOException{
+		//1. 파일 탐색
+		AttachmentDto attachmentDto = attachmentDao.selectAttachment(attachmentNo);
+		if(attachmentDto == null) {
+			throw new TargetNotFoundException("존재하지 않는 파일");
+		}
+		
+		//2. 파일 불러오기
+		File dir = new File(System.getProperty("user.home")+"/upload/main");
+		File target = new File(dir, String.valueOf(attachmentNo));
+		byte[] data = FileUtils.readFileToByteArray(target);
+		ByteArrayResource resource = new ByteArrayResource(data);
+
+		//[3] 응답 객체를 만들어 데이터를 전송
+		return ResponseEntity.ok()
+		.header("Content-Encoding", "UTF-8")
+		.header("Content-Length", String.valueOf(attachmentDto.getAttachmentSize()))
+		.header("Content-Disposition", "attachment; filename=" + attachmentDto.getAttachmentName())
+		.header("Content-Type", attachmentDto.getAttachmentType())
+		.body(resource);
+		
 	}
 }

@@ -26,4 +26,7 @@ public interface AttachmentDao {
 	
 	// 추상 메소드 - 자유게시글 첨부파일 삭제
 	public boolean deleteFreeboardAttachment(int freeboardAttachmentNo);
+
+	//공지게시판 첨부파일 관련(notice_attachment_view)
+	List<AttachmentDto> selectNoticeAttachmentList(int noticeOriginNo);
 }

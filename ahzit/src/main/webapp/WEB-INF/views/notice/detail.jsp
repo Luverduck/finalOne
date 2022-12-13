@@ -65,6 +65,29 @@
 								pattern="y년 M월 d일 E요일 a h시 m분 s초" /></td>
 					</tr>
 				</c:if>
+				
+				
+				<c:if test="${attachmentList != null}">
+				<tr>
+					<th>첨부파일</th>
+					<td>
+						<ul class="attachment-list">
+							<c:forEach var="attachmentDto" items="${attachmentList}">
+							<li>
+								${attachmentDto.attachmentName} 
+								(${attachmentDto.attachmentSize} bytes) 
+								- 
+								[${attachmentDto.attachmentType}]
+								<a href="/attachment/download/${attachmentDto.attachmentNo}">download</a>
+							</li>
+							</c:forEach>
+						</ul>
+					</td>
+				</tr>
+				</c:if>
+				
+				
+				
 			</tbody>
 
 			<tfoot>
