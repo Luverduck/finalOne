@@ -164,10 +164,13 @@
       <%-- 가운데 내용 --%>
       <div class = "col col-6">
       	<div class="row">
-      		<form action="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert" method="post">
+      		<form name="ahzitJoin" action="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert" method="post">
       		<input type="hidden" name="memberAhzitNo" value="${ahzitNo}">
       		<input type="hidden" name="memberId" value="${loginId}">
       		<input type="text" name="memberNick">
+      		<div class="valid-feedback">사용할 수 있는 닉네임입니다</div>
+            <div class="invalid-feedback">닉네임은 한글 3~10글자로 작성하세요</div>
+      		<div name="duplicate" class="NNNNN">이미 사용 중인 닉네임입니다</div>
       		<button type="submit">소모임 가입</button>
       		</form>
       	</div>
@@ -189,5 +192,6 @@
 
 <script type="text/javascript">
    
+
    
 </script>

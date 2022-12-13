@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.repository.AhzitDao;
+import com.kh.ahzit.repository.AhzitMemberDao;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +23,7 @@ public class Test_public1992 {
 	private AhzitDao ahzitDao;
 	
 	@Autowired
-	
+	private AhzitMemberDao ahzitMemberDao;
 
 	//삭제
 	//ahzitDao.delete(AhzitDto.builder().ahzitNo(4).ahzitLeader("tester111").build());
@@ -42,8 +43,8 @@ public class Test_public1992 {
 	
 	@Test
 	public void test() {
-		sqlSession.update("ahzitMember.updateMember", AhzitMemberDto.builder().memberNo(112).memberNick("수정테스트").build());
-		
+		AhzitMemberDto testDto=AhzitMemberDto.builder().memberAhzitNo(84).memberNick("쿼리테스트").build();
+		System.out.println(ahzitMemberDao.nicknameCheck(testDto));
 	}
 
 }

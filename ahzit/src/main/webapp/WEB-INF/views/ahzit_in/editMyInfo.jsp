@@ -164,12 +164,7 @@
       <%-- 가운데 내용 --%>
       <div class = "col col-6">
       	<div class="row">
-      		<form action="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert" method="post">
-      		<input type="hidden" name="memberAhzitNo" value="${ahzitNo}">
-      		<input type="hidden" name="memberId" value="${loginId}">
-      		<input type="text" name="memberNick">
-      		<button type="submit">소모임 가입</button>
-      		</form>
+      		
       	</div>
 
       </div>

@@ -162,11 +162,20 @@ public class AhzitInController {
 		return "redirect:/ahzit_in/{ahzitNo}";
 	}
 	
-//	@GetMapping("/{ahzitNo}/editMyInfo/{memberNo}")
-//	public String editMyInfo(@PathVariable int ahzitNo, 
-//			@PathVariable int memberNo, HttpSession session, Model model) {
-//		
-//	}
+	@GetMapping("/{ahzitNo}/editMyInfo/{memberNo}")
+	public String editMyInfo(@PathVariable int ahzitNo, 
+			@PathVariable int memberNo, HttpSession session, Model model) {
+			// HttpSession에서 로그인 중인 회원 아이디 반환
+			String loginId = (String)session.getAttribute("loginId");
+			// 입력받은 소모임 번호와 반환한 회원 아이디로 로그인한 회원의 해당 소모임 내 회원 정보 조회
+			AhzitMemberDto ahzitMemberDto = ahzitBoardDao.searchMemberInfo(ahzitNo, loginId);
+			// 조회한 정보를 model에 추가
+			model.addAttribute("ahzitMemberDto", ahzitMemberDto);
+			//개설한 아지트 정보를 조회
+			model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));
+			
+			return "ahzit_in/editMyInfo/{memberNo}";
+	}
 	
 	
 	

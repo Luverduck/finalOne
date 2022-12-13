@@ -31,6 +31,13 @@ public class AhzitMemberDaoImpl implements AhzitMemberDao {
 	public List<AhzitMemberListVO> select(int ahzitNo) {
 		return sqlSession.selectList("ahzitMember.ahzitMemberList",ahzitNo);
 	}
+	
+	//소모임 가입시 닉네임 중복검사
+	@Override
+	public boolean nicknameCheck(AhzitMemberDto ahzitMemberDto) {
+		int count=sqlSession.selectOne("ahzitMember.nicknameCheck");
+		return count==0;
+	}
 
 
 

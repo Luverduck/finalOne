@@ -17,10 +17,15 @@
    		ahzit_head = ahzit_head + 1 where ahzit_no = #{ahzitNo}
    </update>
    
-   <!-- 소모임 회원이 자기 프로필(닉네임)을 수정하는 메소드 -->
+   <!-- 소모임 회원이 자기 프로필(닉네임)을 수정하는 메소드 
    <update id="updateMember" parameterType="AhzitMemberDto">
    		update ahzit_member set member_nick = #{memberNick} where member_no = #{memberNo}
    </update>
+   -->
    
+   <!-- 소모임 내부 닉네임 중복 확인 -->
+   <select id="nicknameCheck" parameterType="AhzitMemberDto" resultType="int">
+   		select count(*) member_nick from ahzit_member where member_ahzit_no=#{memberAhzitNo} and member_nick=#{memberNick}
+   </select>
 
   </mapper>

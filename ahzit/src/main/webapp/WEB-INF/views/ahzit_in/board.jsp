@@ -167,6 +167,10 @@
          <c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
 			<a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i></i><span>아지트 수정</span></a><br>
 		</c:if>
+		
+		<c:if test="${ahzitMemberDto.memberId==sessionScope.loginId}">
+			<a href="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/editMyInfo/${ahzitMemberDto.memberNo}"><i class="fa-solid fa-pen-nib"></i><span>내 아지트 프로필 수정</span></a><br>
+		</c:if>
       </div>
             
       <%-- 가운데 내용 --%>
