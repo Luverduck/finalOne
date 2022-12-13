@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DOCTYPE 설정을 통해 자동완성 + 문법검사 수행 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper 내부에 SQL 구문을 배치 - namespace : 외부에서 부르기 위한 별칭(테이블명으로 작성) -->
+<mapper namespace="faq">
+
+	<insert id="insert" parameterType="FaqDto">
+		insert into faq(
+		faq_no, faq_writer, faq_title,
+		faq_content, faq_writedate
+		)
+		values(
+		faq_seq.nextval, #{faqWriter}, #{faqTitle},
+		#{faqContent}, sysdate
+		)
+	</insert>
+
+	<select id="list" resultType="FaqDto">
+		select * from faq order by faq_no
+		desc
+	</select>
+	
+	<!-- 검색 -->
+	<select id="search" parameterType="map" resultType="FaqDto">
+		select * from faq where instr(${type}, #{keyword}) > 0
+		order by ${type} asc
+	</select>
+
+	<select id="one" parameterType="int" resultType="FaqDto">
+		select * from
+		faq where faq_no = #{faqNo}
+	</select>
+
+	<update id="edit" parameterType="FaqDto">
+		update faq set
+		faq_title = #{faqTitle},
+		faq_content = #{faqContent}
+
+		where
+		faq_no = #{faqNo}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete faq where faq_no =
+		#{faqNo}
+	</delete>
+
+
+	<!-- 통합 리스트 -->
+	<select id="pagelist" parameterType="map" resultType="FaqDto">
+		select *
+		from (
+		select rownum rn, TMP.* from (
+		select * from faq order by faq_no desc
+		)TMP
+		)where rn between #{startRow} and
+		#{endRow}
+	</select>
+
+	<!-- 통합 검색 -->
+	<select id="pageSearch" parameterType="map" resultType="FaqDto">
+		select *
+		from (
+		select rownum rn, TMP.* from (
+		select * from faq
+		where instr(${type}, #{keyword}) > 0
+		order by faq_no desc
+		)TMP
+		)where rn between #{startRow} and #{endRow}
+	</select>
+
+</mapper>
