@@ -92,9 +92,23 @@ public class NoticeController {
 	
 	@GetMapping("/delete")
 	public String delete(@RequestParam int noticeNo) {
+		
+		//삭제가 이루어지기 전에 삭제될 게시글의 첨부파일 정보 조회
+		List<AttachmentDto> attachmentList = attachmentDao.selectNoticeAttachmentList(noticeNo);
+		
+		//삭제 - 자동으로 board_attachemnt의 데이터가 연쇄 삭제됨
 		boolean result = noticeDao.delete(noticeNo);
 		
-		if(result) {
+		if(result) { //성공
+			for(AttachmentDto attachmentDto : attachmentList) {
+				//첨부파일(attachment) 테이블 삭제
+				attachmentDao.deleteAttachment(attachmentDto.getAttachmentNo());
+				
+				//실제 파일 삭제
+				String filename = String.valueOf(attachmentDto.getAttachmentNo());
+				File target = new File(directory, filename);
+				target.delete();
+			}
 			return "redirect:list";
 		}
 		else {
