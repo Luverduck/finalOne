@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.ahzit.entity.AhzitBoardDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
+import com.kh.ahzit.vo.AhzitBoardLikeRestVO;
 import com.kh.ahzit.vo.AhzitBoardListRestRequestVO;
 import com.kh.ahzit.vo.AhzitBoardVO;
 
@@ -35,4 +36,7 @@ public interface AhzitBoardDao {
 	
 	// 추상 메소드 - 소모임 게시글 삭제
 	public boolean deleteBoard(int boardNo, int boardWriterNo);
+	
+	// 추상 메소드 - 소모임 게시글 좋아요 갯수 갱신
+	public boolean updateBoardLike(int boardNo, int boardLike);
 }

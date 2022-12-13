@@ -86,4 +86,9 @@
 		delete ahzit_board where board_no = #{boardNo} and board_writer_no = #{boardWriterNo}
 	</delete>
 	
+	<!-- 소모임 게시글 좋아요 갱신 -->
+	<update id = "updateBoardLike" parameterType = "map">
+		update ahzit_board set board_like = #{boardLike} where board_no = #{boardNo}
+	</update>
+	
 </mapper>
