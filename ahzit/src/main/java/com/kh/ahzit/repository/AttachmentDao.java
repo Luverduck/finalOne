@@ -2,7 +2,7 @@ package com.kh.ahzit.repository;
 
 import java.util.List;
 
-import com.kh.ahzit.entity.AhzitAttachmentDto;
+
 import com.kh.ahzit.entity.AttachmentDto;
 
 public interface AttachmentDao {
