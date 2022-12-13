@@ -73,9 +73,9 @@
 		color: black;
 		font-size: 20px;
 	}
-	.chal-img {
-	width : 250px;
-	height : 250px;		
+	.ahzit-img {
+	width : 400px;
+	height : 400px;		
 	}
   
  .icon-board-like-on {
@@ -95,10 +95,14 @@
 					<br>
 					
 					<div class = "row">
-						<%-- 아지트 정보 --%>
-		            <c:forEach var = "list" items = "${attachmentList}">
-		              <img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" > 					
-		             </c:forEach>	
+						<%-- 아지트 정보 --%> 
+						<%--아지트 프로필 사진 --%>
+						<c:if test="${attachmentList.isEmpty()}"> <%--미설정시 기본 프로필 --%>
+							 <img src = "/images/bg_default.jpg" class="ahzit-img">
+						</c:if>
+			            <c:forEach var = "list" items = "${attachmentList}">  <%--설정한 프로필 --%>
+			              <img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img"  > 					
+			             </c:forEach>	
 						아지트 이름 : ${ahzitVO.getAhzitName()} <br>
 						아지트 소개 : ${ahzitVO.getAhzitInfo()}<br>
 						아지트 멤버 : ${ahzitVO.getAhzitHead()} 명<br>
@@ -403,12 +407,6 @@
 	}, 100));
 	
 	$(function(){
-		
-		//소모임프로필이 없으면 기본이미지로 대체
-	      $(".ahzit-img").on("error", function() {
-	         $(this).attr("src", "/images/bg_default.jpg");
-	      });
-
 		// 게시글 작성 비동기 처리
 		// - 게시글 작성 영역 클릭시 게시글 입력창 열기
 		$(".editor-open-insert").click(function(){
