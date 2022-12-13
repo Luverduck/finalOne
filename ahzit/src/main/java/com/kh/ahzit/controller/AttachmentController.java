@@ -53,6 +53,31 @@ public class AttachmentController {
 				.body(resource);
 	}
 	
+
+	@GetMapping("/download/ahzit")
+	public ResponseEntity<ByteArrayResource> downloadAhzit(@RequestParam int attachmentNo) throws IOException {
+		//파일탐색
+		AttachmentDto attachmentDto = attachmentDao.selectAttachment(attachmentNo);
+		if(attachmentDto == null) return ResponseEntity.notFound().build();
+		
+		//파일생성위치
+		File directory = new File("D:/upload/kh10f");
+		//디렉토리 생성
+		directory.mkdirs();
+		
+		//파일 불러오기
+    File target = new File(directory, String.valueOf(attachmentNo));
+		byte[] data = FileUtils.readFileToByteArray(target);
+		ByteArrayResource resource = new ByteArrayResource(data);
+    
+    return  ResponseEntity.ok()
+				.header("Content-Encoding", "UTF-8")
+				.header("Content-Length", String.valueOf(attachmentDto.getAttachmentSize()))
+				.header("Content-Disposition", "attachment; filename=" + attachmentDto.getAttachmentName())
+				.header("Content-Type", attachmentDto.getAttachmentType())
+				.body(resource);
+	}
+
 	@GetMapping("/download/inquire")
 	public ResponseEntity<ByteArrayResource> downloadInquire(@RequestParam int attachmentNo) throws IOException{
 		// 파일 탐색(DB)
@@ -79,5 +104,5 @@ public class AttachmentController {
 				.header("Content-Type", attachmentDto.getAttachmentType())
 				.body(resource);
 	}
-	
+
 }

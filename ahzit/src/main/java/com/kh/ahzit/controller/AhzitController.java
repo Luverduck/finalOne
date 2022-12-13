@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ahzit.constant.SessionConstant;
+import com.kh.ahzit.entity.AhzitAttachmentDto;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AhzitUserDto;
@@ -34,7 +35,7 @@ public class AhzitController {
 	@Autowired
 	private AhzitService ahzitService;
 	
-	private final File dir = new File("D:/upload/kh10f/ahzit");
+	private final File dir = new File("D:/upload/kh10f");
 	
 	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
 	public void prepare() {
@@ -59,15 +60,8 @@ public class AhzitController {
 
 		ahzitDto.setAhzitLeader(ahzitLeader);
 		//AhzitService에서 번호를 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
-		
 		int ahzitNo = ahzitService.create(ahzitDto, ahzitMemberDto,  attachment, ahzitLeader);
-		
-//		//소모임에 개설자 자동 추가
-//		ahzitMemberDto.setMemberAhzitNo(ahzitNo);
-//		ahzitMemberDto.setMemberId(ahzitLeader);
-//		ahzitMemberDto.setMemberNick(userDto.getUserNick());
-//		ahzitDao.addMember(ahzitMemberDto);
-		
+	
 		return "redirect:/ahzit_in/" + ahzitNo;
 	}
 	
