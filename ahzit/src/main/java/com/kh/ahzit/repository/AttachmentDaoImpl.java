@@ -113,6 +113,21 @@ public class AttachmentDaoImpl implements AttachmentDao {
 		return sqlSession.delete("attachment.deleteInquireAttachment", inquireAttachmentNo) > 0;
 		}
 
+	//아지트 첨부파일
+	@Override
+	public void ahzitInAttachment(int ahzitInAttachmentNo, int ahzitInMemberNo) {
+		Map<String, String> param = new HashMap<>();
+		
+		param.put("ahzitInAttachmentNo", String.valueOf(ahzitInAttachmentNo));
+		param.put("ahzitInMemberNo", String.valueOf(ahzitInMemberNo));
+		sqlSession.insert("attachment.InsertAhzitInAttachment", param);
+		
+	}
 
+	//아지트 첨부파일 조회
+	@Override
+	public List<AttachmentDto> selectAhzitInAttachment(int memberAhzitNo) {
+		return sqlSession.selectList("attachment.selectAhzitInAttachment",  memberAhzitNo);
+	}
 
 }

@@ -69,6 +69,7 @@
 
 		<div class="row">
 
+
 			<p>아지트 이미지를 등록해주세요</p>
 			  <div>
 	            <input id="input-file" type="file" class="thumbnail"  name="attachment" accept="jpg, png" class="thumbnail">
@@ -76,7 +77,6 @@
 	          </div>
 	          <div>
 	            <label class="input-file-upload img-lab" for="input-file">사진변경</label>     
-	            <button type="button" class="delete-file-upload img-btn btn-delete-file" name="thumbnail-delete" >삭제</button>
 	          </div>
 		</div>
 		

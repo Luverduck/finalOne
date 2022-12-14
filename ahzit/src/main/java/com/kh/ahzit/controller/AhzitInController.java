@@ -17,13 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ahzit.entity.AhzitDto;
+import com.kh.ahzit.entity.AhzitInAttachmentDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AttachmentDto;
 import com.kh.ahzit.repository.AhzitBoardDao;
 import com.kh.ahzit.repository.AhzitDao;
-
 import com.kh.ahzit.repository.AttachmentDao;
-import com.kh.ahzit.vo.AhzitBoardVO;
 
 @Controller
 @RequestMapping("/ahzit_in")
@@ -97,7 +96,7 @@ public class AhzitInController {
 	
 	// 소모임 첨부 Mapping
 	@GetMapping("/{ahzitNo}/attachment")
-	public String attachment(@PathVariable int ahzitNo, HttpSession session, Model model) {
+	public String attachment(@PathVariable int ahzitNo, @ModelAttribute AhzitInAttachmentDto ahzitInAttachmentDto, HttpSession session, Model model) {
 		// HttpSession에서 로그인 중인 회원 아이디 반환
 		String loginId = (String)session.getAttribute("loginId");
 		// 입력받은 소모임 번호와 반환한 회원 아이디로 로그인한 회원의 해당 소모임 내 회원 정보 조회
@@ -107,6 +106,9 @@ public class AhzitInController {
 		
 		//입력받은 아지트번호로 연결되는 첨부파일 조회
 		model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
+		
+		//입력받은 아지트번호로 연결되는 첨부파일 조회(최근)
+		model.addAttribute("InAttachmentList", attachmentDao.selectAhzitInAttachment(ahzitNo));
 		
 		//첨부파일 목록 조회
 		model.addAttribute("list", attachmentDao.selectList());
@@ -121,6 +123,7 @@ public class AhzitInController {
 	
 	@PostMapping("/{ahzitNo}/attachment")
 	public String upload(@RequestParam MultipartFile attachment, 
+										@RequestParam int ahzitInMemberNo,
 										@ModelAttribute AhzitDto ahzitDto ) throws IllegalStateException, IOException {
 		//db저장
 		int attachmentNo = attachmentDao.nextAttachmentNo();
@@ -136,6 +139,9 @@ public class AhzitInController {
 		directory.mkdirs();
 		File target = new File(directory, String.valueOf(attachmentNo));
 		attachment.transferTo(target);
+		
+		//연결테이블에 연결정보저장(첨부파일번호, 아지트 내 회원 번호)
+		attachmentDao.ahzitInAttachment(attachmentNo, ahzitInMemberNo);
 		return "ahzit_in/attachment";
 	}
 	

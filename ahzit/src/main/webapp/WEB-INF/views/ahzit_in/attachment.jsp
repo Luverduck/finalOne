@@ -75,27 +75,26 @@
 						<h2>첨부 모아보기</h2>
 						<div>
 							<form action="attachment" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="ahzitInMemberNo" value=" ${ahzitMemberDto.memberNo}">
 								<input type="file" name="attachment" >
 								<button type="submit">업로드</button>
 							</form>
-							
-							
 						</div>
-						
-						
-				<c:if test="${not list.isEmpty()}">
-				<c:forEach var="attachmentDto" items="${list}">
+				<%--첨부파일 목록 --%>
+				<c:if test="${not InAttachmentList.isEmpty()}">
+				<c:forEach var="attachmentDto" items="${InAttachmentList}">
 					<ul>
 						<a href="/attachment/download?attachmentNo=${attachmentDto.attachmentNo}">
-								<!-- <i class="fa-solid fa-file fa-3x" ></i> -->
-								<li>${attachmentDto.attachmentName} <br>
-								(${attachmentDto.attachmentSize} bytes) &nbsp; · &nbsp;
-								 ${attachmentDto.attachmentDate} &nbsp; · &nbsp; ${ahzitMemberDto.memberId}
-								</li>
+							<!-- <i class="fa-solid fa-file fa-3x" ></i> -->
+							<li>${attachmentDto.attachmentName} <br>
+							(${attachmentDto.attachmentSize} bytes) &nbsp; · &nbsp;
+							 ${attachmentDto.attachmentDate} &nbsp; · &nbsp; ${ahzitMemberDto.memberId}
+							</li>
 						</a>
 					</ul>
 				</c:forEach>
 				</c:if>
+				
 				</div>
 				
 				<%-- 오른쪽 사이드바 --%>
