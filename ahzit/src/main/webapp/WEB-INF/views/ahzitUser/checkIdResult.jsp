@@ -4,11 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <style>
-.email1{
+.id1{
 	font-size: 0.9em;
 	font-weight: 600;
 }
-.email2{
+.id2{
 	font-size: 1.3em;
 	font-weight: 900;
 	color: #3E4684;
@@ -32,9 +32,9 @@
 </div>
 	
 			<div class="col-md-8 offset-md-2 my-4">
-				<div class="text-center email1">
+				<div class="text-center id1">
 					회원님의 아이디는  &nbsp;&nbsp; 
-					<span class="email2">${checkId}</span>
+					<span class="id2">${checkId}</span>
 					 &nbsp;&nbsp; 입니다.
 				</div>
 				

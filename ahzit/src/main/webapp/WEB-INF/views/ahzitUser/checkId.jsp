@@ -25,7 +25,7 @@ font-size: 0.85rem;
 	</div>
 
 
-	<div class="row">
+	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating ">
 				<input type="text" name="userEmail" class="form-control rounded" placeholder="이메일" required>

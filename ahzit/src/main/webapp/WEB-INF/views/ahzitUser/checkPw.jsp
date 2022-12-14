@@ -55,6 +55,14 @@ font-size: 0.85rem;
 		</div>
 	</div>
 	
+	<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+		<div class=" col">
+			<a href="login" class="btn w-100" role=button>로그인 하기</a>
+		</div>
+		<div class=" col" >
+			<a href="checkId"  class="btn w-100" role=button>아이디 찾기</a>
+		</div>
+	</div>
 		
 </form>
 
