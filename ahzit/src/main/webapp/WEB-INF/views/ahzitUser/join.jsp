@@ -10,6 +10,9 @@
         border: 1px;
          color: red;
     }
+   .btn-m{
+   padding: 0.26rem 0.75rem;
+   }
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
@@ -33,6 +36,7 @@
                                 && this.userInterestSort
                                 && this.userEmailValid;
                 }
+
             };
             
             $(".join").submit(function(){
@@ -49,8 +53,6 @@
                 var regex = validChecker.idRegex;
                 var judge = regex.test(value);
           
-                
-             //   $(this).removeClass("is-valid is-invalid");
                 if(judge) {
                     //+비동기통신(중복검사)
                     validChecker.idValid = true;
@@ -79,6 +81,7 @@
                     validChecker.userIdValid = false;
                     $(this).removeClass("is-valid is-invalid").addClass("is-invalid");
                 }
+            	
             });
          
 
@@ -112,6 +115,7 @@
                 if(regex.test(value)) {
                     validChecker.userEmailValid = true;
                     $(this).removeClass("is-valid is-invalid").addClass("is-valid");
+                    $(".send-btn").prop("disabled", false);
                 }
                 else {
                     validChecker.userEmailValid = false;
@@ -141,7 +145,8 @@
 
                 //console.log(validChecker.isAllValid());
                 if(validChecker.isAllValid()){
-                    this.submit();//전송
+
+                      this.submit();//전송
                 }
             });
             
@@ -157,7 +162,6 @@
 			if(email.length == 0) return;
 			
 			var btn = $(this);
-			btn.prop("disabled", true);
 			
 			$.ajax({
 				url:"${pageContext.request.contextPath}/async2",
@@ -166,14 +170,15 @@
 				success:function() {
 					//성공했다면 메일은 전송되었다고 볼 수 있다
 					console.log("메일 전송 완료");
-					btn.prop("disabled", false);
+					$(".send-btn").prop("disabled", true);
 					
 					//인증번호 입력창을 사용자에게 보여줘야 한다
 					//(1) 만들든가 (2) 숨겨놨다 보여주든가
 					
-					var div = $("<div>");
-					var input = $("<input>").attr("class" , "form-control rounded");
-					var button = $("<button>").attr("type", "button").attr("class", "btn btn-warning btn-lg rounded text-light").text("확인");
+					
+					var div = $("<div>").attr("class", "d-flex justify-content-center align-items-center flex-fill mb-3");
+					var input = $("<input>").attr("class" , "form-control rounded").attr("placeholder" , "인증번호")
+					var button = $("<button>").attr("type", "button").attr("class", "btn btn-sm btn-warning rounded text-light btn-m emailSend-btn").text("확인");
 					
 					//button을 클릭하면 input에 있는 인증번호와 이메일을 사용해서 검사요청
 					button.click(function(){
@@ -201,6 +206,7 @@
 								judge.emailValid = resp;
 								btn.prop("disabled", true);
 								alert("인증이 완료되었습니다.");
+								$(".emailSend-btn").prop("disabled", true);
 								}
 							}
 						});
@@ -267,7 +273,7 @@
   	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
-				<input type="text" name="userId" class="form-control rounded" placeholder="아이디" >
+				<input type="text" name="userId" class="form-control rounded" placeholder="아이디" required>
                 	<label>
 						아이디
 						<i class="fa-solid fa-asterisk text-danger"></i>
@@ -283,7 +289,7 @@
 	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
-				<input type="text" name="userPw" class="form-control rounded" placeholder="비밀번호" >
+				<input type="password" name="userPw" class="form-control rounded" placeholder="비밀번호" required>
 					<label>
 					비밀번호
  					<i class="fa-solid fa-asterisk text-danger"></i>
@@ -298,7 +304,7 @@
 	 <div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
-				<input type="text" id="userPw-re" class="form-control rounded" placeholder="비밀번호 확인" >
+				<input type="password" id="userPw-re" class="form-control rounded" placeholder="비밀번호 확인" required>
 					<label>
  					비밀번호 확인
 					<i class="fa-solid fa-asterisk text-danger"></i>
@@ -312,36 +318,48 @@
 	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
-    			<input type="text" name="userNick" class="form-control rounded" placeholder="닉네임" >
+    			<input type="text" name="userNick" class="form-control rounded" placeholder="닉네임" required >
               		<label>
                     닉네임
                     <i class="fa-solid fa-asterisk text-danger"></i>
                     </label>
-                    <div class="valid-feedback">멋진 닉네임입니다!</div>
+                    <div class="valid-feedback">올바른 닉네임 형식입니다</div>
                     <div class="invalid-feedback">닉네임은 한글 3~10글자로 작성하세요</div>
 			</div>
 		</div>
  	</div>
 		
-		<input type="hidden" name="certificationId" value="${certificationId}">	
+		<input type="hidden" name="certificationId" value="${certificationId}">
+			
 		<div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-				<div class="form-floating">
-					<input type="text" name="userEmail" class="form-control rounded" placeholder="이메일" >
-					<label>
-					이메일 
-					<i class="fa-solid fa-asterisk text-danger"></i>
-					</label>
+			
+				<div class="d-flex justify-content-center align-items-center flex-wrap mb-3">
 				
+					<div class=" d-flex justify-content-center align-items-center flex-fill mb-3 form-group">
+						
+						<div class="input-group form-floating">
+						
+							<input type="text" name="userEmail" class=" form-control rounded d-flex flex-fill" placeholder="이메일"  required>
+							
+							<label>
+							이메일 
+							<i class="fa-solid fa-asterisk text-danger"></i>
+							</label>
+							
+							<button class="send-btn btn btn-warning rounded text-light btn-m" disabled="" type="button" >인증번호 발송</button>
+							<div class="valid-feedback">올바른 이메일 형식입니다.</div>
+							<div class="invalid-feedback">이메일 형식을 확인해주세요</div>		
+						</div>
+						
+					</div>  
+						
 				</div>
-				<button class="send-btn btn btn-warning btn-lg rounded text-light " type="button" >인증번호 발송</button> 
-		
-				<div class="valid-feedback">올바른 이메일 형식입니다.</div>
-				<div class="invalid-feedback">이메일 형식을 확인해주세요</div>
+				
 				<div class="cert"></div>
+				
 			</div>
 		</div>
-
             
 		
 	 <div class="row mt-4">
@@ -394,7 +412,7 @@
 	    
 	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-		<input class="btn btn-warning w-100 btn-lg rounded text-light" type="button" value="가입하기"  onclick="submitChk();"/>
+		<input class="btn btn-warning w-100 btn-lg rounded text-light join-btn" type="button" value="가입하기" onclick="submitChk();"/>
 		 </div>
 	</div>
               

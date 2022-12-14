@@ -7,34 +7,56 @@
 	<jsp:param value="비밀번호 찾기" name="title"/>
 </jsp:include>
 
+<style>
+.checkpw-size{
+font-size: 0.85rem;
+}
+</style>
 
 
 <form action="checkPw" method="post" autocomplete="off">
 
-	<div>
-		<div>
-			<h1>비밀번호 찾기</h1>
+ 	<div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="p-4 text-dark rounded">
+				<h1 class="text-center">비밀번호 찾기</h1>
+				<h6 class="text-center checkpw-size">가입 시 입력한 본인정보를 입력해주세요</h6>
+				<h6 class="text-center checkpw-size">본인 확인 후 비밀번호를 다시 설정할 수 있습니다</h6>
+			</div>
 		</div>
-		<div>
-			<label>아이디 : 
-				<input name="userId" type="text" required placeholder="아이디">
-			</label>
+	</div>
+	
+	<div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="form-floating ">
+				<input type="text" name="userId" class="form-control rounded" placeholder="아이디" required>
+                	<label>
+					아이디 
+					</label>
+			</div>
 		</div>
-		<div >
-			Email : <input name="userEmail" type="text" required placeholder="이메일">
-			<button class="send-btn" type="submit">인증하기</button>
+	 </div>
+		
+	<div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="form-floating ">
+				<input type="text" name="userEmail" class="form-control rounded" placeholder="이메일" required>
+                	<label>
+						Email
+					</label>
+			</div>
+		</div>
+	 </div>
+	 
+	 <div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<button class="send-btn btn btn-outline-warning rounded-pill w-100 btn-lg btn-m" type="submit">인증하기</button>
 			<div class="cert"></div>
 		</div>
-	
 	</div>
+	
 		
 </form>
-
-<c:if test="${param.error != null}">
-	<div class="row center mt-30">
-		<span style="color: darkred;">아이디와 이메일을 확인해주세요.</span>
-	</div>
-</c:if>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
@@ -62,7 +84,7 @@
 					},
 				success:function(map) {
 					
-					if(map.message == "아이디 또는 이메일을 다시 확인해주세요"){
+					if(map.message == "입력된 회원정보가 존재하지 않습니다"){
 						alert(map.message);
 						btn.prop("disabled", false);
 						return false;
@@ -77,9 +99,9 @@
 					//인증번호 입력창을 사용자에게 보여줘야 한다
 					//(1) 만들든가 (2) 숨겨놨다 보여주든가
 					
-					var div = $("<div>");
-					var input = $("<input>");
-					var button = $("<button>").attr("type", "button").text("인증하기");
+						var div = $("<div>").attr("class", "d-flex justify-content-center align-items-center flex-fill mb-3");
+					var input = $("<input>").attr("class" , "form-control rounded").attr("placeholder" , "인증번호")
+					var button = $("<button>").attr("type", "button").attr("class", "btn btn-sm btn-warning rounded text-light btn-m emailSend-btn").text("확인");
 					
 					//button을 클릭하면 input에 있는 인증번호와 이메일을 사용해서 검사요청
 					button.click(function(){
