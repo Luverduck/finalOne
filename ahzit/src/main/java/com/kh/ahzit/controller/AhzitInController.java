@@ -189,7 +189,21 @@ public class AhzitInController {
 				//소모임 가입 페이지로 model 전달, 이동
 				return "ahzit_in/editMyInfo";
 	}
+	
+	@PostMapping("/{ahzitNo}/editMyInfo")
+	public String editMyInfo(@PathVariable int ahzitNo, 
+			@ModelAttribute AhzitMemberDto ahzitMemberDto, 
+			HttpSession session, Model model) {
+			boolean result=ahzitMemberDao.updateMember(ahzitMemberDto);
+			if(result) {
+				return "redirect:/ahzit_in/{ahzitNo}";
+			}
+			else {
+				throw new TargetNotFoundException();
+			}
+	}
 
+	
 	
 	
 	
