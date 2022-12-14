@@ -102,9 +102,11 @@
 	</div>
 		
 	
-<c:if test="${param.error != null}">
-	<h3>기존 비밀번호를 확인해주세요</h3>
-</c:if>
+	<c:if test="${param.error != null}">
+		<div class="row text-center mt-4">
+			<span style="color:red;">기존 비밀번호를 다시 확인해주세요</span>
+		</div>
+	</c:if>
        
 </form>
 

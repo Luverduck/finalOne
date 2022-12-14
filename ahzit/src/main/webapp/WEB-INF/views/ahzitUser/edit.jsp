@@ -45,6 +45,7 @@
 </script>
 
 	<form action = "edit" method = "post">
+	<input type = "hidden" name = "userId" value = "${ahzitUserDto.userId}">
 	
 	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
@@ -69,8 +70,6 @@
 			</div>
 		</div>
  	</div>
-			<input type = "hidden" name = "userId" value = "${ahzitUserDto.userId}">
-			
 			
 	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
@@ -131,7 +130,7 @@
     				맛집
   					</label>
 	        </div>
-	
+		</div>
 	
 	<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 		<div class=" col">
@@ -142,7 +141,7 @@
 		</div>
 	</div>	
 	
-	</form>
+</form>
 
 <script>
 	  function submitChk() {
