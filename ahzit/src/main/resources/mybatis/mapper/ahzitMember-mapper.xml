@@ -37,5 +37,15 @@
    <select id="findMember" parameterType="int" resultType="AhzitMemberDto">
    		select*from ahzit_member where member_no=#{memberNo}
    </select>
+   
+   <!-- 소모임 회원수 카운트(ahzitNo로 count한 결과값을 ahzit_head칼럼에 저장) -->
+   <update id="updateAhzitHead2" parameterType="int">
+   		update ahzit set ahzit_head=(select count(*) from ahzit_member where member_ahzit_no=#{ahzitNo}) where ahzit_no=#{ahzitNo}
+   </update>
+   
+   <!-- 일반 회원 탈퇴 메소드 -->
+   <delete id="deleteCommonMember" parameterType="int">
+   		delete ahzit_member where member_no=#{memberNo} and member_grade='일반'
+   </delete>
 
   </mapper>

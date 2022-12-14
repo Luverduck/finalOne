@@ -90,6 +90,12 @@ public class AhzitDaoImpl implements AhzitDao {
 		return count > 0;
 	}
 
+	//ahzit_member 테이블에서 아지트 번호로 count한 결과값을 인원수에 반영
+	@Override
+	public boolean updateAhzitHead2(int ahzitNo) {
+		int count=sqlSession.update("ahzitMember.updateAhzitHead2",ahzitNo);
+		return count>0;
+	}
 
 
 }

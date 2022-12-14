@@ -24,5 +24,7 @@ public interface AhzitDao {
 	boolean update(AhzitDto ahzitDto);//아지트 정보 수정
 
 	boolean delete(int ahzitNo); //아지트 삭제
+	
+	public boolean updateAhzitHead2(int ahzitNo);//현재 아지트 회원 수를 세어서 참가자 인원수에 반영
 
 }
