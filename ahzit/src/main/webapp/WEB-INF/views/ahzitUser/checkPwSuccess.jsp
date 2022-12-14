@@ -57,9 +57,10 @@ font-size: 0.85rem;
 	
  	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<div class="p-4 text-dark rounded">
-				<h1 class="text-center">비밀번호 변경</h1>
-				<h6 class="text-center checkpw-size">비밀번호 재설정을 위한 본인 확인이 완료되었습니다</h6>
+			<div class="p-4 text-dark rounded text-center">
+				<h1 class="text-center">비밀번호 변경</h1>	
+				<i class="fa-solid fa-circle-exclamation"></i>
+				비밀번호 재설정을 위한 본인 확인이 완료되었습니다
 				<h6 class="text-center checkpw-size">새로운 비밀번호를 등록 후 사용해주세요</h6>
 			</div>
 		</div>

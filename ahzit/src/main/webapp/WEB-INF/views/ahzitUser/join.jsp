@@ -261,7 +261,7 @@
 
 <form action="join" method="post" >
   	
-  	 <div class="row mt-4">
+	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="p-4 text-dark bg-Light rounded">
 				<h1 class="text-center">회원 가입</h1>
@@ -363,7 +363,7 @@
             
 		
 	 <div class="row mt-4">
-		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
 			<div class="p-4 text-dark bg-Light rounded">
 				<h3 class="text-center">관심사</h3>
 			</div>	

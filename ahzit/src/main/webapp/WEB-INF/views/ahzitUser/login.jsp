@@ -87,9 +87,9 @@ function kakaoLogout() {
 				<label>
 				비밀번호
 				</label>
-				</div>
 			</div>
 		</div>
+	</div>
 	
 	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
@@ -112,7 +112,7 @@ function kakaoLogout() {
 	
 	<c:if test="${param.error != null}">
 		<div class="row text-center">
-			<h6 class="text-center checklogin-size">가입 시 입력한 본인정보를 입력해주세요</h6>
+			<h6 class="text-center checklogin-size">가입 시 입력한 본인정보를 입력해주세요.</h6>
 		</div>
 	</c:if>
 </form>
