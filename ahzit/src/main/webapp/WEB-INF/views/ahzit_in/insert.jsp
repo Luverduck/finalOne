@@ -164,14 +164,14 @@
       <%-- 가운데 내용 --%>
       <div class = "col col-6">
       	<div class="row">
-      		<form name="ahzitJoin" action="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert" method="post">
+      		<form id="ahzitJoin" action="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert" method="post">
       		<input type="hidden" name="memberAhzitNo" value="${ahzitNo}">
       		<input type="hidden" name="memberId" value="${loginId}">
       		<input type="text" name="memberNick">
       		<div class="valid-feedback">사용할 수 있는 닉네임입니다</div>
             <div class="invalid-feedback">닉네임은 한글 3~10글자로 작성하세요</div>
-      		<div name="duplicate" class="NNNNN">이미 사용 중인 닉네임입니다</div>
-      		<button type="submit">소모임 가입</button>
+      		<div id="duplicate" class="NNNNN">이미 사용 중인 닉네임입니다</div>
+      		<button id="submitBtn" type="button" onclick="submitChk();">소모임 가입</button>
       		</form>
       	</div>
 
@@ -190,8 +190,112 @@
    </div>
 </div>
 
-<script type="text/javascript">
-   
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+ <script>
+        $(function(){
+        	
+        	$(".NNNNN").hide();
+        	
+            //상태 객체
+            var validChecker = {
+                memberNickValid : false, 
+                nicknameRegex : /^[가-힣0-9]{2,10}$/
+            };
+            
+            $("#ahzitJoin").submit(function(){
+    	        if(!validChecker.memberNickValid()){
+    	            return false;
+    	        }
+    	        return true;
+    	    });
 
-   
+			    $("[name=memberNick]").blur(function(){
+	                
+			    var name = $(this).attr("name");
+                var value = $(this).val();
+                var regex = validChecker.nicknameRegex;
+                var judge = regex.test(value);
+                
+                var memberAhzitNo = $("[name=memberAhzitNo]").val();
+
+                var ahzitMemberDto={"memberAhzitNo":memberAhzitNo, "memberNick":value};
+          
+                
+             //   $(this).removeClass("is-valid is-invalid");
+                if(judge) {
+                    //+비동기통신(중복검사)
+                    validChecker.memberNickValid = true;
+                    $(this).removeClass("is-valid is-invalid").addClass("is-valid");
+                    var that = this;
+                    $.ajax({
+    	                url: "${pageContext.request.contextPath}/rest/ahzitMember/nicknameCheck",
+    	                method: "post",
+    	                data: ahzitMemberDto,
+    	                success:function(resp){
+    	                    if(resp == "NNNNY"){
+    	                        validChecker.memberNickValid = true;
+    	                        $(".NNNNN").hide();
+    	                        $("#submitBtn").attr('disabled',false);
+    	                    }
+    	                    else{
+    	                        validChecker.memberNickValid = false;
+    	                        $(that).removeClass("is-valid is-invalid");
+    	                        $(".NNNNN").show();
+    	                        $("#submitBtn").attr('disabled',true);
+    	                    }
+    	                }
+    	            });
+                }
+                
+                else {
+                    validChecker.memberNickValid = false;
+                    $(this).removeClass("is-valid is-invalid").addClass("is-invalid");
+                    $("#submitBtn").attr('disabled',true);
+                }
+            });
+         
+
+            
+
+            $("#ahzitJoin").submit(function(e){
+                e.preventDefault();
+
+                $(this).find("#memberNick").blur();
+
+                //console.log(validChecker.isAllValid());
+                if(validChecker.memberNickValid()){
+                    this.submit();//전송
+                }
+            });
+            
+        });
+	
+		
+		//form이 전송될 때 판정객체(judge)의 상태가 어떤지 출력
+		$("#ahzitJoin").submit(function(){
+			console.log(judge);
+			return false;
+		});
+	
+    
+		function submitChk(){
+			var memberAhzitNo=$("input[name='memberAhzitNo']").val();
+			var memberId=$("input[name='memberId']").val();
+			var memberNick=$("input[name='memberNick']").val();
+			
+			var allData={"memberAhzitNo":memberAhzitNo, "memberId":memberId, "memberNick":memberNick};
+			
+			$.ajax({
+				url:"insert",
+				type:'POST',
+				data:allData,
+				success:function(data){
+					alert("아지트 가입이 완료되었습니다");
+					window.location=("${pageContext.request.contextPath}/ahzit_in/${ahzitNo}");
+				}
+			})
+		}
+
+	 
+	
 </script>

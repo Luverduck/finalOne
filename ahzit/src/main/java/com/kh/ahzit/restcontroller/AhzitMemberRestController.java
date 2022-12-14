@@ -19,7 +19,8 @@ public class AhzitMemberRestController {
 	private AhzitMemberDao ahzitMemberDao;
 	
 	@PostMapping("/nicknameCheck")
-	private String nicknameCheck(@RequestParam AhzitMemberDto ahzitMemberDto) {
+	private String nicknameCheck(@RequestParam int memberAhzitNo, @RequestParam String memberNick) {
+		AhzitMemberDto ahzitMemberDto=AhzitMemberDto.builder().memberAhzitNo(memberAhzitNo).memberNick(memberNick).build();
 		if(ahzitMemberDao.nicknameCheck(ahzitMemberDto)==true) {
 			//NNNNY 중복 없음
 			return "NNNNY";
