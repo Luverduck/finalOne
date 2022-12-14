@@ -143,26 +143,22 @@
             아지트 종류 : ${ahzitVO.getAhzitSort()}<br>
             아지트 리더 : ${ahzitVO.getAhzitLeader()}<br>
                   
-            <%-- 아지트 가입 폼 --%>
-            <form action="insert" method="post">   
-               <input type="hidden" name="ahzitNo"  value="${ahzitVO.getAhzitNo()}">
-               <%-- 아지트 가입버튼 --%>
-               <c:choose>
-               <c:when test="${ahzitMemberDto.getMemberId() == null}"><%-- 소모임 회원이 아니면 --%>
-               <button type="submit">아지트 가입</button>
-               </c:when>
-               <c:otherwise>
-               <button type="submit"  disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
-               </c:otherwise>
-               </c:choose>
-            </form>
+            <%-- 아지트 가입 버튼 --%>
+            <c:choose>
+			<c:when test="${ahzitMemberDto.getMemberId() == null}"><%-- 소모임 회원이 아니면 --%>
+			<button type="button" onclick="location.href='${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert'">아지트 가입</button>
+			</c:when>
+			<c:otherwise>
+			<button type="button"  disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
+			</c:otherwise>
+			</c:choose>
          </div>
                
          <div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
             로그인 중인 회원 번호 : ${ahzitMemberDto.memberNo}<br>
             회원이 가입한 아지트 번호 : ${ahzitMemberDto.memberAhzitNo}<br>
             로그인 중인 회원 아이디 : ${ahzitMemberDto.memberId}<br>
-            로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberId}<br>
+            로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberNick}<br>
             로그인 중인 회원 등급 : ${ahzitMemberDto.memberGrade}<br>
             로그인 중인 회원 활동 점수 : ${ahzitMemberDto.memberGrade}<br>
             소모임 가입일 : ${ahzitMemberDto.memberJoindate}
@@ -171,6 +167,10 @@
          <c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
 			<a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i></i><span>아지트 수정</span></a><br>
 		</c:if>
+		
+		<!-- 
+		아지트 가입 회원 프로필 수정/이미지 파일 등록/수정 페이지로 이동기능 넣으려던 자리(만들다 계속 오류나서 지움)
+		 -->
       </div>
             
       <%-- 가운데 내용 --%>
