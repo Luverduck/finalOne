@@ -203,7 +203,17 @@ public class AhzitInController {
 			}
 	}
 
-	
+	@GetMapping("/deleteCommonMember")
+	public String deleteCommonMember(@RequestParam int memberNo, Model model) {
+		boolean result=ahzitDao.deleteCommonMember(memberNo);
+		if(result) {
+			int ahzitNo=(int)model.getAttribute("ahzitNo");
+			return "redirect:/ahzit_in"+ahzitNo;
+		}
+		else {
+			throw new TargetNotFoundException();
+		}
+	}
 	
 	
 	

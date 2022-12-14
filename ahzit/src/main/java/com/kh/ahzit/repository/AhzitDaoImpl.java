@@ -96,6 +96,12 @@ public class AhzitDaoImpl implements AhzitDao {
 		int count=sqlSession.update("ahzitMember.updateAhzitHead2",ahzitNo);
 		return count>0;
 	}
+	
+	@Override//일반회원 아지트(소모임) 탈퇴용 메소드
+	public boolean deleteCommonMember(int memberNo) {
+		int count=sqlSession.delete("ahzitMember.deleteCommonMember",memberNo);
+		return count>0;
+	}
 
 
 }
