@@ -12,10 +12,10 @@ public class AhzitUserInterestDaoImpl implements AhzitUserInterestDao{
 	@Autowired
 	private SqlSession sqlSession;
 
-	@Override
-	public int sequence() {
-		return sqlSession.selectOne("ahzituserinterest.sequence");
-		}
+//	@Override
+//	public int sequence() {
+//		return sqlSession.selectOne("ahzituserinterest.sequence");
+//		}
 
 	@Override
 	public void insert(AhzitUserInterestDto ahzitUserInterestDto) {
@@ -27,5 +27,16 @@ public class AhzitUserInterestDaoImpl implements AhzitUserInterestDao{
 		int count = sqlSession.update("ahzituserinterest.edit", ahzitUserInterestDto);
 		return count > 0;
 	}
+
+	@Override
+	public boolean delete(String userInterestId) {
+		System.out.println("딜리트");
+		System.out.println(userInterestId);
+		int count = sqlSession.delete("ahzituserinterest.delete", userInterestId);
+		System.out.println("타나?");
+		return count > 0;
+	}
+
+	
 
 }

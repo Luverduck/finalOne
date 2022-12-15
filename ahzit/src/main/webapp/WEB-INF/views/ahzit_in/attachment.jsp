@@ -34,19 +34,16 @@
 						아지트 종류 : ${ahzitVO.getAhzitSort()}<br>
 						아지트 리더 : ${ahzitVO.getAhzitLeader()}<br>
 						
-						<%-- 아지트 가입 폼 --%>
-						<form action="insert" method="post">	
-							<input type="hidden" name="ahzitNo"  value="${ahzitVO.getAhzitNo()}">
-							<%-- 아지트 가입버튼 --%>
-							<c:choose>
-							<c:when test="${ahzitMemberDto.getMemberId() == null}"><%-- 소모임 회원이 아니면 --%>
-							<button type="submit">아지트 가입</button>
-							</c:when>
-							<c:otherwise>
-							<button type="submit"  disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
-							</c:otherwise>
-							</c:choose>
-						</form>
+			            <%-- 아지트 가입 버튼 --%>
+			            <c:choose>
+						<c:when test="${ahzitMemberDto.getMemberId() == null}"><%-- 소모임 회원이 아니면 --%>
+						<button type="button" onclick="location.href='${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert'">아지트 가입</button>
+						</c:when>
+						<c:otherwise>
+						<button type="button"  disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
+						</c:otherwise>
+						</c:choose>
+         
 					</div>
 					
 					<div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
@@ -62,7 +59,26 @@
 				
 				<%-- 가운데 내용 --%>
 				<div class = "col col-6">
-					첨부파일 관리
+						<h2>첨부 모아보기</h2>
+						<div>
+							<form action="attach" method="get" enctype="multipart/form-data">
+								<input type="file" name="attachment" multiple>
+								<button type="submit">첨부하기</button>
+							</form>
+						</div>
+						
+						
+				<c:if test="${not list.isEmpty()}">
+					<ul>
+						<c:forEach var="attachmentDto" items="${attachmentList}">
+							<li>${attachmentDto.attachmentName} <br>
+							(${attachmentDto.attachmentSize} bytes) &nbsp; · &nbsp;
+							 ${attachmentDto.attachmentDate} &nbsp; &nbsp;
+							<a href="/attachment/download?attachmentNo=${attachmentDto.attachmentNo}"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+							</li>
+						</c:forEach>
+					</ul>
+				</c:if>
 				</div>
 				
 				<%-- 오른쪽 사이드바 --%>

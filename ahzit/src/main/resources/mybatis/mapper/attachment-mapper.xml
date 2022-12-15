@@ -72,6 +72,13 @@
 	<delete id = "deleteInquireAttachment" parameterType = "int">
 		delete inquire_attachment where inquire_attachment_no = #{attachmentNo}
 	</delete>
+	
+	<!-- 아지트 회원 프로필 이미지 첨부파일 테이블 등록 -->
+	<insert id="insertAhzitMemberAttachment" parameterType="map">
+		insert into member_attachment(member_origin_no, member_attachment_no) values (#{memberOriginNo}, #{memberAttachmentNo})
+	</insert>
+	
+	
 
 	
 </mapper>

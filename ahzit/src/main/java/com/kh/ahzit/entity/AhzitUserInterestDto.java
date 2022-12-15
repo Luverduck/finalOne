@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class AhzitUserInterestDto {
-	private int userInterestNo;
 	private String userInterestId;
 	private String userInterestSort;
 }

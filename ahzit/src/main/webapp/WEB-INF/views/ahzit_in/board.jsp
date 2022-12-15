@@ -30,7 +30,6 @@
 		border-radius: 50%;
 		width: 100%;
 	}
-
 	.div-editor-opener,
 	.div-editor-input {
 		border-radius: 10px;
@@ -39,7 +38,6 @@
 		padding-left: 2%;
 		color: rgba(140, 140, 140, 140);
 	}
-
   	.div-board-container{
     	border-radius: 10px 10px;  
   	}
@@ -79,10 +77,11 @@
 		font-size: 20px;
 	}
 	
-	.chal-img {
-		width : 250px;
-		height : 250px;		
-	}
+	ahzit-img {
+      	width : 400px;
+      	height : 400px;      
+   	}
+   	
   	.shadow rounded-3{
     	border-radius: 50px 50px;
   	}
@@ -90,7 +89,6 @@
 	@keyframes heart-on {
         from {color:black;}
         to {color:#FF8681;}
-
         0% {transform: rotate(10deg);}
         5% {transform: rotate(-10deg);}
         10% {transform: rotate(10deg);}
@@ -115,7 +113,6 @@
 	@keyframes heart-off {
         from {color:#FF8681;}
         to {color:black;}
-
         0% {transform: rotate(10deg);}
         5% {transform: rotate(-10deg);}
         10% {transform: rotate(10deg);}
@@ -136,7 +133,6 @@
         animation-duration: 1s;
         animation-iteration-count: 1;
 	}
-
 	.div-reply,
 	.btn-reply-edit-submit,
 	.btn-reply-edit-cancel
@@ -163,7 +159,6 @@
 	.btn-reply-edit-cancel {
 	  	color: #FEC260; 
 	}
-
 </style>
 
 
@@ -179,18 +174,22 @@
 				<div class = "col-3" style="background-color: #dff9fb;">
 					<h1>왼쪽 사이드바</h1> 
 					<br>
-					<%-- 아지트 정보 --%>
-		           	<c:forEach var = "list" items = "${attachmentList}">
-		             	<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" > 					
-		           	</c:forEach>	
-		           	
-		           	<div class = "row">
-		           		아지트 이름 : ${ahzitVO.getAhzitName()} <br>
+					<%--아지트 프로필 사진 --%>
+          			<c:if test="${attachmentList.isEmpty()}"> <%--미설정시 기본 프로필 --%>
+				    	<img src = "/images/bg_default.jpg" class="ahzit-img">
+			    	</c:if>
+		      		<c:forEach var = "list" items = "${attachmentList}"> <%--설정한 프로필 --%>
+		        		<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img">  					
+		      		</c:forEach>	
+          
+		      		<%-- 아지트 정보 --%>     	
+		      		<div class = "row">
+		        		아지트 이름 : ${ahzitVO.getAhzitName()} <br>
 						아지트 소개 : ${ahzitVO.getAhzitInfo()}<br>
 						아지트 멤버 : ${ahzitVO.getAhzitHead()} 명<br>
 						아지트 종류 : ${ahzitVO.getAhzitSort()}<br>
 						아지트 리더 : ${ahzitVO.getAhzitLeader()}<br>
-		           	</div>
+		      		</div>
 					
 					<div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
 						로그인 중인 회원 번호 : ${ahzitMemberDto.memberNo}<br>
@@ -201,20 +200,21 @@
 						로그인 중인 회원 활동 점수 : ${ahzitMemberDto.memberGrade}<br>
 						소모임 가입일 : ${ahzitMemberDto.memberJoindate}
 					</div>
-							
-					<%-- 아지트 가입 폼 --%>
-					<form action="insert" method="post">	
-						<input type="hidden" name="ahzitNo"  value="${ahzitVO.getAhzitNo()}">
-						<%-- 아지트 가입버튼 --%>
-						<c:choose>
-						<c:when test="${ahzitMemberDto.getMemberId() == null}"><%-- 소모임 회원이 아니면 --%>
-						<button type="submit">아지트 가입</button>
-						</c:when>
-						<c:otherwise>
-						<button type="submit"  disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
-						</c:otherwise>
-						</c:choose>
-					</form>
+          
+					<%-- 아지트 가입 버튼 --%>
+		          	<c:choose>
+				    <c:when test="${ahzitMemberDto.getMemberId() == null}"><%-- 소모임 회원이 아니면 --%>
+				    	<button type="button" onclick="location.href='${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert'">아지트 가입</button>
+				    </c:when>
+				    <c:otherwise>
+				    	<button type="button"  disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
+				    </c:otherwise>
+				    </c:choose>
+			    
+				    <c:if test="${ahzitMemberDto.memberId==sessionScope.loginId}">
+						<a href="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/editMyInfo"><span>내 정보 수정</span></a>
+				 	</c:if>
+			    
 				</div>
 				
 				<%-- 가운데 내용 --%>
@@ -547,7 +547,6 @@
 			}
 		});
 	});
-
 </script>
 
 <%-- 게시글 관련 script --%>
@@ -615,7 +614,6 @@
 				target.append(divbottom_label_right);
 			}); 
 		});
-
 		// 게시글 작성 비동기 처리
 		// - 게시글 작성 영역 클릭시 게시글 작성 Modal 열기
 		$(".editor-open-insert").click(function(){

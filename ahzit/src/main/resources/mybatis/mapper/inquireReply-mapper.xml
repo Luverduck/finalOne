@@ -36,4 +36,9 @@
 	<delete id = "delete" parameterType = "InquireReplyDto">
 		delete inquire_reply where inquire_reply_no = #{inquireReplyNo}
 	</delete>
+	
+	<!-- 게시판상태 업데이트 -->
+	<update id = "ansUpdate" parameterType = "InquireReplyDto" >
+		update inquire set inquire_state = 'Y' where inquire_no = #{inquireOriginNo}
+	</update>
 </mapper>

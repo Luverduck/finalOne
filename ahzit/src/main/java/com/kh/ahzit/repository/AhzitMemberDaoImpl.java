@@ -31,7 +31,30 @@ public class AhzitMemberDaoImpl implements AhzitMemberDao {
 	public List<AhzitMemberListVO> select(int ahzitNo) {
 		return sqlSession.selectList("ahzitMember.ahzitMemberList",ahzitNo);
 	}
+	
+	//소모임 가입시 닉네임 중복검사
+	@Override
+	public boolean nicknameCheck(AhzitMemberDto ahzitMemberDto) {
+		int count=sqlSession.selectOne("ahzitMember.nicknameCheck", ahzitMemberDto);
+		return count==0;//count가 0이다=중복이 없다=true
+	}
 
+	//소모임 회원번호 시퀀스 넘버 발행
+	@Override
+	public int sequence() {
+		return sqlSession.selectOne("ahzitMember.sequence");
+	}
+	
+	@Override
+	public boolean updateMember(AhzitMemberDto ahzitMemberDto) {
+		int count=sqlSession.update("ahzitMember.updateMember", ahzitMemberDto);
+		return count>0;
+	}
+
+	@Override
+	public AhzitMemberDto findMember(int memberNo) {
+		return sqlSession.selectOne("ahzitMember.findMember",memberNo);
+	}
 
 
 }

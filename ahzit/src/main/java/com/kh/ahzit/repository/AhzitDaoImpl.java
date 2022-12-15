@@ -39,24 +39,24 @@ public class AhzitDaoImpl implements AhzitDao {
 		return sqlSession.selectList("ahzit.list");
 	}
 
-	//소모임 수정
-	@Override
-	public int ahzitEdit(AhzitDto ahzitDto) {
-		// sql에서 소모임장 여부도 같이 판단
-		return sqlSession.update("ahzit.edit",ahzitDto);
-	}
-	
 	//소모임 단일조회
 	@Override
 	public AhzitDto selectOne(int ahzitNo) {
 		return sqlSession.selectOne("ahzit.one", ahzitNo);
 	}	
 	
+	//아지트 수정 메소드
+	@Override
+	public boolean update(AhzitDto ahzitDto) {
+		int count = sqlSession.update("ahzit.update", ahzitDto);
+		return count > 0;
+	}
+	
 	//소모임 삭제
   @Override
-	public boolean delete(AhzitDto ahzitDto) {
-		int count=sqlSession.delete("ahzit.delete", ahzitDto);
-		return count>0;	
+	public boolean delete(int ahzitNo) {
+		int count=sqlSession.delete("ahzit.delete", ahzitNo);
+		return count > 0;	
 
 	}
 
@@ -88,6 +88,25 @@ public class AhzitDaoImpl implements AhzitDao {
 	public boolean updateAhzitPerson(int ahzitNo) {
 		int count = sqlSession.update("ahzitMember.update", ahzitNo);
 		return count > 0;
+	}
+
+	//ahzit_member 테이블에서 아지트 번호로 count한 결과값을 인원수에 반영
+	@Override
+	public boolean updateAhzitHead2(int ahzitNo) {
+		int count=sqlSession.update("ahzitMember.updateAhzitHead2",ahzitNo);
+		return count>0;
+	}
+	
+	@Override//일반회원 아지트(소모임) 탈퇴용 메소드
+	public boolean deleteCommonMember(int memberNo) {
+		int count=sqlSession.delete("ahzitMember.deleteCommonMember",memberNo);
+		return count>0;
+	}
+
+	@Override
+	public void insertMember2(AhzitMemberDto ahzitMemberDto) {
+		sqlSession.insert("ahzitMember.insert2", ahzitMemberDto);
+		
 	}
 
 }
