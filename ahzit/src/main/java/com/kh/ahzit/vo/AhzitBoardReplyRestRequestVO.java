@@ -19,13 +19,21 @@ public class AhzitBoardReplyRestRequestVO {
 	private int cntRow = 5;  // 한 게시글에 표시할 댓글 갯수 (고정값)
 	
 	// 메소드
-	// - 현재 페이지 열 시작 번호 반환
+	// - 댓글 열 시작 번호
 	public int rownumStart() {
 		return (rownumEnd() - cntRow) + 1;
 	}
 	
-	// - 현재 페이지 열 끝 번호 반환
+	// - 댓글 열 끝 번호
 	public int rownumEnd() {
 		return rp * cntRow;
+	}
+	
+	// 마지막 댓글 페이지 블럭을 구하기 위한 댓글 총 수
+	private int total;
+	
+	// 마지막 댓글 페이지 블럭
+	public int blockLast() {
+		return (total + (cntRow - 1)) / cntRow;
 	}
 }

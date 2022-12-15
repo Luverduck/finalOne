@@ -316,23 +316,121 @@
 <%-- 댓글 관련 script --%>
 <script type="text/javascript">
 
-	// 초기 댓글 페이지는 1페이지로
-	var rp = 1;
+	var memberNo = $("#div-member-info").data("memberno"); // 로그인 중인 회원 번호
+	var rp = 1; // 댓글 페이지 번호
 	
-
 	$(function(){
+		
+		// 댓글 더보기
+		$(document).on("click", ".btn-reply-more", function(){
+			
+			var target = $(this).parent();
+			
+			var boardNo = $(this).data("boardno");
+			
+			// 현재 댓글 페이지
+			var thisRp = Number($(this).attr("data-rp"));
+			
+			// 총 댓글 페이지
+			var rpLast = $(this).data("rplast");
+			
+			// 현재 댓글 페이지가 댓글 마지막 페이지와 같다면 비동기 조회 차단
+			if(thisRp == rpLast) {
+				return;
+			} else {
+				var nextRp = thisRp + 1;
+				$(this).attr("data-rp", nextRp);
+			}
+			
+			axios({
+				url : "http://localhost:8888/rest_reply/list",
+				method : "post",
+				data : {
+					boardNo : boardNo,
+					rp : nextRp
+				}
+			})
+			.then(function(response){
+				console.log(response);
+				for(var i = 0 ; i < response.data.replyList.length ; i ++){
+					// 댓글 리스트
+					// 1) 댓글 외부 컨테이너
+					var div_reply_outer_container = $("<div>").attr("class", "d-flex flex-column align-items-start px-3 py-1 border-top div-board div-reply div-reply-container");
+					// 2) 댓글 내부 컨테이너
+					var div_reply_inner_container = $("<div>").attr("class", "col w-100 d-flex ps-1 py-2 border-3");
+					
+					// 2-1) span 태그
+					var span_reply_member_img_container = $("<span>").attr("class", "div-reply-member-profile");
+					var img_reply_member_img = $("<img>").attr("class", "img-member-profile").attr("src", "https://placeimg.com/65/65/any");
+					var span_reply_member_img = span_reply_member_img_container.append(img_reply_member_img);
+					
+					// 2-2) 
+					var div_reply_writer_container = $("<div>").attr("class", "ms-3 w-100 d-flex flex-column");
+					
+					var p_reply_writer = $("<p>").attr("class", "mb-0 p-writer-info div-reply-text").text(response.data.replyList[i].memberNick + response.data.replyList[i].memberGrade);
+					
+					var div_reply_content_outer_container = $("<div>").attr("class", "w-100 div-reply div-reply-text");
+					var p_reply_content = $("<p>").attr("class", "px-1 py-2 div-reply-text mb-0").text(response.data.replyList[i].replyContent);
+					var div_reply_content = div_reply_content_outer_container.append(p_reply_content);
+					
+					var div_reply_editor_container = $("<div>").attr("class", "d-none flex-wrap p-2 my-2 border border-2 div-reply-editor");
+					var input_reply_editor = $("<input>").attr("class", "d-flex w-100 p-2 mb-1 input-reply-editor");
+					var btn_reply_edit = $("<button>").attr("class", "border-0 btn-reply-edit-submit").text("수정");
+					var btn_reply_cancel = $("<button>").attr("class", "border-0 btn-reply-edit-cancel").text("취소");
+					var div_reply_editor = div_reply_editor_container.append(input_reply_editor).append(btn_reply_edit).append(btn_reply_cancel);
+					
+					var p_reply_writedate = $("<p>").attr("class", "mb-0 div-reply-text").text(response.data.replyList[i].replyWritedate);
+					
+					var div_reply_info = div_reply_writer_container.append(p_reply_writer).append(div_reply_content).append(div_reply_editor).append(p_reply_writedate);
+					
+					// 2-3)
+					var div_reply_dropdown_container = $("<div>").attr("class", "dropdown div-icon-dropdown");
+					var a_reply_dropdown_trigger = $("<a>").attr("class", "fa-solid fa-ellipsis-vertical a-board-dropdown icon-board w-100").attr("data-bs-toggle", "dropdown");
+					var ul_reply_dropdown_container = $("<ul>").attr("class", "dropdown-menu");
+					var li_reply_dropdown_edit_container = $("<li>").attr("class", "li-reply-edit");
+					var a_reply_dropdown_edit = $("<a>").attr("class", "dropdown-item btn-reply-edit").attr("data-replyno", response.data.replyList[i].replyNo).text("수정");
+					var li_reply_dropdown_delete_container = $("<li>").attr("class", "li-reply-delete");
+					var a_reply_dropdown_delete = $("<a>").attr("class", "dropdown-item btn-reply-delete").attr("data-replyno", response.data.replyList[i].replyNo).text("삭제");
+					
+					var li_reply_dropdown_edit = li_reply_dropdown_edit_container.append(a_reply_dropdown_edit);
+					var li_reply_dropdown_delete = li_reply_dropdown_delete_container.append(a_reply_dropdown_delete);
+					
+					var ul_reply_dropdown = ul_reply_dropdown_container.append(li_reply_dropdown_edit).append(li_reply_dropdown_delete);
+					
+					var div_reply_dropdown = div_reply_dropdown_container.append(a_reply_dropdown_trigger).append(ul_reply_dropdown);
+					
+					var div_reply_inner = div_reply_inner_container.append(span_reply_member_img).append(div_reply_info).append(div_reply_dropdown);
+					
+					var div_reply_outer = div_reply_outer_container.append(div_reply_inner);
+					
+					// 더보기 버튼
+					var div_reply_more_container = $("<div>").attr("class", "d-flex justify-content-center align-items-center border-top border-bottom div-reply-more");
+					var div_reply_more_button = $("<button>").attr("class", "col d-flex justify-content-center align-items-center border-0 btn-reply-more").attr("data-boardno", boardNo).text("더보기");
+					
+					var div_reply_more = div_reply_more_container.append(div_reply_more_button);
+					
+					target.before(div_reply_outer);
+				};
+				
+				if(nextRp == rpLast) { // 마지막 댓글 페이지일 경우 더보기 삭제
+					target.remove();
+				}
+			})
+			
+		});
+		
 		// 댓글 목록 조회
 		$(document).on("click", ".btn-reply-write", function(event){
 			event.stopPropagation();
 			// 태그 생성
 			var boardNo = $(this).data("boardno"); // 댓글 원본 번호
-			var memberNo = $("#div-member-info").data("memberno"); // 로그인 중인 회원 번호
+			
 			var target = $(this).parents(".div-reply-button").next();
 			
 			var fold_state = $(this).attr("data-fold");
 			var reply_list_state = $(this).attr("data-replylist");
 			
-			console.log("현재 상태 = " + fold_state);
+			//console.log("현재 상태 = " + fold_state);
 			
 			if(fold_state == "1") { // 펼친 상태이면(1)
 				$(this).attr("data-fold", "0"); // 접힌 상태로 바꾸기(0)
@@ -355,10 +453,12 @@
 						}
 					})
 					.then(function(response){
-						console.log(response);
+						
+						//console.log(response.data.rpLast);
+						//rpLast = response.data.rpLast;
 						
 						if(response.data.length != 0) {
-							for(var i = 0 ; i < response.data.length ; i ++){
+							for(var i = 0 ; i < response.data.replyList.length ; i ++){
 								// 댓글 리스트
 								// 1) 댓글 외부 컨테이너
 								var div_reply_outer_container = $("<div>").attr("class", "d-flex flex-column align-items-start px-3 py-1 border-top div-board div-reply div-reply-container");
@@ -373,10 +473,10 @@
 								// 2-2) 
 								var div_reply_writer_container = $("<div>").attr("class", "ms-3 w-100 d-flex flex-column");
 								
-								var p_reply_writer = $("<p>").attr("class", "mb-0 p-writer-info div-reply-text").text(response.data[i].memberNick + response.data[i].memberGrade);
+								var p_reply_writer = $("<p>").attr("class", "mb-0 p-writer-info div-reply-text").text(response.data.replyList[i].memberNick + response.data.replyList[i].memberGrade);
 								
 								var div_reply_content_outer_container = $("<div>").attr("class", "w-100 div-reply div-reply-text");
-								var p_reply_content = $("<p>").attr("class", "px-1 py-2 div-reply-text mb-0").text(response.data[i].replyContent);
+								var p_reply_content = $("<p>").attr("class", "px-1 py-2 div-reply-text mb-0").text(response.data.replyList[i].replyContent);
 								var div_reply_content = div_reply_content_outer_container.append(p_reply_content);
 								
 								var div_reply_editor_container = $("<div>").attr("class", "d-none flex-wrap p-2 my-2 border border-2 div-reply-editor");
@@ -385,7 +485,7 @@
 								var btn_reply_cancel = $("<button>").attr("class", "border-0 btn-reply-edit-cancel").text("취소");
 								var div_reply_editor = div_reply_editor_container.append(input_reply_editor).append(btn_reply_edit).append(btn_reply_cancel);
 								
-								var p_reply_writedate = $("<p>").attr("class", "mb-0 div-reply-text").text(response.data[i].replyWritedate);
+								var p_reply_writedate = $("<p>").attr("class", "mb-0 div-reply-text").text(response.data.replyList[i].replyWritedate);
 								
 								var div_reply_info = div_reply_writer_container.append(p_reply_writer).append(div_reply_content).append(div_reply_editor).append(p_reply_writedate);
 								
@@ -394,9 +494,9 @@
 								var a_reply_dropdown_trigger = $("<a>").attr("class", "fa-solid fa-ellipsis-vertical a-board-dropdown icon-board w-100").attr("data-bs-toggle", "dropdown");
 								var ul_reply_dropdown_container = $("<ul>").attr("class", "dropdown-menu");
 								var li_reply_dropdown_edit_container = $("<li>").attr("class", "li-reply-edit");
-								var a_reply_dropdown_edit = $("<a>").attr("class", "dropdown-item btn-reply-edit").attr("data-replyno", response.data[i].replyNo).text("수정");
+								var a_reply_dropdown_edit = $("<a>").attr("class", "dropdown-item btn-reply-edit").attr("data-replyno", response.data.replyList[i].replyNo).text("수정");
 								var li_reply_dropdown_delete_container = $("<li>").attr("class", "li-reply-delete");
-								var a_reply_dropdown_delete = $("<a>").attr("class", "dropdown-item btn-reply-delete").attr("data-replyno", response.data[i].replyNo).text("삭제");
+								var a_reply_dropdown_delete = $("<a>").attr("class", "dropdown-item btn-reply-delete").attr("data-replyno", response.data.replyList[i].replyNo).text("삭제");
 								
 								var li_reply_dropdown_edit = li_reply_dropdown_edit_container.append(a_reply_dropdown_edit);
 								var li_reply_dropdown_delete = li_reply_dropdown_delete_container.append(a_reply_dropdown_delete);
@@ -420,7 +520,7 @@
 							
 							// 더보기 버튼
 							var div_reply_more_container = $("<div>").attr("class", "d-flex justify-content-center align-items-center border-top border-bottom div-reply-more");
-							var div_reply_more_button = $("<button>").attr("class", "col d-flex justify-content-center align-items-center border-0 btn-reply-more").attr("data-boardno", boardNo).text("더보기");
+							var div_reply_more_button = $("<button>").attr("class", "col d-flex justify-content-center align-items-center border-0 btn-reply-more").attr("data-boardno", boardNo).attr("data-rp", 1).attr("data-rplast", response.data.rpLast).text("더보기");
 							
 							var div_reply_more = div_reply_more_container.append(div_reply_more_button);
 							target.append(div_reply_more);
@@ -459,6 +559,9 @@
 	// 초기 검색어
 	var keyword = "";
 	
+	// 총 댓글 수
+	var pLast;
+	
 	// 초기 게시글 목록 비동기 조회
 	loadList();
 	
@@ -494,6 +597,7 @@
 				}
 			})
 			.then(function(response){
+				
 				$(btnThis).remove();
 				
 				var divbottom_label_like = $("<label>").attr("class", "btn-board-like col d-flex justify-content-center align-items-center button-board").attr("data-boardno", response.data.boardNo).attr("data-boardlike", response.data.boardLike).attr("data-islike", response.data.isLike);
@@ -750,6 +854,7 @@
 				}
 			})
 			.then(function(response){
+				
 				// 게시글 작성 영역 삭제 (게시글 작성시 검색 목록이 아닌 전체 목록의 가장 상단에 붙여야 하지만 페이지를 갱신하지 않고는 어려운 것 같다)
 				$(".div-editor-insert").remove();
 				$("#div-board-list").empty();
@@ -840,11 +945,14 @@
 	// 무한 스크롤
 	$(window).scroll(_.debounce(function(){
 		var percentage = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100;
+		
+		if(p == pLast) return; // 페이지 끝 번호에 도달하면 비동기 조회 요청을 보내지 않도록 설정
+		
 		if(percentage > 80) {
 			p = p + 1;
 			var ahzitNo = $("#div-member-info").data("ahzitno");
 			var memberNo = $("#div-member-info").data("memberno");
-			//var p = 1;
+			
 			axios({
 				url : "http://localhost:8888/rest_board/search",
 				method : "post",
@@ -856,6 +964,7 @@
 				}
 			})
 			.then(function(response){
+				
 				for(var i = 0 ; i < response.data.boardList.length ; i ++){
 					var divtop_outer = $("<div>").attr("class", "d-flex align-items-start px-3 pt-3 mt-3 div-board div-board-top");
 					
@@ -935,7 +1044,6 @@
 				}
 			});
 		}
-		if(percentage == 100) return;
 	}, 100));
 	
 	// 게시글 목록 갱신 함수
@@ -955,6 +1063,9 @@
 			}
 		})
 		.then(function(response){
+			pLast = response.data.plast; // 끝 페이지에 도달하면 비동기 조회를 막기 위해 페이지 끝 번호 설정
+			//console.log(pLast);
+			
 			$("#div-board-list").empty();
 			for(var i = 0 ; i < response.data.boardList.length ; i ++){
 				var div_container = $("<div>").attr("class", "shadow div-board-container"); // 그림자를 위한 컨테이너 태그
