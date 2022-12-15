@@ -207,8 +207,8 @@ public class AhzitInController {
 
 	@GetMapping("/{memberNo}/deleteCommonMember")//소모임 탈퇴기능
 	public String deleteCommonMember(@PathVariable int memberNo, Model model, RedirectAttributes attr) {
-		AhzitMemberDto findDto=ahzitMemberDao.findMember(memberNo);
-		int ahzitNo=findDto.getMemberAhzitNo();
+		AhzitMemberDto findDto=ahzitMemberDao.findMember(memberNo);//회원고유번호로 ahzitMemberDto조회
+		int ahzitNo=findDto.getMemberAhzitNo();//조회한 ahzitMemberDto에서 아지트 번호 반환
 		boolean result=ahzitDao.deleteCommonMember(memberNo);
 		if(result) {
 			ahzitDao.updateAhzitHead2(ahzitNo);//탈퇴 성공시 ahzit_head 변경

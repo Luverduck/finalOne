@@ -9,6 +9,7 @@
   			select ahzit_member_seq.nextval from dual
   	</select>
  
+ 	<!-- 소모임 가입 -->
 	<insert id="insert" parameterType="AhzitMemberDto" >
   		insert into ahzit_member(
   			member_no, member_ahzit_no, member_id, member_joindate, member_nick )
@@ -16,6 +17,15 @@
   			ahzit_member_seq.nextval, #{memberAhzitNo}, #{memberId}, sysdate, #{memberNick} )
    </insert>
    
+   <!-- 소모임 가입(회원번호 시퀀스 미리 발행 후 사용) -->
+   <insert id="insert2" parameterType="AhzitMemberDto" >
+  		insert into ahzit_member(
+  			member_no, member_ahzit_no, member_id, member_joindate, member_nick )
+  		values (
+  			#{memberNo}, #{memberAhzitNo}, #{memberId}, sysdate, #{memberNick} )
+   </insert>
+   
+   <!-- 소모임 가입 시 소모임 회원수 +1 증가 -->
    <update id="update" parameterType="AhzitMemberDto">
    		update ahzit
    			set
