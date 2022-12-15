@@ -25,4 +25,7 @@ public class AhzitBoardVO {
 	
 	// - 좋아요 여부
 	private int isLike;
+	
+	// - 회원 프로필 번호
+	private int memberAttachmentNo;
 }

@@ -35,6 +35,12 @@
 	
 	<!-- jQuery CDN -->
     <script src = "https://code.jquery.com/jquery-3.6.1.js"></script>
+    
+    <!-- Summer Note CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.js"></script>
+	
+	<!-- Summer Note CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.css" rel="stylesheet">
   	
     <style>
         * {
