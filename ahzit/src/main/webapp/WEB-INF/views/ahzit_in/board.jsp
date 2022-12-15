@@ -39,6 +39,10 @@
 		padding-left: 2%;
 		color: rgba(140, 140, 140, 140);
 	}
+
+  	.div-board-container{
+    	border-radius: 10px 10px;  
+  	}
 	
 	.div-board {
 		background-color: white;
@@ -49,7 +53,8 @@
 		border-top-right-radius: 10px;
 	}
 	
-	.div-board-bottom {
+	.div-board-bottom,
+  	.div-reply-bottom {
 		border-bottom-left-radius: 10px;
 		border-bottom-right-radius: 10px;
 	}
@@ -62,7 +67,8 @@
 		width : 20px;
 	}
 	
-	.button-board {
+	.button-board,
+  	.btn-reply-more {
 		cursor: pointer;
 		align-content: center;
 	}
@@ -77,16 +83,25 @@
 		width : 250px;
 		height : 250px;		
 	}
+  	.shadow rounded-3{
+    	border-radius: 50px 50px;
+  	}
 	
 	@keyframes heart-on {
         from {color:black;}
         to {color:#FF8681;}
 
-        0% {transform: translate(0, 0%);}
-        25% {transform: translate(0, 5%)}
-        50% {transform: translate(0, -5%)}
-        75% {transform: translate(0, 5%)}
-        100% {transform: translate(0, 0%)}
+        0% {transform: rotate(10deg);}
+        5% {transform: rotate(-10deg);}
+        10% {transform: rotate(10deg);}
+        15% {transform: rotate(-10deg);}
+        20% {transform: rotate(10deg);}
+        25% {transform: rotate(-10deg);}
+        30% {transform: rotate(10deg);}
+        35% {transform: rotate(-10deg);}
+        40% {transform: rotate(10deg);}
+        45% {transform: rotate(-10deg);}
+        50% {transform: rotate(0deg);}
     }
   
  	.icon-board-like-on {
@@ -101,11 +116,17 @@
         from {color:#FF8681;}
         to {color:black;}
 
-        0% {transform: translate(0, 0%);}
-        25% {transform: translate(0, -5%)}
-        50% {transform: translate(0, 5%)}
-        75% {transform: translate(0, -5%)}
-        100% {transform: translate(0, 0%)}
+        0% {transform: rotate(10deg);}
+        5% {transform: rotate(-10deg);}
+        10% {transform: rotate(10deg);}
+        15% {transform: rotate(-10deg);}
+        20% {transform: rotate(10deg);}
+        25% {transform: rotate(-10deg);}
+        30% {transform: rotate(10deg);}
+        35% {transform: rotate(-10deg);}
+        40% {transform: rotate(10deg);}
+        45% {transform: rotate(-10deg);}
+        50% {transform: rotate(0deg);}
     }
   
  	.icon-board-like-off {
@@ -116,6 +137,33 @@
         animation-iteration-count: 1;
 	}
 
+	.div-reply,
+	.btn-reply-edit-submit,
+	.btn-reply-edit-cancel
+	.div-reply-more, .btn-reply-more {
+	  	background-color: rgba(250, 250, 250, 100);
+	}
+	
+	.div-reply-member-profile {
+	  	width: 60px;
+	  	height : 60px;
+	}
+	
+	.span-reply-writer-profile {
+	  	width: 40px;
+	  	height: 40px;
+	}
+	
+	.div-reply-text {
+	  	font-size: 14px;
+	}
+	
+	/* 수정, 수정 취소 버튼 */
+	.btn-reply-edit-submit,
+	.btn-reply-edit-cancel {
+	  	color: #FEC260; 
+	}
+
 </style>
 
 
@@ -123,142 +171,286 @@
 	
 	<div class = "row">
 			
-		<%-- 왼쪽 사이드바 --%>
-		<div class = "col col-3" style="background-color: green;">
-			<h1>왼쪽 사이드바</h1> 
-		
-			<br>
+		<div class = "col-8 offset-2">
 			
 			<div class = "row">
-				<%-- 아지트 정보 --%>
-	           	<c:forEach var = "list" items = "${attachmentList}">
-	             	<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" > 					
-	           	</c:forEach>	
-				아지트 이름 : ${ahzitVO.getAhzitName()} <br>
-				아지트 소개 : ${ahzitVO.getAhzitInfo()}<br>
-				아지트 멤버 : ${ahzitVO.getAhzitHead()} 명<br>
-				아지트 종류 : ${ahzitVO.getAhzitSort()}<br>
-				아지트 리더 : ${ahzitVO.getAhzitLeader()}<br>
+			
+				<%-- 왼쪽 사이드바 --%>
+				<div class = "col-3" style="background-color: #dff9fb;">
+					<h1>왼쪽 사이드바</h1> 
+					<br>
+					<%-- 아지트 정보 --%>
+		           	<c:forEach var = "list" items = "${attachmentList}">
+		             	<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" > 					
+		           	</c:forEach>	
+		           	
+		           	<div class = "row">
+		           		아지트 이름 : ${ahzitVO.getAhzitName()} <br>
+						아지트 소개 : ${ahzitVO.getAhzitInfo()}<br>
+						아지트 멤버 : ${ahzitVO.getAhzitHead()} 명<br>
+						아지트 종류 : ${ahzitVO.getAhzitSort()}<br>
+						아지트 리더 : ${ahzitVO.getAhzitLeader()}<br>
+		           	</div>
+					
+					<div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
+						로그인 중인 회원 번호 : ${ahzitMemberDto.memberNo}<br>
+						회원이 가입한 아지트 번호 : ${ahzitMemberDto.memberAhzitNo}<br>
+						로그인 중인 회원 아이디 : ${ahzitMemberDto.memberId}<br>
+						로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberId}<br>
+						로그인 중인 회원 등급 : ${ahzitMemberDto.memberGrade}<br>
+						로그인 중인 회원 활동 점수 : ${ahzitMemberDto.memberGrade}<br>
+						소모임 가입일 : ${ahzitMemberDto.memberJoindate}
+					</div>
+							
+					<%-- 아지트 가입 폼 --%>
+					<form action="insert" method="post">	
+						<input type="hidden" name="ahzitNo"  value="${ahzitVO.getAhzitNo()}">
+						<%-- 아지트 가입버튼 --%>
+						<c:choose>
+						<c:when test="${ahzitMemberDto.getMemberId() == null}"><%-- 소모임 회원이 아니면 --%>
+						<button type="submit">아지트 가입</button>
+						</c:when>
+						<c:otherwise>
+						<button type="submit"  disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
+						</c:otherwise>
+						</c:choose>
+					</form>
+				</div>
+				
+				<%-- 가운데 내용 --%>
+				<div class = "col-6">
+					<%-- 게시글 검색창 --%>
+					<div class = "row">
+						<div class = "col">
+							<div class = "d-flex ps-3 py-3 bg-white div-editor-opener">
+								<input type = "text" class = "input-search col-11 d-flex flex-fill div-editor-input py-1 px-2" placeholder = "검색어 입력">
+								<button class="col-1 d-flex align-items-center justify-content-center border-0 bg-white icon-editor-opener btn-search-submit">
+									<i class="fa-solid fa-magnifying-glass w-100"></i>
+								</button>
+							</div>
+						</div>
+					</div>
 						
-				<%-- 아지트 가입 폼 --%>
-				<form action="insert" method="post">	
-					<input type="hidden" name="ahzitNo"  value="${ahzitVO.getAhzitNo()}">
-					<%-- 아지트 가입버튼 --%>
-					<c:choose>
-					<c:when test="${ahzitMemberDto.getMemberId() == null}"><%-- 소모임 회원이 아니면 --%>
-					<button type="submit">아지트 가입</button>
-					</c:when>
-					<c:otherwise>
-					<button type="submit"  disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
-					</c:otherwise>
-					</c:choose>
-				</form>
-			</div>
-					
-			<div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
-				로그인 중인 회원 번호 : ${ahzitMemberDto.memberNo}<br>
-				회원이 가입한 아지트 번호 : ${ahzitMemberDto.memberAhzitNo}<br>
-				로그인 중인 회원 아이디 : ${ahzitMemberDto.memberId}<br>
-				로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberId}<br>
-				로그인 중인 회원 등급 : ${ahzitMemberDto.memberGrade}<br>
-				로그인 중인 회원 활동 점수 : ${ahzitMemberDto.memberGrade}<br>
-				소모임 가입일 : ${ahzitMemberDto.memberJoindate}
-			</div>
-		</div>
-				
-		<%-- 가운데 내용 --%>
-		<div class = "col col-6">
-			<%-- 게시글 검색창 --%>
-			<div class = "row">
-				<div class = "col">
-					<div class = "d-flex ps-3 py-3 bg-white div-editor-opener">
-						<input type = "text" class = "input-search col-11 d-flex flex-fill div-editor-input py-1 px-2" placeholder = "검색어 입력">
-						<button class="col-1 d-flex align-items-center justify-content-center border-0 bg-white icon-editor-opener btn-search-submit">
-							<i class="fa-solid fa-magnifying-glass w-100"></i>
-						</button>
+					<%-- 게시글 작성창 --%>
+					<div class = "row mt-3 div-editor-insert">
+						<div class = "col">
+							<div class = "d-flex ps-3 py-3 bg-white div-editor-opener">
+								<button class="col-11 d-flex flex-fill div-editor-opener editor-open-insert py-1 px-2" data-bs-toggle="modal" data-bs-target="#modal-insert">새 소식을 남겨보세요</button>
+								<button class="col-1 d-flex align-items-center justify-content-center border-0 bg-white icon-editor-opener editor-open-insert" data-bs-toggle="modal-insert" data-bs-target="#modal-insert">
+									<i class = "fa-solid fa-pen-to-square w-100"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+							
+					<%-- 게시글 목록 --%>
+					<div class = "row">
+						<div class = "col" id = "div-board-list"> <%-- 게시글 목록이 표시될 영역 --%>
+							
+						</div>		
+					</div>
+							
+					<%-- 게시글 작성 Modal --%>
+			        <div class="modal fade" id="modal-insert" tabindex="-1" data-bs-backdrop="static">
+			            <div class="modal-dialog modal-dialog-centered modal-lg">
+			                <div class="modal-content">
+			                    <!-- 모달 헤더 : 제목 영역 -->
+			                    <div class="modal-header">
+			                        <h5 class="modal-title">게시글 작성</h5>
+			                        <!-- X 버튼 -->
+			                        <button type="button" class="btn-close modal-insert-close" aria-label="Close"></button>
+			                    </div>
+			                    <!-- 모달 바디 -->
+			                    <div class="modal-body">
+			                        <!-- Summer Note 영역 - 게시글 작성 영역 -->
+			                        <textarea id = "summernote-insert"></textarea>
+			                    </div>
+			                    <!-- 모달 푸터 -->
+			                    <div class="modal-footer">
+			                        <button type="button" class="btn modal-insert-submit">작성</button>
+			                        <button type="button" class="btn modal-insert-close">닫기</button>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+					        
+			        <%-- 게시글 수정 Modal --%>
+					<div class="modal fade" id="modal-edit" tabindex="-1" data-bs-backdrop="static">
+			            <div class="modal-dialog modal-dialog-centered modal-lg">
+			                <div class="modal-content">
+			                    <!-- 모달 헤더 : 제목 영역 -->
+			                    <div class="modal-header">
+			                        <h5 class="modal-title">게시글 수정</h5>
+			                        <!-- X 버튼 -->
+			                        <button type="button" class="btn-close modal-edit-close" aria-label="Close"></button>
+			                    </div>
+			                    <!-- 모달 바디 -->
+			                    <div class="modal-body">
+			                        <!-- Summer Note 영역 - 게시글 수정 영역-->
+			                        <textarea id = "summernote-edit"></textarea>
+			                    </div>
+			                    <!-- 모달 푸터 -->
+			                    <div class="modal-footer">
+			                        <button type="button" class="btn modal-edit-submit">수정</button>
+			                        <button type="button" class="btn modal-edit-close">닫기</button>
+					        	</div>
+					    	</div>
+						</div>
 					</div>
 				</div>
-			</div>
 				
-			<%-- 게시글 작성창 --%>
-			<div class = "row mt-3 div-editor-insert">
-				<div class = "col">
-					<div class = "d-flex ps-3 py-3 bg-white div-editor-opener">
-						<button class="col-11 d-flex flex-fill div-editor-opener editor-open-insert py-1 px-2" data-bs-toggle="modal" data-bs-target="#modal-insert">새 소식을 남겨보세요</button>
-						<button class="col-1 d-flex align-items-center justify-content-center border-0 bg-white icon-editor-opener editor-open-insert" data-bs-toggle="modal-insert" data-bs-target="#modal-insert">
-							<i class = "fa-solid fa-pen-to-square w-100"></i>
-						</button>
+				<%-- 오른쪽 사이드바 --%>
+				<div class = "col-3" style="background-color: #dff9fb;">
+					<%-- 공지사항 목록 --%>
+					<div>
+							
 					</div>
 				</div>
+			
 			</div>
 					
-			<%-- 게시글 목록 --%>
-			<div class = "row">
-				<div class = "col" id = "div-board-list"> <%-- 게시글 목록이 표시될 영역 --%>
-					
-				</div>		
-			</div>
-					
-			<%-- 게시글 작성 Modal --%>
-	        <div class="modal fade" id="modal-insert" tabindex="-1" data-bs-backdrop="static">
-	            <div class="modal-dialog modal-dialog-centered modal-lg">
-	                <div class="modal-content">
-	                    <!-- 모달 헤더 : 제목 영역 -->
-	                    <div class="modal-header">
-	                        <h5 class="modal-title">게시글 작성</h5>
-	                        <!-- X 버튼 -->
-	                        <button type="button" class="btn-close modal-insert-close" aria-label="Close"></button>
-	                    </div>
-	                    <!-- 모달 바디 -->
-	                    <div class="modal-body">
-	                        <!-- Summer Note 영역 - 게시글 작성 영역 -->
-	                        <textarea id = "summernote-insert"></textarea>
-	                    </div>
-	                    <!-- 모달 푸터 -->
-	                    <div class="modal-footer">
-	                        <button type="button" class="btn modal-insert-submit">작성</button>
-	                        <button type="button" class="btn modal-insert-close">닫기</button>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-			        
-	        <%-- 게시글 수정 Modal --%>
-			<div class="modal fade" id="modal-edit" tabindex="-1" data-bs-backdrop="static">
-	            <div class="modal-dialog modal-dialog-centered modal-lg">
-	                <div class="modal-content">
-	                    <!-- 모달 헤더 : 제목 영역 -->
-	                    <div class="modal-header">
-	                        <h5 class="modal-title">게시글 수정</h5>
-	                        <!-- X 버튼 -->
-	                        <button type="button" class="btn-close modal-edit-close" aria-label="Close"></button>
-	                    </div>
-	                    <!-- 모달 바디 -->
-	                    <div class="modal-body">
-	                        <!-- Summer Note 영역 - 게시글 수정 영역-->
-	                        <textarea id = "summernote-edit"></textarea>
-	                    </div>
-	                    <!-- 모달 푸터 -->
-	                    <div class="modal-footer">
-	                        <button type="button" class="btn modal-edit-submit">수정</button>
-	                        <button type="button" class="btn modal-edit-close">닫기</button>
-			        	</div>
-			    	</div>
-				</div>
-			</div>
-		</div>
-				
-		<%-- 오른쪽 사이드바 --%>
-		<div class = "col-3" style="background-color: green;">
-
-			<%-- 공지사항 목록 --%>
-			<div>
-					
-			</div>
 		</div>
 	</div>
 </div>
 
+<%-- 댓글 관련 script --%>
+<script type="text/javascript">
+
+	// 초기 댓글 페이지는 1페이지로
+	var rp = 1;
+	
+
+	$(function(){
+		// 댓글 목록 조회
+		$(document).on("click", ".btn-reply-write", function(event){
+			event.stopPropagation();
+			// 태그 생성
+			var boardNo = $(this).data("boardno"); // 댓글 원본 번호
+			var memberNo = $("#div-member-info").data("memberno"); // 로그인 중인 회원 번호
+			var target = $(this).parents(".div-reply-button").next();
+			
+			var fold_state = $(this).attr("data-fold");
+			var reply_list_state = $(this).attr("data-replylist");
+			
+			console.log("현재 상태 = " + fold_state);
+			
+			if(fold_state == "1") { // 펼친 상태이면(1)
+				$(this).attr("data-fold", "0"); // 접힌 상태로 바꾸기(0)
+				// 접기 (hide)
+				target.hide();
+			} else { // 접힌 상태이면(0)
+				$(this).attr("data-fold", "1"); // 펼친 상태로 바꾸기(1)
+				if(reply_list_state == "1") { // 이미 조회한 상태라면
+					// 펴기 (hide)
+					target.show();
+				} else { // 최초 조회 상태라면
+					$(this).attr("data-replylist", "1"); // 조회한 상태로 변경
+					
+					axios({
+						url : "http://localhost:8888/rest_reply/list",
+						method : "post",
+						data : {
+							boardNo : boardNo,
+							rp : rp
+						}
+					})
+					.then(function(response){
+						console.log(response);
+						
+						if(response.data.length != 0) {
+							for(var i = 0 ; i < response.data.length ; i ++){
+								// 댓글 리스트
+								// 1) 댓글 외부 컨테이너
+								var div_reply_outer_container = $("<div>").attr("class", "d-flex flex-column align-items-start px-3 py-1 border-top div-board div-reply div-reply-container");
+								// 2) 댓글 내부 컨테이너
+								var div_reply_inner_container = $("<div>").attr("class", "col w-100 d-flex ps-1 py-2 border-3");
+								
+								// 2-1) span 태그
+								var span_reply_member_img_container = $("<span>").attr("class", "div-reply-member-profile");
+								var img_reply_member_img = $("<img>").attr("class", "img-member-profile").attr("src", "https://placeimg.com/65/65/any");
+								var span_reply_member_img = span_reply_member_img_container.append(img_reply_member_img);
+								
+								// 2-2) 
+								var div_reply_writer_container = $("<div>").attr("class", "ms-3 w-100 d-flex flex-column");
+								
+								var p_reply_writer = $("<p>").attr("class", "mb-0 p-writer-info div-reply-text").text(response.data[i].memberNick + response.data[i].memberGrade);
+								
+								var div_reply_content_outer_container = $("<div>").attr("class", "w-100 div-reply div-reply-text");
+								var p_reply_content = $("<p>").attr("class", "px-1 py-2 div-reply-text mb-0").text(response.data[i].replyContent);
+								var div_reply_content = div_reply_content_outer_container.append(p_reply_content);
+								
+								var div_reply_editor_container = $("<div>").attr("class", "d-none flex-wrap p-2 my-2 border border-2 div-reply-editor");
+								var input_reply_editor = $("<input>").attr("class", "d-flex w-100 p-2 mb-1 input-reply-editor");
+								var btn_reply_edit = $("<button>").attr("class", "border-0 btn-reply-edit-submit").text("수정");
+								var btn_reply_cancel = $("<button>").attr("class", "border-0 btn-reply-edit-cancel").text("취소");
+								var div_reply_editor = div_reply_editor_container.append(input_reply_editor).append(btn_reply_edit).append(btn_reply_cancel);
+								
+								var p_reply_writedate = $("<p>").attr("class", "mb-0 div-reply-text").text(response.data[i].replyWritedate);
+								
+								var div_reply_info = div_reply_writer_container.append(p_reply_writer).append(div_reply_content).append(div_reply_editor).append(p_reply_writedate);
+								
+								// 2-3)
+								var div_reply_dropdown_container = $("<div>").attr("class", "dropdown div-icon-dropdown");
+								var a_reply_dropdown_trigger = $("<a>").attr("class", "fa-solid fa-ellipsis-vertical a-board-dropdown icon-board w-100").attr("data-bs-toggle", "dropdown");
+								var ul_reply_dropdown_container = $("<ul>").attr("class", "dropdown-menu");
+								var li_reply_dropdown_edit_container = $("<li>").attr("class", "li-reply-edit");
+								var a_reply_dropdown_edit = $("<a>").attr("class", "dropdown-item btn-reply-edit").attr("data-replyno", response.data[i].replyNo).text("수정");
+								var li_reply_dropdown_delete_container = $("<li>").attr("class", "li-reply-delete");
+								var a_reply_dropdown_delete = $("<a>").attr("class", "dropdown-item btn-reply-delete").attr("data-replyno", response.data[i].replyNo).text("삭제");
+								
+								var li_reply_dropdown_edit = li_reply_dropdown_edit_container.append(a_reply_dropdown_edit);
+								var li_reply_dropdown_delete = li_reply_dropdown_delete_container.append(a_reply_dropdown_delete);
+								
+								var ul_reply_dropdown = ul_reply_dropdown_container.append(li_reply_dropdown_edit).append(li_reply_dropdown_delete);
+								
+								var div_reply_dropdown = div_reply_dropdown_container.append(a_reply_dropdown_trigger).append(ul_reply_dropdown);
+								
+								var div_reply_inner = div_reply_inner_container.append(span_reply_member_img).append(div_reply_info).append(div_reply_dropdown);
+								
+								var div_reply_outer = div_reply_outer_container.append(div_reply_inner);
+								
+								// 더보기 버튼
+								var div_reply_more_container = $("<div>").attr("class", "d-flex justify-content-center align-items-center border-top border-bottom div-reply-more");
+								var div_reply_more_button = $("<button>").attr("class", "col d-flex justify-content-center align-items-center border-0 btn-reply-more").attr("data-boardno", boardNo).text("더보기");
+								
+								var div_reply_more = div_reply_more_container.append(div_reply_more_button);
+								
+								target.append(div_reply_outer);
+							};
+							
+							// 더보기 버튼
+							var div_reply_more_container = $("<div>").attr("class", "d-flex justify-content-center align-items-center border-top border-bottom div-reply-more");
+							var div_reply_more_button = $("<button>").attr("class", "col d-flex justify-content-center align-items-center border-0 btn-reply-more").attr("data-boardno", boardNo).text("더보기");
+							
+							var div_reply_more = div_reply_more_container.append(div_reply_more_button);
+							target.append(div_reply_more);
+						}
+						
+						// 댓글 입력창
+						var div_reply_insert_outer_container = $("<div>").attr("class", "d-flex px-3 py-3 bg-white div-reply-bottom div-reply-input");
+						
+						var div_reply_insert_inner_container = $("<div>").attr("class", "d-flex justify-content-center align-items-center px-2 py-2 w-100 rounded-pill bg-white border border-1");
+						
+						var span_reply_insert_container = $("<span>").attr("class", "me-3 ms-1 span-reply-writer-profile");
+						var img_reply_insert = $("<img>").attr("class", "img-member-profile").attr("src", "https://placeimg.com/65/65/any");
+						var span_reply_insert = span_reply_insert_container.append(img_reply_insert);
+						
+						var input_reply_insert = $("<input>").attr("class", "d-flex flex-fill me-3 ps-2 py-1 border-0 rounded align-self-center btn-reply-input").attr("placeholder", "댓글을 남겨주세요");
+						var button_reply_insert_submit = $("<button>").attr("class", "align-self-center border border-1 rounded-pill bg-white px-2 py-2 btn-reply-submit").attr("data-boardno", boardNo).attr("data-memberno", memberNo).text("보내기");
+						
+						var div_reply_insert_inner = div_reply_insert_inner_container.append(span_reply_insert).append(input_reply_insert).append(button_reply_insert_submit);
+						var div_reply_insert_outer = div_reply_insert_outer_container.append(div_reply_insert_inner);
+						
+						target.append(div_reply_more).append(div_reply_insert_outer);
+					}); 
+				}
+			}
+		});
+	});
+
+</script>
+
+<%-- 게시글 관련 script --%>
 <script type="text/javascript">
 	
 	// 초기 1페이지
@@ -279,7 +471,8 @@
 	 	});
 		
 		// 게시글 좋아요 비동기 처리
-		$(document).on("click", ".btn-board-like", function(){
+		$(document).on("click", ".btn-board-like", function(event){
+			event.stopPropagation();
 			var btnThis = $(this);
 			var target = $(this).parent();
 			// 로그인 중인 회원의 회원 번호
@@ -303,7 +496,7 @@
 			.then(function(response){
 				$(btnThis).remove();
 				
-				var divbottom_label_like = $("<label>").attr("class", "btn-board-like col d-flex justify-content-center button-board").attr("data-boardno", response.data.boardNo).attr("data-boardlike", response.data.boardLike).attr("data-islike", response.data.isLike);
+				var divbottom_label_like = $("<label>").attr("class", "btn-board-like col d-flex justify-content-center align-items-center button-board").attr("data-boardno", response.data.boardNo).attr("data-boardlike", response.data.boardLike).attr("data-islike", response.data.isLike);
 				
 				var divbottom_i_like;
 				if(response.data.isLike == 1) {
@@ -365,6 +558,8 @@
 				
 				// 태그 요소 생성
 				// - 상단
+				var div_container = $("<div>").attr("class", "shadow div-board-container"); // 그림자를 위한 컨테이너 태그
+				
 				var divtop_outer = $("<div>").attr("class", "d-flex align-items-start px-3 pt-3 mt-3 div-board div-board-top")
 				
 				var divtop_span = $("<span>").attr("class", "div-member-profile");
@@ -380,7 +575,7 @@
 				var divtop_dropdown_a = $("<a>").attr("class", "fa-solid fa-ellipsis-vertical a-board-dropdown icon-board w-100").attr("data-bs-toggle", "dropdown").attr("data-boardwriterno", response.data.boardWriterNo).attr("data-boardwritergrade", response.data.memberGrade);
 				var divtop_dropdown_ul = $("<ul>").attr("class", "dropdown-menu");
 				var divtop_dropdown_li_edit = $("<li>").attr("class", "li-edit");
-				var divtop_dropdown_a_edit = $("<a>").attr("class", "dropdown-item editor-open-edit").attr("data-bs-toggle", "modal").attr("data-bs-target", "#modal-edit").text("수정");
+				var divtop_dropdown_a_edit = $("<a>").attr("class", "dropdown-item editor-open-edit").attr("data-bs-toggle", "modal").attr("data-bs-target", "#modal-edit").attr("data-boardno", response.data.boardNo).text("수정");
 				var divtop_dropdown_li_delete = $("<li>").attr("class", "li-delete");
 				var divtop_dropdown_a_delete = $("<a>").attr("class", "dropdown-item btn-delete").attr("data-boardno", response.data.boardNo).attr("data-boardwriterno", response.data.boardWriterNo).text("삭제");
 				var divtop_dropdown_li_report = $("<li>").attr("class", "li-report");
@@ -413,25 +608,26 @@
 				
 				// - 하단
 				var divbottom_outer = $("<div>").attr("class", "div-board div-board-bottom");
-				var divbottom_div_flex = $("<div>").attr("class", "d-flex px-3 pb-3");
-				var divbottom_label_reply = $("<label>").attr("class", "btn-reply-write col d-flex justify-content-center button-board");
-				var divbottom_i_reply = $("<i>").attr("class", "fa-regular fa-comment-dots icon-board").attr("data-boardno", response.data.boardNo);
-				var divbottom_i_reply_count = $("<div>").attr("class", "ps-1 align-middle").text(response.data.replyCount);
-				var divbottom_label_like = $("<label>").attr("class", "btn-board-like col d-flex justify-content-center button-board").attr("data-boardno", response.data.boardNo).attr("data-boardlike", response.data.boardLike).attr("data-islike", response.data.isLike);
-				var divbottom_i_like = $("<i>").attr("class", "fa-regular fa-heart icon-board");				
-				var divbottom_i_like_count = $("<div>").attr("class", "ps-1 align-middle").text(response.data.boardLike);
-				
-				var divbottom_label_left = divbottom_label_reply.append(divbottom_i_reply).append(divbottom_i_reply_count);
-				var divbottom_label_right = divbottom_label_like.append(divbottom_i_like).append(divbottom_i_like_count);
-				
-				var divbottom_flex = divbottom_div_flex.append(divbottom_label_left).append(divbottom_label_right);
-				var divbottom = divbottom_outer.append(divbottom_flex);
-				
-				// 태그 재구성
-				$("#div-board-list").prepend(divbottom);
-				$("#div-board-list").prepend(divmid);
-				$("#div-board-list").prepend(divtop);
-				
+	            var divbottom_div_flex = $("<div>").attr("class", "d-flex px-3 pb-3 div-reply-button");
+	            var divbottom_label_reply = $("<label>").attr("class", "btn-reply-write col-6 d-flex justify-content-center align-items-center button-board").attr("data-fold", 0).attr("data-replylist", 0);
+	            var divbottom_i_reply = $("<i>").attr("class", "fa-regular fa-comment-dots icon-board align-middle").attr("data-boardno", response.data.boardNo);
+	            var divbottom_i_reply_count = $("<div>").attr("class", "ps-1 align-middle").text(response.data.replyCount);
+	            var divbottom_label_like = $("<label>").attr("class", "btn-board-like col-6 d-flex justify-content-center align-items-center button-board").attr("data-boardno", response.data.boardNo).attr("data-boardlike", response.data.boardLike).attr("data-islike", response.data.isLike);
+	            var divbottom_i_like = $("<i>").attr("class", "fa-regular fa-heart icon-board align-middle");            
+	            var divbottom_i_like_count = $("<div>").attr("class", "ps-1 align-middle").text(response.data.boardLike);
+	            
+	            var divbottom_label_left = divbottom_label_reply.append(divbottom_i_reply).append(divbottom_i_reply_count);
+	            var divbottom_label_right = divbottom_label_like.append(divbottom_i_like).append(divbottom_i_like_count);
+	            
+	            var divbottom_flex = divbottom_div_flex.append(divbottom_label_left).append(divbottom_label_right);
+	            
+	            var divbottom_reply_list = $("<div>").attr("class", "div-reply-list");
+	            var divbottom = divbottom_outer.append(divbottom_flex).append(divbottom_reply_list);
+	            
+	            div_container.append(divtop).append(divmid).append(divbottom);
+	            
+	            // 태그 재구성
+	            $("#div-board-list").prepend(div_container);
 				// 게시글 입력창 닫기
 				$("#modal-insert").modal("hide");
 			});
@@ -469,7 +665,7 @@
         	$(".note-editable").html(boardContentValue);
          	
         	// - 확인 버튼 클릭시 비동기로 게시글 수정 요청 전송
-            $(".modal-edit-submit").click(function(e){ // off()가 없으면 이상하게 클릭 이벤트가 2번 발생함(?)
+            $(".modal-edit-submit").off().click(function(e){ // off()가 없으면 이상하게 클릭 이벤트가 2번 발생함(?)
             	// 확인 메시지 출력
             	var choice = window.confirm("글을 수정하시겠습니까?");
             	// 취소시 return
@@ -513,7 +709,6 @@
     	// 게시글 삭제 비동기 처리
 		$(document).on("click", ".btn-delete", function(e){
 			var btnThis = $(this);
-			console.log(btnThis);
 			var choice = window.confirm("글을 삭제하시겠습니까?");
 			if(choice == false) return;
 			// 삭제하려는 게시글 번호
@@ -555,11 +750,12 @@
 				}
 			})
 			.then(function(response){
-				console.log(response);
 				// 게시글 작성 영역 삭제 (게시글 작성시 검색 목록이 아닌 전체 목록의 가장 상단에 붙여야 하지만 페이지를 갱신하지 않고는 어려운 것 같다)
 				$(".div-editor-insert").remove();
 				$("#div-board-list").empty();
 				for(var i = 0 ; i < response.data.boardList.length ; i ++){
+					var div_container = $("<div>").attr("class", "shadow div-board-container"); // 그림자를 위한 컨테이너 태그
+					
 					var divtop_outer = $("<div>").attr("class", "d-flex align-items-start px-3 pt-3 mt-3 div-board div-board-top")
 					
 					var divtop_span = $("<span>").attr("class", "div-member-profile");
@@ -575,7 +771,7 @@
 					var divtop_dropdown_a = $("<a>").attr("class", "fa-solid fa-ellipsis-vertical a-board-dropdown icon-board w-100").attr("data-bs-toggle", "dropdown").attr("data-boardwriterno", response.data.boardList[i].boardWriterNo).attr("data-boardwritergrade", response.data.boardList[i].memberGrade);
 					var divtop_dropdown_ul = $("<ul>").attr("class", "dropdown-menu");
 					var divtop_dropdown_li_edit = $("<li>").attr("class", "li-edit");
-					var divtop_dropdown_a_edit = $("<a>").attr("class", "dropdown-item editor-open-edit").attr("data-bs-toggle", "modal").attr("data-bs-target", "#modal-edit").text("수정");
+					var divtop_dropdown_a_edit = $("<a>").attr("class", "dropdown-item editor-open-edit").attr("data-bs-toggle", "modal").attr("data-bs-target", "#modal-edit").attr("data-boardno", response.data.boardList[i].boardNo).text("수정");
 					var divtop_dropdown_li_delete = $("<li>").attr("class", "li-delete");
 					var divtop_dropdown_a_delete = $("<a>").attr("class", "dropdown-item btn-delete").attr("data-boardno", response.data.boardList[i].boardNo).attr("data-boardwriterno", response.data.boardList[i].boardWriterNo).text("삭제");
 					var divtop_dropdown_li_report = $("<li>").attr("class", "li-report");
@@ -607,17 +803,17 @@
 					
 					// - 하단
 					var divbottom_outer = $("<div>").attr("class", "div-board div-board-bottom");
-					var divbottom_div_flex = $("<div>").attr("class", "d-flex px-3 pb-3");
-					var divbottom_label_reply = $("<label>").attr("class", "btn-reply-write col d-flex justify-content-center button-board").attr("data-boardno", response.data.boardList[i].boardNo);
-					var divbottom_i_reply = $("<i>").attr("class", "fa-regular fa-comment-dots icon-board");
+					var divbottom_div_flex = $("<div>").attr("class", "d-flex px-3 pb-3 div-reply-button");
+					var divbottom_label_reply = $("<label>").attr("class", "btn-reply-write col-6 d-flex justify-content-center align-items-center button-board").attr("data-boardno", response.data.boardList[i].boardNo).attr("data-fold", 0).attr("data-replylist", 0);
+					var divbottom_i_reply = $("<i>").attr("class", "fa-regular fa-comment-dots icon-board align-middle");
 					var divbottom_i_reply_count = $("<div>").attr("class", "ps-1 align-middle").text(response.data.boardList[i].replyCount);
-					var divbottom_label_like = $("<label>").attr("class", "btn-board-like col d-flex justify-content-center button-board").attr("data-boardno", response.data.boardList[i].boardNo).attr("data-boardlike", response.data.boardList[i].boardLike).attr("data-islike", response.data.boardList[i].isLike);
+					var divbottom_label_like = $("<label>").attr("class", "btn-board-like col-6 d-flex justify-content-center align-items-center button-board").attr("data-boardno", response.data.boardList[i].boardNo).attr("data-boardlike", response.data.boardList[i].boardLike).attr("data-islike", response.data.boardList[i].isLike);
 					
 					var divbottom_i_like;
 					if(response.data.boardList[i].isLike == 1) {
-						divbottom_i_like = $("<i>").attr("class", "fa-regular fa-heart icon-board icon-board-like-on");
+						divbottom_i_like = $("<i>").attr("class", "fa-regular fa-heart icon-board icon-board-like-on align-middle");
 					} else {
-						divbottom_i_like = $("<i>").attr("class", "fa-regular fa-heart icon-board");
+						divbottom_i_like = $("<i>").attr("class", "fa-regular fa-heart icon-board align-middle");
 					}
 					
 					var divbottom_i_like_count = $("<div>").attr("class", "ps-1 align-middle").text(response.data.boardList[i].boardLike);
@@ -626,12 +822,14 @@
 					var divbottom_label_right = divbottom_label_like.append(divbottom_i_like).append(divbottom_i_like_count);
 					
 					var divbottom_flex = divbottom_div_flex.append(divbottom_label_left).append(divbottom_label_right);
-					var divbottom = divbottom_outer.append(divbottom_flex);
 					
-					// 태그 재구성
-					$("#div-board-list").append(divtop);
-					$("#div-board-list").append(divmid);
-					$("#div-board-list").append(divbottom);
+					var divbottom_reply_list = $("<div>").attr("class", "div-reply-list");
+		            var divbottom = divbottom_outer.append(divbottom_flex).append(divbottom_reply_list);
+					
+					div_container.append(divtop).append(divmid).append(divbottom);
+		            
+		            // 태그 재구성
+		            $("#div-board-list").append(div_container);
 				}
 				
 				$(".input-search").val("");
@@ -658,9 +856,8 @@
 				}
 			})
 			.then(function(response){
-				console.log(response);
 				for(var i = 0 ; i < response.data.boardList.length ; i ++){
-					var divtop_outer = $("<div>").attr("class", "d-flex align-items-start px-3 pt-3 mt-3 div-board div-board-top")
+					var divtop_outer = $("<div>").attr("class", "d-flex align-items-start px-3 pt-3 mt-3 div-board div-board-top");
 					
 					var divtop_span = $("<span>").attr("class", "div-member-profile");
 					var divtop_img_member = $("<img>").attr("class", "img-member-profile").attr("src", "https://placeimg.com/65/65/any"); // 임시 주소
@@ -675,7 +872,7 @@
 					var divtop_dropdown_a = $("<a>").attr("class", "fa-solid fa-ellipsis-vertical a-board-dropdown icon-board w-100").attr("data-bs-toggle", "dropdown").attr("data-boardwriterno", response.data.boardList[i].boardWriterNo).attr("data-boardwritergrade", response.data.boardList[i].memberGrade);
 					var divtop_dropdown_ul = $("<ul>").attr("class", "dropdown-menu");
 					var divtop_dropdown_li_edit = $("<li>").attr("class", "li-edit");
-					var divtop_dropdown_a_edit = $("<a>").attr("class", "dropdown-item editor-open-edit").attr("data-bs-toggle", "modal").attr("data-bs-target", "#modal-editor").text("수정");
+					var divtop_dropdown_a_edit = $("<a>").attr("class", "dropdown-item editor-open-edit").attr("data-bs-toggle", "modal").attr("data-bs-target", "#modal-editor").attr("data-boardno", response.data.boardList[i].boardNo).text("수정");
 					var divtop_dropdown_li_delete = $("<li>").attr("class", "li-delete");
 					var divtop_dropdown_a_delete = $("<a>").attr("class", "dropdown-item btn-delete").attr("data-boardno", response.data.boardList[i].boardNo).attr("data-boardwriterno", response.data.boardList[i].boardWriterNo).text("삭제");
 					var divtop_dropdown_li_report = $("<li>").attr("class", "li-report");
@@ -708,8 +905,8 @@
 					
 					// - 하단
 					var divbottom_outer = $("<div>").attr("class", "div-board div-board-bottom");
-					var divbottom_div_flex = $("<div>").attr("class", "d-flex px-3 pb-3");
-					var divbottom_label_reply = $("<label>").attr("class", "btn-reply-write col d-flex justify-content-center button-board").attr("data-boardno", response.data.boardList[i].boardNo);
+					var divbottom_div_flex = $("<div>").attr("class", "d-flex px-3 pb-3 div-reply-button");
+					var divbottom_label_reply = $("<label>").attr("class", "btn-reply-write col d-flex justify-content-center button-board").attr("data-boardno", response.data.boardList[i].boardNo).attr("data-fold", 0).attr("data-replylist", 0);
 					var divbottom_i_reply = $("<i>").attr("class", "fa-regular fa-comment-dots icon-board");
 					var divbottom_i_reply_count = $("<div>").attr("class", "ps-1 align-middle").text(response.data.boardList[i].replyCount);
 					var divbottom_label_like = $("<label>").attr("class", "btn-board-like col d-flex justify-content-center button-board").attr("data-boardno", response.data.boardList[i].boardNo).attr("data-boardlike", response.data.boardList[i].boardLike).attr("data-islike", response.data.boardList[i].isLike);
@@ -727,7 +924,9 @@
 					var divbottom_label_right = divbottom_label_like.append(divbottom_i_like).append(divbottom_i_like_count);
 					
 					var divbottom_flex = divbottom_div_flex.append(divbottom_label_left).append(divbottom_label_right);
-					var divbottom = divbottom_outer.append(divbottom_flex);
+					
+					var divbottom_reply_list = $("<div>").attr("class", "div-reply-list");
+		            var divbottom = divbottom_outer.append(divbottom_flex).append(divbottom_reply_list);
 					
 					// 태그 재구성
 					$("#div-board-list").append(divtop);
@@ -758,6 +957,8 @@
 		.then(function(response){
 			$("#div-board-list").empty();
 			for(var i = 0 ; i < response.data.boardList.length ; i ++){
+				var div_container = $("<div>").attr("class", "shadow div-board-container"); // 그림자를 위한 컨테이너 태그
+				
 				var divtop_outer = $("<div>").attr("class", "d-flex align-items-start px-3 pt-3 mt-3 div-board div-board-top");
 				
 				var divtop_span = $("<span>").attr("class", "div-member-profile");
@@ -773,7 +974,7 @@
 				var divtop_dropdown_a = $("<a>").attr("class", "fa-solid fa-ellipsis-vertical a-board-dropdown icon-board w-100").attr("data-bs-toggle", "dropdown").attr("data-boardwriterno", response.data.boardList[i].boardWriterNo).attr("data-boardwritergrade", response.data.boardList[i].memberGrade);
 				var divtop_dropdown_ul = $("<ul>").attr("class", "dropdown-menu");
 				var divtop_dropdown_li_edit = $("<li>").attr("class", "li-edit");
-				var divtop_dropdown_a_edit = $("<a>").attr("class", "dropdown-item editor-open-edit").attr("data-bs-toggle", "modal").attr("data-bs-target", "#modal-edit").text("수정");
+				var divtop_dropdown_a_edit = $("<a>").attr("class", "dropdown-item editor-open-edit").attr("data-bs-toggle", "modal").attr("data-bs-target", "#modal-edit").attr("data-boardno", response.data.boardList[i].boardNo).text("수정");
 				var divtop_dropdown_li_delete = $("<li>").attr("class", "li-delete");
 				var divtop_dropdown_a_delete = $("<a>").attr("class", "dropdown-item btn-delete").attr("data-boardno", response.data.boardList[i].boardNo).attr("data-boardwriterno", response.data.boardList[i].boardWriterNo).text("삭제");
 				var divtop_dropdown_li_report = $("<li>").attr("class", "li-report");
@@ -806,8 +1007,8 @@
 				
 				// - 하단
 				var divbottom_outer = $("<div>").attr("class", "div-board div-board-bottom");
-				var divbottom_div_flex = $("<div>").attr("class", "d-flex px-3 pb-3");
-				var divbottom_label_reply = $("<label>").attr("class", "btn-reply-write col d-flex justify-content-center button-board").attr("data-boardno", response.data.boardList[i].boardNo);
+				var divbottom_div_flex = $("<div>").attr("class", "d-flex px-3 pb-3 div-reply-button");
+				var divbottom_label_reply = $("<label>").attr("class", "btn-reply-write col d-flex justify-content-center button-board").attr("data-boardno", response.data.boardList[i].boardNo).attr("data-fold", 0).attr("data-replylist", 0);
 				var divbottom_i_reply = $("<i>").attr("class", "fa-regular fa-comment-dots icon-board");
 				var divbottom_i_reply_count = $("<div>").attr("class", "ps-1 align-middle").text(response.data.boardList[i].replyCount)
 				var divbottom_label_like = $("<label>").attr("class", "btn-board-like col d-flex justify-content-center button-board").attr("data-boardno", response.data.boardList[i].boardNo).attr("data-boardlike", response.data.boardList[i].boardLike).attr("data-islike", response.data.boardList[i].isLike);
@@ -825,12 +1026,14 @@
 				var divbottom_label_right = divbottom_label_like.append(divbottom_i_like).append(divbottom_i_like_count);
 				
 				var divbottom_flex = divbottom_div_flex.append(divbottom_label_left).append(divbottom_label_right);
-				var divbottom = divbottom_outer.append(divbottom_flex);
 				
-				// 태그 재구성
-				$("#div-board-list").append(divtop);
-				$("#div-board-list").append(divmid);
-				$("#div-board-list").append(divbottom);
+				var divbottom_reply_list = $("<div>").attr("class", "div-reply-list");
+	            var divbottom = divbottom_outer.append(divbottom_flex).append(divbottom_reply_list);
+				
+				div_container.append(divtop).append(divmid).append(divbottom);
+	            
+	            // 태그 재구성
+	            $("#div-board-list").append(div_container);
 			}
 		});
 	};
