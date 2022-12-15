@@ -194,7 +194,7 @@
 						로그인 중인 회원 번호 : ${ahzitMemberDto.memberNo}<br>
 						회원이 가입한 아지트 번호 : ${ahzitMemberDto.memberAhzitNo}<br>
 						로그인 중인 회원 아이디 : ${ahzitMemberDto.memberId}<br>
-						로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberId}<br>
+						로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberNick}<br>
 						로그인 중인 회원 등급 : ${ahzitMemberDto.memberGrade}<br>
 						로그인 중인 회원 활동 점수 : ${ahzitMemberDto.memberGrade}<br>
 						소모임 가입일 : ${ahzitMemberDto.memberJoindate}

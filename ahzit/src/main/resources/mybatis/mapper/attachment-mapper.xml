@@ -78,6 +78,12 @@
 		insert into member_attachment(member_origin_no, member_attachment_no) values (#{memberOriginNo}, #{memberAttachmentNo})
 	</insert>
 	
+	<!-- 소모임 회원번호(member_no)로 프로필 이미지 첨부파일 조회 -->
+	<select id="selectAhzitMemberAttachment" parameterType="int" resultType="AttachmentDto">
+		select am.member_no, iaa.attachment_no, iaa.attachment_name, iaa.attachment_type, iaa.attachment_size, iaa.attachment_date from ahzit_member am left outer join 
+		(select * from member_attachment ma inner join attachment a on ma.member_attachment_no=a.attachment_no) iaa on am.member_no=iaa.member_origin_no where member_origin_no=#{memberOriginNo}
+	</select>
+	
 	
 
 	
