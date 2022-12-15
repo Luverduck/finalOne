@@ -35,6 +35,12 @@
 	
 	<!-- jQuery CDN -->
     <script src = "https://code.jquery.com/jquery-3.6.1.js"></script>
+    
+    <!-- Summer Note CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.js"></script>
+	
+	<!-- Summer Note CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.css" rel="stylesheet">
   	
     <style>
         * {
@@ -50,7 +56,7 @@
 	<c:choose>
 		<c:when test="${login}">
 			<a href="/">홈</a>
-			<a href="/ahzitUser/logout">로그아웃</a>
+			<a class="logout" href="/ahzitUser/logout">로그아웃</a>
 			<a href="/ahzitUser/mypage">마이페이지</a>
 		</c:when>
 		<c:otherwise>
@@ -67,3 +73,19 @@
 </div>
 
 <hr>
+
+
+<script>
+    //로그아웃 버튼 클릭 시 알람
+	$(function(){
+		$("a.logout").click(function(e){
+            var choice = confirm("로그아웃 하시겠습니까?");
+            if(choice){
+                return true;
+            }
+            else{
+                return false;
+            }
+		});
+	});
+</script>

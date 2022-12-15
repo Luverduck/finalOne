@@ -20,8 +20,9 @@ public interface AhzitDao {
 	
 	List<AhzitDto> selectList();//아지트 목록
 	AhzitDto selectOne(int ahzitNo);//아지트 단일조회
-	
-	public int ahzitEdit(AhzitDto ahzitDto);//아지트 수정
-	boolean delete(AhzitDto ahzitDto);//아지트 삭제
+
+	boolean update(AhzitDto ahzitDto);//아지트 정보 수정
+
+	boolean delete(int ahzitNo); //아지트 삭제
 
 }

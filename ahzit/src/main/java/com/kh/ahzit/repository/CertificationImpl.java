@@ -32,6 +32,11 @@ public class CertificationImpl implements CertificationDao {
 	@Override
 	public void clear() {
 		sqlSession.delete("certification.clear");
+	}
+
+	@Override
+	public CertificationDto selectOne(String certificationId) {
+		return sqlSession.selectOne("certification.get", certificationId);
 	}	
 	
 

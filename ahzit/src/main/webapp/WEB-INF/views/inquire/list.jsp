@@ -8,78 +8,93 @@
 	<jsp:param value="1:1 문의 목록" name="title"/>
 </jsp:include>
 
-<div>
 
-	<div>
-		<h1>내 문의 목록</h1>
+<style>
+.pagination{
+justify-content : center
+}
+</style>
+
+	<div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="p-4 text-dark bg-Light rounded">
+				<h1 class="text-center">문의 게시판</h1>	
+			</div>
+		</div>
 	</div>
 	
-	
-	<div>
-		<table class="table table-border table-hover">
-			<thead>
-				<tr>
-
-					<th>번호</th>
-					<th width="45%">제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<c:forEach var="inquireDto" items="${inquireList}">
-				<tr>
-				
-				<td>${inquireDto.inquireNo}</td>
-					<td align="left">
-					<!-- 제목을 누르면 상세 페이지로 이동하도록 처리 -->
-						<a href="detail?inquireNo=${inquireDto.inquireNo}">
-							${inquireDto.inquireTitle}
-						</a>
-					</td>
-					
-					<td>${inquireDto.inquireId}</td>
-					
-					<td>
-					<c:set var="current">
-						<fmt:formatDate value="${inquireDto.inquireWritedate}" pattern="yyyy-MM-dd"/>
-					</c:set>
-					<c:choose>
-						<c:when test="${today == current}">
-							<fmt:formatDate value="${inquireDto.inquireWritedate}" pattern="HH:mm"/>
-						</c:when>
-						<c:otherwise>
-							<fmt:formatDate value="${inquireDto.inquireWritedate}" pattern="yyyy-MM-dd"/>
-						</c:otherwise>
-					</c:choose>
-					</td>
-				</tr>
-				</c:forEach>
-			</tbody>
-			
-	<tfoot>
-		<tr class = "right" >
-			<td colspan="6">
-				<a href = "insert">글쓰기</a>
-			</td>
-		</tr>
-	</tfoot>
-</table>
-
+	        
+	<div class="text-center mt-3 mb-4">
+	<%-- 검색창 --%>
+	<form action = "list" method = "get">
+		<select name = "type" required>
+			<option value = "inquire_title">제목</option>
+			<option value = "inquire_content">내용</option>
+		</select>
+		<input name = "inquireId" type="hidden" value = "${inquireListSearchVO.inquireId}">
+		<input name = "keyword" placeholder = "검색어" value = "${inquireListSearchVO.keyword}">
+		<button type = "submit">검색</button>
+	</form>
 	</div>
-	
-<%-- 검색창 --%>
-<form action = "list" method = "get">
-	<select name = "type" required>
-		<option value = "inquire_title">제목</option>
-		<option value = "inquire_content">내용</option>
-	</select>
-	<input name = "inquireId" type="hidden" value = "${inquireListSearchVO.inquireId}">
-	<input name = "keyword" placeholder = "검색어" value = "${inquireListSearchVO.keyword}">
-	<button type = "submit">검색</button>
-</form>
 
+	 <div class="row mt-4">
+            <div class="col-md-10 offset-md-1">
+                <table class="table table-hover">
+                    <thead class="text-center">
+                        <tr class="bg-dark text-light">
+							<th>번호</th>
+							<th width="45%">제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center" >
+                        <c:forEach var="inquireDto" items="${inquireList}">
+							<tr>
+								<td>${inquireDto.inquireNo}</td>
+								<td>
+									<!-- 제목을 누르면 상세 페이지로 이동하도록 처리 -->
+									<a href="detail?inquireNo=${inquireDto.inquireNo}">
+										${inquireDto.inquireTitle}
+									</a>
+									<c:choose>
+										<c:when test="${ inquireDto.inquireState  == 'Y'}">
+										[답변 완료]
+										</c:when>
+										<c:otherwise>
+										[답변 예정]
+										</c:otherwise>
+									</c:choose>
+								</td>
+								<td>${inquireDto.inquireId}</td>
+								<td>
+								<c:set var="current">
+									<fmt:formatDate value="${inquireDto.inquireWritedate}" pattern="yyyy-MM-dd"/>
+								</c:set>
+								<c:choose>
+									<c:when test="${today == current}">
+										<fmt:formatDate value="${inquireDto.inquireWritedate}" pattern="HH:mm"/>
+									</c:when>
+									<c:otherwise>
+										<fmt:formatDate value="${inquireDto.inquireWritedate}" pattern="yyyy-MM-dd"/>
+									</c:otherwise>
+								</c:choose>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+					<tfoot>
+						<tr >
+							<td colspan="6">
+								<a class="btn btn-outline-warning" href = "insert">글쓰기</a>
+							</td>
+						</tr>
+					</tfoot>
+                </table>
+            </div>
+        </div>
+
+<div class=" mt-3 mb-4">
 <%-- 페이지 네비게이터 --%>
 <ul class="pagination">
 	<c:choose>
@@ -140,6 +155,7 @@
 		</c:otherwise>
 	</c:choose>
 </ul>
+</div>
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

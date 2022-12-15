@@ -32,12 +32,21 @@ public class InquireReplyController {
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute InquireReplyDto inquireReplyDto, 
 			HttpSession session, RedirectAttributes attr) {
+		
 		int inquireReplyNo = inquireReplyDao.sequence();
-		inquireReplyDto.setInquireReplyNo(inquireReplyNo);
 		String loginId = (String)session.getAttribute("loginId");
+		inquireReplyDto.setInquireReplyNo(inquireReplyNo);  // dto에 값 셋팅
 		inquireReplyDto.setInquireReplyWriter(loginId);
-		inquireReplyDao.insert(inquireReplyDto);
 		int inquireNo = inquireReplyDto.getInquireOriginNo();
+		
+		 boolean result = inquireReplyDao.insert(inquireReplyDto);
+		//	System.out.println("댓글등록");
+		 if(result) {
+			 inquireReplyDao.updateReply(inquireReplyDto);
+		 }
+		
+		
+		
 		attr.addAttribute("inquireNo", inquireNo);
 		return "redirect:/inquire/detail";
 	}
