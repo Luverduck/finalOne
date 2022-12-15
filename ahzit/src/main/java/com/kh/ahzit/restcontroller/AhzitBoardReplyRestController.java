@@ -21,9 +21,22 @@ public class AhzitBoardReplyRestController {
 	@Autowired
 	private AhzitBoardReplyDao ahzitBoardReplyDao;
 	
+	// 댓글 등록 Mapping
+	@PostMapping("/write")
+	public AhzitBoardReplyVO insertReply(@RequestBody AhzitBoardReplyRestRequestVO ahzitBoardReplyRestRequestVO) {
+		// 다음 댓글 번호 반환
+		int replyNo = ahzitBoardReplyDao.nextReplyNo();
+		// ahzitBoardReplyRestRequestVO에 반환한 댓글 번호를 설정
+		ahzitBoardReplyRestRequestVO.setReplyNo(replyNo);
+		// 댓글 등록
+		ahzitBoardReplyDao.insertReply(ahzitBoardReplyRestRequestVO);
+		// 등록한 댓글 정보를 조회하여 반환
+		return ahzitBoardReplyDao.selectReply(replyNo);
+	}
+	
 	// 댓글 목록 조회 Mapping
 	@PostMapping("/list")
-	public AhzitBoardReplyRestResponseVO selectList(@RequestBody AhzitBoardReplyRestRequestVO ahzitBoardReplyRestRequestVO) {
+	public AhzitBoardReplyRestResponseVO selectReplyList(@RequestBody AhzitBoardReplyRestRequestVO ahzitBoardReplyRestRequestVO) {
 		// REST 응답 VO 생성
 		AhzitBoardReplyRestResponseVO ahzitBoardReplyRestResponseVO = new AhzitBoardReplyRestResponseVO();
 		// 게시글에 달린 댓글 갯수 반환

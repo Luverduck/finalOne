@@ -77,9 +77,9 @@
 		font-size: 20px;
 	}
 	
-	ahzit-img {
-      	width : 400px;
-      	height : 400px;      
+	.ahzit-img {
+      	width : 250px;
+      	height : 250px;      
    	}
    	
   	.shadow rounded-3{
@@ -175,12 +175,14 @@
 					<h1>왼쪽 사이드바</h1> 
 					<br>
 					<%--아지트 프로필 사진 --%>
-          			<c:if test="${attachmentList.isEmpty()}"> <%--미설정시 기본 프로필 --%>
-				    	<img src = "/images/bg_default.jpg" class="ahzit-img">
-			    	</c:if>
-		      		<c:forEach var = "list" items = "${attachmentList}"> <%--설정한 프로필 --%>
-		        		<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img">  					
-		      		</c:forEach>	
+					<div class = "row">
+						<c:if test="${attachmentList.isEmpty()}"> <%--미설정시 기본 프로필 --%>
+						    	<img src = "/images/bg_default.jpg" class="w-100">
+					    	</c:if>
+				      		<c:forEach var = "list" items = "${attachmentList}"> <%--설정한 프로필 --%>
+				        		<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img">  					
+				      		</c:forEach>	
+					</div>
           
 		      		<%-- 아지트 정보 --%>     	
 		      		<div class = "row">
@@ -321,10 +323,102 @@
 	
 	$(function(){
 		
+		$(document).on("click", ".btn-reply-submit", function(){
+			// 댓글 원본글 번호
+			var replyOriginNo = $(this).data("boardno");
+			
+			// 댓글 내용
+			var replyContent = $(this).prev().val();
+			
+			// 새 댓글을 추가할 위치 (div-reply-container의 자식 태그로)
+			var target = $(this).parents(".div-reply-input").prev();
+			
+			axios({
+				url : "http://localhost:8888/rest_reply/write",
+				method : "post",
+				data : {
+					memberNo : memberNo,
+					boardNo : replyOriginNo,
+					replyContent : replyContent
+				}
+			})
+			.then(function(response){
+				console.log(response);
+				// 댓글 리스트
+				// 1) 댓글 외부 컨테이너
+				var div_reply_outer_container = $("<div>").attr("class", "d-flex flex-column align-items-start px-3 py-1 border-top div-board div-reply div-reply-container");
+				// 2) 댓글 내부 컨테이너
+				var div_reply_inner_container = $("<div>").attr("class", "col w-100 d-flex ps-1 py-2 border-3");
+				
+				// 2-1) span 태그
+				var span_reply_member_img_container = $("<span>").attr("class", "div-reply-member-profile");
+				var img_reply_member_img = $("<img>").attr("class", "img-member-profile").attr("src", "https://placeimg.com/65/65/any");
+				var span_reply_member_img = span_reply_member_img_container.append(img_reply_member_img);
+				
+				// 2-2) 
+				var div_reply_writer_container = $("<div>").attr("class", "ms-3 w-100 d-flex flex-column");
+				
+				var p_reply_writer = $("<p>").attr("class", "mb-0 p-writer-info div-reply-text").text(response.data.memberNick + " [" + response.data.memberGrade + "]");
+				
+				var div_reply_content_outer_container = $("<div>").attr("class", "w-100 div-reply div-reply-text");
+				var p_reply_content = $("<p>").attr("class", "px-1 py-2 div-reply-text mb-0").text(response.data.replyContent);
+				var div_reply_content = div_reply_content_outer_container.append(p_reply_content);
+				
+				var div_reply_editor_container = $("<div>").attr("class", "d-none flex-wrap p-2 my-2 border border-2 div-reply-editor");
+				var input_reply_editor = $("<input>").attr("class", "d-flex w-100 p-2 mb-1 input-reply-editor");
+				var btn_reply_edit = $("<button>").attr("class", "border-0 btn-reply-edit-submit").text("수정");
+				var btn_reply_cancel = $("<button>").attr("class", "border-0 btn-reply-edit-cancel").text("취소");
+				var div_reply_editor = div_reply_editor_container.append(input_reply_editor).append(btn_reply_edit).append(btn_reply_cancel);
+				
+				var p_reply_writedate = $("<p>").attr("class", "mb-0 div-reply-text").text(response.data.replyWritedate);
+				
+				// 로그인 중인 회원이 작성자인지 여부에 따라 다른 태그 생성
+				var div_reply_info
+				if(memberNo == response.data.replyWriterNo) { // 로그인 중인 회원이 작성자라면 editor 포함
+					div_reply_info = div_reply_writer_container.append(p_reply_writer).append(div_reply_content).append(div_reply_editor).append(p_reply_writedate);	
+				} else { // 작성자가 아니라면 editor 제외
+					div_reply_info = div_reply_writer_container.append(p_reply_writer).append(div_reply_content).append(p_reply_writedate);
+				}
+				
+				// 2-3)
+				var div_reply_dropdown_container = $("<div>").attr("class", "dropdown div-icon-dropdown");
+				var a_reply_dropdown_trigger = $("<a>").attr("class", "fa-solid fa-ellipsis-vertical a-board-dropdown icon-board w-100").attr("data-bs-toggle", "dropdown");
+				var ul_reply_dropdown_container = $("<ul>").attr("class", "dropdown-menu");
+				var li_reply_dropdown_edit_container = $("<li>").attr("class", "li-reply-edit");
+				var a_reply_dropdown_edit = $("<a>").attr("class", "dropdown-item btn-reply-edit").attr("data-replyno", response.data.replyNo).text("수정");
+				var li_reply_dropdown_delete_container = $("<li>").attr("class", "li-reply-delete");
+				var a_reply_dropdown_delete = $("<a>").attr("class", "dropdown-item btn-reply-delete").attr("data-replyno", response.data.replyNo).text("삭제");
+				
+				var li_reply_dropdown_edit = li_reply_dropdown_edit_container.append(a_reply_dropdown_edit);
+				var li_reply_dropdown_delete = li_reply_dropdown_delete_container.append(a_reply_dropdown_delete);
+				
+				var ul_reply_dropdown;
+				if($(".div-member-info").data("membergrade") == "개설자") { // 관리자일 경우
+					ul_reply_dropdown = ul_reply_dropdown_container.append(li_reply_dropdown_delete); // 삭제 드롭다운
+				} else { // 관리자가 아닐 경우
+					ul_reply_dropdown = ul_reply_dropdown_container.append(li_reply_dropdown_edit).append(li_reply_dropdown_delete); // 삭제 + 수정 드롭다운
+				}
+				
+				var div_reply_dropdown = div_reply_dropdown_container.append(a_reply_dropdown_trigger).append(ul_reply_dropdown);
+				
+				// 로그인 중인 회원이 작성자인지 여부에 따라 다른 태그 생성
+				var div_reply_inner 
+				if(memberNo == response.data.replyWriterNo){ // 로그인 중인 회원이 작성자라면 수정/삭제 드롭다운 포함
+					div_reply_inner = div_reply_inner_container.append(span_reply_member_img).append(div_reply_info).append(div_reply_dropdown);
+				} else { // 작성자가 아니라면 수정/삭제 드롭다운 제외
+					div_reply_inner = div_reply_inner_container.append(span_reply_member_img).append(div_reply_info);
+				}
+				
+				var div_reply_outer = div_reply_outer_container.append(div_reply_inner);
+				
+				target.after(div_reply_outer);
+			});
+		});
+		
 		// 댓글 더보기
 		$(document).on("click", ".btn-reply-more", function(){
-			
-			var target = $(this).parent();
+			var targetMore = $(this);
+			var target = $(this).parent().next();
 			
 			var boardNo = $(this).data("boardno");
 			
@@ -352,6 +446,7 @@
 			})
 			.then(function(response){
 				console.log(response);
+				
 				for(var i = 0 ; i < response.data.replyList.length ; i ++){
 					// 댓글 리스트
 					// 1) 댓글 외부 컨테이너
@@ -367,7 +462,7 @@
 					// 2-2) 
 					var div_reply_writer_container = $("<div>").attr("class", "ms-3 w-100 d-flex flex-column");
 					
-					var p_reply_writer = $("<p>").attr("class", "mb-0 p-writer-info div-reply-text").text(response.data.replyList[i].memberNick + response.data.replyList[i].memberGrade);
+					var p_reply_writer = $("<p>").attr("class", "mb-0 p-writer-info div-reply-text").text(response.data.replyList[i].memberNick + " [" + response.data.replyList[i].memberGrade + "]");
 					
 					var div_reply_content_outer_container = $("<div>").attr("class", "w-100 div-reply div-reply-text");
 					var p_reply_content = $("<p>").attr("class", "px-1 py-2 div-reply-text mb-0").text(response.data.replyList[i].replyContent);
@@ -381,7 +476,13 @@
 					
 					var p_reply_writedate = $("<p>").attr("class", "mb-0 div-reply-text").text(response.data.replyList[i].replyWritedate);
 					
-					var div_reply_info = div_reply_writer_container.append(p_reply_writer).append(div_reply_content).append(div_reply_editor).append(p_reply_writedate);
+					// 로그인 중인 회원이 작성자인지 여부에 따라 다른 태그 생성
+					var div_reply_info
+					if(memberNo == response.data.replyList[i].replyWriterNo) { // 로그인 중인 회원이 작성자라면 editor 포함
+						div_reply_info = div_reply_writer_container.append(p_reply_writer).append(div_reply_content).append(div_reply_editor).append(p_reply_writedate);	
+					} else { // 작성자가 아니라면 editor 제외
+						div_reply_info = div_reply_writer_container.append(p_reply_writer).append(div_reply_content).append(p_reply_writedate);
+					}
 					
 					// 2-3)
 					var div_reply_dropdown_container = $("<div>").attr("class", "dropdown div-icon-dropdown");
@@ -395,25 +496,30 @@
 					var li_reply_dropdown_edit = li_reply_dropdown_edit_container.append(a_reply_dropdown_edit);
 					var li_reply_dropdown_delete = li_reply_dropdown_delete_container.append(a_reply_dropdown_delete);
 					
-					var ul_reply_dropdown = ul_reply_dropdown_container.append(li_reply_dropdown_edit).append(li_reply_dropdown_delete);
+					var ul_reply_dropdown;
+					if($(".div-member-info").data("membergrade") == "개설자") { // 관리자일 경우
+						ul_reply_dropdown = ul_reply_dropdown_container.append(li_reply_dropdown_delete); // 삭제 드롭다운
+					} else { // 관리자가 아닐 경우
+						ul_reply_dropdown = ul_reply_dropdown_container.append(li_reply_dropdown_edit).append(li_reply_dropdown_delete); // 삭제 + 수정 드롭다운
+					}
 					
 					var div_reply_dropdown = div_reply_dropdown_container.append(a_reply_dropdown_trigger).append(ul_reply_dropdown);
 					
-					var div_reply_inner = div_reply_inner_container.append(span_reply_member_img).append(div_reply_info).append(div_reply_dropdown);
+					// 로그인 중인 회원이 작성자인지 여부에 따라 다른 태그 생성
+					var div_reply_inner 
+					if(memberNo == response.data.replyList[i].replyWriterNo){ // 로그인 중인 회원이 작성자라면 수정/삭제 드롭다운 포함
+						div_reply_inner = div_reply_inner_container.append(span_reply_member_img).append(div_reply_info).append(div_reply_dropdown);
+					} else { // 작성자가 아니라면 수정/삭제 드롭다운 제외
+						div_reply_inner = div_reply_inner_container.append(span_reply_member_img).append(div_reply_info);
+					}
 					
 					var div_reply_outer = div_reply_outer_container.append(div_reply_inner);
 					
-					// 더보기 버튼
-					var div_reply_more_container = $("<div>").attr("class", "d-flex justify-content-center align-items-center border-top border-bottom div-reply-more");
-					var div_reply_more_button = $("<button>").attr("class", "col d-flex justify-content-center align-items-center border-0 btn-reply-more").attr("data-boardno", boardNo).text("더보기");
-					
-					var div_reply_more = div_reply_more_container.append(div_reply_more_button);
-					
-					target.before(div_reply_outer);
+					target.prepend(div_reply_outer);
 				};
 				
 				if(nextRp == rpLast) { // 마지막 댓글 페이지일 경우 더보기 삭제
-					target.remove();
+					targetMore.remove();
 				}
 			})
 			
@@ -425,6 +531,7 @@
 			// 태그 생성
 			var boardNo = $(this).data("boardno"); // 댓글 원본 번호
 			
+			var targetMore = $(this).parents(".div-reply-button");
 			var target = $(this).parents(".div-reply-button").next();
 			
 			var fold_state = $(this).attr("data-fold");
@@ -454,10 +561,11 @@
 					})
 					.then(function(response){
 						
-						//console.log(response.data.rpLast);
+						console.log(response);
 						//rpLast = response.data.rpLast;
 						
 						if(response.data.length != 0) {
+							
 							for(var i = 0 ; i < response.data.replyList.length ; i ++){
 								// 댓글 리스트
 								// 1) 댓글 외부 컨테이너
@@ -473,7 +581,7 @@
 								// 2-2) 
 								var div_reply_writer_container = $("<div>").attr("class", "ms-3 w-100 d-flex flex-column");
 								
-								var p_reply_writer = $("<p>").attr("class", "mb-0 p-writer-info div-reply-text").text(response.data.replyList[i].memberNick + response.data.replyList[i].memberGrade);
+								var p_reply_writer = $("<p>").attr("class", "mb-0 p-writer-info div-reply-text").text(response.data.replyList[i].memberNick+ " [" + response.data.replyList[i].memberGrade + "]");
 								
 								var div_reply_content_outer_container = $("<div>").attr("class", "w-100 div-reply div-reply-text");
 								var p_reply_content = $("<p>").attr("class", "px-1 py-2 div-reply-text mb-0").text(response.data.replyList[i].replyContent);
@@ -487,7 +595,13 @@
 								
 								var p_reply_writedate = $("<p>").attr("class", "mb-0 div-reply-text").text(response.data.replyList[i].replyWritedate);
 								
-								var div_reply_info = div_reply_writer_container.append(p_reply_writer).append(div_reply_content).append(div_reply_editor).append(p_reply_writedate);
+								// 로그인 중인 회원이 작성자인지 여부에 따라 다른 태그 생성
+								var div_reply_info
+								if(memberNo == response.data.replyList[i].replyWriterNo) { // 로그인 중인 회원이 작성자라면 editor 포함
+									div_reply_info = div_reply_writer_container.append(p_reply_writer).append(div_reply_content).append(div_reply_editor).append(p_reply_writedate);	
+								} else { // 작성자가 아니라면 editor 제외
+									div_reply_info = div_reply_writer_container.append(p_reply_writer).append(div_reply_content).append(p_reply_writedate);
+								}
 								
 								// 2-3)
 								var div_reply_dropdown_container = $("<div>").attr("class", "dropdown div-icon-dropdown");
@@ -501,21 +615,26 @@
 								var li_reply_dropdown_edit = li_reply_dropdown_edit_container.append(a_reply_dropdown_edit);
 								var li_reply_dropdown_delete = li_reply_dropdown_delete_container.append(a_reply_dropdown_delete);
 								
-								var ul_reply_dropdown = ul_reply_dropdown_container.append(li_reply_dropdown_edit).append(li_reply_dropdown_delete);
-								
+								// 로그인 중인 회원이 댓글의 작성자인지 여부에 따라 다른 태그 생성
+								var ul_reply_dropdown;
+								if($("#div-member-info").data("memberno") == response.data.replyList[i].replyWriterNo) { // 로그인 중인 회원이 댓글의 작성자라면
+									ul_reply_dropdown = ul_reply_dropdown_container.append(li_reply_dropdown_edit).append(li_reply_dropdown_delete);
+								} else {
+									ul_reply_dropdown = ul_reply_dropdown_container.append(li_reply_dropdown_delete);
+								}
 								var div_reply_dropdown = div_reply_dropdown_container.append(a_reply_dropdown_trigger).append(ul_reply_dropdown);
 								
-								var div_reply_inner = div_reply_inner_container.append(span_reply_member_img).append(div_reply_info).append(div_reply_dropdown);
+								// 로그인 중인 회원이 개설자이거나 댓글의 작성자인지 여부에 따라 다른 태그 생성
+								var div_reply_inner;
+								if($("#div-member-info").data("memberno") == response.data.replyList[i].replyWriterNo || $("#div-member-info").data("membergrade") == "개설자") {
+									div_reply_inner = div_reply_inner_container.append(span_reply_member_img).append(div_reply_info).append(div_reply_dropdown);
+								} else {
+									div_reply_inner = div_reply_inner_container.append(span_reply_member_img).append(div_reply_info);
+								}
 								
 								var div_reply_outer = div_reply_outer_container.append(div_reply_inner);
 								
-								// 더보기 버튼
-								var div_reply_more_container = $("<div>").attr("class", "d-flex justify-content-center align-items-center border-top border-bottom div-reply-more");
-								var div_reply_more_button = $("<button>").attr("class", "col d-flex justify-content-center align-items-center border-0 btn-reply-more").attr("data-boardno", boardNo).text("더보기");
-								
-								var div_reply_more = div_reply_more_container.append(div_reply_more_button);
-								
-								target.append(div_reply_outer);
+								target.prepend(div_reply_outer);
 							};
 							
 							// 더보기 버튼
@@ -523,7 +642,7 @@
 							var div_reply_more_button = $("<button>").attr("class", "col d-flex justify-content-center align-items-center border-0 btn-reply-more").attr("data-boardno", boardNo).attr("data-rp", 1).attr("data-rplast", response.data.rpLast).text("더보기");
 							
 							var div_reply_more = div_reply_more_container.append(div_reply_more_button);
-							target.append(div_reply_more);
+							targetMore.after(div_reply_more);
 						}
 						
 						// 댓글 입력창
@@ -541,7 +660,7 @@
 						var div_reply_insert_inner = div_reply_insert_inner_container.append(span_reply_insert).append(input_reply_insert).append(button_reply_insert_submit);
 						var div_reply_insert_outer = div_reply_insert_outer_container.append(div_reply_insert_inner);
 						
-						target.append(div_reply_more).append(div_reply_insert_outer);
+						target.append(div_reply_insert_outer);
 					}); 
 				}
 			}

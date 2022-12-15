@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.ahzit.entity.AhzitAttachmentDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
-import com.kh.ahzit.entity.AttachmentDto;
 import com.kh.ahzit.entity.MemberAttachmentDto;
 import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AhzitBoardDao;
@@ -29,7 +27,6 @@ import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.repository.AhzitMemberDao;
 import com.kh.ahzit.repository.AttachmentDao;
 import com.kh.ahzit.service.AhzitMemberService;
-import com.kh.ahzit.vo.AhzitBoardVO;
 
 @Controller
 @RequestMapping("/ahzit_in")
