@@ -126,29 +126,10 @@ public class AhzitInController {
 		// 소모임 첨부파일 페이지(attachment.jsp)로 연결
 		return "ahzit_in/attachment";
 	}
-	
-	@GetMapping("/{ahzitNo}/attachment/delete")
-	public String delete(@RequestParam int attachmentNo, @RequestParam int memberAhzitNo) {
-		
-		// 연결 테이블에서 데이터 삭제
-		attachmentDao.deleteAhzitInAttachment(attachmentNo, memberAhzitNo);
-		
-		// 첨부파일 테이블에서 데이터 삭제
-		attachmentDao.deleteAttachment(attachmentNo);
-		
-		// 첨부파일 경로 설정
-		File directory = new File("D:/upload/kh10f/ahzit");
-		directory.mkdirs();
-		File target = new File(directory, String.valueOf(attachmentNo));
-		
-		// 실제 첨부파일 삭제 - delete();
-		target.delete();
-		
-		return  "ahzit_in/attachment";
-	}
+
 	
 	@PostMapping("/{ahzitNo}/attachment")
-	public String upload(@RequestParam MultipartFile attachment, 
+	public String upload(@PathVariable int ahzitNo, @RequestParam MultipartFile attachment, 
 										@RequestParam int ahzitInMemberNo,
 										@ModelAttribute AhzitDto ahzitDto ) throws IllegalStateException, IOException {
 		//db저장
@@ -170,9 +151,28 @@ public class AhzitInController {
 		//연결테이블에 연결정보저장(첨부파일번호, 아지트 내 회원 번호)
 		attachmentDao.ahzitInAttachment(attachmentNo, ahzitInMemberNo);
 
-		return "ahzit_in/attachment";
+		return "redirect:attachment";
 	}
 
+	@GetMapping("/{ahzitNo}/attachment/delete")
+	public String delete(@PathVariable int ahzitNo, @RequestParam int attachmentNo, @RequestParam int memberAhzitNo) {
+		
+		// 연결 테이블에서 데이터 삭제
+		attachmentDao.deleteAhzitInAttachment(attachmentNo, memberAhzitNo);
+		
+		// 첨부파일 테이블에서 데이터 삭제
+		attachmentDao.deleteAttachment(attachmentNo);
+		
+		// 첨부파일 경로 설정
+		File directory = new File("D:/upload/kh10f/ahzit");
+		directory.mkdirs();
+		File target = new File(directory, String.valueOf(attachmentNo));
+		
+		// 실제 첨부파일 삭제 - delete();
+		target.delete();
+		
+		return  "redirect:/ahzit_in/"+ahzitNo+"attachment";
+	}
 	
 	// 소모임 멤버 Mapping
 	@GetMapping("/{ahzitNo}/member")

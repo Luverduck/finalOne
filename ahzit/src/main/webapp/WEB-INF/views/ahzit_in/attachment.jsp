@@ -75,7 +75,8 @@
 						<h2>첨부 모아보기</h2>
 						<div>
 							<form action="attachment" method="post" enctype="multipart/form-data">
-								<input type="hidden" name="ahzitInMemberNo" value=" ${ahzitMemberDto.memberNo}">
+								<input type="hidden" name="ahzitNo" value="${ahzitMemberDto.memberAhzitNo}">
+ 								<input type="hidden" name="ahzitInMemberNo" value=" ${ahzitMemberDto.memberNo}">
 								<input type="file" name="attachment" >
 								<button type="submit">업로드</button>
 							</form>
@@ -85,12 +86,13 @@
 				<c:forEach var="attachmentDto" items="${InAttachmentList}">
 					<ul>
 						<a href="/attachment/download?attachmentNo=${attachmentDto.attachmentNo}">
-							<!-- <i class="fa-solid fa-file fa-3x" ></i> -->
 							<li>${attachmentDto.attachmentName} <br>
 							(${attachmentDto.attachmentSize} bytes) &nbsp; · &nbsp;
 							 ${attachmentDto.attachmentDate} &nbsp; · &nbsp; ${ahzitMemberDto.memberId}
 							 <%--아지트 내 첨부파일 삭제 --%>
-							<a href="/ahzit_in/ ${ahzitMemberDto.memberAhzitNo}/attachment/delete?attachmentNo=${attachmentDto.attachmentNo}&memberAhzitNo=${ahzitMemberDto.memberNo}" onclick="return checkout();"><i class="fa-solid fa-trash" style="color:red;"></i><span style="color:red">삭제</span></a>	
+							<c:if test="${sessionScope.loginId == ahzitMemberDto.getMemberId()}">
+								<a href="/ahzit_in/ ${ahzitMemberDto.memberAhzitNo}/attachment/delete?attachmentNo=${attachmentDto.attachmentNo}&memberAhzitNo=${ahzitMemberDto.memberNo}" onclick="return checkout();"><i class="fa-solid fa-trash" style="color:red;"></i><span style="color:red">삭제</span></a>	
+							</c:if>
 							</li>
 						</a>
 					</ul>
