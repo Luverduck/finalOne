@@ -1,5 +1,8 @@
 package com.kh.ahzit.controller;
 
+import java.io.File;
+
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.ahzit.entity.AhzitAttachmentDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AttachmentDto;
+import com.kh.ahzit.entity.MemberAttachmentDto;
 import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AhzitBoardDao;
 import com.kh.ahzit.repository.AhzitDao;
@@ -39,6 +44,16 @@ public class AhzitInController {
 	
 	@Autowired
 	private AhzitMemberDao ahzitMemberDao;
+	
+	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
+	public void prepare() {
+		dir.mkdirs();
+	}
+	
+	@Autowired(required=false)
+	private MemberAttachmentDto memberAttachmentDto;
+	
+	private final File dir = new File("D:/upload/kh10f");
 	
 	
 	// 소모임 홈 화면 Mapping
