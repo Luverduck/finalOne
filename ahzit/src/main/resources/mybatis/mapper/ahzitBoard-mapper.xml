@@ -82,6 +82,11 @@
 		)tmp) where rn between #{rownumStart} and #{rownumEnd}
 	</select>
 	
+	<!-- 특정 소모임 내 게시글 총 갯수 -->
+	<select id = "countBoard" parameterType = "int" resultType = "int">
+		select count(*) from ahzit_board where board_ahzit_no = #{boardAhzitNo}
+	</select>
+	
 	<!-- 소모임 게시글 수정 -->
 	<update id = "updateBoard" parameterType = "map">
 		update ahzit_board set board_content = #{boardContent} where board_no = #{boardNo} and board_writer_no = #{boardWriterNo}

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ahzit.vo.AhzitBoardReplyRestRequestVO;
-import com.kh.ahzit.vo.AhzitBoardReplyRestResponseVO;
+import com.kh.ahzit.vo.AhzitBoardReplyVO;
 
 @Repository
 public class AhzitBoardReplyDaoImp implements AhzitBoardReplyDao {
@@ -56,7 +56,7 @@ public class AhzitBoardReplyDaoImp implements AhzitBoardReplyDao {
 
 	// 추상 메소드 오버라이딩 - 댓글 목록
 	@Override
-	public List<AhzitBoardReplyRestResponseVO> selectReplyList(AhzitBoardReplyRestRequestVO ahzitBoardReplyRestRequestVO) {
+	public List<AhzitBoardReplyVO> selectReplyList(AhzitBoardReplyRestRequestVO ahzitBoardReplyRestRequestVO) {
 		// 바인딩 변수를 저장할 Map 생성
 		Map<String, String> param = new HashMap<>();
 		// 바인딩 변수로 사용할 값 저장
@@ -64,5 +64,11 @@ public class AhzitBoardReplyDaoImp implements AhzitBoardReplyDao {
 		param.put("rownumStart", String.valueOf(ahzitBoardReplyRestRequestVO.rownumStart()));
 		param.put("rownumEnd", String.valueOf(ahzitBoardReplyRestRequestVO.rownumEnd()));
 		return sqlSession.selectList("ahzitBoardReply.selectReplyList", param);
+	}
+
+	// 추상 메소드 오버라이딩 - 특정 게시글에 달린 댓글의 총 수
+	@Override
+	public int countReply(int replyOriginNo) {
+		return sqlSession.selectOne("ahzitBoardReply.countReply", replyOriginNo);
 	}
 }

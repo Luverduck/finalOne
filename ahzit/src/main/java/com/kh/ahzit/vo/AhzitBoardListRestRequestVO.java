@@ -20,13 +20,21 @@ public class AhzitBoardListRestRequestVO {
 	private int cntRow = 10;  // 한 페이지에 표시할 열 갯수 (고정값)
 	
 	// 메소드
-	// - 현재 페이지 열 시작 번호 반환
+	// - 게시글 열 시작 번호
 	public int rownumStart() {
 		return (rownumEnd() - cntRow) + 1;
 	}
 	
-	// - 현재 페이지 열 끝 번호 반환
+	// - 게시글 열 끝 번호
 	public int rownumEnd() {
 		return p * cntRow;
+	}
+	
+	// 마지막 페이지 블럭을 구하기 위한 게시글 총 수
+	private int total;
+	
+	// 마지막 페이지 블럭
+	public int blockLast() {
+		return (total + (cntRow - 1)) / cntRow;
 	}
 }
