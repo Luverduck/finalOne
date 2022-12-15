@@ -28,5 +28,7 @@ public interface AhzitDao {
 	public boolean updateAhzitHead2(int ahzitNo);//현재 아지트 회원 수를 세어서 참가자 인원수에 반영
 	
 	boolean deleteCommonMember(int memberNo);//일반회원-아지트(소모임)탈퇴 메소드
+	
+	void insertMember2(AhzitMemberDto ahzitMemberDto);//아지트가입하기 메소드 2 (member_no 미리 발행하는 버전)
 
 }

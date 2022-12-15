@@ -1,6 +1,7 @@
 package com.kh.ahzit.controller;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -26,6 +28,7 @@ import com.kh.ahzit.repository.AhzitBoardDao;
 import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.repository.AhzitMemberDao;
 import com.kh.ahzit.repository.AttachmentDao;
+import com.kh.ahzit.service.AhzitMemberService;
 import com.kh.ahzit.vo.AhzitBoardVO;
 
 @Controller
@@ -44,6 +47,9 @@ public class AhzitInController {
 	
 	@Autowired
 	private AhzitMemberDao ahzitMemberDao;
+	
+	@Autowired
+	private AhzitMemberService ahzitMemberService;
 	
 	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
 	public void prepare() {
@@ -174,13 +180,14 @@ public class AhzitInController {
 		return "ahzit_in/insert";
 	}
 	
+	@ResponseBody
 	@PostMapping("/{ahzitNo}/insert")
 	public String insert(@PathVariable int ahzitNo, 
+			@RequestParam MultipartFile attachment,
 			@ModelAttribute AhzitMemberDto ahzitMemberDto, 
-			HttpSession session, Model model) {
-		ahzitDao.insertMember(ahzitMemberDto);//소모임 가입
-		ahzitDao.updateAhzitPerson(ahzitMemberDto.getMemberAhzitNo());//아지트 회원수 1 증가
-		return "redirect:/ahzit_in/{ahzitNo}";
+			HttpSession session, Model model) throws IllegalStateException, IOException {
+		ahzitMemberService.insert(ahzitMemberDto, attachment);
+		return "/ahzit_in/board";
 	}
 	
 	@GetMapping("/{ahzitNo}/editMyInfo")

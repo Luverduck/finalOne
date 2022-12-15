@@ -103,5 +103,10 @@ public class AhzitDaoImpl implements AhzitDao {
 		return count>0;
 	}
 
+	@Override
+	public void insertMember2(AhzitMemberDto ahzitMemberDto) {
+		sqlSession.insert("ahzitMember.insert2", ahzitMemberDto);
+		
+	}
 
 }
