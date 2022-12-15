@@ -41,6 +41,9 @@ public interface AttachmentDao {
 	
 	//소모임 내 멤버 번호와 연결된 첨부파일 조회
 	public List<AttachmentDto> selectAhzitInAttachment(int memberAhzitNo);
+	
+	//소모임 내 첨부파일 삭제
+	public boolean deleteAhzitInAttachment(int ahzitInAttachmentNo, int memberAhzitNo); 
 
 	// 1:1 문의 게시판 첨부파일 등록
 	public void insertInquireAttachment(int inquireOriginNo, int inquireAttachmentNo);
@@ -50,5 +53,7 @@ public interface AttachmentDao {
 	
 	// 게시글 수정 시 첨부파일 재등록 위한 첨부파일 삭제 
 	public boolean deleteInquireAttachment(int inquireAttachmentNo);
+
+	
 
 }

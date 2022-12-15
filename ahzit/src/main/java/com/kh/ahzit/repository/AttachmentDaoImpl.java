@@ -130,4 +130,10 @@ public class AttachmentDaoImpl implements AttachmentDao {
 		return sqlSession.selectList("attachment.selectAhzitInAttachment",  memberAhzitNo);
 	}
 
+	//아지트 첨부파일 삭제
+	@Override
+	public boolean deleteAhzitInAttachment(int ahzitInAttachmentNo, int  memberAhzitNo) {
+		return sqlSession.delete("attachment.deleteAhzitInAttachment", ahzitInAttachmentNo) > 0;
+	}
+
 }

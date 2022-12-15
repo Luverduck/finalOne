@@ -91,7 +91,12 @@
 		ahzit_member am 
 			inner join (select * from attachment inner join ahzit_in_attachment on attachment_no = ahzit_in_attachment_no) aaia 
 			on 
-		am.member_no = aaia.ahzit_in_member_no where am.member_ahzit_no = #{memberAhzitNo}
+		am.member_no = aaia.ahzit_in_member_no  where am.member_ahzit_no = #{memberAhzitNo} order by aaia.attachment_no desc
 	</select>
+	
+	<!-- 소모임 내 첨부파일 삭제 -->
+	<delete id="deleteAhzitInAttachment" parameterType="int">
+		delete ahzit_in_attachment where ahzit_in_attachment_no = #{ahzitInAttachmentNo} 
+	</delete>
 	
 </mapper>

@@ -89,6 +89,8 @@
 							<li>${attachmentDto.attachmentName} <br>
 							(${attachmentDto.attachmentSize} bytes) &nbsp; · &nbsp;
 							 ${attachmentDto.attachmentDate} &nbsp; · &nbsp; ${ahzitMemberDto.memberId}
+							 <%--아지트 내 첨부파일 삭제 --%>
+							<a href="/ahzit_in/ ${ahzitMemberDto.memberAhzitNo}/attachment/delete?attachmentNo=${attachmentDto.attachmentNo}&memberAhzitNo=${ahzitMemberDto.memberNo}" onclick="return checkout();"><i class="fa-solid fa-trash" style="color:red;"></i><span style="color:red">삭제</span></a>	
 							</li>
 						</a>
 					</ul>
@@ -107,6 +109,14 @@
 	</div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript">
+	//소모임 삭제 확인창(javascript)
+	function checkout(){
+	    var choice = confirm("정말 첨부파일을 삭제하시겠습니까?");
+	    return choice;
+	}
+</script>
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

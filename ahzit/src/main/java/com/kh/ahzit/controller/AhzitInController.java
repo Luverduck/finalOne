@@ -2,6 +2,7 @@ package com.kh.ahzit.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.ahzit.constant.SessionConstant;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitInAttachmentDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AttachmentDto;
+import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AhzitBoardDao;
 import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.repository.AttachmentDao;
@@ -37,6 +40,8 @@ public class AhzitInController {
 	
 	@Autowired
 	private AttachmentDao attachmentDao;
+	
+	private final File directory = new File("D:/upload/kh10f/ahzit");
 	
 	// 소모임 홈 화면 Mapping
 	@GetMapping("/{ahzitNo}")
@@ -117,8 +122,29 @@ public class AhzitInController {
 		model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));
 		// 편의를 위해 ahzitNo를 model에 추가
 		model.addAttribute("ahzitNo", ahzitNo);
+		
 		// 소모임 첨부파일 페이지(attachment.jsp)로 연결
 		return "ahzit_in/attachment";
+	}
+	
+	@GetMapping("/{ahzitNo}/attachment/delete")
+	public String delete(@RequestParam int attachmentNo, @RequestParam int memberAhzitNo) {
+		
+		// 연결 테이블에서 데이터 삭제
+		attachmentDao.deleteAhzitInAttachment(attachmentNo, memberAhzitNo);
+		
+		// 첨부파일 테이블에서 데이터 삭제
+		attachmentDao.deleteAttachment(attachmentNo);
+		
+		// 첨부파일 경로 설정
+		File directory = new File("D:/upload/kh10f/ahzit");
+		directory.mkdirs();
+		File target = new File(directory, String.valueOf(attachmentNo));
+		
+		// 실제 첨부파일 삭제 - delete();
+		target.delete();
+		
+		return  "ahzit_in/attachment";
 	}
 	
 	@PostMapping("/{ahzitNo}/attachment")
@@ -138,12 +164,15 @@ public class AhzitInController {
 		File directory = new File("D:/upload/kh10f/ahzit");
 		directory.mkdirs();
 		File target = new File(directory, String.valueOf(attachmentNo));
+		
 		attachment.transferTo(target);
 		
 		//연결테이블에 연결정보저장(첨부파일번호, 아지트 내 회원 번호)
 		attachmentDao.ahzitInAttachment(attachmentNo, ahzitInMemberNo);
+
 		return "ahzit_in/attachment";
 	}
+
 	
 	// 소모임 멤버 Mapping
 	@GetMapping("/{ahzitNo}/member")
