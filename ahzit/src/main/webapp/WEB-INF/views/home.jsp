@@ -8,8 +8,8 @@
 </jsp:include>
 
 <h1>홈 화면</h1>
-
 <c:set var="login" value="${loginId != null}"></c:set>
+<a href = "/ahzit_in/84">소모임 84번 - 개설자 : tester111 개설자 / 회원 : tester2222, tester3333</a>
 
 <div>
 	<c:choose>
@@ -21,8 +21,18 @@
 	</c:choose>
 </div>
 
-
-<a href = "/ahzit_in/84">소모임 84번 - 개설자 : tester111 개설자 / 회원 : tester2222, tester3333</a>
+<div class="container">
+	<div class="row">
+		<c:forEach var="ahzitDto" items="${list}">
+			<a href="ahzit_in/${ahzitDto.ahzitNo}">
+				   <%--아지트 프로필 사진 --%>		
+				<span>아지트 번호 : ${ahzitDto.ahzitNo}</span> &nbsp;&nbsp;
+				<span>아지트 이름 : ${ahzitDto.ahzitName}</span> &nbsp;&nbsp;
+				<span>아지트 소개 : ${ahzitDto.ahzitInfo}</span><br><br>
+			</a>
+		</c:forEach>
+	</div>
+</div>
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
