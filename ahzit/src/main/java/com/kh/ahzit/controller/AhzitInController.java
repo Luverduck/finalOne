@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AttachmentDto;
@@ -186,7 +187,8 @@ public class AhzitInController {
 
 				// 편의를 위해 ahzitNo를 model에 추가
 				model.addAttribute("ahzitNo", ahzitNo);
-				//소모임 가입 페이지로 model 전달, 이동
+								
+				//개인 프로필 수정 페이지로 model 전달, 이동
 				return "ahzit_in/editMyInfo";
 	}
 	
@@ -203,12 +205,15 @@ public class AhzitInController {
 			}
 	}
 
-	@GetMapping("/deleteCommonMember")
-	public String deleteCommonMember(@RequestParam int memberNo, Model model) {
+	@GetMapping("/{memberNo}/deleteCommonMember")//소모임 탈퇴기능
+	public String deleteCommonMember(@PathVariable int memberNo, Model model, RedirectAttributes attr) {
+		AhzitMemberDto findDto=ahzitMemberDao.findMember(memberNo);
+		int ahzitNo=findDto.getMemberAhzitNo();
 		boolean result=ahzitDao.deleteCommonMember(memberNo);
 		if(result) {
-			int ahzitNo=(int)model.getAttribute("ahzitNo");
-			return "redirect:/ahzit_in"+ahzitNo;
+			ahzitDao.updateAhzitHead2(ahzitNo);//탈퇴 성공시 ahzit_head 변경
+			attr.addAttribute("ahzitNo",ahzitNo);
+			return "redirect:/ahzit_in/{ahzitNo}";
 		}
 		else {
 			throw new TargetNotFoundException();

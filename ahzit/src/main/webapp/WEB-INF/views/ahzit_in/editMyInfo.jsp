@@ -178,7 +178,7 @@
       	</div>
       	
       	<div class="row">
-      	
+      		<a href="${pageContext.request.contextPath}/ahzit_in/${ahzitMemberDto.memberNo}/deleteCommonMember" type="button">아지트 탈퇴하기</a>
       	</div>
 
       </div>
