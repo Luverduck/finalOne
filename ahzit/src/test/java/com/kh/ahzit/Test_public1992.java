@@ -41,10 +41,12 @@ public class Test_public1992 {
 //												.ahzitIsPublic("Y")
 //												.build());
 	
+//	AhzitMemberDto testDto=AhzitMemberDto.builder().memberAhzitNo(84).memberNick("쿼리테스트").build();
+//	System.out.println(ahzitMemberDao.nicknameCheck(testDto));
+	
 	@Test
 	public void test() {
-		AhzitMemberDto testDto=AhzitMemberDto.builder().memberAhzitNo(84).memberNick("쿼리테스트").build();
-		System.out.println(ahzitMemberDao.nicknameCheck(testDto));
+		ahzitDao.updateAhzitHead2(166);
 	}
 
 }

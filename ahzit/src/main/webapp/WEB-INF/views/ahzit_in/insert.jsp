@@ -164,7 +164,16 @@
       <%-- 가운데 내용 --%>
       <div class = "col col-6">
       	<div class="row">
-      		<form id="ahzitJoin" action="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert" method="post">
+      		<form id="ahzitJoin" action="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert" method="post" enctype ="multipart/form-data">
+      		
+      		<p>아지트에서 사용할 프로필 이미지를 등록해 주세요</p>
+      		<input type="file" name="attachment" id="input-file" class="thumbnail">
+      		<img class="preview" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br>
+	      		 <div class="row img-btns">
+                       <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
+                       <label class="delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</label><br><br>
+	             </div>
+	             
       		<input type="hidden" name="memberAhzitNo" value="${ahzitNo}">
       		<input type="hidden" name="memberId" value="${loginId}">
       		<input type="text" name="memberNick">
@@ -276,22 +285,61 @@
 			console.log(judge);
 			return false;
 		});
+		
+		//이미지
+		$(function(){
+		      $("[name=attachment]").change(function(e){
+		          //input[type=file] 태그에는 files라는 속성이 존재
+		          console.log(this.files);
+		          if(this.files.length > 0){
+		              //읽는 도구
+		              var reader = new FileReader();
+		              //읽을 때 해야할 작업
+		              reader.onload = function(e){
+		                  //읽은 내용 정보가 e에 들어 있음
+		                  var preview = document.getElementById("preview")
+		                  $(".preview").attr("src", e.target.result);
+		              };
+		              reader.readAsDataURL(this.files[0]);//읽어라
+		          }
+		      });
+		      $("button[name=thumbnail-delete]").click(function(){
+		          $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
+		      });
+			  //취소버튼 클릭 시, 이전 페이지로 이동(jquery)
+			  $(".btn-edit-cancel").click(function(){
+			     history.back();
+			    });
+		  });
 	
     
 		function submitChk(){
+			
+			
+			
+			var form = $("#ahzitJoin")[0];
+			var data = new FormData(form);
+			
 			var memberAhzitNo=$("input[name='memberAhzitNo']").val();
 			var memberId=$("input[name='memberId']").val();
 			var memberNick=$("input[name='memberNick']").val();
 			
-			var allData={"memberAhzitNo":memberAhzitNo, "memberId":memberId, "memberNick":memberNick};
+			var attachment=$("input[name='attachment']").val();
 			
+						
 			$.ajax({
-				url:"insert",
+				url:'insert',
 				type:'POST',
-				data:allData,
+				data:data,
+				contentType : false,
+		        processData : false,
 				success:function(data){
 					alert("아지트 가입이 완료되었습니다");
-					window.location=("${pageContext.request.contextPath}/ahzit_in/${ahzitNo}");
+					window.location=("${pageContext.request.contextPath}/ahzit_in/"+memberAhzitNo);
+				},
+				error: function (e) { 
+					// 전송 후 에러 발생 시 실행 코드
+					console.log("ERROR : ", e); 
 				}
 			})
 		}

@@ -30,7 +30,6 @@
 		border-radius: 50%;
 		width: 100%;
 	}
-
 	.div-editor-opener,
 	.div-editor-input {
 		border-radius: 10px;
@@ -39,7 +38,6 @@
 		padding-left: 2%;
 		color: rgba(140, 140, 140, 140);
 	}
-
   	.div-board-container{
     	border-radius: 10px 10px;  
   	}
@@ -90,7 +88,6 @@
 	@keyframes heart-on {
         from {color:black;}
         to {color:#FF8681;}
-
         0% {transform: rotate(10deg);}
         5% {transform: rotate(-10deg);}
         10% {transform: rotate(10deg);}
@@ -115,7 +112,6 @@
 	@keyframes heart-off {
         from {color:#FF8681;}
         to {color:black;}
-
         0% {transform: rotate(10deg);}
         5% {transform: rotate(-10deg);}
         10% {transform: rotate(10deg);}
@@ -136,7 +132,6 @@
         animation-duration: 1s;
         animation-iteration-count: 1;
 	}
-
 	.div-reply,
 	.btn-reply-edit-submit,
 	.btn-reply-edit-cancel
@@ -163,7 +158,6 @@
 	.btn-reply-edit-cancel {
 	  	color: #FEC260; 
 	}
-
 </style>
 
 
@@ -215,6 +209,11 @@
 			      <button type="button"  disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
 			    </c:otherwise>
 			    </c:choose>
+			    
+			    <c:if test="${ahzitMemberDto.memberId==sessionScope.loginId}">
+					<a href="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/editMyInfo"><span>내 정보 수정</span></a>
+			 	</c:if>
+			    
 				</div>
 				
 				<%-- 가운데 내용 --%>
@@ -315,11 +314,9 @@
 
 <%-- 댓글 관련 script --%>
 <script type="text/javascript">
-
 	// 초기 댓글 페이지는 1페이지로
 	var rp = 1;
 	
-
 	$(function(){
 		// 댓글 목록 조회
 		$(document).on("click", ".btn-reply-write", function(event){
@@ -447,7 +444,6 @@
 			}
 		});
 	});
-
 </script>
 
 <%-- 게시글 관련 script --%>
@@ -511,7 +507,6 @@
 				target.append(divbottom_label_right);
 			}); 
 		});
-
 		// 게시글 작성 비동기 처리
 		// - 게시글 작성 영역 클릭시 게시글 작성 Modal 열기
 		$(".editor-open-insert").click(function(){
