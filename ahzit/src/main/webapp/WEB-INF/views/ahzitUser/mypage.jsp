@@ -57,12 +57,15 @@
 		</div>
 		<div class=" col" >
 			<a href="password?userId=${loginId}"  class="btn btn-outline-warning w-100" role=button>비밀번호 변경</a>
-		</div>
+		</div> 
 		<div class=" col" >
 			<a href="goodbye?userId=${loginId}"  class="btn btn-outline-warning w-100" role=button>회원 탈퇴</a>
 		</div>
 		<div class=" col" >
 			<a href="/inquire/list?inquireId=${loginId}"  class="btn btn-outline-warning w-100" role=button>1:1 문의</a>
+		</div>
+		<div class=" col" >
+			<a href="/ahzitUser/myAhzit"  class="btn btn-outline-warning w-100" role=button>내가 가입한 아지트</a>
 		</div>
 	</div>		
 
