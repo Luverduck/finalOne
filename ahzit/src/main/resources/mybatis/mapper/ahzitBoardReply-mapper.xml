@@ -27,12 +27,17 @@
 	</delete>
 	
 	<!-- 댓글 목록 조회 -->
-	<select id = "selectReplyList" parameterType = "map" resultType = "AhzitBoardReplyRestResponseVO">
+	<select id = "selectReplyList" parameterType = "map" resultType = "AhzitBoardReplyVO">
 		select * from (select tmp.*, rownum rn from(
 		    select aram.*, ma.member_attachment_no from (
 		        select reply_no, reply_writer_no, reply_origin_no, reply_content, reply_writedate, reply_state, member_no, member_nick, member_grade from ahzit_reply inner join ahzit_member on reply_writer_no = member_no
 		    )aram left outer join member_attachment ma on aram.member_no = ma.member_origin_no where aram.reply_origin_no = #{replyOriginNo} and aram.reply_state = 'N' order by aram.reply_no asc
 		)tmp) where rn between #{rownumStart} and #{rownumEnd}
+	</select>
+	
+	<!-- 특정 게시글에 달린 댓글의 총 수 -->
+	<select id = "countReply" parameterType = "int" resultType = "int">
+		select count(*) from ahzit_reply where reply_origin_no = #{replyOriginNo}
 	</select>
 	
 </mapper>
