@@ -124,7 +124,7 @@
    <div class = "row">
          
       <%-- 왼쪽 사이드바 --%>
-      <div class = "col col-3" style="background-color: green;">
+      <div class = "col col-3" style="background-color: #dff9fb;">
          <h1>왼쪽 사이드바</h1> 
       
          <br>
@@ -189,7 +189,7 @@
           
             
       <%-- 오른쪽 사이드바 --%>
-      <div class = "col-3" style="background-color: green;">
+      <div class = "col-3" style="background-color: #dff9fb;">
 
          <%-- 공지사항 목록 --%>
          <div>

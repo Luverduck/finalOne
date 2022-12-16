@@ -124,7 +124,7 @@
    <div class = "row">
          
       <%-- 왼쪽 사이드바 --%>
-      <div class = "col col-3" style="background-color: green;">
+      <div class = "col col-3" style="background-color: #dff9fb;">
          <h1>왼쪽 사이드바</h1> 
       
          <br>
@@ -163,9 +163,38 @@
             
       <%-- 가운데 내용 --%>
       <div class = "col col-6">
+      
       	
       	<div class="row">
       		<form id="ahzitJoin" action="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/editMyInfo" method="post">
+
+			
+				<c:choose>
+			      	<c:when test="${memberAttachmentList.isEmpty()}"><!-- 프로필 이미지를 등록하지 않았을 경우 -->
+			      		<p>아지트에서 사용할 프로필 이미지를 등록해 주세요</p>
+			      	</c:when>
+			      	<c:otherwise>
+			      		<p>프로필 이미지를 수정할 수 있습니다</p>
+			      	</c:otherwise>
+		      	</c:choose>
+		      	
+		      	<input type="file" name="attachment" id="input-file" class="thumbnail">
+      			<c:choose>
+      				<c:when test="${memberAttachmentList.isEmpty()}"><!-- 프로필 이미지를 등록하지 않았을 경우 -->
+      					<img class="preview" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br>
+      				</c:when>
+      			<c:otherwise><!-- 프로필 이미지를 등록했을 경우 -->
+      				<c:forEach var = "memberAttachmentList" items = "${memberAttachmentList}">  <%--설정한 프로필 --%>
+			            <img class="preview" src = "/attachment/download/ahzitMember?attachmentNo=${memberAttachmentList.attachmentNo}" width="200" height="200"> 					
+			          </c:forEach>
+      			</c:otherwise>
+      			</c:choose>
+	      		 <div class="row img-btns">
+                 <label class="input-file-upload img-lab" for="input-file">사진변경</label> 
+	      		</div>
+			
+
+
 			<input type="hidden" name="memberAhzitNo" value="${ahzitNo}">
       		<input type="hidden" name="memberId" value="${loginId}">
       		<input type="hidden" name="memberNo" value="${ahzitMemberDto.memberNo}">
@@ -173,7 +202,7 @@
       		<div class="valid-feedback">사용할 수 있는 닉네임입니다</div>
             <div class="invalid-feedback">닉네임은 한글 3~10글자로 작성하세요</div>
       		<div id="duplicate" class="NNNNN">이미 사용 중인 닉네임입니다</div>
-      		<button id="submitBtn" type="button" onclick="submitChk();">닉네임 변경</button>
+      		<button id="submitBtn" type="button" onclick="submitChk();">프로필 변경하기</button>
       		</form>
       	</div>
       	
@@ -187,7 +216,7 @@
           
             
       <%-- 오른쪽 사이드바 --%>
-      <div class = "col-3" style="background-color: green;">
+      <div class = "col-3" style="background-color: #dff9fb;">
 
          <%-- 공지사항 목록 --%>
          <div>
@@ -286,24 +315,54 @@
 
 
 	function submitChk(){
+		var form = $("#ahzitJoin")[0];
+		var data = new FormData(form);
+		
 		var memberAhzitNo=$("input[name='memberAhzitNo']").val();
 		var memberId=$("input[name='memberId']").val();
 		var memberNick=$("input[name='memberNick']").val();
-		var memberNo=$("input[name='memberNo']").val();
 		
-		var allData={"memberNick":memberNick, "memberNo":memberNo};
+		var attachment=$("input[name='attachment']").val();
 		
+					
 		$.ajax({
-			url:"editMyInfo",
+			url:'editMyInfo',
 			type:'POST',
-			data:allData,
+			data:data,
+			contentType : false,
+	        processData : false,
 			success:function(data){
-				alert("닉네임 변경이 완료되었습니다");
-				window.location=("${pageContext.request.contextPath}/ahzit_in/${ahzitNo}");
+				alert("프로필 변경이 완료되었습니다");
+				window.location=("${pageContext.request.contextPath}/ahzit_in/"+memberAhzitNo);
+			},
+			error: function (e) { 
+				// 전송 후 에러 발생 시 실행 코드
+				console.log("ERROR : ", e); 
 			}
 		})
 	}
 
+	
+	$(function(){
+	      $("[name=attachment]").change(function(e){
+	          //input[type=file] 태그에는 files라는 속성이 존재
+	          console.log(this.files);
+	          if(this.files.length > 0){
+	              //읽는 도구
+	              var reader = new FileReader();
+	              //읽을 때 해야할 작업
+	              reader.onload = function(e){
+	                  //읽은 내용 정보가 e에 들어 있음
+	                  var preview = document.getElementById("preview")
+	                  $(".preview").attr("src", e.target.result);
+	              };
+	              reader.readAsDataURL(this.files[0]);//읽어라
+	          }
+	      });	  
+	  });
+	
+	
+	
 	
 	 
 	

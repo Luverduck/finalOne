@@ -279,6 +279,9 @@ public class AhzitInController {
 				
 				//입력받은 아지트번호로 연결되는 첨부파일 조회
 				model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
+				
+				//입력받은 회원번호로 연결되는 첨부파일 조회
+				model.addAttribute("memberAttachmentList", attachmentDao.selectAhzitMemberAttachment(ahzitMemberDto.getMemberNo()));
 
 				// 편의를 위해 ahzitNo를 model에 추가
 				model.addAttribute("ahzitNo", ahzitNo);
@@ -287,11 +290,14 @@ public class AhzitInController {
 				return "ahzit_in/editMyInfo";
 	}
 	
-	@PostMapping("/{ahzitNo}/editMyInfo")
+	
+	@PostMapping("/{ahzitNo}/editMyInfo")//가입한 아지트에서 사용하는 프로필 수정기능
 	public String editMyInfo(@PathVariable int ahzitNo, 
 			@ModelAttribute AhzitMemberDto ahzitMemberDto, 
-			HttpSession session, Model model) {
+			@RequestParam MultipartFile attachment,
+			HttpSession session, Model model) throws IllegalStateException, IOException {
 			boolean result=ahzitMemberDao.updateMember(ahzitMemberDto);
+			ahzitMemberService.uploadProfile(ahzitMemberDto, attachment);
 			if(result) {
 				return "redirect:/ahzit_in/{ahzitNo}";
 			}
@@ -315,6 +321,8 @@ public class AhzitInController {
 		}
 	}
 	
+	
+
 	
 	
 }

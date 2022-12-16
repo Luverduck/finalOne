@@ -58,5 +58,7 @@ public interface AttachmentDao {
 	public void memberAttachment(int memberOriginNo, int memberAttachmentNo);
 
 	
+	//회원번호(member_no)로 첨부파일 검색(조회)
+	public List<AttachmentDto> selectAhzitMemberAttachment(int memberOriginNo);
 
 }
