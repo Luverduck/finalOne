@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%-- header --%>
-<jsp:include page="/WEB-INF/views/template/ahzitUserHeader.jsp">
+<jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
 	<jsp:param value="회원 관리" name="title"/>
 </jsp:include>
 
@@ -32,6 +32,7 @@ justify-content : center
 			                        <tr class="bg-dark text-light">
 										<th>아이디</th>
 										<th>닉네임</th>
+										<th>등급</th>
 										<th>이메일</th>
 										<th>가입일자</th>	
 										<th>로그인일자</th>
@@ -43,6 +44,7 @@ justify-content : center
 										<tr>
 											<td>${ahzitUser.userId}</td>
 											<td>${ahzitUser.userNick}</td>
+											<td>${ahzitUser.userGrade}</td>
 											<td>${ahzitUser.userEmail}</td>
 											<td>
 												<fmt:formatDate value="${ahzitUser.userJoinDate}" pattern="yyyy-MM-dd"/>
