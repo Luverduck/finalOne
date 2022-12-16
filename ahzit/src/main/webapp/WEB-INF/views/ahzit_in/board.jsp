@@ -1040,7 +1040,7 @@
 				}
 			})
 			.then(function(response){
-				
+				console.log(response);
 				// 게시글 작성 영역 삭제 (게시글 작성시 검색 목록이 아닌 전체 목록의 가장 상단에 붙여야 하지만 페이지를 갱신하지 않고는 어려운 것 같다)
 				$(".div-editor-insert").remove();
 				$("#div-board-list").empty();

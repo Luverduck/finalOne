@@ -51,8 +51,11 @@
 	<style>
         * {
             font-family: 'Noto Sans KR', sans-serif;
-           /*  border: gray 1px dotted; */
+           	font-size : 20px !important;
         }
+        a {
+			text-decoration: none;
+		}
     </style>
 </head>
 <body>

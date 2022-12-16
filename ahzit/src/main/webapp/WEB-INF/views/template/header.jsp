@@ -44,8 +44,14 @@
   	
     <style>
         * {
+        	border : 1px dotted gray;
             font-family: 'Noto Sans KR', sans-serif;
+            font-size : 20px !important;
         }
+        a {
+			text-decoration: none;
+		}
+		
     </style>
 </head>
 <body>
