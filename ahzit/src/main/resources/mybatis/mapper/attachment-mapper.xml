@@ -16,6 +16,12 @@
 		insert into attachment(attachment_no, attachment_name, attachment_type, attachment_size) values(#{attachmentNo}, #{attachmentName}, #{attachmentType}, #{attachmentSize})
 	</insert>
 	
+	<!-- 첨부파일 목록 -->
+	<select id="selectAttachmentList"  resultType="AttachmentDto">
+		select * from attachment order by attachment_no desc
+	</select>
+	
+	
 	<!-- 첨부파일 조회 -->
 	<select id = "selectAttachment" parameterType = "int" resultType = "AttachmentDto">
 		select * from attachment where attachment_no = #{attachmentNo}
@@ -72,19 +78,37 @@
 	<delete id = "deleteInquireAttachment" parameterType = "int">
 		delete inquire_attachment where inquire_attachment_no = #{attachmentNo}
 	</delete>
-	
+
+	<!-- 소모임 내 첨부파일-->
+	<insert id="InsertAhzitInAttachment" parameterType="map">
+		insert into ahzit_in_attachment(ahzit_in_attachment_no, ahzit_in_member_no) values (#{ahzitInAttachmentNo}, #{ahzitInMemberNo})
+	</insert>
+
 	<!-- 아지트 회원 프로필 이미지 첨부파일 테이블 등록 -->
 	<insert id="insertAhzitMemberAttachment" parameterType="map">
 		insert into member_attachment(member_origin_no, member_attachment_no) values (#{memberOriginNo}, #{memberAttachmentNo})
 	</insert>
 	
+
 	<!-- 소모임 회원번호(member_no)로 프로필 이미지 첨부파일 조회 -->
 	<select id="selectAhzitMemberAttachment" parameterType="int" resultType="AttachmentDto">
 		select am.member_no, iaa.attachment_no, iaa.attachment_name, iaa.attachment_type, iaa.attachment_size, iaa.attachment_date from ahzit_member am left outer join 
 		(select * from member_attachment ma inner join attachment a on ma.member_attachment_no=a.attachment_no) iaa on am.member_no=iaa.member_origin_no where member_origin_no=#{memberOriginNo}
 	</select>
-	
-	
 
+	<!-- 소모임 내 첨부파일 조회 -->
+	<select id="selectAhzitInAttachment" parameterType="int" resultType="AttachmentDto">
+		select aaia.attachment_no, aaia.attachment_name, aaia.attachment_type, aaia.attachment_size, aaia.attachment_date
+			from 
+		ahzit_member am 
+			inner join (select * from attachment inner join ahzit_in_attachment on attachment_no = ahzit_in_attachment_no) aaia 
+			on 
+		am.member_no = aaia.ahzit_in_member_no  where am.member_ahzit_no = #{memberAhzitNo} order by aaia.attachment_no desc
+	</select>
+	
+	<!-- 소모임 내 첨부파일 삭제 -->
+	<delete id="deleteAhzitInAttachment" parameterType="int">
+		delete ahzit_in_attachment where ahzit_in_attachment_no = #{ahzitInAttachmentNo} 
+	</delete>
 	
 </mapper>

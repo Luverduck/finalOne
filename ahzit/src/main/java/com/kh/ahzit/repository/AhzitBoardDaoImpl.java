@@ -93,6 +93,12 @@ public class AhzitBoardDaoImpl implements AhzitBoardDao {
 		param.put("rownumEnd", String.valueOf(ahzitBoardListRestRequestVO.rownumEnd()));
 		return sqlSession.selectList("ahzitBoard.searchList", param);
 	}
+	
+	// 추상 메소드 오버라이딩 - 특정 소모임 내 게시글 총 갯수
+	@Override
+	public int countBoard(int ahzitNo) {
+		return sqlSession.selectOne("ahzitBoard.countBoard", ahzitNo);
+	}
 
 	// 추상 메소드 오버라이딩 - 소모임 게시글 수정
 	@Override

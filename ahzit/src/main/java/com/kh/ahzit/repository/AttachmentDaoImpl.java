@@ -29,6 +29,12 @@ public class AttachmentDaoImpl implements AttachmentDao {
 		sqlSession.insert("attachment.insertAttachment", attachmentDto);
 	}
 	
+	// 추상 메소드 오버라이딩 - 첨부파일 목록
+	@Override
+	public List<AttachmentDto> selectList() {
+		return sqlSession.selectList("attachment.selectAttachmentList");
+	}	
+	
 	// 추상 메소드 오버라이딩 - 첨부파일 조회
 	@Override
 	public AttachmentDto selectAttachment(int attachmentNo) {
@@ -121,6 +127,29 @@ public class AttachmentDaoImpl implements AttachmentDao {
 	public List<AttachmentDto> selectAhzitMemberAttachment(int memberOriginNo) {
 		// 아지트 회원번호로 첨부파일 전체 조회 후 결과 반환
 		return sqlSession.selectList("attachment.selectAhzitMemberAttachment", memberOriginNo);
+	}
+
+	//아지트 첨부파일
+	@Override
+	public void ahzitInAttachment(int ahzitInAttachmentNo, int ahzitInMemberNo) {
+		Map<String, String> param = new HashMap<>();
+		
+		param.put("ahzitInAttachmentNo", String.valueOf(ahzitInAttachmentNo));
+		param.put("ahzitInMemberNo", String.valueOf(ahzitInMemberNo));
+		sqlSession.insert("attachment.InsertAhzitInAttachment", param);
+		
+	}
+
+	//아지트 첨부파일 조회
+	@Override
+	public List<AttachmentDto> selectAhzitInAttachment(int memberAhzitNo) {
+		return sqlSession.selectList("attachment.selectAhzitInAttachment",  memberAhzitNo);
+	}
+
+	//아지트 첨부파일 삭제
+	@Override
+	public boolean deleteAhzitInAttachment(int ahzitInAttachmentNo, int  memberAhzitNo) {
+		return sqlSession.delete("attachment.deleteAhzitInAttachment", ahzitInAttachmentNo) > 0;
 	}
 
 }

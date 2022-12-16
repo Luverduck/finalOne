@@ -18,7 +18,7 @@
   		
   		<!-- 소모임 목록 -->
   		<select id="list" resultType="AhzitDto">
-  			select * from ahzit 
+  			select * from ahzit order by ahzit_no desc
   		</select>
   		
   		<!-- 소모임 단일조회 -->

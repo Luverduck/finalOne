@@ -31,6 +31,9 @@ public interface AhzitBoardDao {
 	// 추상 메소드 - 특정 소모임 내 게시글 검색 조회
 	public List<AhzitBoardVO> searchBoardList(AhzitBoardListRestRequestVO ahzitBoardListRestRequestVO);
 	
+	// 추상 메소드 - 특정 소모임 내 게시글 총 갯수
+	public int countBoard(int ahzitNo);
+	
 	// 추상 메소드 - 소모임 게시글 수정
 	public boolean editBoard(AhzitBoardDto ahzitBoardDto);
 	
