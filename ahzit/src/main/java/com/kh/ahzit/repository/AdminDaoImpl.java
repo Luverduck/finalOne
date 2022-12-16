@@ -37,17 +37,17 @@ public class AdminDaoImpl implements AdminDao{
 		// 등급 변경
 		@Override
 		public boolean change(AhzitUserDto ahzitUserDto) {
-			// TODO Auto-generated method stub
-			return false;
+			int count = sqlSession.update("admin.change", ahzitUserDto);
+			return count > 0;
 		}
 
 		// 변경 후 자동 등급 업데이트
 		@Override
 		public boolean change2(AhzitUserDto ahzitUserDto) {
-			// TODO Auto-generated method stub
-			return false;
+			int count1 = sqlSession.update("admin.changeGrade", ahzitUserDto);
+			return count1 > 0;
 		}
-		
+
 		
 		
 
