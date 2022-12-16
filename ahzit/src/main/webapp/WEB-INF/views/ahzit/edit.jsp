@@ -68,14 +68,16 @@
 	</div>
 
 		<div class="row">
+
+
 			<p>아지트 이미지를 등록해주세요</p>
-				<div>
-                     <input id="input-file" type="file" name="attachment" class="thumbnail">
-		              	<img class="preview" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br> 
-                     <div class="row img-btns">
-                         <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
-                     </div>
-                 </div>
+			  <div>
+	            <input id="input-file" type="file" class="thumbnail"  name="attachment" accept="jpg, png" class="thumbnail">
+	            <img class="preview" src="/images/bg_default.jpg" width="250px" height="200px">
+	          </div>
+	          <div>
+	            <label class="input-file-upload img-lab" for="input-file">사진변경</label>     
+	          </div>
 		</div>
 		
 	<div>
@@ -147,42 +149,66 @@ function ahzitInfo1(){
     }
     span.textContent = size;
 }
-
-//소모임이미지 (jquery)
-$(function(){
-    $("[name=attachment]").change(function(e){
-        //input[type=file] 태그에는 files라는 속성이 존재
-        console.log(this.files);
-        if(this.files.length > 0){
-            //읽는 도구
-            var reader = new FileReader();
-            //읽을 때 해야할 작업
-            reader.onload = function(e){
-                //읽은 내용 정보가 e에 들어 있음
-                var preview = document.getElementById("preview")
-                $(".preview").attr("src", e.target.result);
-            };
-            reader.readAsDataURL(this.files[0]);//읽어라
-        }
-    });
-    $("button[name=thumbnail-delete]").click(function(){
-        $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
-    });
-	  //취소버튼 클릭 시, 이전 페이지로 이동(jquery)
-	  $(".btn-edit-cancel").click(function(){
-	     history.back();
-	    });
-	  
-	  //인증샷이 없으면 기본 이미지 노출
-      $(".preview").on("error", function(){
-          $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
-      });
-});
-	//소모임 삭제 확인창
+	//소모임 삭제 확인창(javascript)
 	function checkout(){
 	    var choice = confirm("정말 삭제하시겠습니까? 해당 아지트의 모든 정보가 삭제됩니다");
 	    return choice;
 	}
+	
+    // 이미지 (jquery)
+    $(function(){
+            $("[name=attachment]").change(function(e){
+                //input[type=file] 태그에는 files라는 속성이 존재
+               
+                if(this.files.length > 0){
+                    //읽는 도구
+                    var reader = new FileReader();
+                    //읽을 때 해야할 작업
+                    reader.onload = function(e){
+                        //읽은 내용 정보가 e에 들어 있음
+                        var preview = document.getElementById("preview")
+                        $(".preview").attr("src", e.target.result);
+                    };
+                    reader.readAsDataURL(this.files[0]);//읽어라
+                }
+            }); 
+        });
+    
+    $(function() {
+        //선택된 챌린지 번호를 input type=hidden에 추가
+        var ahzitNo = parseInt($(this).find("option:selected").attr("value"));
+        $("input[name=chalNo]").val(chalNo);
+        
+        //인증샷이 없으면 기본 이미지 노출
+        $(".preview").on("error", function(){
+            $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.jpg");
+        });
+        
+        //form submit 시 select disabled 속성 제거
+        $(".confirm-form").submit(function(){
+           $(this).removeAttr('disabled');
+           });
+        
+        //취소버튼 클릭 시, 이전 페이지로 이동
+        $(".btn-edit-cancel").click(function(){
+           history.back();
+          });
+        
+        //사진 삭제 버튼 클릭 시, 테이블 데이터/실제 파일 삭제
+        $(".btn-delete-file").click(function(){
+           $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.jpg");
+           $.ajax({
+                //인증샷 삭제 메소드 호출
+                url : "${pageContext.request.contextPath}/rest/chal/confirm_img/delete?confirmNo=${param.confirmNo}",
+                method : "get",
+                dataType : "json",
+                async : false,
+                success : function(resp) {
+                   $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.jpg");
+                }
+            });
+        });
+  });
 </script>
 
 

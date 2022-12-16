@@ -2,7 +2,6 @@ package com.kh.ahzit.repository;
 
 import java.util.List;
 
-
 import com.kh.ahzit.entity.AttachmentDto;
 
 public interface AttachmentDao {
@@ -12,6 +11,9 @@ public interface AttachmentDao {
 
 	// 추상 메소드 - 첨부파일 등록
 	public void insertAttachment(AttachmentDto attachmentDto);
+	
+	// 추상 메소드 - 첨부파일 목록
+	public List<AttachmentDto> selectList();
 	
 	// 추상 메소드 - 첨부파일 조회
 	public AttachmentDto selectAttachment(int attachmentNo);
@@ -31,8 +33,17 @@ public interface AttachmentDao {
 	//소모임 프로필 이미지첨부 관련 메소드
 	public void ahzitAttachment(int ahzitOriginNo, int ahzitAttachmentNo); //ahzit_attachment 테이블에 첨부파일 정보 연결
   
-	//소모임 원본번호와 연결된 첨부파일 조회
+	//소모임 프로필 원본번호와 연결된 첨부파일 조회
 	public List<AttachmentDto> selectAhzitAttachment(int ahzitOriginNo);
+	
+	//소모임 첨부파일 관련 메소드
+	public void ahzitInAttachment(int ahzitInAttachmentNo, int ahzitInMemberNo); //ahzit_in_attachment 테이블에 첨부파일 정보 연결
+	
+	//소모임 내 멤버 번호와 연결된 첨부파일 조회
+	public List<AttachmentDto> selectAhzitInAttachment(int memberAhzitNo);
+	
+	//소모임 내 첨부파일 삭제
+	public boolean deleteAhzitInAttachment(int ahzitInAttachmentNo, int memberAhzitNo); 
 
 	// 1:1 문의 게시판 첨부파일 등록
 	public void insertInquireAttachment(int inquireOriginNo, int inquireAttachmentNo);
@@ -45,5 +56,7 @@ public interface AttachmentDao {
 	
 	//member_attachment 테이블에 첨부파일 정보 연결
 	public void memberAttachment(int memberOriginNo, int memberAttachmentNo);
+
+	
 
 }
