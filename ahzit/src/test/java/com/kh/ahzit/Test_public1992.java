@@ -9,6 +9,7 @@ import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.repository.AhzitMemberDao;
+import com.kh.ahzit.repository.AttachmentDao;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +25,9 @@ public class Test_public1992 {
 	
 	@Autowired
 	private AhzitMemberDao ahzitMemberDao;
+	
+	@Autowired
+	private AttachmentDao attachmentDao;
 
 	//삭제
 	//ahzitDao.delete(AhzitDto.builder().ahzitNo(4).ahzitLeader("tester111").build());
@@ -43,10 +47,13 @@ public class Test_public1992 {
 	
 //	AhzitMemberDto testDto=AhzitMemberDto.builder().memberAhzitNo(84).memberNick("쿼리테스트").build();
 //	System.out.println(ahzitMemberDao.nicknameCheck(testDto));
+//	
+//	ahzitDao.updateAhzitHead2(166);
 	
 	@Test
 	public void test() {
-		ahzitDao.updateAhzitHead2(166);
+		
+		System.out.println(attachmentDao.selectAhzitMemberAttachment(231));
 	}
 
 }
