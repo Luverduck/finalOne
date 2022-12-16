@@ -34,9 +34,15 @@ public class AhzitBoardReplyDaoImp implements AhzitBoardReplyDao {
 		param.put("replyWriterNo", String.valueOf(ahzitBoardReplyRestRequestVO.getMemberNo()));
 		param.put("replyOriginNo", String.valueOf(ahzitBoardReplyRestRequestVO.getBoardNo()));
 		param.put("replyContent", ahzitBoardReplyRestRequestVO.getReplyContent());
-		sqlSession.insert("ahzitBoardReply.insertReply");
+		sqlSession.insert("ahzitBoardReply.insertReply", param);
 	}
 
+	// 추상 메소드 - 댓글 등록 후 댓글 정보 조회
+	@Override
+	public AhzitBoardReplyVO selectReply(int replyNo) {
+		return sqlSession.selectOne("ahzitBoardReply.selectReply", replyNo);
+	}
+	
 	// 추상 메소드 오버라이딩 - 댓글 수정
 	@Override
 	public boolean editReply(AhzitBoardReplyRestRequestVO ahzitBoardReplyRestRequestVO) {
