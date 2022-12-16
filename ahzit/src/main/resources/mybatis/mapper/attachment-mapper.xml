@@ -82,6 +82,7 @@
 	<!-- 소모임 내 첨부파일-->
 	<insert id="InsertAhzitInAttachment" parameterType="map">
 		insert into ahzit_in_attachment(ahzit_in_attachment_no, ahzit_in_member_no) values (#{ahzitInAttachmentNo}, #{ahzitInMemberNo})
+	</insert>
 
 	<!-- 아지트 회원 프로필 이미지 첨부파일 테이블 등록 -->
 	<insert id="insertAhzitMemberAttachment" parameterType="map">
