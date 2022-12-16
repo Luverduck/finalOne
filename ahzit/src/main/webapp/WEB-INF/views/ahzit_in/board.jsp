@@ -323,6 +323,72 @@
 	
 	$(function(){
 		
+		// 댓글 삭제
+		$(document).on("click", ".li-reply-delete", function(){
+			// 삭제할 태그
+			var target = $(this).parents(".div-reply-container");
+			// 댓글 번호
+			var replyNo = $(this).data("replyno");
+			// 댓글 삭제 DB 처리
+			axios({
+				url : "http://localhost:8888/rest_reply/delete?replyNo=" + replyNo,
+				method : "delete"
+			})
+			.then(function(response){
+				//console.log("삭제 성공");
+				target.remove();
+			});
+		});
+		
+		// 댓글 수정 - 댓글 수정창 표시
+		$(document).on("click", ".li-reply-edit", function(){
+			// 댓글 번호
+			var replyNo = $(this).data("replyno");
+			//console.log(replyNo);
+			
+			var content = $(this).parents(".div-icon-dropdown").prev().children(".div-reply-content").children();
+			
+			var reply_content = content.text();
+			console.log(reply_content);
+			
+			var editor = $(this).parents(".div-icon-dropdown").prev().children(".div-reply-editor");
+			
+			var editor_input = editor.children(".input-reply-editor");
+			
+			editor_input.val(reply_content);
+			
+			editor.removeClass("d-none");
+			content.addClass("d-none");
+			
+			// 댓글 수정 - 댓글 수정창 숨김
+			$(document).on("click", ".btn-reply-edit-cancel", function(){
+				editor_input.val("");
+				editor.addClass("d-none");
+				content.removeClass("d-none");
+			});
+			
+			// 댓글 수정 - 댓글 수정 DB 처리
+			$(document).on("click", ".btn-reply-edit-submit", function(){
+				var replyContent = editor_input.val();
+				//console.log(replyContent);
+				axios({
+					url : "http://localhost:8888/rest_reply/edit",
+					method : "put",
+					data : {
+						replyNo : replyNo,
+						replyContent : replyContent
+					}
+				})
+				.then(function(response){
+					// 화면에서 댓글 창 수정
+					content.html(replyContent);
+					editor.addClass("d-none");
+					content.removeClass("d-none");
+				});
+			});
+		});
+		
+		
 		$(document).on("click", ".btn-reply-submit", function(){
 			// 댓글 원본글 번호
 			var replyOriginNo = $(this).data("boardno");
@@ -343,7 +409,7 @@
 				}
 			})
 			.then(function(response){
-				console.log(response);
+				//console.log(response);
 				// 댓글 리스트
 				// 1) 댓글 외부 컨테이너
 				var div_reply_outer_container = $("<div>").attr("class", "d-flex flex-column align-items-start px-3 py-1 border-top div-board div-reply div-reply-container");
@@ -360,7 +426,7 @@
 				
 				var p_reply_writer = $("<p>").attr("class", "mb-0 p-writer-info div-reply-text").text(response.data.memberNick + " [" + response.data.memberGrade + "]");
 				
-				var div_reply_content_outer_container = $("<div>").attr("class", "w-100 div-reply div-reply-text");
+				var div_reply_content_outer_container = $("<div>").attr("class", "w-100 div-reply div-reply-text div-reply-content");
 				var p_reply_content = $("<p>").attr("class", "px-1 py-2 div-reply-text mb-0").text(response.data.replyContent);
 				var div_reply_content = div_reply_content_outer_container.append(p_reply_content);
 				
@@ -384,10 +450,10 @@
 				var div_reply_dropdown_container = $("<div>").attr("class", "dropdown div-icon-dropdown");
 				var a_reply_dropdown_trigger = $("<a>").attr("class", "fa-solid fa-ellipsis-vertical a-board-dropdown icon-board w-100").attr("data-bs-toggle", "dropdown");
 				var ul_reply_dropdown_container = $("<ul>").attr("class", "dropdown-menu");
-				var li_reply_dropdown_edit_container = $("<li>").attr("class", "li-reply-edit");
-				var a_reply_dropdown_edit = $("<a>").attr("class", "dropdown-item btn-reply-edit").attr("data-replyno", response.data.replyNo).text("수정");
-				var li_reply_dropdown_delete_container = $("<li>").attr("class", "li-reply-delete");
-				var a_reply_dropdown_delete = $("<a>").attr("class", "dropdown-item btn-reply-delete").attr("data-replyno", response.data.replyNo).text("삭제");
+				var li_reply_dropdown_edit_container = $("<li>").attr("class", "li-reply-edit").attr("data-replyno", response.data.replyNo);
+				var a_reply_dropdown_edit = $("<a>").attr("class", "dropdown-item btn-reply-edit").text("수정");
+				var li_reply_dropdown_delete_container = $("<li>").attr("class", "li-reply-delete").attr("data-replyno", response.data.replyNo);
+				var a_reply_dropdown_delete = $("<a>").attr("class", "dropdown-item btn-reply-delete").text("삭제");
 				
 				var li_reply_dropdown_edit = li_reply_dropdown_edit_container.append(a_reply_dropdown_edit);
 				var li_reply_dropdown_delete = li_reply_dropdown_delete_container.append(a_reply_dropdown_delete);
@@ -445,7 +511,7 @@
 				}
 			})
 			.then(function(response){
-				console.log(response);
+				//console.log(response);
 				
 				for(var i = 0 ; i < response.data.replyList.length ; i ++){
 					// 댓글 리스트
@@ -464,7 +530,7 @@
 					
 					var p_reply_writer = $("<p>").attr("class", "mb-0 p-writer-info div-reply-text").text(response.data.replyList[i].memberNick + " [" + response.data.replyList[i].memberGrade + "]");
 					
-					var div_reply_content_outer_container = $("<div>").attr("class", "w-100 div-reply div-reply-text");
+					var div_reply_content_outer_container = $("<div>").attr("class", "w-100 div-reply div-reply-text div-reply-content");
 					var p_reply_content = $("<p>").attr("class", "px-1 py-2 div-reply-text mb-0").text(response.data.replyList[i].replyContent);
 					var div_reply_content = div_reply_content_outer_container.append(p_reply_content);
 					
@@ -488,10 +554,10 @@
 					var div_reply_dropdown_container = $("<div>").attr("class", "dropdown div-icon-dropdown");
 					var a_reply_dropdown_trigger = $("<a>").attr("class", "fa-solid fa-ellipsis-vertical a-board-dropdown icon-board w-100").attr("data-bs-toggle", "dropdown");
 					var ul_reply_dropdown_container = $("<ul>").attr("class", "dropdown-menu");
-					var li_reply_dropdown_edit_container = $("<li>").attr("class", "li-reply-edit");
-					var a_reply_dropdown_edit = $("<a>").attr("class", "dropdown-item btn-reply-edit").attr("data-replyno", response.data.replyList[i].replyNo).text("수정");
-					var li_reply_dropdown_delete_container = $("<li>").attr("class", "li-reply-delete");
-					var a_reply_dropdown_delete = $("<a>").attr("class", "dropdown-item btn-reply-delete").attr("data-replyno", response.data.replyList[i].replyNo).text("삭제");
+					var li_reply_dropdown_edit_container = $("<li>").attr("class", "li-reply-edit").attr("data-replyno", response.data.replyList[i].replyNo);
+					var a_reply_dropdown_edit = $("<a>").attr("class", "dropdown-item btn-reply-edit").text("수정");
+					var li_reply_dropdown_delete_container = $("<li>").attr("class", "li-reply-delete").attr("data-replyno", response.data.replyList[i].replyNo);
+					var a_reply_dropdown_delete = $("<a>").attr("class", "dropdown-item btn-reply-delete").text("삭제");
 					
 					var li_reply_dropdown_edit = li_reply_dropdown_edit_container.append(a_reply_dropdown_edit);
 					var li_reply_dropdown_delete = li_reply_dropdown_delete_container.append(a_reply_dropdown_delete);
@@ -531,8 +597,10 @@
 			// 태그 생성
 			var boardNo = $(this).data("boardno"); // 댓글 원본 번호
 			
-			var targetMore = $(this).parents(".div-reply-button");
-			var target = $(this).parents(".div-reply-button").next();
+			var targetMore = $(this).parents(".div-reply-button").nextAll(".div-reply-more");
+			//console.log("1 = " + targetMore);
+			var target = $(this).parents(".div-reply-button").nextAll(".div-reply-list");
+			//console.log("2 = " + target);
 			
 			var fold_state = $(this).attr("data-fold");
 			var reply_list_state = $(this).attr("data-replylist");
@@ -542,12 +610,14 @@
 			if(fold_state == "1") { // 펼친 상태이면(1)
 				$(this).attr("data-fold", "0"); // 접힌 상태로 바꾸기(0)
 				// 접기 (hide)
-				target.hide();
+				targetMore.addClass("d-none");
+				target.addClass("d-none");
 			} else { // 접힌 상태이면(0)
 				$(this).attr("data-fold", "1"); // 펼친 상태로 바꾸기(1)
 				if(reply_list_state == "1") { // 이미 조회한 상태라면
 					// 펴기 (hide)
-					target.show();
+					targetMore.removeClass("d-none");
+					target.removeClass("d-none");
 				} else { // 최초 조회 상태라면
 					$(this).attr("data-replylist", "1"); // 조회한 상태로 변경
 					
@@ -561,10 +631,16 @@
 					})
 					.then(function(response){
 						
-						console.log(response);
+						//console.log(response);
 						//rpLast = response.data.rpLast;
 						
 						if(response.data.length != 0) {
+							// 더보기 버튼
+							var div_reply_more_container = $("<div>").attr("class", "d-flex justify-content-center align-items-center border-top border-bottom div-reply-more");
+							var div_reply_more_button = $("<button>").attr("class", "col d-flex justify-content-center align-items-center border-0 btn-reply-more").attr("data-boardno", boardNo).attr("data-rp", 1).attr("data-rplast", response.data.rpLast).text("더보기");
+							
+							var div_reply_more = div_reply_more_container.append(div_reply_more_button);
+							target.before(div_reply_more);
 							
 							for(var i = 0 ; i < response.data.replyList.length ; i ++){
 								// 댓글 리스트
@@ -583,7 +659,7 @@
 								
 								var p_reply_writer = $("<p>").attr("class", "mb-0 p-writer-info div-reply-text").text(response.data.replyList[i].memberNick+ " [" + response.data.replyList[i].memberGrade + "]");
 								
-								var div_reply_content_outer_container = $("<div>").attr("class", "w-100 div-reply div-reply-text");
+								var div_reply_content_outer_container = $("<div>").attr("class", "w-100 div-reply div-reply-text div-reply-content");
 								var p_reply_content = $("<p>").attr("class", "px-1 py-2 div-reply-text mb-0").text(response.data.replyList[i].replyContent);
 								var div_reply_content = div_reply_content_outer_container.append(p_reply_content);
 								
@@ -607,10 +683,10 @@
 								var div_reply_dropdown_container = $("<div>").attr("class", "dropdown div-icon-dropdown");
 								var a_reply_dropdown_trigger = $("<a>").attr("class", "fa-solid fa-ellipsis-vertical a-board-dropdown icon-board w-100").attr("data-bs-toggle", "dropdown");
 								var ul_reply_dropdown_container = $("<ul>").attr("class", "dropdown-menu");
-								var li_reply_dropdown_edit_container = $("<li>").attr("class", "li-reply-edit");
-								var a_reply_dropdown_edit = $("<a>").attr("class", "dropdown-item btn-reply-edit").attr("data-replyno", response.data.replyList[i].replyNo).text("수정");
-								var li_reply_dropdown_delete_container = $("<li>").attr("class", "li-reply-delete");
-								var a_reply_dropdown_delete = $("<a>").attr("class", "dropdown-item btn-reply-delete").attr("data-replyno", response.data.replyList[i].replyNo).text("삭제");
+								var li_reply_dropdown_edit_container = $("<li>").attr("class", "li-reply-edit").attr("data-replyno", response.data.replyList[i].replyNo);
+								var a_reply_dropdown_edit = $("<a>").attr("class", "dropdown-item btn-reply-edit").text("수정");
+								var li_reply_dropdown_delete_container = $("<li>").attr("class", "li-reply-delete").attr("data-replyno", response.data.replyList[i].replyNo);
+								var a_reply_dropdown_delete = $("<a>").attr("class", "dropdown-item btn-reply-delete").text("삭제");
 								
 								var li_reply_dropdown_edit = li_reply_dropdown_edit_container.append(a_reply_dropdown_edit);
 								var li_reply_dropdown_delete = li_reply_dropdown_delete_container.append(a_reply_dropdown_delete);
@@ -636,13 +712,6 @@
 								
 								target.prepend(div_reply_outer);
 							};
-							
-							// 더보기 버튼
-							var div_reply_more_container = $("<div>").attr("class", "d-flex justify-content-center align-items-center border-top border-bottom div-reply-more");
-							var div_reply_more_button = $("<button>").attr("class", "col d-flex justify-content-center align-items-center border-0 btn-reply-more").attr("data-boardno", boardNo).attr("data-rp", 1).attr("data-rplast", response.data.rpLast).text("더보기");
-							
-							var div_reply_more = div_reply_more_container.append(div_reply_more_button);
-							targetMore.after(div_reply_more);
 						}
 						
 						// 댓글 입력창
