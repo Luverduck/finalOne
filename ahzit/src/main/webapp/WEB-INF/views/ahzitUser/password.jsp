@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%-- header --%>
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/template/ahzitUserHeader.jsp">
 	<jsp:param value="마이페이지 비밀번호 변경" name="title"/>
 </jsp:include>
 

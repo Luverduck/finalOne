@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.ahzit.entity.AhzitUserDto;
-import com.kh.ahzit.entity.AhzitUserInterestDto;
+import com.kh.ahzit.vo.MyAhzitVO;
 
 public interface AhzitUserDao {
 
@@ -28,5 +28,7 @@ public interface AhzitUserDao {
 
 	boolean checkPwSuccess(AhzitUserDto ahzitUserDto); // 비밀번호 변경
 	
+	List<MyAhzitVO> myAhzit(String userId); // 가입한 아지트 조회
 	
+	 List<AhzitUserDto> selectList();
 }
