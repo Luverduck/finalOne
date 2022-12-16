@@ -27,26 +27,5 @@
 	</c:choose>
 </div>
 
-<div class="container">
-	<div class="row">
-		<c:forEach var="ahzitDto" items="${list}">
-			<a href="ahzit_in/${ahzitDto.ahzitNo}">
-			<%--아지트 프로필 사진 --%>	
- 			<c:if test="${attachmentList.isEmpty()}"> 
-				 <img src = "/images/bg_default.jpg" class="ahzit-img">
-			</c:if> 
-			<c:forEach var = "attachmentList" items = "${attachmentList}">  
-              <img src = "/attachment/download/ahzit?attachmentNo=${attachmentList.attachmentNo}" class="ahzit-img"  > 					
-             </c:forEach>	
-					<span>아지트 번호 : ${ahzitDto.ahzitNo}</span> &nbsp;
-					<span>아지트 종류 : ${ahzitDto.ahzitSort}</span> &nbsp;
-					<span>아지트 지역 : ${ahzitDto.ahzitRegionHigh} &nbsp; ${ahzitDto.ahzitRegionLow}</span> 				
-					<span>아지트 이름 : ${ahzitDto.ahzitName}</span> &nbsp;			
-					<span>아지트 소개 : ${ahzitDto.ahzitInfo}</span> &nbsp;&nbsp;
-			</c:forEach>
-		 </a>
-	</div>
-</div>
-
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
