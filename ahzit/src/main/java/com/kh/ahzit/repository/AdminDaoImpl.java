@@ -34,5 +34,22 @@ public class AdminDaoImpl implements AdminDao{
 			sqlSession.insert("admin.insert", ahzitUserDto); // 만들어둔 insert 문에 작성
 		}
 
+		// 등급 변경
+		@Override
+		public boolean change(AhzitUserDto ahzitUserDto) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		// 변경 후 자동 등급 업데이트
+		@Override
+		public boolean change2(AhzitUserDto ahzitUserDto) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+		
+		
+		
+
 	
 }

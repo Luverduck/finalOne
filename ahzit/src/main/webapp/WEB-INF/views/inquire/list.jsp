@@ -36,7 +36,7 @@ justify-content : center
 						<option value = "inquire_content">내용</option>
 					</select>
 					<input name = "inquireId" type="hidden" value = "${inquireListSearchVO.inquireId}">
-					<input name = "keyword" placeholder = "검색어" value = "${inquireListSearchVO.keyword}">
+					<input name = "keyword" placeholder = "검색어" value = "${inquireListSearchVO.keyword}" required>
 					<button type = "submit">검색</button>
 				</form>
 				</div>
@@ -98,7 +98,7 @@ justify-content : center
 			            </div>
 			        </div>
 			
-			<div class=" mt-3 mb-4">
+		<div class=" mt-3 mb-4">
 			<%-- 페이지 네비게이터 --%>
 			<ul class="pagination">
 				<c:choose>
@@ -159,7 +159,7 @@ justify-content : center
 					</c:otherwise>
 				</c:choose>
 			</ul>
-			</div>
+		</div>
 			
 			</div>
 		</div>

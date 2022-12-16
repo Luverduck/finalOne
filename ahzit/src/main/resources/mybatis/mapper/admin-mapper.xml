@@ -17,5 +17,9 @@
 		select * from ahzit_user order by user_grade asc
 	</select>
 	
+	<!--관리자 등급 변경 -->
+	<update id="change" parameterType ="AhzitUserDto">
+		update ahzit_user set user_grade = #{userGrade} where user_id = #{userId}
+	</update>
 
 </mapper>
