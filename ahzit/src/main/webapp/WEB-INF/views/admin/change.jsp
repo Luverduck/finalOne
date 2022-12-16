@@ -7,22 +7,10 @@
 	<jsp:param value="회원 관리" name="title"/>
 </jsp:include>
 
-<script type="text/javascript">
-	$(function(){
-		$(window).on("beforeunload", function(){
-		    return false;
-		});
-		$(".btn-pass").click(function(){
-		    $(window).off("beforeunload");
-		    return true;
-		});
-	});
-</script>
-
 <form action="change" method="post">
 
-<input name="adminId"  type="text"  value="${ahzitUserDto.userId}">
 
+<input name="userId"  type="hidden"  value="${ahzitUserDto.userId}">
 <div class="container-300 mt-50 mb-50">
 	<div class="row center mb-30">
 		<h1>ADMIN</h1>
@@ -36,7 +24,7 @@
 	
 	<div class="row left">
 		등급변경
-		<select class="input w-100" name="userGrade">
+		<select class="input w-100" name="userGrade" required>
 			<option value="">선택</option>
 			<option disabled>------</option>
 			<option value="관리자">관리자</option>
@@ -46,7 +34,6 @@
 	
 	
 	<div class="row right">
-		<a href="list" class="btn btn-neutral">목록</a>
 		<button type="submit" class="btn btn-positive btn-pass">수정</button>	
 	</div>
 </div>

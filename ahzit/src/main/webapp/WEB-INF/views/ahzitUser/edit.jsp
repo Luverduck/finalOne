@@ -14,11 +14,16 @@
 	height: 130px;
 	border-radius: 50%; 
 	}
-	
-.checked{
-		border-color: #3E4684;
-		border-width: 0.25em;
-}
+	.btn-m {
+		padding: 0.26rem 0.75rem;
+	}
+	[type=checkbox] {
+		display:none !important;
+	}
+		
+	.interest-selected {
+		border : 5px solid blue;
+	}
  
 </style>
 
@@ -100,7 +105,7 @@
  	</div>
  	
 	        
-	<div class="container mt-4">
+ <div class="container mt-4">
 		<div class="col-md-8 offset-md-2 mb-5 mt-3">
 			<div class="text-center mb-3">
 				<i class="fa-solid fa-tag"></i>&nbsp; 
@@ -110,13 +115,11 @@
 			<div class="row row-cols-1 row-cols-md-3 g-10 my-2 text-center">
 				<div class="col">
 					<div class="my-2 myinterest">
-						<label for="sort1"  class= "rounded-circle">
+						<label for="sort1">
                				<input  type="checkbox" name="userInterestSort" value="취미" id ="sort1" >
-               				<div>
 							<span>
 							<img src="/images/sns.jpg">
 							</span>
-							</div>
 						</label>
 					</div>
 					<strong>
@@ -128,11 +131,9 @@
 					<div class="my-2">
 						<label for="sort2">
                 				<input  type="checkbox" name="userInterestSort" value="스터디" id ="sort2" >
-								<div>
 								<span>
-								<img src="/images/sns.jpg">
+								<img src="/images/sns.jpg" class="image image-hover">
 								</span>
-								</div>
 						</label>
 					</div>
 					<strong>
@@ -143,12 +144,10 @@
 				<div class="col">
 					<div class="my-2">
 						<label for="sort3">
-                				<input  type="checkbox" name="userInterestSort" value="일상"  id ="sort3"  >
-								<div>
+                				<input  type="checkbox" name="userInterestSort" value="일상"  id ="sort3" style="display: none;">
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-								</div>
 						</label>
 					</div>
 					<strong>
@@ -160,11 +159,9 @@
 					<div class="my-2">
 						<label for="sort4">
                 				<input type="checkbox" name="userInterestSort" value="팬클럽" id ="sort4"  >
-								<div>
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-								</div>
 						</label>
 					</div>
 					<strong>
@@ -176,11 +173,9 @@
 					<div class="my-2">
 						<label for="sort5">
                 				<input type="checkbox" name="userInterestSort" value="음악" id ="sort5"  >
-								<div>
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-								</div>
 						</label>
 					</div>
 					<strong>
@@ -192,11 +187,9 @@
 					<div class="my-2">
 						<label for="sort6">
                 				<input type="checkbox" name="userInterestSort" value="스포츠" id ="sort6"  >
-								<div>
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-								</div>
 						</label>
 					</div>
 					<strong>
@@ -208,11 +201,9 @@
 					<div class="my-2">
 						<label for="sort7">
                 				<input type="checkbox" name="userInterestSort" value="여행" id ="sort7"  >
-								<div>
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-								</div>
 						</label>
 					</div>
 					<strong>
@@ -224,15 +215,27 @@
 					<div class="my-2">
 						<label for="sort8">
                 				<input type="checkbox" name="userInterestSort" value="맛집" id ="sort8"  >
-								<div>
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-								</div>
 						</label>
 					</div>
 					<strong>
 					맛집
+					</strong>
+				</div>
+				
+				<div class="col">
+					<div class="my-2">
+						<label for="sort9">
+                				<input type="checkbox" name="userInterestSort" value="영화" id ="sort9"  >
+								<span>
+								<img src="/images/sns.jpg">
+								</span>
+						</label>
+					</div>
+					<strong>
+					영화
 					</strong>
 				</div>
 			</div>
@@ -249,6 +252,10 @@
 	</div>	
 	
 </form>
+
+
+<%-- footer --%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 <script>
 	  function submitChk() {
@@ -283,19 +290,23 @@
 	
 </script>  
 <script>
-$(document).ready(function(){
-	$("input[type='checkbox']").on("click", function(){
+
+$(function(){
 	
+	$("[name=userInterestSort]").click(function(){
+		target = $(this).next().children();
+		var count = $("input:checked[type='checkbox']").length;
 		
-		let count = $("input:checked[type='checkbox']").length;
-		if(count >3){
-			$(this).prop("checked", false);
+		if(count > 3) {
 			alert("관심사는 3개까지만 선택할 수 있습니다")
+			return;
+		}
+		
+		if($(this).is(":checked")) {
+			target.addClass("interest-selected");
+		} else {
+			target.removeClass("interest-selected");
 		}
 	});
-});
-
+});	
 </script>
-
-<%-- footer --%>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
