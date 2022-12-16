@@ -61,11 +61,11 @@ public class AttachmentDaoImpl implements AttachmentDao {
 	}
 
 	// 추상 메소드 오버라이딩 - 자유게시글 원본 번호에 연결된 첨부파일 전체 조회
-	@Override
-	public List<AttachmentDto> selectFreeboardAttachment(int freeboardOriginNo) {
-		// 해당 게시글 번호로 첨부파일 전체 조회 후 결과 반환
-		return sqlSession.selectList("attachment.selectFreeboardAttachment", freeboardOriginNo);
-	}
+		@Override
+		public List<AttachmentDto> selectFreeboardAttachment(int freeboardOriginNo) {
+			// 해당 게시글 번호로 첨부파일 전체 조회 후 결과 반환
+			return sqlSession.selectList("attachment.selectFreeboardAttachment", freeboardOriginNo);
+		}
 
 	// 추상 메소드 - 자유게시글 첨부파일 삭제
 	@Override
@@ -121,6 +121,12 @@ public class AttachmentDaoImpl implements AttachmentDao {
 		param.put("memberAttachmentNo", String.valueOf(memberAttachmentNo));
 		sqlSession.insert("attachment.insertAhzitMemberAttachment", param);
 		
+	}
+	
+	@Override
+	public List<AttachmentDto> selectAhzitMemberAttachment(int memberOriginNo) {
+		// 아지트 회원번호로 첨부파일 전체 조회 후 결과 반환
+		return sqlSession.selectList("attachment.selectAhzitMemberAttachment", memberOriginNo);
 	}
 
 	//아지트 첨부파일
