@@ -5,7 +5,7 @@
 
 
 <%-- header --%>
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/template/ahzitUserHeader.jsp">
 	<jsp:param value="비밀번호 변경" name="title"/>
 </jsp:include>
 
