@@ -13,6 +13,9 @@ public interface AhzitBoardReplyDao {
 	// 추상 메소드 - 댓글 등록
 	public void insertReply(AhzitBoardReplyRestRequestVO ahzitBoardReplyRestRequestVO);
 	
+	// 추상 메소드 - 댓글 등록 후 댓글 정보 조회
+	AhzitBoardReplyVO selectReply(int replyNo);
+	
 	// 추상 메소드 - 댓글 수정
 	public boolean editReply(AhzitBoardReplyRestRequestVO ahzitBoardReplyRestRequestVO);
 	
