@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.ahzit.entity.AttachmentDto;
 import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.repository.AttachmentDao;
 
@@ -32,10 +33,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/")
-	public String home(Model model) {
+	public String home(Model model, @ModelAttribute AttachmentDto attachmentDto) {
 		model.addAttribute("list", ahzitDao.selectList());
-		
-		model.addAttribute("attachmentList", attachmentDao.selectList());
+		model.addAttribute("attachmentList", attachmentDao.selectAttachment(attachmentDto.getAttachmentNo()));
 		return "home";
 	}	
 		

@@ -12,6 +12,8 @@ public class AhzitVO {
 	private int ahzitHead;
 	private int ahzitSort;
 	private String ahzitLeader;
+	
+	private int attachmentNo;
 
 	
 	//아지트 가입 관련
