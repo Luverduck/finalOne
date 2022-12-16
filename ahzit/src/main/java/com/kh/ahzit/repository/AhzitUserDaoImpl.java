@@ -96,9 +96,16 @@ public class AhzitUserDaoImpl implements AhzitUserDao{
 		return sqlSession.selectList("ahzitUser.myAhzit", userId);
 	}
 	
+	// 가입한 아지트 조회(메인-9개)
+	@Override
+	public List<MyAhzitVO> myAhzitTopN(String userId) {
+		return sqlSession.selectList("ahzitUser.myAhzitTopN", userId);
+	}
+	
 	// 회원 전체 조회
 	@Override
 	public List<AhzitUserDto> selectList() {
 		return sqlSession.selectList("ahzitUser.list");
 	}
+
 }

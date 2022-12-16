@@ -30,5 +30,7 @@ public interface AhzitUserDao {
 	
 	List<MyAhzitVO> myAhzit(String userId); // 가입한 아지트 조회
 	
+	List<MyAhzitVO> myAhzitTopN(String userId); //가입한 아지트 조회(메인-9개)
+	
 	 List<AhzitUserDto> selectList();
 }
