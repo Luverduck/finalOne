@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+
+import javax.annotation.PostConstruct;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +18,33 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.multipart.MultipartFile;
+
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.kh.ahzit.constant.SessionConstant;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitInAttachmentDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
+
 import com.kh.ahzit.entity.AttachmentDto;
 import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AhzitBoardDao;
 import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.repository.AttachmentDao;
+
+import com.kh.ahzit.entity.MemberAttachmentDto;
+import com.kh.ahzit.error.TargetNotFoundException;
+import com.kh.ahzit.repository.AhzitBoardDao;
+import com.kh.ahzit.repository.AhzitDao;
+import com.kh.ahzit.repository.AhzitMemberDao;
+import com.kh.ahzit.repository.AttachmentDao;
+import com.kh.ahzit.service.AhzitMemberService;
+
 
 @Controller
 @RequestMapping("/ahzit_in")
@@ -41,7 +60,26 @@ public class AhzitInController {
 	@Autowired
 	private AttachmentDao attachmentDao;
 	
+
 	private final File directory = new File("D:/upload/kh10f/ahzit");
+
+	@Autowired
+	private AhzitMemberDao ahzitMemberDao;
+	
+	@Autowired
+	private AhzitMemberService ahzitMemberService;
+	
+	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
+	public void prepare() {
+		dir.mkdirs();
+	}
+	
+	@Autowired(required=false)
+	private MemberAttachmentDto memberAttachmentDto;
+	
+	private final File dir = new File("D:/upload/kh10f");
+	
+
 	
 	// 소모임 홈 화면 Mapping
 	@GetMapping("/{ahzitNo}")
@@ -190,4 +228,93 @@ public class AhzitInController {
 		// 소모임 회원 관리 페이지(member.jsp)로 이동
 		return "ahzit_in/member";
 	}
+	
+	//소모임 가입
+	@GetMapping("/{ahzitNo}/insert")
+	public String insert(@PathVariable int ahzitNo, HttpSession session, Model model) {
+		// HttpSession에서 로그인 중인 회원 아이디 반환
+		String loginId = (String)session.getAttribute("loginId");
+		// 반환받은 회원 id를 model에 추가
+		model.addAttribute("loginId",loginId);
+		// 입력받은 소모임 번호와 반환한 회원 아이디로 로그인한 회원의 해당 소모임 내 회원 정보 조회
+		AhzitMemberDto ahzitMemberDto = ahzitBoardDao.searchMemberInfo(ahzitNo, loginId);
+		// 조회한 정보를 model에 추가
+		model.addAttribute("ahzitMemberDto", ahzitMemberDto);
+		//개설한 아지트 정보를 조회
+		model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));
+
+		
+		//입력받은 아지트번호로 연결되는 첨부파일 조회
+		model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
+
+		// 편의를 위해 ahzitNo를 model에 추가
+		model.addAttribute("ahzitNo", ahzitNo);
+		//소모임 가입 페이지로 model 전달, 이동
+		return "ahzit_in/insert";
+	}
+	
+	@ResponseBody
+	@PostMapping("/{ahzitNo}/insert")
+	public String insert(@PathVariable int ahzitNo, 
+			@RequestParam MultipartFile attachment,
+			@ModelAttribute AhzitMemberDto ahzitMemberDto, 
+			HttpSession session, Model model) throws IllegalStateException, IOException {
+		ahzitMemberService.insert(ahzitMemberDto, attachment);
+		return "/ahzit_in/board";
+	}
+	
+	@GetMapping("/{ahzitNo}/editMyInfo")
+	public String editMyInfo(@PathVariable int ahzitNo, HttpSession session, Model model) {
+		// HttpSession에서 로그인 중인 회원 아이디 반환
+				String loginId = (String)session.getAttribute("loginId");
+				// 반환받은 회원 id를 model에 추가
+				model.addAttribute("loginId",loginId);
+				// 입력받은 소모임 번호와 반환한 회원 아이디로 로그인한 회원의 해당 소모임 내 회원 정보 조회
+				AhzitMemberDto ahzitMemberDto = ahzitBoardDao.searchMemberInfo(ahzitNo, loginId);
+				// 조회한 정보를 model에 추가
+				model.addAttribute("ahzitMemberDto", ahzitMemberDto);
+				//개설한 아지트 정보를 조회
+				model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));
+
+				
+				//입력받은 아지트번호로 연결되는 첨부파일 조회
+				model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
+
+				// 편의를 위해 ahzitNo를 model에 추가
+				model.addAttribute("ahzitNo", ahzitNo);
+								
+				//개인 프로필 수정 페이지로 model 전달, 이동
+				return "ahzit_in/editMyInfo";
+	}
+	
+	@PostMapping("/{ahzitNo}/editMyInfo")
+	public String editMyInfo(@PathVariable int ahzitNo, 
+			@ModelAttribute AhzitMemberDto ahzitMemberDto, 
+			HttpSession session, Model model) {
+			boolean result=ahzitMemberDao.updateMember(ahzitMemberDto);
+			if(result) {
+				return "redirect:/ahzit_in/{ahzitNo}";
+			}
+			else {
+				throw new TargetNotFoundException();
+			}
+	}
+
+	@GetMapping("/{memberNo}/deleteCommonMember")//소모임 탈퇴기능
+	public String deleteCommonMember(@PathVariable int memberNo, Model model, RedirectAttributes attr) {
+		AhzitMemberDto findDto=ahzitMemberDao.findMember(memberNo);//회원고유번호로 ahzitMemberDto조회
+		int ahzitNo=findDto.getMemberAhzitNo();//조회한 ahzitMemberDto에서 아지트 번호 반환
+		boolean result=ahzitDao.deleteCommonMember(memberNo);
+		if(result) {
+			ahzitDao.updateAhzitHead2(ahzitNo);//탈퇴 성공시 ahzit_head 변경
+			attr.addAttribute("ahzitNo",ahzitNo);
+			return "redirect:/ahzit_in/{ahzitNo}";
+		}
+		else {
+			throw new TargetNotFoundException();
+		}
+	}
+	
+	
+	
 }

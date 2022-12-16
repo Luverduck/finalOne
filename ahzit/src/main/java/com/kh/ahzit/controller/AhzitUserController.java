@@ -261,7 +261,7 @@ public class AhzitUserController {
 	
 	@PostMapping("/checkId")
 	public String checkId(
-			@RequestParam String userEmail, Model model) {
+			@RequestParam String userEmail, Model model, HttpSession session) {
 		
 			List<Object> checkId = ahzitUserDao.checkId(userEmail);
 		//	model.addAttribute("checkId", checkId);	
@@ -273,8 +273,14 @@ public class AhzitUserController {
 				model.addAttribute("checkId", checkId);	
 			}
 			// System.out.println("아이디 값 = " + model.getAttribute("checkId"));
-			return"ahzitUser/checkId";
+			return "ahzitUser/checkIdResult";
 	}
+	
+	// 아이디 확인 페이지
+		@GetMapping("/checkId_result")
+		public String checkIdResult() {
+			return "ahzitUser/checkIdResult";
+		}
 	
 	// 비밀번호 찾기
 		@GetMapping("/checkPw")
@@ -321,9 +327,9 @@ public class AhzitUserController {
 					return "redirect:checkPw";
 					}
 				else {
-					map.put("message", "아이디 또는 이메일을 다시 확인해주세요");
+					map.put("message", "입력된 회원정보가 존재하지 않습니다");
 					System.out.println("실패");
-					model.addAttribute("ddd", checkPw);
+					model.addAttribute("checkPw", checkPw);
 				//	System.out.println("실패시 " + checkPw);
 					return map;
 				}

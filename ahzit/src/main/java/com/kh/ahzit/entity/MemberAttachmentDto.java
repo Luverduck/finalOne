@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
 public class MemberAttachmentDto {
-	private String memberOriginNick;
+	private int memberOriginNo;
 	private int memberAttachmentNo;
 
 }

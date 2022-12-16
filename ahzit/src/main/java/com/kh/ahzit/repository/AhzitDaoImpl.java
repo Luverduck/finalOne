@@ -90,6 +90,23 @@ public class AhzitDaoImpl implements AhzitDao {
 		return count > 0;
 	}
 
+	//ahzit_member 테이블에서 아지트 번호로 count한 결과값을 인원수에 반영
+	@Override
+	public boolean updateAhzitHead2(int ahzitNo) {
+		int count=sqlSession.update("ahzitMember.updateAhzitHead2",ahzitNo);
+		return count>0;
+	}
+	
+	@Override//일반회원 아지트(소모임) 탈퇴용 메소드
+	public boolean deleteCommonMember(int memberNo) {
+		int count=sqlSession.delete("ahzitMember.deleteCommonMember",memberNo);
+		return count>0;
+	}
 
+	@Override
+	public void insertMember2(AhzitMemberDto ahzitMemberDto) {
+		sqlSession.insert("ahzitMember.insert2", ahzitMemberDto);
+		
+	}
 
 }

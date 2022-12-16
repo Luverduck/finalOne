@@ -53,6 +53,9 @@ public interface AttachmentDao {
 	
 	// 게시글 수정 시 첨부파일 재등록 위한 첨부파일 삭제 
 	public boolean deleteInquireAttachment(int inquireAttachmentNo);
+	
+	//member_attachment 테이블에 첨부파일 정보 연결
+	public void memberAttachment(int memberOriginNo, int memberAttachmentNo);
 
 	
 

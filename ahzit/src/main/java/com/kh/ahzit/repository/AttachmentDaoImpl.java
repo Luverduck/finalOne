@@ -112,6 +112,16 @@ public class AttachmentDaoImpl implements AttachmentDao {
 	// 해당 첨부파일 번호로 자유게시글 첨부파일 정보 삭제 후 결과 반환
 		return sqlSession.delete("attachment.deleteInquireAttachment", inquireAttachmentNo) > 0;
 		}
+	
+	@Override//member_attachment 테이블에 회원번호, 첨부파일번호 등록
+	public void memberAttachment(int memberOriginNo, int memberAttachmentNo) {
+		Map<String, String> param = new HashMap<>();
+		
+		param.put("memberOriginNo", String.valueOf(memberOriginNo));
+		param.put("memberAttachmentNo", String.valueOf(memberAttachmentNo));
+		sqlSession.insert("attachment.insertAhzitMemberAttachment", param);
+		
+	}
 
 	//아지트 첨부파일
 	@Override
