@@ -30,5 +30,5 @@ public interface AhzitUserDao {
 	
 	List<MyAhzitVO> myAhzit(String userId); // 가입한 아지트 조회
 	
-	
+	 List<AhzitUserDto> selectList();
 }

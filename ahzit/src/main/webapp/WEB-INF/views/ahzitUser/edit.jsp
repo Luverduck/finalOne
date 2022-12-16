@@ -9,16 +9,16 @@
 </jsp:include>
 
 <style>
-.checked1 {
-    border-color: #3E4684;
-    border-width: 1.5em;
- }
- 
  span img{
 	width: 130px;
 	height: 130px;
 	border-radius: 50%; 
- }
+	}
+	
+.checked{
+		border-color: #3E4684;
+		border-width: 0.25em;
+}
  
 </style>
 
@@ -100,7 +100,7 @@
  	</div>
  	
 	        
-	<div class="container w500 m30 page mb-5" style="height:600px;">
+	<div class="container mt-4">
 		<div class="col-md-8 offset-md-2 mb-5 mt-3">
 			<div class="text-center mb-3">
 				<i class="fa-solid fa-tag"></i>&nbsp; 
@@ -109,13 +109,13 @@
 
 			<div class="row row-cols-1 row-cols-md-3 g-10 my-2 text-center">
 				<div class="col">
-					<div class="my-2">
-						<label for="sort1"">
-							<div>
-                				<input  type="checkbox" name="userInterestSort" value="취미" id ="sort1" style="display: none" >
-								<span>
-								<img src="/images/sns.jpg">
-								</span>
+					<div class="my-2 myinterest">
+						<label for="sort1"  class= "rounded-circle">
+               				<input  type="checkbox" name="userInterestSort" value="취미" id ="sort1" >
+               				<div>
+							<span>
+							<img src="/images/sns.jpg">
+							</span>
 							</div>
 						</label>
 					</div>
@@ -127,12 +127,12 @@
 				<div class="col">
 					<div class="my-2">
 						<label for="sort2">
-							<div>
-                				<input  type="checkbox" name="userInterestSort" value="스터디" id ="sort2"  style="display: none" >
+                				<input  type="checkbox" name="userInterestSort" value="스터디" id ="sort2" >
+								<div>
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-							</div>
+								</div>
 						</label>
 					</div>
 					<strong>
@@ -143,12 +143,12 @@
 				<div class="col">
 					<div class="my-2">
 						<label for="sort3">
-							<div>
-                				<input  type="checkbox" name="userInterestSort" value="일상"  id ="sort3" style="display: none" >
+                				<input  type="checkbox" name="userInterestSort" value="일상"  id ="sort3"  >
+								<div>
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-							</div>
+								</div>
 						</label>
 					</div>
 					<strong>
@@ -159,12 +159,12 @@
 				<div class="col">
 					<div class="my-2">
 						<label for="sort4">
-							<div>
-                				<input type="checkbox" name="userInterestSort" value="팬클럽" id ="sort4" style="display: none" >
+                				<input type="checkbox" name="userInterestSort" value="팬클럽" id ="sort4"  >
+								<div>
 								<span>
-								<img src="/images/sns.jpg" >
+								<img src="/images/sns.jpg">
 								</span>
-							</div>
+								</div>
 						</label>
 					</div>
 					<strong>
@@ -175,12 +175,12 @@
 				<div class="col">
 					<div class="my-2">
 						<label for="sort5">
-							<div>
-                				<input type="checkbox" name="userInterestSort" value="음악" id ="sort5" style="display: none" >
+                				<input type="checkbox" name="userInterestSort" value="음악" id ="sort5"  >
+								<div>
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-							</div>
+								</div>
 						</label>
 					</div>
 					<strong>
@@ -191,12 +191,12 @@
 				<div class="col">
 					<div class="my-2">
 						<label for="sort6">
-							<div>
-                				<input type="checkbox" name="userInterestSort" value="스포츠" id ="sort6" style="display: none" >
+                				<input type="checkbox" name="userInterestSort" value="스포츠" id ="sort6"  >
+								<div>
 								<span>
-								<img src="/images/sns.jpg" >
+								<img src="/images/sns.jpg">
 								</span>
-							</div>
+								</div>
 						</label>
 					</div>
 					<strong>
@@ -207,12 +207,12 @@
 				<div class="col">
 					<div class="my-2">
 						<label for="sort7">
-							<div>
-                				<input type="checkbox" name="userInterestSort" value="여행" id ="sort7" style="display: none" >
+                				<input type="checkbox" name="userInterestSort" value="여행" id ="sort7"  >
+								<div>
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-							</div>
+								</div>
 						</label>
 					</div>
 					<strong>
@@ -223,12 +223,12 @@
 				<div class="col">
 					<div class="my-2">
 						<label for="sort8">
-							<div>
-                				<input type="checkbox" name="userInterestSort" value="맛집" id ="sort8" style="display: none" >
+                				<input type="checkbox" name="userInterestSort" value="맛집" id ="sort8"  >
+								<div>
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-							</div>
+								</div>
 						</label>
 					</div>
 					<strong>
@@ -237,7 +237,7 @@
 				</div>
 			</div>
 		</div>
-		
+	</div>
 		
 	<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 		<div class=" col">
@@ -285,7 +285,7 @@
 <script>
 $(document).ready(function(){
 	$("input[type='checkbox']").on("click", function(){
-		alert("클릭")
+	
 		
 		let count = $("input:checked[type='checkbox']").length;
 		if(count >3){

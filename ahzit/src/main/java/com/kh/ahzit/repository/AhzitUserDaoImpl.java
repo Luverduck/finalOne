@@ -95,4 +95,10 @@ public class AhzitUserDaoImpl implements AhzitUserDao{
 	public List<MyAhzitVO> myAhzit(String userId) {
 		return sqlSession.selectList("ahzitUser.myAhzit", userId);
 	}
+	
+	// 회원 전체 조회
+	@Override
+	public List<AhzitUserDto> selectList() {
+		return sqlSession.selectList("ahzitUser.list");
+	}
 }
