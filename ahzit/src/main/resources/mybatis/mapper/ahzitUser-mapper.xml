@@ -76,7 +76,7 @@
 		            	select * from ahzit_user ab inner join (
 		                select * from ahzit a inner join ahzit_member am on a.ahzit_no = am.member_ahzit_no
 		            ) myahzit on ab.user_id = myahzit.member_id where ab.user_id =#{userId}) already 
-		            	on aa.ahzit_origin_no = already.ahzit_no
+		            	on aa.ahzit_origin_no = already.ahzit_no order by already.ahzit_no desc
 		    )TMP
 		) where rn between 1 and 9
 	 </select>
