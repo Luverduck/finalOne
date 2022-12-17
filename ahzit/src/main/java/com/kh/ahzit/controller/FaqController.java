@@ -21,18 +21,19 @@ import com.kh.ahzit.vo.FaqListSearchVO;
 @Controller
 @RequestMapping("/faq")
 public class FaqController {
+	
 	@Autowired
 	private FaqDao faqDao;
 	
 	@GetMapping("/list")
 	public String list(Model model,
 			@ModelAttribute(name="vo") FaqListSearchVO vo) {
-		if(vo.isSearch()) {
-			model.addAttribute("list", faqDao.selectList(vo));
-		}
-		else {
-			model.addAttribute("list", faqDao.selectList());
-		}
+
+		//페이지 네비게이터를 위한 게시글 수
+		int count = faqDao.count(vo);
+		vo.setCount(count);
+		
+		model.addAttribute("list", faqDao.selectList(vo));
 		return "faq/list";
 	}
 	
@@ -83,12 +84,15 @@ public class FaqController {
 	
 	@PostMapping("/write")
 	public String write(@ModelAttribute FaqDto faqDto,
-			HttpSession session) {
+			HttpSession session, RedirectAttributes attr) {
+		//session에 있는 아이디를 작성자로 추가한 뒤 등록
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		faqDto.setFaqWriter(memberId);
 		
-		faqDao.insert(faqDto);
-		return "redirect:list";
+		//번호 생성 후 등록
+		int faqNo = faqDao.insert2(faqDto);
+		attr.addAttribute("faqNo", faqNo);
+		return "redirect:detail";
 	}
 	
 }

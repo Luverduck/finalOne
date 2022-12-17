@@ -10,7 +10,8 @@
 
 	<insert id="insert" parameterType="FaqDto">
 		insert into faq(
-		faq_no, faq_writer, faq_title,
+		faq_no,
+		faq_writer, faq_title,
 		faq_content, faq_writedate
 		)
 		values(
@@ -23,12 +24,6 @@
 		select * from faq order by faq_no
 		desc
 	</select>
-	
-	<!-- 검색 -->
-	<select id="search" parameterType="map" resultType="FaqDto">
-		select * from faq where instr(${type}, #{keyword}) > 0
-		order by ${type} asc
-	</select>
 
 	<select id="one" parameterType="int" resultType="FaqDto">
 		select * from
@@ -36,9 +31,11 @@
 	</select>
 
 	<update id="edit" parameterType="FaqDto">
-		update faq set
+		update faq
+		set
 		faq_title = #{faqTitle},
-		faq_content = #{faqContent}
+		faq_content = #{faqContent},
+		faq_updatedate = sysdate
 
 		where
 		faq_no = #{faqNo}
@@ -49,13 +46,20 @@
 		#{faqNo}
 	</delete>
 
+	<!-- 검색 -->
+	<select id="search" parameterType="map" resultType="FaqDto">
+		select * from
+		faq where instr(${type}, #{keyword}) > 0
+		order by ${type} asc
+	</select>
 
 	<!-- 통합 리스트 -->
 	<select id="pagelist" parameterType="map" resultType="FaqDto">
 		select *
 		from (
 		select rownum rn, TMP.* from (
-		select * from faq order by faq_no desc
+		select * from faq order by faq_no
+		desc
 		)TMP
 		)where rn between #{startRow} and
 		#{endRow}
@@ -63,14 +67,25 @@
 
 	<!-- 통합 검색 -->
 	<select id="pageSearch" parameterType="map" resultType="FaqDto">
-		select *
-		from (
+		select * from (
 		select rownum rn, TMP.* from (
 		select * from faq
-		where instr(${type}, #{keyword}) > 0
+		where
+		instr(${type}, #{keyword}) > 0
 		order by faq_no desc
 		)TMP
-		)where rn between #{startRow} and #{endRow}
+		)where rn
+		between #{startRow} and #{endRow}
+	</select>
+
+	<!-- 검색과 목록의 총 데이터 수 -->
+	<select id="pageListCount" resultType="int">
+		select count(*) from faq
+	</select>
+
+	<select id="pageSearchCount" resultType="int">
+		select count(*) from faq
+		where instr(${type}, #{keyword}) > 0
 	</select>
 
 </mapper>

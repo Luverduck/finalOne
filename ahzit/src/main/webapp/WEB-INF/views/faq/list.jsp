@@ -18,6 +18,17 @@
 
 <div class="container">
 
+	<c:if test="${loginId != null}">
+		<div class="row right">
+			<%-- 관리자일 경우만 삭제버튼을 추가 --%>
+			<c:if test="${loginGrade == '관리자'}">
+				<a class="btn btn-neutral" href="write">글쓰기</a>
+			</c:if>
+
+			<a class="btn btn-neutral" href="write">글쓰기</a>
+
+		</div>
+	</c:if>
 
 	<!-- 게시판 이름 -->
 	<div class="row">
@@ -51,8 +62,7 @@
 						<td>${faqDto.faqNo}</td>
 						<td align="left">
 							<!-- 제목을 누르면 상세 페이지로 이동하도록 처리 --> <a
-							href="detail?faqNo=${faqDto.faqNo}">
-								${faqDto.faqTitle} </a>
+							href="detail?faqNo=${faqDto.faqNo}"> ${faqDto.faqTitle} </a>
 
 
 
@@ -63,8 +73,7 @@
 									pattern="yyyy-MM-dd" />
 							</c:set> <c:choose>
 								<c:when test="${today == current}">
-									<fmt:formatDate value="${faqDto.faqWritedate}"
-										pattern="HH:mm" />
+									<fmt:formatDate value="${faqDto.faqWritedate}" pattern="HH:mm" />
 								</c:when>
 								<c:otherwise>
 									<fmt:formatDate value="${faqDto.faqWritedate}"
