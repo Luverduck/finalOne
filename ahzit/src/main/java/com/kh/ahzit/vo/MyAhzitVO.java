@@ -10,6 +10,8 @@ public class MyAhzitVO {
 
 	//내가 가입한 아지트
 	private int ahzitNo;
+	private int ahzitAttachmentNo;
+	private int ahzitHead;
 	private String ahzitName;
 	private String ahzitSort;
 	private String ahzitGrade;
