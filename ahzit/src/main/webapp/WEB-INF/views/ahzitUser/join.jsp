@@ -5,23 +5,32 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="회원 가입" name="title"/>
 </jsp:include>
+
 <style>
-.NNNNN{
-        border: 1px;
-         color: red;
-    }
-   .btn-m{
-   padding: 0.26rem 0.75rem;
-   }
-    span img{
-	width: 130px;
-	height: 130px;
-	border-radius: 50%; 
+
+	.NNNNN {
+	    border: 1px;
+		color: red;
 	}
 	
-.imginteres{
-border : 5px solid blue;
-}
+	.btn-m {
+		padding: 0.26rem 0.75rem;
+	}
+	
+	 span img {
+		width: 130px;
+		height: 130px;
+		border-radius: 50%; 
+	}
+	
+	[type=checkbox] {
+		display:none !important;
+	}
+		
+	.interest-selected {
+		border : 5px solid blue;
+	}
+	
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
@@ -356,7 +365,7 @@ border : 5px solid blue;
 							<i class="fa-solid fa-asterisk text-danger"></i>
 							</label>
 							
-							<button class="send-btn btn btn-warning rounded text-light btn-m" disabled="" type="button" >인증번호 발송</button>
+							<button class="send-btn btn btn-warning rounded text-light btn-m" disabled type="button" >인증번호 발송</button>
 							<div class="valid-feedback">올바른 이메일 형식입니다.</div>
 							<div class="invalid-feedback">이메일 형식을 확인해주세요</div>		
 						</div>
@@ -381,13 +390,11 @@ border : 5px solid blue;
 			<div class="row row-cols-1 row-cols-md-3 g-10 my-2 text-center">
 				<div class="col">
 					<div class="my-2 myinterest">
-						<label for="sort1"  class= "rounded-circle">
+						<label for="sort1">
                				<input  type="checkbox" name="userInterestSort" value="취미" id ="sort1" >
-               				<div>
 							<span>
 							<img src="/images/sns.jpg">
 							</span>
-							</div>
 						</label>
 					</div>
 					<strong>
@@ -399,11 +406,9 @@ border : 5px solid blue;
 					<div class="my-2">
 						<label for="sort2">
                 				<input  type="checkbox" name="userInterestSort" value="스터디" id ="sort2" >
-								<div>
 								<span>
 								<img src="/images/sns.jpg" class="image image-hover">
 								</span>
-								</div>
 						</label>
 					</div>
 					<strong>
@@ -414,12 +419,10 @@ border : 5px solid blue;
 				<div class="col">
 					<div class="my-2">
 						<label for="sort3">
-                				<input  type="checkbox" name="userInterestSort" value="일상"  id ="sort3"  >
-								<div>
+                				<input  type="checkbox" name="userInterestSort" value="일상"  id ="sort3" style="display: none;">
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-								</div>
 						</label>
 					</div>
 					<strong>
@@ -431,11 +434,9 @@ border : 5px solid blue;
 					<div class="my-2">
 						<label for="sort4">
                 				<input type="checkbox" name="userInterestSort" value="팬클럽" id ="sort4"  >
-								<div>
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-								</div>
 						</label>
 					</div>
 					<strong>
@@ -447,11 +448,9 @@ border : 5px solid blue;
 					<div class="my-2">
 						<label for="sort5">
                 				<input type="checkbox" name="userInterestSort" value="음악" id ="sort5"  >
-								<div>
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-								</div>
 						</label>
 					</div>
 					<strong>
@@ -463,11 +462,9 @@ border : 5px solid blue;
 					<div class="my-2">
 						<label for="sort6">
                 				<input type="checkbox" name="userInterestSort" value="스포츠" id ="sort6"  >
-								<div>
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-								</div>
 						</label>
 					</div>
 					<strong>
@@ -479,11 +476,9 @@ border : 5px solid blue;
 					<div class="my-2">
 						<label for="sort7">
                 				<input type="checkbox" name="userInterestSort" value="여행" id ="sort7"  >
-								<div>
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-								</div>
 						</label>
 					</div>
 					<strong>
@@ -495,15 +490,27 @@ border : 5px solid blue;
 					<div class="my-2">
 						<label for="sort8">
                 				<input type="checkbox" name="userInterestSort" value="맛집" id ="sort8"  >
-								<div>
 								<span>
 								<img src="/images/sns.jpg">
 								</span>
-								</div>
 						</label>
 					</div>
 					<strong>
 					맛집
+					</strong>
+				</div>
+				
+				<div class="col">
+					<div class="my-2">
+						<label for="sort9">
+                				<input type="checkbox" name="userInterestSort" value="영화" id ="sort9"  >
+								<span>
+								<img src="/images/sns.jpg">
+								</span>
+						</label>
+					</div>
+					<strong>
+					영화
 					</strong>
 				</div>
 			</div>
@@ -522,26 +529,23 @@ border : 5px solid blue;
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 <script>
-$(function(){
-	$("input[type='checkbox']").on("click", function(){
-		let count = $("input:checked[type='checkbox']").length;
-		if(count >3){
-			$(this).prop("checked", false);
-			alert("관심사는 3개까지만 선택할 수 있습니다")
-		}
-	});
-});
 
 $(function(){
-	$("img").click(function(){
-		let count1 = $("input:checked[type='checkbox']").length;
-		console.log(count1)
-		if(count1<3){
-			 $(this).addClass("imginteres");
+	
+	$("[name=userInterestSort]").click(function(){
+		target = $(this).next().children();
+		var count = $("input:checked[type='checkbox']").length;
+		
+		if(count > 3) {
+			alert("관심사는 3개까지만 선택할 수 있습니다")
+			return;
 		}
-		$("input:checked[type='checkbox']").on("click", function(){
-			$(this).removeClass("imginteres");
-		})
-	})
-});
+		
+		if($(this).is(":checked")) {
+			target.addClass("interest-selected");
+		} else {
+			target.removeClass("interest-selected");
+		}
+	});
+});	
 </script>

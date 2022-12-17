@@ -20,7 +20,7 @@ public interface AhzitBoardReplyDao {
 	public boolean editReply(AhzitBoardReplyRestRequestVO ahzitBoardReplyRestRequestVO);
 	
 	// 추상 메소드 - 댓글 삭제
-	public boolean deleteReply(AhzitBoardReplyRestRequestVO ahzitBoardReplyRestRequestVO);
+	public boolean deleteReply(int replyNo);
 	
 	// 추상 메소드 - 댓글 목록
 	public List<AhzitBoardReplyVO> selectReplyList(AhzitBoardReplyRestRequestVO ahzitBoardReplyRestRequestVO);
