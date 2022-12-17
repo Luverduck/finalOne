@@ -14,7 +14,6 @@
 	<jsp:param value="faq - 등록" name="title" />
 </jsp:include>
 
-
 <form action="write" method="post">
 	<div class="container">
 		<div class="row center">
@@ -28,8 +27,8 @@
 
 		<div class="row left">
 			<label>내용</label>
-			<textarea class="input w-100" name="faqContent" rows="10" cols="80"
-				required></textarea>
+			<textarea class="input w-100" name="faqContent" rows="10"
+				cols="80" required></textarea>
 		</div>
 
 
