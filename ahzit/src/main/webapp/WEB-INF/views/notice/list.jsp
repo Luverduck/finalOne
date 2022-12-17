@@ -11,7 +11,7 @@
 
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="공지게시판" name="title" />
+	<jsp:param value="notice" name="title" />
 </jsp:include>
 
 
@@ -19,71 +19,78 @@
 
 <div class="container">
 
+	<c:if test="${loginId != null}">
+		<div class="row right">
+			<%-- 관리자일 경우만 삭제버튼을 추가 --%>
+			<c:if test="${loginGrade == '관리자'}">
+				<a class="btn btn-neutral" href="write">글쓰기</a>
+			</c:if>
 
-		<!-- 게시판 이름 -->
-		<div class="row">
-			<h1>공지 게시판</h1>
-		</div>
-
-		<!-- 글쓰기 버튼 -->
-		<div class="row">
 			<a class="btn btn-neutral" href="write">글쓰기</a>
+
 		</div>
+	</c:if>
 
-		<div class="row center">
-			<table class="table">
+	<!-- 게시판 이름 -->
+	<div class="row">
+		<h1>공지 게시판</h1>
+	</div>
 
-				<thead align="center">
+
+	<div class="row center">
+		<table class="table">
+
+			<thead align="center">
+				<tr>
+					<th>번호</th>
+					<th width="45%">제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회수</th>
+
+				</tr>
+			</thead>
+
+
+			<tbody align="center">
+				<c:forEach var="noticeDto" items="${list}">
 					<tr>
-						<th>번호</th>
-						<th width="45%">제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>조회수</th>
-
-					</tr>
-				</thead>
-				
-				
-				<tbody align="center">
-					<c:forEach var="noticeDto" items="${list}">
-						<tr>
 
 
-							<td>${noticeDto.noticeNo}</td>
-							<td align="left">
-								<!-- 제목을 누르면 상세 페이지로 이동하도록 처리 --> <a
-								href="detail?noticeNo=${noticeDto.noticeNo}">
-									${noticeDto.noticeTitle} </a>
+						<td>${noticeDto.noticeNo}</td>
+						<td align="left">
+							<!-- 제목을 누르면 상세 페이지로 이동하도록 처리 --> <a
+							href="detail?noticeNo=${noticeDto.noticeNo}">
+								${noticeDto.noticeTitle} </a>
 
 
 
-							</td>
-							<td>${noticeDto.noticeWriter}</td>
-							<td><c:set var="current">
+						</td>
+						<td>${noticeDto.noticeWriter}</td>
+						<td><c:set var="current">
+								<fmt:formatDate value="${noticeDto.noticeWritedate}"
+									pattern="yyyy-MM-dd" />
+							</c:set> <c:choose>
+								<c:when test="${today == current}">
+									<fmt:formatDate value="${noticeDto.noticeWritedate}"
+										pattern="HH:mm" />
+								</c:when>
+								<c:otherwise>
 									<fmt:formatDate value="${noticeDto.noticeWritedate}"
 										pattern="yyyy-MM-dd" />
-								</c:set> <c:choose>
-									<c:when test="${today == current}">
-										<fmt:formatDate value="${noticeDto.noticeWritedate}"
-											pattern="HH:mm" />
-									</c:when>
-									<c:otherwise>
-										<fmt:formatDate value="${noticeDto.noticeWritedate}"
-											pattern="yyyy-MM-dd" />
-									</c:otherwise>
-								</c:choose></td>
-							<td>${noticeDto.noticeRead}</td>
+								</c:otherwise>
+							</c:choose></td>
+						<td>${noticeDto.noticeRead}</td>
 
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 
 
-<!-- 페이징 -->
-<div class="row center">
+	<!-- 페이징 -->
+	<div class="row center">
 		<ul class="pagination">
 			<!-- 이전 -->
 			<c:choose>
@@ -94,7 +101,7 @@
 					<li><a href="#">&laquo;</a></li>
 				</c:otherwise>
 			</c:choose>
-			
+
 			<c:choose>
 				<c:when test="${vo.hasPrev()}">
 					<li><a href="list?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a></li>
@@ -103,9 +110,10 @@
 					<li><a href="#">&lt;</a></li>
 				</c:otherwise>
 			</c:choose>
-			
+
 			<!-- 숫자 -->
-			<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
+			<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}"
+				step="1">
 				<c:choose>
 					<c:when test="${vo.p == i}">
 						<li class="on"><a href="#">${i}</a></li>
@@ -115,7 +123,7 @@
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
-			
+
 			<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
 			<c:choose>
 				<c:when test="${vo.hasNext()}">
@@ -125,7 +133,7 @@
 					<li><a href="#">&gt;</a></li>
 				</c:otherwise>
 			</c:choose>
-			
+
 			<c:choose>
 				<c:when test="${not vo.isLast()}">
 					<li><a href="list?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;</a></li>
@@ -138,20 +146,20 @@
 	</div>
 
 
-<!-- 검색창 -->
-		<form action="list" method="get">
-			<select name="type" required>
-				<option value="notice_title"
-					<c:if test="${vo.type=='notice_title'}">selected</c:if>>제목</option>
-				<option value="notice_content"
-					<c:if test="${vo.type=='notice_content'}">selected</c:if>>내용</option>
+	<!-- 검색창 -->
+	<form action="list" method="get">
+		<select name="type" required>
+			<option value="notice_title"
+				<c:if test="${vo.type=='notice_title'}">selected</c:if>>제목</option>
+			<option value="notice_content"
+				<c:if test="${vo.type=='notice_content'}">selected</c:if>>내용</option>
 
-			</select> 
-			<input type="search" name="keyword" placeholder="검색어" required value="${vo.keyword}">
-			<button type="submit">검색</button>
-		</form>
+		</select> <input type="search" name="keyword" placeholder="검색어" required
+			value="${vo.keyword}">
+		<button type="submit">검색</button>
+	</form>
 
-	</div>
+</div>
 
 
 <%-- footer --%>
