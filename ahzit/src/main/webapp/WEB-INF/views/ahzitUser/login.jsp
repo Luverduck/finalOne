@@ -38,8 +38,7 @@ function kakaoLogin() {
         Kakao.API.request({
           url: '/v2/user/me',
           success: function (response) {
-        	  console.log(response);
-        	  //	 alert("111");
+        //	  console.log(response);
         	  //	  alert(response.id);
         	  	 const kakaoId = response.id
         	  $.ajax({
@@ -53,12 +52,13 @@ function kakaoLogin() {
 					data:{
 						kakaoId
 					},
-					success : function(a){
-						alert("dd");
-						alert(a);
+					success : function(LoginId){
+					//	alert("dd");
+					//	alert(LoginId);
 						let url1 = '${pageContext.request.contextPath}/kakao/edit';
-						if( a == "Y"){
-						location.href = url1;
+						let url2 = '${pageContext.request.contextPath}/';
+						if( LoginId == "Y"){
+							location.href = url2;
 						}
 						else{
 							location.href = url1;

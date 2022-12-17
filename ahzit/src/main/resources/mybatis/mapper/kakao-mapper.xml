@@ -16,6 +16,11 @@
 		select * from kakao where kakao_id = #{kakaoId}
 	</select>
 	
-
+	<!-- 회원 가입 -->
+	<insert id="edit" parameterType="AhzitUserDto">
+		 insert into ahzit_user(user_id, user_pw, user_nick, user_email) 
+		 values(#{user_id}, 'kakaoPw', #{userNick}, #{userEmail})
+	</insert>
+	
 	
 </mapper>

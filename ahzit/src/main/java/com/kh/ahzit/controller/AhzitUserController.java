@@ -61,7 +61,6 @@ public class AhzitUserController {
 	// 회원가입
 	@GetMapping("/join")
 	public String join() {
-	
 		return "ahzitUser/join";
 	}
 

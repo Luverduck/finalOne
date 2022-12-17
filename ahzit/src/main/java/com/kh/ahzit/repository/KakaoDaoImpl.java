@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ahzit.entity.AhzitUserDto;
 import com.kh.ahzit.entity.KakaoDto;
 
 @Repository
@@ -21,6 +22,12 @@ public class KakaoDaoImpl implements KakaoDao {
 	@Override
 	public KakaoDto selectOne(String kakaoId) {
 		return sqlSession.selectOne("kakao.one", kakaoId);
+	}
+
+	@Override
+	public void edit(AhzitUserDto ahzitUserDto) {
+		sqlSession.insert("kakao.edit", ahzitUserDto);
+		
 	}
 
 }
