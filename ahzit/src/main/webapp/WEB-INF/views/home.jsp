@@ -37,25 +37,15 @@
 	<div class="row">
 
 	   	<c:forEach var="myAhzitTopN" items="${myAhzitTopN}">
-<%-- 	   	<c:choose>
-	   	<c:when  test="${myAhzitTopN.ahzitAttachmentNo == 0}">
-	   		<img src = "/images/bg_default.jpg" class="ahzit-img">	   	
-	   	</c:when>
-	   	<c:otherwise>
-		 	<img src = "/attachment/download/ahzit?attachmentNo=${myAhzitTopN.ahzitAttachmentNo}" class="ahzit-img"> 	
-	   	</c:otherwise>
-	   	</c:choose> --%>
-	
-	   <%--	<img src = "/images/bg_default.jpg" class="ahzit-img"> --%>
-	   <img src = "/attachment/download/ahzit?attachmentNo=${myAhzitTopN.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">  
+	  		<img src = "/attachment/download/ahzit?attachmentNo=${myAhzitTopN.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">  
 			<a href="${pageContext.request.contextPath}/ahzit_in/${myAhzitTopN.ahzitNo}">
 				${myAhzitTopN.ahzitNo}
 				${myAhzitTopN.ahzitName} &nbsp; <%--아지트 이름 --%>
 				${myAhzitTopN.ahzitSort} &nbsp; <%--아지트 종류 --%>
-				${myAhzitTopN.ahzitHead} &nbsp;
+				${myAhzitTopN.ahzitHead} &nbsp; <%--아지트 멤버 수 --%>
 			</a>
-		</c:forEach>
 			<a href="ahzitUser/myAhzit">가입한 소모임 전부보기<i class="fa-solid fa-angles-right"></i></a>
+		</c:forEach>
 	</div>
 	
 	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
