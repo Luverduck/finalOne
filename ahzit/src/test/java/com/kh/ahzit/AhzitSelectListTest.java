@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.kh.ahzit.entity.AhzitDto;
+import com.kh.ahzit.vo.MyAhzitVO;
 
 @SpringBootTest
 public class AhzitSelectListTest {
@@ -17,9 +17,9 @@ public class AhzitSelectListTest {
 
 	@Test
 	public void test() {
-		List<AhzitDto> list = sqlSession.selectList("ahzit.list");
+		List<MyAhzitVO> list = sqlSession.selectList("ahzitUser.myAhzitTopN");
 		System.out.println(list.size());
-		for(AhzitDto dto : list) {
+		for(MyAhzitVO dto : list) {
 			System.out.println(dto);
 		}
 	}

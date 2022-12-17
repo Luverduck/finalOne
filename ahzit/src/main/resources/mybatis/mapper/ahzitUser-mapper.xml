@@ -63,4 +63,21 @@
 		select myahzit.ahzit_name, myahzit.ahzit_sort, myahzit.ahzit_no, myahzit.ahzit_grade, myahzit.member_nick from ahzit_user ab left outer join
 		(select * from ahzit a inner join ahzit_member am on a.ahzit_no = am.member_ahzit_no) myahzit on ab.user_id = myahzit.member_id where ab.user_id =#{userId}
 	</select>
+	
+	<!-- 내가 가입한 아지트 조회 (메인-9개)-->
+	 <select id="myAhzitTopN" parameterType="String" resultType="MyAhzitVO">
+		select * from (
+		    select TMP.*, rownum rn from (
+		       select 
+		            	aa.ahzit_attachment_no, already.ahzit_no, already.ahzit_name, already.ahzit_sort, already.ahzit_head
+		            from 
+		            	ahzit_attachment aa 
+		            right outer join (
+		            	select * from ahzit_user ab inner join (
+		                select * from ahzit a inner join ahzit_member am on a.ahzit_no = am.member_ahzit_no
+		            ) myahzit on ab.user_id = myahzit.member_id where ab.user_id =#{userId}) already 
+		            	on aa.ahzit_origin_no = already.ahzit_no order by already.ahzit_no desc
+		    )TMP
+		) where rn between 1 and 9
+	 </select>
 </mapper>
