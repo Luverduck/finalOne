@@ -14,6 +14,18 @@ color: red;
 }
 </style>
 
+<ul>
+	<li onclick="kakaoLogin();">
+      <a href="javascript:void(0)">
+          <span>카카오 로그인</span>
+      </a>
+	</li>
+	<li onclick="kakaoLogout();">
+      <a href="javascript:void(0)">
+          <span>카카오 로그아웃</span>
+      </a>
+	</li>
+</ul>
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
@@ -22,14 +34,39 @@ console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //카카오로그인
 function kakaoLogin() {
     Kakao.Auth.login({
-    	
       success: function (response) {
-    //alert(JSON.stringify(response))
         Kakao.API.request({
           url: '/v2/user/me',
           success: function (response) {
-        	  alert(JSON.stringify(response))
-        	  console.log(response)
+        	  console.log(response);
+        	  //	 alert("111");
+        	  //	  alert(response.id);
+        	  	 const kakaoId = response.id
+        	  $.ajax({
+					url:"${pageContext.request.contextPath}/kakao/insert",
+					/* 카카오 아이디 받아서 회원 테이블에 아이디로 저장 
+						추가 회원 정보를 입력받아서 회원테이블에 인서트
+						인서트가 되면 세션에 로그인 아이디 저장
+						기존 추가정보 입력했던 회원이면 홈화면으로 이동
+						*/
+					method:"post",
+					data:{
+						kakaoId
+					},
+					success : function(a){
+						alert("dd");
+						alert(a);
+						let url1 = '${pageContext.request.contextPath}/kakao/edit';
+						if( a == "Y"){
+						location.href = url1;
+						}
+						else{
+							location.href = url1;
+						}
+					}
+					
+				});
+        		
           },
           fail: function (error) {
             console.log(error)
@@ -47,7 +84,6 @@ function kakaoLogout() {
       Kakao.API.request({
         url: '/v1/user/unlink',
         success: function (response) {
-      
         	console.log(response)
         },
         fail: function (error) {
