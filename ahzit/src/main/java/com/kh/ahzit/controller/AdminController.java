@@ -51,7 +51,6 @@ public class AdminController {
 	// 관리자 생성
 		@GetMapping("/join")
 		public String join() {
-			
 			return "admin/join";
 		}
 
@@ -71,8 +70,6 @@ public class AdminController {
 		
 		@PostMapping("/change")
 		public String edit(@ModelAttribute AhzitUserDto ahzitUserDto, Model model,  RedirectAttributes attr) {
-//			String loginId = (String) session.getAttribute(SessionConstant.ID);
-//			String loginGrade = (String) session.getAttribute(SessionConstant.GRADE);
 		//	System.out.println("ahzit = "+ ahzitUserDto);
 			// 관리자 등급 변경 
 			boolean result = 	adminDao.change(ahzitUserDto);
@@ -82,7 +79,7 @@ public class AdminController {
 			// 관리자 변경시 운영자로 업데이트
 			if(result) {
 				attr.addAttribute("userId",ahzitUserDto.getUserId());
-				return "redirect:/admin/";
+				return "redirect:/admin/ahzitUser";
 			}	
 			else {
 				throw new TargetNotFoundException("변경실패");
