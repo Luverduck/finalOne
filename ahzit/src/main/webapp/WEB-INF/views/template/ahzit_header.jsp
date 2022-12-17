@@ -51,7 +51,7 @@
 	<style>
         * {
             font-family: 'Noto Sans KR', sans-serif;
-           	font-size : 20px !important;
+           	font-size : 16px !important;
         }
         a {
 			text-decoration: none;
