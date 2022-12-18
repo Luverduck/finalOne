@@ -12,19 +12,14 @@
 </jsp:include>
 
 <style>
-	a {
-		text-decoration-line : none;
-	}
-	 .ahzit-img {
-      	width : 120px;
-		height :100px;      
-   }
-   
    /* 이미지 슬라이더 */
-     .swiper {
-         width: 600px;
-         height: 300px;
-    }
+   .main-img {
+    	height: 100%;
+   }
+    .swiper {
+        width: 100%;
+        height: 500px;
+   }
     .swiper-slide { 
         text-align: center; 
         font-size: 18px; 
@@ -51,10 +46,60 @@
         color : white;
     }
     
-    .swiper-button-next::after,
-    .swiper-button-prev::after {/* 이미지 슬라이더  버튼 숨기기*/
+	.swiper-button-next::after,
+    .swiper-button-prev::after {
         display: none;
-    }
+    } 
+    /*카드*/
+     img {
+       height:170px;
+       width:100%;
+   }
+     div [class^="col-"]{
+     	padding-left:5px;
+     	padding-right:5px;
+     }
+     .card{
+     	transition:0.5s;
+     	cursor:pointer;
+     	width : 220px;
+     }
+     .card-title{  
+     	font-size:15px;
+     	transition:1s;
+     	cursor:pointer;
+     }
+     .card-title i{  /*지역 표시*/
+     	font-size:15px;
+     	cursor:pointer;
+     }
+     .card:hover{
+     	transform: scale(1.05);
+     	box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
+     }
+     .card-text{
+     	height:30px;  
+     }
+     .card::before, .card::after {
+     	position: absolute;
+     	top: 0;
+     	right: 0;
+    	bottom: 0;
+     	left: 0;
+     	transform: scale3d(0, 0, 1);
+     	transition: transform .3s ease-out 0s;
+     	background: rgba(255, 255, 255, 0.1);
+     	pointer-events: none;
+     }
+     .card::before {
+     	transform-origin: left top;
+     }
+     .card::after {
+     	transform-origin: right bottom;
+     }
+     .card:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
+     	transform: scale3d(1, 1, 1);
+     }
 </style>
 
 <c:set var="login" value="${loginId != null}"></c:set>
@@ -62,14 +107,14 @@
 <div class = "container-fulid mt-3">
 	<div class = "row">
 
-		<div class = "col-8 offset-2">
+		<div class = "col-8 offset-2 ">
 			<h1>홈 화면 내용 영역</h1>
-
+		   <%--이미지 슬라이더 --%>
 			<div class="swiper">
                 <div class="swiper-wrapper">
-                	<div class="swiper-slide"><img src="https://placeimg.com/600/300/any"></div>
-                	<div class="swiper-slide"><img src="https://placeimg.com/600/300/animal"></div>
-                	<div class="swiper-slide"><img src="https://placeimg.com/600/300/tech"></div>
+                	<div class="swiper-slide"><img src="https://placeimg.com/600/300/any" class="main-img"></div>
+                	<div class="swiper-slide"><img src="https://placeimg.com/600/300/animal" class="main-img"></div>
+                	<div class="swiper-slide"><img src="https://placeimg.com/600/300/tech" class="main-img"></div>
                 </div>
                 <div class="swiper-pagination"></div>
                 <div class="swiper-button-prev"></div>
@@ -77,19 +122,24 @@
             </div>
 
 		<h2>내가 가입한 아지트</h2>
-			<div class="row">
-			   	<c:forEach var="myAhzitTopN" items="${myAhzitTopN}">
-			  		<img src = "/attachment/download/ahzit?attachmentNo=${myAhzitTopN.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">  
-					<a href="${pageContext.request.contextPath}/ahzit_in/${myAhzitTopN.ahzitNo}">
-						${myAhzitTopN.ahzitNo}
-						${myAhzitTopN.ahzitName} &nbsp; <%--아지트 이름 --%>
-						${myAhzitTopN.ahzitSort} &nbsp; <%--아지트 종류 --%>
-						${myAhzitTopN.ahzitHead} &nbsp; <%--아지트 멤버 수 --%>
-					</a>
-				</c:forEach>
-					<a href="ahzitUser/myAhzit">가입한 소모임 전부보기<i class="fa-solid fa-angles-right"></i></a>
-			</div>
-			<%--홈 내용영역 끝 --%>
+		 <div class="row">
+		 
+		 	<c:forEach var="myAhzitTopN" items="${myAhzitTopN}">
+            	<div class="mt-4 col-md-4 col-sm-6">
+              		<div class="card card-block">
+              			<a href="${pageContext.request.contextPath}/ahzit_in/${myAhzitTopN.ahzitNo}">
+              			<h4 class="card-title text-right">&nbsp;<i class="fa-solid fa-location-dot">${myAhzitTopN.ahzitRegionHigh} &nbsp; ${myAhzitTopN.ahzitRegionLow}</i></h4>
+             			<img src = "/attachment/download/ahzit?attachmentNo=${myAhzitTopN.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">  
+                		<h5 class="card-title  mt-3 mb-3">${myAhzitTopN.ahzitName}</h5> <%--아지트 이름 --%>
+                		<p class="card-text">멤버 : ${myAhzitTopN.ahzitHead} &nbsp;${myAhzitTopN.ahzitSort}</p> <%--아지트 멤버 수 , 종류 --%>
+						</a>                		
+         			 </div>
+            	</div>
+
+  			</c:forEach>
+  			<a href="ahzitUser/myAhzit">가입한 소모임 전부보기<i class="fa-solid fa-angles-right"></i></a>
+          </div>
+		<%--홈 내용영역 끝 --%>
 		</div>
 	</div>
 </div>
