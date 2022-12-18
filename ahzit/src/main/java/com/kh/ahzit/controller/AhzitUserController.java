@@ -124,6 +124,7 @@ public class AhzitUserController {
 	public String logout(HttpSession session) {
 		session.removeAttribute(SessionConstant.ID);
 		session.removeAttribute(SessionConstant.GRADE);
+		
 		return "redirect:login";
 	}
 	

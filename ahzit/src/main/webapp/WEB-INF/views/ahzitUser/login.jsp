@@ -55,7 +55,7 @@ function kakaoLogin() {
 					success : function(LoginId){
 					//	alert("dd");
 					//	alert(LoginId);
-						let url1 = '${pageContext.request.contextPath}/kakao/edit';
+						let url1 = '${pageContext.request.contextPath}/kakao/edit?kakaoId='+kakaoId;
 						let url2 = '${pageContext.request.contextPath}/';
 						if( LoginId == "Y"){
 							location.href = url2;
