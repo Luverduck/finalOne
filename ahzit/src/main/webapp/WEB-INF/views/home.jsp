@@ -22,10 +22,11 @@
    /* 이미지 슬라이더 */
    .main-img {
     	height: 100%;
+    	width: 100%;
    }
     .swiper {
         width: 800px;
-        height: 400px;
+        height: 500px;
    }
     .swiper-slide { 
         text-align: center; 
@@ -59,7 +60,7 @@
     /*카드*/
     body {
         font-family: Varela Round;
-        background: #f1f1f1;
+        background: #F5F5F5;
     }
     .card-sl {
         border-radius: 15px;
@@ -141,6 +142,10 @@
     .joined-img {
       width:20px;
     }
+    .ahzit-title-name {
+      font-size : 40px;
+      color : #3E4684;
+    }
 </style>
 
 <c:set var="login" value="${loginId != null}"></c:set>
@@ -164,11 +169,12 @@
             </div>
             
 		<div>
-			<h1>가입한 아지트</h1>
+			<p class="text-center ahzit-title-name">My Ahzit is?</p> <%--추후 바꾸기 --%>
 		</div>
 		
 		 <div class="row">
 		<%--card--%>
+		<a href="ahzitUser/myAhzit" class="text-end">가입한 소모임 전부보기<i class="fa-solid fa-angles-right"></i></a>
 		<c:forEach var="myAhzitTopN" items="${myAhzitTopN}">
 		 <div class="mt-4 col-xl-4 col-lg-6 col-md-6 col-sm-6">
               <div class="card-sl">
@@ -198,8 +204,6 @@
               </div>
              </div>
 		 </c:forEach>
-
-  			<a href="ahzitUser/myAhzit">가입한 소모임 전부보기<i class="fa-solid fa-angles-right"></i></a>
           </div>
 		<%--홈 내용영역 끝 --%>
 		</div>
