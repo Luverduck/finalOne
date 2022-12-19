@@ -8,11 +8,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.ahzit.entity.AhzitAttachmentDto;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AhzitUserDto;
 import com.kh.ahzit.vo.AhzitSearchListRequestVO;
+import com.kh.ahzit.vo.AhzitSearchListResponseVO;
 
 
 @Repository
@@ -147,5 +147,26 @@ public class AhzitDaoImpl implements AhzitDao {
 		param.put("userId", userId);
 		param.put("ahzitNo", String.valueOf(ahzitNo));
 		return sqlSession.selectOne("ahzit.joinAlready", param);
+	}
+
+	@Override
+	public int listCountInquire(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+		return sqlSession.selectOne("ahzit.allCount", ahzitSearchListRequestVO);
+	}
+
+	@Override
+	public List<AhzitSearchListRequestVO> searchSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+		Map<String, String> param = new HashMap<>();	
+		param.put("keyword", ahzitSearchListRequestVO.getKeyword());
+		param.put("rownumStart", String.valueOf(ahzitSearchListRequestVO.rownumStart()));
+		param.put("rownumEnd", String.valueOf(ahzitSearchListRequestVO.rownumEnd()));
+	//	System.out.println("확인@@@@@@");
+		
+		return sqlSession.selectList("ahzit.selectSort", param);
+	}
+
+	@Override
+	public int listSortCountInquire(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+		return sqlSession.selectOne("ahzit.sortCount", ahzitSearchListRequestVO);
 	}
 }

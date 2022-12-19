@@ -212,7 +212,7 @@
 				    	<button type="button"  disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
 				    </c:otherwise>
 				    </c:choose>
-			    
+			    `
 				    <c:if test="${ahzitMemberDto.memberId==sessionScope.loginId}">
 						<a href="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/editMyInfo"><span>내 정보 수정</span></a>
 				 	</c:if>

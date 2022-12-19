@@ -10,7 +10,7 @@ public class AhzitSearchListRequestVO {
 	
 	// 페이징 관련
 	private int p = 1; // 페이지 번호(페이지 로드시 초기 페이지를 1로 하기 위해 초기값을 1로 설정)
-	private int cntRow = 10;  // 한 페이지에 표시할 열 갯수 (고정값)
+	private int cntRow = 9;  // 한 페이지에 표시할 열 갯수 (고정값)
 	
 	// 메소드
 	// - 게시글 열 시작 번호

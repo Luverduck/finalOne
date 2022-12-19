@@ -6,6 +6,7 @@ import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AhzitUserDto;
 import com.kh.ahzit.vo.AhzitSearchListRequestVO;
+import com.kh.ahzit.vo.AhzitSearchListResponseVO;
 
 public interface AhzitDao {
 	int sequence();//ahzit_no 시퀀스 번호 발행
@@ -43,4 +44,14 @@ public interface AhzitDao {
 	
 	// 추상 메소드 - 내가 가입한 소모임인지 조회
 	public int alreadyJoin(String userId, int ahzitNo);
+	
+	// 홈화면 검색페이지 (관심사 별)
+	List<AhzitSearchListRequestVO> searchSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+		
+	//  전체 조회시 아지트 총 개수 반환
+	public int listCountInquire(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+	
+	//  관심사 조회시 아지트 개수 반환
+	public int listSortCountInquire(AhzitSearchListRequestVO ahzitSearchListRequestVO); 
+
 }
