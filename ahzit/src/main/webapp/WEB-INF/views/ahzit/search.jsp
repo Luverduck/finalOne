@@ -33,31 +33,27 @@
 				</div>
 				
 				<div class = "col-1">
-					<a></a>
+					<a>일상</a>
 				</div>
 				
 				<div class = "col-1">
-					4
+					<a>팬클럽</a>
 				</div>
 				
 				<div class = "col-1">
-					5
+					<a>음악</a>
 				</div>
 				
 				<div class = "col-1">
-					6
+					<a>스포츠</a>
 				</div>
 				
 				<div class = "col-1">
-					7
+					<a>여행</a>
 				</div>
 				
 				<div class = "col-1">
-					8
-				</div>
-				
-				<div class = "col-1">
-					9
+					<a>맛집</a>
 				</div>
 				
 			</div>

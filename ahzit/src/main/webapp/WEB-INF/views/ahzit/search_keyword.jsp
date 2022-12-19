@@ -10,6 +10,7 @@
 <style>
 	* {
 		border: 1px dotted gray;
+		font-family: font-family: 'Gothic A1', sans-serif;
 	}
 	.ahzit-img {
 		width: 250px;
@@ -18,21 +19,55 @@
 	
 </style>
 
-<div class = "container-fluid mt-3">
+<div class = "container-fluid mt-5 mb-5">
 	<div class = "row">
 		<div class = "col-8 offset-2">			
 		
 			<div class = "row">
-
-				<%-- 왼쪽 사이드바 --%>
-				<div class = "col-3" style="background-color: #dff9fb;">
-					<h1>왼쪽 사이드바</h1> 
-					
-				</div>
-				
 				<%-- 가운데 내용 --%>
+				<div class = "col-6-center">
+				
+					<div class="mt-3 mb-3">검색 결과 : ${keyword}</div>
+					
+					<c:forEach var = "ahzitList" items = "${ahzitList}">
+					<div class = "row">
+					
+						<div class="mt-4 mb-4">
+						
+						<%-- 프로필 번호 : ${ahzitList.ahzitAttachmentNo} /  --%>
+						아지트 번호 : ${ahzitList.ahzitNo} / 
+						리더 : ${ahzitList.ahzitLeader} / 
+						아지트 이름 : ${ahzitList.ahzitName} / 
+						설명 : ${ahzitList.ahzitInfo} / 
+						멤버 : ${ahzitList.ahzitHead} / 
+<%-- 						${ahzitList.ahzitHeadmax} /  --%>
+						지역 : ${ahzitList.ahzitRegionHigh} ${ahzitList.ahzitRegionLow} /
+						좋아요 ${ahzitList.ahzitLike} /  
+						점수 ${ahzitList.ahzitScore} /  
+						<c:if  test=""></c:if>
+						<%-- ${ahzitList.ahzitIspublic} /
+						${ahzitList.ahzitState} /  --%>
+						
+						등급 : ${ahzitList.ahzitGrade} / 
+						카테고리 : ${ahzitList.ahzitSort}
+						
+						
+						
+						</div>
+				
+						
+						
+					</div>      
+					</c:forEach>	
+				</div>
+			</div>
+			
+			
+			
+			<%-- <div class = "row">
+				가운데 내용
 				<div class = "col-6">
-					<h1>가운데 내용</h1>
+					<h1>검색 결과</h1>
 					<c:forEach var = "ahzitList" items = "${ahzitList}">
 					<div class = "row">
 						프로필 번호 : ${ahzitList.ahzitAttachmentNo} / 
@@ -51,32 +86,16 @@
 						${ahzitList.ahzitGrade} / 
 						${ahzitList.ahzitSort} /
 					</div>      
-					</c:forEach>
-					
-					<div class = "container-ahzit-list">
-						<div class = "col-1">
-							
-						</div>
-						<div class = "col-11">
-						
-						</div>
-					</div>
+					</c:forEach>	
 				</div>
-				
-				<%-- 오른쪽 사이드바 --%>
-				<div class = "col" style="background-color: #dff9fb;">
-					<h1>오른쪽 사이드바</h1>
-				</div>
+			</div> --%>
 			
-			</div>
-			
-			<div class = "row">
-				ㅎㅇㅎㅇ
-			</div>
 					
 		</div>
 	</div>
 </div>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500&display=swap" rel="stylesheet">
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

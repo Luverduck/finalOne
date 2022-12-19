@@ -45,6 +45,7 @@ public class HomeController {
  		//System.out.println(ahzitSearchListRequestVO.getKeyword());
  		//System.out.println(ahzitDao.selectAhzit(ahzitSearchListRequestVO));
  		model.addAttribute("ahzitList", ahzitDao.selectAhzit(ahzitSearchListRequestVO));
+ 		model.addAttribute("keyword", ahzitSearchListRequestVO.getKeyword());
  		return "ahzit/search_keyword";
  	}
  	

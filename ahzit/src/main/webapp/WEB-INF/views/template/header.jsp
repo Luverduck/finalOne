@@ -99,7 +99,7 @@
 	</div> <!-- row mt-1 끝 -->
 	
 	<!-- 백엔드 작업 끝나면 지울 영역 -->
-	<div class = "row mt-3">
+<%-- 	<div class = "row mt-3">
 		<div class = "col-8 offset-2 d-flex align-items-center justify-content-left">
 			<div class = "col-3">
 				<a href = "/freeboard/list">자유게시판</a>
@@ -113,7 +113,7 @@
 			</div>
 			</c:if>
 		</div>
-	</div>
+	</div> --%>
 </div> <!-- container 끝 -->
 
 
