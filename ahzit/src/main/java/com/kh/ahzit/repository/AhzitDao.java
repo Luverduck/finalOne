@@ -5,6 +5,8 @@ import java.util.List;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.vo.AhzitMemberInfoRequestVO;
+import com.kh.ahzit.vo.AhzitMemberInfoVO;
 import com.kh.ahzit.vo.AhzitSearchListRequestVO;
 
 public interface AhzitDao {
@@ -43,4 +45,22 @@ public interface AhzitDao {
 	
 	// 추상 메소드 - 내가 가입한 소모임인지 조회
 	public int alreadyJoin(String userId, int ahzitNo);
+	
+	// 추상 메소드 - 소모임 내 회원 통합 조회
+	public List<AhzitMemberInfoVO> selectMemberInfo(AhzitMemberInfoRequestVO ahzitMemberInfoRequestVO);
+	
+	// 추상 메소드 - 소모임 내 회원 전체 조회
+	public List<AhzitMemberInfoVO> allMemberInfo(AhzitMemberInfoRequestVO ahzitMemberInfoRequestVO);
+	
+	// 추상 메소드 - 소모임 내 회원 검색 조회
+	public List<AhzitMemberInfoVO> searchMemberInfo(AhzitMemberInfoRequestVO ahzitMemberInfoRequestVO);
+	
+	// 추상 메소드 - 소모임 내 회원수 조회
+	public int selectMemberCount(AhzitMemberInfoRequestVO ahzitMemberInfoRequestVO);
+	
+	// 추상 메소드 - 소모임 내 전체 회원수
+	public int allMemberCount(int ahzitNo);
+	
+	// 추상 메소드 - 소모임 내 회원 검색시 회원수
+	public int searchMemberCount(int ahzitNo, String keyword);
 }

@@ -65,5 +65,33 @@
 		<select id = "selectSort" parameterType = "map" resultType = "AhzitSearchListResponseVO">
 			select * from (select tmp.*, rownum rn from (select aa.ahzit_attachment_no, a.* from ahzit a left outer join ahzit_attachment aa on a.ahzit_no = ahzit_origin_no where ahzit_state = 'N' and ahzit_ispublic = 'N' and instr(ahzit_sort, #{keyword]) > 0)tmp) where rn between #{rownumStart} and #{rownumEnd}
 		</select>
+		
+		<!-- 소모임에 가입한 회원 정보 전체 조회 -->
+		<select id = "allMember" parameterType = "map" resultType = "AhzitMemberInfoVO">
+			select * from (
+			    select tmp.*, rownum rn from (
+			        select am.*, ma.member_attachment_no from ahzit_member am left outer join member_attachment ma on am.member_no = ma.member_origin_no where am.member_ahzit_no = #{memberAhzitNo} order by am.member_no asc
+			    )tmp
+			) where rn between #{rownumStart} and #{rownumEnd}
+		</select>
+		
+		<!-- 소모임에 가입한 회원 정보 검색 조회 -->
+		<select id = "searchMember" parameterType = "map" resultType = "AhzitMemberInfoVO">
+			select * from (
+			    select tmp.*, rownum rn from (
+			        select am.*, ma.member_attachment_no from ahzit_member am left outer join member_attachment ma on am.member_no = ma.member_origin_no where am.member_ahzit_no = #{memberAhzitNo} and instr(am.member_nick, #{keyword}) > 0 order by am.member_no asc
+			    )tmp
+			) where rn between #{rownumStart} and #{rownumEnd}
+		</select>
+		
+		<!-- 소모임에 가입한 전체 회원 수 반환 -->
+		<select id = "countallMember" parameterType = "int" resultType = "int">
+			select count(*) from ahzit_member where member_ahzit_no = #{memberAhzitNo}
+		</select>
+		
+		<!-- 소모임에 가입한 회원 중 특정 글자로 시작하는 회원 수 반환 -->
+		<select id = "countsearchMember" parameterType = "map" resultType = "int">
+			select count(*) from ahzit_member where member_ahzit_no = #{memberAhzitNo} and instr(member_nick, #{keyword}) > 0
+		</select>
   
   </mapper>

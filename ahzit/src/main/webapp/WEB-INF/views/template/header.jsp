@@ -122,12 +122,13 @@
 
 	$(function(){
 		
+		// header 검색창의 검색 버튼을 누를 때
 		$(".btn-allsearch-submit").click(function(){
+			// 검색 입력창의 값을 변수로 설정
 			var keyword = $(".input-allsearch").val();
-			console.log(keyword);
-			var input = $("<input>").attr("type", "hidden").attr("name", "keyword").attr("value", keyword);
-			console.log(keyword);
+			// form을 생성하여 조회
 			var form = $("<form>").attr("action", "search_keyword").attr("method", "get");
+			var input = $("<input>").attr("type", "hidden").attr("name", "keyword").attr("value", keyword);
 			form.append(input);
 			$("body").append(form);
 			form.submit();
