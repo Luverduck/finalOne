@@ -62,41 +62,47 @@
 
 <c:set var="login" value="${loginId != null}"></c:set>
 
-<div class = "container-fluid py-2" style="background-color: #FEC260;">
+<div class = "container-fluid py-2" style="background-color:#FFA91C;">
 
 	<div class = "row mt-1">
 		<div class = "col-1 offset-2 d-flex justify-content-center">
-			<a href="/" class = "d-flex align-items-center">홈(로고)</a>
+			<a href="/" class = "d-flex align-items-center" style="color:white;" >홈(로고)</a>
 		</div>
 		
 		<div class = "col-2 d-flex bg-white rounded py-1">
-			<div class = "col-11 me-1">
+
+			<div class = "col-11 me-1" style="color: white;">
 				<input class = "w-100 border-0 bg-white ps-3 input-allsearch" placeholder = "아지트 검색">
 			</div>
 			<div class = "col-1 bg-white">
-				<button class = "fa-solid fa-magnifying-glass w-100 border-0 bg-white btn-allsearch-submit"></button>
+				<button class = "fa-solid fa-magnifying-glass w-100 border-0 bg-white btn-allsearch-submit" style="color: #75758B;"></button>
+
 			</div>
 		</div>
 	
 		<div class = "col-3 offset-2 d-flex">
 			<div class = "col d-flex justify-content-center align-items-center">
-				<a href = "/ahzit/search" class = "d-flex align-items-center">찾기</a>
+
+				<a href = "/ahzit/search" class = "d-flex align-items-center" style="color:white;">찾기</a>
+
 			</div>
 			<c:choose>
 			<c:when test="${login}">
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/logout" class = "d-flex align-items-center logout">로그아웃</a>
+        
+					<a href="/ahzitUser/logout" class = "d-flex align-items-center logout" style="color:white;">로그아웃</a>
+
 				</div>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/mypage" class = "d-flex align-items-center">마이페이지</a>
+					<a href="/ahzitUser/mypage" class = "d-flex align-items-center" style="color:white;">마이페이지</a>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/login" class = "d-flex align-items-center">로그인</a>
+					<a href="/ahzitUser/login" class = "d-flex align-items-center" style="color:white;">로그인</a>
 				</div>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/join" class = "d-flex align-items-center">회원가입</a>
+					<a href="/ahzitUser/join" class = "d-flex align-items-center" style="color:white;">회원가입</a>
 				</div>
 			</c:otherwise>
 			</c:choose>

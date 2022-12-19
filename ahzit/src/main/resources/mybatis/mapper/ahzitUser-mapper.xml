@@ -69,7 +69,7 @@
 		select * from (
 		    select TMP.*, rownum rn from (
 		       select 
-		            	aa.ahzit_attachment_no, already.ahzit_no, already.ahzit_name, already.ahzit_sort, already.ahzit_head
+		            	aa.ahzit_attachment_no, already.ahzit_no, already.ahzit_name, already.ahzit_sort, already.ahzit_head, already.ahzit_region_high, already.ahzit_region_low
 		            from 
 		            	ahzit_attachment aa 
 		            right outer join (

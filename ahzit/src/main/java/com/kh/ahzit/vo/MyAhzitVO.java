@@ -14,6 +14,8 @@ public class MyAhzitVO {
 	private int ahzitHead;
 	private String ahzitName;
 	private String ahzitSort;
+	private String ahzitRegionHigh;
+	private String ahzitRegionLow;
 	private String ahzitGrade;
 	private String memberNick;
 }

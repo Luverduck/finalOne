@@ -36,6 +36,9 @@ public class AhzitController {
 	private AhzitDao ahzitDao;
 	
 	@Autowired
+	private AttachmentDao attachmentDao;
+	
+	@Autowired
 	private AhzitService ahzitService;
 	
 	@Autowired
@@ -100,6 +103,8 @@ public class AhzitController {
     										Model model
     									) {
     	model.addAttribute("ahzitDto", ahzitDao.selectOne(ahzitNo));
+    	//입력받은 아지트번호로 연결되는 첨부파일 조회
+		model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
     	return "ahzit/edit";
     }
     
