@@ -83,7 +83,7 @@
 		<div class = "col-3 offset-2 d-flex">
 			<div class = "col d-flex justify-content-center align-items-center">
 
-				<a href = "/ahzit/search" class = "d-flex align-items-center" style="color:white;">찾기</a>
+				<a href = "/search" class = "d-flex align-items-center" style="color:white;">찾기</a>
 
 			</div>
 			<c:choose>

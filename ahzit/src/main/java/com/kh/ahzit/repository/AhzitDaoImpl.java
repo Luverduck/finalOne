@@ -14,6 +14,7 @@ import com.kh.ahzit.entity.AhzitUserDto;
 import com.kh.ahzit.vo.AhzitMemberInfoRequestVO;
 import com.kh.ahzit.vo.AhzitMemberInfoVO;
 import com.kh.ahzit.vo.AhzitSearchListRequestVO;
+import com.kh.ahzit.vo.AhzitSearchListResponseVO;
 
 
 @Repository
@@ -50,6 +51,7 @@ public class AhzitDaoImpl implements AhzitDao {
 	//아지트 수정 메소드
 	@Override
 	public boolean update(AhzitDto ahzitDto) {
+		System.out.println("@@@ 타나?");
 		int count = sqlSession.update("ahzit.update", ahzitDto);
 		return count > 0;
 	}
@@ -207,5 +209,25 @@ public class AhzitDaoImpl implements AhzitDao {
 		param.put("memberAhzitNo", String.valueOf(ahzitNo));
 		param.put("keyword", keyword);
 		return sqlSession.selectOne("ahzit.countsearchMember", param);
+
+	@Override
+	public int listCountInquire(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+		return sqlSession.selectOne("ahzit.allCount", ahzitSearchListRequestVO);
+	}
+
+	@Override
+	public List<AhzitSearchListRequestVO> searchSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+		Map<String, String> param = new HashMap<>();	
+		param.put("keyword", ahzitSearchListRequestVO.getKeyword());
+		param.put("rownumStart", String.valueOf(ahzitSearchListRequestVO.rownumStart()));
+		param.put("rownumEnd", String.valueOf(ahzitSearchListRequestVO.rownumEnd()));
+	//	System.out.println("확인@@@@@@");
+		
+		return sqlSession.selectList("ahzit.selectSort", param);
+	}
+
+	@Override
+	public int listSortCountInquire(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+		return sqlSession.selectOne("ahzit.sortCount", ahzitSearchListRequestVO);
 	}
 }

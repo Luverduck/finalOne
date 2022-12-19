@@ -46,6 +46,16 @@
   			]]> -->
   		</delete>
 
+		<!-- 로그인 중인 회원이 가입한 소모임인지 조회 -->
+		<select id = "joinAlready" parameterType = "map" resultType = "int">
+			select * from ahzit_user inner join ahzit_member on user_id = member_id where member_no = #{memberNo} and user_id = #{userId}
+		</select>
+		
+		<!-- 소모임 종류별로 조회 -->
+		<select id = "selectSort" parameterType = "map" resultType = "AhzitSearchListResponseVO">
+			select * from (select tmp.*, rownum rn from (select aa.ahzit_attachment_no, a.* from ahzit a left outer join ahzit_attachment aa on a.ahzit_no = ahzit_origin_no where ahzit_state = 'N' and ahzit_ispublic = 'N' and instr(ahzit_sort, #{keyword}) > 0)tmp) where rn between #{rownumStart} and #{rownumEnd}
+		</select>
+		
 		<!-- 홈 화면의 검색창 전체 조회 -->
 		<select id = "allAhzit" parameterType = "map" resultType = "AhzitSearchListResponseVO">
 			select * from (select tmp.*, rownum rn from (select aa.ahzit_attachment_no, a.* from ahzit a left outer join ahzit_attachment aa on a.ahzit_no = ahzit_origin_no where ahzit_state = 'N' and ahzit_ispublic = 'N')tmp) where rn between #{rownumStart} and #{rownumEnd}
@@ -55,17 +65,17 @@
 		<select id = "searchAhzit" parameterType = "map" resultType = "AhzitSearchListResponseVO">
 			select * from (select tmp.*, rownum rn from (select aa.ahzit_attachment_no, a.* from ahzit a left outer join ahzit_attachment aa on a.ahzit_no = ahzit_origin_no where ahzit_state = 'N' and ahzit_ispublic = 'N' and instr(ahzit_name, #{keyword}) > 0)tmp) where rn between #{rownumStart} and #{rownumEnd}
 		</select>
+		
+		<!--전체 조회시 아지트 총 갯수 반환 -->
+		<select id = "allCount" resultType = "int">
+			select count(*) from ahzit
+		</select>
+		
+		<!--전체 조회시 아지트 총 갯수 반환 -->
+		<select id = "sortCount" parameterType = "map"  resultType = "int">
+			 select count(*) from ahzit where ahzit_sort = #{keyword}
+		</select>
 
-		<!-- 로그인 중인 회원이 가입한 소모임인지 조회 -->
-		<select id = "joinAlready" parameterType = "map" resultType = "int">
-			select * from ahzit_user inner join ahzit_member on user_id = member_id where member_no = #{memberNo} and user_id = #{userId}
-		</select>
-		
-		<!-- 소모임 종류별로 조회 -->
-		<select id = "selectSort" parameterType = "map" resultType = "AhzitSearchListResponseVO">
-			select * from (select tmp.*, rownum rn from (select aa.ahzit_attachment_no, a.* from ahzit a left outer join ahzit_attachment aa on a.ahzit_no = ahzit_origin_no where ahzit_state = 'N' and ahzit_ispublic = 'N' and instr(ahzit_sort, #{keyword]) > 0)tmp) where rn between #{rownumStart} and #{rownumEnd}
-		</select>
-		
 		<!-- 소모임에 가입한 회원 정보 전체 조회 -->
 		<select id = "allMember" parameterType = "map" resultType = "AhzitMemberInfoVO">
 			select * from (

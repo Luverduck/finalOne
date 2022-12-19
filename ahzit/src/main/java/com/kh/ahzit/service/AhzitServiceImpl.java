@@ -70,7 +70,6 @@ public class AhzitServiceImpl implements AhzitService{
 			//연결 테이블에 연결정보저장(아지트번호, 첨부파일번호)
 			attachmentDao.ahzitAttachment(ahzitNo, attachmentNo);
 		}
-		
 		AhzitUserDto userDto = ahzitDao.selectOne(memberId);
 		
 		ahzitMemberDto.setMemberAhzitNo(ahzitNo);

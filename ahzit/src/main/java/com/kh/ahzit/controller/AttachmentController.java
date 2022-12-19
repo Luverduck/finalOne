@@ -83,15 +83,17 @@ public class AttachmentController {
 	public ResponseEntity<ByteArrayResource> downloadAhzit(@RequestParam int attachmentNo) throws IOException {
 		//파일탐색
 		AttachmentDto attachmentDto = attachmentDao.selectAttachment(attachmentNo);
-		if(attachmentDto == null) return ResponseEntity.notFound().build();
+		if(attachmentDto == null) {//파일이 없으면
+			throw new TargetNotFoundException("존재하지 않는 파일");
+		}
 		
 		//파일생성위치
-		File directory = new File("D:/upload/kh10f");
+		File dir = new File("D:/upload/kh10f");
 		//디렉토리 생성
-		directory.mkdirs();
+		dir.mkdirs();
 		
 		//파일 불러오기
-    File target = new File(directory, String.valueOf(attachmentNo));
+		File target = new File(dir, String.valueOf(attachmentNo));
 		byte[] data = FileUtils.readFileToByteArray(target);
 		ByteArrayResource resource = new ByteArrayResource(data);
     
