@@ -47,6 +47,14 @@
 		delete freeboard_attachment where freeboard_attachment_no = #{attachmentNo}
 	</delete>
 	
+	<!-- 공지게시판 원본 번호와 연결된 첨부파일 전체 조 -->
+	<select id="selectNoticeAttachment" parameterType="int" resultType="AttachmentDto">
+		select N.notice_origin_no, A.*
+		from
+		notice_attachment N inner join attachment A
+		on N.notice_attachment_no = A.attachment_no
+		where notice_origin_no = #{noticeAttachmentNo}
+	</select>
 
 	<!-- 소모임프로필 등록 -->
  	<insert id="insertAhzitAttachment" parameterType="map">

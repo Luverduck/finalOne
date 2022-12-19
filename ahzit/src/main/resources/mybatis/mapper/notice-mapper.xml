@@ -34,6 +34,7 @@
 		update notice set 
 		notice_title = #{noticeTitle},
 		notice_content = #{noticeContent}
+		notice_updatedate = sysdate
     
 		where
 		notice_no = #{noticeNo}
@@ -80,9 +81,19 @@
 		select count(*) from notice
 	</select>
 	
-	<select id="pageSearchCount"  resultType="NoticeDto">
+	<select id="pageSearchCount"  resultType="int">
 		select count(*) from notice
 		where instr(${type}, #{keyword}) > 0
 	</select>
+	
+	<!-- 첨부파일 -->
+	<insert id="fileInsert" parameterType="map">
+		insert into notice_attachment(
+			notice_origin_no, notice_attachment_no
+		)
+		values(
+			#{noticeOriginNo}, #{noticeAttachmentNo}
+		)
+	</insert>
 	
 </mapper>
