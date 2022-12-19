@@ -33,9 +33,6 @@ public class KakaoController {
 	기존 추가정보 입력했던 회원이면 홈화면으로 이동
 	*/
 	@Autowired
-	private SqlSession sqlSessin;
-
-	@Autowired
 	private KakaoDao kakaoDao;
 	
 	@Autowired
