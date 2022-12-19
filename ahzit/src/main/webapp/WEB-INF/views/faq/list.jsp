@@ -65,7 +65,7 @@ display: none;
 						</div>
 						
 						<div class="faqContent">
-						내용 : ${faqDto.faqContent}
+						 ${faqDto.faqContent}
 						</div>
 						<hr>
 					</c:forEach>
