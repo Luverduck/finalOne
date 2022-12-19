@@ -108,4 +108,9 @@ public class AhzitUserDaoImpl implements AhzitUserDao{
 		return sqlSession.selectList("ahzitUser.list");
 	}
 
+	@Override
+	public boolean changePw1(AhzitUserDto ahzitUserDto1) {
+		return sqlSession.update("ahzitUser.changePw", ahzitUserDto1) > 0;
+	}
+
 }

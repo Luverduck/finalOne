@@ -138,10 +138,27 @@
             var choice = confirm("로그아웃 하시겠습니까?");
             if(choice){
                 return true;
+                
             }
             else{
                 return false;
             }
 		});
 	});
+    
+	//카카오로그아웃  
+	function kakaoLogout() {
+	    if (Kakao.Auth.getAccessToken()) {
+	      Kakao.API.request({
+	        url: '/v1/user/unlink',
+	        success: function (response) {
+	        	console.log(response)
+	        },
+	        fail: function (error) {
+	          console.log(error)
+	        },
+	      })
+	      Kakao.Auth.setAccessToken(undefined)
+	    }
+	  }  
 </script>

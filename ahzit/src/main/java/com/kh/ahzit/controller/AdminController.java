@@ -2,8 +2,6 @@ package com.kh.ahzit.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.ahzit.constant.SessionConstant;
 import com.kh.ahzit.entity.AhzitUserDto;
 import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AdminDao;
@@ -24,10 +21,6 @@ import com.kh.ahzit.repository.AhzitUserDao;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	
-	@Autowired
-	private SqlSession sqlSessin;
-		
 	
 	@Autowired
 	private AhzitUserDao ahzitUserDao;
@@ -51,7 +44,6 @@ public class AdminController {
 	// 관리자 생성
 	@GetMapping("/join")
 	public String join() {
-		
 		return "admin/join";
 	}
 
@@ -61,7 +53,7 @@ public class AdminController {
 		adminDao.insert(ahzitUserDto);
 		return "redirect:/admin/";
 	}
-	
+		
 	// 관리자 등급 변경
 	@GetMapping("/change")
 	public String change(Model model,@RequestParam String userId) {
@@ -71,8 +63,6 @@ public class AdminController {
 	
 	@PostMapping("/change")
 	public String edit(@ModelAttribute AhzitUserDto ahzitUserDto, Model model,  RedirectAttributes attr) {
-//			String loginId = (String) session.getAttribute(SessionConstant.ID);
-//			String loginGrade = (String) session.getAttribute(SessionConstant.GRADE);
 	//	System.out.println("ahzit = "+ ahzitUserDto);
 		// 관리자 등급 변경 
 		boolean result = 	adminDao.change(ahzitUserDto);
@@ -82,7 +72,7 @@ public class AdminController {
 		// 관리자 변경시 운영자로 업데이트
 		if(result) {
 			attr.addAttribute("userId",ahzitUserDto.getUserId());
-			return "redirect:/admin/";
+			return "redirect:/admin/ahzitUser";
 		}	
 		else {
 			throw new TargetNotFoundException("변경실패");
