@@ -138,6 +138,9 @@
     .sort-img {
       width:40px;
     }
+    .joined-img {
+      width:20px;
+    }
 </style>
 
 <c:set var="login" value="${loginId != null}"></c:set>
@@ -146,20 +149,24 @@
 	<div class = "row">
 
 		<div class = "col-8 offset-2 ">
-			<h1>홈 화면 내용 영역</h1>
+		   <%-- 홈 화면 내용 영역 --%>
 		   <%--이미지 슬라이더 --%>
 			<div class="swiper">
                 <div class="swiper-wrapper">
-                	<div class="swiper-slide"><img src="https://placeimg.com/600/300/any" class="main-img"></div>
-                	<div class="swiper-slide"><img src="https://placeimg.com/600/300/animal" class="main-img"></div>
-                	<div class="swiper-slide"><img src="https://placeimg.com/600/300/tech" class="main-img"></div>
+                	<div class="swiper-slide"><img src="images/main-img-1.png" class="main-img"></div>
+                	<div class="swiper-slide"><img src="images/main-img-2.png" class="main-img"></div>
+                	<div class="swiper-slide"><img src="images/main-img-3.png" class="main-img"></div>
+                	<div class="swiper-slide"><img src="images/main-img-4.png" class="main-img"></div>
                 </div>
                 <div class="swiper-pagination"></div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>
-
-		<h2>내가 가입한 아지트</h2>
+            
+		<div>
+			<h1>가입한 아지트</h1>
+		</div>
+		
 		 <div class="row">
 		<%--card--%>
 		<c:forEach var="myAhzitTopN" items="${myAhzitTopN}">
