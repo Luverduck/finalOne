@@ -12,6 +12,7 @@ import com.kh.ahzit.entity.AhzitAttachmentDto;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.vo.AhzitSearchListRequestVO;
 
 
 @Repository
@@ -109,4 +110,42 @@ public class AhzitDaoImpl implements AhzitDao {
 		
 	}
 
+	// 추상 메소드 오버라이딩 - 홈 화면 검색창 검색 : 통합 검색
+	@Override
+	public List<AhzitSearchListRequestVO> selectAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+		if(ahzitSearchListRequestVO.getKeyword() == null){
+			return allAhzit(ahzitSearchListRequestVO);
+		}
+		else {
+			return searchAhzit(ahzitSearchListRequestVO);
+		}
+	}
+
+	// 추상 메소드 오버라이딩 - 홈 화면 검색창 검색 : 전체 조회(검색어가 없는 경우)
+	@Override
+	public List<AhzitSearchListRequestVO> allAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+		Map<String, String> param = new HashMap<>();	
+		param.put("rownumStart", String.valueOf(ahzitSearchListRequestVO.rownumStart()));
+		param.put("rownumEnd", String.valueOf(ahzitSearchListRequestVO.rownumEnd()));
+		return sqlSession.selectList("ahzit.allAhzit", param);
+	}
+	
+	// 추상 메소드 오버라이딩 - 홈 화면 검색창 검색 : 검색 조회(검색어가 있는 경우)
+	@Override
+	public List<AhzitSearchListRequestVO> searchAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+		Map<String, String> param = new HashMap<>();	
+		param.put("keyword", ahzitSearchListRequestVO.getKeyword());
+		param.put("rownumStart", String.valueOf(ahzitSearchListRequestVO.rownumStart()));
+		param.put("rownumEnd", String.valueOf(ahzitSearchListRequestVO.rownumEnd()));
+		return sqlSession.selectList("ahzit.searchAhzit", param);
+	}
+
+	// 추상 메소드 오버라이딩 - 내가 가입한 소모임인지 조회
+	@Override
+	public int alreadyJoin(String userId, int ahzitNo) {
+		Map<String, String> param = new HashMap<>();	
+		param.put("userId", userId);
+		param.put("ahzitNo", String.valueOf(ahzitNo));
+		return sqlSession.selectOne("ahzit.joinAlready", param);
+	}
 }

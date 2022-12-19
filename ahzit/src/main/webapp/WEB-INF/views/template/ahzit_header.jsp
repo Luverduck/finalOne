@@ -51,7 +51,7 @@
 	<style>
         * {
             font-family: 'Noto Sans KR', sans-serif;
-           	font-size : 20px !important;
+           	font-size : 16px !important;
         }
         a {
 			text-decoration: none;
@@ -71,21 +71,21 @@
 		
 		<div class = "col-2 d-flex bg-white rounded py-1">
 			<div class = "col-11 me-1">
-				<input class = "w-100 border-0 bg-white ps-3" placeholder = "아지트, 게시글 검색">
+				<input class = "w-100 border-0 bg-white ps-3 input-allsearch" placeholder = "아지트 검색">
 			</div>
 			<div class = "col-1 bg-white">
-				<button class = "fa-solid fa-magnifying-glass w-100 btn-allsearch-submit border-0 bg-white"></button>
+				<button class = "fa-solid fa-magnifying-glass w-100 border-0 bg-white btn-allsearch-submit"></button>
 			</div>
 		</div>
 	
 		<div class = "col-3 offset-2 d-flex">
 			<div class = "col d-flex justify-content-center align-items-center">
-				<a href = "" class = "d-flex align-items-center">찾기</a>
+				<a href = "/ahzit/search" class = "d-flex align-items-center">찾기</a>
 			</div>
 			<c:choose>
 			<c:when test="${login}">
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/logout" class = "d-flex align-items-center">로그아웃</a>
+					<a href="/ahzitUser/logout" class = "d-flex align-items-center logout">로그아웃</a>
 				</div>
 				<div class = "col d-flex justify-content-center">
 					<a href="/ahzitUser/mypage" class = "d-flex align-items-center">마이페이지</a>
@@ -120,3 +120,21 @@
 	</div>
 	
 </div>
+
+<script>
+
+    //로그아웃 버튼 클릭 시 알람
+	$(function(){
+		
+		// 로그아웃 시 경고창
+		$(".logout").click(function(e){
+            var choice = confirm("로그아웃 하시겠습니까?");
+            if(choice){
+                return true;
+            }
+            else{
+                return false;
+            }
+		});
+	});
+</script>

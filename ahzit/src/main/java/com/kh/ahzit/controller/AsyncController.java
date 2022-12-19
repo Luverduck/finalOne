@@ -17,10 +17,6 @@ public class AsyncController {
 	
 	@Autowired
 	private EmailService emailService;
-	@Autowired
-	private CertificationDao certificationDao;
-	
-
 
 	@RequestMapping("/async1")
 	public String async1() {
