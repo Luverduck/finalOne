@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.vo.AhzitMemberInfoRequestVO;
+import com.kh.ahzit.vo.AhzitMemberInfoVO;
 import com.kh.ahzit.vo.AhzitSearchListRequestVO;
 import com.kh.ahzit.vo.AhzitSearchListResponseVO;
 
@@ -149,6 +151,64 @@ public class AhzitDaoImpl implements AhzitDao {
 		param.put("ahzitNo", String.valueOf(ahzitNo));
 		return sqlSession.selectOne("ahzit.joinAlready", param);
 	}
+
+	// 추상 메소드 오버라이딩 - 소모임 내 회원 통합 조회
+	@Override
+	public List<AhzitMemberInfoVO> selectMemberInfo(AhzitMemberInfoRequestVO ahzitMemberInfoRequestVO) {
+		if(ahzitMemberInfoRequestVO.isSearch()) {
+			return searchMemberInfo(ahzitMemberInfoRequestVO);
+		}
+		else {
+			return allMemberInfo(ahzitMemberInfoRequestVO);
+		}
+	}
+
+	// 추상 메소드 오버라이딩 - 소모임 내 회원 전체 조회
+	@Override
+	public List<AhzitMemberInfoVO> allMemberInfo(AhzitMemberInfoRequestVO ahzitMemberInfoRequestVO) {
+		Map<String, String> param = new HashMap<>();	
+		param.put("memberAhzitNo", String.valueOf(ahzitMemberInfoRequestVO.getAhzitNo()));
+		param.put("rownumStart", String.valueOf(ahzitMemberInfoRequestVO.rownumStart()));
+		param.put("rownumEnd", String.valueOf(ahzitMemberInfoRequestVO.rownumEnd()));
+		return sqlSession.selectList("ahzit.allMember", param);
+	}
+
+	// 추상 메소드 오버라이딩 - 소모임 내 회원 검색 조회
+	@Override
+	public List<AhzitMemberInfoVO> searchMemberInfo(AhzitMemberInfoRequestVO ahzitMemberInfoRequestVO) {
+		Map<String, String> param = new HashMap<>();	
+		param.put("memberAhzitNo", String.valueOf(ahzitMemberInfoRequestVO.getAhzitNo()));
+		param.put("keyword", ahzitMemberInfoRequestVO.getKeyword());
+		param.put("rownumStart", String.valueOf(ahzitMemberInfoRequestVO.rownumStart()));
+		param.put("rownumEnd", String.valueOf(ahzitMemberInfoRequestVO.rownumEnd()));
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ahzit.searchMember", param);
+	}
+	
+	// 추상 메소드 오버라이딩 - 소모임 내 회원수 조회
+	@Override
+	public int selectMemberCount(AhzitMemberInfoRequestVO ahzitMemberInfoRequestVO) {
+		if(ahzitMemberInfoRequestVO.isSearch()) {
+			return searchMemberCount(ahzitMemberInfoRequestVO.getAhzitNo(), ahzitMemberInfoRequestVO.getKeyword());
+		}
+		else {
+			return allMemberCount(ahzitMemberInfoRequestVO.getAhzitNo());
+		}
+	}
+
+	// 추상 메소드 오버라이딩 - 소모임 내 전체 회원수
+	@Override
+	public int allMemberCount(int ahzitNo) {
+		return sqlSession.selectOne("ahzit.countallMember", ahzitNo);
+	}
+
+	// 추상 메소드 오버라이딩 - 소모임 내 회원 검색시 회원수
+	@Override
+	public int searchMemberCount(int ahzitNo, String keyword) {
+		Map<String, String> param = new HashMap<>();	
+		param.put("memberAhzitNo", String.valueOf(ahzitNo));
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("ahzit.countsearchMember", param);
 
 	@Override
 	public int listCountInquire(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
