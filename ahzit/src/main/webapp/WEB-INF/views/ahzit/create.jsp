@@ -156,7 +156,8 @@
 			<input type="radio"  name="ahzitSort" id="ex_rd5" value="음악"><label  for="ex_rd5">음악</label><br>
 			<input type="radio"  name="ahzitSort" id="ex_rd6" value="스포츠"><label  for="ex_rd6">스포츠</label><br>
 			<input type="radio"  name="ahzitSort" id="ex_rd7" value="여행"><label  for="ex_rd7">여행</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd8" value="맛집"><label  for="ex_rd8">맛집</label><br><br>
+			<input type="radio"  name="ahzitSort" id="ex_rd8" value="맛집"><label  for="ex_rd8">맛집</label><br>
+			<input type="radio"  name="ahzitSort" id="ex_rd9" value="영화"><label  for="ex_rd9">영화</label><br><br>
 		</div>
 	</div>
 		

@@ -68,12 +68,12 @@
 		    outline: 1px solid #3E4684;
 		    border-radius : 2em;
 		} 
-		.search-bar{
+		.search-bar {
 			display: flex;
 			flex-direction: row;
 			position: relative;
 		}
-		.search-box{
+		.search-box {
 			position : relative;
 			border:2px solid #3E4684;
 			border-radius: 2em; 
@@ -82,24 +82,27 @@
  			font-size: 16px;
 			padding: 15px; 
 		}
-	.search-box > select > input{
+		.search-box > select > input{
 			display: flex;
 			flex-direction: row;
 			flex-grow: 1;
 			color :#3E4684;
 		}
-	.btn {
+		.btn {
 			position: absolute;
 			margin-top : 0px;
 			right: 0;     
 		}
+		 .header-style {
+		 	 background-color : #EDEEF0; 
+		 }
     </style>
 </head>
 <body>
 
 <c:set var="login" value="${loginId != null}"></c:set>
 
-<div class = "container-fluid py-2"> <!-- container 시작 -->
+<div class = "container-fluid py-2 header-style"> <!-- container 시작 -->
 	<div class = "row mt-1"> <!-- row mt-1 시작 -->
 		<div class = "col-1 offset-2 d-flex justify-content-center">
 			<a href="/" class = "d-flex align-items-center"><img src="images/logo.png" class="logo-img"></a>

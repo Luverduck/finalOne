@@ -86,7 +86,7 @@
     }
     .card-action:hover {
         color: #fff;
-        background: #FFA91C;
+        background: #3E4684;
         -webkit-animation: pulse 1.5s infinite;
     }
     .card-heading {
@@ -156,7 +156,7 @@
 		<div class = "col-8 offset-2 ">
 		   <%-- 홈 화면 내용 영역 --%>
 		   <%--이미지 슬라이더 --%>
-			<div class="swiper">
+			<div class="swiper mb-3">
                 <div class="swiper-wrapper">
                 	<div class="swiper-slide"><img src="images/main-img-1.png" class="main-img"></div>
                 	<div class="swiper-slide"><img src="images/main-img-2.png" class="main-img"></div>
@@ -168,11 +168,14 @@
                 <div class="swiper-button-next"></div>
             </div>
             
+            
+
+		<c:if test="${login}">
 		<div>
-			<p class="text-center ahzit-title-name">My Ahzit is?</p> <%--추후 바꾸기 --%>
+			<p class="text-center ahzit-title-name">내가 가입한 소모임</p> <%--추후 바꾸기 --%>
 		</div>
 		
-		 <div class="row">
+		 <div class="row mb-3">
 		<%--card--%>
 		<a href="ahzitUser/myAhzit" class="text-end">가입한 소모임 전부보기<i class="fa-solid fa-angles-right"></i></a>
 		<c:forEach var="myAhzitTopN" items="${myAhzitTopN}">
@@ -183,7 +186,7 @@
                   </div>
                   <a class="card-action" href="${pageContext.request.contextPath}/ahzit_in/${myAhzitTopN.ahzitNo}">
                   <%--아지트 종류에 따른 아이콘 --%>
-                  <c:if test="${myAhzitTopN.ahzitSort == '취미'}"><img src="/images/hobby.png"  class="sort-img"></c:if>
+                  <c:if test="${myAhzitTopN.ahzitSort == '취미'}"><img src="/images/hobbies.png"  class="sort-img"></c:if>
                   <c:if test="${myAhzitTopN.ahzitSort == '스터디'}"><img src="/images/study.png"  class="sort-img"></c:if>
                   <c:if test="${myAhzitTopN.ahzitSort == '일상'}"><img src="/images/life-smile.png"  class="sort-img"></c:if>
                   <c:if test="${myAhzitTopN.ahzitSort == '팬클럽'}"><img src="/images/fanclub.png"  class="sort-img"></c:if>
@@ -191,6 +194,7 @@
                   <c:if test="${myAhzitTopN.ahzitSort == '스포츠'}"><img src="/images/sports.png"  class="sort-img"></c:if>
                   <c:if test="${myAhzitTopN.ahzitSort == '여행'}"><img src="/images/travel.png"  class="sort-img"></c:if>
                   <c:if test="${myAhzitTopN.ahzitSort == '맛집'}"><img src="/images/eat.png"  class="sort-img"></c:if>
+                  <c:if test="${myAhzitTopN.ahzitSort == '영화'}"><img src="/images/movie.png"  class="sort-img"></c:if>
                   </a>
                   <div class="card-heading"> <%--아지트 이름 --%>
                       ${myAhzitTopN.ahzitName} 
@@ -205,6 +209,7 @@
              </div>
 		 </c:forEach>
           </div>
+          </c:if>
 		<%--홈 내용영역 끝 --%>
 		</div>
 	</div>
