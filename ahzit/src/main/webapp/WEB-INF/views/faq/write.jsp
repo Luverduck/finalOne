@@ -11,10 +11,10 @@
 
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="공지게시판 - 등록" name="title" />
+	<jsp:param value="faq - 등록" name="title" />
 </jsp:include>
 
-<form action="write" method="post" enctype="multipart/form-data">
+<form action="write" method="post">
 	<div class="container">
 		<div class="row center">
 			<h1>게시글 쓰기</h1>
@@ -22,19 +22,15 @@
 
 		<div class="row left">
 			<label>제목</label> <input class="input w-100" type="text"
-				name="noticeTitle" required>
+				name="faqTitle" required>
 		</div>
 
 		<div class="row left">
 			<label>내용</label>
-			<textarea class="input w-100" name="noticeContent" rows="10"
+			<textarea class="input w-100" name="faqContent" rows="10"
 				cols="80" required></textarea>
 		</div>
 
-		<div class="row left">
-			<label>첨부파일(1개당 1MB. 최대 10MB 가능)</label> 
-			<input class="input w-100" type="file" name="attachment" multiple>
-		</div>
 
 		<div class="row right">
 			<a class="btn btn-neutral" href="list">목록으로</a>

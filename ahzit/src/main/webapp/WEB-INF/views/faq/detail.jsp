@@ -11,7 +11,7 @@
 
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="공지게시판 - 상세" name="title" />
+	<jsp:param value="faq - 상세" name="title" />
 </jsp:include>
 
 <div class="container">
@@ -30,61 +30,36 @@
 			<tbody>
 				<tr>
 					<th width="30%">번호</th>
-					<td>${noticeDto.noticeNo}</td>
+					<td>${faqDto.faqNo}</td>
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td>${noticeDto.noticeTitle}</td>
+					<td>${faqDto.faqTitle}</td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td>${noticeDto.noticeWriter}</td>
+					<td>${faqDto.faqWriter}</td>
 				</tr>
 				<tr height="200" valign="top">
 					<th>내용</th>
-					<td>${noticeDto.noticeContent}</td>
+					<td>${faqDto.faqContent}</td>
 				</tr>
-
-				<tr>
-					<th>조회수</th>
-					<td>${noticeDto.noticeRead}</td>
-				</tr>
-
 
 				<tr>
 					<th>작성일</th>
-					<td><fmt:formatDate value="${noticeDto.noticeWritedate}"
+					<td><fmt:formatDate value="${faqDto.faqWritedate}"
 							pattern="y년 M월 d일 E요일 a h시 m분 s초" /></td>
 				</tr>
 
 
-				<c:if test="${noticeDto.noticeUpdatedate != null}">
+				<c:if test="${faqDto.faqUpdatedate != null}">
 					<tr>
 						<th>수정일</th>
-						<td><fmt:formatDate value="${noticeDto.noticeUpdatedate}"
+						<td><fmt:formatDate value="${faqDto.faqUpdatedate}"
 								pattern="y년 M월 d일 E요일 a h시 m분 s초" /></td>
 					</tr>
 				</c:if>
-				
-				
-				<c:if test="${attachmentList != null}">
-				<tr>
-					<th>첨부파일</th>
-					<td>
-						<ul class="attachment-list">
-							<c:forEach var="attachmentDto" items="${attachmentList}">
-							<li>
-								${attachmentDto.attachmentName} 
-								(${attachmentDto.attachmentSize} bytes) 
-								- 
-								[${attachmentDto.attachmentType}]
-								<a href="/attachment/download/${attachmentDto.attachmentNo}">download</a>
-							</li>
-							</c:forEach>
-						</ul>
-					</td>
-				</tr>
-				</c:if>
+			
 				
 				
 				
@@ -96,8 +71,8 @@
 						<c:if test="${loginId != null}">
 							<a class="btn btn-positive" href="write">글쓰기</a>
 						</c:if>
-						<a href="edit?noticeNo=${noticeDto.noticeNo}">수정하기</a>	
-						<a href="delete?noticeNo=${noticeDto.noticeNo}">삭제하기</a>
+						<a href="edit?faqNo=${faqDto.faqNo}">수정하기</a>	
+						<a href="delete?faqNo=${faqDto.faqNo}">삭제하기</a>
 					</td>
 				</tr>
 			</tfoot>

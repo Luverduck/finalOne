@@ -46,7 +46,7 @@
         * {
         	/* border : 1px dotted gray; */
             font-family: 'Noto Sans KR', sans-serif;
-            font-size : 20px !important;
+            font-size : 16px !important;
         }
         a {
 			text-decoration: none;
@@ -58,40 +58,107 @@
 
 <c:set var="login" value="${loginId != null}"></c:set>
 
-<div>
-	<c:choose>
-		<c:when test="${login}">
-			<a href="/">홈</a>
-			<a class="logout" href="/ahzitUser/logout">로그아웃</a>
-			<a href="/ahzitUser/mypage">마이페이지</a>
-		</c:when>
-		<c:otherwise>
-			<a href="/">홈</a>
-			<a href="/ahzitUser/login">로그인</a>
-			<a href="/ahzitUser/join">회원가입</a>
-		</c:otherwise>
-	</c:choose>
+<div class = "container-fluid py-2"> <!-- container 시작 -->
+	<div class = "row mt-1"> <!-- row mt-1 시작 -->
+		<div class = "col-1 offset-2 d-flex justify-content-center">
+			<a href="/" class = "d-flex align-items-center">홈(로고)</a>
+		</div>
+		
+		<div class = "col-2 d-flex bg-white rounded py-1">
+			<div class = "col-11 me-1">
+				<input class = "w-100 border-0 bg-white ps-3 input-allsearch" placeholder = "아지트 검색" type = "text" >
+			</div>
+			<div class = "col-1 bg-white">
+				<button class = "fa-solid fa-magnifying-glass w-100 border-0 bg-white btn-allsearch-submit" type = "submit"></button>
+			</div>
+		</div>
+	
+		<div class = "col-3 offset-2 d-flex">
+			<div class = "col d-flex justify-content-center align-items-center">
+				<a href = "/search" class = "d-flex align-items-center">찾기</a>
+			</div>
+			<c:choose>
+			<c:when test="${login}">
+				<div class = "col d-flex justify-content-center">
+					<a href="/ahzitUser/logout" class = "d-flex align-items-center logout">로그아웃</a>
+				</div>
+				<div class = "col d-flex justify-content-center">
+					<a href="/ahzitUser/mypage" class = "d-flex align-items-center">마이페이지</a>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class = "col d-flex justify-content-center">
+					<a href="/ahzitUser/login" class = "d-flex align-items-center">로그인</a>
+				</div>
+				<div class = "col d-flex justify-content-center">
+					<a href="/ahzitUser/join" class = "d-flex align-items-center">회원가입</a>
+				</div>
+			</c:otherwise>
+			</c:choose>
+		</div>
+	</div> <!-- row mt-1 끝 -->
+	
+	<!-- 백엔드 작업 끝나면 지울 영역 -->
+	<div class = "row mt-3">
+		<div class = "col-8 offset-2 d-flex align-items-center justify-content-left">
+			<div class = "col-3">
+				<a href = "/freeboard/list">자유게시판</a>
+			</div>
+			<div class = "col-3">
+				<a href = "/ahzit_in/84">소모임 84번 - tester111</a>
+			</div>
+			<c:if test="${login}">
+			<div class = "col-3">
+				<a href="/ahzit/create">아지트 개설</a>
+			</div>
+			</c:if>
+		</div>
+	</div>
+</div> <!-- container 끝 -->
 
-</div>
-
-<div>
-	<a href = "/freeboard/list">자유게시판</a>
-</div>
-
-<hr>
 
 
 <script>
-    //로그아웃 버튼 클릭 시 알람
+
 	$(function(){
-		$("a.logout").click(function(e){
+		
+		$(".btn-allsearch-submit").click(function(){
+			var keyword = $(".input-allsearch").val();
+			console.log(keyword);
+			var input = $("<input>").attr("type", "hidden").attr("name", "keyword").attr("value", keyword);
+			console.log(keyword);
+			var form = $("<form>").attr("action", "search_keyword").attr("method", "get");
+			form.append(input);
+			$("body").append(form);
+			form.submit();
+		})
+		
+		 //로그아웃 버튼 클릭 시 알람
+		$(".logout").click(function(e){
             var choice = confirm("로그아웃 하시겠습니까?");
             if(choice){
                 return true;
+                
             }
             else{
                 return false;
             }
 		});
 	});
+    
+	//카카오로그아웃  
+	function kakaoLogout() {
+	    if (Kakao.Auth.getAccessToken()) {
+	      Kakao.API.request({
+	        url: '/v1/user/unlink',
+	        success: function (response) {
+	        	console.log(response)
+	        },
+	        fail: function (error) {
+	          console.log(error)
+	        },
+	      })
+	      Kakao.Auth.setAccessToken(undefined)
+	    }
+	  }  
 </script>
