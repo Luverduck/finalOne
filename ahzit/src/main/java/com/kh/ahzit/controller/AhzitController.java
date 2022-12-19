@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,7 @@ import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.repository.AttachmentDao;
 import com.kh.ahzit.service.AhzitService;
+import com.kh.ahzit.vo.AhzitSearchListRequestVO;
 
 @Controller
 @RequestMapping("/ahzit")
@@ -38,6 +40,9 @@ public class AhzitController {
 	
 	@Autowired
 	private AhzitService ahzitService;
+	
+	@Autowired
+	private AttachmentDao attachmentDao;
 	
 	private final File dir = new File("D:/upload/kh10f");
 	
@@ -60,7 +65,6 @@ public class AhzitController {
 			RedirectAttributes attr,
 			HttpSession session) throws IllegalStateException, IOException {
 		String ahzitLeader = (String)session.getAttribute("loginId");
-		AhzitUserDto userDto = ahzitDao.selectOne(ahzitLeader);
 
 		ahzitDto.setAhzitLeader(ahzitLeader);
 		//AhzitService에서 번호를 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
@@ -138,6 +142,25 @@ public class AhzitController {
     		return "redirect:/ahzit_in/" +ahzitNo;
     	}
     }
-
-
+    
+    // 소모임 홈 화면 Mapping
+ 	@GetMapping("/detail/{ahzitNo}")
+ 	public String home(@PathVariable int ahzitNo, Model model, HttpSession session) {
+ 		// 소모임 정보를 조회
+	 	model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));	
+ 		// HttpSession에서 로그인 중인 회원 아이디 반환
+		String userId = (String)session.getAttribute("loginId");
+		// 내가 가입한 소모임인지 반환
+		boolean isMember = ahzitDao.alreadyJoin(userId, ahzitNo) == 1;
+		if(isMember) { // 회원이라면
+			//입력받은 아지트번호로 연결되는 첨부파일 조회
+		 	model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
+		 	// 소모임 홈 Mapping으로 강제 이동
+		 	return "redirect:/ahzit_in/" + ahzitNo;
+		}
+	 	// 편의를 위해 ahzitNo를 model에 추가
+	 	model.addAttribute("ahzitNo", ahzitNo);
+	 	// 소모임 상세 페이지(board.jsp)로 연결	
+	 	return "ahzit/detail";
+ 	}
 }

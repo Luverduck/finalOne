@@ -5,9 +5,6 @@
   <%-- swiper CDN (이미지슬라이더)--%>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
   <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-	
-  <%-- 나눔스퀘어 폰트--%>
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css"> 
 
 <%-- header.jsp 불러오기 --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">

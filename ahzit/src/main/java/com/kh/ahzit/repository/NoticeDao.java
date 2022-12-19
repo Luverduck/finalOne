@@ -41,4 +41,7 @@ public interface NoticeDao {
 	//test clear
 	void clear();
 	
+	//첨부파일
+	void connectAttachment(int noticeOriginNo, int noticeAttachmentNo);
+	
 }

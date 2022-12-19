@@ -73,6 +73,12 @@ public class AttachmentDaoImpl implements AttachmentDao {
 		// 해당 첨부파일 번호로 자유게시글 첨부파일 정보 삭제 후 결과 반환
 		return sqlSession.delete("attachment.deleteFreeboardAttachment", freeboardAttachmentNo) > 0;
 	}
+	
+	@Override
+	public List<AttachmentDto> selectNoticeAttachmentList(int noticeOriginNo) {
+		return sqlSession.selectList("attachment.selectNoticeAttachment", noticeOriginNo);
+	}
+
 
 	//소모임 프로필
 	@Override

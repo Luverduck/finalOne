@@ -9,9 +9,8 @@
 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" />
 </c:set>
 
-<%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="notice" name="title" />
+	<jsp:param value="faq" name="title" />
 </jsp:include>
 
 
@@ -33,9 +32,13 @@
 
 	<!-- 게시판 이름 -->
 	<div class="row">
-		<h1>공지 게시판</h1>
+		<h1>faq</h1>
 	</div>
 
+	<!-- 글쓰기 버튼 -->
+	<div class="row">
+		<a class="btn btn-neutral" href="write">글쓰기</a>
+	</div>
 
 	<div class="row center">
 		<table class="table">
@@ -46,41 +49,37 @@
 					<th width="45%">제목</th>
 					<th>작성자</th>
 					<th>작성일</th>
-					<th>조회수</th>
 
 				</tr>
 			</thead>
 
 
 			<tbody align="center">
-				<c:forEach var="noticeDto" items="${list}">
+				<c:forEach var="faqDto" items="${list}">
 					<tr>
 
 
-						<td>${noticeDto.noticeNo}</td>
+						<td>${faqDto.faqNo}</td>
 						<td align="left">
 							<!-- 제목을 누르면 상세 페이지로 이동하도록 처리 --> <a
-							href="detail?noticeNo=${noticeDto.noticeNo}">
-								${noticeDto.noticeTitle} </a>
+							href="detail?faqNo=${faqDto.faqNo}"> ${faqDto.faqTitle} </a>
 
 
 
 						</td>
-						<td>${noticeDto.noticeWriter}</td>
+						<td>${faqDto.faqWriter}</td>
 						<td><c:set var="current">
-								<fmt:formatDate value="${noticeDto.noticeWritedate}"
+								<fmt:formatDate value="${faqDto.faqWritedate}"
 									pattern="yyyy-MM-dd" />
 							</c:set> <c:choose>
 								<c:when test="${today == current}">
-									<fmt:formatDate value="${noticeDto.noticeWritedate}"
-										pattern="HH:mm" />
+									<fmt:formatDate value="${faqDto.faqWritedate}" pattern="HH:mm" />
 								</c:when>
 								<c:otherwise>
-									<fmt:formatDate value="${noticeDto.noticeWritedate}"
+									<fmt:formatDate value="${faqDto.faqWritedate}"
 										pattern="yyyy-MM-dd" />
 								</c:otherwise>
 							</c:choose></td>
-						<td>${noticeDto.noticeRead}</td>
 
 					</tr>
 				</c:forEach>
@@ -149,10 +148,10 @@
 	<!-- 검색창 -->
 	<form action="list" method="get">
 		<select name="type" required>
-			<option value="notice_title"
-				<c:if test="${vo.type=='notice_title'}">selected</c:if>>제목</option>
-			<option value="notice_content"
-				<c:if test="${vo.type=='notice_content'}">selected</c:if>>내용</option>
+			<option value="faq_title"
+				<c:if test="${vo.type=='faq_title'}">selected</c:if>>제목</option>
+			<option value="faq_content"
+				<c:if test="${vo.type=='faq_content'}">selected</c:if>>내용</option>
 
 		</select> <input type="search" name="keyword" placeholder="검색어" required
 			value="${vo.keyword}">
@@ -162,5 +161,10 @@
 </div>
 
 
-<%-- footer --%>
+
+
+
+
+
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

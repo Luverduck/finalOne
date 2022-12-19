@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.vo.AhzitSearchListRequestVO;
 
 public interface AhzitDao {
 	int sequence();//ahzit_no 시퀀스 번호 발행
@@ -31,4 +32,15 @@ public interface AhzitDao {
 	
 	void insertMember2(AhzitMemberDto ahzitMemberDto);//아지트가입하기 메소드 2 (member_no 미리 발행하는 버전)
 
+	// 추상 메소드 - 홈 화면 검색창 검색 : 통합 검색
+	List<AhzitSearchListRequestVO> selectAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+	
+	// 추상 메소드 - 홈 화면 검색창 검색 : 전체 조회(검색어가 없는 경우)
+	List<AhzitSearchListRequestVO> allAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+	
+	// 추상 메소드 - 홈 화면 검색창 검색 : 검색 조회(검색어가 있는 경우)
+	List<AhzitSearchListRequestVO> searchAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+	
+	// 추상 메소드 - 내가 가입한 소모임인지 조회
+	public int alreadyJoin(String userId, int ahzitNo);
 }
