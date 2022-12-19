@@ -21,9 +21,6 @@ import com.kh.ahzit.repository.InquireReplyDao;
 @Controller
 @RequestMapping("/inquireReply")
 public class InquireReplyController {
-
-	@Autowired
-	private SqlSession sqlSessin;
 	
 	@Autowired
 	private InquireReplyDao inquireReplyDao;

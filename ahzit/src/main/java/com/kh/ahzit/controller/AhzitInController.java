@@ -60,9 +60,6 @@ public class AhzitInController {
 	@Autowired
 	private AttachmentDao attachmentDao;
 	
-
-	private final File directory = new File("D:/upload/kh10f/ahzit");
-
 	@Autowired
 	private AhzitMemberDao ahzitMemberDao;
 	
@@ -73,13 +70,8 @@ public class AhzitInController {
 	public void prepare() {
 		dir.mkdirs();
 	}
-	
-	@Autowired(required=false)
-	private MemberAttachmentDto memberAttachmentDto;
-	
-	private final File dir = new File("D:/upload/kh10f");
-	
 
+	private final File dir = new File("D:/upload/kh10f");
 	
 	// 소모임 홈 화면 Mapping
 	@GetMapping("/{ahzitNo}")
@@ -320,9 +312,4 @@ public class AhzitInController {
 			throw new TargetNotFoundException();
 		}
 	}
-	
-	
-
-	
-	
 }
