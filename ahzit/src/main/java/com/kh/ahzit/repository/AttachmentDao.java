@@ -64,4 +64,7 @@ public interface AttachmentDao {
 	//회원번호(member_no)로 첨부파일 검색(조회)
 	public List<AttachmentDto> selectAhzitMemberAttachment(int memberOriginNo);
 
+	// 소모임 프로필 첨부파일 삭제
+	boolean deleteAhzitAttachment(int ahzitAttachmentNo);
+
 }

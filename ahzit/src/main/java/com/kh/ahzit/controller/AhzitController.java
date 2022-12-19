@@ -2,6 +2,7 @@ package com.kh.ahzit.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
@@ -19,14 +20,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ahzit.constant.SessionConstant;
+import com.kh.ahzit.entity.AhzitAttachmentDto;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.entity.AttachmentDto;
 import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.repository.AttachmentDao;
 import com.kh.ahzit.service.AhzitService;
-import com.kh.ahzit.vo.AhzitSearchListRequestVO;
 
 @Controller
 @RequestMapping("/ahzit")
@@ -67,6 +69,9 @@ public class AhzitController {
 		ahzitDto.setAhzitLeader(ahzitLeader);
 		//AhzitService에서 번호를 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
 		int ahzitNo = ahzitService.create(ahzitDto, ahzitMemberDto,  attachment, ahzitLeader);
+		
+	System.out.println();
+	
 	
 		return "redirect:/ahzit_in/" + ahzitNo;
 	}
@@ -97,21 +102,66 @@ public class AhzitController {
 	
     //소모임 관리 페이지(수정)
     @GetMapping("/edit")
-    public String ahzitEdit(@RequestParam int ahzitNo, 
-    										Model model
-    									) {
+    public String ahzitEdit(@RequestParam int ahzitNo, Model model) {
     	model.addAttribute("ahzitDto", ahzitDao.selectOne(ahzitNo));
-    	//입력받은 아지트번호로 연결되는 첨부파일 조회
-		model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
+    	System.out.println(ahzitDao.selectOne(ahzitNo));
+//    	//입력받은 아지트번호로 연결되는 첨부파일 조회
+//		model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
     	return "ahzit/edit";
     }
     
     @PostMapping("/edit")
-    public String edit(@ModelAttribute AhzitDto ahzitDto,
-    							  @RequestParam MultipartFile attachment
-    							) {
+    public String edit(@ModelAttribute AhzitDto ahzitDto, List<MultipartFile> ahzitAttachment, RedirectAttributes attr) throws Exception {
     	boolean result = ahzitDao.update(ahzitDto);
     	if(result) {
+    		// 첨부파일에 대한 처리
+    		//System.out.println(ahzitAttachment.get(0));
+    		if(!ahzitAttachment.get(0).isEmpty()) { // 첨부파일 변화가 있다면
+			// 기존 첨부파일 조회
+			List<AttachmentDto> attachmentList = attachmentDao.selectAhzitAttachment(ahzitDto.getAhzitNo());
+			// ** 이상하게 null도 하나의 원소 취급을 하는 것 같다
+			if(attachmentList.get(0) != null) { // 기존 첨부파일이 있다면
+				// 기존 첨부파일 삭제
+				for(AttachmentDto attachmentDto : attachmentList) {
+					// attachmentDto에서 첨부파일 번호를 반환
+					int attachmentNo = attachmentDto.getAttachmentNo();
+					// 첨부파일 정보 삭제
+					attachmentDao.deleteAttachment(attachmentNo);
+					//  첨부파일 정보 삭제
+					attachmentDao.deleteAhzitAttachment(attachmentNo);
+					// 삭제할 첨부파일명 반환
+					String fileName = String.valueOf(attachmentDto.getAttachmentNo());
+					// 삭제할 첨부파일 경로 설정
+					File target = new File(dir, fileName);
+					// 첨부파일 삭제
+					target.delete();
+					}
+				}
+				// 첨부파일 재등록
+				// 게시글 원본 번호 반환
+				int ahzitNo = ahzitDto.getAhzitNo();
+				// 새로 입력된 첨부파일에 대한 처리
+				for(MultipartFile file : ahzitAttachment) {
+					// 다음 첨부파일 번호 반환
+					int attachmentNo = attachmentDao.nextAttachmentNo();
+					// 첨부파일 등록 DB 처리
+					attachmentDao.insertAttachment(AttachmentDto.builder()
+								.attachmentNo(attachmentNo)
+								.attachmentName(file.getOriginalFilename())
+								.attachmentType(file.getContentType())
+								.attachmentSize(file.getSize())
+							.build());
+					// 디렉토리 생성
+					dir.mkdirs();
+					// 첨부파일 저장 하위경로 설정
+					File target = new File(dir, String.valueOf(attachmentNo));
+					// 첨부파일 전송
+					file.transferTo(target);
+					// 자유 게시글 첨부파일 등록 DB 처리
+					attachmentDao.ahzitAttachment(ahzitNo, attachmentNo);
+				}
+			}
+    		
     		return "redirect:/ahzit_in/" +ahzitDto.getAhzitNo();
     	}
     	else {//실패했다면 오류 발생

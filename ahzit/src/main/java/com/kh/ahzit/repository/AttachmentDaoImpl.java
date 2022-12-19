@@ -84,7 +84,6 @@ public class AttachmentDaoImpl implements AttachmentDao {
 	@Override
 	public void ahzitAttachment(int ahzitOriginNo, int ahzitAttachmentNo) {
 		Map<String, String> param = new HashMap<>();
-
 		param.put("ahzitOriginNo", String.valueOf(ahzitOriginNo));
 		param.put("ahzitAttachmentNo", String.valueOf(ahzitAttachmentNo));
 		sqlSession.insert("attachment.insertAhzitAttachment", param);
@@ -94,14 +93,19 @@ public class AttachmentDaoImpl implements AttachmentDao {
 	@Override
 	public List<AttachmentDto> selectAhzitAttachment(int ahzitOriginNo) {
 		//소모임 번호로 첨부파일 전체 조회 후 결과 반환
+	
 		return sqlSession.selectList("attachment.selectAhzitAttachment", ahzitOriginNo);
 	}
 	
+	@Override
+	public boolean deleteAhzitAttachment(int ahzitAttachmentNo) {
+	// 해당 첨부파일 번호로 자유게시글 첨부파일 정보 삭제 후 결과 반환
+		return sqlSession.delete("attachment.deleteAhzitAttachment", ahzitAttachmentNo) > 0;
+		}
 
 	@Override
 	public void insertInquireAttachment(int inquireOriginNo, int inquireAttachmentNo) {
 		Map<String, String> param = new HashMap<>();
-		// 생성한 Map의 type과 keyword를 freeboardListSeachVO의 type과 keyword로 설정
 		param.put("inquireOriginNo", String.valueOf(inquireOriginNo));
 		param.put("inquireAttachmentNo", String.valueOf(inquireAttachmentNo));
 		sqlSession.insert("attachment.insertInquireAttachment", param);
