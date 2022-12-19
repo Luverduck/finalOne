@@ -41,8 +41,6 @@ public class AhzitController {
 	@Autowired
 	private AhzitService ahzitService;
 	
-	@Autowired
-	private AttachmentDao attachmentDao;
 	
 	private final File dir = new File("D:/upload/kh10f");
 	
