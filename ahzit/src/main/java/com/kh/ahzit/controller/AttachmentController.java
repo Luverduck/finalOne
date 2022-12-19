@@ -56,7 +56,7 @@ public class AttachmentController {
 	
 	//공지게시판 첨부파일 다운로드 mapping
 	@GetMapping("/download/{attachmentNo}")
-	public ResponseEntity<ByteArrayResource> download(@PathVariable int attachmentNo) throws IOException{
+	public ResponseEntity<ByteArrayResource> downloadNotice(@PathVariable int attachmentNo) throws IOException{
 		//1. 파일 탐색
 		AttachmentDto attachmentDto = attachmentDao.selectAttachment(attachmentNo);
 		if(attachmentDto == null) {

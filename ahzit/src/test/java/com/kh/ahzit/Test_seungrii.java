@@ -15,21 +15,10 @@ import com.kh.ahzit.repository.FaqDao;
 @SpringBootTest
 public class Test_seungrii {
 
-	@Autowired
-	private FaqDao faqDao;
-
 	@Test
 	public void test() {
-		List<FaqDto> list = faqDao.selectList();
 
-		for (FaqDto faqDto : list) {
-			System.out.println(faqDto);
-		}
-		assertEquals(list.size(), 10);
+		
 	}
 	
-//	@AfterEach
-//	public void after() {
-//		faqDao.clear();
-//	}
 }
