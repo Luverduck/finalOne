@@ -141,7 +141,7 @@
 
 <div class="container">
 	<form action="create" method="post" enctype = "multipart/form-data">
-	
+		<input  name="ahzitLeader" value="${sessionScope.loginId}" type="hidden">
 	<div class="row">
 	 소모임리더 : <p name="ahzitLeader">${sessionScope.loginId}</p>
 	</div>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "ahzitBoardReply">
+
+	<!-- 다음 댓글 번호 반환 -->
+	<select id = "nextReplyNo" resultType = "int">
+		select ahzit_reply_seq.nextval from dual
+	</select>
+	
+	<!-- 댓글 등록 -->
+	<insert id = "insertReply" parameterType = "map">
+		insert into ahzit_reply(reply_no, reply_writer_no, reply_origin_no, reply_content) values(#{replyNo}, #{replyWriterNo}, #{replyOriginNo}, #{replyContent})
+	</insert>
+	
+	<!-- 댓글 등록 후 등록한 댓글 정보 조회 -->
+	<select id = "selectReply" parameterType = "int" resultType = "AhzitBoardReplyVO">
+		select aram.*, ma.member_attachment_no from (
+		    select reply_no, reply_writer_no, reply_origin_no, reply_content, reply_writedate, reply_state, member_no, member_nick, member_grade from ahzit_reply inner join ahzit_member on reply_writer_no = member_no
+		)aram left outer join member_attachment ma on aram.member_no = ma.member_origin_no where aram.reply_no = #{replyNo} and reply_state = 'N'
+	</select>
+	
+	<!-- 댓글 수정 -->
+	<update id = "updateReply" parameterType = "map">
+		update ahzit_reply set reply_content = #{replyContent}, reply_updatedate = sysdate where reply_no = #{replyNo}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id = "deleteReply" parameterType = "int">
+		delete ahzit_reply where reply_no = #{replyNo}
+	</delete>
+	
+	<!-- 댓글 목록 조회 -->
+	<select id = "selectReplyList" parameterType = "map" resultType = "AhzitBoardReplyVO">
+		select * from (select tmp.*, rownum rn from(
+		    select aram.*, ma.member_attachment_no from (
+		        select reply_no, reply_writer_no, reply_origin_no, reply_content, reply_writedate, reply_state, member_no, member_nick, member_grade from ahzit_reply inner join ahzit_member on reply_writer_no = member_no
+		    )aram left outer join member_attachment ma on aram.member_no = ma.member_origin_no where aram.reply_origin_no = #{replyOriginNo} and aram.reply_state = 'N' order by aram.reply_no desc
+		)tmp) where rn between #{rownumStart} and #{rownumEnd}
+	</select>
+	
+	<!-- 특정 게시글에 달린 댓글의 총 수 -->
+	<select id = "countReply" parameterType = "int" resultType = "int">
+		select count(*) from ahzit_reply where reply_origin_no = #{replyOriginNo}
+	</select>
+	
+</mapper>

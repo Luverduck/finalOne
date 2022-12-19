@@ -3,10 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">	
+	<title>
+		<c:choose>
+			<%-- title이라는 변수의 값이 있다면(null이 아니면) title에 입력될 값은 해당 title 변수의 값으로  --%>
+			<c:when test = "${param.title != null}">
+				${param.title}
+			</c:when>
+			<c:otherwise>
+				Ahzit
+			</c:otherwise>
+		</c:choose>
+	</title>
+	
+	<!-- Font CDN - Noto Sans Korean -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 	<!-- Font Awesome Link -->
 	<link rel="stylesheet" type = "text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
@@ -23,56 +39,84 @@
 	<!-- AXIOS CDN -->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	
-<title>
-	<c:choose>
-		<%-- title이라는 변수의 값이 있다면(null이 아니면) title에 입력될 값은 해당 title 변수의 값으로  --%>
-		<c:when test = "${param.title != null}">
-			${param.title}
-		</c:when>
-		<c:otherwise>
-			Ahzit
-		</c:otherwise>
-	</c:choose>
-</title>
+	<!-- Lodash CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
+	<!-- Summer Note CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.js"></script>
+	
+	<!-- Summer Note CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.css" rel="stylesheet">
+	
+	<style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+           	font-size : 20px !important;
+        }
+        a {
+			text-decoration: none;
+		}
+    </style>
 </head>
 <body>
 
 <c:set var="login" value="${loginId != null}"></c:set>
 
-<div class = "container" style="background-color: yellow;">
-	<div class = "row">
-		<div class = "col right">
-			<a href="/">홈</a>
+<div class = "container-fluid py-2" style="background-color: #FEC260;">
+
+	<div class = "row mt-1">
+		<div class = "col-1 offset-2 d-flex justify-content-center">
+			<a href="/" class = "d-flex align-items-center">홈(로고)</a>
+		</div>
+		
+		<div class = "col-2 d-flex bg-white rounded py-1">
+			<div class = "col-11 me-1">
+				<input class = "w-100 border-0 bg-white ps-3" placeholder = "아지트, 게시글 검색">
+			</div>
+			<div class = "col-1 bg-white">
+				<button class = "fa-solid fa-magnifying-glass w-100 btn-allsearch-submit border-0 bg-white"></button>
+			</div>
+		</div>
+	
+		<div class = "col-3 offset-2 d-flex">
+			<div class = "col d-flex justify-content-center align-items-center">
+				<a href = "" class = "d-flex align-items-center">찾기</a>
+			</div>
 			<c:choose>
-				<c:when test="${login}">
-					<a href="/ahzitUser/logout">로그아웃</a>
-					<a href="/ahzitUser/mypage">마이페이지</a>
-				</c:when>
-				<c:otherwise>
-					<a href="/ahzitUser/login">로그인</a>
-					<a href="/ahzitUser/join">회원가입</a>
-				</c:otherwise>
+			<c:when test="${login}">
+				<div class = "col d-flex justify-content-center">
+					<a href="/ahzitUser/logout" class = "d-flex align-items-center">로그아웃</a>
+				</div>
+				<div class = "col d-flex justify-content-center">
+					<a href="/ahzitUser/mypage" class = "d-flex align-items-center">마이페이지</a>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class = "col d-flex justify-content-center">
+					<a href="/ahzitUser/login" class = "d-flex align-items-center">로그인</a>
+				</div>
+				<div class = "col d-flex justify-content-center">
+					<a href="/ahzitUser/join" class = "d-flex align-items-center">회원가입</a>
+				</div>
+			</c:otherwise>
 			</c:choose>
 		</div>
 	</div>
-	<div class = "row">
-		<div class = "col">
-			<a href = "/ahzit_in/84">게시글</a>
+	
+	<div class = "row mt-3">
+		<div class = "col-2 offset-2 d-flex justify-content-center">
+			<a href = "/ahzit_in/84" class = "p-2">게시글</a>
 			<!-- <a href = "/ahzit_in/${ahzitDto.ahzitNo}">게시글</a> -->
 		</div>
-		<div class = "col">
-			<a href = "/ahzit_in/84/album">사진첩</a>
+		<div class = "col-2 d-flex justify-content-center">
+			<a href = "/ahzit_in/84/calendar" class = "p-2">일정</a>
 		</div>
-		<div class = "col">
-			<a href = "/ahzit_in/84/calendar">일정</a>
+		<div class = "col-2 d-flex justify-content-center">
+			<a href = "/ahzit_in/84/attachment" class = "p-2">첨부</a>
 		</div>
-		<div class = "col">
-			<a href = "/ahzit_in/84/attachment">첨부</a>
-		</div>
-		<div class = "col">
-			<a href = "/ahzit_in/84/member">멤버</a>
+		<div class = "col-2 d-flex justify-content-center">
+			<a href = "/ahzit_in/84/member" class = "p-2">멤버</a>
 		</div>
 	</div>
+	
 </div>
-
-<hr>

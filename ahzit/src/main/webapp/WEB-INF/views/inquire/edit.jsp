@@ -8,26 +8,67 @@
 	<jsp:param value="1:1 문의글 수정" name="title"/>
 </jsp:include>
 
-<h1>1:1 문의 수정</h1>
+<script>
+$(function(){
+    $("[name=inquireContent]").summernote({
+        height : 300, // 높이 지정
+        minHeight : 300, // 최소 높이
+        maxHeight : 300, // 최대 높이
+        lang : "ko-KR" // 도움말 한글로 번역, 스크립트 추가해야함
+    })
+});
+</script>
+
+<div class="row mt-4">
+	<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+		<div class="p-4 text-dark rounded  text-center">
+			<h1 class="text-center">문의 글 수정</h1>
+		</div>
+	</div>
+</div>
 
 <div>
 	<form action = "edit" method = "post" enctype="multipart/form-data">
 		<input type = "hidden" name = "inquireNo" value = "${inquireDto.inquireNo}">
-		<div>
-			제목 : <input type = "text" name = "inquireTitle" value = "${inquireDto.inquireTitle}">
-		</div>
-		<div>
-			내용 : <input type = "text" name = "inquireContent" value = "${inquireDto.inquireContent}">
-		</div>
 		
-		<div>
-			<button type = "submit">수정</button>
+	<div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="form-floating">
+    			<input type="text" name="inquireTitle" class="form-control rounded" placeholder="제목" required value = "${inquireDto.inquireTitle}">
+              		<label>
+                    제목
+                    </label>
+			</div>
 		</div>
-	</form>
-	<div>
-		<a href = "list?inquireId=${inquireDto.inquireId}">목록</a>		
+ 	</div>
+ 	
+ 	<div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="form-floating">
+				<textarea name="inquireContent"  required>${inquireDto.inquireContent}</textarea>
+			</div>
+		</div>
+ 	</div>
+ 	
+	<div class="row mt-4">
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<p>
+            첨부파일 등록
+            </p>
+			<input type="file" name="inquireAttachment" multiple>
+		</div>
+ 	</div>
+ 	
+	<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+		<div class=" col">
+			<a href="list?inquireId=${inquireDto.inquireId}" class="btn w-100 btn-outline-secondary" role=button>목록</a>
+		</div>
+		<div class=" col" >
+		<button class="btn w-100 btn-outline-warning" type="submit">수정하기</button>
+		</div>
 	</div>
-</div>
+	
+	</form>
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

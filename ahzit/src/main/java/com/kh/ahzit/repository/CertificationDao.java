@@ -1,5 +1,6 @@
 package com.kh.ahzit.repository;
 
+import com.kh.ahzit.entity.AhzitUserDto;
 import com.kh.ahzit.entity.CertificationDto;
 
 public interface CertificationDao {
@@ -8,4 +9,6 @@ public interface CertificationDao {
 	boolean check(CertificationDto certificationDto);
 	boolean delete(String certificationId);
 	void clear();
+	
+	CertificationDto selectOne(String certificationId); 
 }

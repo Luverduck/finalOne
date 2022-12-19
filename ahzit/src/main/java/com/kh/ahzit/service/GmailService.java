@@ -45,6 +45,7 @@ public class GmailService implements EmailService {
 
 	@Override
 	public boolean checkCert(CertificationDto certificationDto) {
+		
 		if (certificationDao.check(certificationDto)) { // 인증성공시
 			certificationDao.delete(certificationDto.getCertificationId());
 			return true;

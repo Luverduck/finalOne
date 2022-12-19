@@ -20,6 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.ahzit.constant.SessionConstant;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
+import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.service.AhzitService;
 
@@ -33,7 +35,7 @@ public class AhzitController {
 	@Autowired
 	private AhzitService ahzitService;
 	
-	private final File dir = new File("D:/upload/kh10f/ahzit");
+	private final File dir = new File("D:/upload/kh10f");
 	
 	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
 	public void prepare() {
@@ -48,21 +50,18 @@ public class AhzitController {
 	@PostMapping("/create")
 	private String create(
 			@ModelAttribute AhzitDto ahzitDto,
+			@ModelAttribute AhzitUserDto ahzitUserDto,
 			@ModelAttribute AhzitMemberDto ahzitMemberDto,
 			@RequestParam MultipartFile attachment,
 			RedirectAttributes attr,
 			HttpSession session) throws IllegalStateException, IOException {
 		String ahzitLeader = (String)session.getAttribute("loginId");
+		AhzitUserDto userDto = ahzitDao.selectOne(ahzitLeader);
+
 		ahzitDto.setAhzitLeader(ahzitLeader);
-		
 		//AhzitService에서 번호를 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
-		int ahzitNo = ahzitService.create(ahzitDto, attachment);
-		
-		//소모임에 개설자 자동 추가
-		ahzitMemberDto.setMemberAhzitNo(ahzitNo);
-		ahzitMemberDto.setMemberId(ahzitLeader);
-		
-		//redirect
+		int ahzitNo = ahzitService.create(ahzitDto, ahzitMemberDto,  attachment, ahzitLeader);
+	
 		return "redirect:/ahzit_in/" + ahzitNo;
 	}
 	
@@ -90,10 +89,27 @@ public class AhzitController {
 		return "redirect:/ahzit_in/" + ahzitNo;
 	}
 	
-    //소모임 관리 페이지
+    //소모임 관리 페이지(수정)
     @GetMapping("/edit")
-    public String ahzitEdit(@RequestParam int AhzitNo) {
-      return "ahzit/detail_edit";
+    public String ahzitEdit(@RequestParam int ahzitNo, 
+    										Model model
+    									) {
+    	model.addAttribute("ahzitDto", ahzitDao.selectOne(ahzitNo));
+    	return "ahzit/edit";
+    }
+    
+    @PostMapping("/edit")
+    public String edit(@ModelAttribute AhzitDto ahzitDto,
+    							  @RequestParam MultipartFile attachment
+    							) {
+    	boolean result = ahzitDao.update(ahzitDto);
+    	if(result) {
+    		return "redirect:/ahzit_in/" +ahzitDto.getAhzitNo();
+    	}
+    	else {//실패했다면 오류 발생
+    		throw new TargetNotFoundException();
+    	}
+    			
     }
 	
     //소모임 회원 관리페이지
@@ -103,5 +119,19 @@ public class AhzitController {
           ) {
       return "ahzit/detail_member_management";
 	}
-	
+    
+    //소모임 삭제
+    //소모임 관리페이지(수정) 안에서 삭제 가능
+    @GetMapping("/delete")
+    public String delete(@RequestParam int ahzitNo) {
+    	boolean result = ahzitDao.delete(ahzitNo);
+    	if(result) {
+    		return "redirect:/";
+    	}
+    	else { //소모임 삭제 취소하면 제자리
+    		return "redirect:/ahzit_in/" +ahzitNo;
+    	}
+    }
+
+
 }
