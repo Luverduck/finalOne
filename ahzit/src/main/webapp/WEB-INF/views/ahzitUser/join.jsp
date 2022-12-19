@@ -532,8 +532,12 @@
 
 $(function(){
 	
+	var thisBtnCheck;
+	
 	$("[name=userInterestSort]").click(function(){
-		target = $(this).next().children();
+		thisBtnCheck = $(this);
+			
+		var target = $(this).next().children();
 		var count = $("input:checked[type='checkbox']").length;
 		
 		if(count > 3) {

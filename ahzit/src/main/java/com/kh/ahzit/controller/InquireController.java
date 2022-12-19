@@ -33,9 +33,6 @@ import com.kh.ahzit.vo.InquireReplyListSearchVO;
 @Controller
 @RequestMapping("/inquire")
 public class InquireController {
-
-	@Autowired
-	private SqlSession sqlSessin;
 	
 	@Autowired
 	private AttachmentDao attachmentDao;

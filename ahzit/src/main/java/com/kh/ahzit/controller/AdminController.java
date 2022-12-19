@@ -23,9 +23,6 @@ import com.kh.ahzit.repository.AhzitUserDao;
 public class AdminController {
 	
 	@Autowired
-	private SqlSession sqlSessin;
-	
-	@Autowired
 	private AhzitUserDao ahzitUserDao;
 	
 	@Autowired
@@ -45,45 +42,40 @@ public class AdminController {
 	}
 	
 	// 관리자 생성
-		@GetMapping("/join")
-		public String join() {
-			return "admin/join";
-		}
+	@GetMapping("/join")
+	public String join() {
+		return "admin/join";
+	}
 
-		@PostMapping("/join")
-		public String join(@ModelAttribute AhzitUserDto ahzitUserDto) {
-			//관리자 회원 테이블 저장
-			adminDao.insert(ahzitUserDto);
-			return "redirect:/admin/";
-		}
+	@PostMapping("/join")
+	public String join(@ModelAttribute AhzitUserDto ahzitUserDto) {
+		//관리자 회원 테이블 저장
+		adminDao.insert(ahzitUserDto);
+		return "redirect:/admin/";
+	}
 		
-		// 관리자 등급 변경
-		@GetMapping("/change")
-		public String change(Model model,@RequestParam String userId) {
-			model.addAttribute("ahzitUserDto", ahzitUserDao.selectOne(userId));
-			return "admin/change";
-		}
-		
-		@PostMapping("/change")
-		public String edit(@ModelAttribute AhzitUserDto ahzitUserDto, Model model,  RedirectAttributes attr) {
-		//	System.out.println("ahzit = "+ ahzitUserDto);
-			// 관리자 등급 변경 
-			boolean result = 	adminDao.change(ahzitUserDto);
-			
-		//	System.out.println(ahzitUserDto);
-			adminDao.change2(ahzitUserDto);
-			// 관리자 변경시 운영자로 업데이트
-			if(result) {
-				attr.addAttribute("userId",ahzitUserDto.getUserId());
-				return "redirect:/admin/ahzitUser";
-			}	
-			else {
-				throw new TargetNotFoundException("변경실패");
-			}
-			
-		
-
-		}		
+	// 관리자 등급 변경
+	@GetMapping("/change")
+	public String change(Model model,@RequestParam String userId) {
+		model.addAttribute("ahzitUserDto", ahzitUserDao.selectOne(userId));
+		return "admin/change";
+	}
 	
-
+	@PostMapping("/change")
+	public String edit(@ModelAttribute AhzitUserDto ahzitUserDto, Model model,  RedirectAttributes attr) {
+	//	System.out.println("ahzit = "+ ahzitUserDto);
+		// 관리자 등급 변경 
+		boolean result = 	adminDao.change(ahzitUserDto);
+		
+	//	System.out.println(ahzitUserDto);
+		adminDao.change2(ahzitUserDto);
+		// 관리자 변경시 운영자로 업데이트
+		if(result) {
+			attr.addAttribute("userId",ahzitUserDto.getUserId());
+			return "redirect:/admin/ahzitUser";
+		}	
+		else {
+			throw new TargetNotFoundException("변경실패");
+		}
+	}		
 }

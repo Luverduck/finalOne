@@ -774,14 +774,14 @@
 			// 좋아요를 누른 게시글의 이전 좋아요 여부
 			var isLike = $(this).data("islike");
 			axios({
-				url : "http://localhost:8888/rest_board/is_like",
-				method : "post",
-				data : {
+				url : "http://localhost:8888/rest_board/is_like?memberNo=" + memberNo + "&boardNo=" + boardNo + "&boardLike=" + boardLike + "&isLike=" + isLike,
+				method : "get"
+				/* data : {
 					memberNo : memberNo,
 					boardNo : boardNo,
 					boardLike : boardLike,
 					isLike : isLike
-				}
+				} */
 			})
 			.then(function(response){
 				
@@ -934,6 +934,7 @@
 		// 게시글 수정 비동기 처리
         // - 게시글 수정 클릭시 게시글 수정 Modal 열기
         $(document).on("click", ".editor-open-edit", function(e){
+        	console.log($(this));
         	// 게시글 수정 Modal 열기
             $("#modal-edit").modal("show");
         	// - 클릭한 게시글 수정 버튼의 data 값을 Modal의 data 값으로 설정
@@ -967,7 +968,8 @@
     			// 현재 접속중인 소모임 페이지의 소모임 번호
     			var boardAhzitNo = $("#div-member-info").data("ahzitno");
                 // 태그를 포함하여 내용 지정
-                var editorContent = $(".note-editable").html();
+                var editorContent = $(this).parent().prev().children(".note-editor").children(".note-editing-area").children(".note-editable").html();
+                //var editorContent = $(".note-editable").html();
                 // 비동기 통신을 이용한 게시글 수정
                 axios({
     				url : "http://localhost:8888/rest_board/edit",
@@ -980,8 +982,11 @@
     				}
     			})
     			.then(function(response){
+    				console.log(response);
+    				console.log(boardContent);
     				// 새로운 내용으로 교체
     				boardContent.html(editorContent);
+    				console.log(boardContent.html());
     	         	// 게시글 수정 Modal 닫기
     	            $("#modal-edit").modal("hide");
     			});
@@ -1030,14 +1035,14 @@
 			var memberNo = $("#div-member-info").data("memberno");
 			keyword = $(".input-search").val();
 			axios({
-				url : "http://localhost:8888/rest_board/search",
-				method : "post", 
-				data : {
+				url : "http://localhost:8888/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&keyword=" + keyword + "&p=" + p,
+				method : "get"
+				/*data : {
 					ahzitNo : ahzitNo,
 					memberNo : memberNo,
 					keyword : keyword,
 					p : p
-				}
+				}*/
 			})
 			.then(function(response){
 				console.log(response);
@@ -1140,14 +1145,14 @@
 			var memberNo = $("#div-member-info").data("memberno");
 			
 			axios({
-				url : "http://localhost:8888/rest_board/search",
-				method : "post",
-				data : {
+				url : "http://localhost:8888/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&keyword=" + keyword + "&p=" + p,
+				method : "get"
+				/* data : {
 					ahzitNo : ahzitNo,
 					memberNo : memberNo,
 					keyword : keyword,
 					p : p
-				}
+				} */
 			})
 			.then(function(response){
 				
@@ -1239,14 +1244,14 @@
 		keyword = "";
 		p = 1;
 		axios({
-			url : "http://localhost:8888/rest_board/search",
-			method : "post",
-			data : {
+			url : "http://localhost:8888/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&keyword=" + keyword + "&p=" + p,
+			method : "get"
+			/* data : {
 				ahzitNo : ahzitNo,
 				memberNo : memberNo,
 				keyword : keyword,
 				p : p
-			}
+			} */
 		})
 		.then(function(response){
 			pLast = response.data.plast; // 끝 페이지에 도달하면 비동기 조회를 막기 위해 페이지 끝 번호 설정

@@ -8,54 +8,77 @@
 </jsp:include>
 
 <style>
+
 	a {
 		text-decoration-line : none;
 	}
-	 .ahzit-img {
-      width : 120px;
-      height :100px;      
-   }
+	
+	.ahzit-img {
+    	width : 250px;
+    	height :150px;      
+	}
+   
 </style>
-
-<h1>홈 화면</h1>
-
 		
 <c:set var="login" value="${loginId != null}"></c:set>
-<a href = "/ahzit_in/84">소모임 84번 - 개설자 : tester111 개설자 / 회원 : tester2222, tester3333</a>
 
-<div>
-	<c:choose>
-		<c:when test="${login}">
-			<a href="/ahzit/create">아지트 개설</a>
-		</c:when>
-		<c:otherwise>
-		</c:otherwise>
-	</c:choose>
+
+<div class = "container-fluid mt-3">
+	<div class = "row">
+		<div class = "col-8 offset-2">
+			<div class = "row">
+			
+				<%-- 왼쪽 사이드바 --%>
+				<div class = "col-3" style="background-color: #dff9fb;">
+					<h1>왼쪽 사이드바</h1> 
+					
+				</div>
+				
+				<%-- 가운데 내용 --%>
+				<div class = "col-6">
+					<h1>가운데 내용</h1>
+				</div>
+				
+				<%-- 오른쪽 사이드바 --%>
+				<div class = "col" style="background-color: #dff9fb;">
+					<h1>오른쪽 사이드바</h1>
+				</div>
+			
+			</div>
+					
+		</div>
+	</div>
 </div>
 
-<h2>내가 가입한 아지트</h2>
-	<div class="row">
 
-	   	<c:forEach var="myAhzitTopN" items="${myAhzitTopN}">
-	  		<img src = "/attachment/download/ahzit?attachmentNo=${myAhzitTopN.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">  
-			<a href="${pageContext.request.contextPath}/ahzit_in/${myAhzitTopN.ahzitNo}">
-				${myAhzitTopN.ahzitNo}
-				${myAhzitTopN.ahzitName} &nbsp; <%--아지트 이름 --%>
-				${myAhzitTopN.ahzitSort} &nbsp; <%--아지트 종류 --%>
-				${myAhzitTopN.ahzitHead} &nbsp; <%--아지트 멤버 수 --%>
-			</a>
-			<a href="ahzitUser/myAhzit">가입한 소모임 전부보기<i class="fa-solid fa-angles-right"></i></a>
-		</c:forEach>
-	</div>
-	
-	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+
+
+<h2>내가 가입한 아지트</h2>
+<c:forEach var="myAhzitTopN" items="${myAhzitTopN}">
+  		<div class="inner-box float-left">
+  		<img src = "/attachment/download/ahzit?attachmentNo=${myAhzitTopN.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">  
+		<div class="text-box">
+		<a href="${pageContext.request.contextPath}/ahzit_in/${myAhzitTopN.ahzitNo}">
+			<span>${myAhzitTopN.ahzitNo}</span>
+			<span>${myAhzitTopN.ahzitName}</span> <%--아지트 이름 --%>
+			<span>${myAhzitTopN.ahzitSort}</span> <%--아지트 종류 --%>
+			<span>${myAhzitTopN.ahzitHead}</span> <%--아지트 멤버 수 --%>
+		</a>
+		<a href="ahzitUser/myAhzit"><span>가입한 소모임 전부보기</span><i class="fa-solid fa-angles-right"></i></a>
+		</div>
+		</div>
+	</c:forEach>
+
 <script>
-  $(function(){
-    //이미지가 없으면 기본 이미지로 대체
-    $(".ahzit-img").on("error", function(){
-      $(this).attr("src", "/images/bg_default.jpg");
-    });
-  });
+
+	$(function(){
+	  //이미지가 없으면 기본 이미지로 대체
+	  $(".ahzit-img").on("error", function(){
+	    $(this).attr("src", "/images/bg_default.jpg");
+	  });
+	});
+	
+</script>
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

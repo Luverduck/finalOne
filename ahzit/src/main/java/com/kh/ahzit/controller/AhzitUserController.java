@@ -37,9 +37,6 @@ import com.kh.ahzit.vo.MyAhzitVO;
 public class AhzitUserController {
 	
 	@Autowired
-	private SqlSession sqlSession;
-	
-	@Autowired
 	private PasswordEncoder encoder; // 암호화복호화
 	
 	@Autowired
