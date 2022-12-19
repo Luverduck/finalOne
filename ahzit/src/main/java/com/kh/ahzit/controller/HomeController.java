@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -50,7 +49,29 @@ public class HomeController {
  	
  	// 홈 화면의 찾기 버튼 클릭시 카테고리별 소모임 Mapping
  	@RequestMapping("/search") 
- 	public String search() {
+ 	public String search(Model model, @ModelAttribute AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+ 		
+ 		int total = ahzitDao.listCountInquire(ahzitSearchListRequestVO);
+ 		ahzitSearchListRequestVO.setTotal(total);
+ 		List<AhzitSearchListRequestVO> allAhzitList = ahzitDao.selectAhzit(ahzitSearchListRequestVO);
+ 	//	System.out.println(total);
+ 		model.addAttribute("allAhzitList", allAhzitList);
  		return "ahzit/search";
+ 	}
+ 	
+ 	// 
+ 	@RequestMapping("/search_sort") 
+ 	public String searchSort(Model model, @ModelAttribute AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+ 	
+ 		int total = ahzitDao.listSortCountInquire(ahzitSearchListRequestVO);
+ 		ahzitSearchListRequestVO.setTotal(total);
+ 		
+ 		List<AhzitSearchListRequestVO> searchSortAhzit = ahzitDao.searchSortAhzit(ahzitSearchListRequestVO);
+ 		
+ 		//System.out.println("확인@@@@@@");
+ 		
+ 		model.addAttribute("searchSortAhzit", searchSortAhzit);
+ 		System.out.println(searchSortAhzit);
+ 		return "ahzit/search_sort";
  	}
 }

@@ -212,14 +212,14 @@
 				    	<button type="button"  disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
 				    </c:otherwise>
 				    </c:choose>
-			    
 				    <c:if test="${ahzitMemberDto.memberId==sessionScope.loginId}">
 						<a href="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/editMyInfo"><span>내 정보 수정</span></a>
 				 	</c:if>
 				 	<br>
 				 	<%-- 소모임 수정 --%>
 				 	<c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
-						<a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i></i>아지트 수정</a>					
+						<a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i>아지트 수정</a>			
+							<a href="${pageContext.request.contextPath}/ahzit/edit?ahzitNo=${ahzitNo}">아테스트지트 수정</a>							
 					</c:if>
 			    
 				</div>
