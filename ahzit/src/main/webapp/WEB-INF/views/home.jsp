@@ -19,7 +19,7 @@
    		font-family: 'NanumSquareAc', sans-serif ;
    	}  */
    	.ahzit-img {
-   		width:400px;
+   		width:100%;
    		height:300px;
    	}
    /* 이미지 슬라이더 */
@@ -189,7 +189,7 @@
                       멤버${myAhzitTopN.ahzitHead} &nbsp;${myAhzitTopN.ahzitSort}
                   </div>
                   <div class="card-text-2"> <%--아지트 지역 --%>
-                    <i class="fa-solid fa-location-dot"></i>${myAhzitTopN.ahzitRegionHigh} ${myAhzitTopN.ahzitRegionLow} 
+                    <i class="fa-solid fa-location-dot"></i> ${myAhzitTopN.ahzitRegionHigh} ${myAhzitTopN.ahzitRegionLow} 
                   </div>
               </div>
              </div>

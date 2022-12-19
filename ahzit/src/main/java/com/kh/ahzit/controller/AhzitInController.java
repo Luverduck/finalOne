@@ -223,6 +223,10 @@ public class AhzitInController {
 		model.addAttribute("ahzitMemberDto", ahzitMemberDto);
 		//개설한 아지트 정보를 조회
 		model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));
+		
+		//입력받은 아지트번호로 연결되는 첨부파일 조회
+		model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
+		
 		// 편의를 위해 ahzitNo를 model에 추가
 		model.addAttribute("ahzitNo", ahzitNo);
 		// 소모임 회원 관리 페이지(member.jsp)로 이동

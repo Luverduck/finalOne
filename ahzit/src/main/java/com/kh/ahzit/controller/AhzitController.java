@@ -23,6 +23,7 @@ import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AhzitUserDto;
 import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AhzitDao;
+import com.kh.ahzit.repository.AttachmentDao;
 import com.kh.ahzit.service.AhzitService;
 
 @Controller
@@ -31,6 +32,9 @@ public class AhzitController {
 	
 	@Autowired
 	private AhzitDao ahzitDao;
+	
+	@Autowired
+	private AttachmentDao attachmentDao;
 	
 	@Autowired
 	private AhzitService ahzitService;
@@ -95,6 +99,8 @@ public class AhzitController {
     										Model model
     									) {
     	model.addAttribute("ahzitDto", ahzitDao.selectOne(ahzitNo));
+    	//입력받은 아지트번호로 연결되는 첨부파일 조회
+		model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
     	return "ahzit/edit";
     }
     
