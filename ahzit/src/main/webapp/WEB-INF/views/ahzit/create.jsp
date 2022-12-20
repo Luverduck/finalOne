@@ -138,16 +138,12 @@
 
 
 <style>
-* {
-	border: 1px dotted gray;
-	font-family: font-family : 'Gothic A1', sans-serif;
-	
-}
+
 </style>
 
 
 
-<div class="container">
+<div class="container mt-5 mb-5">
 	<form action="create" method="post" enctype="multipart/form-data">
 		<input name="ahzitLeader" value="${sessionScope.loginId}"
 			type="hidden">
@@ -197,21 +193,7 @@
 				
 				</div>
 			</div>
-
-<div class = "row">
-		<p>만들고 싶은 아지트종류를 선택하세요</p>
-		<div>
-			<input type="radio"  name="ahzitSort" id="ex_rd1" value="취미" checked><label for="ex_rd1">취미</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd2" value="스터디"><label for="ex_rd2">스터디</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd3" value="일상"><label  for="ex_rd3">일상</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd4" value="팬클럽"><label  for="ex_rd4">팬클럽</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd5" value="음악"><label  for="ex_rd5">음악</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd6" value="스포츠"><label  for="ex_rd6">스포츠</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd7" value="여행"><label  for="ex_rd7">여행</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd8" value="맛집"><label  for="ex_rd8">맛집</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd9" value="영화"><label  for="ex_rd9">영화</label><br><br>
-
-</div>
+		</div>
 
 		<%--아지트 이름 --%>
 		<div class="row align-items-center mt-5">
@@ -271,14 +253,15 @@
 			<p class="fs-3">아지트 이미지를 등록해주세요</p>
 			
 			<div class="row">
-				<input id="input-file" type="file" name="attachment" class="form-control thumbnail"> 
+				<input id="input-file" type="file" name="attachment" class="form-control thumbnail">
 			</div>
+		
 				
 			<div class="col">	
-				<img class="preview rounded float-end" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br>
+				<img class="preview rounded float-start" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200">
 			</div>
 
-			<div class="row align-items-end img-btns">
+			<div class="col align-self-end img-btns">
 				<label class="col input-file-upload img-lab" for="input-file" type="button">사진변경</label>
 				<label class="col delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</label>
 			</div>
@@ -287,7 +270,7 @@
 
 		<div class="row justify-content-center mt-5">
 			<button type="submit" class="col btn-edit-cancel btn btn-outline-secondary rounded">취소</button>
-			<button type="submit" class="col btn btn-outline-warning rounded">개설하기</button>
+			<button type="submit" class="col btn rounded" style="background-color : #E6E6E6; color:#3E4684;">개설하기</button>
 		</div>
 </div>
 </form>
