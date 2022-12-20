@@ -223,8 +223,7 @@
 				 	<br>
 				 	<%-- 소모임 수정 --%>
 				 	<c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
-						<a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i>아지트 수정</a>			
-							<a href="${pageContext.request.contextPath}/ahzit/edit?ahzitNo=${ahzitNo}">아테스트지트 수정</a>							
+						<a href="${pageContext.request.contextPath}/ahzit/edit?ahzitNo=${ahzitNo}"><i class="fa-solid fa-gear"></i>아지트 수정</a>						
 					</c:if>
 			    
 				</div>
