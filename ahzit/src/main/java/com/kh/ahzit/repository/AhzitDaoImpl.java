@@ -209,6 +209,7 @@ public class AhzitDaoImpl implements AhzitDao {
 		param.put("memberAhzitNo", String.valueOf(ahzitNo));
 		param.put("keyword", keyword);
 		return sqlSession.selectOne("ahzit.countsearchMember", param);
+	}
 
 	@Override
 	public int listCountInquire(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
