@@ -35,7 +35,7 @@
 						<c:if test="${attachmentList.isEmpty()}"> <%--미설정시 기본 프로필 --%>
 							 <img src = "/images/bg_default.jpg" class="ahzit-img">
 						</c:if>
-						<c:forEach var = "list" items = "${attachmentList}">  <%--설정한 프로필--%>
+						<c:forEach var = "list" items = "${InAttachmentList}">  <%--설정한 프로필--%>
 			              <img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img"  > 					
 			             </c:forEach>
 						아지트 이름 : ${ahzitVO.getAhzitName()} <br>

@@ -111,17 +111,17 @@
 	
 	<div class = "row mt-3">
 		<div class = "col-2 offset-2 d-flex justify-content-center">
-			<a href = "/ahzit_in/84" class = "p-2">게시글</a>
+			<a href = "/ahzit_in/${ahzitNo}" class = "p-2">게시글</a>
 			<!-- <a href = "/ahzit_in/${ahzitDto.ahzitNo}">게시글</a> -->
 		</div>
 		<div class = "col-2 d-flex justify-content-center">
-			<a href = "/ahzit_in/84/calendar" class = "p-2">일정</a>
+			<a href = "/ahzit_in/${ahzitNo}/calendar" class = "p-2">일정</a>
 		</div>
 		<div class = "col-2 d-flex justify-content-center">
-			<a href = "/ahzit_in/84/attachment" class = "p-2">첨부</a>
+			<a href = "/ahzit_in/${ahzitNo}/attachment" class = "p-2">첨부</a>
 		</div>
 		<div class = "col-2 d-flex justify-content-center">
-			<a href = "/ahzit_in/84/member" class = "p-2">멤버</a>
+			<a href = "/ahzit_in/${ahzitNo}/member" class = "p-2">멤버</a>
 		</div>
 	</div>
 	

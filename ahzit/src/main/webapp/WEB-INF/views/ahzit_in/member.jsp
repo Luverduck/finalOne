@@ -23,10 +23,12 @@
 		border-radius : 15px;
 	}
 	
-	.div-ahzit-img {
+	.img-ahzit {
 		width : 100px;
-		height : 200px;
+		height : 100px;
 	}
+	
+
 	
 </style>
 
@@ -44,10 +46,10 @@
 						<div class = "div-ahzit-info shadow p-3" style="background-color: white;">
 							<div class = "d-flex div-ahzit-img justify-content-center align-items-center">
 							<c:if test="${attachmentList.isEmpty()}">
-						    	<img src = "/images/bg_default.jpg" class="flex-fill" style="width: 100px; height:100px;">
+						    	<img src = "/images/bg_default.jpg" class="flex-fill img-ahzit">
 					    	</c:if>
 				      		<c:forEach var = "list" items = "${attachmentList}"> <!-- 설정한 프로필 -->
-				        		<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="flex-fill">  					
+				        		<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="flex-fill img-ahzit">  					
 				      		</c:forEach>
 							</div>
 						
