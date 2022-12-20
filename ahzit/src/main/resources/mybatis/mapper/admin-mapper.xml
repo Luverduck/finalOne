@@ -13,16 +13,34 @@
 	 </insert>
 	
 	 <!-- 회원 전체 조회(admin) -->
-	 <select id="list" resultType="AhzitUserDto">
-		select * from ahzit_user order by user_grade asc
+	 <select id="allList" parameterType="map" resultType="AhzitUserDto">
+		select * from (select rownum rn, TMP.* from (select * from ahzit_user order by user_grade asc
+		)TMP)where rn between #{startRow} and #{endRow}
 	</select>
+	
+	<!-- 회원 검색 조회 -->
+	<select id="searchList" parameterType="map" resultType="AhzitUserDto">
+	select * from (select tmp.*,  rownum rn from (select * from ahzit_user where instr(${type}, #{keyword}) > 0
+	order by user_grade asc)tmp) where rn between #{startRow} and #{endRow}
+	</select>	
+	
+	<!--검색 조회시 회원 수 -->
+	<select id = "searchListCount" resultType = "int">
+		select count(*) from ahzit_user where instr(${type}, #{keyword}) > 0
+	</select>
+	
+	<!-- 전체 회원 수 -->
+	<select id="allListCount" resultType="int">
+		select count(*) from ahzit_user
+	</select>
+	
 	
 	<!--관리자 등급 변경 -->
 	<update id="change" parameterType ="AhzitUserDto">
 		update ahzit_user set user_grade = #{userGrade} where user_id = #{userId}
 	</update>
 	
-		<!--관리자 등급 변경 -->
+	<!--관리자 등급 변경 -->
 	<update id="changeGrade" parameterType ="AhzitUserDto">
 		update ahzit_user set user_grade = '운영자' where user_id != #{userId} and user_grade = '관리자'
 	</update>

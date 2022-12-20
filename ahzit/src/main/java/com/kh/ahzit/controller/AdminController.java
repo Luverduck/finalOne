@@ -2,7 +2,6 @@ package com.kh.ahzit.controller;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +16,7 @@ import com.kh.ahzit.entity.AhzitUserDto;
 import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AdminDao;
 import com.kh.ahzit.repository.AhzitUserDao;
+import com.kh.ahzit.vo.AdminAhzitUserListSearchVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -35,8 +35,10 @@ public class AdminController {
 	
 	// 회원 조회
 	@GetMapping("/ahzitUser")
-	public String ahzitUserList(Model model) {
-		List<AhzitUserDto> ahzitUser = adminDao.selectList();
+	public String ahzitUserList(Model model, @ModelAttribute AdminAhzitUserListSearchVO adminAhzitUserListSearchVO) {
+		List<AhzitUserDto> ahzitUser = adminDao.selectList(adminAhzitUserListSearchVO);
+		int count = adminDao.count(adminAhzitUserListSearchVO);
+		adminAhzitUserListSearchVO.setCount(count);
 		model.addAttribute("ahzitUser", ahzitUser);
 		return "admin/ahzitUser";
 	}
