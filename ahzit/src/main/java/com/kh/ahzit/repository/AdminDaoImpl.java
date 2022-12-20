@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.vo.AdminAhzitListSearchVO;
 import com.kh.ahzit.vo.AdminAhzitUserListSearchVO;
 
 @Repository
@@ -93,6 +95,63 @@ public class AdminDaoImpl implements AdminDao{
 		@Override
 		public int listCount(AdminAhzitUserListSearchVO adminAhzitUserListSearchVO) {
 			return sqlSession.selectOne("admin.allListCount", adminAhzitUserListSearchVO);
+		}
+
+		@Override
+		public List<AhzitDto> ahzitSelectList(AdminAhzitListSearchVO adminAhzitListSearchVO) {
+			if (adminAhzitListSearchVO.isSearch()) {
+				return ahzitSearchList(adminAhzitListSearchVO);
+			} else {
+				return ahzitAllList(adminAhzitListSearchVO);
+			}
+		}
+
+		@Override
+		public List<AhzitDto> ahzitAllList(AdminAhzitListSearchVO adminAhzitListSearchVO) {
+			Map<String, String> param = new HashMap<>();
+
+			param.put("startRow", String.valueOf(adminAhzitListSearchVO.startRow()));
+			param.put("endRow", String.valueOf(adminAhzitListSearchVO.endRow()));
+			return sqlSession.selectList("admin.ahzitAllList", param);
+		}
+
+		@Override
+		public List<AhzitDto> ahzitSearchList(AdminAhzitListSearchVO adminAhzitListSearchVO) {
+			Map<String, String> param = new HashMap<>();
+			
+			param.put("type", adminAhzitListSearchVO.getType());
+			param.put("keyword", adminAhzitListSearchVO.getKeyword());
+			param.put("startRow", String.valueOf(adminAhzitListSearchVO.startRow()));
+			param.put("endRow", String.valueOf(adminAhzitListSearchVO.endRow()));
+			return sqlSession.selectList("admin.ahzitSearchList", param);
+		}
+
+		@Override
+		public int ahzitCount(AdminAhzitListSearchVO adminAhzitListSearchVO) {
+			if (adminAhzitListSearchVO.isSearch()) {
+				return ahzitSearchCount(adminAhzitListSearchVO);
+			} else {
+				return ahzitListCount(adminAhzitListSearchVO);
+			}
+		}
+
+		@Override
+		public int ahzitSearchCount(AdminAhzitListSearchVO adminAhzitListSearchVO) {
+			Map<String, String> param = new HashMap<>();
+			
+			param.put("type", adminAhzitListSearchVO.getType());
+			param.put("keyword", adminAhzitListSearchVO.getKeyword());
+			return sqlSession.selectOne("admin.ahzitSearchListCount", param);
+		}
+
+		@Override
+		public int ahzitListCount(AdminAhzitListSearchVO adminAhzitListSearchVO) {
+			return sqlSession.selectOne("admin.ahzitAllListCount", adminAhzitListSearchVO);
+		}
+
+		@Override
+		public AhzitDto selectOne(int ahzitNo) {
+			return sqlSession.selectOne("ahzit.one", ahzitNo);
 		}
 
 		

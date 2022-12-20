@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitUserDto;
 import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AdminDao;
 import com.kh.ahzit.repository.AhzitUserDao;
+import com.kh.ahzit.vo.AdminAhzitListSearchVO;
 import com.kh.ahzit.vo.AdminAhzitUserListSearchVO;
 
 @Controller
@@ -79,5 +81,21 @@ public class AdminController {
 		else {
 			throw new TargetNotFoundException("변경실패");
 		}
-	}		
+	}
+	
+	// 아지트(소모임) 조회
+	@GetMapping("/ahzit")
+	public String ahzitList(Model model, @ModelAttribute AdminAhzitListSearchVO adminAhzitListSearchVO) {
+		List<AhzitDto> ahzit = adminDao.ahzitSelectList(adminAhzitListSearchVO);
+		int count = adminDao.ahzitCount(adminAhzitListSearchVO);
+		adminAhzitListSearchVO.setCount(count);
+		model.addAttribute("ahzit", ahzit);
+		return "admin/ahzit";
+	}
+	// 아지트 선택 조회	
+	@GetMapping("/ahzitSelect")
+	public String detail(@RequestParam int ahzitNo, Model model) {
+		model.addAttribute("ahzitSelect", adminDao.selectOne(ahzitNo));
+		return "admin/ahzitSelect";
+	}
 }

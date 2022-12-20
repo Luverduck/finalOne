@@ -22,6 +22,9 @@
 			<a href = "${pageContext.request.contextPath}/admin/" class = "p-2 btn btn-outline-warning w-100" role=button>관리자 홈</a>
 		</div>
 		<div class = "col-2 d-flex justify-content-center">
+			<a href = "${pageContext.request.contextPath}/admin/ahzit" class = "p-2 btn btn-outline-warning w-100" role=button>소모임 관리</a>
+		</div>
+		<div class = "col-2 d-flex justify-content-center">
 			<a href = "${pageContext.request.contextPath}/admin/change?userId=${loginId}" class = "p-2 btn btn-outline-warning w-100" role=button>관리자 수정</a>
 		</div>
 	</div>

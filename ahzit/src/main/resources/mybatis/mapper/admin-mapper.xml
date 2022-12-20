@@ -34,7 +34,6 @@
 		select count(*) from ahzit_user
 	</select>
 	
-	
 	<!--관리자 등급 변경 -->
 	<update id="change" parameterType ="AhzitUserDto">
 		update ahzit_user set user_grade = #{userGrade} where user_id = #{userId}
@@ -44,6 +43,28 @@
 	<update id="changeGrade" parameterType ="AhzitUserDto">
 		update ahzit_user set user_grade = '운영자' where user_id != #{userId} and user_grade = '관리자'
 	</update>
+	
+	<!-- 소모임 전체 조회(admin) -->
+	 <select id="ahzitAllList" parameterType="map" resultType="AhzitDto">
+		select * from (select rownum rn, TMP.* from (select * from ahzit order by ahzit_no asc
+		)TMP)where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<!-- 소모임 검색 조회 -->
+	<select id="ahzitSearchList" parameterType="map" resultType="AhzitDto">
+	select * from (select tmp.*,  rownum rn from (select * from ahzit where instr(${type}, #{keyword}) > 0
+	order by ahzit_no asc)tmp) where rn between #{startRow} and #{endRow}
+	</select>	
+	
+	<!--검색 조회시 소모임 수 -->
+	<select id = "ahzitSearchListCount" resultType = "int">
+		select count(*) from ahzit where instr(${type}, #{keyword}) > 0
+	</select>
+	
+	<!-- 전체 소모임 수 -->
+	<select id="ahzitAllListCount" resultType="int">
+		select count(*) from ahzit
+	</select>
 	
 
 </mapper>
