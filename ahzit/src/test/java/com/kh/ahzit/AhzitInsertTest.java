@@ -29,7 +29,7 @@ public class AhzitInsertTest {
 												.ahzitInfo("테스트용아지트소개")
 												.ahzitRegionHigh("인천광역시")
 												.ahzitRegionLow("부평구")
-												//.ahzitIsPublic("Y")
+												.ahzitIspublic("Y")
 											.build());
 	}
 
