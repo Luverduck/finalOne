@@ -89,9 +89,12 @@
 				<div class = "col-3" style="background-color: #dff9fb;">
 				
 					<div class="row" style="overflow:auto; height:580px;">
+						
 						<c:forEach var="scheduleList" items="${scheduleList}">
-							
-							<span>${scheduleList.scheduleTitle}, ${scheduleList.scheduleStart}</span> <br>
+						<div class="row">
+							일정 제목: ${scheduleList.scheduleTitle} <br>
+							시작 시간: ${scheduleList.scheduleStart} <br>
+						</div>
 						</c:forEach>
 					
 					</div>
