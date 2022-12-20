@@ -185,9 +185,6 @@ function ahzitInfo1(){
         });
     
     $(function() {
-        //선택된 챌린지 번호를 input type=hidden에 추가
-    //    var ahzitNo = parseInt($(this).find("option:selected").attr("value"));
-        $("input[name=ahzitNo]").val(ahzitNo);
         
         //인증샷이 없으면 기본 이미지 노출
         $(".preview").on("error", function(){

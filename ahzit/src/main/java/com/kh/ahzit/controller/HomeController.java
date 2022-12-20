@@ -51,7 +51,6 @@ public class HomeController {
  	// 홈 화면의 찾기 버튼 클릭시 카테고리별 소모임 Mapping
  	@RequestMapping("/search") 
  	public String search(Model model, @ModelAttribute AhzitSearchListRequestVO ahzitSearchListRequestVO) {
- 		
  		int total = ahzitDao.listCountInquire(ahzitSearchListRequestVO);
  		ahzitSearchListRequestVO.setTotal(total);
  		List<AhzitSearchListRequestVO> allAhzitList = ahzitDao.selectAhzit(ahzitSearchListRequestVO);

@@ -373,8 +373,12 @@ public class AhzitUserController {
 			String loginId = (String) session.getAttribute(SessionConstant.ID);
 		
 			List<MyAhzitVO> myAhzit = ahzitUserDao.myAhzit(loginId);
-	
-			model.addAttribute("myAhzit", myAhzit);
+			
+			if(myAhzit!=null) {
+				model.addAttribute("myAhzit", myAhzit);
+			}
+			
+		
 			return "ahzitUser/myAhzit";
 		}
 }
