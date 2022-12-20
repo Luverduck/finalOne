@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ahzit.entity.AhzitUserDto;
-import com.kh.ahzit.entity.AhzitUserInterestDto;
+import com.kh.ahzit.vo.MyAhzitVO;
 
 @Repository
 public class AhzitUserDaoImpl implements AhzitUserDao{
@@ -89,4 +89,28 @@ public class AhzitUserDaoImpl implements AhzitUserDao{
 	public boolean checkPwSuccess(AhzitUserDto ahzitUserDto) {
 		return sqlSession.update("ahzitUser.checkPwSuccess", ahzitUserDto) > 0;
 	}
+
+	// 가입한 아지트 조회
+	@Override
+	public List<MyAhzitVO> myAhzit(String userId) {
+		return sqlSession.selectList("ahzitUser.myAhzit", userId);
+	}
+	
+	// 가입한 아지트 조회(메인-9개)
+	@Override
+	public List<MyAhzitVO> myAhzitTopN(String userId) {
+		return sqlSession.selectList("ahzitUser.myAhzitTopN", userId);
+	}
+	
+	// 회원 전체 조회
+	@Override
+	public List<AhzitUserDto> selectList() {
+		return sqlSession.selectList("ahzitUser.list");
+	}
+
+	@Override
+	public boolean changePw1(AhzitUserDto ahzitUserDto1) {
+		return sqlSession.update("ahzitUser.changePw", ahzitUserDto1) > 0;
+	}
+
 }

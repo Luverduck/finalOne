@@ -5,19 +5,39 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="회원 가입" name="title"/>
 </jsp:include>
+
 <style>
-.NNNNN{
-        border: 1px;
-         color: red;
-    }
-   .btn-m{
-   padding: 0.26rem 0.75rem;
-   }
+
+	.NNNNN {
+	    border: 1px;
+		color: red;
+	}
+	
+	.btn-m {
+		padding: 0.26rem 0.75rem;
+	}
+	
+	 span img {
+		width: 130px;
+		height: 130px;
+		border-radius: 50%; 
+	}
+	
+	[type=checkbox] {
+		display:none !important;
+	}
+		
+	.interest-selected {
+		border : 5px solid blue;
+	}
+	
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
  <script>
         $(function(){
+        
+        	
         	$("[name=userId]").next().next().next().next().hide();
         	
             //상태 객체
@@ -226,7 +246,6 @@
 	});
 
 	  function submitChk() {
-		    
 		    var userInterestSort = [];
 		    $("input[name='userInterestSort']:checked").each(function(i) {
 		    	userInterestSort.push($(this).val());
@@ -254,7 +273,6 @@
 		    
 		    }) 
 		  }
-	
 </script>
 
 
@@ -347,7 +365,7 @@
 							<i class="fa-solid fa-asterisk text-danger"></i>
 							</label>
 							
-							<button class="send-btn btn btn-warning rounded text-light btn-m" disabled="" type="button" >인증번호 발송</button>
+							<button class="send-btn btn btn-warning rounded text-light btn-m" disabled type="button" >인증번호 발송</button>
 							<div class="valid-feedback">올바른 이메일 형식입니다.</div>
 							<div class="invalid-feedback">이메일 형식을 확인해주세요</div>		
 						</div>
@@ -362,53 +380,142 @@
 		</div>
             
 		
-	 <div class="row mt-4">
-		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
-			<div class="p-4 text-dark bg-Light rounded">
-				<h3 class="text-center">관심사</h3>
-			</div>	
+	 <div class="container mt-4">
+		<div class="col-md-8 offset-md-2 mb-5 mt-3">
+			<div class="text-center mb-3">
+				<i class="fa-solid fa-tag"></i>&nbsp; 
+				관심사 3가지를 설정하세요!
+			</div>
+
+			<div class="row row-cols-1 row-cols-md-3 g-10 my-2 text-center">
+				<div class="col">
+					<div class="my-2 myinterest">
+						<label for="sort1">
+               				<input  type="checkbox" name="userInterestSort" value="취미" id ="sort1" >
+							<span>
+							<img src="/images/sns.jpg">
+							</span>
+						</label>
+					</div>
+					<strong>
+					취미
+					</strong>
+				</div>
+				
+				<div class="col">
+					<div class="my-2">
+						<label for="sort2">
+                				<input  type="checkbox" name="userInterestSort" value="스터디" id ="sort2" >
+								<span>
+								<img src="/images/sns.jpg" class="image image-hover">
+								</span>
+						</label>
+					</div>
+					<strong>
+					스터디
+					</strong>
+				</div>
+			
+				<div class="col">
+					<div class="my-2">
+						<label for="sort3">
+                				<input  type="checkbox" name="userInterestSort" value="일상"  id ="sort3" style="display: none;">
+								<span>
+								<img src="/images/sns.jpg">
+								</span>
+						</label>
+					</div>
+					<strong>
+					일상
+					</strong>
+				</div>
 		
-	            <input class=" form-check-input" type="checkbox" name="userInterestSort" value="취미" id ="sort1" >
-	            	<label class="form-check-label" for="sort1">
-    				취미
-  					</label>
-	        
-	            <input class="form-check-input"  type="checkbox" name="userInterestSort" value="스터디" id ="sort2" >
-					<label class="form-check-label" for="sort2">
-    				스터디
-  					</label>
-
-	            <input  class="form-check-input"   type="checkbox" name="userInterestSort" value="일상"  id ="sort3" >
-					<label class="form-check-label" for="sort3">
-	    			일상
-	  				</label>
-
-	            <input class="form-check-input"   type="checkbox" name="userInterestSort" value="팬클럽" id ="sort4" >
-					<label class="form-check-label" for="sort4">
-    				팬클럽
-  					</label>
-
-	            <input class="form-check-input"   type="checkbox" name="userInterestSort" value="음악" id ="sort5" >
-					<label class="form-check-label" for="sort5">
-    				음악
-  					</label>
-
-	            <input class="form-check-input"  type="checkbox" name="userInterestSort" value="스포츠" id ="sort6" >
-					<label class="form-check-label" for="sort6">
-    				스포츠
-  					</label>
+				<div class="col">
+					<div class="my-2">
+						<label for="sort4">
+                				<input type="checkbox" name="userInterestSort" value="팬클럽" id ="sort4"  >
+								<span>
+								<img src="/images/sns.jpg">
+								</span>
+						</label>
+					</div>
+					<strong>
+					팬클럽
+					</strong>
+				</div>
+			
+				<div class="col">
+					<div class="my-2">
+						<label for="sort5">
+                				<input type="checkbox" name="userInterestSort" value="음악" id ="sort5"  >
+								<span>
+								<img src="/images/sns.jpg">
+								</span>
+						</label>
+					</div>
+					<strong>
+					음악
+					</strong>
+				</div>
 	
-	            <input class="form-check-input"  type="checkbox" name="userInterestSort" value="여행" id ="sort7" >
-     				<label class="form-check-label" for="sort7">
-    				여행
-  					</label>
-	  
-	            <input class="form-check-input"   type="checkbox" name="userInterestSort" value="맛집" id ="sort8" >
-					<label class="form-check-label" for="sort8">
-    				맛집
-  					</label>
-	        </div>
-	    </div>
+				<div class="col">
+					<div class="my-2">
+						<label for="sort6">
+                				<input type="checkbox" name="userInterestSort" value="스포츠" id ="sort6"  >
+								<span>
+								<img src="/images/sns.jpg">
+								</span>
+						</label>
+					</div>
+					<strong>
+					스포츠
+					</strong>
+				</div>
+	
+				<div class="col">
+					<div class="my-2">
+						<label for="sort7">
+                				<input type="checkbox" name="userInterestSort" value="여행" id ="sort7"  >
+								<span>
+								<img src="/images/sns.jpg">
+								</span>
+						</label>
+					</div>
+					<strong>
+					여행
+					</strong>
+				</div>
+			
+				<div class="col">
+					<div class="my-2">
+						<label for="sort8">
+                				<input type="checkbox" name="userInterestSort" value="맛집" id ="sort8"  >
+								<span>
+								<img src="/images/sns.jpg">
+								</span>
+						</label>
+					</div>
+					<strong>
+					맛집
+					</strong>
+				</div>
+				
+				<div class="col">
+					<div class="my-2">
+						<label for="sort9">
+                				<input type="checkbox" name="userInterestSort" value="영화" id ="sort9"  >
+								<span>
+								<img src="/images/sns.jpg">
+								</span>
+						</label>
+					</div>
+					<strong>
+					영화
+					</strong>
+				</div>
+			</div>
+		</div>
+	</div>
 	    
 	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
@@ -422,14 +529,27 @@
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 <script>
-$(document).ready(function(){
-	$("input[type='checkbox']").on("click", function(){
-		let count = $("input:checked[type='checkbox']").length;
-		if(count >3){
-			$(this).prop("checked", false);
+
+$(function(){
+	
+	var thisBtnCheck;
+	
+	$("[name=userInterestSort]").click(function(){
+		thisBtnCheck = $(this);
+			
+		var target = $(this).next().children();
+		var count = $("input:checked[type='checkbox']").length;
+		
+		if(count > 3) {
 			alert("관심사는 3개까지만 선택할 수 있습니다")
+			return;
+		}
+		
+		if($(this).is(":checked")) {
+			target.addClass("interest-selected");
+		} else {
+			target.removeClass("interest-selected");
 		}
 	});
-});
-
+});	
 </script>

@@ -30,13 +30,11 @@ import com.kh.ahzit.entity.CertificationDto;
 import com.kh.ahzit.repository.AhzitUserDao;
 import com.kh.ahzit.repository.AhzitUserInterestDao;
 import com.kh.ahzit.repository.CertificationDao;
+import com.kh.ahzit.vo.MyAhzitVO;
 
 @Controller
 @RequestMapping("/ahzitUser")
 public class AhzitUserController {
-	
-	@Autowired
-	private SqlSession sqlSession;
 	
 	@Autowired
 	private PasswordEncoder encoder; // 암호화복호화
@@ -123,6 +121,7 @@ public class AhzitUserController {
 	public String logout(HttpSession session) {
 		session.removeAttribute(SessionConstant.ID);
 		session.removeAttribute(SessionConstant.GRADE);
+		
 		return "redirect:login";
 	}
 	
@@ -366,5 +365,16 @@ public class AhzitUserController {
 		@GetMapping("/checkPwdSuccess")
 		public String checkPwdSuccess() {
 			return "ahzitUser/checkPwdSuccess";
+		}
+		
+		// 내가 가입한 아지트
+		@GetMapping("/myAhzit")
+		public String myAhzit(Model model, HttpSession session, @ModelAttribute MyAhzitVO myAhzitVO) {
+			String loginId = (String) session.getAttribute(SessionConstant.ID);
+		
+			List<MyAhzitVO> myAhzit = ahzitUserDao.myAhzit(loginId);
+	
+			model.addAttribute("myAhzit", myAhzit);
+			return "ahzitUser/myAhzit";
 		}
 }

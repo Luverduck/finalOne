@@ -9,11 +9,14 @@
 </jsp:include>
 
 
+	         
 <h1>소모임 정보 수정</h1>
 <%-- 소모임 수정(소모임이름, 소개, 최대멤버수, 공개여부, 프로필사진)--%>
 <div class="container">
 <form action="edit" method="post" enctype = "multipart/form-data">
 
+	<input type="text"  name = "ahzitNo" value="${ahzitDto.ahzitNo}">
+	
 	<div>
 	 	소모임리더 : <p>${ahzitDto.ahzitLeader}</p>
 	</div>
@@ -21,6 +24,8 @@
 	<div>
 	 소모임 종류: <p>${ahzitDto.ahzitSort}</p>
 	</div>
+	
+
 	
 	<%--아지트 이름 --%>
 		<div class="row">
@@ -71,19 +76,24 @@
 
 
 			<p>아지트 이미지를 등록해주세요</p>
-			  <div>
-	            <input id="input-file" type="file" class="thumbnail"  name="attachment" accept="jpg, png" class="thumbnail">
-	            <img class="preview" src="/images/bg_default.jpg" width="250px" height="200px">
-	          </div>
+	            <input type="file"  name="ahzitAttachment"  id="input-file" class="thumbnail">
+	            <c:choose>
+      				<c:when test="${ahzitAttachmentList.isEmpty()}"><!-- 프로필 이미지를 등록하지 않았을 경우 -->
+      					<img class="preview" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br>
+      				</c:when>
+      			<c:otherwise><!-- 프로필 이미지를 등록했을 경우 -->
+      				<c:forEach var = "ahzitAttachmentList" items = "${memberAttachmentList}">  <%--설정한 프로필 --%>
+			            <img class="preview" src = "/attachment/download/ahzitNo?attachmentNo=${ahzitAttachmentList.attachmentNo}" width="200" height="200"> 					
+			          </c:forEach>
+      			</c:otherwise>
+      			</c:choose>
+	           <!--  <img class="preview" src="/images/bg_default.jpg" width="250px" height="200px"> -->
+	      
 	          <div>
 	            <label class="input-file-upload img-lab" for="input-file">사진변경</label>     
 	          </div>
 		</div>
-		
-	<div>
-		<input type="hidden" name="ahzitNo" value="${ahzitDto.ahzitNo}">
-	</div>
-		
+	
 		<div>
 			<a type="button"  class="btn-edit-cancel" >취소</a>
             <button type="submit" >수정하기</button>
@@ -176,8 +186,8 @@ function ahzitInfo1(){
     
     $(function() {
         //선택된 챌린지 번호를 input type=hidden에 추가
-        var ahzitNo = parseInt($(this).find("option:selected").attr("value"));
-        $("input[name=chalNo]").val(chalNo);
+    //    var ahzitNo = parseInt($(this).find("option:selected").attr("value"));
+        $("input[name=ahzitNo]").val(ahzitNo);
         
         //인증샷이 없으면 기본 이미지 노출
         $(".preview").on("error", function(){
@@ -198,8 +208,8 @@ function ahzitInfo1(){
         $(".btn-delete-file").click(function(){
            $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.jpg");
            $.ajax({
-                //인증샷 삭제 메소드 호출
-                url : "${pageContext.request.contextPath}/rest/chal/confirm_img/delete?confirmNo=${param.confirmNo}",
+                //삭제 메소드 호출
+                url : "/attachment/download/ahzitMember?attachmentNo=${memberAttachmentList.attachmentNo}",
                 method : "get",
                 dataType : "json",
                 async : false,

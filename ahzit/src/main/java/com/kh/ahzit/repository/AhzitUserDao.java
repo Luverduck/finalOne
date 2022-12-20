@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.ahzit.entity.AhzitUserDto;
-import com.kh.ahzit.entity.AhzitUserInterestDto;
+import com.kh.ahzit.vo.MyAhzitVO;
 
 public interface AhzitUserDao {
 
@@ -17,6 +17,8 @@ public interface AhzitUserDao {
 	boolean update(AhzitUserDto ahzitUserDto); // 회원 정보 수정
 
 	boolean changePw(AhzitUserDto ahzitUserDto); // 마이페이지 비밀번호 변경
+	
+	boolean changePw1(AhzitUserDto ahzitUserDto1); // 마이페이지 비밀번호 변경
 
 	boolean delete(String userId); // 회원 탈퇴
 
@@ -28,5 +30,10 @@ public interface AhzitUserDao {
 
 	boolean checkPwSuccess(AhzitUserDto ahzitUserDto); // 비밀번호 변경
 	
+	List<MyAhzitVO> myAhzit(String userId); // 가입한 아지트 조회
 	
+	List<MyAhzitVO> myAhzitTopN(String userId); //가입한 아지트 조회(메인-9개)
+	
+	List<AhzitUserDto> selectList();
+
 }

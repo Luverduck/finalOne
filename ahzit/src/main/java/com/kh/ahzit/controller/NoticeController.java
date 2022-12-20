@@ -1,8 +1,12 @@
 package com.kh.ahzit.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +17,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ahzit.constant.SessionConstant;
+import com.kh.ahzit.entity.AttachmentDto;
 import com.kh.ahzit.entity.NoticeDto;
 import com.kh.ahzit.error.TargetNotFoundException;
+import com.kh.ahzit.repository.AttachmentDao;
 import com.kh.ahzit.repository.NoticeDao;
 import com.kh.ahzit.vo.NoticeListSearchVO;
 
@@ -27,6 +34,16 @@ public class NoticeController {
 	
 	@Autowired
 	private NoticeDao noticeDao;
+	
+	@Autowired
+	private AttachmentDao attachmentDao;
+	
+	private final File directory = new File(System.getProperty("user.home")+"/upload/main");
+
+	@PostConstruct//최초 실행시 딱 한 번만 실행되는 메소드
+	public void prepare() {
+		directory.mkdirs();
+	}
 	
 	@GetMapping("/list")
 	public String list(Model model,
@@ -65,14 +82,33 @@ public class NoticeController {
 		}
 		session.setAttribute("history", history);
 		
+//		(+추가) 게시글에 대한 첨부파일을 조회하여 첨부
+		model.addAttribute("attachmentList", 
+				attachmentDao.selectNoticeAttachmentList(noticeNo));
+		
+		
 		return "notice/detail";
 	}
 	
 	@GetMapping("/delete")
 	public String delete(@RequestParam int noticeNo) {
+		
+		//삭제가 이루어지기 전에 삭제될 게시글의 첨부파일 정보 조회
+		List<AttachmentDto> attachmentList = attachmentDao.selectNoticeAttachmentList(noticeNo);
+		
+		//삭제 - 자동으로 board_attachemnt의 데이터가 연쇄 삭제됨
 		boolean result = noticeDao.delete(noticeNo);
 		
-		if(result) {
+		if(result) { //성공
+			for(AttachmentDto attachmentDto : attachmentList) {
+				//첨부파일(attachment) 테이블 삭제
+				attachmentDao.deleteAttachment(attachmentDto.getAttachmentNo());
+				
+				//실제 파일 삭제
+				String filename = String.valueOf(attachmentDto.getAttachmentNo());
+				File target = new File(directory, filename);
+				target.delete();
+			}
 			return "redirect:list";
 		}
 		else {
@@ -116,7 +152,8 @@ public class NoticeController {
 	
 	@PostMapping("/write")
 	public String write(@ModelAttribute NoticeDto noticeDto,
-			HttpSession session, RedirectAttributes attr){
+			@RequestParam List<MultipartFile> attachment,
+			HttpSession session, RedirectAttributes attr) throws IllegalStateException, IOException{
 		//session에 있는 회원 아이디를 작성자로 추가한 뒤 등록
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		noticeDto.setNoticeWriter(memberId);
@@ -129,8 +166,35 @@ public class NoticeController {
 		
 		//번호 생성 후 등록
 		int noticeNo = noticeDao.insert2(noticeDto);
-		attr.addAttribute("noticeNo", noticeNo);
 		
+		//첨부파일
+		for(MultipartFile file : attachment) {
+			if(!file.isEmpty()) {
+				System.out.println("첨부파일 발견");
+
+				//DB 등록
+				int attachmentNo = attachmentDao.nextAttachmentNo();
+				attachmentDao.insertAttachment(AttachmentDto.builder()
+									.attachmentNo(attachmentNo)
+									.attachmentName(file.getOriginalFilename())
+									.attachmentType(file.getContentType())
+									.attachmentSize(file.getSize())
+								.build());
+				
+				
+				//파일 저장
+				File target = new File(directory, String.valueOf(attachmentNo));
+				//System.out.println(target.getAbsolutePath());
+				file.transferTo(target);
+
+				//+ 연결 테이블에 연결 정보를 저장(게시글번호, 첨부파일번호)
+				noticeDao.connectAttachment(noticeNo, attachmentNo);
+				
+				//+@
+			}
+		}
+		
+		attr.addAttribute("noticeNo", noticeNo);
 		return "redirect:detail";
 	}
 

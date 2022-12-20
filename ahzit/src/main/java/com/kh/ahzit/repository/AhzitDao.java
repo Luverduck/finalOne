@@ -5,6 +5,10 @@ import java.util.List;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.vo.AhzitMemberInfoRequestVO;
+import com.kh.ahzit.vo.AhzitMemberInfoVO;
+import com.kh.ahzit.vo.AhzitSearchListRequestVO;
+import com.kh.ahzit.vo.AhzitSearchListResponseVO;
 
 public interface AhzitDao {
 	int sequence();//ahzit_no 시퀀스 번호 발행
@@ -30,5 +34,46 @@ public interface AhzitDao {
 	boolean deleteCommonMember(int memberNo);//일반회원-아지트(소모임)탈퇴 메소드
 	
 	void insertMember2(AhzitMemberDto ahzitMemberDto);//아지트가입하기 메소드 2 (member_no 미리 발행하는 버전)
+
+	// 추상 메소드 - 홈 화면 검색창 검색 : 통합 검색
+	List<AhzitSearchListRequestVO> selectAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+	
+	// 추상 메소드 - 홈 화면 검색창 검색 : 전체 조회(검색어가 없는 경우)
+	List<AhzitSearchListRequestVO> allAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+	
+	// 추상 메소드 - 홈 화면 검색창 검색 : 검색 조회(검색어가 있는 경우)
+	List<AhzitSearchListRequestVO> searchAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+	
+	// 추상 메소드 - 내가 가입한 소모임인지 조회
+	public int alreadyJoin(String userId, int ahzitNo);
+	
+
+	// 추상 메소드 - 소모임 내 회원 통합 조회
+	public List<AhzitMemberInfoVO> selectMemberInfo(AhzitMemberInfoRequestVO ahzitMemberInfoRequestVO);
+	
+	// 추상 메소드 - 소모임 내 회원 전체 조회
+	public List<AhzitMemberInfoVO> allMemberInfo(AhzitMemberInfoRequestVO ahzitMemberInfoRequestVO);
+	
+	// 추상 메소드 - 소모임 내 회원 검색 조회
+	public List<AhzitMemberInfoVO> searchMemberInfo(AhzitMemberInfoRequestVO ahzitMemberInfoRequestVO);
+	
+	// 추상 메소드 - 소모임 내 회원수 조회
+	public int selectMemberCount(AhzitMemberInfoRequestVO ahzitMemberInfoRequestVO);
+	
+	// 추상 메소드 - 소모임 내 전체 회원수
+	public int allMemberCount(int ahzitNo);
+	
+	// 추상 메소드 - 소모임 내 회원 검색시 회원수
+	public int searchMemberCount(int ahzitNo, String keyword);
+
+	// 홈화면 검색페이지 (관심사 별)
+	List<AhzitSearchListRequestVO> searchSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+		
+	//  전체 조회시 아지트 총 개수 반환
+	public int listCountInquire(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+	
+	//  관심사 조회시 아지트 개수 반환
+	public int listSortCountInquire(AhzitSearchListRequestVO ahzitSearchListRequestVO); 
+
 
 }

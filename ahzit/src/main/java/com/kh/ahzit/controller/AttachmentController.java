@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,20 +54,46 @@ public class AttachmentController {
 				.body(resource);
 	}
 	
+	//공지게시판 첨부파일 다운로드 mapping
+	@GetMapping("/download/{attachmentNo}")
+	public ResponseEntity<ByteArrayResource> downloadNotice(@PathVariable int attachmentNo) throws IOException{
+		//1. 파일 탐색
+		AttachmentDto attachmentDto = attachmentDao.selectAttachment(attachmentNo);
+		if(attachmentDto == null) {
+			throw new TargetNotFoundException("존재하지 않는 파일");
+		}
+		
+		//2. 파일 불러오기
+		File dir = new File(System.getProperty("user.home")+"/upload/main");
+		File target = new File(dir, String.valueOf(attachmentNo));
+		byte[] data = FileUtils.readFileToByteArray(target);
+		ByteArrayResource resource = new ByteArrayResource(data);
+
+		//[3] 응답 객체를 만들어 데이터를 전송
+		return ResponseEntity.ok()
+		.header("Content-Encoding", "UTF-8")
+		.header("Content-Length", String.valueOf(attachmentDto.getAttachmentSize()))
+		.header("Content-Disposition", "attachment; filename=" + attachmentDto.getAttachmentName())
+		.header("Content-Type", attachmentDto.getAttachmentType())
+		.body(resource);
+		
+	}
 
 	@GetMapping("/download/ahzit")
 	public ResponseEntity<ByteArrayResource> downloadAhzit(@RequestParam int attachmentNo) throws IOException {
 		//파일탐색
 		AttachmentDto attachmentDto = attachmentDao.selectAttachment(attachmentNo);
-		if(attachmentDto == null) return ResponseEntity.notFound().build();
+		if(attachmentDto == null) {//파일이 없으면
+			throw new TargetNotFoundException("존재하지 않는 파일");
+		}
 		
 		//파일생성위치
-		File directory = new File("D:/upload/kh10f");
+		File dir = new File("D:/upload/kh10f");
 		//디렉토리 생성
-		directory.mkdirs();
+		dir.mkdirs();
 		
 		//파일 불러오기
-    File target = new File(directory, String.valueOf(attachmentNo));
+		File target = new File(dir, String.valueOf(attachmentNo));
 		byte[] data = FileUtils.readFileToByteArray(target);
 		ByteArrayResource resource = new ByteArrayResource(data);
     
@@ -158,6 +185,5 @@ public class AttachmentController {
 				.header("Content-Type", attachmentDto.getAttachmentType())
 				.body(resource);
 	}
-
 
 }

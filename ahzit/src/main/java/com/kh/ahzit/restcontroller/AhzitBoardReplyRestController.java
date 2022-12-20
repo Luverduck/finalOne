@@ -3,9 +3,12 @@ package com.kh.ahzit.restcontroller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.ahzit.repository.AhzitBoardReplyDao;
@@ -50,7 +53,21 @@ public class AhzitBoardReplyRestController {
 		List<AhzitBoardReplyVO> replyList = ahzitBoardReplyDao.selectReplyList(ahzitBoardReplyRestRequestVO);
 		// 조회한 댓글 목록을 REST 응답에 설정
 		ahzitBoardReplyRestResponseVO.setReplyList(replyList);
+		// 댓글의 총 수 반환 (더보기 생성 제한을 위함)
+		ahzitBoardReplyRestResponseVO.setReplyCount(replyCount);
 		// REST 응답 반환
 		return ahzitBoardReplyRestResponseVO;
+	}
+	
+	// 댓글 수정 Mapping
+	@PutMapping("/edit")
+	public boolean editReply(@RequestBody AhzitBoardReplyRestRequestVO ahzitBoardReplyRestRequestVO) {
+		return ahzitBoardReplyDao.editReply(ahzitBoardReplyRestRequestVO);
+	}
+	
+	// 댓글 삭제 Mapping
+	@DeleteMapping("/delete")
+	public boolean deleteReply(@RequestParam int replyNo) {
+		return ahzitBoardReplyDao.deleteReply(replyNo);
 	}
 }

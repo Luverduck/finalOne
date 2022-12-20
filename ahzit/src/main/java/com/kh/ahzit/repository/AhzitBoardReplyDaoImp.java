@@ -56,8 +56,8 @@ public class AhzitBoardReplyDaoImp implements AhzitBoardReplyDao {
 
 	// 추상 메소드 오버라이딩 - 댓글 삭제
 	@Override
-	public boolean deleteReply(AhzitBoardReplyRestRequestVO ahzitBoardReplyRestRequestVO) {
-		return sqlSession.delete("ahzitBoardReply.deleteReply", ahzitBoardReplyRestRequestVO.getReplyNo()) > 0;
+	public boolean deleteReply(int replyNo) {
+		return sqlSession.delete("ahzitBoardReply.deleteReply", replyNo) > 0;
 	}
 
 	// 추상 메소드 오버라이딩 - 댓글 목록

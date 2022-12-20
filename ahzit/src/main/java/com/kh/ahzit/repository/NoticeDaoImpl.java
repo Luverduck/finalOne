@@ -51,48 +51,46 @@ public class NoticeDaoImpl implements NoticeDao {
 
 	@Override
 	public List<NoticeDto> selectList(NoticeListSearchVO vo) {
-		
-		if(vo.isSearch()) {
+
+		if (vo.isSearch()) {
 			return search(vo);
-		}
-		else {
+		} else {
 			return list(vo);
 		}
 	}
-	
+
 	@Override
 	public List<NoticeDto> list(NoticeListSearchVO vo) {
 		Map<String, String> param = new HashMap<>();
 
 		param.put("startRow", String.valueOf(vo.startRow()));
 		param.put("endRow", String.valueOf(vo.endRow()));
-		
+
 		return sqlSession.selectList("notice.pagelist", param);
 	}
-	
+
 	@Override
 	public List<NoticeDto> search(NoticeListSearchVO vo) {
 		Map<String, String> param = new HashMap<>();
-		
+
 		param.put("type", vo.getType());
 		param.put("keyword", vo.getKeyword());
 		param.put("startRow", String.valueOf(vo.startRow()));
 		param.put("endRow", String.valueOf(vo.endRow()));
 
-		
 		return sqlSession.selectList("notice.pageSearch", param);
 	}
-	
-	//검색과 목록의 총 데이터 개수를 구하는 메소드
+
+	// 검색과 목록의 총 데이터 개수를 구하는 메소드
 	@Override
 	public int count(NoticeListSearchVO vo) {
-		if(vo.isSearch()) {
+		if (vo.isSearch()) {
 			return searchCount(vo);
-		}
-		else {
+		} else {
 			return listCount(vo);
 		}
 	}
+
 	@Override
 	public int listCount(NoticeListSearchVO vo) {
 		return sqlSession.selectOne("notice.pageListCount", vo);
@@ -101,19 +99,19 @@ public class NoticeDaoImpl implements NoticeDao {
 	@Override
 	public int searchCount(NoticeListSearchVO vo) {
 		Map<String, String> param = new HashMap<>();
-		
+
 		param.put("type", vo.getType());
 		param.put("keyword", vo.getKeyword());
-		
+
 		return sqlSession.selectOne("notice.pageSearchCount", param);
 	}
-	
+
 	// 상세
 	@Override
 	public NoticeDto selectOne(int noticeNo) {
 		return sqlSession.selectOne("notice.one", noticeNo);
 	}
-	
+
 	// 조회수 증가
 	@Override
 	public boolean updateReadCount(int noticeNo) {
@@ -140,12 +138,24 @@ public class NoticeDaoImpl implements NoticeDao {
 		int count = sqlSession.delete("notice.delete", noticeNo);
 		return count > 0;
 	}
-	
+
 	@Override
 	public void clear() {
 		String sql = "delete notice";
 		jdbcTemplate.update(sql);
-		
+
 	}
+
+	@Override
+	public void connectAttachment(int noticeOriginNo, int noticeAttachmentNo) {
+		
+		Map<String, String> param = new HashMap<>();
+		
+		param.put("noticeOriginNo", String.valueOf(noticeOriginNo));
+		param.put("noticeAttachmentNo", String.valueOf(noticeAttachmentNo));
+		
+		sqlSession.insert("notice.fileInsert", param);
+
+		}
 
 }

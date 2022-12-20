@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -64,10 +65,18 @@ public class AhzitBoardRestController {
 	}
 	
 	// 소모임 게시글 조회 Mapping
-	@PostMapping("/search")
-	public AhzitBoardListRestResponseVO selectList(@RequestBody AhzitBoardListRestRequestVO ahzitBoardListRestRequestVO) {
+	@GetMapping("/search")
+	public AhzitBoardListRestResponseVO selectList(@RequestParam int ahzitNo, @RequestParam int memberNo, @RequestParam String keyword, @RequestParam int p
+			//@RequestBody AhzitBoardListRestRequestVO ahzitBoardListRestRequestVO
+			) {
 		// REST 응답 VO 생성
 		AhzitBoardListRestResponseVO ahzitBoardListRestResponseVO = new AhzitBoardListRestResponseVO();
+		// Rest 요청을 받아 처리하는 VO 생성
+		AhzitBoardListRestRequestVO ahzitBoardListRestRequestVO = new AhzitBoardListRestRequestVO();
+		ahzitBoardListRestRequestVO.setAhzitNo(ahzitNo);
+		ahzitBoardListRestRequestVO.setMemberNo(memberNo);
+		ahzitBoardListRestRequestVO.setKeyword(keyword);
+		ahzitBoardListRestRequestVO.setP(p);
 		// 소모임 내 모든 게시글 갯수 반환
 		int boardCount = ahzitBoardDao.countBoard(ahzitBoardListRestRequestVO.getAhzitNo());
 		// 소모임 내 게시글 마지막 페이지를 반환
@@ -96,18 +105,26 @@ public class AhzitBoardRestController {
 	}
 	
 	// 소모임 게시글 좋아요 / 좋아요 취소 DB 처리 Mapping
-	@PostMapping("/is_like")
-	public AhzitBoardLikeRestVO isLike(@RequestBody AhzitBoardLikeRestVO ahzitBoardLikeRestVO) {
+	@GetMapping("/is_like")
+	public AhzitBoardLikeRestVO isLike(@RequestParam int memberNo, @RequestParam int boardNo, @RequestParam int boardLike, @RequestParam int isLike
+			//@RequestBody AhzitBoardLikeRestVO ahzitBoardLikeRestVO
+			) {
+		// REST 응답 VO 생성
+		AhzitBoardLikeRestVO ahzitBoardLikeRestVO = new AhzitBoardLikeRestVO();
+		ahzitBoardLikeRestVO.setMemberNo(memberNo);
+		ahzitBoardLikeRestVO.setBoardNo(boardNo);
+		ahzitBoardLikeRestVO.setBoardLike(boardLike);
+		ahzitBoardLikeRestVO.setIsLike(isLike);
 		// 좋아요 여부(좋아요가 1인지)에 따라 다른 처리
 		if(ahzitBoardLikeRestVO.getIsLike() == 1) { // 좋아요 한 경우라면
 			// 좋아요 삭제
 			ahzitBoardLikeDao.boardLikeDelete(ahzitBoardLikeRestVO.getBoardNo(), ahzitBoardLikeRestVO.getMemberNo());
 			// 좋아요 갯수 조회
-			int boardLike = ahzitBoardLikeDao.boardLikeCount(ahzitBoardLikeRestVO.getBoardNo());
+			int newBoardLike = ahzitBoardLikeDao.boardLikeCount(ahzitBoardLikeRestVO.getBoardNo());
 			// 좋아요 갯수 갱신
-			ahzitBoardDao.updateBoardLike(ahzitBoardLikeRestVO.getBoardNo(), boardLike);
+			ahzitBoardDao.updateBoardLike(ahzitBoardLikeRestVO.getBoardNo(), newBoardLike);
 			// ahzitBoardLikeRestVO의 boardLike 필드에 반환한 좋아요 갯수를 설정
-			ahzitBoardLikeRestVO.setBoardLike(boardLike);
+			ahzitBoardLikeRestVO.setBoardLike(newBoardLike);
 			// ahzitBoardLikeRestVO의 isLike 필드에 0을 설정(좋아요 취소)
 			ahzitBoardLikeRestVO.setIsLike(0);
 			// 설정이 끝난 ahzitBoardLikeRestVO 반환
@@ -117,11 +134,11 @@ public class AhzitBoardRestController {
 			// 좋아요 등록
 			ahzitBoardLikeDao.boardLikeInsert(ahzitBoardLikeRestVO.getBoardNo(), ahzitBoardLikeRestVO.getMemberNo());
 			// 좋아요 갯수 조회
-			int boardLike = ahzitBoardLikeDao.boardLikeCount(ahzitBoardLikeRestVO.getBoardNo());
+			int newBoardLike = ahzitBoardLikeDao.boardLikeCount(ahzitBoardLikeRestVO.getBoardNo());
 			// 좋아요 갯수 갱신
-			ahzitBoardDao.updateBoardLike(ahzitBoardLikeRestVO.getBoardNo(), boardLike);
+			ahzitBoardDao.updateBoardLike(ahzitBoardLikeRestVO.getBoardNo(), newBoardLike);
 			// ahzitBoardLikeRestVO의 boardLike 필드에 반환한 좋아요 갯수를 설정
-			ahzitBoardLikeRestVO.setBoardLike(boardLike);
+			ahzitBoardLikeRestVO.setBoardLike(newBoardLike);
 			// ahzitBoardLikeRestVO의 isLike 필드에 1을 설정(좋아요 등록)
 			ahzitBoardLikeRestVO.setIsLike(1);
 		}

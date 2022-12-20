@@ -30,7 +30,10 @@ public interface AttachmentDao {
 	// 추상 메소드 - 자유게시글 첨부파일 삭제
 	public boolean deleteFreeboardAttachment(int freeboardAttachmentNo);
 
-	//소모임 프로필 이미지첨부 관련 메소드
+	//공지게시판 첨부파일 관련(notice_attachment_view)
+	List<AttachmentDto> selectNoticeAttachmentList(int noticeOriginNo);
+
+  //소모임 프로필 이미지첨부 관련 메소드
 	public void ahzitAttachment(int ahzitOriginNo, int ahzitAttachmentNo); //ahzit_attachment 테이블에 첨부파일 정보 연결
   
 	//소모임 프로필 원본번호와 연결된 첨부파일 조회
@@ -60,5 +63,8 @@ public interface AttachmentDao {
 	
 	//회원번호(member_no)로 첨부파일 검색(조회)
 	public List<AttachmentDto> selectAhzitMemberAttachment(int memberOriginNo);
+
+	// 소모임 프로필 첨부파일 삭제
+	boolean deleteAhzitAttachment(int ahzitAttachmentNo);
 
 }
