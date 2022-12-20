@@ -39,11 +39,11 @@ font-size: 0.85rem;
 	 
 	 <div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<button class="btn btn-outline-warning rounded-pill w-100 btn-lg myId" type="submit">아이디찾기</button>
+			<button class="btn rounded w-100 btn-lg myId" style="background-color : #E6E6E6; color:#3E4684;" type="submit">아이디찾기</button>
 		 </div>
 	</div>
 		
-	<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+	<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mb-3">
 		<div class=" col">
 			<a href="login" class="btn w-100" role=button>로그인 하기</a>
 		</div>
