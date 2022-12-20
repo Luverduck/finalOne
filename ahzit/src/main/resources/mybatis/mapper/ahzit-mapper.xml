@@ -51,8 +51,13 @@
 			select * from ahzit_user inner join ahzit_member on user_id = member_id where member_no = #{memberNo} and user_id = #{userId}
 		</select>
 		
-		<!-- 소모임 종류별로 조회 -->
-		<select id = "selectSort" parameterType = "map" resultType = "AhzitSearchListResponseVO">
+		<!-- 찾기 페이지에서 전체 소모임 조회 -->
+		<select id = "allSort" parameterType = "map" resultType = "AhzitSearchListResponseVO">
+			select * from (select tmp.*, rownum rn from (select aa.ahzit_attachment_no, a.* from ahzit a left outer join ahzit_attachment aa on a.ahzit_no = ahzit_origin_no where ahzit_state = 'N' and ahzit_ispublic = 'N')tmp) where rn between #{rownumStart} and #{rownumEnd}
+		</select>
+		
+		<!-- 찾기 페이지에서 특정 카테고리 소모임 조회 -->
+		<select id = "searchSort" parameterType = "map" resultType = "AhzitSearchListResponseVO">
 			select * from (select tmp.*, rownum rn from (select aa.ahzit_attachment_no, a.* from ahzit a left outer join ahzit_attachment aa on a.ahzit_no = ahzit_origin_no where ahzit_state = 'N' and ahzit_ispublic = 'N' and instr(ahzit_sort, #{keyword}) > 0)tmp) where rn between #{rownumStart} and #{rownumEnd}
 		</select>
 		
