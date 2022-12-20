@@ -17,7 +17,7 @@
 <form action="write" method="post">
 	<div class="container">
 		<div class="row center">
-			<h1>게시글 쓰기</h1>
+			<h1>FAQ 등록</h1>
 		</div>
 
 		<div class="row left">
@@ -41,7 +41,17 @@
 
 
 
-
+<script>
+$(function(){
+    $("[name=faqContent]").summernote({
+        height : 300, // 높이 지정
+        minHeight : 300, // 최소 높이
+        maxHeight : 300, // 최대 높이
+        placeholder : "내용을 작성하세요", // 도움말
+        lang : "ko-KR" // 도움말 한글로 번역, 스크립트 추가해야함
+    })
+});
+</script>
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

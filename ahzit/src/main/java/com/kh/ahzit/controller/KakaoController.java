@@ -25,13 +25,6 @@ import com.kh.ahzit.repository.KakaoDao;
 @RequestMapping("/kakao")
 public class KakaoController {
 
-	/* 카카오 아이디를 카카오 테이블에 저장
-	 * 카카오 아이디 받아서 회원 테이블에 아이디로 저장
-	 * 
-	추가 회원 정보를 입력받아서 회원테이블에 인서트
-	인서트가 되면 세션에 로그인 아이디 저장
-	기존 추가정보 입력했던 회원이면 홈화면으로 이동
-	*/
 	@Autowired
 	private KakaoDao kakaoDao;
 	
@@ -39,7 +32,7 @@ public class KakaoController {
 	private AhzitUserDao ahzitUserDao;
 	
 	@Autowired
-	private PasswordEncoder encoder; // 암호화복호화
+	private PasswordEncoder encoder;
 
 	@GetMapping("/insert")
 		public String insert() {

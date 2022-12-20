@@ -162,7 +162,7 @@ public class InquireController {
 						int attachmentNo = attachmentDto.getAttachmentNo();
 						// 첨부파일 정보 삭제
 						attachmentDao.deleteAttachment(attachmentNo);
-						// 자유게시판 첨부파일 정보 삭제
+						//  첨부파일 정보 삭제
 						attachmentDao.deleteInquireAttachment(attachmentNo);
 						// 삭제할 첨부파일명 반환
 						String fileName = String.valueOf(attachmentDto.getAttachmentNo());
