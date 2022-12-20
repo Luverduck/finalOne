@@ -14,27 +14,34 @@
 	<jsp:param value="notice" name="title" />
 </jsp:include>
 
+<style>
+* {
+	border: 1px dotted gray;
+	font-family: font-family : 'Gothic A1', sans-serif;
+}
+</style>
 
 
+<div class="container mt-5 mb-5">
 
-<div class="container">
-
-	<c:if test="${loginId != null}">
-		<div class="row right">
-			<%-- 관리자일 경우만 삭제버튼을 추가 --%>
-			<c:if test="${loginGrade == '관리자'}">
-				<a class="btn btn-neutral" href="write">글쓰기</a>
-			</c:if>
-
-			<a class="btn btn-neutral" href="write">글쓰기</a>
-
-		</div>
-	</c:if>
-
+	
 	<!-- 게시판 이름 -->
-	<div class="row">
+	<div class="row mt-5 mb-5">
 		<h1>공지 게시판</h1>
 	</div>
+	
+	<div class="row justify-content-end">
+		<div class="col-3">
+			<c:if test="${loginId != null}">
+				<%-- 관리자일 경우만 삭제버튼을 추가 --%>
+				<c:if test="${loginGrade == '관리자'}">
+					<a class="btn btn-neutral text-end" href="write">글쓰기</a>
+				</c:if>
+			</c:if>
+		</div>
+	</div>
+
+	
 
 
 	<div class="row center">
@@ -90,24 +97,31 @@
 
 
 	<!-- 페이징 -->
-	<div class="row center">
+	<div class="row">
+	
+		<nav aria-label="Search results pages">
+		
 		<ul class="pagination">
 			<!-- 이전 -->
 			<c:choose>
 				<c:when test="${not vo.isFirst()}">
-					<li><a href="list?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a></li>
+					<li class="page-item">
+					<a class="page-link" href="list?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="#">&laquo;</a></li>
+					<li class="page-item">
+					<a class="page-link" href="#">&laquo;</a></li>
 				</c:otherwise>
 			</c:choose>
 
 			<c:choose>
 				<c:when test="${vo.hasPrev()}">
-					<li><a href="list?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a></li>
+					<li class="page-item">
+					<a class="page-link" href="list?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="#">&lt;</a></li>
+					<li class="page-item">
+					<a class="page-link" href="#">&lt;</a></li>
 				</c:otherwise>
 			</c:choose>
 
@@ -143,6 +157,8 @@
 				</c:otherwise>
 			</c:choose>
 		</ul>
+		
+		</nav>
 	</div>
 
 
