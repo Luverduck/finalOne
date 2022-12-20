@@ -5,8 +5,13 @@ import lombok.Data;
 @Data
 public class AhzitSearchListRequestVO {
 
-	// 검색 관련
+	// 카테고리명
 	private String keyword;
+	
+	// 특정 카테고리 조회인지
+	public boolean isSearch() {
+		return keyword != null;
+	}
 	
 	// 페이징 관련
 	private int p = 1; // 페이지 번호(페이지 로드시 초기 페이지를 1로 하기 위해 초기값을 1로 설정)
