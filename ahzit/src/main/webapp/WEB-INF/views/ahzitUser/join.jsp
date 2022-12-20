@@ -35,7 +35,6 @@
 	.interest-selected {
 		border : 5px solid #3E4684;
 	}
-	
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
@@ -363,14 +362,14 @@
 						
 						<div class="input-group form-floating">
 						
-							<input type="text" name="userEmail" class=" form-control rounded d-flex flex-fill" placeholder="이메일"  required>
+							<input type="text" name="userEmail" class=" form-control rounded me-1"  placeholder="이메일"  required>
 							
 							<label>
 							이메일 
 							<i class="fa-solid fa-asterisk text-danger"></i>
 							</label>
 							
-							<button class="send-btn btn btn-warning rounded text-light btn-m" disabled type="button" >인증번호 발송</button>
+							<button class="send-btn btn  rounded btn-m" style="background-color : #E6E6E6; color:#3E4684;" disabled type="button" >인증번호 발송</button>
 							<div class="valid-feedback">올바른 이메일 형식입니다.</div>
 							<div class="invalid-feedback">이메일 형식을 확인해주세요</div>		
 						</div>
@@ -523,9 +522,11 @@
 	</div>
 	    
 	<div class="row mt-4">
-		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-		<input class="btn btn-warning w-100 btn-lg rounded text-light join-btn" type="button" value="가입하기" onclick="submitChk();"/>
+	<div class="col-8 offset-2 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+		<div class="mb-5">
+		<input class="btn btn-lg rounded w-100 join-btn" style="background-color : #E6E6E6; color:#3E4684;" type="button" value="가입하기" onclick="submitChk();"/>
 		 </div>
+	</div> 
 	</div>
               
 </form>

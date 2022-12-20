@@ -9,12 +9,17 @@
 
 <style>
 .checklogin-size{
-font-size: 1.2rem;
-color: red;
+	font-size: 1.2rem;
+	color: red;
 }
+ .kakao-logo {
+	width : 23px;
+	color : #3e2723;
+} 
+
 </style>
 
-<ul>
+<!--  <ul>
 	<li onclick="kakaoLogin();">
       <a href="javascript:void(0)">
           <span>카카오 로그인</span>
@@ -25,7 +30,7 @@ color: red;
           <span>카카오 로그아웃</span>
       </a>
 	</li>
-</ul>
+</ul>  -->
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
@@ -95,6 +100,8 @@ function kakaoLogout() {
   }  
 </script>
 
+
+
 <form action="login" method="post">
 
 	<div class="row mt-4">
@@ -128,22 +135,22 @@ function kakaoLogout() {
 	</div>
 	
 	<div class="row mt-4">
-		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<button class="btn btn-outline-warning rounded-pill w-100 btn-lg" type="submit">로그인</button>
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2" >
+			<button class="btn rounded btn-lg w-100" type="submit" style="background-color : #E6E6E6; color:#3E4684;">로그인</button>
 		 </div>
 	</div>
 	
 	<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-		<div class=" col">
-			<a href="checkId" class="btn w-100" role=button>아이디 찾기</a>
+		<div class=" col ">
+			<a href="checkId" class="btn w-100 login-a" role=button>아이디 찾기</a>
 		</div>
 		<div class=" col" >
-			<a href="checkPw"  class="btn w-100" role=button>비밀번호 찾기</a>
+			<a href="checkPw"  class="btn w-100 login-a" role=button>비밀번호 찾기</a>
 		</div>
 	</div>
 	
-	<div class="row mb-2 mt-1">
-		<a href="join" class="btn" role=button>아직 AHZIT의 회원이 아니신가요?</a>
+	<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+		<a href="join" class="btn  login-a" role=button>아직 AHZIT의 회원이 아니신가요?</a>
 	</div>
 	
 	<c:if test="${param.error != null}">
@@ -153,5 +160,15 @@ function kakaoLogout() {
 	</c:if>
 </form>
 
+	<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+		<p class="text-center">또는</p>
+	</div>
+	
+	<div class="row mt-2 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mb-3">
+		<div onclick="kakaoLogin();" class="text-center btn btn-warning rounded btn-lg w-100" >
+			<a href="javascript:void(0)" ><img src="/images/kakao-logo.png" class="kakao-logo"> 카카오계정으로 로그인</button>
+		 </div>
+	</div>
+
 <%-- footer --%>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> 
