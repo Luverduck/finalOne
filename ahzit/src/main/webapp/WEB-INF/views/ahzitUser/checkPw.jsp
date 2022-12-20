@@ -11,6 +11,15 @@
 .checkpw-size{
 font-size: 0.85rem;
 }
+.emailSend-btn {
+	background-color : #E6E6E6;
+	color:#3E4684;
+	font-size : 12px;
+	padding : 0;
+}
+.emailSend {
+	color:#3E4684;
+}
 </style>
 
 
@@ -50,13 +59,13 @@ font-size: 0.85rem;
 	 </div>
 	 
 	 <div class="row mt-4">
-		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<button class="send-btn btn btn-outline-warning rounded-pill w-100 btn-lg btn-m" type="submit">인증하기</button>
+		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mb-3">
+			<button class="send-btn btn rounded w-100 btn-lg btn-m" style="background-color : #E6E6E6; color:#3E4684;" type="submit">인증하기</button>
 			<div class="cert"></div>
 		</div>
 	</div>
 	
-	<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+	<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mb-3">
 		<div class=" col">
 			<a href="login" class="btn w-100" role=button>로그인 하기</a>
 		</div>
@@ -108,9 +117,9 @@ font-size: 0.85rem;
 					//인증번호 입력창을 사용자에게 보여줘야 한다
 					//(1) 만들든가 (2) 숨겨놨다 보여주든가
 					
-						var div = $("<div>").attr("class", "d-flex justify-content-center align-items-center flex-fill mb-3");
-					var input = $("<input>").attr("class" , "form-control rounded").attr("placeholder" , "인증번호")
-					var button = $("<button>").attr("type", "button").attr("class", "btn btn-sm btn-warning rounded text-light btn-m emailSend-btn").text("확인");
+					var div = $("<div>").attr("class", "d-flex justify-content-center align-items-center flex-fill mb-3");
+					var input = $("<input>").attr("class" , "form-control rounded me-1 mt-4 emailSend").attr("placeholder" , "인증번호");
+					var button = $("<button>").attr("type", "button").attr("class", "btn btn-sm rounded btn-m emailSend-btn mt-4").text("확인");
 					
 					//button을 클릭하면 input에 있는 인증번호와 이메일을 사용해서 검사요청
 					button.click(function(){

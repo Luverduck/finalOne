@@ -12,28 +12,14 @@
    font-size: 1.2rem;
    color: red;
 }
-.login-btn, btn-outline-warning {
-   color :#3E4684;
-}
-.kakao-logo {
+ .kakao-logo {
    width : 23px;
    color : #3e2723;
-}
+} 
 
 </style>
 
- <ul>
-   <li onclick="kakaoLogin();">
-      <a href="javascript:void(0)">
-          <span>카카오 로그인</span>
-      </a>
-   </li>
-   <li onclick="kakaoLogout();">
-      <a href="javascript:void(0)">
-          <span>카카오 로그아웃</span>
-      </a>
-   </li>
-</ul> 
+
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
@@ -167,8 +153,11 @@ function kakaoLogout() {
       <p class="text-center">또는</p>
    </div>
    
-
-
+   <div class="row mt-2 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mb-3">
+      <div onclick="kakaoLogin();" class="text-center btn btn-warning rounded btn-lg w-100" >
+         <a href="javascript:void(0)" ><img src="/images/kakao-logo.png" class="kakao-logo"> 카카오계정으로 로그인</button>
+       </div>
+   </div>
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> 
