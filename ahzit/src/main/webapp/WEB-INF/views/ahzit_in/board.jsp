@@ -915,7 +915,7 @@
 				// - 하단
 				var divbottom_outer = $("<div>").attr("class", "div-board div-board-bottom");
 	            var divbottom_div_flex = $("<div>").attr("class", "d-flex px-3 pb-3 div-reply-button");
-	            var divbottom_label_reply = $("<label>").attr("class", "btn-reply-write col-6 d-flex justify-content-center align-items-center button-board").attr("data-fold", 0).attr("data-replylist", 0);
+	            var divbottom_label_reply = $("<label>").attr("class", "btn-reply-write col-6 d-flex justify-content-center align-items-center button-board").attr("data-boardno", response.data.boardNo).attr("data-fold", 0).attr("data-replylist", 0);
 	            var divbottom_i_reply = $("<i>").attr("class", "fa-regular fa-comment-dots icon-board align-middle").attr("data-boardno", response.data.boardNo);
 	            var divbottom_i_reply_count = $("<div>").attr("class", "ps-1 align-middle").text(response.data.replyCount);
 	            var divbottom_label_like = $("<label>").attr("class", "btn-board-like col-6 d-flex justify-content-center align-items-center button-board").attr("data-boardno", response.data.boardNo).attr("data-boardlike", response.data.boardLike).attr("data-islike", response.data.isLike);
