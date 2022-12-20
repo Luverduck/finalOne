@@ -255,9 +255,9 @@
 			<div class="row">
 				<input id="input-file" type="file" name="attachment" class="form-control thumbnail">
 			</div>
-		
+					
 				
-			<div class="col">	
+			<div class=col-3>	
 				<img class="preview rounded float-start" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200">
 			</div>
 
