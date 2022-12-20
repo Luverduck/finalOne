@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="아지트 개설" name="title"/>
+	<jsp:param value="아지트 개설" name="title" />
 </jsp:include>
 
-<h1>아지트 개설</h1>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
@@ -31,7 +30,6 @@
 	  var area14 = ["경산시","경주시","구미시","김천시","문경시","상주시","안동시","영주시","영천시","포항시","고령군","군위군","봉화군","성주군","영덕군","영양군","예천군","울릉군","울진군","의성군","청도군","청송군","칠곡군"];
 	  var area15 = ["거제시","김해시","마산시","밀양시","사천시","양산시","진주시","진해시","창원시","통영시","거창군","고성군","남해군","산청군","의령군","창녕군","하동군","함안군","함양군","합천군"];
 	  var area16 = ["서귀포시","제주시","남제주군","북제주군"];
-
 	  // 시/도 선택 박스 초기화
 	  $("select[name^=ahzitRegionHigh]").each(function() {
 	  $selsido = $(this);
@@ -40,13 +38,11 @@
 	  });
 	  $selsido.next().append("<option value=''>구/군 선택</option>");
 	 });
-
 	 // 시/도 선택시 구/군 설정
 	 $("select[name^=ahzitRegionHigh]").change(function() {
 	 	var area = "area"+$("option",$(this)).index($("option:selected",$(this))); // 선택지역의 구군 Array
 	 	var $gugun = $(this).next(); // 선택영역 구군 객체
 	 $("option",$gugun).remove(); // 구군 초기화
-
 	  if(area == "area0")
 	  	$gugun.append("<option value=''>구/군 선택</option>");
 	  else {
@@ -57,166 +53,230 @@
   });
 });
 
-  //소모임이름 입력 제어 (javascript)
-  function ahzitName1(){
-      //(주의) input 입력값을 value로 조회
-      var tag = document.querySelector(".ahzitName-input");
-      var text = tag.value;
+	//소모임이름 입력 제어 (javascript)
+	function ahzitName1() {
+		//(주의) input 입력값을 value로 조회
+		var tag = document.querySelector(".ahzitName-input");
+		var text = tag.value;
 
-      //글자수에 따라 다른 표시를 숫자로 구현
-      var span = document.querySelector(".ahzitName-input-length");
-      span.textContent = text.length;
+		//글자수에 따라 다른 표시를 숫자로 구현
+		var span = document.querySelector(".ahzitName-input-length");
+		span.textContent = text.length;
 
-      //15글자 초과시 빨간 글씨로 표현
-      if(text.length > 15){
-          span.style.color = "red";
-      }
-      else {
-          span.style.color = "black";
-      }
+		//15글자 초과시 빨간 글씨로 표현
+		if (text.length > 15) {
+			span.style.color = "red";
+		} else {
+			span.style.color = "black";
+		}
 
-      //15글자 초과시 입력 불가 처리 = 15글자 넘어가면 잘라내기
-      var size = text.length;
-      while(size > 15){
-          tag.value = tag.value.substring(0, size-1);
-          size--;
-      }
-      span.textContent = size;
-  }
-  
-  //소모임소개 입력 제어 (javascript)
-  function ahzitInfo1(){
-      //(주의) input 입력값을 value로 조회
-      var tag = document.querySelector(".ahzitInfo-input");
-      var text = tag.value;
+		//15글자 초과시 입력 불가 처리 = 15글자 넘어가면 잘라내기
+		var size = text.length;
+		while (size > 15) {
+			tag.value = tag.value.substring(0, size - 1);
+			size--;
+		}
+		span.textContent = size;
+	}
 
-      //글자수에 따라 다른 표시를 숫자로 구현
-      var span = document.querySelector(".ahzitInfo-input-length");
-      span.textContent = text.length;
+	//소모임소개 입력 제어 (javascript)
+	function ahzitInfo1() {
+		//(주의) input 입력값을 value로 조회
+		var tag = document.querySelector(".ahzitInfo-input");
+		var text = tag.value;
 
-      //200글자 초과시 빨간 글씨로 표현
-      if(text.length > 200){
-          span.style.color = "red";
-      }
-      else {
-          span.style.color = "black";
-      }
+		//글자수에 따라 다른 표시를 숫자로 구현
+		var span = document.querySelector(".ahzitInfo-input-length");
+		span.textContent = text.length;
 
-      //200글자 초과시 입력 불가 처리 = 15글자 넘어가면 잘라내기
-      var size = text.length;
-      while(size > 200){
-          tag.value = tag.value.substring(0, size-1);
-          size--;
-      }
-      span.textContent = size;
-  }
-  
-  //소모임이미지 (jquery)
-  $(function(){
-      $("[name=attachment]").change(function(e){
-          //input[type=file] 태그에는 files라는 속성이 존재
-          console.log(this.files);
-          if(this.files.length > 0){
-              //읽는 도구
-              var reader = new FileReader();
-              //읽을 때 해야할 작업
-              reader.onload = function(e){
-                  //읽은 내용 정보가 e에 들어 있음
-                  var preview = document.getElementById("preview")
-                  $(".preview").attr("src", e.target.result);
-              };
-              reader.readAsDataURL(this.files[0]);//읽어라
-          }
-      });
-      $("button[name=thumbnail-delete]").click(function(){
-          $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.png");
-      });
-	  //취소버튼 클릭 시, 이전 페이지로 이동(jquery)
-	  $(".btn-edit-cancel").click(function(){
-	     history.back();
-	    });
-  });
-  
+		//200글자 초과시 빨간 글씨로 표현
+		if (text.length > 200) {
+			span.style.color = "red";
+		} else {
+			span.style.color = "black";
+		}
+
+		//200글자 초과시 입력 불가 처리 = 15글자 넘어가면 잘라내기
+		var size = text.length;
+		while (size > 200) {
+			tag.value = tag.value.substring(0, size - 1);
+			size--;
+		}
+		span.textContent = size;
+	}
+
+	//소모임이미지 (jquery)
+	$(function() {
+		$("[name=attachment]").change(function(e) {
+			//input[type=file] 태그에는 files라는 속성이 존재
+			console.log(this.files);
+			if (this.files.length > 0) {
+				//읽는 도구
+				var reader = new FileReader();
+				//읽을 때 해야할 작업
+				reader.onload = function(e) {
+					//읽은 내용 정보가 e에 들어 있음
+					var preview = document.getElementById("preview")
+					$(".preview").attr("src", e.target.result);
+				};
+				reader.readAsDataURL(this.files[0]);//읽어라
+			}
+		});
+		$("button[name=thumbnail-delete]")
+				.click(
+						function() {
+							$(".preview")
+									.attr("src",
+											"${pageContext.request.contextPath}/images/bg_default.png");
+						});
+		//취소버튼 클릭 시, 이전 페이지로 이동(jquery)
+		$(".btn-edit-cancel").click(function() {
+			history.back();
+		});
+	});
 </script>
 
-<div class="container">
-	<form action="create" method="post" enctype = "multipart/form-data">
-		<input  name="ahzitLeader" value="${sessionScope.loginId}" type="hidden">
-	<div class="row">
-	 소모임리더 : <p name="ahzitLeader">${sessionScope.loginId}</p>
-	</div>
+
+<style>
+* {
+	border: 1px dotted gray;
+	font-family: font-family : 'Gothic A1', sans-serif;
 	
-	<div class = "row">
-		<p>만들고 싶은 아지트종류를 선택하세요</p>
-		<div>
-			<input type="radio"  name="ahzitSort" id="ex_rd1" value="취미" checked><label for="ex_rd1">취미</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd2" value="스터디"><label for="ex_rd2">스터디</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd3" value="일상"><label  for="ex_rd3">일상</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd4" value="팬클럽"><label  for="ex_rd4">팬클럽</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd5" value="음악"><label  for="ex_rd5">음악</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd6" value="스포츠"><label  for="ex_rd6">스포츠</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd7" value="여행"><label  for="ex_rd7">여행</label><br>
-			<input type="radio"  name="ahzitSort" id="ex_rd8" value="맛집"><label  for="ex_rd8">맛집</label><br><br>
-		</div>
-	</div>
-		
-		<%--아지트 이름 --%>
-		<div class="row">
-			<p>아지트 이름</p>	
-			<div>
-				<input name="ahzitName"  class="ahzitName-input"  oninput="ahzitName1();"  type="text" placeholder="아지트 이름 입력"  autocomplete="off" required><br>			
-				<span class="ahzitName-input-length">0</span> / 15<br><br>
-			</div>
-		</div>
+}
+</style>
+
+
+
+<div class="container">
+	<form action="create" method="post" enctype="multipart/form-data">
+		<input name="ahzitLeader" value="${sessionScope.loginId}"
+			type="hidden">
+		<%-- <div class="row">
+			<span>리더</span>
+			<span name="ahzitLeader">${sessionScope.loginId}</span>
+		</div> --%>
+
+		<div class="row mt-3">
+			<p class="fs-3">만들고 싶은 아지트를 선택하세요</p>
+			<div class="row justify-content-center">
 			
-			<%--아지트 소개 --%>
-			<div class="row">
-				<p>아지트 소개</p>	
-				<div>
-					<textarea name="ahzitInfo"  class="ahzitInfo-input"  oninput="ahzitInfo1();"  type="text" placeholder="아지트 소개"  autocomplete="off" required></textarea>			
-					<span class="ahzitInfo-input-length">0</span> / 200<br><br>
+				<div class="col-4 fs-4">
+					<input type="radio" name="ahzitSort" id="ex_rd1" value="취미" checked>
+					<label for="ex_rd1">취미</label><br> 
+					
+					
+					<input type="radio" name="ahzitSort" id="ex_rd2" value="스터디">
+					<label for="ex_rd2">스터디</label><br> 
+						
+						
+					<input type="radio" name="ahzitSort" id="ex_rd3" value="일상">
+					
+					<label for="ex_rd3">일상</label><br>
+					
+					
+					<input type="radio" name="ahzitSort" id="ex_rd4" value="팬클럽">
+					<label for="ex_rd4">팬클럽</label><br> 
+				
+				</div>
+				
+				<div class="col-4 fs-4">
+					<input type="radio" name="ahzitSort" id="ex_rd5" value="음악">
+					<label for="ex_rd5">음악</label><br>
+					
+					
+					<input type="radio" name="ahzitSort" id="ex_rd6" value="스포츠">
+					<label for="ex_rd6">스포츠</label><br> 
+					
+					
+					<input type="radio" name="ahzitSort" id="ex_rd7" value="여행">
+					<label for="ex_rd7">여행</label><br>
+					
+					
+					<input type="radio" name="ahzitSort" id="ex_rd8" value="맛집">
+					<label for="ex_rd8">맛집</label><br><br>
+				
 				</div>
 			</div>
-			
-	<div class="row">
-		<p>소모임 지역 선택</p>
-		
-		<div>
-			<select name="ahzitRegionHigh" id="sido1"></select>  <%--지역선택 시/도 --%>
-			<select name="ahzitRegionLow" id="gugun1"></select><br><br>  <%--지역선택 군/구 --%>
 		</div>
-	</div>
-			
-		
-		<%--아지트 공개--%>
-		<div class="row">
-			<p>아지트 공개</p>
+
+		<%--아지트 이름 --%>
+		<div class="row align-items-center mt-5">
+			<p class="fs-3">아지트 이름을 입력해주세요</p>
 			<div>
-				<input type="radio" name="ahzitIsPublic" value="N" checked><label>비공개 아지트</label>
-				<input type="radio" name="ahzitIsPublic" value="Y"><label>공개 아지트</label><br><br>
+				<input name="ahzitName" class="ahzitName-input d-inline-flex form-control form-control-lg rounded"
+					oninput="ahzitName1();" type="text" placeholder="아지트 이름 입력"
+					autocomplete="off" required><br> 
+					<span class="ahzitName-input-length">0</span> / 15<br>
+				<br>
 			</div>
 		</div>
-			
-			
-		<%--아지트 이미지--%>
-		<div class="row">
-			<p>아지트 이미지를 등록해주세요</p>
-				<div>
-                      <input id="input-file" type="file" name="attachment" class="thumbnail">
-                      <img class="preview" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br>
-                      <div class="row img-btns">
-                          <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
-                          <label class="delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</label><br><br>
-                      </div>
-                  </div>
-		</div>
+
+		<%--아지트 소개 --%>
+		<div class="row align-items-center mt-5">
+			<p class="fs-3">아지트 소개글을 입력해주세요</p>
 		
 			<div>
-				<a type="button"  class="btn-edit-cancel" >취소</a>
-                <button type="submit" >개설하기</button>
-			</div>	
+				<textarea name="ahzitInfo" class="ahzitInfo-input form-control rounded"
+					oninput="ahzitInfo1();" type="text" placeholder="아지트 소개글 입력"
+					autocomplete="off" style="height: 100px" required></textarea>
+				<span class="ahzitInfo-input-length">0</span> / 200<br>
+				<br>
+			</div>
 		</div>
-	</form>
+
+		<div class="row align-items-center mt-5">
+			<p class="fs-3">아지트 지역을 설정하세요</p>
+
+				<%--지역선택 시/도 --%>
+				<select class="form-select form-select-lg mb-3" name="ahzitRegionHigh" id="sido1"></select>
+				<%--지역선택 군/구 --%>
+				<select class="form-select form-select-lg mb-3" name="ahzitRegionLow" id="gugun1"></select>
+		</div>
+
+
+		<%--아지트 공개--%>
+		<div class="row justify-content-center mt-5">
+			<p class="fs-3">아지트의 공개 여부를 선택하세요</p>
+			
+			<div class="col">
+				<input type="radio" name="ahzitIsPublic" value="N" checked>
+				<label>비공개 아지트</label> 
+			</div>
+			
+			<div class="col">
+				<input type="radio" name="ahzitIsPublic" value="Y">
+				<label>공개 아지트</label><br>
+			</div>
+
+
+		</div>
+
+
+		<%--아지트 이미지--%>
+		<div class="row justify-content-center mt-5">
+			<p class="fs-3">아지트 이미지를 등록해주세요</p>
+			
+			<div class="row">
+				<input id="input-file" type="file" name="attachment" class="form-control thumbnail"> 
+			</div>
+				
+			<div class="col">	
+				<img class="preview rounded float-end" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br>
+			</div>
+
+			<div class="row align-items-end img-btns">
+				<label class="col input-file-upload img-lab" for="input-file" type="button">사진변경</label>
+				<label class="col delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</label>
+			</div>
+			
+		</div>
+
+		<div class="row justify-content-center mt-5">
+			<button type="submit" class="col btn-edit-cancel btn btn-outline-secondary rounded">취소</button>
+			<button type="submit" class="col btn btn-outline-warning rounded">개설하기</button>
+		</div>
+</div>
+</form>
 </div>
 
 
