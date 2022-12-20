@@ -46,7 +46,6 @@ public interface AhzitDao {
 	
 	// 추상 메소드 - 내가 가입한 소모임인지 조회
 	public int alreadyJoin(String userId, int ahzitNo);
-	
 
 	// 추상 메소드 - 소모임 내 회원 통합 조회
 	public List<AhzitMemberInfoVO> selectMemberInfo(AhzitMemberInfoRequestVO ahzitMemberInfoRequestVO);

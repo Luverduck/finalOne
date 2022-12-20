@@ -2,7 +2,6 @@ package com.kh.ahzit.controller;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.entity.InquireDto;
 import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AdminDao;
 import com.kh.ahzit.repository.AhzitUserDao;
+import com.kh.ahzit.vo.AdminAhzitListSearchVO;
+import com.kh.ahzit.vo.AdminAhzitUserListSearchVO;
+import com.kh.ahzit.vo.AdminInquireListSearchVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -35,8 +39,10 @@ public class AdminController {
 	
 	// 회원 조회
 	@GetMapping("/ahzitUser")
-	public String ahzitUserList(Model model) {
-		List<AhzitUserDto> ahzitUser = adminDao.selectList();
+	public String ahzitUserList(Model model, @ModelAttribute AdminAhzitUserListSearchVO adminAhzitUserListSearchVO) {
+		List<AhzitUserDto> ahzitUser = adminDao.selectList(adminAhzitUserListSearchVO);
+		int count = adminDao.count(adminAhzitUserListSearchVO);
+		adminAhzitUserListSearchVO.setCount(count);
 		model.addAttribute("ahzitUser", ahzitUser);
 		return "admin/ahzitUser";
 	}
@@ -77,5 +83,32 @@ public class AdminController {
 		else {
 			throw new TargetNotFoundException("변경실패");
 		}
-	}		
+	}
+	
+	// 아지트(소모임) 조회
+	@GetMapping("/ahzit")
+	public String ahzitList(Model model, @ModelAttribute AdminAhzitListSearchVO adminAhzitListSearchVO) {
+		List<AhzitDto> ahzit = adminDao.ahzitSelectList(adminAhzitListSearchVO);
+		int count = adminDao.ahzitCount(adminAhzitListSearchVO);
+		adminAhzitListSearchVO.setCount(count);
+		model.addAttribute("ahzit", ahzit);
+		return "admin/ahzit";
+	}
+	
+	// 아지트 선택 조회	
+	@GetMapping("/ahzitSelect")
+	public String detail(@RequestParam int ahzitNo, Model model) {
+		model.addAttribute("ahzitSelect", adminDao.selectOne(ahzitNo));
+		return "admin/ahzitSelect";
+	}
+	
+	// 1:1문의 글 조회
+	@GetMapping("/inquire")
+	public String inquireList(Model model, @ModelAttribute AdminInquireListSearchVO adminInquireListSearchVO) {
+		List<InquireDto> inquireList = adminDao.inquireSelectList(adminInquireListSearchVO);
+		int count = adminDao.inquireCount(adminInquireListSearchVO);
+		adminInquireListSearchVO.setCount(count);
+		model.addAttribute("inquireList", inquireList);
+		return "admin/inquire";
+	}
 }
