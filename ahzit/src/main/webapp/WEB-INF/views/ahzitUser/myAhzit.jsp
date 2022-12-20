@@ -21,15 +21,7 @@
 						</div>
 					</div>
 				</div>
-				
-					<c:choose>
-						<c:when test="${myAhzit.size()==0}">
-							<div class="p-4 text-dark bg-Light rounded">
-								<h1 class="text-center">가입한 아지트가 없습니다.</h1>	
-							</div>
-						</c:when>
-						
-						<c:otherwise>
+	
 						 <div class="row mt-4">
 				            <div class="col-md-10 offset-md-1">
 				                <table class="table table-hover">
@@ -61,9 +53,7 @@
 				                </table>
 				            </div>
 				        </div>
-					</c:otherwise>
-				</c:choose>
-	
+			
 				<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 					<div class=" col" >
 						<a href="mypage"  class="btn btn-outline-warning w-100" role=button>Mypage 이동</a>
