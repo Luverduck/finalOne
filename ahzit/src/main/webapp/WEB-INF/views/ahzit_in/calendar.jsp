@@ -13,6 +13,20 @@
 	}
 </style>
 
+<!-- jquery CDN -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- fullcalendar CDN -->
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+
+<!-- moment CDN (format사용하기 위해)-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script type="text/javascript"></script>
+
+
 <div class = "container-fluid mt-3">
 	<div class = "row">
 		
@@ -59,7 +73,18 @@
 				
 				<%-- 가운데 내용 --%>
 				<div class = "col col-6">
-					일정관리
+					
+						<div class="row">
+							<div id="calendar"></div>
+							<input type="hidden" name="memberAhzitNo" value="${ahzitMemberDto.memberAhzitNo}">
+							<input type="hidden" name="memberNo" value="${ahzitMemberDto.memberNo}">
+						</div>
+						
+						<c:forEach var="scheduleList" items="${scheduleList}">
+						${scheduleList}
+						</c:forEach>
+					
+					
 				</div>
 				
 				<%-- 오른쪽 사이드바 --%>
@@ -71,6 +96,110 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+
+
+var memberNo=$("[name=memberNo]").val();
+var memberAhzitNo=$("[name=memberAhzitNo]").val();
+
+document.addEventListener('DOMContentLoaded', function() {
+	
+	
+    var calendarEl = document.getElementById('calendar');
+	// new FullCalendar.Calendar(대상 DOM객체, {속성:속성값, 속성2:속성값2..})
+	
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      navLinks: true, // can click day/week names to navigate views
+      selectable: true,
+      selectMirror: true,
+      // 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
+      select: function(arg) {
+    	  
+
+        var title = prompt('입력할 일정:');
+        var dto={
+      		  "scheduleMemberNo": memberNo,
+       		  "scheduleAhzitNo": memberAhzitNo,
+       		  "scheduleTitle": title,
+       		  "scheduleStart": moment(arg.start).format('YYYY-MM-DD HH:mm:ss'),
+       		  "scheduleEnd": moment(arg.end).format('YYYY-MM-DD HH:mm:ss'),
+       		  "scheduleAllday": arg.allDay
+    	  };
+        console.log(dto);
+    
+    // title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
+        if (title) {
+          calendar.addEvent({
+            title: title,
+            start: arg.start,
+            end: arg.end,
+            allDay: arg.allDay
+          }),
+       	
+          //화면에 addEvent 추가후 통신
+         axios({
+        	 url:"${pageContext.request.contextPath}/rest/ahzitSchedule/scheduleInsert",
+        	 method:"post",
+        	 data:JSON.stringify(dto),
+        	 headers: { 'Content-Type': 'application/json' }
+         }).then(function(response){
+				console.log(response);
+				alert("일정이 입력되었습니다");
+				location.reload();
+         });
+          
+          
+        }
+        calendar.unselect()
+      },
+      eventClick: function(arg) {
+    	  // 있는 일정 클릭시,
+    	  console.log("#등록된 일정 클릭#");
+    	  console.log(arg.event);
+    	  
+        if (confirm('Are you sure you want to delete this event?')) {
+          arg.event.remove()
+        }
+      },
+      editable: true,
+      dayMaxEvents: true,
+      locale:"ko",
+      events: [
+    	  $.ajax({
+    		  url:"${pageContext.request.contextPath}/rest/ahzitMember/scheduleList/",
+    		  method:"get",
+    		  data:{"memberAhzitNo":memberAhzitNo},
+    		  success:function(resp){
+    			  console.log(resp);
+    			  if(resp.length!=0){
+    				  for(var i=0;i<resp.length;i++){
+    					  calendar.addEvent({
+    						  title: resp[i]['scheduleTitle'],
+    						  start: resp[i]['scheduleStart'],
+    						  end: resp[i]['scheduleEnd'],
+    						  id: resp[i]['scheduleNo']
+    					  })
+    				  }
+    			  }
+    		  }
+    	  })
+      ]
+     
+      //================ ajax데이터 불러올 부분 =====================//
+  });
+
+    calendar.render();
+  });
+
+
+</script>
+
 
 
 <%-- footer --%>
