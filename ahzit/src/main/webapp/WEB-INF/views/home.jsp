@@ -165,11 +165,15 @@
                 <div class="swiper-button-next"></div>
             </div>
             
+      	<div>
+			<p class="text-center ahzit-title-name">소모임 추천</p> <%--추후 바꾸기 --%>
+		</div>
+            
             
 
 		<c:if test="${login}">
 		<div>
-			<p class="text-center ahzit-title-name">내가 가입한 소모임</p> <%--추후 바꾸기 --%>
+			<p class="text-center ahzit-title-name">내가 가입한 소모임</p> 
 		</div>
 		
 		 <div class="row mb-3">
