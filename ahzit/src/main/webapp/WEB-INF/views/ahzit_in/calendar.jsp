@@ -87,6 +87,11 @@
 				
 				<%-- 오른쪽 사이드바 --%>
 				<div class = "col-3" style="background-color: #dff9fb;">
+				
+				<c:forEach var="scheduleList" items="${scheduleList}">
+					
+					<span>${scheduleList.scheduleTitle}, ${scheduleList.scheduleStart}</span> <br>
+				</c:forEach>
 					
 					오른쪽
 				</div>
