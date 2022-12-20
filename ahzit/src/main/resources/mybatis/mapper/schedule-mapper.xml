@@ -34,5 +34,10 @@
 			insert into schedule(schedule_no, schedule_member_no, schedule_ahzit_no, schedule_title, schedule_start, schedule_end, schedule_allday) values(#{scheduleNo}, #{scheduleMemberNo}, #{scheduleAhzitNo}, #{scheduleTitle}, to_date(#{scheduleStart},'YYYY-MM-DD HH24:MI:SS'), to_date(#{scheduleEnd},'YYYY-MM-DD HH24:MI:SS'), #{scheduleAllday})
 		</insert>
 		
+		<!-- 스케줄 삭제 -->
+		<delete id="delete" parameterType="int">
+			delete schedule where schedule_no=#{scheduleNo}
+		</delete>
+		
 		
 </mapper>
