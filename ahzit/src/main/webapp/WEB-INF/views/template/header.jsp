@@ -50,11 +50,16 @@
         	 /* border : 1px dotted gray;   */
            /*  font-family: 'Noto Sans KR', sans-serif;  */
             font-family: 'EsaManru';
+            color :#3E4684;
             /* font-size : 16px !important; */
         }
         a {
 			text-decoration: none;
 		}
+		a:link { color: #3E4684; }
+		a:visited { color: #3E4684; }
+		a:hover { color:  #3E4684; }
+		a:active { color: #3E4684; } 
 		.logo-img {
 			width : 100%;
 		}
@@ -88,7 +93,7 @@
 			flex-grow: 1;
 			color :#3E4684;
 		}
-		.btn {
+		.header-btn {
 			position: absolute;
 			margin-top : 0px;
 			right: 0;     
@@ -111,7 +116,7 @@
 		<div class = "col-2">
 			<div class = "col search-bar">
 				<input class = "w-100 input-allsearch search-box" placeholder = "아지트 검색" type = "text" >
-				<button type="submit" class="btn"><i class="fa-solid fa-magnifying-glass i-margin"></i></button>
+				<button type="submit" class="btn header-btn"><i class="fa-solid fa-magnifying-glass i-margin"></i></button>
 				
 			</div>
 	 	<!-- 	<div class = "col-1">  -->
@@ -146,7 +151,7 @@
 	</div> <!-- row mt-1 끝 -->
 	
 	<!-- 백엔드 작업 끝나면 지울 영역 -->
-	<div class = "row mt-3">
+<%-- 	<div class = "row mt-3">
 		<div class = "col-8 offset-2 d-flex align-items-center justify-content-left">
 			<div class = "col-3">
 				<a href = "/freeboard/list">자유게시판</a>
@@ -160,7 +165,7 @@
 			</div>
 			</c:if>
 		</div>
-	</div>
+	</div> --%>
 </div> <!-- container 끝 -->
 
 

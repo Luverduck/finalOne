@@ -12,9 +12,6 @@
 </jsp:include>
 
 <style>
-/*    * { 
-   		font-family: 'NanumSquareAc', sans-serif ;
-   	}  */
    	.ahzit-img {
    		width:100%;
    		height:300px;

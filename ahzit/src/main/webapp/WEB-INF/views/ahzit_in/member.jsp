@@ -35,9 +35,9 @@
 			<div class = "row">
 			
 				<%-- 왼쪽 사이드바 --%>
-				<div class = "col col-3  me-2 ahzit-side shadow" style="background-color: white;">
+				<div class = "col col-3 ahzit-side" >
 					<%--아지트 프로필 사진 --%>
-					<div class = "row ahzit-side mt-2">
+					<div class = "row ahzit-side mt-2 me-2 shadow" style="background-color: white;">
 						<c:if test="${attachmentList.isEmpty()}"> <%--미설정시 기본 프로필 --%>
 						    	<img src = "/images/bg_default.jpg" class="w-100 ahzit-img">
 					    	</c:if>
