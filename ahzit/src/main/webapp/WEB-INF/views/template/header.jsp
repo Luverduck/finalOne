@@ -104,9 +104,9 @@
 			margin-top : 0px;
 			right: 0;     
 		}
-		 .header-style {
-		 	 background-color : #EDEEF0; 
-		 }
+		.header-style {
+		 	background-color : #EDEEF0; 
+		}
     </style>
 </head>
 <body>
