@@ -42,59 +42,114 @@
 	<!-- Summer Note CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.css" rel="stylesheet">
   	
+
+  	<!-- 폰트(이사만루체) CDN -->
+  	 <link href="https://webfontworld.github.io/gonggames/EsaManru.css" rel="stylesheet">
+  	
+
   	<!-- Lodash CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    
+
     <style>
         * {
-        	/* border : 1px dotted gray; */
-            font-family: 'Noto Sans KR', sans-serif;
-            font-size : 16px !important;
+        	 /* border : 1px dotted gray;   */
+           /*  font-family: 'Noto Sans KR', sans-serif;  */
+            font-family: 'EsaManru';
+            color :#3E4684;
+            /* font-size : 16px !important; */
         }
         a {
 			text-decoration: none;
 		}
-		
+		a:link { color: #3E4684; }
+		a:visited { color: #3E4684; }
+		a:hover { color:  #3E4684; }
+		a:active { color: #3E4684; } 
+		.logo-img {
+			width : 100%;
+		}
+		.header-style {
+			 color :#3E4684;
+		}
+ 		input::placeholder {
+			color:#3E4684;
+		}
+		input:focus {
+		    outline: 1px solid #3E4684;
+		    border-radius : 2em;
+		} 
+		.search-bar {
+			display: flex;
+			flex-direction: row;
+			position: relative;
+		}
+		.search-box {
+			position : relative;
+			border:2px solid #3E4684;
+			border-radius: 2em; 
+			width: 100%;
+			height: 30px;
+ 			font-size: 16px;
+			padding: 15px; 
+		}
+		.search-box > select > input{
+			display: flex;
+			flex-direction: row;
+			flex-grow: 1;
+			color :#3E4684;
+		}
+		.header-btn {
+			position: absolute;
+			margin-top : 0px;
+			right: 0;     
+		}
+		.header-style {
+		 	background-color : #EDEEF0; 
+		}
     </style>
 </head>
 <body>
 
 <c:set var="login" value="${loginId != null}"></c:set>
 
-<div class = "container-fluid py-2"> <!-- container 시작 -->
+<div class = "container-fluid py-2 header-style"> <!-- container 시작 -->
 	<div class = "row mt-1"> <!-- row mt-1 시작 -->
 		<div class = "col-1 offset-2 d-flex justify-content-center">
-			<a href="/" class = "d-flex align-items-center">홈(로고)</a>
+			<a href="/" class = "d-flex align-items-center"><img src="images/logo.png" class="logo-img"></a>
 		</div>
 		
-		<div class = "col-2 d-flex bg-white rounded py-1">
-			<div class = "col-11 me-1">
-				<input class = "w-100 border-0 bg-white ps-3 input-allsearch" placeholder = "아지트 검색" type = "text" >
+		<div class = "col-2">
+			<div class = "col search-bar">
+				<input class = "w-100 input-allsearch search-box" placeholder = "아지트 검색" type = "text" >
+				<button type="submit" class="btn header-btn"><i class="fa-solid fa-magnifying-glass i-margin"></i></button>
+				
 			</div>
-			<div class = "col-1 bg-white">
-				<button class = "fa-solid fa-magnifying-glass w-100 border-0 bg-white btn-allsearch-submit" type = "submit"></button>
-			</div>
+	 	<!-- 	<div class = "col-1">  -->
+				<!-- <button class = "fa-solid fa-magnifying-glass w-100 border-0 btn-allsearch-submit mt-2 search-box" type = "submit"></button> -->
+		 		<!-- <button type="submit" class="btn"><i class="fa-solid fa-magnifying-glass i-margin"></i></button> -->
+		<!-- 	</div> --> 
 		</div>
 	
 		<div class = "col-3 offset-2 d-flex">
 			<div class = "col d-flex justify-content-center align-items-center">
-				<a href = "/search" class = "d-flex align-items-center">찾기</a>
+				<a href = "/search" class = "d-flex align-items-center header-style">찾기</a>
 			</div>
 			<c:choose>
 			<c:when test="${login}">
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/logout" class = "d-flex align-items-center logout">로그아웃</a>
+					<a href="/ahzitUser/logout" class = "d-flex align-items-center logout header-style">로그아웃</a>
 				</div>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/mypage" class = "d-flex align-items-center">마이페이지</a>
+					<a href="/ahzitUser/mypage" class = "d-flex align-items-center header-style">마이페이지</a>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/login" class = "d-flex align-items-center">로그인</a>
+					<a href="/ahzitUser/login" class = "d-flex align-items-center header-style">로그인</a>
 				</div>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/join" class = "d-flex align-items-center">회원가입</a>
+					<a href="/ahzitUser/join" class = "d-flex align-items-center header-style">회원가입</a>
 				</div>
 			</c:otherwise>
 			</c:choose>

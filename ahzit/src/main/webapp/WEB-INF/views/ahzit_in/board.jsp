@@ -159,6 +159,10 @@
 	.btn-reply-edit-cancel {
 	  	color: #FEC260; 
 	}
+	/* 멤버 프로필 포인터 표시*/
+	.member-profile {
+		cursor: pointer;
+	}
 </style>
 
 
@@ -426,7 +430,7 @@
 				
 				// 2-1) span 태그
 				var span_reply_member_img_container = $("<span>").attr("class", "div-reply-member-profile");
-				var img_reply_member_img = $("<img>").attr("class", "img-member-profile").attr("src", "https://placeimg.com/65/65/any");
+				var img_reply_member_img = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "https://placeimg.com/65/65/any").attr("writerno", response.data.replyWriterNo);
 				var span_reply_member_img = span_reply_member_img_container.append(img_reply_member_img);
 				
 				// 2-2) 
@@ -532,7 +536,7 @@
 					
 					// 2-1) span 태그
 					var span_reply_member_img_container = $("<span>").attr("class", "div-reply-member-profile");
-					var img_reply_member_img = $("<img>").attr("class", "img-member-profile").attr("src", "https://placeimg.com/65/65/any");
+					var img_reply_member_img = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "https://placeimg.com/65/65/any").attr("writerno", response.data.replyList[i].replyWriterNo);
 					var span_reply_member_img = span_reply_member_img_container.append(img_reply_member_img);
 					
 					// 2-2) 
@@ -610,8 +614,8 @@
 			//var targetMore = $(this).parents(".div-reply-button").nextAll(".div-reply-more");
 			//console.log("1 = " + targetMore);
 			
-			var targetMore = $(this).parents(".div-reply-button");
-			var target = targetMore.nextAll(".div-reply-list");
+			//var targetMore = $(this).parents(".div-reply-button");
+			var target = $(this).parents(".div-reply-button").nextAll(".div-reply-list");
 			//console.log("2 = " + target);
 			
 			var fold_state = $(this).attr("data-fold");
@@ -622,14 +626,14 @@
 			if(fold_state == "1") { // 펼친 상태이면(1)
 				$(this).attr("data-fold", "0"); // 접힌 상태로 바꾸기(0)
 				// 접기 (hide)
-				targetMore.addClass("d-none");
-				target.addClass("d-none");
+				target.prev().addClass("d-none");
+				target.children().addClass("d-none");
 			} else { // 접힌 상태이면(0)
 				$(this).attr("data-fold", "1"); // 펼친 상태로 바꾸기(1)
 				if(reply_list_state == "1") { // 이미 조회한 상태라면
 					// 펴기 (hide)
-					targetMore.removeClass("d-none");
-					target.removeClass("d-none");
+					target.prev().removeClass("d-none");
+					target.children().removeClass("d-none");
 				} else { // 최초 조회 상태라면
 					$(this).attr("data-replylist", "1"); // 조회한 상태로 변경
 					
@@ -648,12 +652,14 @@
 						
 						if(response.data.length != 0) {
 							// 더보기 버튼
-							if(response.data.replyList.length > response.data.replyCount) {
+							console.log("replyLenght = " + response.data.replyList.length)
+							console.log("replyCount = " + response.data.replyCount)
+							if(response.data.replyList.length < response.data.replyCount) {
 								var div_reply_more_container = $("<div>").attr("class", "d-flex justify-content-center align-items-center border-top border-bottom div-reply-more");
 								var div_reply_more_button = $("<button>").attr("class", "col d-flex justify-content-center align-items-center border-0 btn-reply-more").attr("data-boardno", boardNo).attr("data-rp", 1).attr("data-rplast", response.data.rpLast).text("더보기");
 								
 								var div_reply_more = div_reply_more_container.append(div_reply_more_button);
-								targetMore.after(div_reply_more);
+								target.before(div_reply_more);
 							}
 							
 							// 댓글 입력창
@@ -662,7 +668,7 @@
 							var div_reply_insert_inner_container = $("<div>").attr("class", "d-flex justify-content-center align-items-center px-2 py-2 w-100 rounded-pill bg-white border border-1");
 							
 							var span_reply_insert_container = $("<span>").attr("class", "me-3 ms-1 span-reply-writer-profile");
-							var img_reply_insert = $("<img>").attr("class", "img-member-profile").attr("src", "https://placeimg.com/65/65/any");
+							var img_reply_insert = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "https://placeimg.com/65/65/any");
 							var span_reply_insert = span_reply_insert_container.append(img_reply_insert);
 							
 							var input_reply_insert = $("<input>").attr("class", "d-flex flex-fill me-3 ps-2 py-1 border-0 rounded align-self-center btn-reply-input").attr("placeholder", "댓글을 남겨주세요");
@@ -682,7 +688,7 @@
 								
 								// 2-1) span 태그
 								var span_reply_member_img_container = $("<span>").attr("class", "div-reply-member-profile");
-								var img_reply_member_img = $("<img>").attr("class", "img-member-profile").attr("src", "https://placeimg.com/65/65/any");
+								var img_reply_member_img = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "https://placeimg.com/65/65/any").attr("writerno", response.data.replyList[i].replyWriterNo);
 								var span_reply_member_img = span_reply_member_img_container.append(img_reply_member_img);
 								
 								// 2-2) 
@@ -869,7 +875,7 @@
 				var divtop_outer = $("<div>").attr("class", "d-flex align-items-start px-3 pt-3 mt-3 div-board div-board-top")
 				
 				var divtop_span = $("<span>").attr("class", "div-member-profile");
-				var divtop_img_member = $("<img>").attr("class", "img-member-profile").attr("src", "https://placeimg.com/65/65/any"); // 임시 주소
+				var divtop_img_member = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "https://placeimg.com/65/65/any").attr("writerno", response.data.boardWriterNo); // 임시 주소
 				var divtop_img = divtop_span.append(divtop_img_member);
 				
 				var divtop_writer_outer = $("<div>").attr("class", "ms-3 w-100");
@@ -1071,7 +1077,7 @@
 					var divtop_outer = $("<div>").attr("class", "d-flex align-items-start px-3 pt-3 mt-3 div-board div-board-top")
 					
 					var divtop_span = $("<span>").attr("class", "div-member-profile");
-					var divtop_img_member = $("<img>").attr("class", "img-member-profile").attr("src", "https://placeimg.com/65/65/any"); // 임시 주소
+					var divtop_img_member = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "https://placeimg.com/65/65/any").attr("writerno", response.data.boardList[i].boardWriterNo); // 임시 주소
 					var divtop_img = divtop_span.append(divtop_img_member);
 					
 					var divtop_writer_outer = $("<div>").attr("class", "ms-3 w-100");
@@ -1176,7 +1182,7 @@
 					var divtop_outer = $("<div>").attr("class", "d-flex align-items-start px-3 pt-3 mt-3 div-board div-board-top");
 					
 					var divtop_span = $("<span>").attr("class", "div-member-profile");
-					var divtop_img_member = $("<img>").attr("class", "img-member-profile").attr("src", "https://placeimg.com/65/65/any"); // 임시 주소
+					var divtop_img_member = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "https://placeimg.com/65/65/any").attr("writerno", response.data.boardList[i].boardWriterNo); // 임시 주소
 					var divtop_img = divtop_span.append(divtop_img_member);
 					
 					var divtop_writer_outer = $("<div>").attr("class", "ms-3 w-100");
@@ -1188,7 +1194,7 @@
 					var divtop_dropdown_a = $("<a>").attr("class", "fa-solid fa-ellipsis-vertical a-board-dropdown icon-board w-100").attr("data-bs-toggle", "dropdown").attr("data-boardwriterno", response.data.boardList[i].boardWriterNo).attr("data-boardwritergrade", response.data.boardList[i].memberGrade);
 					var divtop_dropdown_ul = $("<ul>").attr("class", "dropdown-menu");
 					var divtop_dropdown_li_edit = $("<li>").attr("class", "li-edit");
-					var divtop_dropdown_a_edit = $("<a>").attr("class", "dropdown-item editor-open-edit").attr("data-bs-toggle", "modal").attr("data-bs-target", "#modal-editor").attr("data-boardno", response.data.boardList[i].boardNo).text("수정");
+					var divtop_dropdown_a_edit = $("<a>").attr("class", "dropdown-item editor-open-edit").attr("data-bs-toggle", "modal").attr("data-bs-target", "#modal-edit").attr("data-boardno", response.data.boardList[i].boardNo).text("수정");
 					var divtop_dropdown_li_delete = $("<li>").attr("class", "li-delete");
 					var divtop_dropdown_a_delete = $("<a>").attr("class", "dropdown-item btn-delete").attr("data-boardno", response.data.boardList[i].boardNo).attr("data-boardwriterno", response.data.boardList[i].boardWriterNo).text("삭제");
 					var divtop_dropdown_li_report = $("<li>").attr("class", "li-report");
@@ -1280,7 +1286,7 @@
 				var divtop_outer = $("<div>").attr("class", "d-flex align-items-start px-3 pt-3 mt-3 div-board div-board-top");
 				
 				var divtop_span = $("<span>").attr("class", "div-member-profile");
-				var divtop_img_member = $("<img>").attr("class", "img-member-profile").attr("src", "https://placeimg.com/65/65/any"); // 임시 주소
+				var divtop_img_member = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "https://placeimg.com/65/65/any").attr("writerno", response.data.boardList[i].boardWriterNo); // 임시 주소
 				var divtop_img = divtop_span.append(divtop_img_member);
 				
 				var divtop_writer_outer = $("<div>").attr("class", "ms-3 w-100");

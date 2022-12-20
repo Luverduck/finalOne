@@ -197,7 +197,21 @@
 				
 				</div>
 			</div>
-		</div>
+
+<div class = "row">
+		<p>만들고 싶은 아지트종류를 선택하세요</p>
+		<div>
+			<input type="radio"  name="ahzitSort" id="ex_rd1" value="취미" checked><label for="ex_rd1">취미</label><br>
+			<input type="radio"  name="ahzitSort" id="ex_rd2" value="스터디"><label for="ex_rd2">스터디</label><br>
+			<input type="radio"  name="ahzitSort" id="ex_rd3" value="일상"><label  for="ex_rd3">일상</label><br>
+			<input type="radio"  name="ahzitSort" id="ex_rd4" value="팬클럽"><label  for="ex_rd4">팬클럽</label><br>
+			<input type="radio"  name="ahzitSort" id="ex_rd5" value="음악"><label  for="ex_rd5">음악</label><br>
+			<input type="radio"  name="ahzitSort" id="ex_rd6" value="스포츠"><label  for="ex_rd6">스포츠</label><br>
+			<input type="radio"  name="ahzitSort" id="ex_rd7" value="여행"><label  for="ex_rd7">여행</label><br>
+			<input type="radio"  name="ahzitSort" id="ex_rd8" value="맛집"><label  for="ex_rd8">맛집</label><br>
+			<input type="radio"  name="ahzitSort" id="ex_rd9" value="영화"><label  for="ex_rd9">영화</label><br><br>
+
+</div>
 
 		<%--아지트 이름 --%>
 		<div class="row align-items-center mt-5">

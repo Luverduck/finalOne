@@ -32,7 +32,7 @@
 	</div>
 </div>
 	
-			<div class="col-md-8 offset-md-2 my-4">
+			<div class="col-md-8 offset-md-2 my-4 mb-4">
 				<div class="text-center id1">
 					회원님의 아이디는  &nbsp;&nbsp; 
 					<span class="id2">${checkId}</span>
@@ -40,12 +40,12 @@
 				</div>
 				
 
-<div class="col-md-6 offset-md-3 mt-5">
+<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-5">
 	<div class="row text-center mb-2">
-		<a href="login" class="btn btn-outline-success w-100" role="button">로그인 하기</a>
+		<a href="login" class="btn w-100" style="background-color : #E6E6E6; color:#3E4684;" role="button">로그인 하기</a>
 	</div>
-	<div class="row text-center mb-2 mt-1">
-		<a href="checkPw" class="btn btn btn-outline-warning w-100 " role="button">비밀번호 찾기</a>
+	<div class="row text-center mb-4 mt-1">
+		<a href="checkPw" class="btn w-100 " style="background-color : #E6E6E6; color:#3E4684;" role="button">비밀번호 찾기</a>
 	</div>
 </div>
 

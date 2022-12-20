@@ -24,11 +24,13 @@ import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitInAttachmentDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AttachmentDto;
+import com.kh.ahzit.entity.ScheduleDto;
 import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AhzitBoardDao;
 import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.repository.AhzitMemberDao;
 import com.kh.ahzit.repository.AttachmentDao;
+import com.kh.ahzit.repository.ScheduleDao;
 import com.kh.ahzit.service.AhzitMemberService;
 import com.kh.ahzit.vo.AhzitMemberInfoRequestVO;
 import com.kh.ahzit.vo.AhzitMemberInfoVO;
@@ -53,6 +55,9 @@ public class AhzitInController {
 	
 	@Autowired
 	private AhzitMemberService ahzitMemberService;
+	
+	@Autowired
+	private ScheduleDao scheduleDao;
 	
 	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
 	public void prepare() {
@@ -109,6 +114,10 @@ public class AhzitInController {
 		AhzitMemberDto ahzitMemberDto = ahzitBoardDao.searchMemberInfo(ahzitNo, loginId);
 		// 조회한 정보를 model에 추가
 		model.addAttribute("ahzitMemberDto", ahzitMemberDto);
+		//1219 추가) ahzit_no로 schedule 테이블을 검색한 목록
+		List<ScheduleDto> scheduleList=scheduleDao.scheduleList(ahzitNo);
+		//1219 추가) 검색결과목록을 model에 추가
+		model.addAttribute("scheduleList", scheduleList);
 		//개설한 아지트 정보를 조회
 		model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));
 		// 편의를 위해 ahzitNo를 model에 추가

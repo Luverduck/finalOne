@@ -40,6 +40,7 @@
 			<div class = "row">
 			
 				<%-- 왼쪽 사이드바 --%>
+
 				<div class = "col-3">
 					<%--아지트 프로필 사진 --%>
 					<div class = "row">
@@ -47,6 +48,7 @@
 							<div class = "d-flex div-ahzit-img justify-content-center align-items-center">
 							<c:if test="${attachmentList.isEmpty()}">
 						    	<img src = "/images/bg_default.jpg" class="flex-fill img-ahzit">
+
 					    	</c:if>
 				      		<c:forEach var = "list" items = "${attachmentList}"> <!-- 설정한 프로필 -->
 				        		<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="flex-fill img-ahzit">  					

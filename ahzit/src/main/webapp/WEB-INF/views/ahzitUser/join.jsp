@@ -17,9 +17,14 @@
 		padding: 0.26rem 0.75rem;
 	}
 	
-	 span img {
+/* 	 span img {
 		width: 130px;
 		height: 130px;
+		border-radius: 50%; 
+	} */
+	.join-img-sort {
+		width: 110px;
+		height: 110px;
 		border-radius: 50%; 
 	}
 	
@@ -28,9 +33,8 @@
 	}
 		
 	.interest-selected {
-		border : 5px solid blue;
+		border : 5px solid #3E4684;
 	}
-	
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
@@ -358,14 +362,14 @@
 						
 						<div class="input-group form-floating">
 						
-							<input type="text" name="userEmail" class=" form-control rounded d-flex flex-fill" placeholder="이메일"  required>
+							<input type="text" name="userEmail" class=" form-control rounded me-1"  placeholder="이메일"  required>
 							
 							<label>
 							이메일 
 							<i class="fa-solid fa-asterisk text-danger"></i>
 							</label>
 							
-							<button class="send-btn btn btn-warning rounded text-light btn-m" disabled type="button" >인증번호 발송</button>
+							<button class="send-btn btn  rounded btn-m" style="background-color : #E6E6E6; color:#3E4684;" disabled type="button" >인증번호 발송</button>
 							<div class="valid-feedback">올바른 이메일 형식입니다.</div>
 							<div class="invalid-feedback">이메일 형식을 확인해주세요</div>		
 						</div>
@@ -393,7 +397,7 @@
 						<label for="sort1">
                				<input  type="checkbox" name="userInterestSort" value="취미" id ="sort1" >
 							<span>
-							<img src="/images/sns.jpg">
+							<img src="/images/hobbies.png" class="join-img-sort">
 							</span>
 						</label>
 					</div>
@@ -407,7 +411,7 @@
 						<label for="sort2">
                 				<input  type="checkbox" name="userInterestSort" value="스터디" id ="sort2" >
 								<span>
-								<img src="/images/sns.jpg" class="image image-hover">
+								<img src="/images/study.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>
@@ -421,7 +425,7 @@
 						<label for="sort3">
                 				<input  type="checkbox" name="userInterestSort" value="일상"  id ="sort3" style="display: none;">
 								<span>
-								<img src="/images/sns.jpg">
+								<img src="/images/life-smile.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>
@@ -435,7 +439,7 @@
 						<label for="sort4">
                 				<input type="checkbox" name="userInterestSort" value="팬클럽" id ="sort4"  >
 								<span>
-								<img src="/images/sns.jpg">
+								<img src="/images/fanclub.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>
@@ -449,7 +453,7 @@
 						<label for="sort5">
                 				<input type="checkbox" name="userInterestSort" value="음악" id ="sort5"  >
 								<span>
-								<img src="/images/sns.jpg">
+								<img src="/images/music.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>
@@ -463,7 +467,7 @@
 						<label for="sort6">
                 				<input type="checkbox" name="userInterestSort" value="스포츠" id ="sort6"  >
 								<span>
-								<img src="/images/sns.jpg">
+								<img src="/images/sports.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>
@@ -477,7 +481,7 @@
 						<label for="sort7">
                 				<input type="checkbox" name="userInterestSort" value="여행" id ="sort7"  >
 								<span>
-								<img src="/images/sns.jpg">
+								<img src="/images/travel.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>
@@ -491,7 +495,7 @@
 						<label for="sort8">
                 				<input type="checkbox" name="userInterestSort" value="맛집" id ="sort8"  >
 								<span>
-								<img src="/images/sns.jpg">
+								<img src="/images/eat.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>
@@ -505,7 +509,7 @@
 						<label for="sort9">
                 				<input type="checkbox" name="userInterestSort" value="영화" id ="sort9"  >
 								<span>
-								<img src="/images/sns.jpg">
+								<img src="/images/movie.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>
@@ -518,9 +522,11 @@
 	</div>
 	    
 	<div class="row mt-4">
-		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-		<input class="btn btn-warning w-100 btn-lg rounded text-light join-btn" type="button" value="가입하기" onclick="submitChk();"/>
+	<div class="col-8 offset-2 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+		<div class="mb-5">
+		<input class="btn btn-lg rounded w-100 join-btn" style="background-color : #E6E6E6; color:#3E4684;" type="button" value="가입하기" onclick="submitChk();"/>
 		 </div>
+	</div> 
 	</div>
               
 </form>
