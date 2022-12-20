@@ -11,8 +11,10 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.entity.InquireDto;
 import com.kh.ahzit.vo.AdminAhzitListSearchVO;
 import com.kh.ahzit.vo.AdminAhzitUserListSearchVO;
+import com.kh.ahzit.vo.AdminInquireListSearchVO;
 
 @Repository
 public class AdminDaoImpl implements AdminDao{
@@ -152,6 +154,57 @@ public class AdminDaoImpl implements AdminDao{
 		@Override
 		public AhzitDto selectOne(int ahzitNo) {
 			return sqlSession.selectOne("ahzit.one", ahzitNo);
+		}
+
+		@Override
+		public List<InquireDto> inquireSelectList(AdminInquireListSearchVO adminInquireListSearchVO) {
+			if (adminInquireListSearchVO.isSearch()) {
+				return inquireSearchList(adminInquireListSearchVO);
+			} else {
+				return inquireAllList(adminInquireListSearchVO);
+			}
+		}
+
+		@Override
+		public List<InquireDto> inquireAllList(AdminInquireListSearchVO adminInquireListSearchVO) {
+			Map<String, String> param = new HashMap<>();
+
+			param.put("startRow", String.valueOf(adminInquireListSearchVO.startRow()));
+			param.put("endRow", String.valueOf(adminInquireListSearchVO.endRow()));
+			return sqlSession.selectList("admin.inquireAllList", param);
+		}
+
+		@Override
+		public List<InquireDto> inquireSearchList(AdminInquireListSearchVO adminInquireListSearchVO) {
+		Map<String, String> param = new HashMap<>();
+			
+			param.put("type", adminInquireListSearchVO.getType());
+			param.put("keyword", adminInquireListSearchVO.getKeyword());
+			param.put("startRow", String.valueOf(adminInquireListSearchVO.startRow()));
+			param.put("endRow", String.valueOf(adminInquireListSearchVO.endRow()));
+			return sqlSession.selectList("admin.inquireSearchList", param);
+		}
+
+		@Override
+		public int inquireCount(AdminInquireListSearchVO adminInquireListSearchVO) {
+			if (adminInquireListSearchVO.isSearch()) {
+				return inquireSearchCount(adminInquireListSearchVO);
+			} else {
+				return inquireListCount(adminInquireListSearchVO);
+			}
+		}
+
+		@Override
+		public int inquireSearchCount(AdminInquireListSearchVO adminInquireListSearchVO) {
+			Map<String, String> param = new HashMap<>();
+			param.put("type", adminInquireListSearchVO.getType());
+			param.put("keyword", adminInquireListSearchVO.getKeyword());
+			return sqlSession.selectOne("admin.inquireSearchListCount", param);
+		}
+
+		@Override
+		public int inquireListCount(AdminInquireListSearchVO adminInquireListSearchVO) {
+			return sqlSession.selectOne("admin.inquireAllListCount", adminInquireListSearchVO);
 		}
 
 		

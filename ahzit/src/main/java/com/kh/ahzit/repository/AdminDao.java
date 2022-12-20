@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.entity.InquireDto;
 import com.kh.ahzit.vo.AdminAhzitListSearchVO;
 import com.kh.ahzit.vo.AdminAhzitUserListSearchVO;
+import com.kh.ahzit.vo.AdminInquireListSearchVO;
 
 public interface AdminDao {
 	
@@ -37,5 +39,15 @@ public interface AdminDao {
 	
 	// 아지트 단일 조회
 	AhzitDto selectOne(int ahzitNo);
+	
+	// 1:1 문의 전체 리스트, 조회 통합
+	List<InquireDto> inquireSelectList(AdminInquireListSearchVO adminInquireListSearchVO);
+	List<InquireDto> inquireAllList(AdminInquireListSearchVO adminInquireListSearchVO);
+	List<InquireDto> inquireSearchList(AdminInquireListSearchVO adminInquireListSearchVO);
+	
+	//1:1 문의 전체 리스트, 조회 카운트 숫자
+	int inquireCount(AdminInquireListSearchVO adminInquireListSearchVO);
+	int inquireSearchCount(AdminInquireListSearchVO adminInquireListSearchVO);
+	int inquireListCount(AdminInquireListSearchVO adminInquireListSearchVO);
 	
 }

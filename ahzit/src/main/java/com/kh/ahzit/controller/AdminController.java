@@ -14,11 +14,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.entity.InquireDto;
 import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AdminDao;
 import com.kh.ahzit.repository.AhzitUserDao;
 import com.kh.ahzit.vo.AdminAhzitListSearchVO;
 import com.kh.ahzit.vo.AdminAhzitUserListSearchVO;
+import com.kh.ahzit.vo.AdminInquireListSearchVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -92,10 +94,21 @@ public class AdminController {
 		model.addAttribute("ahzit", ahzit);
 		return "admin/ahzit";
 	}
+	
 	// 아지트 선택 조회	
 	@GetMapping("/ahzitSelect")
 	public String detail(@RequestParam int ahzitNo, Model model) {
 		model.addAttribute("ahzitSelect", adminDao.selectOne(ahzitNo));
 		return "admin/ahzitSelect";
+	}
+	
+	// 1:1문의 글 조회
+	@GetMapping("/inquire")
+	public String inquireList(Model model, @ModelAttribute AdminInquireListSearchVO adminInquireListSearchVO) {
+		List<InquireDto> inquireList = adminDao.inquireSelectList(adminInquireListSearchVO);
+		int count = adminDao.inquireCount(adminInquireListSearchVO);
+		adminInquireListSearchVO.setCount(count);
+		model.addAttribute("inquireList", inquireList);
+		return "admin/inquire";
 	}
 }
