@@ -66,14 +66,23 @@ public interface AhzitDao {
 	// 추상 메소드 - 소모임 내 회원 검색시 회원수
 	public int searchMemberCount(int ahzitNo, String keyword);
 
-	// 홈화면 검색페이지 (관심사 별)
+	// 추상 메소드 - 찾기 페이지에서 소모임 조회
+	List<AhzitSearchListRequestVO> selectSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+	
+	// 추상 메소드 - 찾기 페이지에서 전체 소모임 조회
+	List<AhzitSearchListRequestVO> allSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+	
+	// 추상 메소드 - 찾기 페이지에서 특정 카테고리 소모임 조회
 	List<AhzitSearchListRequestVO> searchSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
 		
-	//  전체 조회시 아지트 총 개수 반환
-	public int listCountInquire(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+	// 추상 메소드 - 찾기 페이지에서 소모임 갯수
+	public int countselectAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
 	
-	//  관심사 조회시 아지트 개수 반환
-	public int listSortCountInquire(AhzitSearchListRequestVO ahzitSearchListRequestVO); 
+	// 추상 메소드 - 찾기 페이지에서 전체 소모임 갯수
+	public int countAllAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+	
+	// 추상 메소드 - 찾기 페이지에서 특정 카테고리 소모임 갯수
+	public int coutntSelectAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO); 
 
 
 }
