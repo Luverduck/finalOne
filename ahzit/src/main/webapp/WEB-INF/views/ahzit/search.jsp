@@ -8,9 +8,6 @@
 </jsp:include>
 
 <style>
-/*    * { 
-   		font-family: 'NanumSquareAc', sans-serif ;
-   	}  */
    	.ahzit-img {
    		width:100%;
    		height:300px;
@@ -54,8 +51,7 @@
     } 
     /*카드*/
     body {
-        font-family: Varela Round;
-        background: #f1f1f1;
+        background: #F5F5F5;
     }
     .card-sl {
         border-radius: 15px;
@@ -81,7 +77,7 @@
     }
     .card-action:hover {
         color: #fff;
-        background: #FFA91C;
+        background: #3E4684;
         -webkit-animation: pulse 1.5s infinite;
     }
     .card-heading {
@@ -150,43 +146,43 @@
 			
 			<div class = "row mt-4">
 				<div class = "col">
-					<a href="search"><img src="/images/hobby.png" class="sort-img me-2">전체</a>
-				</div>
-		
+					<a href="search"><img src="/images/search.png" class="sort-img mb-2 ms-4"><p class="text-center">전체</p></a>
+				</div>	
+
 				<div class = "col">
-					<a href="search?keyword=취미"><img src="/images/hobby.png" class="sort-img me-2">취미</a>
+					<a href="search?keyword=취미"><img src="/images/hobbies.png" class="sort-img mb-2 ms-4"><p class="text-center">취미</p></a>
 				</div>
 			
 				<div class = "col">
-					<a href="search?keyword=스터디"> <img src="/images/study.png" class="sort-img me-2">스터디</a>
+					<a href="search?keyword=스터디"> <img src="/images/study.png" class="sort-img mb-2 mb-1 ms-4"><p class="text-center">스터디</p></a>
 				</div>
 				
 				<div class = "col">
-          			<a href="search?keyword=일상"><img src="/images/life-smile.png" class="sort-img me-2">일상</a>
+          			<a href="search?keyword=일상"><img src="/images/life-smile.png" class="sort-img mb-2 mb-1 ms-4"><p class="text-center">일상</p></a>
 				</div>
 				
 				<div class = "col">
-					<a href="search?keyword=팬클럽"><img src="/images/fanclub.png" class="sort-img me-2">팬클럽</a>
+					<a href="search?keyword=팬클럽"><img src="/images/fanclub.png" class="sort-img mb-2 mb-1 ms-4"><p class="text-center">팬클럽</p></a>
 				</div>
 				
 				<div class = "col">
-					<a href="search?keyword=음악"><img src="/images/music.png" class="sort-img me-2">음악</a>
+					<a href="search?keyword=음악"><img src="/images/music.png" class="sort-img mb-2 ms-4"><p class="text-center">음악</p></a>
 				</div>
 				
 				<div class = "col">
-					<a href="search?keyword=스포츠"><img src="/images/sports.png" class="sort-img me-2">스포츠</a>
+					<a href="search?keyword=스포츠"><img src="/images/sports.png" class="sort-img mb-2 ms-4"><p class="text-center">스포츠</p></a>
 				</div>
 				
 				<div class = "col">
-					<a href="search?keyword=여행"><img src="/images/travel.png" class="sort-img me-2">여행</a>
+					<a href="search?keyword=여행"><img src="/images/travel.png" class="sort-img mb-2 ms-4"><p class="text-center">여행</p></a>
 				</div>
 				
 				<div class = "col">
-					<a href="search?keyword=맛집"><img src="/images/eat.png" class="sort-img me-2">맛집</a>
+					<a href="search?keyword=맛집"><img src="/images/eat.png" class="sort-img mb-2 ms-4"><p class="text-center">맛집</p></a>
 				</div>
 				
 				<div class = "col">
-					<a href="search?keyword=영화">영화</a>
+					<a href="search?keyword=영화"><img src="/images/movie.png" class="sort-img mb-2 ms-4"><p class="text-center">영화</p></a>
 				</div>	
 			</div>
 				
@@ -201,7 +197,7 @@
 	                  </div>
 	                  <a class="card-action" href="${pageContext.request.contextPath}/ahzit_in/${searchSortAhzit.ahzitNo}">
 	                  <%--아지트 종류에 따른 아이콘 --%>
-	                  <c:if test="${searchSortAhzit.ahzitSort == '취미'}"><img src="/images/hobby.png"  class="sort-img"></c:if>
+	                  <c:if test="${searchSortAhzit.ahzitSort == '취미'}"><img src="/images/hobbies.png"  class="sort-img"></c:if>
 	                  <c:if test="${searchSortAhzit.ahzitSort == '스터디'}"><img src="/images/study.png"  class="sort-img"></c:if>
 	                  <c:if test="${searchSortAhzit.ahzitSort == '일상'}"><img src="/images/life-smile.png"  class="sort-img"></c:if>
 	                  <c:if test="${searchSortAhzit.ahzitSort == '팬클럽'}"><img src="/images/fanclub.png"  class="sort-img"></c:if>
@@ -209,6 +205,7 @@
 	                  <c:if test="${searchSortAhzit.ahzitSort == '스포츠'}"><img src="/images/sports.png"  class="sort-img"></c:if>
 	                  <c:if test="${searchSortAhzit.ahzitSort == '여행'}"><img src="/images/travel.png"  class="sort-img"></c:if>
 	                  <c:if test="${searchSortAhzit.ahzitSort == '맛집'}"><img src="/images/eat.png"  class="sort-img"></c:if>
+	                  <c:if test="${searchSortAhzit.ahzitSort == '영화'}"><img src="/images/movie.png"  class="sort-img"></c:if>
 	                  </a>
 	                  <div class="card-heading"> <%--아지트 이름 --%>
 	                      ${searchSortAhzit.ahzitName} 

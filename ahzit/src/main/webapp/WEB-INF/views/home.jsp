@@ -56,7 +56,6 @@
     } 
     /*카드*/
     body {
-        font-family: Varela Round;
         background: #F5F5F5;
     }
     .card-sl {
