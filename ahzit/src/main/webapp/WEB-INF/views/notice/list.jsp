@@ -14,12 +14,12 @@
 	<jsp:param value="notice" name="title" />
 </jsp:include>
 
-<style>
+<!-- <style>
 * {
 	border: 1px dotted gray;
 	font-family: font-family : 'Gothic A1', sans-serif;
 }
-</style>
+</style> -->
 
 
 <div class="container mt-5 mb-5">
@@ -97,11 +97,11 @@
 
 
 	<!-- 페이징 -->
-	<div class="row">
+  <div class="row align-items-center mt-2">
 	
 		<nav aria-label="Search results pages">
 		
-		<ul class="pagination">
+		<ul class="pagination justify-content-center">
 			<!-- 이전 -->
 			<c:choose>
 				<c:when test="${not vo.isFirst()}">
@@ -130,10 +130,12 @@
 				step="1">
 				<c:choose>
 					<c:when test="${vo.p == i}">
-						<li class="on"><a href="#">${i}</a></li>
+						<li class="page-item on">
+						<a class="page-link" href="#">${i}</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="list?p=${i}&${vo.parameter()}">${i}</a></li>
+						<li class="page-item">
+						<a class="page-link" href="list?p=${i}&${vo.parameter()}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -141,19 +143,23 @@
 			<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
 			<c:choose>
 				<c:when test="${vo.hasNext()}">
-					<li><a href="list?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a></li>
+					<li class="page-item">
+					<a class="page-link" href="list?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="#">&gt;</a></li>
+					<li class="page-item">
+					<a class="page-link" href="#">&gt;</a></li>
 				</c:otherwise>
 			</c:choose>
 
 			<c:choose>
 				<c:when test="${not vo.isLast()}">
-					<li><a href="list?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;</a></li>
+					<li class="page-item">
+					<a class="page-link" href="list?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="#">&raquo;</a></li>
+					<li class="page-item">
+					<a class="page-link href="#">&raquo;</a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>
@@ -163,17 +169,27 @@
 
 
 	<!-- 검색창 -->
-	<form action="list" method="get">
-		<select name="type" required>
+
+<div class="justify-content-center input-group mt-2 mb-5">
+	<form class="row gy-2 gx-3 align-items-center" action="list" method="get">
+		<div class="col-auto">
+		<select class="form-select" name="type" required>
 			<option value="notice_title"
 				<c:if test="${vo.type=='notice_title'}">selected</c:if>>제목</option>
 			<option value="notice_content"
 				<c:if test="${vo.type=='notice_content'}">selected</c:if>>내용</option>
-
-		</select> <input type="search" name="keyword" placeholder="검색어" required
-			value="${vo.keyword}">
-		<button type="submit">검색</button>
+		</select>
+		</div>
+		
+		<div class="col-auto">
+		<input class="form-control" type="search" name="keyword" placeholder="검색어" required value="${vo.keyword}">
+		</div>
+		
+		<div class="col-auto">	
+		<button class="btn btn-outline-secondary" type="submit">검색</button>
+		</div>
 	</form>
+</div>
 
 </div>
 

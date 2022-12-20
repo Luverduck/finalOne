@@ -11,21 +11,25 @@
 
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="공지게시판 - 상세" name="title" />
+	<jsp:param value="notice" name="title" />
 </jsp:include>
 
-<div class="container">
-	<div class="row center">
-		<h1>게시글 보기</h1>
+<style>
+* {
+	border: 1px dotted gray;
+	font-family: font-family : 'Gothic A1', sans-serif;
+}
+</style>
+
+
+
+<div class="container mt-5 mb-5">
+
+	<div class="row mt-5 mb-5">
+		<h1>공지 게시판</h1>
 	</div>
 
-	<!-- 목록 버튼 -->
-	<div class="row">
-		<a class="btn btn-neutral" href="list">목록으로</a>
-	</div>
-
-
-	<div class="row center">
+	<div class="row mt-5 mb-5">
 		<table class="table">
 			<tbody>
 				<tr>
@@ -78,7 +82,7 @@
 								(${attachmentDto.attachmentSize} bytes) 
 								- 
 								[${attachmentDto.attachmentType}]
-								<a href="/attachment/download/${attachmentDto.attachmentNo}">download</a>
+								<a href="/attachment/download/${attachmentDto.attachmentNo}"><i class="fa-solid fa-cloud-arrow-down"></i></a>
 							</li>
 							</c:forEach>
 						</ul>
@@ -89,22 +93,22 @@
 				
 				
 			</tbody>
-
-			<tfoot>
-				<tr>
-					<td>
-						<c:if test="${loginId != null}">
-							<a class="btn btn-positive" href="write">글쓰기</a>
-						</c:if>
-						<a href="edit?noticeNo=${noticeDto.noticeNo}">수정하기</a>	
-						<a href="delete?noticeNo=${noticeDto.noticeNo}">삭제하기</a>
-					</td>
-				</tr>
-			</tfoot>
-
-
-
 		</table>
+
+			
+			<div>		
+				<c:if test="${loginId != null}">
+					<c:if test="${loginGrade == '관리자'}">
+						<a class="btn" href="write">글쓰기</a>
+						<a class="btn" href="edit?noticeNo=${noticeDto.noticeNo}">수정하기</a>	
+						<a class="btn" href="delete?noticeNo=${noticeDto.noticeNo}">삭제하기</a>
+					</c:if>
+				</c:if>
+				
+						<a href="list">목록으로</a>
+			</div>
+
+
 	</div>
 
 
