@@ -93,11 +93,11 @@
 			<tfoot>
 				<tr>
 					<td>
-						<c:if test="${loginId != null}">
+						<c:if test = "${loginGrade == '관리자' || loginGrade == '운영자'}">
 							<a class="btn btn-positive" href="write">글쓰기</a>
+							<a href="edit?noticeNo=${noticeDto.noticeNo}">수정하기</a>	
+							<a href="delete?noticeNo=${noticeDto.noticeNo}">삭제하기</a>
 						</c:if>
-						<a href="edit?noticeNo=${noticeDto.noticeNo}">수정하기</a>	
-						<a href="delete?noticeNo=${noticeDto.noticeNo}">삭제하기</a>
 					</td>
 				</tr>
 			</tfoot>

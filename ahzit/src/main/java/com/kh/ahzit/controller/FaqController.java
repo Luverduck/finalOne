@@ -70,7 +70,7 @@ public class FaqController {
 		boolean result = faqDao.edit(faqDto);
 		if(result) {
 			attr.addAttribute("faqNo", faqDto.getFaqNo());
-			return "redirect:detail";
+			return "redirect:list";
 		}
 		else {
 			throw new TargetNotFoundException();
@@ -92,7 +92,7 @@ public class FaqController {
 		//번호 생성 후 등록
 		int faqNo = faqDao.insert2(faqDto);
 		attr.addAttribute("faqNo", faqNo);
-		return "redirect:detail";
+		return "redirect:list";
 	}
 	
 }

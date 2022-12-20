@@ -130,10 +130,11 @@
 		</div>
 	
 		<div class = "col-4 offset-1 d-flex">
-		<!-- 마지막에 관리자, 운영자만 볼 수 있게 버튼 바꿀게요 ! -->
+			<c:if test = "${loginGrade == '관리자' || loginGrade == '운영자'}">
 			<div class = "col d-flex justify-content-center align-items-center">
-				<a href = "/admin/" class = "d-flex align-items-center header-style">관리자홈</a>
+				<a href = "${pageContext.request.contextPath}/admin/" class = "d-flex align-items-center header-style">관리자홈</a>
 			</div>
+			</c:if>
 			<div class = "col d-flex justify-content-center align-items-center">
 				<a href = "/search" class = "d-flex align-items-center header-style">찾기</a>
 			</div>
@@ -143,15 +144,15 @@
 					<a href="/ahzitUser/logout" class = "d-flex align-items-center logout header-style">로그아웃</a>
 				</div>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/mypage" class = "d-flex align-items-center header-style">마이페이지</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/mypage" class = "d-flex align-items-center header-style">마이페이지</a>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/login" class = "d-flex align-items-center header-style">로그인</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/login" class = "d-flex align-items-center header-style">로그인</a>
 				</div>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/join" class = "d-flex align-items-center header-style">회원가입</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/join" class = "d-flex align-items-center header-style">회원가입</a>
 				</div>
 			</c:otherwise>
 			</c:choose>
