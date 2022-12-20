@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-
 import javax.annotation.PostConstruct;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,32 +16,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import org.springframework.web.multipart.MultipartFile;
-
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-import com.kh.ahzit.constant.SessionConstant;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitInAttachmentDto;
 import com.kh.ahzit.entity.AhzitMemberDto;
-
 import com.kh.ahzit.entity.AttachmentDto;
-import com.kh.ahzit.error.TargetNotFoundException;
-import com.kh.ahzit.repository.AhzitBoardDao;
-import com.kh.ahzit.repository.AhzitDao;
-import com.kh.ahzit.repository.AttachmentDao;
-
-import com.kh.ahzit.entity.MemberAttachmentDto;
+import com.kh.ahzit.entity.ScheduleDto;
 import com.kh.ahzit.error.TargetNotFoundException;
 import com.kh.ahzit.repository.AhzitBoardDao;
 import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.repository.AhzitMemberDao;
 import com.kh.ahzit.repository.AttachmentDao;
+import com.kh.ahzit.repository.ScheduleDao;
 import com.kh.ahzit.service.AhzitMemberService;
+import com.kh.ahzit.vo.AhzitMemberInfoRequestVO;
+import com.kh.ahzit.vo.AhzitMemberInfoVO;
 
 
 @Controller
@@ -65,6 +55,9 @@ public class AhzitInController {
 	
 	@Autowired
 	private AhzitMemberService ahzitMemberService;
+	
+	@Autowired
+	private ScheduleDao scheduleDao;
 	
 	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
 	public void prepare() {
@@ -121,6 +114,10 @@ public class AhzitInController {
 		AhzitMemberDto ahzitMemberDto = ahzitBoardDao.searchMemberInfo(ahzitNo, loginId);
 		// 조회한 정보를 model에 추가
 		model.addAttribute("ahzitMemberDto", ahzitMemberDto);
+		//1219 추가) ahzit_no로 schedule 테이블을 검색한 목록
+		List<ScheduleDto> scheduleList=scheduleDao.scheduleList(ahzitNo);
+		//1219 추가) 검색결과목록을 model에 추가
+		model.addAttribute("scheduleList", scheduleList);
 		//개설한 아지트 정보를 조회
 		model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));
 		// 편의를 위해 ahzitNo를 model에 추가
@@ -206,7 +203,7 @@ public class AhzitInController {
 	
 	// 소모임 멤버 Mapping
 	@GetMapping("/{ahzitNo}/member")
-	public String member(@PathVariable int ahzitNo, HttpSession session, Model model) {
+	public String member(@PathVariable int ahzitNo, @ModelAttribute AhzitMemberInfoRequestVO ahzitMemberInfoRequestVO, HttpSession session, Model model) {
 		// HttpSession에서 로그인 중인 회원 아이디 반환
 		String loginId = (String)session.getAttribute("loginId");
 		// 입력받은 소모임 번호와 반환한 회원 아이디로 로그인한 회원의 해당 소모임 내 회원 정보 조회
@@ -215,12 +212,18 @@ public class AhzitInController {
 		model.addAttribute("ahzitMemberDto", ahzitMemberDto);
 		//개설한 아지트 정보를 조회
 		model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));
-		
 		//입력받은 아지트번호로 연결되는 첨부파일 조회
 		model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
-		
 		// 편의를 위해 ahzitNo를 model에 추가
 		model.addAttribute("ahzitNo", ahzitNo);
+		// 조회 유형에 따른 회원 수 반환
+		int memberCount = ahzitDao.selectMemberCount(ahzitMemberInfoRequestVO);
+		// 조회한 회원 수를 VO에 설정
+		ahzitMemberInfoRequestVO.setMemberCount(memberCount);
+		// 조회 유형에 따른 회원 정보 조회
+		List<AhzitMemberInfoVO> memberInfoList = ahzitDao.selectMemberInfo(ahzitMemberInfoRequestVO);
+		// 조회 결과를 model에 추가
+		model.addAttribute("ahzitMemberList", memberInfoList);	
 		// 소모임 회원 관리 페이지(member.jsp)로 이동
 		return "ahzit_in/member";
 	}

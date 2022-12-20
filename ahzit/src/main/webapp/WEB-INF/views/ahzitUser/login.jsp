@@ -19,18 +19,7 @@
 
 </style>
 
-<!--  <ul>
-	<li onclick="kakaoLogin();">
-      <a href="javascript:void(0)">
-          <span>카카오 로그인</span>
-      </a>
-	</li>
-	<li onclick="kakaoLogout();">
-      <a href="javascript:void(0)">
-          <span>카카오 로그아웃</span>
-      </a>
-	</li>
-</ul>  -->
+
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>

@@ -68,8 +68,15 @@
 			a.ahzit_no, iaa.attachment_no, iaa.attachment_name, iaa.attachment_type, iaa.attachment_size, iaa.attachment_date 
 		from ahzit a left outer join
 			(select * from ahzit_attachment aa inner join attachment a on 
-        	aa.ahzit_attachment_no = a.attachment_no) iaa on a.ahzit_no = iaa.ahzit_origin_no where ahzit_origin_no= #{ahzitOriginNo}
+        	aa.ahzit_attachment_no = a.attachment_no) iaa on a.ahzit_no = iaa.ahzit_origin_no where a.ahzit_no = #{ahzitAttachmentNo}
 	</select> 
+	
+		
+	<!-- 아지트 수정 시 첨부파일 재등록 위한 첨부파일 삭제 -->
+	<delete id = "deleteAhzitAttachment" parameterType = "int">
+		delete ahzit_attachment where ahzit_attachment_no = #{ahzitAttachmentNo}
+	</delete>
+	
 
 	<!-- 1:1 문의 게시판 첨부파일 등록 -->
 	<insert id = "insertInquireAttachment" parameterType = "map">
@@ -96,7 +103,6 @@
 	<insert id="insertAhzitMemberAttachment" parameterType="map">
 		insert into member_attachment(member_origin_no, member_attachment_no) values (#{memberOriginNo}, #{memberAttachmentNo})
 	</insert>
-	
 
 	<!-- 소모임 회원번호(member_no)로 프로필 이미지 첨부파일 조회 -->
 	<select id="selectAhzitMemberAttachment" parameterType="int" resultType="AttachmentDto">

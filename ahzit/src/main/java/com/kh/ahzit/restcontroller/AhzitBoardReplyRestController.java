@@ -53,6 +53,8 @@ public class AhzitBoardReplyRestController {
 		List<AhzitBoardReplyVO> replyList = ahzitBoardReplyDao.selectReplyList(ahzitBoardReplyRestRequestVO);
 		// 조회한 댓글 목록을 REST 응답에 설정
 		ahzitBoardReplyRestResponseVO.setReplyList(replyList);
+		// 댓글의 총 수 반환 (더보기 생성 제한을 위함)
+		ahzitBoardReplyRestResponseVO.setReplyCount(replyCount);
 		// REST 응답 반환
 		return ahzitBoardReplyRestResponseVO;
 	}

@@ -22,5 +22,4 @@
 		 values(#{userId}, #{userId}, #{userNick}, #{userEmail})
 	</insert>
 	
-	
 </mapper>

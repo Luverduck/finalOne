@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +21,8 @@ import com.kh.ahzit.repository.ScheduleDao;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/rest/ahzitMember")
-public class AhzitMemberRestController {
+@RequestMapping("/rest/ahzitSchedule")
+public class AhzitScheduleRestController {
 	
 	@Autowired
 	private AhzitMemberDao ahzitMemberDao;
@@ -29,29 +30,18 @@ public class AhzitMemberRestController {
 	@Autowired
 	private ScheduleDao scheduleDao;
 	
-	@PostMapping("/nicknameCheck")
-	private String nicknameCheck(@RequestParam int memberAhzitNo, @RequestParam String memberNick) {
-		AhzitMemberDto ahzitMemberDto=AhzitMemberDto.builder().memberAhzitNo(memberAhzitNo).memberNick(memberNick).build();
-		if(ahzitMemberDao.nicknameCheck(ahzitMemberDto)==true) {
-			//NNNNY 중복 없음
-			return "NNNNY";
-		}
-		else {
-			//NNNNN 중복 있음
-			return "NNNNN";
-		}
+	
+	
+	
+	
+	
+	@ResponseBody
+	@RequestMapping("/scheduleInsert")
+	public void scheduleInsert(@RequestBody ScheduleDto scheduleDto) {
+		int scheduleNo=scheduleDao.sequence();
+		scheduleDto.setScheduleNo(scheduleNo);
+		scheduleDao.insert2(scheduleDto);
 	}
-	
-	
-	@GetMapping("/scheduleList")
-	public List<ScheduleDto> scheduleList(@RequestParam int memberAhzitNo){
-		List<ScheduleDto> findList=scheduleDao.scheduleList(memberAhzitNo);
-		
-		return findList;
-		
-	}
-	
-	
 	
 
 }
