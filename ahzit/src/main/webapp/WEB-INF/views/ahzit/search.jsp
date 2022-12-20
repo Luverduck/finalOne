@@ -160,7 +160,7 @@
 				<div class = "col">
           			<a href="search?keyword=일상"><img src="/images/life-smile.png" class="sort-img mb-2 mb-1 ms-4"><p class="text-center">일상</p></a>
 				</div>
-				
+			
 				<div class = "col">
 					<a href="search?keyword=팬클럽"><img src="/images/fanclub.png" class="sort-img mb-2 mb-1 ms-4"><p class="text-center">팬클럽</p></a>
 				</div>
@@ -185,7 +185,6 @@
 					<a href="search?keyword=영화"><img src="/images/movie.png" class="sort-img mb-2 ms-4"><p class="text-center">영화</p></a>
 				</div>	
 			</div>
-				
 					
 	
 		 <div class="row">

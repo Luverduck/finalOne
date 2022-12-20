@@ -32,15 +32,9 @@ display: none;
 </jsp:include>
 
 
-	<c:if test="${loginId != null}">
+	<c:if test = "${loginGrade == '관리자' || loginGrade == '운영자'}">
 		<div class="row right">
-			<%-- 관리자일 경우만 삭제버튼을 추가 --%>
-			<c:if test="${loginGrade == '관리자'}">
-				<a class="btn btn-neutral" href="write">글쓰기</a>
-			</c:if>
-
 			<a class="btn btn-neutral" href="write">글쓰기</a>
-
 		</div>
 	</c:if>
 

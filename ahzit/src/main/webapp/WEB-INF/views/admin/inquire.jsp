@@ -64,7 +64,6 @@ justify-content : center
 			                </table>
 			            </div>
 			        </div>
-        
 	<%-- 페이지 네비게이터 --%>
 	<div class=" mt-3 mb-4">
 	<ul class="pagination">
