@@ -43,5 +43,10 @@ public class AhzitScheduleRestController {
 		scheduleDao.insert2(scheduleDto);
 	}
 	
+	@ResponseBody
+	@RequestMapping("/scheduleDelete")
+	public void scheduleDelete(@RequestBody int scheduleNo) {
+		scheduleDao.delete(scheduleNo);
+	}
 
 }

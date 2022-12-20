@@ -30,12 +30,12 @@
 <div class = "container-fluid mt-3">
 	<div class = "row">
 		
-		<div class = "col-8 offset-2 main">
+		<div class = "col-10 offset-1 main">
 			
 			<div class = "row">
 			
 				<%-- 왼쪽 사이드바 --%>
-				<div class = "col col-3" style="background-color: green;">
+				<div class = "col col-3" style="background-color: #dff9fb;">
 					<h1>왼쪽 사이드바</h1> 
 				
 					<br>
@@ -80,15 +80,13 @@
 							<input type="hidden" name="memberNo" value="${ahzitMemberDto.memberNo}">
 						</div>
 						
-						<c:forEach var="scheduleList" items="${scheduleList}">
-						${scheduleList}
-						</c:forEach>
+						
 					
 					
 				</div>
 				
 				<%-- 오른쪽 사이드바 --%>
-				<div class = "col-3" style="background-color: green;">
+				<div class = "col-3" style="background-color: #dff9fb;">
 					
 					오른쪽
 				</div>
@@ -99,7 +97,8 @@
 
 <script type="text/javascript">
 
-
+var currentTime=new Date();
+console.log(currentTime);
 var memberNo=$("[name=memberNo]").val();
 var memberAhzitNo=$("[name=memberAhzitNo]").val();
 
@@ -120,8 +119,16 @@ document.addEventListener('DOMContentLoaded', function() {
       selectMirror: true,
       // 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
       select: function(arg) {
-    	  
-
+    	  console.log(arg);
+    	
+    	  var result=moment(arg.start).isAfter(currentTime);
+    	  console.log(result);
+    	  if(result==false){
+    		  
+    		  confirm("지나간 날짜에는 일정을 등록할 수 없습니다");
+    		  return false;
+    	  }
+    	
         var title = prompt('입력할 일정:');
         var dto={
       		  "scheduleMemberNo": memberNo,
@@ -139,7 +146,10 @@ document.addEventListener('DOMContentLoaded', function() {
             title: title,
             start: arg.start,
             end: arg.end,
-            allDay: arg.allDay
+            allDay: arg.allDay,
+            extendedProps: {
+            	"scheduleMemberNo": memberNo
+              }
           }),
        	
           //화면에 addEvent 추가후 통신
@@ -162,10 +172,31 @@ document.addEventListener('DOMContentLoaded', function() {
     	  // 있는 일정 클릭시,
     	  console.log("#등록된 일정 클릭#");
     	  console.log(arg.event);
-    	  
-        if (confirm('Are you sure you want to delete this event?')) {
-          arg.event.remove()
-        }
+    	  var check=arg.event.extendedProps.scheduleMemberNo;
+    	  console.log(check);
+    	  var scheduleNo=arg.event.id;
+    		console.log(scheduleNo);
+    	  if(memberNo==check){
+	        if (confirm('일정을 삭제하시겠습니까?')) {
+	          arg.event.remove();
+	          axios({
+	        	  url:"${pageContext.request.contextPath}/rest/ahzitSchedule/scheduleDelete",
+	        	  method:"post",
+	        	  data:scheduleNo,
+	        	  headers: { 'Content-Type': 'application/json' }
+	          }).then(function(response){
+	        	  console.log(response);
+	        	  alert("일정이 삭제되었습니다");
+	        	  location.reload();
+	          }).catch(function (error) {
+	        	    console.log(error);
+	          });
+	        }
+    	  }
+    	  else{
+    		  alert("자신이 등록한 일정만 삭제할 수 있습니다");
+    		  return false;
+    	  }
       },
       editable: true,
       dayMaxEvents: true,
@@ -183,7 +214,10 @@ document.addEventListener('DOMContentLoaded', function() {
     						  title: resp[i]['scheduleTitle'],
     						  start: resp[i]['scheduleStart'],
     						  end: resp[i]['scheduleEnd'],
-    						  id: resp[i]['scheduleNo']
+    						  id: resp[i]['scheduleNo'],
+    						  extendedProps: {
+    				            	"scheduleMemberNo": resp[i]['scheduleMemberNo']
+    				              }
     					  })
     				  }
     			  }
