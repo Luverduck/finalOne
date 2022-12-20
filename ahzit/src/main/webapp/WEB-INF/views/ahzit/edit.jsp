@@ -14,8 +14,8 @@
 <%-- 소모임 수정(소모임이름, 소개, 최대멤버수, 공개여부, 프로필사진)--%>
 <div class="container">
 <form action="edit" method="post" enctype = "multipart/form-data">
-
-	<input type="text"  name = "ahzitNo" value="${ahzitDto.ahzitNo}">
+	<!-- 소모임 정보 수정을 위해 소모임 번호를 hidden으로 추가 -->
+	<input type="hidden" name = "ahzitNo" value="${ahzitDto.ahzitNo}">
 	
 	<div>
 	 	소모임리더 : <p>${ahzitDto.ahzitLeader}</p>
@@ -64,11 +64,11 @@
 			
 
 	<div class="row">
-		<p>아지트 공개</p>
+		<p>아지트 공개 여부</p>
 		<p>현재 상태 : ${ahzitDto.ahzitIsPublic}</p>
 		<div>
-			<input type="radio" name="ahzitIsPublic" value="N" checked><label>비공개 아지트</label>
-			<input type="radio" name="ahzitIsPublic" value="Y"><label>공개 아지트</label><br><br>
+			<input type="radio" name="ahzitIsPublic" value="Y" checked><label>비공개 아지트</label>
+			<input type="radio" name="ahzitIsPublic" value="N"><label>공개 아지트</label><br><br> <%-- 공개를 N으로 하기로 함 --%>
 		</div>
 	</div>
 
@@ -185,9 +185,6 @@ function ahzitInfo1(){
         });
     
     $(function() {
-        //선택된 챌린지 번호를 input type=hidden에 추가
-    //    var ahzitNo = parseInt($(this).find("option:selected").attr("value"));
-        $("input[name=ahzitNo]").val(ahzitNo);
         
         //인증샷이 없으면 기본 이미지 노출
         $(".preview").on("error", function(){

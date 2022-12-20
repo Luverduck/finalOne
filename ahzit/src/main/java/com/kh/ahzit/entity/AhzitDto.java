@@ -20,6 +20,6 @@ public class AhzitDto {
 	private int ahzitLike;
 	private int ahzitScore;
 	private String ahzitGrade;
-	private String ahzitIsPublic;
+	private String ahzitIspublic;
 	private String ahzitState;
 }
