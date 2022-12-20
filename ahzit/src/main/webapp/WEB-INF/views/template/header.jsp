@@ -122,7 +122,7 @@
 		<div class = "col-2">
 			<div class = "col search-bar">
 				<input class = "w-100 input-allsearch search-box" placeholder = "아지트 검색" type = "text" >
-				<button type="submit" class="btn header-btn"><i class="fa-solid fa-magnifying-glass i-margin"></i></button>
+				<button type="submit" class="btn-allsearch-submit btn header-btn"><i class="fa-solid fa-magnifying-glass i-margin"></i></button>
 				
 			</div>
 	 	<!-- 	<div class = "col-1">  -->
