@@ -65,7 +65,7 @@
 
 	<div class="row">
 		<p>아지트 공개 여부</p>
-		<p>현재 상태 : ${ahzitDto.ahzitIsPublic}</p>
+		<p>현재 상태 : ${ahzitDto.ahzitIspublic}</p>
 		<div>
 			<input type="radio" name="ahzitIsPublic" value="Y" checked><label>비공개 아지트</label>
 			<input type="radio" name="ahzitIsPublic" value="N"><label>공개 아지트</label><br><br> <%-- 공개를 N으로 하기로 함 --%>

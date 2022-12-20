@@ -129,7 +129,11 @@
 			</div>
 		</div>
 	
-		<div class = "col-3 offset-2 d-flex">
+		<div class = "col-4 offset-1 d-flex">
+		<!-- 마지막에 관리자, 운영자만 볼 수 있게 버튼 바꿀게요 ! -->
+			<div class = "col d-flex justify-content-center align-items-center">
+				<a href = "/admin/" class = "d-flex align-items-center header-style">관리자홈</a>
+			</div>
 			<div class = "col d-flex justify-content-center align-items-center">
 				<a href = "/search" class = "d-flex align-items-center header-style">찾기</a>
 			</div>
