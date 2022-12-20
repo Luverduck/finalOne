@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
     		  return false;
     	  }
       },
-      editable: true,
+      editable: false,
       dayMaxEvents: true,
       locale:"ko",
       events: [
