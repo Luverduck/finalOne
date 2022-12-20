@@ -51,8 +51,7 @@
     } 
     /*카드*/
     body {
-        font-family: Varela Round;
-        background: #f1f1f1;
+        background: #F5F5F5;
     }
     .card-sl {
         border-radius: 15px;
@@ -78,7 +77,7 @@
     }
     .card-action:hover {
         color: #fff;
-        background: #FFA91C;
+        background: #3E4684;
         -webkit-animation: pulse 1.5s infinite;
     }
     .card-heading {
@@ -198,7 +197,7 @@
 	                  </div>
 	                  <a class="card-action" href="${pageContext.request.contextPath}/ahzit_in/${searchSortAhzit.ahzitNo}">
 	                  <%--아지트 종류에 따른 아이콘 --%>
-	                  <c:if test="${searchSortAhzit.ahzitSort == '취미'}"><img src="/images/hobby.png"  class="sort-img"></c:if>
+	                  <c:if test="${searchSortAhzit.ahzitSort == '취미'}"><img src="/images/hobbies.png"  class="sort-img"></c:if>
 	                  <c:if test="${searchSortAhzit.ahzitSort == '스터디'}"><img src="/images/study.png"  class="sort-img"></c:if>
 	                  <c:if test="${searchSortAhzit.ahzitSort == '일상'}"><img src="/images/life-smile.png"  class="sort-img"></c:if>
 	                  <c:if test="${searchSortAhzit.ahzitSort == '팬클럽'}"><img src="/images/fanclub.png"  class="sort-img"></c:if>
@@ -206,6 +205,7 @@
 	                  <c:if test="${searchSortAhzit.ahzitSort == '스포츠'}"><img src="/images/sports.png"  class="sort-img"></c:if>
 	                  <c:if test="${searchSortAhzit.ahzitSort == '여행'}"><img src="/images/travel.png"  class="sort-img"></c:if>
 	                  <c:if test="${searchSortAhzit.ahzitSort == '맛집'}"><img src="/images/eat.png"  class="sort-img"></c:if>
+	                  <c:if test="${searchSortAhzit.ahzitSort == '영화'}"><img src="/images/movie.png"  class="sort-img"></c:if>
 	                  </a>
 	                  <div class="card-heading"> <%--아지트 이름 --%>
 	                      ${searchSortAhzit.ahzitName} 
