@@ -184,7 +184,7 @@ $(window).scroll(_.debounce(function(){
 				</div>
 				
 				<div class = "col-1">
-					<a href="search_sort?keyword=일상"><img src="/images/life-smile.png"  class="sort-img">일상</a>
+          <a href="search_sort?keyword=일상"><img src="/images/life-smile.png"  class="sort-img">일상</a>
 				</div>
 				
 				<div class = "col-1">
