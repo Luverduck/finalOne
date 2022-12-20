@@ -101,12 +101,15 @@
 		}
 		.header-btn {
 			position: absolute;
-			margin-top : 0px;
+			margin:0.5em;
+			padding:0;
 			right: 0;     
+			border : 0;
+			background-color : white; 
 		}
-		 .header-style {
-		 	 background-color : #EDEEF0; 
-		 }
+		.header-style {
+		 	background-color : #EDEEF0; 
+		}
     </style>
 </head>
 <body>
@@ -119,16 +122,11 @@
 			<a href="/" class = "d-flex align-items-center"><img src="images/logo.png" class="logo-img"></a>
 		</div>
 		
-		<div class = "col-2">
+	<div class = "col-2">
 			<div class = "col search-bar">
 				<input class = "w-100 input-allsearch search-box" placeholder = "아지트 검색" type = "text" >
-				<button type="submit" class="btn-allsearch-submit btn header-btn"><i class="fa-solid fa-magnifying-glass i-margin"></i></button>
-				
+				<button type="submit"  class ="fa-solid fa-magnifying-glass btn-allsearch-submit header-btn"></button>
 			</div>
-	 	<!-- 	<div class = "col-1">  -->
-				<!-- <button class = "fa-solid fa-magnifying-glass w-100 border-0 btn-allsearch-submit mt-2 search-box" type = "submit"></button> -->
-		 		<!-- <button type="submit" class="btn"><i class="fa-solid fa-magnifying-glass i-margin"></i></button> -->
-		<!-- 	</div> --> 
 		</div>
 	
 		<div class = "col-3 offset-2 d-flex">

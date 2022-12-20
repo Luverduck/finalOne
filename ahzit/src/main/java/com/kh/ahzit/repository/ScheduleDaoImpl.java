@@ -35,4 +35,10 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		sqlSession.insert("schedule.insert2", scheduleDto);
 	}
 	
+	@Override
+	public boolean delete(int scheduleNo) {
+		int count=sqlSession.delete("schedule.delete",scheduleNo);
+		return count>0;
+	}
+	
 }

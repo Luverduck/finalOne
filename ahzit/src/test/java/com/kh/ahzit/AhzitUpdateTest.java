@@ -19,7 +19,7 @@ public class AhzitUpdateTest {
 					.ahzitName("테스트용아지트4") //소모임이름
 					.ahzitInfo("테스트용아지트소개4") //소모임소개
 					.ahzitHeadMax(10) //소모임최대인원
-					.ahzitIsPublic("Y") //소모임 공개여부 
+					.ahzitIspublic("Y") //소모임 공개여부 
 					.ahzitNo(23)
 					.build());
 			

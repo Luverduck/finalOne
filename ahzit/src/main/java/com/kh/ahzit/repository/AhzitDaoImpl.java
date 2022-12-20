@@ -210,25 +210,56 @@ public class AhzitDaoImpl implements AhzitDao {
 		param.put("keyword", keyword);
 		return sqlSession.selectOne("ahzit.countsearchMember", param);
 	}
-
+	
+	// 추상 메소드 - 찾기 페이지에서 소모임 조회
 	@Override
-	public int listCountInquire(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
-		return sqlSession.selectOne("ahzit.allCount", ahzitSearchListRequestVO);
+	public List<AhzitSearchListRequestVO> selectSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+		if(ahzitSearchListRequestVO.isSearch()) {
+			return searchSortAhzit(ahzitSearchListRequestVO);
+		}
+		else {
+			return allSortAhzit(ahzitSearchListRequestVO);
+		}
+	}
+	
+	// 추상 메소드 - 찾기 페이지에서 전체 소모임 조회
+	@Override
+	public List<AhzitSearchListRequestVO> allSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+		Map<String, String> param = new HashMap<>();	
+		param.put("rownumStart", String.valueOf(ahzitSearchListRequestVO.rownumStart()));
+		param.put("rownumEnd", String.valueOf(ahzitSearchListRequestVO.rownumEnd()));
+		return sqlSession.selectList("ahzit.allSort", param);
 	}
 
+	// 추상 메소드 - 찾기 페이지에서 특정 카테고리 소모임 조회
 	@Override
 	public List<AhzitSearchListRequestVO> searchSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
 		Map<String, String> param = new HashMap<>();	
 		param.put("keyword", ahzitSearchListRequestVO.getKeyword());
 		param.put("rownumStart", String.valueOf(ahzitSearchListRequestVO.rownumStart()));
 		param.put("rownumEnd", String.valueOf(ahzitSearchListRequestVO.rownumEnd()));
-	//	System.out.println("확인@@@@@@");
-		
-		return sqlSession.selectList("ahzit.selectSort", param);
+		return sqlSession.selectList("ahzit.searchSort", param);
 	}
 
+	// 추상 메소드 오버라이딩 - 찾기 페이지에서 소모임 갯수
 	@Override
-	public int listSortCountInquire(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+	public int countselectAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+		if(ahzitSearchListRequestVO.isSearch()) {
+			return coutntSelectAhzit(ahzitSearchListRequestVO);
+		} else {
+			return countAllAhzit(ahzitSearchListRequestVO);
+		}
+	}
+	
+	// 추상 메소드 오버라이딩 - 찾기 페이지에서 전체 소모임 갯수
+	@Override
+	public int countAllAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+		return sqlSession.selectOne("ahzit.allCount", ahzitSearchListRequestVO);
+	}
+	
+	// 추상 메소드 오버라이딩 - 찾기 페이지에서 특정 카테고리 소모임 갯수
+	@Override
+	public int coutntSelectAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
 		return sqlSession.selectOne("ahzit.sortCount", ahzitSearchListRequestVO);
 	}
 }

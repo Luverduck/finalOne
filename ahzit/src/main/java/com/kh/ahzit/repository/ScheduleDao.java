@@ -10,4 +10,5 @@ public interface ScheduleDao {
 	void insert(ScheduleDto scheduleDto);//로그인한 회원이 아지트 캘린더에 일정 등록
 	void insert2(ScheduleDto scheduleDto);//일정등록(시퀀스번호미리발행한것을 따로 사용)
 	int sequence();//시퀀스 번호 	발행
+	boolean delete(int scheduleNo);//일정 삭제
 }

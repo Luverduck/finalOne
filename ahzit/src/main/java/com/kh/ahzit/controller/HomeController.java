@@ -51,27 +51,13 @@ public class HomeController {
  	// 홈 화면의 찾기 버튼 클릭시 카테고리별 소모임 Mapping
  	@RequestMapping("/search") 
  	public String search(Model model, @ModelAttribute AhzitSearchListRequestVO ahzitSearchListRequestVO) {
- 		int total = ahzitDao.listCountInquire(ahzitSearchListRequestVO);
+
+ 		int total = ahzitDao.countselectAhzit(ahzitSearchListRequestVO);
  		ahzitSearchListRequestVO.setTotal(total);
- 		List<AhzitSearchListRequestVO> allAhzitList = ahzitDao.selectAhzit(ahzitSearchListRequestVO);
+ 		List<AhzitSearchListRequestVO> searchSortAhzit = ahzitDao.selectSortAhzit(ahzitSearchListRequestVO);
+ 		//System.out.println(allAhzitList);
  	//	System.out.println(total);
- 		model.addAttribute("allAhzitList", allAhzitList);
- 		return "ahzit/search";
- 	}
- 	
- 	// 
- 	@RequestMapping("/search_sort") 
- 	public String searchSort(Model model, @ModelAttribute AhzitSearchListRequestVO ahzitSearchListRequestVO) {
- 	
- 		int total = ahzitDao.listSortCountInquire(ahzitSearchListRequestVO);
- 		ahzitSearchListRequestVO.setTotal(total);
- 		
- 		List<AhzitSearchListRequestVO> searchSortAhzit = ahzitDao.searchSortAhzit(ahzitSearchListRequestVO);
- 		
- 		//System.out.println("확인@@@@@@");
- 		
  		model.addAttribute("searchSortAhzit", searchSortAhzit);
- 		System.out.println(searchSortAhzit);
- 		return "ahzit/search_sort";
+ 		return "ahzit/search";
  	}
 }
