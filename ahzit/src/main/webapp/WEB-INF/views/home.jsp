@@ -139,8 +139,13 @@
       width:20px;
     }
     .ahzit-title-name {
-      font-size : 40px;
+      font-size : 30px;
       color : #3E4684;
+    }
+    .recommend {
+    	font-size : 20px;
+    	background-color: #E4E4E4;
+    	border-radius: 15px;
     }
 </style>
 
@@ -152,7 +157,7 @@
 		<div class = "col-8 offset-2 ">
 		   <%-- 홈 화면 내용 영역 --%>
 		   <%--이미지 슬라이더 --%>
-			<div class="swiper mb-3">
+			<div class="swiper mb-4">
                 <div class="swiper-wrapper">
                 	<div class="swiper-slide"><img src="images/main-img-1.png" class="main-img"></div>
                 	<div class="swiper-slide"><img src="images/main-img-2.png" class="main-img"></div>
@@ -163,40 +168,16 @@
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>
-            
-      	<div>
-			<p class="text-center ahzit-title-name">소모임 추천</p> <%--추후 바꾸기 --%>
-		</div>
-            
-            
+       
+       <a href = "/search">
+	      	<div class="text-center shadow recommend mb-4 mt-4 p-2">
+				새로운 소모임에 참여해보세요 ! &nbsp; <i class="fa-solid fa-angles-right "></i>
+			</div>
+		</a>
 
 		<c:if test="${login}">
-		<div>
+		<div class="mt-4 mb-4">
 			<p class="text-center ahzit-title-name">내가 가입한 소모임</p> 
-		</div>
-		
-		<%-- 개설 유도 카드--%>
-		<div class="row">
-			<div  class="mt-4 col-xl-4 col-lg-6 col-md-6 col-sm-6">
-				<div class="card-sl">
-                 <div class="card-image">  <%--  아지트 이미지 --%>
-                      <img src="/images/bg_default.jpg""  class="ahzit-img">
-                  </div>
-                 <a class="card-action" href="ahzit/create" style="background-color :  #3E4684">
-                <%--  아지트 종류에 따른 아이콘 --%>
-                 <img src="/images/create.png"  class="sort-img">
-                  </a>
-                  <div class="card-heading"> <%--  아지트 이름 --%>
-                      나로부터 시작하는 아지트 개설
-                  </div>
-                  <div class="card-text-1">   <%--  아지트 멤버수, 종류--%>
-                     나만 존재 , #취미
-                  </div>
-                  <div class="card-text-2">   <%--  아지트 지역--%>
-                    <i class="fa-solid fa-location-dot"></i> 아지트 지역
-                  </div> 
-              </div>
-			</div>
 		</div>
 		
 		 <div class="row mb-3"> 
