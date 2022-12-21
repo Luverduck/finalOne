@@ -55,7 +55,7 @@
 				아지트 종류 : ${ahzitVO.getAhzitSort()}<br>
 				아지트 리더 : ${ahzitVO.getAhzitLeader()}<br>
       		</div>
-		</div> 
+		</div>  
 		
 		<%-- 가운데 내용 --%>
 		<div class = "col-6">
