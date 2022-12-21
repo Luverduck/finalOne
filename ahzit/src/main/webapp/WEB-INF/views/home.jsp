@@ -182,7 +182,7 @@
                  <div class="card-image">  <%--  아지트 이미지 --%>
                       <img src="/images/bg_default.jpg""  class="ahzit-img">
                   </div>
-                 <a class="card-action" href="create" style="background-color :  #3E4684">
+                 <a class="card-action" href="ahzit/create" style="background-color :  #3E4684">
                 <%--  아지트 종류에 따른 아이콘 --%>
                  <img src="/images/create.png"  class="sort-img">
                   </a>

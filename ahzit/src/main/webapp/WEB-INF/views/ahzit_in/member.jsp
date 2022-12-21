@@ -99,6 +99,7 @@
 								 	<c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
 										<a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i><span>아지트 수정</span></a>					
 									</c:if>
+									
 								</div>
 							</div>
 						</div>
@@ -151,7 +152,7 @@
 				<%-- 오른쪽 사이드바 --%>
 				<div class = "col-3">
 					<div class = "row">
-						<div class = "div-right-side p-3" style="background-color: white;">
+						<div class = "div-right-side p-3 shadow" style="background-color: white;">
 						 	반가워요<br>
 						 	반가워요<br>
 						 	반가워요<br>
