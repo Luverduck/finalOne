@@ -122,7 +122,7 @@ $(function() {
 
 			for (var i = 0; i < resp.length; i++) {
 				labels.push(resp[i].ahzitName);
-				values.push(resp[i].rn);
+				values.push(resp[resp.length-1-i].rn);
 
 			}
 			// labels 와 values 를 사용해서 차트를 생성
@@ -133,7 +133,7 @@ $(function() {
 				data : { // 차트에 들어갈 내용 
 					labels : labels, // 우측 labels 은 배열을 임의로 지정한 이름
 					datasets : [ {
-						label : '회원수',
+						label : '아지트',
 						data : values,
 						backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
 								'rgba(54, 162, 235, 0.2)',
@@ -166,9 +166,8 @@ $(function() {
 </script>
 
 <div class = "container-fluid mt-3">
-	<div class = "row">
+	<div class = "row text-center">
 		<div class = "col-8 offset-2">
-		
 			<div class = "row mt-4">
 				<div class = "col">
 					<h3>일자 별 회원 가입 현황</h3>
@@ -185,100 +184,106 @@ $(function() {
 					<canvas id="ahzitHeadCount"></canvas>
 				</div>
 			</div>
+			
+			<div class = "row mt-4">
+				<div class = "col">
+					
+				</div>
+				<div class = "col">
+				asdfa
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 	
-		</div>
-	</div>
-</div>
-
-	<div class = "container-fluid mt-3">
+	<div class = "container-fluid mt-3 text-center">
 		<div class = "row">
 			<div class = "col-8 offset-2">
-			<div class="row center">
-			<h3>NOTICE</h3>
-			
-			<small><a class="btn"  href="${pageContext.request.contextPath}/notice/list">[더보기]</a></small>
-			</div>
-			<div class="row">
-				<table class="table table-border">
-					<thead>
-						<tr>
-							<th>공지번호</th>
-							<th class="w-50">제목</th>
-							<th>조회수</th>
-							<th>작성일</th>
-						</tr>
-					</thead>
-					<tbody align="center">
-						<c:forEach var="noticeList" items="${noticeList}">
+				<div class="row center">
+				<h3>NOTICE</h3>
+				<small><a class="btn"  href="${pageContext.request.contextPath}/notice/list">[더보기]</a></small>
+				</div>
+				<div class="row">
+					<table class="table table-border">
+						<thead>
 							<tr>
-								<td>${noticeList.noticeNo}</td>
-								<td>
-									<a href="${pageContext.request.contextPath}/notice/detail?noticeNo=${noticeList.noticeNo}">
-										${noticeList.noticeTitle}
-									</a>
-								</td>		
-								<td>${noticeList.noticeRead}</td>		
-								<td>
-									<c:set var="current">
-										<fmt:formatDate value="${noticeList.noticeWritedate}" pattern="yyyy-MM-dd"/>
-									</c:set>
-									<c:choose>
-										<c:when test="${today == current}">
-											<fmt:formatDate value="${noticeList.noticeWritedate}" 
-																	pattern="HH:mm"/>
-										</c:when>
-										<c:otherwise>
-											<fmt:formatDate value="${noticeList.noticeWritedate}" 
-																	pattern="yyyy-MM-dd"/>
-										</c:otherwise>
-									</c:choose>
-								</td>	
+								<th>공지번호</th>
+								<th class="w-50">제목</th>
+								<th>조회수</th>
+								<th>작성일</th>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+						</thead>
+						<tbody align="center">
+							<c:forEach var="noticeList" items="${noticeList}">
+								<tr>
+									<td>${noticeList.noticeNo}</td>
+									<td>
+										<a href="${pageContext.request.contextPath}/notice/detail?noticeNo=${noticeList.noticeNo}">
+											${noticeList.noticeTitle}
+										</a>
+									</td>		
+									<td>${noticeList.noticeRead}</td>		
+									<td>
+										<c:set var="current">
+											<fmt:formatDate value="${noticeList.noticeWritedate}" pattern="yyyy-MM-dd"/>
+										</c:set>
+										<c:choose>
+											<c:when test="${today == current}">
+												<fmt:formatDate value="${noticeList.noticeWritedate}" 
+																		pattern="HH:mm"/>
+											</c:when>
+											<c:otherwise>
+												<fmt:formatDate value="${noticeList.noticeWritedate}" 
+																		pattern="yyyy-MM-dd"/>
+											</c:otherwise>
+										</c:choose>
+									</td>	
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-	<div class = "container-fluid mt-3">
+	<div class = "container-fluid mt-3 mb-3 text-center">
 		<div class = "row">
 			<div class = "col-8 offset-2">
-			<div class="row center">
-			<h3>INQUIRE</h3>
-			
-			<small><a class="btn"  href="${pageContext.request.contextPath}/admin/inquire">[더보기]</a></small>
-			</div>
-			<div class="row">
-				<table class="table table-border">
-					<thead>
-						<tr>
-							<th>문의글번호</th>
-							<th class="w-50">제목</th>
-							<th>문의자</th>
-							<th>작성일</th>
-						</tr>
-					</thead>
-					<tbody class="text-center" >
-			                        <c:forEach var="inquireList" items="${inquireList}">
-										<tr>
-											<td>${inquireList.inquireNo}</td>
-											<td>
-			 									<a href="${pageContext.request.contextPath}/inquire/detail?inquireNo=${inquireList.inquireNo}">
-													${inquireList.inquireTitle}
-												</a>
-											</td>
-											<td>${inquireList.inquireId}</td>
-											<td>${inquireList.inquireWritedate}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-				</table>
+				<div class="row center">
+				<h3>INQUIRE</h3>
+				<small><a class="btn"  href="${pageContext.request.contextPath}/admin/inquire">[더보기]</a></small>
+				</div>
+				<div class="row">
+					<table class="table table-border">
+						<thead>
+							<tr>
+								<th>문의글번호</th>
+								<th>제목</th>
+								<th>문의자</th>
+								<th>작성일</th>
+							</tr>
+						</thead>
+						<tbody class="text-center" >
+				       		<c:forEach var="inquireList" items="${inquireList}">
+								<tr>
+									<td>${inquireList.inquireNo}</td>
+									<td>
+	 									<a href="${pageContext.request.contextPath}/inquire/detail?inquireNo=${inquireList.inquireNo}">
+											${inquireList.inquireTitle}
+										</a>
+									</td>
+									<td>${inquireList.inquireId}</td>
+									<td>${inquireList.inquireWritedate}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
 
 <%-- footer --%>

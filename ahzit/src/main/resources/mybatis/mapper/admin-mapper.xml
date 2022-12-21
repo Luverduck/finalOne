@@ -101,7 +101,7 @@
 	
 	 <!--  회원수에 따른 아지트 나열 : 10개 -->
 	 <select id="ahzitHeadCount" resultType="AhzitDto">
-		select * from (select rownum rn, TMP.* from (select ahzit_name from ahzit where ahzit_head >0 order by ahzit_head desc )TMP) where rn between 1 and 10 
+		select * from (select rownum rn, TMP.* from (select ahzit_name from ahzit order by ahzit_head desc )TMP) where rn between 1 and 10 
 	</select>
 	
 	<!-- 관리자 홈 화면 출력 게시판 -->
