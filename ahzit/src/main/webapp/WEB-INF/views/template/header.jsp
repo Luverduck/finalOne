@@ -101,8 +101,11 @@
 		}
 		.header-btn {
 			position: absolute;
-			margin-top : 0px;
+			margin:0.5em;
+			padding:0;
 			right: 0;     
+			border : 0;
+			background-color : white; 
 		}
 		.header-style {
 		 	background-color : #EDEEF0; 
@@ -119,19 +122,19 @@
 			<a href="/" class = "d-flex align-items-center"><img src="images/logo.png" class="logo-img"></a>
 		</div>
 		
-		<div class = "col-2">
+	<div class = "col-2">
 			<div class = "col search-bar">
 				<input class = "w-100 input-allsearch search-box" placeholder = "아지트 검색" type = "text" >
-				<button type="submit" class="btn header-btn"><i class="fa-solid fa-magnifying-glass i-margin"></i></button>
-				
+				<button type="submit"  class ="fa-solid fa-magnifying-glass btn-allsearch-submit header-btn"></button>
 			</div>
-	 	<!-- 	<div class = "col-1">  -->
-				<!-- <button class = "fa-solid fa-magnifying-glass w-100 border-0 btn-allsearch-submit mt-2 search-box" type = "submit"></button> -->
-		 		<!-- <button type="submit" class="btn"><i class="fa-solid fa-magnifying-glass i-margin"></i></button> -->
-		<!-- 	</div> --> 
 		</div>
 	
-		<div class = "col-3 offset-2 d-flex">
+		<div class = "col-4 offset-1 d-flex">
+			<c:if test = "${loginGrade == '관리자' || loginGrade == '운영자'}">
+			<div class = "col d-flex justify-content-center align-items-center">
+				<a href = "${pageContext.request.contextPath}/admin/" class = "d-flex align-items-center header-style">관리자홈</a>
+			</div>
+			</c:if>
 			<div class = "col d-flex justify-content-center align-items-center">
 				<a href = "/search" class = "d-flex align-items-center header-style">찾기</a>
 			</div>
@@ -141,15 +144,15 @@
 					<a href="/ahzitUser/logout" class = "d-flex align-items-center logout header-style">로그아웃</a>
 				</div>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/mypage" class = "d-flex align-items-center header-style">마이페이지</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/mypage" class = "d-flex align-items-center header-style">마이페이지</a>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/login" class = "d-flex align-items-center header-style">로그인</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/login" class = "d-flex align-items-center header-style">로그인</a>
 				</div>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/join" class = "d-flex align-items-center header-style">회원가입</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/join" class = "d-flex align-items-center header-style">회원가입</a>
 				</div>
 			</c:otherwise>
 			</c:choose>
@@ -185,7 +188,7 @@
 			// 검색 입력창의 값을 변수로 설정
 			var keyword = $(".input-allsearch").val();
 			// form을 생성하여 조회
-			var form = $("<form>").attr("action", "search_keyword").attr("method", "get");
+			var form = $("<form>").attr("action", "/search_keyword").attr("method", "get");
 			var input = $("<input>").attr("type", "hidden").attr("name", "keyword").attr("value", keyword);
 			form.append(input);
 			$("body").append(form);

@@ -23,9 +23,9 @@
 
 
 
-<div class="container mt-5 mb-5">
+<div class="container">
 
-	<div class="row mt-5 mb-5">
+	<div class="row mt-5">
 		<h1>공지 게시판</h1>
 	</div>
 
@@ -93,6 +93,7 @@
 				
 				
 			</tbody>
+
 		</table>
 
 			

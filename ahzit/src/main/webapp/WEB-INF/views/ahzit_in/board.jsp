@@ -223,8 +223,7 @@
 				 	<br>
 				 	<%-- 소모임 수정 --%>
 				 	<c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
-						<a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i>아지트 수정</a>			
-							<a href="${pageContext.request.contextPath}/ahzit/edit?ahzitNo=${ahzitNo}">아테스트지트 수정</a>							
+						<a href="${pageContext.request.contextPath}/ahzit/edit?ahzitNo=${ahzitNo}"><i class="fa-solid fa-gear"></i>아지트 수정</a>						
 					</c:if>
 			    
 				</div>
@@ -768,7 +767,7 @@
 	// 초기 검색어
 	var keyword = "";
 	
-	// 총 댓글 수
+	// 총 게시글 수
 	var pLast;
 	
 	// 초기 게시글 목록 비동기 조회

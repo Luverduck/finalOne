@@ -13,8 +13,25 @@
 	 </insert>
 	
 	 <!-- 회원 전체 조회(admin) -->
-	 <select id="list" resultType="AhzitUserDto">
-		select * from ahzit_user order by user_grade asc
+	 <select id="allList" parameterType="map" resultType="AhzitUserDto">
+		select * from (select rownum rn, TMP.* from (select * from ahzit_user order by user_grade asc
+		)TMP)where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<!-- 회원 검색 조회 -->
+	<select id="searchList" parameterType="map" resultType="AhzitUserDto">
+	select * from (select tmp.*,  rownum rn from (select * from ahzit_user where instr(${type}, #{keyword}) > 0
+	order by user_grade asc)tmp) where rn between #{startRow} and #{endRow}
+	</select>	
+	
+	<!--검색 조회시 회원 수 -->
+	<select id = "searchListCount" resultType = "int">
+		select count(*) from ahzit_user where instr(${type}, #{keyword}) > 0
+	</select>
+	
+	<!-- 전체 회원 수 -->
+	<select id="allListCount" resultType="int">
+		select count(*) from ahzit_user
 	</select>
 	
 	<!--관리자 등급 변경 -->
@@ -22,10 +39,54 @@
 		update ahzit_user set user_grade = #{userGrade} where user_id = #{userId}
 	</update>
 	
-		<!--관리자 등급 변경 -->
+	<!--관리자 등급 변경 -->
 	<update id="changeGrade" parameterType ="AhzitUserDto">
 		update ahzit_user set user_grade = '운영자' where user_id != #{userId} and user_grade = '관리자'
 	</update>
+	
+	<!-- 소모임 전체 조회(admin) -->
+	 <select id="ahzitAllList" parameterType="map" resultType="AhzitDto">
+		select * from (select rownum rn, TMP.* from (select * from ahzit order by ahzit_no asc
+		)TMP)where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<!-- 소모임 검색 조회 -->
+	<select id="ahzitSearchList" parameterType="map" resultType="AhzitDto">
+	select * from (select tmp.*,  rownum rn from (select * from ahzit where instr(${type}, #{keyword}) > 0
+	order by ahzit_no asc)tmp) where rn between #{startRow} and #{endRow}
+	</select>	
+	
+	<!--검색 조회시 소모임 수 -->
+	<select id = "ahzitSearchListCount" resultType = "int">
+		select count(*) from ahzit where instr(${type}, #{keyword}) > 0
+	</select>
+	
+	<!-- 전체 소모임 수 -->
+	<select id="ahzitAllListCount" resultType="int">
+		select count(*) from ahzit
+	</select>
+	
+	<!-- 1:1 문의 전체 조회(admin) -->
+	 <select id="inquireAllList" parameterType="map" resultType="InquireDto">
+		select * from (select rownum rn, TMP.* from (select * from inquire where inquire_state='N' order by inquire_no desc
+		)TMP)where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<!-- 1:1 문의 검색 조회 -->
+	<select id="inquireSearchList" parameterType="map" resultType="InquireDto">
+	select * from (select tmp.*,  rownum rn from (select * from inquire where inquire_state='N' and instr(${type}, #{keyword}) > 0
+	order by inquire_no desc)tmp) where rn between #{startRow} and #{endRow}
+	</select>	
+	
+	<!--검색 조회시 문의글 수 -->
+	<select id = "inquireSearchListCount" resultType = "int">
+		select count(*) from inquire where inquire_state='N' and instr(${type}, #{keyword}) > 0
+	</select>
+	
+	<!-- 전체 문의글 수 -->
+	<select id="inquireAllListCount" resultType="int">
+		select count(*) from inquire where inquire_state='N'
+	</select>
 	
 
 </mapper>

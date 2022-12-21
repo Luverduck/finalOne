@@ -38,15 +38,27 @@
             <div class="col-md-2 col-lg-2 col-xl-2  mt-3 mx-auto">
               <h6 class="text-uppercase mb-4 font-weight-bold">Enjoy</h6>
               <p>
-                <a href="search"><i class="fa-solid fa-chevron-right"></i> Search</a>
+                <a href="${pageContext.request.contextPath}/search"><i class="fa-solid fa-chevron-right"></i>Search</a>
               </p>
               <p>
-                <a href="ahzitUser/join"><i class="fa-solid fa-chevron-right"></i>  Join</a>
+                <a href="${pageContext.request.contextPath}/ahzitUser/join"><i class="fa-solid fa-chevron-right"></i>Join</a>
               </p>
               <p>
-                <a href="ahzitUser/login"><i class="fa-solid fa-chevron-right"></i>  Login</a>
+                <a href="${pageContext.request.contextPath}/ahzitUser/login"><i class="fa-solid fa-chevron-right"></i>Login</a>
               </p>
             </div>
+            
+             <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2  mt-3 mx-auto">
+              <h6 class="text-uppercase mb-4 font-weight-bold">Service</h6>
+              <p>
+                <a href="${pageContext.request.contextPath}/notice/list"><i class="fa-solid fa-chevron-right"></i>Notice</a>
+              </p>
+              <p>
+                <a href="${pageContext.request.contextPath}/faq/list"><i class="fa-solid fa-chevron-right"></i>FAQ</a>
+              </p>
+            </div>
+         
   
             <!-- Grid column -->
             <hr class="w-100 clearfix d-md-none " />

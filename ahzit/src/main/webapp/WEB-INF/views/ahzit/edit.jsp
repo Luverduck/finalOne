@@ -16,6 +16,7 @@
 </style>
 	         
 <%-- 소모임 수정(소모임이름, 소개, 최대멤버수, 공개여부, 프로필사진)--%>
+
 <div class="container mt-5 mb-5">
 
 <form action="edit" method="post" enctype = "multipart/form-data">
@@ -76,8 +77,8 @@
 		</div>
 		<div class="col">
 			<input type="radio" name="ahzitIsPublic" value="Y"><label>공개 아지트</label>
+	
 		</div>
-	</div>
 
 
 		<%--아지트 이미지--%>
@@ -108,7 +109,7 @@
 	          </div>
 		</div>
 	
-		<div class="row justify-content-center mt-5">
+		<div class="row justify-content-center mt-5 mb-5">
 			<button type="submit" class="col btn-edit-cancel btn btn-outline-secondary rounded" >취소</button>
             <button type="submit" class="col btn rounded" style="background-color : #E6E6E6; color:#3E4684;">수정하기</button>
 			<button type="submit" class="btn rounded" href="/ahzit/delete?ahzitNo= ${ahzitDto.ahzitNo}" onclick="return checkout();">
@@ -116,6 +117,7 @@
 				<span style="color:red">아지트 삭제</span>
 			</button>
 		</div>	
+		
 	</form>
 	
 	<%--아지트 삭제 --%>
@@ -206,9 +208,6 @@ function ahzitInfo1(){
         });
     
     $(function() {
-        //선택된 챌린지 번호를 input type=hidden에 추가
-    //    var ahzitNo = parseInt($(this).find("option:selected").attr("value"));
-        $("input[name=ahzitNo]").val(ahzitNo);
         
         //인증샷이 없으면 기본 이미지 노출
         $(".preview").on("error", function(){

@@ -24,18 +24,20 @@
 
 <div class="container mt-5 mb-5">
 
-	
+
+<div class="container">
+
 	<!-- 게시판 이름 -->
-	<div class="row mt-5 mb-5">
+	<div class="row mt-5">
 		<h1>공지 게시판</h1>
 	</div>
 	
 	<div class="row justify-content-end">
-		<div class="col-3">
+		<div class="col-2">
 			<c:if test="${loginId != null}">
 				<%-- 관리자일 경우만 삭제버튼을 추가 --%>
 				<c:if test="${loginGrade == '관리자'}">
-					<a class="btn btn-neutral text-end" href="write">글쓰기</a>
+					<a class="btn text-end" href="write">글쓰기</a>
 				</c:if>
 			</c:if>
 		</div>

@@ -373,8 +373,17 @@ public class AhzitUserController {
 			String loginId = (String) session.getAttribute(SessionConstant.ID);
 		
 			List<MyAhzitVO> myAhzit = ahzitUserDao.myAhzit(loginId);
-	
+			System.out.println(myAhzit);
+			if(myAhzit.get(0) == null) {
+			return "redirect:myAhzitFail";
+			}
 			model.addAttribute("myAhzit", myAhzit);
 			return "ahzitUser/myAhzit";
+		}
+		
+		// 가입한 아지트가 없을 때 
+		@GetMapping("/myAhzitFail")
+		public String myAhzitFail() {
+			return "ahzitUser/myAhzitFail";
 		}
 }
