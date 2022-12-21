@@ -12,6 +12,7 @@ public class MyAhzitVO {
 	private int ahzitNo;
 	private int ahzitAttachmentNo;
 	private int ahzitHead;
+	private int ahzitHeadMax;
 	private String ahzitName;
 	private String ahzitSort;
 	private String ahzitRegionHigh;
