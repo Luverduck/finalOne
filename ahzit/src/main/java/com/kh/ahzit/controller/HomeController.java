@@ -14,6 +14,7 @@ import com.kh.ahzit.constant.SessionConstant;
 import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.repository.AhzitUserDao;
 import com.kh.ahzit.vo.AhzitSearchListRequestVO;
+import com.kh.ahzit.vo.AhzitSearchListResponseVO;
 import com.kh.ahzit.vo.MyAhzitVO;
 
 
@@ -54,9 +55,10 @@ public class HomeController {
 
  		int total = ahzitDao.countselectAhzit(ahzitSearchListRequestVO);
  		ahzitSearchListRequestVO.setTotal(total);
- 		List<AhzitSearchListRequestVO> searchSortAhzit = ahzitDao.selectSortAhzit(ahzitSearchListRequestVO);
- 		//System.out.println(allAhzitList);
+ 		List<AhzitSearchListResponseVO> searchSortAhzit = ahzitDao.selectSortAhzit(ahzitSearchListRequestVO);
+ 		//System.out.println(searchSortAhzit);
  	//	System.out.println(total);
+ 		model.addAttribute("pLast", ahzitSearchListRequestVO.blockLast());
  		model.addAttribute("searchSortAhzit", searchSortAhzit);
  		return "ahzit/search";
  	}

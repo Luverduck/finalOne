@@ -8,75 +8,91 @@
 	<jsp:param value="소모임 정보 수정" name="title"/>
 </jsp:include>
 
-
+<style>
+/* * {
+	border: 1px dotted gray;
+	font-family: font-family : 'Gothic A1', sans-serif;
+} */
+</style>
 	         
-<h1>소모임 정보 수정</h1>
 <%-- 소모임 수정(소모임이름, 소개, 최대멤버수, 공개여부, 프로필사진)--%>
-<div class="container">
+
+<div class="container mt-5 mb-5">
+
 <form action="edit" method="post" enctype = "multipart/form-data">
-	<!-- 소모임 정보 수정을 위해 소모임 번호를 hidden으로 추가 -->
-	<input type="hidden" name = "ahzitNo" value="${ahzitDto.ahzitNo}">
+	<%-- <input type="text"  name = "ahzitNo" value="${ahzitDto.ahzitNo}"> --%>
 	
-	<div>
-	 	소모임리더 : <p>${ahzitDto.ahzitLeader}</p>
+	<div class="row mt-3">
+		<p class="fs-3">이 아지트 리더는 ${ahzitDto.ahzitLeader} 입니다</p>
 	</div>
 	
-	<div>
-	 소모임 종류: <p>${ahzitDto.ahzitSort}</p>
+	<div class="row">
+	 	<span class="col-4">&#35;${ahzitDto.ahzitSort}</span>
+	 	<span class="col-4"><i class="fa-solid fa-location-dot">
+	 		${ahzitDto.ahzitRegionHigh}&nbsp; <%--지역선택 시/도 --%>
+			${ahzitDto.ahzitRegionLow}<%--지역선택 군/구 --%>
+				
+	 	</i></span>
 	</div>
 	
 
 	
 	<%--아지트 이름 --%>
-		<div class="row">
-			<p>아지트 이름</p>	
-			<div>
-				<input name="ahzitName"  class="ahzitName-input"  oninput="ahzitName1();"  type="text"  value="${ahzitDto.ahzitName}" autocomplete="off" required><br>			
-				<span class="ahzitName-input-length">0</span> / 15<br><br>
-			</div>
+	<div class="row align-items-center mt-5">
+		<p class="fs-3">아지트 이름을 입력해주세요</p>
+		<div>
+			<input name="ahzitName"  class="ahzitName-input d-inline-flex form-control form-control-lg rounded"  oninput="ahzitName1();"  type="text"  value="${ahzitDto.ahzitName}" autocomplete="off" required><br>			
+			<span class="ahzitName-input-length">0</span> / 15<br><br>
 		</div>
+	</div>
 		
-		<%--아지트 소개 --%>
-			<div class="row">
-				<p>아지트 소개</p>	
-				<div>
-					<input name="ahzitInfo"  class="ahzitInfo-input"  oninput="ahzitInfo1();"  type="text"  value="${ahzitDto.ahzitInfo}" autocomplete="off" required>	
-					<span class="ahzitInfo-input-length">0</span> / 200<br><br>
-				</div>
-			</div>
+	<%--아지트 소개 --%>
+		<div class="row align-items-center mt-5">
+			<p class="fs-3">아지트 소개글을 입력해주세요</p>
+		<div>
+			<input name="ahzitInfo"  class="ahzitInfo-input form-control rounded"  oninput="ahzitInfo1();"  type="text"  value="${ahzitDto.ahzitInfo}" autocomplete="off" required>	
+			<span class="ahzitInfo-input-length">0</span> / 200<br><br>
+		</div>
+	</div>
 			
-		<%--아지트 최대멤버수 --%>
-			<div class="row">
-				<p>아지트 최대인원 설정</p>	
-				<div>
-					<input name="ahzitHeadMax" value="${ahzitDto.ahzitHeadMax}"><br>
-					<p>아지트 인원은 최대 100명까지 가능합니다</p>
-				</div>
+	<%--아지트 최대멤버수 --%>
+	<div class="row align-items-center mt-5">
+		<p class="fs-3">아지트 인원을 입력해주세요</p>
+			<div class="col">
+				<input class="form-control rounded" name="ahzitHeadMax" value="${ahzitDto.ahzitHeadMax}"><br>
 			</div>
+		<p class="col">아지트 인원은 최대 100명까지 가능합니다</p>
+	</div>
 			
-			<div class="row">
-				<p>소모임 지역</p>
-				<div>
-					<span>${ahzitDto.ahzitRegionHigh}</span>&nbsp; <%--지역선택 시/도 --%>
-					<span>${ahzitDto.ahzitRegionLow}</span><br>  <%--지역선택 군/구 --%>
-				</div>
-			</div>
+
 			
 
 	<div class="row">
 		<p>아지트 공개 여부</p>
 		<p>현재 상태 : ${ahzitDto.ahzitIspublic}</p>
 		<div>
-			<input type="radio" name="ahzitIsPublic" value="Y" checked><label>비공개 아지트</label>
-			<input type="radio" name="ahzitIsPublic" value="N"><label>공개 아지트</label><br><br> <%-- 공개를 N으로 하기로 함 --%>
+			<input type="radio" name="ahzitIspublic" value="N"><label>공개 아지트</label><br><br> <%-- 공개를 N으로 하기로 함 --%>
+			<input type="radio" name="ahzitIspublic" value="Y" checked><label>비공개 아지트</label>
 		</div>
 	</div>
+ 		<div class="col">
+			<input type="radio" name="ahzitIsPublic" value="N" checked><label>비공개 아지트</label>
+		</div>
+		<div class="col">
+			<input type="radio" name="ahzitIsPublic" value="Y"><label>공개 아지트</label>
+	
+		</div>
 
-		<div class="row">
 
-
-			<p>아지트 이미지를 등록해주세요</p>
+		<%--아지트 이미지--%>
+		<div class="row justify-content-center mt-5">
+			<p class="fs-3">아지트 이미지를 등록해주세요</p>
+			
+			<div class="row">
 	            <input type="file"  name="ahzitAttachment"  id="input-file" class="thumbnail">
+			</div>
+			
+			<div class="row">
 	            <c:choose>
       				<c:when test="${ahzitAttachmentList.isEmpty()}"><!-- 프로필 이미지를 등록하지 않았을 경우 -->
       					<img class="preview" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br>
@@ -84,26 +100,36 @@
       			<c:otherwise><!-- 프로필 이미지를 등록했을 경우 -->
       				<c:forEach var = "ahzitAttachmentList" items = "${memberAttachmentList}">  <%--설정한 프로필 --%>
 			            <img class="preview" src = "/attachment/download/ahzitNo?attachmentNo=${ahzitAttachmentList.attachmentNo}" width="200" height="200"> 					
-			          </c:forEach>
+			         </c:forEach>
       			</c:otherwise>
       			</c:choose>
 	           <!--  <img class="preview" src="/images/bg_default.jpg" width="250px" height="200px"> -->
+	      </div>
 	      
-	          <div>
+	      
+	          <div class="row">
 	            <label class="input-file-upload img-lab" for="input-file">사진변경</label>     
 	          </div>
 		</div>
 	
-		<div>
-			<a type="button"  class="btn-edit-cancel" >취소</a>
-            <button type="submit" >수정하기</button>
+		<div class="row justify-content-center mt-5 mb-5">
+			<button type="submit" class="col btn-edit-cancel btn btn-outline-secondary rounded" >취소</button>
+            <button type="submit" class="col btn rounded" style="background-color : #E6E6E6; color:#3E4684;">수정하기</button>
+			<button type="submit" class="btn rounded" href="/ahzit/delete?ahzitNo= ${ahzitDto.ahzitNo}" onclick="return checkout();">
+				<i class="fa-solid fa-trash" style="color:red;"></i>
+				<span style="color:red">아지트 삭제</span>
+			</button>
 		</div>	
+		
 	</form>
 	
 	<%--아지트 삭제 --%>
-		<a href="/ahzit/delete?ahzitNo= ${ahzitDto.ahzitNo}" onclick="return checkout();"><i class="fa-solid fa-trash" style="color:red;"></i><span style="color:red">아지트 삭제</span></a>	
-</div>
-
+<%-- 		<a href="/ahzit/delete?ahzitNo= ${ahzitDto.ahzitNo}" onclick="return checkout();"><i class="fa-solid fa-trash" style="color:red;"></i><span style="color:red">아지트 삭제</span></a>	
+ --%>
+ 
+ </div>
+ 
+ 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
 //소모임이름 입력 제어 (javascript)

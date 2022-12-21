@@ -8,6 +8,23 @@
 	<jsp:param value="관리자 홈" name="title"/>
 </jsp:include>
 
-<h1>관리자 첫페이지</h1>
+
+<div class="container mt-5 mb-5">
+	<div class="row">
+		<div class="col">
+			<h1 class="text-center">관리자 첫페이지</h1>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

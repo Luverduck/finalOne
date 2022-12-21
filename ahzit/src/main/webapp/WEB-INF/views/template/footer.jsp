@@ -11,6 +11,9 @@
 	a {
 		color : #9B9BA0;
 	}
+	* {
+		border: 1px dotted gray;
+	}
 </style>
  <footer>
       <!-- Grid container -->
@@ -18,7 +21,6 @@
         <!-- Section: Links -->
         <section>
           <!--Grid row-->
-          <div class="row">
           <div class="col-8 offset-2 d-flex">
             <!-- Grid column -->
             <div class="col-md-3 col-lg-3 col-xl-3 mt-3 mx-auto">
@@ -81,7 +83,7 @@
   
         <!-- Section: Copyright -->
         <section class="pt-0 ">
-          <div class="row d-flex align-items-center">
+          <div class="d-flex align-items-center">
             <!-- Grid column -->
             <div class="col-md-7 col-lg-8 text-center text-md-start col-8 offset-2">
               <!-- Copyright -->
@@ -96,7 +98,6 @@
           </div>
         </section>
         <!-- Section: Copyright -->
-      </div>
       <!-- Grid container -->
     </footer>
     <!-- Footer -->
