@@ -299,8 +299,8 @@
 				var target = $(".div-ahzit-list");
 				
 				var url;
-				if(keyword != null) {
-					url = "http://localhost:8888/rest_ahzit/search?p=" + p + "&cntRow=" + cntRow + "keyword=" + keyword;
+				if(keyword != "") {
+					url = "http://localhost:8888/rest_ahzit/search?p=" + p + "&cntRow=" + cntRow + "&keyword=" + keyword;
 				} else {
 					url = "http://localhost:8888/rest_ahzit/search?p=" + p + "&cntRow=" + cntRow;
 				}
