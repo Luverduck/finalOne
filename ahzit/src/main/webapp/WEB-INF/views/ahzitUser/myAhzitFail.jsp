@@ -16,20 +16,19 @@
 
 				<div class="row mt-4">
 					<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-						<div class="p-4 text-dark bg-Light rounded">
+						<div class="p-4 rounded">
 							<h1 class="text-center">My Ahzit</h1>	
 						</div>
 					</div>
 				</div>
 				
-							<div class="p-4 text-dark bg-Light rounded">
-								<h1 class="text-center">가입한 아지트가 없습니다.</h1>	
-							</div>
-				
-	
-				<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+					<div class="p-4 rounded">
+						<h1 class="text-center">가입한 아지트가 없습니다.</h1>	
+					</div>
+
+				<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mb-4">
 					<div class=" col" >
-						<a href="mypage"  class="btn btn-outline-warning w-100" role=button>Mypage 이동</a>
+						<a href="mypage"  style="background-color : #E6E6E6; color:#3E4684;" class="btn w-100" role=button>Mypage 이동</a>
 					</div>
 				</div>		
 			</div>

@@ -15,10 +15,10 @@ justify-content : center
 }
 </style>
 
-<div class = "container-fluid mt-3">
-	<div class = "row">
-		<div class = "col-8 offset-2 main">
-			<div class = "row">
+<div class="container-fluid mt-5 mb-5">
+	<div class="row">
+		<div class="col-8 offset-2">
+			<div class="row">
 
 				<div class="row mt-4">
 					<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
@@ -37,7 +37,7 @@ justify-content : center
 					</select>
 					<input name = "inquireId" type="hidden" value = "${inquireListSearchVO.inquireId}">
 					<input name = "keyword" placeholder = "검색어" value = "${inquireListSearchVO.keyword}" required>
-					<button type = "submit">검색</button>
+					<button  type = "submit">검색</button>
 				</form>
 				</div>
 			
@@ -45,7 +45,7 @@ justify-content : center
 			            <div class="col-md-10 offset-md-1">
 			                <table class="table table-hover">
 			                    <thead class="text-center">
-			                        <tr class="bg-dark text-light">
+			                        <tr>
 										<th>번호</th>
 										<th width="45%">제목</th>
 										<th>작성자</th>
@@ -90,7 +90,7 @@ justify-content : center
 								<tfoot>
 									<tr >
 										<td colspan="6">
-											<a class="btn btn-outline-warning" href = "insert">글쓰기</a>
+											<a class="btn" style="background-color : #E6E6E6; color:#3E4684;" href = "insert">글쓰기</a>
 										</td>
 									</tr>
 								</tfoot>
