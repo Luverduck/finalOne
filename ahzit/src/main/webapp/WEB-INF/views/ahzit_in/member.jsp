@@ -28,7 +28,9 @@
 		height : 100px;
 	}
 	
-
+.pagination{
+justify-content : center
+}
 	
 </style>
 
@@ -150,47 +152,105 @@
 			</div>
 		</div>
 	</div>
-</div>
 
 <!-- 지우지마세요!! -->
-<c:forEach var = "ahzitMemberList" items = "${ahzitMemberList}">
-	<div class = "mb-2 div-member-info">
-		회원 번호 : ${ahzitMemberList.memberNo} <br>
-		소모임 번호 : ${ahzitMemberList.memberAhzitNo} <br>
-		회원 아이디 : ${ahzitMemberList.memberId} <br>
-		회원 등급 : ${ahzitMemberList.memberGrade} <br>
-		회원 활동점수 : ${ahzitMemberList.memberScore} <br>
-		회원 가입일 : ${ahzitMemberList.memberJoindate} <br>
-		회원 닉네임 : ${ahzitMemberList.memberNick} <br>
-		회원 프로필 번호 : ${ahzitMemberList.memberAttachmentNo} <br>
-		<hr>	
-	</div> 
-</c:forEach>
+<%-- <c:forEach var = "ahzitMemberList" items = "${ahzitMemberList}"> --%>
+<!-- 	<div class = "mb-2 div-member-info"> -->
+<%-- 		회원 번호 : ${ahzitMemberList.memberNo} <br> --%>
+<%-- 		소모임 번호 : ${ahzitMemberList.memberAhzitNo} <br> --%>
+<%-- 		회원 아이디 : ${ahzitMemberList.memberId} <br> --%>
+<%-- 		회원 등급 : ${ahzitMemberList.memberGrade} <br> --%>
+<%-- 		회원 활동점수 : ${ahzitMemberList.memberScore} <br> --%>
+<%-- 		회원 가입일 : ${ahzitMemberList.memberJoindate} <br> --%>
+<%-- 		회원 닉네임 : ${ahzitMemberList.memberNick} <br> --%>
+<%-- 		회원 프로필 번호 : ${ahzitMemberList.memberAttachmentNo} <br> --%>
+<!-- 		<hr>	 -->
+<!-- 	</div>  -->
+<%-- </c:forEach> --%>
 
-<script type="text/javascript">
+	<%-- 페이지 네비게이터 --%>
+	<div class=" mt-3 mb-4">
+	<ul class="pagination">
+		<c:choose>
+			<c:when test = "${ahzitMemberInfoRequestVO.isFirst()}">
+				<li class="page-item">
+					<a class="page-link" href = "">&laquo;</a>
+				</li>
+			</c:when>
+			<c:otherwise>
+				<li class="page-item">
+					<a class="page-link" href = "member?p=${ahzitMemberInfoRequestVO.firstBlock()}&${ahzitMemberInfoRequestVO.parameter()}">&laquo;</a>
+				</li>
+			</c:otherwise>
+		</c:choose>
+		
+		<c:choose>
+			<c:when test = "${ahzitMemberInfoRequestVO.hasPrev()}">
+				<li class="page-item">
+					<a class="page-link" href = "member?p=${ahzitMemberInfoRequestVO.prevBlock()}&${ahzitMemberInfoRequestVO.parameter()}">&lt;</a>
+				</li>
+			</c:when>
+			<c:otherwise>
+				<li class="page-item">
+					<a class="page-link" href = "">&lt;</a>
+				</li>
+			</c:otherwise>
+		</c:choose>
+		
+		<c:forEach var = "i" begin = "${ahzitMemberInfoRequestVO.startBlock()}" end = "${ahzitMemberInfoRequestVO.endBlock()}" step = "1">
+			<li class="page-item">
+				<a class="page-link" href = "member?p=${i}&${ahzitMemberInfoRequestVO.parameter()}">${i}</a>
+			</li>
+		</c:forEach>
+		
+		<c:choose>
+			<c:when test = "${ahzitMemberInfoRequestVO.hasNext()}">
+				<li class="page-item">
+					<a class="page-link" href = "member?p=${ahzitMemberInfoRequestVO.nextBlock()}&${ahzitMemberInfoRequestVO.parameter()}">&gt;</a>
+				</li>
+			</c:when>
+			<c:otherwise>
+				<li class="page-item">
+					<a class="page-link" href = "">&gt;</a>
+				</li>
+			</c:otherwise>
+		</c:choose>
+		
+		<c:choose>
+			<c:when test = "${ahzitMemberInfoRequestVO.isLast()}">
+				<li class="page-item">
+					<a class="page-link" href = "">&raquo;</a>
+				</li>
+			</c:when>
+			<c:otherwise>
+				<li class="page-item">
+					<a class="page-link" href = "member?p=${ahzitMemberInfoRequestVO.lastBlock()}&${ahzitMemberInfoRequestVO.parameter()}">&raquo;</a>
+				</li>
+			</c:otherwise>
+		</c:choose>
+	</ul>
+	</div>
+</div>
+<script>
+var ahzitNo = $(".div-member-info").data("data-ahzitno");
 
-	var ahzitNo = $(".div-member-info").data("data-ahzitno");
-
-	// 초기 검색시 조회되는 페이지를 1페이지로
-	var p = 1;
-	
-	// 검색 버튼을 누를 때 검색 실행
-	$(function(){
-		$(".btn-search-member-submit").click(function(){
-			// 검색창의 문자열을 변수로 지정
-			var keyword = $(".input-search-member").val();
-			console.log(keyword);
-			var form = $("<form>").attr("method", "get").attr("action", "member");
-			var input_keyword = $("<input>").attr("type", "hidden").attr("name", "keyword").attr("value", keyword);
-			var input_p = $("<input>").attr("type", "hidden").attr("name", "p").attr("value", p);
-			form.append(input_keyword).append(input_p);
-			$("body").append(form);
-			form.submit();
-		});
-	});
-	
-</script>
-
-
+   // 초기 검색시 조회되는 페이지를 1페이지로
+   var p = 1;
+   
+   // 검색 버튼을 누를 때 검색 실행
+   $(function(){
+      $(".btn-search-member-submit").click(function(){
+         // 검색창의 문자열을 변수로 지정
+         var keyword = $(".input-search-member").val();
+         console.log(keyword);
+         var form = $("<form>").attr("method", "get").attr("action", "member");
+         var input_keyword = $("<input>").attr("type", "hidden").attr("name", "keyword").attr("value", keyword);
+         var input_p = $("<input>").attr("type", "hidden").attr("name", "p").attr("value", p);
+         form.append(input_keyword).append(input_p);
+         $("body").append(form);
+         form.submit();
+      });
+   });
+ </script>
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
