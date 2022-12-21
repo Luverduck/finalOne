@@ -20,8 +20,6 @@
 	<jsp:param value="아이디 찾기 완료" name="title"/>
 </jsp:include>
 
-
-
  <div class="row mt-4">
 	<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 		<div class="p-4 rounded text-center">
@@ -32,13 +30,13 @@
 	</div>
 </div>
 	
-			<div class="col-md-8 offset-md-2 my-4 mb-4">
-				<div class="text-center id1">
-					회원님의 아이디는  &nbsp;&nbsp; 
-					<span class="id2">${checkId}</span>
-					 &nbsp;&nbsp; 입니다.
-				</div>
-				
+	<div class="col-md-8 offset-md-2 my-4 mb-4">
+		<div class="text-center id1">
+			회원님의 아이디는  &nbsp;&nbsp; 
+			<span class="id2">${checkId}</span>
+			 &nbsp;&nbsp; 입니다.
+		</div>
+	</div>		
 
 <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-5">
 	<div class="row text-center mb-2">
