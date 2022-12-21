@@ -45,6 +45,9 @@ public class AhzitController {
 	
 	
 	private final File dir = new File("D:/upload/kh10f");
+	//private final File dir = new File(System.getProperty("user.home")+"/upload/kh10f");
+
+	
 	
 	@PostConstruct //최초 실행 시 딱 한번만 실행되는 메소드
 	public void prepare() {
