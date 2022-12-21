@@ -22,4 +22,6 @@ public class AhzitDto {
 	private String ahzitGrade;
 	private String ahzitIspublic;
 	private String ahzitState;
+	private int cnt;
+	private int rn;
 }

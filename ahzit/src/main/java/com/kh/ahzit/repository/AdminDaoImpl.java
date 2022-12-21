@@ -11,10 +11,13 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.entity.FaqDto;
 import com.kh.ahzit.entity.InquireDto;
+import com.kh.ahzit.entity.NoticeDto;
 import com.kh.ahzit.vo.AdminAhzitListSearchVO;
 import com.kh.ahzit.vo.AdminAhzitUserListSearchVO;
 import com.kh.ahzit.vo.AdminInquireListSearchVO;
+import com.kh.ahzit.vo.AhzitUserJoinCountVO;
 
 @Repository
 public class AdminDaoImpl implements AdminDao{
@@ -206,9 +209,32 @@ public class AdminDaoImpl implements AdminDao{
 		public int inquireListCount(AdminInquireListSearchVO adminInquireListSearchVO) {
 			return sqlSession.selectOne("admin.inquireAllListCount", adminInquireListSearchVO);
 		}
-
 		
-		
+		// (차트)
+		// 일자 별 회원 가입 수
+		@Override
+		public List<AhzitUserJoinCountVO> ahzitUserCountList() {
+			return sqlSession.selectList("admin.ahzitUserCountList");
+		}
+		// 아지트 별 관심사 수 출력
+		@Override
+		public List<AhzitDto> ahzitSortCount() {
+			return sqlSession.selectList("admin.ahzitSortCount");
+		}
+		// 회원수에 따른 아지트 나열 : 10개
+		@Override
+		public List<AhzitDto> ahzitHeadCount() {
+			return sqlSession.selectList("admin.ahzitHeadCount");
+		}
 
+		@Override
+		public List<NoticeDto> noticeListForMain() {
+			return sqlSession.selectList("admin.noticeListForMain");
+		}
+
+		@Override
+		public List<InquireDto> inquireListForMain() {
+			return sqlSession.selectList("admin.inquireListForMain");
+		}
 	
 }

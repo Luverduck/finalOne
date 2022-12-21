@@ -314,18 +314,14 @@
 	
     
 		function submitChk(){
-			
-			
-			
+
 			var form = $("#ahzitJoin")[0];
 			var data = new FormData(form);
 			
 			var memberAhzitNo=$("input[name='memberAhzitNo']").val();
 			var memberId=$("input[name='memberId']").val();
 			var memberNick=$("input[name='memberNick']").val();
-			
 			var attachment=$("input[name='attachment']").val();
-			
 						
 			$.ajax({
 				url:'insert',

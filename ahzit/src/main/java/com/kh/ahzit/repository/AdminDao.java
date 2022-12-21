@@ -4,10 +4,13 @@ import java.util.List;
 
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitUserDto;
+import com.kh.ahzit.entity.FaqDto;
 import com.kh.ahzit.entity.InquireDto;
+import com.kh.ahzit.entity.NoticeDto;
 import com.kh.ahzit.vo.AdminAhzitListSearchVO;
 import com.kh.ahzit.vo.AdminAhzitUserListSearchVO;
 import com.kh.ahzit.vo.AdminInquireListSearchVO;
+import com.kh.ahzit.vo.AhzitUserJoinCountVO;
 
 public interface AdminDao {
 	
@@ -49,5 +52,17 @@ public interface AdminDao {
 	int inquireCount(AdminInquireListSearchVO adminInquireListSearchVO);
 	int inquireSearchCount(AdminInquireListSearchVO adminInquireListSearchVO);
 	int inquireListCount(AdminInquireListSearchVO adminInquireListSearchVO);
+	
+	// (차트)
+	// 일자 별 회원 가입 수
+	List<AhzitUserJoinCountVO> ahzitUserCountList();
+	// 관심사에 따른 아지트 수
+	List<AhzitDto>ahzitSortCount();
+	// 회원 수 순으로 아지트 정렬 - 10개
+	List<AhzitDto>ahzitHeadCount();
+	
+	// 관리자 홈 화면에 출력할 공지사항, 1:1 문의
+	List<NoticeDto> noticeListForMain( );
+	List<InquireDto> inquireListForMain();
 	
 }
