@@ -24,7 +24,7 @@
 
  <div class="row mt-4">
 	<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-		<div class="p-4 text-dark rounded text-center">
+		<div class="p-4 rounded text-center">
 			<h1 class="text-center">아이디 찾기</h1>
 			<i class="fa-solid fa-circle-exclamation"></i>
 			입력하신 정보와 일치하는 아이디입니다.

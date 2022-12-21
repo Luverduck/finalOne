@@ -18,7 +18,7 @@ font-size: 0.85rem;
 
 	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<div class="p-4 text-dark rounded text-center">
+			<div class="p-4 rounded text-center">
 				<h1 class="text-center">회원 탈퇴</h1>
 				<i class="fa-solid fa-circle-exclamation"></i>
 				탈퇴를 원하시면 기존 비밀번호를 입력하세요

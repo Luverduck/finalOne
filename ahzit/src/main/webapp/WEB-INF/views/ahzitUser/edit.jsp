@@ -69,7 +69,7 @@
 	
 	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<div class="p-4 text-dark rounded  text-center">
+			<div class="p-4 rounded  text-center">
 				<h1 class="text-center">개인정보 수정</h1>
 				<i class="fa-solid fa-circle-exclamation"></i>
 				비밀번호는 비밀번호 변경 메뉴에서 가능합니다.

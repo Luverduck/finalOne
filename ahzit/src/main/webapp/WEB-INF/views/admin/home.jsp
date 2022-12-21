@@ -165,26 +165,22 @@ $(function() {
 });
 </script>
 
-<div class = "container-fluid mt-3">
-	<div class = "row text-center">
-		<div class = "col-8 offset-2">
-			<div class = "row mt-4">
-				<div class = "col">
-					<h3>일자 별 회원 가입 현황</h3>
-					<canvas id="ahzitUserCount"></canvas>
-				</div>
-	
-				<div class = "col">
-					<h3>아지트 별 관심사 현황</h3>
-					<canvas id="ahzitSortCount"></canvas>
-				</div>
-
-				<div class = "col">
-					<h3>회원수 순 아지트</h3>
-					<canvas id="ahzitHeadCount"></canvas>
-				</div>
+<div class = "container-fluid mt-3 text-center">
+		<div class = "col-8 offset-2 d-flex align-items-center justify-content-center ">
+			<div class = "col">
+				<h3>일자 별 회원 가입 현황</h3>
+				<canvas id="ahzitUserCount"></canvas>
 			</div>
-		</div>
+
+			<div class = "col">
+				<h3>아지트 별 관심사 현황</h3>
+				<canvas id="ahzitSortCount"></canvas>
+			</div>
+
+			<div class = "col">
+				<h3>회원수 순 아지트</h3>
+				<canvas id="ahzitHeadCount"></canvas>
+			</div>
 	</div>
 </div>
 	

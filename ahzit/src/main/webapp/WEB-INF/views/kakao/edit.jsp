@@ -16,7 +16,7 @@
 
 	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<div class="p-4 text-dark rounded  text-center">
+			<div class="p-4 rounded text-center">
 				<h1 class="text-center">추가정보 입력</h1>
 				<i class="fa-solid fa-circle-exclamation"></i>
 				AHZIT 를 이용하기 전 간단한 추가정보를 입력해주세요.
