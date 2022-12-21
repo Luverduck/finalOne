@@ -56,7 +56,7 @@
 			
 				<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 					<div class=" col" >
-						<a href="mypage"  class="btn btn-outline-warning w-100" role=button>Mypage 이동</a>
+						<a href="mypage"  class="btn w-100 rounded"  style="background-color : #E6E6E6; color:#3E4684;" role=button>Mypage 이동</a>
 					</div>
 				</div>		
 			</div>

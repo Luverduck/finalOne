@@ -30,8 +30,7 @@
 			
 				<!-- 게시판 이름 -->
 				<div class="row mt-4">
-					<div
-						class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+					<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 						<div class="p-4 text-dark bg-Light rounded">
 							<h1 class="text-center">NOTICE</h1>
 						</div>
@@ -52,9 +51,10 @@
 
 
 				<div class="row mt-4">
-					<table class="table">
+					
+					<table class="table table-hover">
 
-						<thead align="center">
+						 <thead class="text-center">
 							<tr>
 								<th>번호</th>
 								<th width="45%">제목</th>
@@ -64,9 +64,7 @@
 
 							</tr>
 						</thead>
-
-
-						<tbody align="center">
+						<tbody class="text-center" >
 							<c:forEach var="noticeDto" items="${list}">
 								<tr>
 

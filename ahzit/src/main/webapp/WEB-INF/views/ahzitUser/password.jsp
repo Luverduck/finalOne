@@ -96,11 +96,12 @@
  	</div>
 
 	<div class="row mt-4">
-		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<button class="btn btn-outline-warning rounded-pill w-100 btn-lg" type="submit">변경</button>
+		<div class="col-8 offset-2 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="mb-5">
+			<button class="btn rounded w-100 btn-lg"  style="background-color : #E6E6E6; color:#3E4684;" type="submit">변경</button>
 		 </div>
-	</div>
-		
+		</div>
+	</div>	
 	
 	<c:if test="${param.error != null}">
 		<div class="row text-center mt-4">
