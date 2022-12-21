@@ -33,7 +33,7 @@
 	<update id="edit" parameterType="NoticeDto">
 		update notice set 
 		notice_title = #{noticeTitle},
-		notice_content = #{noticeContent}
+		notice_content = #{noticeContent},
 		notice_updatedate = sysdate
     
 		where

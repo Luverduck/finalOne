@@ -13,7 +13,7 @@
   		<insert id="insert" parameterType="AhzitDto" >
   			insert into ahzit(
   			ahzit_no, ahzit_leader, ahzit_sort, ahzit_name, ahzit_info, ahzit_region_high, ahzit_region_low, ahzit_ispublic) 
-  			values (#{ahzitNo}, #{ahzitLeader}, #{ahzitSort}, #{ahzitName}, #{ahzitInfo}, #{ahzitRegionHigh}, #{ahzitRegionLow}, #{ahzitIsPublic})
+  			values (#{ahzitNo}, #{ahzitLeader}, #{ahzitSort}, #{ahzitName}, #{ahzitInfo}, #{ahzitRegionHigh}, #{ahzitRegionLow}, #{ahzitIspublic})
   		</insert>
   		
   		<!-- 소모임 목록 -->
@@ -33,7 +33,7 @@
 	  				ahzit_name = #{ahzitName} , 
 	  				ahzit_info = #{ahzitInfo}, 
 	  				ahzit_headmax = #{ahzitHeadMax}, 
-	  				ahzit_isPublic = #{ahzitIsPublic}
+	  				ahzit_isPublic = #{ahzitIspublic}
 	  			where
 	  				ahzit_no = #{ahzitNo}
   		 </update>
@@ -53,12 +53,12 @@
 		
 		<!-- 찾기 페이지에서 전체 소모임 조회 -->
 		<select id = "allSort" parameterType = "map" resultType = "AhzitSearchListResponseVO">
-			select * from (select tmp.*, rownum rn from (select aa.ahzit_attachment_no, a.* from ahzit a left outer join ahzit_attachment aa on a.ahzit_no = ahzit_origin_no where ahzit_state = 'N' and ahzit_ispublic = 'N')tmp) where rn between #{rownumStart} and #{rownumEnd}
+			select * from (select tmp.*, rownum rn from (select aa.ahzit_attachment_no, a.* from ahzit a left outer join ahzit_attachment aa on a.ahzit_no = ahzit_origin_no where ahzit_state = 'N' and ahzit_ispublic = 'N' order by ahzit_no desc)tmp) where rn between #{rownumStart} and #{rownumEnd}
 		</select>
 		
 		<!-- 찾기 페이지에서 특정 카테고리 소모임 조회 -->
 		<select id = "searchSort" parameterType = "map" resultType = "AhzitSearchListResponseVO">
-			select * from (select tmp.*, rownum rn from (select aa.ahzit_attachment_no, a.* from ahzit a left outer join ahzit_attachment aa on a.ahzit_no = ahzit_origin_no where ahzit_state = 'N' and ahzit_ispublic = 'N' and instr(ahzit_sort, #{keyword}) > 0)tmp) where rn between #{rownumStart} and #{rownumEnd}
+			select * from (select tmp.*, rownum rn from (select aa.ahzit_attachment_no, a.* from ahzit a left outer join ahzit_attachment aa on a.ahzit_no = ahzit_origin_no where ahzit_state = 'N' and ahzit_ispublic = 'N' and instr(ahzit_sort, #{keyword}) > 0 order by ahzit_no desc)tmp) where rn between #{rownumStart} and #{rownumEnd}
 		</select>
 		
 		<!-- 홈 화면의 검색창 전체 조회 -->

@@ -3,17 +3,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <%-- header --%>
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="소모임 회원" name="title"/>
+</jsp:include>
+
 <jsp:include page="/WEB-INF/views/template/ahzit_header.jsp">
 	<jsp:param value="소모임 회원" name="title"/>
 </jsp:include>
 
 <style>
-	* {
+/* 	div {
 		border : 1px dotted gray;	
-	}
+	} */
 
 	body {
-		background-color: rgba(230, 230, 230, 100);	
+		background-color: #F5F5F5;	
 	}
 	
 	.div-ahzit-info,
@@ -23,18 +27,33 @@
 		border-radius : 15px;
 	}
 	
-	.img-ahzit {
+	.ahzit-profile {
 		width : 100px;
-		height : 100px;
+		height : 300px;
+		border-radius : 15px;
+	}
+
+	.pagination{
+	justify-content : center
 	}
 	
-.pagination{
-justify-content : center
-}
-	
+	#crown {
+		width:20px;
+	}
+	.member-search {
+		margin-right : 1.8em;
+		background-color:transparent;
+	}
+	.btn-join {
+		display : none;
+	}
+	.profile-img {
+		width : 60px;
+		border-radius : 50%;
+	}
 </style>
 
-<div class = "container-fluid mt-3">
+<div class = "container-fluid mt-2 mb-2">
 	<div class = "row">
 		
 		<div class = "col-8 offset-2">
@@ -49,11 +68,10 @@ justify-content : center
 						<div class = "div-ahzit-info shadow p-3" style="background-color: white;">
 							<div class = "d-flex div-ahzit-img justify-content-center align-items-center">
 							<c:if test="${attachmentList.isEmpty()}">
-						    	<img src = "/images/bg_default.jpg" class="flex-fill img-ahzit">
-
+						    	<img src = "/images/bg_default.jpg" class="flex-fill ahzit-profile">
 					    	</c:if>
 				      		<c:forEach var = "list" items = "${attachmentList}"> <!-- 설정한 프로필 -->
-				        		<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="flex-fill img-ahzit">  					
+				        		<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="flex-fill ahzit-profile">  					
 				      		</c:forEach>
 							</div>
 						
@@ -62,8 +80,8 @@ justify-content : center
 				      		<div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
 								<span class="ahzit-side ahzit-name mt-1">${ahzitVO.getAhzitName()}</span><%--아지트 이름 --%>
 								<span class="ahzit-side mt-1">멤버 ${ahzitVO.getAhzitHead()}  · ${ahzitVO.getAhzitSort()} </span>
-								<span class="ahzit-side mt-1">${ahzitVO.getAhzitInfo()}<br> <%--아지트 소개 --%></span>
-								<span class="ahzit-side mt-1">아지트 리더 : ${ahzitVO.getAhzitLeader()}</span>
+								<span class="ahzit-side mt-1 mb-1">${ahzitVO.getAhzitInfo()}<br> <%--아지트 소개 --%></span>
+								<span class="ahzit-side mt-1">아지트 리더 : ${ahzitVO.getAhzitLeader()} <img src = "/images/crown.png"  id="crown"></span>
 							</div>
 							
 							<div class = "row mt-1">
@@ -85,6 +103,7 @@ justify-content : center
 								 	<c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
 										<a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i><span>아지트 수정</span></a>					
 									</c:if>
+									
 								</div>
 							</div>
 						</div>
@@ -106,17 +125,18 @@ justify-content : center
 				<div class = "col-6">
 					<div class = "row">
 						<div class = "col">
-							<div class = "d-flex px-3 py-2 mb-2 shadow div-search-member-input" style="background-color:white;">
-								<input class = "flex-fill input-search-member" type = "text" placeholder= "회원 검색">
-								<button class = "btn-search-member-submit" type = "button">검색</button>
+							<div class = "d-flex px-3 py-2 mb-2 shadow div-search-member-input search-bar" style="background-color:white;">
+								<input class = "flex-fill input-search-member search-box" type = "text" placeholder= "회원 검색">
+								<button class = "btn-search-member-submit header-btn member-search" type = "button"><i class="fa-solid fa-magnifying-glass" ></i></button>
 							</div>
 							<div class = "shadow div-member-info-list p-3" style="background-color:white;">
+							<div style="font-size:20px;" class="mb-2">멤버 ${ahzitVO.getAhzitHead()}</div>
 							<c:forEach var = "ahzitMemberList" items = "${ahzitMemberList}">
 								<div class = "mb-2 div-member-info">
-									<div class = "row">
-										<img src = "/attachment/download/ahzitMember?attachmentNo=${ahzitMemberList.memberAttachmentNo}">
-									</div>
-									(첨부파일 표시 확인 완료)<br>
+										<img src = "/attachment/download/ahzitMember?attachmentNo=${ahzitMemberList.memberAttachmentNo}" onerror=" this.onerror=null; this.src='/images/user.png';" class="profile-img me-2">
+										${ahzitMemberList.memberNick}  (${ahzitMemberList.memberGrade})
+										
+<%-- 									(첨부파일 표시 확인 완료)<br>
 									회원 번호 : ${ahzitMemberList.memberNo} <br>
 									소모임 번호 : ${ahzitMemberList.memberAhzitNo} <br>
 									회원 아이디 : ${ahzitMemberList.memberId} <br>
@@ -124,7 +144,7 @@ justify-content : center
 									회원 활동점수 : ${ahzitMemberList.memberScore} <br>
 									회원 가입일 : ${ahzitMemberList.memberJoindate} <br>
 									회원 닉네임 : ${ahzitMemberList.memberNick} <br>
-									회원 프로필 번호 : ${ahzitMemberList.memberAttachmentNo} <br>
+									회원 프로필 번호 : ${ahzitMemberList.memberAttachmentNo} <br> --%>
 									<hr>	
 								</div> 
 							</c:forEach>
@@ -136,7 +156,7 @@ justify-content : center
 				<%-- 오른쪽 사이드바 --%>
 				<div class = "col-3">
 					<div class = "row">
-						<div class = "div-right-side p-3" style="background-color: white;">
+						<div class = "div-right-side p-3 shadow" style="background-color: white;">
 						 	반가워요<br>
 						 	반가워요<br>
 						 	반가워요<br>

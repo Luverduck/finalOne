@@ -212,7 +212,7 @@ public class AhzitDaoImpl implements AhzitDao {
 	
 	// 추상 메소드 - 찾기 페이지에서 소모임 조회
 	@Override
-	public List<AhzitSearchListRequestVO> selectSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+	public List<AhzitSearchListResponseVO> selectSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
 		if(ahzitSearchListRequestVO.isSearch()) {
 			return searchSortAhzit(ahzitSearchListRequestVO);
 		}
@@ -223,7 +223,7 @@ public class AhzitDaoImpl implements AhzitDao {
 	
 	// 추상 메소드 - 찾기 페이지에서 전체 소모임 조회
 	@Override
-	public List<AhzitSearchListRequestVO> allSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+	public List<AhzitSearchListResponseVO> allSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
 		Map<String, String> param = new HashMap<>();	
 		param.put("rownumStart", String.valueOf(ahzitSearchListRequestVO.rownumStart()));
 		param.put("rownumEnd", String.valueOf(ahzitSearchListRequestVO.rownumEnd()));
@@ -232,7 +232,7 @@ public class AhzitDaoImpl implements AhzitDao {
 
 	// 추상 메소드 - 찾기 페이지에서 특정 카테고리 소모임 조회
 	@Override
-	public List<AhzitSearchListRequestVO> searchSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+	public List<AhzitSearchListResponseVO> searchSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
 		Map<String, String> param = new HashMap<>();	
 		param.put("keyword", ahzitSearchListRequestVO.getKeyword());
 		param.put("rownumStart", String.valueOf(ahzitSearchListRequestVO.rownumStart()));

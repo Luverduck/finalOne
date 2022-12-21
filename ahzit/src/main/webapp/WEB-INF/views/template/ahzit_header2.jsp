@@ -50,24 +50,18 @@
 
 	
 	<style>
-/*         * {
+        * {
             font-family: 'Noto Sans KR', sans-serif;
            	font-size : 16px !important;
-        } */
-		div, a {
-			border : 1px dotted transparent;
-		}
+        }
         a {
 			text-decoration: none;
-		}
-		.ahzit-header-style {
-			background-color : #E4E4E4;
 		}
     </style>
 </head>
 <body>
 
-<%-- <c:set var="login" value="${loginId != null}"></c:set>
+<c:set var="login" value="${loginId != null}"></c:set>
 
 <div class = "container-fluid py-2" style="background-color:#FFA91C;">
 
@@ -114,9 +108,9 @@
 			</c:otherwise>
 			</c:choose>
 		</div>
-	</div> --%>
+	</div>
 	
-	<div class = "row mt-1 ahzit-header-style">
+	<div class = "row mt-3">
 		<div class = "col-2 offset-2 d-flex justify-content-center">
 			<a href = "/ahzit_in/${ahzitNo}" class = "p-2">게시글</a>
 			<!-- <a href = "/ahzit_in/${ahzitDto.ahzitNo}">게시글</a> -->

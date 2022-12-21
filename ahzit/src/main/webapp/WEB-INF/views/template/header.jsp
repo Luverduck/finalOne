@@ -46,6 +46,8 @@
   	<!-- 폰트(이사만루체) CDN -->
   	 <link href="https://webfontworld.github.io/gonggames/EsaManru.css" rel="stylesheet">
   	
+  	<!-- AXIOS CDN -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   	<!-- Lodash CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -109,6 +111,28 @@
 		}
 		.header-style {
 		 	background-color : #EDEEF0; 
+		}
+		 .fixed {
+            position: fixed;
+            bottom:40px;
+            right:40px;
+        }
+         .btn-create {
+            width: 80px;
+            height: 80px;
+            border-radius : 50%;
+            background-color: #3E4684;
+            z-index : 99999;
+        }
+        .create-img {
+        	 width:40px;
+        	 margin : 0.9em 0.7em;
+        }
+		.create {
+			color : white;
+			font-size : 12px;
+			margin:-1em;
+			padding:0;
 		}
     </style>
 </head>
@@ -175,6 +199,14 @@
 			</c:if>
 		</div>
 	</div> --%>
+	
+	<%--개설 하기 버튼 --%>
+	 <div class="row" >
+		<a href="${pageContext.request.contextPath}/ahzit/create" class="hover-text">
+	           <div class="btn-create fixed text-center"><img src="/images/create.png" class="create-img"><p class="create">개설</p></div>
+	     </a>
+      </div>
+        
 </div> <!-- container 끝 -->
 
 

@@ -38,7 +38,9 @@ public class NoticeController {
 	@Autowired
 	private AttachmentDao attachmentDao;
 	
-	private final File directory = new File(System.getProperty("user.home")+"/upload/main");
+	//private final File directory = new File(System.getProperty("user.home")+"/upload/main");
+	private final File directory = new File("D:/upload/kh10f");
+
 
 	@PostConstruct//최초 실행시 딱 한 번만 실행되는 메소드
 	public void prepare() {
