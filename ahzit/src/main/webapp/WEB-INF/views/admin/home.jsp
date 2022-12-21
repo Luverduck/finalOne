@@ -184,15 +184,6 @@ $(function() {
 					<canvas id="ahzitHeadCount"></canvas>
 				</div>
 			</div>
-			
-			<div class = "row mt-4">
-				<div class = "col">
-					
-				</div>
-				<div class = "col">
-				asdfa
-				</div>
-			</div>
 		</div>
 	</div>
 </div>
