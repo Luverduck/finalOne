@@ -1275,6 +1275,8 @@
 			} */
 		})
 		.then(function(response){
+			console.log(response);
+			if(response.data.boardList[0] == null) return;
 			pLast = response.data.plast; // 끝 페이지에 도달하면 비동기 조회를 막기 위해 페이지 끝 번호 설정
 			//console.log(pLast);
 			
