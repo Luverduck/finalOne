@@ -64,7 +64,11 @@ public class AttachmentController {
 		}
 		
 		//2. 파일 불러오기
-		File dir = new File(System.getProperty("user.home")+"/upload/main");
+		//File dir = new File(System.getProperty("user.home")+"/upload/main");
+		File dir = new File("D:/upload/kh10f");
+
+		
+		
 		File target = new File(dir, String.valueOf(attachmentNo));
 		byte[] data = FileUtils.readFileToByteArray(target);
 		ByteArrayResource resource = new ByteArrayResource(data);
