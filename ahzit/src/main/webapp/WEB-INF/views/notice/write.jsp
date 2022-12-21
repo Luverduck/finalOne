@@ -27,15 +27,17 @@ $(function(){
 </script>
 
 <form action="write" method="post" enctype="multipart/form-data">
-	<div class="row mt-4">
+
+<div class="container mt-3 mb-3">
+	<div class="row mt-3">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="p-4 text-dark rounded  text-center">
-				<h1 class="text-center">공지사항 등록</h1>
+				<h1 class="text-center">notice</h1>
 			</div>
 		</div>
 	</div>
 
-	<div class="row mt-4">
+	<div class="row">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
     			<input type="text" name="noticeTitle" class="form-control rounded" placeholder="제목" required >
@@ -46,7 +48,7 @@ $(function(){
 		</div>
  	</div>
  	
- 	<div class="row mt-4">
+ 	<div class="row mt-3">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
 				<textarea name="noticeContent"  required></textarea>
@@ -61,11 +63,16 @@ $(function(){
 		</div>
  	</div>
 
-		<div class="row right">
-			<a class="btn btn-neutral" href="list">목록으로</a>
-			<button class="btn btn-positive" type="submit">등록하기</button>
+		<div class="row justify-content-center mt-5 mb-5">
+			<div class="col-3">
+				<a class="btn btn-neutral" href="list">목록으로</a>
+			</div>
+			
+			<div class="col-3">
+				<button class="btn btn-positive" type="submit">등록하기</button>
+			</div>
 		</div>
-	
+</div>	
 </form>
 
 <%-- footer --%>

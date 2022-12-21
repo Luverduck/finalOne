@@ -15,42 +15,50 @@
 </jsp:include>
 
 
+<script>
+$(function(){
+    $("[name=noticeContent]").summernote({
+        height : 300, // 높이 지정
+        minHeight : 300, // 최소 높이
+        maxHeight : 300, // 최대 높이
+        placeholder : "내용을 작성하세요", // 도움말
+        lang : "ko-KR" // 도움말 한글로 번역, 스크립트 추가해야함
+    })
+});
+</script>
+
+
+
 <form action="edit" method="post">
 
 <!-- input[type=hidden]은 form 안에 위치해야 한다 -->
 <input type="hidden" name="noticeNo" value="${noticeDto.noticeNo}">
 
-<div class="container">
-	<div class="row center">
-		<h1>게시글 보기</h1>
-	</div>
-
-	<!-- 목록 버튼 -->
+<div class="container mt-3 mb-3">
 	<div class="row">
-		<a class="btn btn-neutral" href="list">목록으로</a>
+		<h1>notice</h1>
+	</div>
+	
+	<div class="row">
+		<input class="input" type="text" name="noticeTitle" required value="${noticeDto.noticeTitle}" autocomplete="off" placeholder="제목을 입력해주세요">
 	</div>
 
+	<div class="row">
+		<textarea class="input" name="noticeContent" rows="10" required>${noticeDto.noticeContent}</textarea>
+	</div>
 
-	<div class="row center">
-	
-		<div class="row left">
-			<label>제목</label>
-		<input class="input" type="text" name="noticeTitle" required value="${noticeDto.noticeTitle}" autocomplete="off">
-		</div>
-	
-		<div class="row left">
-			<label>내용</label>
-			<textarea class="input" name="noticeContent" rows="10" required>${noticeDto.noticeContent}</textarea>
-		</div>
-	
-		<div class="row right">
+	<div class="row justify-content-center mt-3 mb-5">
+		<div class="col-3">
 			<a class="btn btn-neutral" href="list">목록으로</a>
+		</div>
+		
+		<div class="col-3">
 			<button class="btn btn-positive" type="submit">수정하기</button>
 		</div>
 	</div>
 
-
 </div>
+
 </form>
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
