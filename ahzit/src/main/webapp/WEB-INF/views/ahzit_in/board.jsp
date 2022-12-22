@@ -356,7 +356,7 @@
 				<%-- 오른쪽 사이드바 --%>
 				<div class = "col-3">
 					<div class = "row">
-						<div class = "div-right-side p-3 shadow" style="background-color: white;">
+						<div class = "div-right-side p-3 shadow bg-white" >
 						 	반가워요<br>
 						 	반가워요<br>
 						 	반가워요<br>
