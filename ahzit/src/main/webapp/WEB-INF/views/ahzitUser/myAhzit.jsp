@@ -5,14 +5,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <%-- header --%>
-<jsp:include page="/WEB-INF/views/template/ahzitUserHeader.jsp">
+<jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="my Ahzit" name="title"/>
 </jsp:include>
 
 <div class = "container-fluid mt-3">
-	<div class = "">
+	<div>
 		<div class = "col-8 offset-2 main">
-			<div class = "">
+			<div>
 
 				<div class=" mt-4">
 					<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
