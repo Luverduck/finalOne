@@ -23,7 +23,7 @@
   		
   		<!-- 소모임 단일조회 -->
   		<select id="one" parameterType="int" resultType="AhzitDto">
-  			select * from ahzit where ahzit_no = #{ahzitNo}
+  			select a.*, am.member_nick from ahzit a inner join ahzit_member am on a.ahzit_no = am.member_ahzit_no where a.ahzit_no = #{ahzitNo} and am.member_grade = '개설자'ㄴ
   		</select>
   		
   		<!-- 소모임 수정(소모임이름, 소개, 최대멤버수, 공개여부, 프로필사진)-->		
