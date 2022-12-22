@@ -13,7 +13,6 @@
 	<div>
 		<div class = "col-8 offset-2 main">
 			<div>
-
 				<div class=" mt-4">
 					<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 						<div class="p-4 rounded">
