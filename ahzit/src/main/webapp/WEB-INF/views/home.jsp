@@ -170,8 +170,10 @@ div {
       <p class="text-center ahzit-title-name">지금 HOT한 AHZIT <i class="fa-solid fa-fire"></i></p> <%--추후 바꾸기 --%>
    </div>
    
-   <div class="row mb-5">
-      <a href="ahzitUser/myAhzit" class="text-end">AHZIT 전부보기<i class="fa-solid fa-angles-right"></i></a>
+
+   <div class="row mb-3">
+      <a href="${pageContext.request.contextPath}/search" class="text-end">AHZIT 전부보기<i class="fa-solid fa-angles-right"></i></a>
+
    <c:forEach var="ahzitHeadCount" items="${ahzitHeadCount}">
     <div class="mt-4 col-xl-4 col-lg-6 col-md-6 col-sm-6">
              <div class="card-sl">

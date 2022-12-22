@@ -17,14 +17,12 @@
 	body {
 		background-color: #F5F5F5 !important;
 	}
-	
 	.div-ahzit-info,
 	.div-member-info-list,
 	.div-right-side,
 	.div-search-member-input {
 		border-radius : 15px;
 	}
-	
 	.ahzit-profile {
 		width : 100px;
 		height : 300px;
@@ -33,74 +31,9 @@
 	#crown {
 		width:20px;
 	}
-	.member-search {
-		margin-right : 1.8em;
-		background-color:transparent;
-	}
 	.btn-join {
 		display : none;
 	}
-	.profile-img {
-		width : 60px;
-		border-radius : 50%;
-	}
-   
-   body {
-      background-color: rgba(230, 230, 230, 100);
-   }
-   
-   .div-member-profile {
-      width: 70px;
-      height: 70px;
-   }
-   
-   .img-member-profile {
-      border-radius: 50%;
-      width: 100%;
-   }
-
-   .div-editor-opener,
-   .div-editor-input {
-      border-radius: 10px;
-      border-color : rgba(210, 210, 210);
-      background-color: rgba(240, 240, 240, 50);
-      padding-left: 2%;
-      color: rgba(140, 140, 140, 140);
-   }
-   
-   .div-board {
-      background-color: white;
-   }
-   
-   .div-board-top {
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-   }
-   
-   .div-board-bottom {
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-   }
-   
-   .p-writer-info {
-      font-weight: 1000;
-   }
-   
-   .div-icon-dropdown {
-      width : 20px;
-   }
-   
-   .button-board {
-      cursor: pointer;
-      align-content: center;
-   }
-   
-   .icon-board, 
-   .icon-editor-opener {
-      color: black;
-      font-size: 20px;
-   }
-   
    .ahzit-img {
       width : 400px;
       height : 400px;      
@@ -151,6 +84,7 @@
 		color : red;
 		font-size : 18px;
 	}
+
 </style>
 
 
@@ -164,63 +98,82 @@
 				<%-- 왼쪽 사이드바 --%>
 				<div class = "col-3">
 					<jsp:include page="/WEB-INF/views/template/ahzit_left_side.jsp"></jsp:include>
-				</div>
-            
-      <%-- 가운데 내용 --%>
-     	<div class = "col-6">
-			<div class = "row">
-				<div class = "col">
-				
-				<div class = "shadow div-member-info-list p-3 bg-white">
-      				<form id="ahzitJoin" action="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/editMyInfo" method="post">
-			
-				<c:choose>
-			      	<c:when test="${memberAttachmentList.isEmpty()}"><!-- 프로필 이미지를 등록하지 않았을 경우 -->
-			      		<p class="fs-3 mb-3">아지트 내 정보 수정</p>
-			      		<p class="fs-5">아지트에서 사용할 프로필 이미지를 등록해 주세요</p>
-			      	</c:when>
-			      	<c:otherwise>
-			      		<p>프로필 이미지를 수정할 수 있습니다</p>
-			      	</c:otherwise>
-		      	</c:choose>
-		      	
-		      	<input type="file" name="attachment" id="input-file" class="thumbnail">
-      			<c:choose>
-      				<c:when test="${memberAttachmentList.isEmpty()}"><!-- 프로필 이미지를 등록하지 않았을 경우 -->
-      					<img class="preview" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br>
-      				</c:when>
-      			<c:otherwise><!-- 프로필 이미지를 등록했을 경우 -->
-      				<c:forEach var = "memberAttachmentList" items = "${memberAttachmentList}">  <%--설정한 프로필 --%>
-			            <img class="preview" src = "/attachment/download/ahzitMember?attachmentNo=${memberAttachmentList.attachmentNo}" width="200" height="200"> 					
-			          </c:forEach>
-      			</c:otherwise>
-      			</c:choose>
-      			
-	      		 <div class="row img-btns mb-4">
-                 	<label class="input-file-upload img-lab" for="input-file">사진변경</label> 
-	      		</div>
-	
-			<span class="fs-5 mb-3">닉네임 변경</span><br>
-				<input type="hidden" name="memberAhzitNo" value="${ahzitNo}">
-	      		<input type="hidden" name="memberId" value="${loginId}">
-	      		<input type="hidden" name="memberNo" value="${ahzitMemberDto.memberNo}">
-	      		<input type="text" name="memberNick" value="${ahzitMemberDto.memberNick}" class="rounded">
-	      		<div class="valid-feedback" >사용할 수 있는 닉네임입니다</div>
-	            <div class="invalid-feedback" >닉네임은 한글 3~10글자로 작성하세요</div>
-	      		<div id="duplicate" class="NNNNN">이미 사용 중인 닉네임입니다</div><br>
-      			<button id="submitBtn" type="button" class="mt-2" onclick="submitChk();">변경 완료</button>
-      			
-      		</form>
 
-			      	<div class="row">
-			      		<a href="${pageContext.request.contextPath}/ahzit_in/${ahzitMemberDto.memberNo}/deleteCommonMember" type="button"><i class="fa-solid fa-trash" style="color:red;"></i><span style="color:red">아지트 탈퇴</span></a>
-			      	</div>
-      			</div>
-   			</div>
-   		</div>
-	</div>
-	
-    	<%-- 오른쪽 사이드바 --%>
+				</div>
+				
+				<%-- <div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
+							로그인 중인 회원 번호 : ${ahzitMemberDto.memberNo}<br>
+							회원이 가입한 아지트 번호 : ${ahzitMemberDto.memberAhzitNo}<br>
+							로그인 중인 회원 아이디 : ${ahzitMemberDto.memberId}<br>
+							로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberNick}<br>
+							로그인 중인 회원 등급 : ${ahzitMemberDto.memberGrade}<br>
+							로그인 중인 회원 활동 점수 : ${ahzitMemberDto.memberGrade}<br>
+							소모임 가입일 : ${ahzitMemberDto.memberJoindate}
+						</div> --%>
+            	
+		      	<%-- 가운데 내용 --%>
+		     	<div class = "col-6">
+		     		<div class = "col p-2 div-info-editor">
+		     		<form id="ahzitJoin" action="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/editMyInfo" method="post">
+		     			<div class = "row">
+		     				<input type="hidden" name="memberAhzitNo" value="${ahzitNo}">
+				      		<input type="hidden" name="memberId" value="${loginId}">
+				      		<input type="hidden" name="memberNo" value="${ahzitMemberDto.memberNo}">
+				      		<div class = "col">
+				      			<p>닉네임</p>	
+				      			<input type="text" name="memberNick" value="${ahzitMemberDto.memberNick}" class="rounded me-3">
+					      		<span class="valid-feedback">사용할 수 있는 닉네임입니다</span>
+					            <span class="invalid-feedback">닉네임은 한글 3~10글자로 작성하세요</span>
+					      		<span id="duplicate" class="NNNNN">이미 사용 중인 닉네임입니다</span><br>
+				      		</div>
+		     			</div>
+		     			<div class = "row mt-2">
+		     				<div class = "col">	
+		     					<div class = "row">
+		     						<p>프로필 이미지</p>
+			     					<c:choose>
+							      	<c:when test="${memberAttachmentList.isEmpty()}"><!-- 프로필 이미지를 등록하지 않았을 경우 -->
+						      			<span>아지트에서 사용할 프로필 이미지를 등록해 주세요</span>
+							      	</c:when>
+							      	<c:otherwise>
+						      			<span>프로필 이미지를 수정할 수 있습니다</span>
+							      	</c:otherwise>
+							      	</c:choose>
+		     					</div>
+		     					<div class = "row">		     					
+				     				<c:choose>
+				      				<c:when test="${memberAttachmentList.isEmpty()}"><!-- 프로필 이미지를 등록하지 않았을 경우 -->
+				      					<img class="preview" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br>
+				      				</c:when>
+					      			<c:otherwise><!-- 프로필 이미지를 등록했을 경우 -->
+					   				<c:forEach var = "memberAttachmentList" items = "${memberAttachmentList}">  <%--설정한 프로필 --%>
+						            	<img class="preview" src = "/attachment/download/ahzitMember?attachmentNo=${memberAttachmentList.attachmentNo}" width="200" height="200"> 					
+						          	</c:forEach>
+					      			</c:otherwise>
+					      			</c:choose>
+		     					</div>	     				
+		     				</div>
+		     				<div class = "col">
+		     					<div class = "row">
+		     						<label class="input-file-upload img-lab mb-2" for="input-file">사진변경</label> 
+		     						<input type="file" name="attachment" id="input-file" class="thumbnail">
+		     					</div>
+		     				</div>
+		     			</div>
+		     			<div class = "row">
+		     				<div class = "col">
+		     					<button id="submitBtn" type="button" class="mt-2" onclick="submitChk();">변경 완료</button>
+		     				</div>
+		     				<div class = "col">
+		     					<i class="fa-solid fa-trash" style="color:red;"></i>
+					      		<span style="color:red">아지트 탈퇴</span>
+		     				</div>
+		     			</div>
+		     		</form>
+		     		</div>
+				</div>
+
+    			<%-- 오른쪽 사이드바 --%>
 				<div class = "col-3">
 					<div class = "row">
 						<div class = "div-right-side p-3 shadow bg-white">

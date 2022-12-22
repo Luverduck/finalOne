@@ -198,11 +198,11 @@
 					
 					//인증번호 입력창을 사용자에게 보여줘야 한다
 					//(1) 만들든가 (2) 숨겨놨다 보여주든가
-					
+	
 					
 					var div = $("<div>").attr("class", "d-flex justify-content-center align-items-center flex-fill mb-3");
 					var input = $("<input>").attr("class" , "form-control rounded").attr("placeholder" , "인증번호")
-					var button = $("<button>").attr("type", "button").attr("class", "btn btn-sm btn-warning rounded text-light btn-m emailSend-btn").text("확인");
+					var button = $("<button>").attr("type", "button").attr("class", "btn rounded btn-m emailSend-btn").attr("style", "background-color : #E6E6E6; color:#3E4684").text("확인");
 					
 					//button을 클릭하면 input에 있는 인증번호와 이메일을 사용해서 검사요청
 					button.click(function(){
@@ -362,14 +362,14 @@
 						
 						<div class="input-group form-floating">
 						
-							<input type="text" name="userEmail" class=" form-control rounded me-1"  placeholder="이메일"  required>
+							<input type="text" name="userEmail" class=" form-control rounded"  placeholder="이메일"  required>
 							
 							<label>
 							이메일 
 							<i class="fa-solid fa-asterisk text-danger"></i>
 							</label>
 							
-							<button class="send-btn btn  rounded btn-m" style="background-color : #E6E6E6; color:#3E4684;" disabled type="button" >인증번호 발송</button>
+							<button class="send-btn btn rounded " style="background-color : #E6E6E6; color:#3E4684;" disabled type="button" >인증번호 발송</button>
 							<div class="valid-feedback">올바른 이메일 형식입니다.</div>
 							<div class="invalid-feedback">이메일 형식을 확인해주세요</div>		
 						</div>
@@ -378,7 +378,7 @@
 						
 				</div>
 				
-				<div class="cert"></div>
+				<div class="cert input-group form-floating"></div>
 				
 			</div>
 		</div>
