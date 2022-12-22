@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -80,28 +81,26 @@ public class AhzitController {
 	}
 	
 	//소모임 가입
-	@GetMapping("/insert")
-	public String insert() {
-		return "ahzit/insert";
-	}
-	
-	@PostMapping("/insert")
-	public String insert(
-			@ModelAttribute AhzitMemberDto ahzitMemberDto,
-			HttpSession session,
-			RedirectAttributes attr			
-			) {
-		attr.addAttribute("ahzitNo", ahzitMemberDto.getMemberAhzitNo());
-		String userId = (String) session.getAttribute(SessionConstant.ID);
-		ahzitMemberDto.setMemberId(userId);
-		ahzitDao.insertMember(ahzitMemberDto);
-		
-		int ahzitNo = ahzitMemberDto.getMemberAhzitNo();		
-		
-		//소모임가입자 증가 메소드
-		ahzitDao.updateAhzitPerson(ahzitMemberDto.getMemberAhzitNo());
-		return "redirect:/ahzit_in/" + ahzitNo;
-	}
+		@GetMapping("/insert")
+		public String insert() {
+			return "ahzit/insert";
+		}
+		@ResponseBody
+		@PostMapping("/insert")
+		public String insert(
+				@ModelAttribute AhzitMemberDto ahzitMemberDto,
+				HttpSession session,
+				RedirectAttributes attr			
+				) {
+			attr.addAttribute("ahzitNo", ahzitMemberDto.getMemberAhzitNo());
+			String userId = (String) session.getAttribute(SessionConstant.ID);
+			ahzitMemberDto.setMemberId(userId);
+			ahzitDao.insertMember(ahzitMemberDto);
+			int ahzitNo = ahzitMemberDto.getMemberAhzitNo();		
+			//소모임가입자 증가 메소드
+			ahzitDao.updateAhzitPerson(ahzitMemberDto.getMemberAhzitNo());
+			return "redirect:/ahzit_in/" + ahzitNo;
+		}
 	
     //소모임 관리 페이지(수정)
     @GetMapping("/edit")
