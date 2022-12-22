@@ -20,12 +20,34 @@
 	</title>
 	
 	<style>
+	
         a {
 			text-decoration: none;
 		}
 		.ahzit-header-style {
 			background-color : #E4E4E4;
 		}
+		.img-member-picture {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+
+        .modal-i-member-grade-leader {
+            width: 1em;
+        }
+
+        .modal-member-nick {
+            font-size: 24px;
+        }
+
+        .div-modal-content-member-info{
+            border-radius: 15px;
+        }
+
+        .div-modal-body-member-info{
+            border  : 50px #3E4684 !important;
+        }
     </style>
 </head>
 <body>
@@ -98,8 +120,91 @@
 	
 </div>
 
+<!-- 회원 정보 모달 -->
+<div class="modal fade" id="modal-member-info" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content div-modal-content-member-info">
+           <!-- 모달 바디 -->
+           <div class="modal-body"> <!-- 붙일 영역-->
+               <div class="container-fluid px-1 py-0 div-modal-body-member-info">
+                   <div class="row d-flex justify-content-end flex-fill">
+                       <!-- X 버튼 -->
+                       <button type="button" class="btn-close modal-member-info-close" aria-label="Close"></button>
+                   </div>
+
+                   <div class="row modal-member-info-attach">
+                       
+                   </div>
+               </div>
+           </div>
+        </div>
+    </div>
+</div>
+
 
 
 <script>
 
+	$(function(){
+		$(document).on("click", ".member-profile", function(){
+			// 로그인 중인 회원의 회원 번호
+			var memberNo = $(this).data("writerno");
+			// 현재 접속중인 소모임 페이지의 소모임 번호
+			var ahzitNo = $("#div-member-info").data("ahzitno");
+			
+			console.log(memberNo);
+			
+			var target = $(".modal-member-info-attach");
+			
+			target.empty();
+			
+			// 비동기 조회
+			axios({
+				url : "http://localhost:8888/rest/ahzitMember/member_info?memberNo=" + memberNo + "&ahzitNo=" + ahzitNo,
+				method : "get"
+			})
+			.then(function(response){
+				console.log(response);
+				
+				var div_img_outer_container = $("<div>").attr("class", "col-10 offset-1");
+				
+				var div_img_inner_container = $("<div>").attr("class", "d-flex align-itmes-center justify-content-center mt-3 div-member-pircutre");
+				
+				var img_member_picture = $("<img>").attr("class", "img-member-picture").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.memberAttachmentNo);
+				var div_img_inner = div_img_inner_container.append(img_member_picture);
+				// 1)
+				var div_img = div_img_outer_container.append(div_img_inner);
+				
+				var div_member_nick_container = $("<div>").attr("class", "col-12 d-flex justify-content-center align-items-center mt-3 mb-1");
+				var span_member_nick = $("<span>").attr("class", "modal-member-nick me-1").text(response.data.memberNick);
+				// 2)
+				var div_member_nick = div_member_nick_container.append(span_member_nick);
+				
+				var div_member_info = $("<div>").attr("class", "col-12 d-flex justify-content-center align-items-center mb-2");
+				if(response.data.memberGrade == "개설자") {
+					var img_member = $("<img>").attr("class", "modal-i-member-grade-leader me-2").attr("src", "/images/crown.png");	
+					div_member_info.append(img_member);
+				}
+				var span_member_grade = $("<span>").attr("class", "modal-member-grade").text(response.data.memberGrade);
+				div_member_info.append(span_member_grade);
+				
+				
+				var div_member_since_container = $("<div>").attr("class", "col-12 d-flex justify-content-center align-items-center mb-2");
+				var span_member_since = $("<span>").attr("class", "modal-member-since").text(response.data.memberJoindate);
+				// 4)
+				var div_member_since = div_member_since_container.append(span_member_since);
+				
+				var div_img_outer = div_img_outer_container.append(div_img).append(div_member_nick).append(div_member_info).append(div_member_since);
+				
+				target.append(div_img_outer);
+				
+				$("#modal-member-info").modal("show"); 
+				
+			});
+		});
+	
+		$(".modal-member-info-close").click(function(){
+			$("#modal-member-info").modal("hide");
+		});
+	});
 </script>
