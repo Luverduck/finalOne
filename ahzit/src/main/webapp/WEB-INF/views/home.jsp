@@ -149,27 +149,26 @@
 <div class = "container-fulid mt-3">
 	<div class = "row">
 
-		<div class = "col-8 offset-2 ">
-		   <%-- 홈 화면 내용 영역 --%>
-		   <%--이미지 슬라이더 --%>
-			<div class="swiper mb-3">
-                <div class="swiper-wrapper">
-                	<div class="swiper-slide"><img src="images/main-img-1.png" class="main-img"></div>
-                	<div class="swiper-slide"><img src="images/main-img-2.png" class="main-img"></div>
-                	<div class="swiper-slide"><img src="images/main-img-3.png" class="main-img"></div>
-                	<div class="swiper-slide"><img src="images/main-img-4.png" class="main-img"></div>
-                </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-            </div>
-            
-      	<div>
-			<p class="text-center ahzit-title-name">소모임 추천</p> <%--추후 바꾸기 --%>
-		</div>
-            
-            
 
+	<div class = "col-8 offset-2 ">
+	   <%-- 홈 화면 내용 영역 --%>
+	   <%--이미지 슬라이더 --%>
+		<div class="swiper mb-3">
+               <div class="swiper-wrapper">
+               	<div class="swiper-slide"><img src="images/main-img-1.png" class="main-img"></div>
+               	<div class="swiper-slide"><img src="images/main-img-2.png" class="main-img"></div>
+               	<div class="swiper-slide"><img src="images/main-img-3.png" class="main-img"></div>
+               	<div class="swiper-slide"><img src="images/main-img-4.png" class="main-img"></div>
+               </div>
+               <div class="swiper-pagination"></div>
+               <div class="swiper-button-prev"></div>
+               <div class="swiper-button-next"></div>
+           </div>
+           
+     	<div>
+		<p class="text-center ahzit-title-name">소모임 추천</p> <%--추후 바꾸기 --%>
+	</div>
+            
 		<c:if test="${login}">
 		<div>
 			<p class="text-center ahzit-title-name">내가 가입한 소모임</p> 
