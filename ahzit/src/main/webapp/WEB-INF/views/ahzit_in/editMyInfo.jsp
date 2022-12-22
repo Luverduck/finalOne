@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
@@ -14,7 +15,13 @@
 
 <style>
 	body {
-		background-color: #F5F5F5;	
+		background-color: #F5F5F5 !important;
+	}
+	.div-ahzit-info,
+	.div-member-info-list,
+	.div-right-side,
+	.div-search-member-input {
+		border-radius : 15px;
 	}
 	.ahzit-profile {
 		width : 100px;
@@ -31,6 +38,53 @@
       width : 400px;
       height : 400px;      
    }
+   
+   @keyframes heart-on {
+        from {color:black;}
+        to {color:#FF8681;}
+
+        0% {transform: translate(0, 0%);}
+        25% {transform: translate(0, 5%)}
+        50% {transform: translate(0, -5%)}
+        75% {transform: translate(0, 5%)}
+        100% {transform: translate(0, 0%)}
+    }
+  
+    .icon-board-like-on {
+       animation-name: heart-on;
+        animation-fill-mode: forwards;
+        animation-delay: 0s;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+   }
+   
+   @keyframes heart-off {
+        from {color:#FF8681;}
+        to {color:black;}
+
+        0% {transform: translate(0, 0%);}
+        25% {transform: translate(0, -5%)}
+        50% {transform: translate(0, 5%)}
+        75% {transform: translate(0, -5%)}
+        100% {transform: translate(0, 0%)}
+    }
+  
+    .icon-board-like-off {
+       animation-name: heart-off;
+        animation-fill-mode: forwards;
+        animation-delay: 0s;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+   }
+	.valid-feedback {
+		color : green;
+		font-size : 18px;
+	}
+	.invalid-feedback, #duplicate {
+		color : red;
+		font-size : 18px;
+	}
+
 </style>
 
 
@@ -44,6 +98,7 @@
 				<%-- 왼쪽 사이드바 --%>
 				<div class = "col-3">
 					<jsp:include page="/WEB-INF/views/template/ahzit_left_side.jsp"></jsp:include>
+
 				</div>
 				
 				<%-- <div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
@@ -117,11 +172,25 @@
 		     		</form>
 		     		</div>
 				</div>
-	
+
     			<%-- 오른쪽 사이드바 --%>
 				<div class = "col-3">
 					<div class = "row">
 						<div class = "div-right-side p-3 shadow bg-white">
+
+								<div style="height:43px;">
+								다가오는 일정
+								<hr />
+							</div>
+							<div>
+								<c:forEach var="scheduleListRownum" items="${scheduleListRownum}">	
+									<div style="margin-bottom: 10px;">	
+										<span style="font-size:20px;">${scheduleListRownum.scheduleTitle}</span>
+										<br>
+										<span style="font-size:12px;">${fn:substring(scheduleListRownum.scheduleStart, 2, 4)}년 ${fn:substring(scheduleListRownum.scheduleStart, 5, 7)}월 ${fn:substring(scheduleListRownum.scheduleStart, 8, 10)}일 ${fn:substring(scheduleListRownum.scheduleStart, 11, 16)}</span>
+									</div>	
+								</c:forEach>
+							</div>
 
 						</div>
 					</div>
@@ -267,6 +336,3 @@
 	      });	  
 	  });
 </script>
-
-<%-- footer --%>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
