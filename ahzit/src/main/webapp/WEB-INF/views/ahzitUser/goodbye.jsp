@@ -16,7 +16,7 @@ font-size: 0.85rem;
 
 <form action="goodbye" method="post">
 
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="p-4 rounded text-center">
 				<h1 class="text-center">회원 탈퇴</h1>
@@ -26,7 +26,7 @@ font-size: 0.85rem;
 		</div>
 	</div>
 	
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
 				<input type="password" name="userPw" class="form-control rounded" placeholder="비밀번호" required>
@@ -37,7 +37,7 @@ font-size: 0.85rem;
 		</div>
 	</div>
 
-	<div class="row mt-4 mb-4">
+	<div class="mt-4 mb-4">
 		<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class=" col">
 				<a href="mypage" class="btn rounded w-100 " style="background-color : #E6E6E6; color:#3E4684;"  role=button>취소하기</a>

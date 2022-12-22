@@ -67,7 +67,7 @@
 	<form action = "edit" method = "post">
 	<input type = "hidden" name = "userId" value = "${ahzitUserDto.userId}">
 	
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="p-4 rounded  text-center">
 				<h1 class="text-center">개인정보 수정</h1>
@@ -78,7 +78,7 @@
 	</div>
 	
 	
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
     			<input type="text" name="userNick" class="form-control rounded" placeholder="닉네임" required  value = "${ahzitUserDto.userNick}">
@@ -91,7 +91,7 @@
 		</div>
  	</div>
 			
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
     			<input type="text" name="userEmail" class="form-control rounded" placeholder="이메일" required  value = "${ahzitUserDto.userEmail}">
@@ -242,7 +242,7 @@
 		</div>
 	</div>
 
-	<div class="row mt-4 mb-4">
+	<div class="mt-4 mb-4">
 		<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class=" col">
 				<input class="btn w-100" type="button" value="변경하기" style="background-color : #E6E6E6; color:#3E4684;" onclick="submitChk();"/>

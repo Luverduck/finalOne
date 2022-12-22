@@ -235,12 +235,12 @@
 			<p class="fs-3">아지트의 공개 여부를 선택하세요</p>
 			
 			<div class="col">
-				<input type="radio" name="ahzitIsPublic" value="N" checked>
+				<input type="radio" name="ahzitIspublic" value="N" checked>
 				<label>비공개 아지트</label> 
 			</div>
 			
 			<div class="col">
-				<input type="radio" name="ahzitIsPublic" value="Y">
+				<input type="radio" name="ahzitIspublic" value="Y">
 				<label>공개 아지트</label><br>
 			</div>
 

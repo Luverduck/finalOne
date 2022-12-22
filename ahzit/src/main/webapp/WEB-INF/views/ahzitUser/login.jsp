@@ -93,7 +93,7 @@ function kakaoLogout() {
 
 <form action="login" method="post">
 
-   <div class="row mt-4">
+   <div class="mt-4">
       <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
          <div class="p-4  rounded">
             <h1 class="text-center">로그인</h1>
@@ -101,7 +101,7 @@ function kakaoLogout() {
       </div>
    </div>
    
-   <div class="row mt-4">
+   <div class="mt-4">
       <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
          <div class="form-floating">
             <input type="text" name="userId" class="form-control rounded" placeholder="아이디" required>
@@ -112,7 +112,7 @@ function kakaoLogout() {
       </div>
     </div>
    
-   <div class="row mt-4">
+   <div class="mt-4">
       <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
          <div class="form-floating">
             <input type="password" name="userPw" class="form-control rounded" placeholder="비밀번호" required>
@@ -123,7 +123,7 @@ function kakaoLogout() {
       </div>
    </div>
    
-   <div class="row mt-4">
+   <div class="mt-4">
       <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2" >
          <button class="btn rounded btn-lg w-100" type="submit" style="background-color : #E6E6E6; color:#3E4684;">로그인</button>
        </div>

@@ -20,7 +20,7 @@
 	<jsp:param value="아이디 찾기 완료" name="title"/>
 </jsp:include>
 
- <div class="row mt-4">
+ <div class="mt-4">
 	<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 		<div class="p-4 rounded text-center">
 			<h1 class="text-center">아이디 찾기</h1>
