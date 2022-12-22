@@ -19,22 +19,22 @@
 
 
 <div class="container-fluid mt-5 mb-5">
-	<div class="row">
+	<div>
 		<div class="col-8 offset-2">
-			<div class="row">
+			<div>
 
 				<!-- 게시판 이름 -->
-				<div class="row mt-4">
-					<div
-						class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-						<div class="p-4 text-dark bg-Light rounded">
-							<h3>notice</h3>
+				<div class="mt-4">
+					<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+						<div class="p-4 rounded">
+							<h1 class="text-center">NOTICE</h1>
 						</div>
 					</div>
 				</div>
 
 				<div class="row mt-4">
-					<table class="table">
+						<div class="col-md-10 offset-md-1">
+						<table class="table">
 						<tbody>
 							<tr>
 								<th width="30%">번호</th>
@@ -93,8 +93,6 @@
 								</tr>
 							</c:if>
 
-
-
 						</tbody>
 
 					</table>
@@ -112,13 +110,12 @@
 						<a href="list">목록으로</a>
 					</div>
 
-
 				</div>
 			</div>
 		</div>
 	</div>
+	</div>
 </div>
-
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

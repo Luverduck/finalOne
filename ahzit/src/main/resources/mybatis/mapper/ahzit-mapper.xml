@@ -23,7 +23,7 @@
   		
   		<!-- 소모임 단일조회 -->
   		<select id="one" parameterType="int" resultType="AhzitDto">
-  			select * from ahzit where ahzit_no = #{ahzitNo}
+  			select a.*, am.member_nick from ahzit a inner join ahzit_member am on a.ahzit_no = am.member_ahzit_no where a.ahzit_no = #{ahzitNo} and am.member_grade = '개설자'
   		</select>
   		
   		<!-- 소모임 수정(소모임이름, 소개, 최대멤버수, 공개여부, 프로필사진)-->		
@@ -65,18 +65,13 @@
 		<select id = "allAhzit" parameterType = "map" resultType = "AhzitSearchListResponseVO">
 			select * from (select tmp.*, rownum rn from (select aa.ahzit_attachment_no, a.* from ahzit a left outer join ahzit_attachment aa on a.ahzit_no = ahzit_origin_no where ahzit_state = 'N' and ahzit_ispublic = 'N')tmp) where rn between #{rownumStart} and #{rownumEnd}
 		</select>
-
-		<!-- 홈 화면의 검색창 검색 조회 -->
-		<select id = "searchAhzit" parameterType = "map" resultType = "AhzitSearchListResponseVO">
-			select * from (select tmp.*, rownum rn from (select aa.ahzit_attachment_no, a.* from ahzit a left outer join ahzit_attachment aa on a.ahzit_no = ahzit_origin_no where ahzit_state = 'N' and ahzit_ispublic = 'N' and instr(ahzit_name, #{keyword}) > 0)tmp) where rn between #{rownumStart} and #{rownumEnd}
-		</select>
 		
 		<!--전체 조회시 아지트 총 갯수 반환 -->
 		<select id = "allCount" resultType = "int">
 			select count(*) from ahzit
 		</select>
 		
-		<!--전체 조회시 아지트 총 갯수 반환 -->
+		<!-- 조회시 아지트 총 갯수 반환 -->
 		<select id = "sortCount" parameterType = "map"  resultType = "int">
 			 select count(*) from ahzit where ahzit_sort = #{keyword}
 		</select>
@@ -109,4 +104,15 @@
 			select count(*) from ahzit_member where member_ahzit_no = #{memberAhzitNo} and instr(member_nick, #{keyword}) > 0
 		</select>
   
+  
+		<!-- 홈 화면의 검색창 검색 조회 -->
+		<select id = "searchAhzit" parameterType = "map" resultType = "AhzitSearchListResponseVO">
+			select * from (select tmp.*, rownum rn from (select aa.ahzit_attachment_no, a.* from ahzit a left outer join ahzit_attachment aa on a.ahzit_no = ahzit_origin_no where  instr(ahzit_name, #{keyword}) > 0)tmp) where rn between #{rownumStart} and #{rownumEnd}
+		</select>
+  
+		<!--이름 조회시 아지트 총 갯수 반환 -->
+		<select id = "searchAhzitCount"  resultType = "int">
+			 select count(*) from ahzit where instr(ahzit_name, #{keyword}) > 0 
+		</select>
+		
   </mapper>

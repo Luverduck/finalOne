@@ -319,7 +319,7 @@ public class AhzitInController {
 			boolean result=ahzitMemberDao.updateMember(ahzitMemberDto);
 			ahzitMemberService.uploadProfile(ahzitMemberDto, attachment);
 			if(result) {
-				return "redirect:/ahzit_in/{ahzitNo}";
+				return "redirect:/ahzit_in/" + ahzitNo;
 			}
 			else {
 				throw new TargetNotFoundException();

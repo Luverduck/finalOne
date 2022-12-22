@@ -4,12 +4,12 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
-public class AdminAhzitListSearchVO {
+public class AhzitSearchKeywordListSearchVO {
 
-	private String type, keyword;
-	
+	private String keyword;
+
 	public boolean isSearch() {
-		return type != null && keyword != null;
+		return keyword != null;
 	}
 
 	// 현재 페이지 번호(없을 경우 1로 설정)
@@ -93,7 +93,7 @@ public class AdminAhzitListSearchVO {
 	@ToString.Include
 	public String parameter() {
 		if (isSearch()) {
-			return "size=" + size + "&type=" + type + "&keyword=" + keyword;
+			return "size=" + size + "&keyword=" + keyword;
 		} else {
 			return "size=" + size;
 		}

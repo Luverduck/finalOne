@@ -8,7 +8,7 @@
 
 	<!-- 소모임 번호와 아이디로 특정 소모임 내 회원 정보 조회 -->
 	<select id = "selectMemberInfo" parameterType = "map" resultType = "AhzitMemberDto">
-		select * from ahzit_member where member_ahzit_no = #{memberAhzitNo} and member_id = #{memberId}
+		select * from ahzit_member left outer join member_attachment on member_no = member_origin_no where member_ahzit_no = #{memberAhzitNo} and member_id = #{memberId}
 	</select>
 	
 	<!-- 등록을 위한 다음 게시글 번호 반환 -->

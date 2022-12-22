@@ -16,7 +16,7 @@ justify-content : center
 
 	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<div class="p-4 text-dark bg-Light rounded">
+			<div class="p-4 rounded">
 				<h1 class="text-center">1:1 문의 글 관리</h1>	
 			</div>
 		</div>
@@ -36,34 +36,34 @@ justify-content : center
 	
 	<div class="text-center mt-3 mb-4">
 
-<div class="row mt-4">
-			            <div class="col-md-10 offset-md-1">
-			                <table class="table table-hover">
-			                    <thead class="text-center">
-			                        <tr class="bg-dark text-light">
-										<th>글번호</th>
-										<th width="35%">제목</th>
-										<th>작성자</th>
-										<th>작성일</th>
-			                        </tr>
-			                    </thead>
-			                    <tbody class="text-center" >
-			                        <c:forEach var="inquireList" items="${inquireList}">
-										<tr>
-											<td>${inquireList.inquireNo}</td>
-											<td>
-			 									<a href="${pageContext.request.contextPath}/inquire/detail?inquireNo=${inquireList.inquireNo}">
-													${inquireList.inquireTitle}
-												</a>
-											</td>
-											<td>${inquireList.inquireId}</td>
-											<td>${inquireList.inquireWritedate}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-			                </table>
-			            </div>
-			        </div>
+		<div class="row mt-4">
+           <div class="col-md-10 offset-md-1">
+               <table class="table table-hover">
+                   <thead class="text-center">
+                       <tr>
+						<th>글번호</th>
+						<th width="35%">제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+                       </tr>
+                   </thead>
+                   <tbody class="text-center" >
+                       <c:forEach var="inquireList" items="${inquireList}">
+						<tr>
+							<td>${inquireList.inquireNo}</td>
+							<td>
+									<a href="${pageContext.request.contextPath}/inquire/detail?inquireNo=${inquireList.inquireNo}">
+									${inquireList.inquireTitle}
+								</a>
+							</td>
+							<td>${inquireList.inquireId}</td>
+							<td>${inquireList.inquireWritedate}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+               </table>
+           </div>
+       </div>
 	<%-- 페이지 네비게이터 --%>
 	<div class=" mt-3 mb-4">
 	<ul class="pagination">
