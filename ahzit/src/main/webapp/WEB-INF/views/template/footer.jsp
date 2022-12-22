@@ -18,7 +18,7 @@
 
  <footer>
       <!-- Grid container -->
-      <div class="container-fluid p-0">
+      <div class="container-fluid p-0 mt-4">
         <!-- Section: Links -->
         <section>
           <!--Grid row-->
