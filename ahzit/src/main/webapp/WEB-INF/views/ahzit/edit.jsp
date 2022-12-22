@@ -4,6 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <%-- header --%>
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="소모임 정보 수정" name="title"/>
+</jsp:include>
+
 <jsp:include page="/WEB-INF/views/template/ahzit_header.jsp">
 	<jsp:param value="소모임 정보 수정" name="title"/>
 </jsp:include>
@@ -28,11 +32,10 @@
 	
 	<div class="row">
 	 	<span class="col-4">&#35;${ahzitDto.ahzitSort}</span>
-	 	<span class="col-4"><i class="fa-solid fa-location-dot">
+	 	<span class="col-4"><i class="fa-solid fa-location-dot"></i>
 	 		${ahzitDto.ahzitRegionHigh}&nbsp; <%--지역선택 시/도 --%>
 			${ahzitDto.ahzitRegionLow}<%--지역선택 군/구 --%>
-				
-	 	</i></span>
+		</span>
 	</div>
 	
 
@@ -65,16 +68,31 @@
 	</div>
 			
 
-			
-
 	<div class="row">
-		<p>아지트 공개 여부</p>
-		<p>현재 상태 : ${ahzitDto.ahzitIspublic}</p>
-		<div>
-			<label><input type="radio" name="ahzitIspublic" value="N">공개 아지트</label><br><br> <%-- 공개를 N으로 하기로 함 --%>
-			<label><input type="radio" name="ahzitIspublic" value="Y" checked>비공개 아지트</label>
+		<p class="fs-3">아지트 공개 여부</p>
+		<p class="fs-4">현재 상태 
+			: 
+			<c:if test="${ahzitDto.ahzitIspublic == 'N'}">
+			 	공개
+			</c:if>
+			<c:if test="${ahzitDto.ahzitIspublic == 'Y'}">
+			 	비공개
+			</c:if>
+			<%-- ${ahzitDto.ahzitIspublic} --%>
+		</p>
+		<div  class="fs-5">
+			<input type="radio" name="ahzitIspublic" value="N"><label>공개 아지트</label><br><%-- 공개를 N으로 하기로 함 --%>
+			<input type="radio" name="ahzitIspublic" value="Y" checked><label>비공개 아지트</label>
 		</div>
 	</div>
+ 	<!-- 	<div class="col">
+			<input type="radio" name="ahzitIsPublic" value="N" checked><label>비공개 아지트</label>
+		</div>
+		<div class="col">
+			<input type="radio" name="ahzitIsPublic" value="Y"><label>공개 아지트</label>
+	
+		</div> -->
+
 
 
 		<%--아지트 이미지--%>

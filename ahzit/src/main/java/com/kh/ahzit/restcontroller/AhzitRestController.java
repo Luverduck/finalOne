@@ -49,6 +49,4 @@ public class AhzitRestController {
 		// 설정된 반환 VO를 반환
 		return ahzitSearchListRestResponseVO;
 	}
-	 
-	
 }
