@@ -3,16 +3,47 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <%-- header --%>
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="소모임 첨부파일" name="title"/>
+</jsp:include>
+
 <jsp:include page="/WEB-INF/views/template/ahzit_header.jsp">
 	<jsp:param value="소모임 첨부파일" name="title"/>
 </jsp:include>
 
 <style>
-	body {
-		background-color: rgba(230, 230, 230, 100);
-	}
 	a {
 	 text-decoration : none;
+	}
+	body {
+		background-color: #F5F5F5;	
+	}
+	
+	.div-ahzit-info,
+	.div-member-info-list,
+	.div-right-side,
+	.div-search-member-input {
+		border-radius : 15px;
+	}
+	
+	.ahzit-profile {
+		width : 100px;
+		height : 300px;
+		border-radius : 15px;
+	}
+	#crown {
+		width:20px;
+	}
+	.member-search {
+		margin-right : 1.8em;
+		background-color:transparent;
+	}
+	.btn-join {
+		display : none;
+	}
+	.profile-img {
+		width : 60px;
+		border-radius : 50%;
 	}
 </style>
 
@@ -103,6 +134,8 @@
 					
 					오른쪽
 				</div>
+				
+				
 			</div>
 		</div>
 	</div>

@@ -88,5 +88,31 @@
 		select count(*) from inquire where inquire_state='N'
 	</select>
 	
+	<!--  일자 별 회원 가입 수 -->
+	 <select id="ahzitUserCountList" resultType="AhzitUserJoinCountVO">
+		 SELECT COUNT(*)AS userCnt,TO_CHAR(user_joindate,'YYYY-MM-DD') AS user_joindate FROM ahzit_user GROUP BY TO_CHAR(user_joindate,'YYYY-MM-DD')
+		 order by user_joindate asc
+	</select> 	
 
+	 <!--  아지트 관심사 별 개수 -->
+	 <select id="ahzitSortCount" resultType="AhzitDto">
+		select ahzit_sort, count(*) cnt from ahzit group by ahzit_sort order by cnt asc
+	</select>
+	
+	 <!--  회원수에 따른 아지트 나열 : 10개 -->
+	 <select id="ahzitHeadCount" resultType="AhzitDto">
+		select * from (select rownum rn, TMP.* from (select ahzit_name from ahzit order by ahzit_head desc )TMP) where rn between 1 and 10 
+	</select>
+	
+	<!-- 관리자 홈 화면 출력 게시판 -->
+	 <!-- 공지사항  -->
+	 <select id="noticeListForMain" resultType="NoticeDto">
+		select * from (select rownum rn, TMP.* from (select * from notice order by NOTICE_NO desc )TMP) where rn between 1 and 5
+	</select>
+	
+	<!-- 1:1 문의 -->
+	 <select id="inquireListForMain" resultType="InquireDto">
+		select * from (select rownum rn, TMP.* from (select * from inquire where inquire_state='N' order by inquire_no desc )TMP) where rn between 1 and 5
+	</select>
+	
 </mapper>

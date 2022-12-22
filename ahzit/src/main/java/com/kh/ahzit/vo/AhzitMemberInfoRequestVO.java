@@ -1,6 +1,7 @@
 package com.kh.ahzit.vo;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 public class AhzitMemberInfoRequestVO {
@@ -20,25 +21,91 @@ public class AhzitMemberInfoRequestVO {
 	}
 	
 	// 페이징 관련
-	private int p = 1; // 페이지 번호(페이지 로드시 초기 페이지를 1로 하기 위해 초기값을 1로 설정)
-	private int cntRow = 10;  // 한 페이지에 표시할 열 갯수 (고정값)
-	
-	// 메소드
-	// - 회원 정보 열 시작 번호
-	public int rownumStart() {
-		return (rownumEnd() - cntRow) + 1;
+	// 현재 페이지 번호(없을 경우 1로 설정)
+		private int p = 1;
+		private int size = 5;
+
+		@ToString.Include
+		public int startRow() {
+			return endRow() - (size - 1);
+		}
+
+		@ToString.Include
+		public int endRow() {
+			return p * size;
+		}
+
+		// 총 게시글 수
+		private int count;
+
+		// 화면에 표시할 블럭 개수
+		private int blockSize = 5;
+
+		@ToString.Include
+		public int pageCount() {
+			return (count + size - 1) / size;
+		}
+
+		@ToString.Include
+		public int startBlock() {
+			return (p - 1) / blockSize * blockSize + 1;
+		}
+
+		@ToString.Include
+		public int endBlock() {
+			int value = startBlock() + blockSize - 1;
+			return Math.min(value, lastBlock());
+		}
+
+		@ToString.Include
+		public int prevBlock() {
+			return startBlock() - 1;
+		}
+
+		@ToString.Include
+		public int nextBlock() {
+			return endBlock() + 1;
+		}
+
+		@ToString.Include
+		public int firstBlock() {
+			return 1;
+		}
+
+		@ToString.Include
+		public int lastBlock() {
+			return pageCount();
+		}
+
+		@ToString.Include
+		public boolean isFirst() {
+			return p == 1;
+		}
+
+		@ToString.Include
+		public boolean isLast() {
+			return endBlock() == lastBlock();
+		}
+
+		@ToString.Include
+		public boolean hasPrev() {
+			return startBlock() > 1;
+		}
+
+		@ToString.Include
+		public boolean hasNext() {
+			return endBlock() < lastBlock();
+		}
+
+		// 검색이나 크기 등이 유지될 수 있도록 Query String을 생성
+		// - p를 제외한 나머지 항목들에 대한 파라미터 생성
+		@ToString.Include
+		public String parameter() {
+			if (isSearch()) {
+				return "size=" + size + "&keyword=" + keyword;
+			} else {
+				return "size=" + size;
+			}
+
+		}
 	}
-	
-	// - 회원 정보 열 끝 번호
-	public int rownumEnd() {
-		return p * cntRow;
-	}
-	
-	// 회원 정보 마지막 페이지 블럭을 구하기 위한 게시글 총 수
-	private int memberCount;
-	
-	// 회원 정보 마지막 페이지 블럭
-	public int blockLast() {
-		return (memberCount + (cntRow - 1)) / cntRow;
-	}
-}

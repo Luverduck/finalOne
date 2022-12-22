@@ -21,7 +21,7 @@
   			select schedule_no, schedule_member_no, schedule_ahzit_no, schedule_title, 
   			to_char(schedule_start, 'YYYY-MM-DD HH24:MI:SS') schedule_start, 
   			to_char(schedule_end, 'YYYY-MM-DD HH24:MI:SS') schedule_end,  
-  			schedule_allday from schedule where schedule_ahzit_no=#{scheduleAhzitNo}
+  			schedule_allday from schedule where schedule_ahzit_no=#{scheduleAhzitNo} order by schedule_start asc
   		</select>
   		
   		<!-- 로그인한 유저가 일정페이지에서 스케줄 입력 -->

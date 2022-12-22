@@ -112,6 +112,28 @@
 		.header-style {
 		 	background-color : #EDEEF0; 
 		}
+		 .fixed {
+            position: fixed;
+            bottom:40px;
+            right:40px;
+        }
+         .btn-create {
+            width: 80px;
+            height: 80px;
+            border-radius : 50%;
+            background-color: #3E4684;
+            z-index : 99999;
+        }
+        .create-img {
+        	 width:40px;
+        	 margin : 0.9em 0.7em;
+        }
+		.create {
+			color : white;
+			font-size : 12px;
+			margin:-1em;
+			padding:0;
+		}
     </style>
 </head>
 <body>
@@ -121,7 +143,7 @@
 <div class = "container-fluid py-2 header-style"> <!-- container 시작 -->
 	<div class = "row mt-1"> <!-- row mt-1 시작 -->
 		<div class = "col-1 offset-2 d-flex justify-content-center">
-			<a href="/" class = "d-flex align-items-center"><img src="images/logo.png" class="logo-img"></a>
+			<a href="/" class = "d-flex align-items-center"><img src="${pageContext.request.contextPath}/images/logo.png" class="logo-img"></a>
 		</div>
 		
 	<div class = "col-2">
@@ -177,6 +199,14 @@
 			</c:if>
 		</div>
 	</div> --%>
+	
+	<%--개설 하기 버튼 --%>
+	 <div class="row" >
+		<a href="${pageContext.request.contextPath}/ahzit/create" class="hover-text">
+	           <div class="btn-create fixed text-center"><img src="/images/create.png" class="create-img"><p class="create">개설</p></div>
+	     </a>
+      </div>
+        
 </div> <!-- container 끝 -->
 
 
