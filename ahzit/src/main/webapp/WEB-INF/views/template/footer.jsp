@@ -11,9 +11,9 @@
 	a {
 		color : #9B9BA0;
 	}
-	* {
+/* 	* {
 		border: 1px dotted gray;
-	}
+	} */
 </style>
  <footer>
       <!-- Grid container -->

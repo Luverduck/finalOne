@@ -12,6 +12,10 @@
 	</jsp:include>
 
 <style>
+	* {
+		border: 1px dotted gray;
+	}
+
    	.ahzit-img {
    		width:100%;
    		height:300px;
@@ -144,7 +148,7 @@
     }
     .recommend {
     	font-size : 20px;
-    	background-color: #E4E4E4;
+    	background-color: #D8D8D8;
     	border-radius: 15px;
     }
 </style>
