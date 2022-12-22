@@ -155,6 +155,10 @@ public class AhzitInController {
 		//첨부파일 목록 조회
 		model.addAttribute("list", attachmentDao.selectList());
 		
+		//1222 추가: 아지트 번호로 스케줄 rownum<=3 조회하여 model에 추가
+		model.addAttribute("scheduleListRownum",scheduleDao.scheduleListRownum(ahzitNo));
+
+		
 		//개설한 아지트 정보를 조회
 		model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));
 		// 편의를 위해 ahzitNo를 model에 추가
@@ -239,6 +243,8 @@ public class AhzitInController {
 		List<AhzitMemberInfoVO> memberInfoList = ahzitDao.selectMemberInfo(ahzitMemberInfoRequestVO);
 		// 조회 결과를 model에 추가
 		model.addAttribute("ahzitMemberList", memberInfoList);	
+		//1222 추가: 아지트 번호로 스케줄 rownum<=3 조회하여 model에 추가
+		model.addAttribute("scheduleListRownum",scheduleDao.scheduleListRownum(ahzitNo));
 		// 소모임 회원 관리 페이지(member.jsp)로 이동
 		return "ahzit_in/member";
 	}

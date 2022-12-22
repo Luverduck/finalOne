@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
@@ -154,9 +155,24 @@
 					<div class = "row">
 						<div class = "div-right-side p-3 shadow bg-white" >
 						 	
+						 	<div style="height:43px;">
+								다가오는 일정
+								<hr />
+							</div>
+							<div>
+								<c:forEach var="scheduleListRownum" items="${scheduleListRownum}">	
+									<div style="margin-bottom: 10px;">	
+										<span style="font-size:20px;">${scheduleListRownum.scheduleTitle}</span>
+										<br>
+										<span style="font-size:12px;">${fn:substring(scheduleListRownum.scheduleStart, 2, 4)}년 ${fn:substring(scheduleListRownum.scheduleStart, 5, 7)}월 ${fn:substring(scheduleListRownum.scheduleStart, 8, 10)}일 ${fn:substring(scheduleListRownum.scheduleStart, 11, 16)}</span>
+									</div>	
+								</c:forEach>
+							</div>
+						 	
 						</div>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>

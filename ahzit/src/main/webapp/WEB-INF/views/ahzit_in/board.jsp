@@ -14,10 +14,6 @@
 </jsp:include>
 
 <style>
-	* {
-		border: gray 1px dotted;
-	}
-	
 	a {
 		text-decoration: none;
 	}
