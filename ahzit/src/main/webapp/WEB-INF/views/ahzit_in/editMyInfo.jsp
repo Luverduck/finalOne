@@ -241,14 +241,14 @@
       			</c:otherwise>
       			</c:choose>
       			
-	      		 <div class="row img-btns">
+	      		 <div class="row img-btns mb-4">
                  	<label class="input-file-upload img-lab" for="input-file">사진변경</label> 
 	      		</div>
 	
 				<input type="hidden" name="memberAhzitNo" value="${ahzitNo}">
 	      		<input type="hidden" name="memberId" value="${loginId}">
 	      		<input type="hidden" name="memberNo" value="${ahzitMemberDto.memberNo}">
-	      		<input type="text" name="memberNick" value="${ahzitMemberDto.memberNick}">
+	      		<input type="text" name="memberNick" value="${ahzitMemberDto.memberNick}" class="rounded">
 	      		<div class="valid-feedback">사용할 수 있는 닉네임입니다</div>
 	            <div class="invalid-feedback">닉네임은 한글 3~10글자로 작성하세요</div>
 	      		<div id="duplicate" class="NNNNN">이미 사용 중인 닉네임입니다</div><br>
