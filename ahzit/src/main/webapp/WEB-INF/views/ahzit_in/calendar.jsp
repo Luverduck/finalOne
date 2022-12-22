@@ -87,8 +87,20 @@
 				
 				<%-- 오른쪽 사이드바 --%>
 				<div class = "col-3" style="background-color: #dff9fb;">
+				
+					<div class="row" style="overflow:auto; height:580px;">
+						
+						<c:forEach var="scheduleList" items="${scheduleList}">
+						<div class="row">
+							일정 제목: ${scheduleList.scheduleTitle} <br>
+							시작 시간: ${scheduleList.scheduleStart} <br>
+						</div>
+						</c:forEach>
 					
-					오른쪽
+					</div>
+				
+					
+					
 				</div>
 			</div>
 		</div>
@@ -198,9 +210,10 @@ document.addEventListener('DOMContentLoaded', function() {
     		  return false;
     	  }
       },
-      editable: true,
+      editable: false,
       dayMaxEvents: true,
       locale:"ko",
+      //================ ajax데이터 불러올 부분 =====================//
       events: [
     	  $.ajax({
     		  url:"${pageContext.request.contextPath}/rest/ahzitMember/scheduleList/",
@@ -225,7 +238,6 @@ document.addEventListener('DOMContentLoaded', function() {
     	  })
       ]
      
-      //================ ajax데이터 불러올 부분 =====================//
   });
 
     calendar.render();
