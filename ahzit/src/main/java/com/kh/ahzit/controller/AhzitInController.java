@@ -273,14 +273,14 @@ public class AhzitInController {
 		return "ahzit_in/insert";
 	}
 	
-	@ResponseBody
+	
 	@PostMapping("/{ahzitNo}/insert")
 	public String insert(@PathVariable int ahzitNo, 
 			@RequestParam MultipartFile attachment,
 			@ModelAttribute AhzitMemberDto ahzitMemberDto, 
 			HttpSession session, Model model) throws IllegalStateException, IOException {
 		ahzitMemberService.insert(ahzitMemberDto, attachment);
-		return "/ahzit_in/board";
+		return "redirect:/ahzit_in/" + ahzitMemberDto.getMemberAhzitNo();
 	}
 	
 	@GetMapping("/{ahzitNo}/editMyInfo")

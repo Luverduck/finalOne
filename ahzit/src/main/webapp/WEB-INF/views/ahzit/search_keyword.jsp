@@ -8,8 +8,11 @@
 </jsp:include>
 
 <style>
+	body {
+		 background-color: #F5F5F5;	 
+	}
 	* {
-	/* 	 border: 1px dotted gray;  */
+	 	/* border: 1px dotted gray;   */
 		ont-family: font-family : 'Gothic A1', sans-serif;
 	}
 	.pagination{
@@ -18,6 +21,13 @@
 	.ahzit-img {
 		width: 200px;
 		height: 200px;
+		border-radius : 15px;
+	}
+	.div-thumnail-size {
+		width : 220px;
+	}
+	.div-search-shape {
+		border-redius : 15px;
 	}
 </style>
 
@@ -29,31 +39,47 @@
 				<div class="col-6-center">
 					<div class="fs-3 mt-3 mb-3">검색 결과 : ${keyword}</div>
 		
-					<div class="mt-4">
+					<div class="mt-1 mb-1 bg-white">
 					
 							<c:forEach var="ahzitList" items="${ahzitList}">
 								
-									<div class="mt-4 mb-4">
+									<div>
 										<div class="cover">
-											<img src="/attachment/download/ahzit?attachmentNo=${ahzitList.ahzitAttachmentNo}"class="ahzit-img">
-											
-												<div class="fs-4">
+										
+									<div class="container mt-3 md-3">
+										<div class="row align-items-center shadow ">
+											<div class="col-3 div-thumnail-size p-3">
+												<img src="/attachment/download/ahzit?attachmentNo=${ahzitList.ahzitAttachmentNo}"class="ahzit-img">
+											</div>
+										
+										<div class="col-9">
+										
+										<div>
+											<div class="fs-4 mb-3">
 												<a href="ahzit_in/${ahzitList.ahzitNo}">
 													<span>${ahzitList.ahzitName}</span>
 												</a>
-												</div>
-												
-												<div class="info">${ahzitList.ahzitInfo}</div>
-										
-											<span class="leader"> 리더 <strong class="leaderName">${ahzitList.ahzitLeader}&nbsp;&#183;&nbsp;
-											</strong>
-											</span> <span class="total"> 멤버 <strong class="totalNumber">${ahzitList.ahzitHead}&nbsp;&#183;&nbsp;</strong>
-											</span> <i class="fa-solid fa-heart"></i> ${ahzitList.ahzitLike}&nbsp;&#183;&nbsp;
-											등급 : ${ahzitList.ahzitGrade}&nbsp;&#183;&nbsp;카테고리 : ${ahzitList.ahzitSort}
+											</div>
 										</div>
+												
+										<div class="info mb-3">${ahzitList.ahzitInfo}</div>
+										
+										<div class="row">
+												<span class="leader"> 리더 <strong class="leaderName">${ahzitList.ahzitLeader}&nbsp;
+												</strong>
+												</span> <span class="total mb-2"> 멤버 <strong class="totalNumber">${ahzitList.ahzitHead}&nbsp;</strong>&nbsp;&nbsp;
+												 <i class="fa-solid fa-heart" style="color:red;"></i> ${ahzitList.ahzitLike}</span>
+										</div>		
+												<%-- 등급 : ${ahzitList.ahzitGrade}&nbsp;&#183;&nbsp; --%>
+												#${ahzitList.ahzitSort}								
+										</div>														
 									</div>
-								
-							</c:forEach>
+								</div>
+										
+							</div>
+						</div>
+						
+					</c:forEach>
 						
 					</div>
 				</div>

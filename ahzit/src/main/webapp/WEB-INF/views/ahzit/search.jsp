@@ -136,7 +136,7 @@
 	<div class = "row">
 		<div class = "col-8 offset-2">
 
-			<div class="row mt-4">
+			<div class="row mt-4 mb-4">
 				<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 div-search-plast" data-plast = "${pLast}">
 					<div class="p-4 rounded">
 						<h1 class="text-center">아지트</h1>	
