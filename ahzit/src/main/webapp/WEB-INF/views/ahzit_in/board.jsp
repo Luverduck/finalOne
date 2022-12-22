@@ -199,7 +199,7 @@
 	.img-member-profile {
 		width : 50px;
 		height : 50px;
-		margin-left : 10px;
+		margin-left : 7px;
 	}
 	.reply-profile {
 		width : 40px;

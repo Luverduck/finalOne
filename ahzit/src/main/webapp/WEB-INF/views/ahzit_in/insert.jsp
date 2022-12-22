@@ -2,22 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
 <%-- header --%>
-<jsp:include page="/WEB-INF/views/template/ahzit_header.jsp">
-   <jsp:param value="소모임 게시글" name="title"/>
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+   <jsp:param value="소모임 가입" name="title"/>
 </jsp:include>
 
-<%-- header --%>
-<jsp:include page="/WEB-INF/views/template/header.jsp">
-   <jsp:param value="소모임 게시글" name="title"/>
+<jsp:include page="/WEB-INF/views/template/ahzit_header.jsp">
+   <jsp:param value="소모임 가입" name="title"/>
 </jsp:include>
 
 <style>
-   * {
-      border: gray 1px dotted;
-   }
-   
+
    a {
       text-decoration: none;
    }
@@ -25,7 +22,34 @@
    body {
       background-color: rgba(230, 230, 230, 100);
    }
-   
+
+	.div-ahzit-info,
+	.div-member-info-list,
+	.div-right-side,
+	.div-search-member-input {
+		border-radius : 15px;
+	}
+	
+	.ahzit-profile {
+		width : 100px;
+		height : 300px;
+		border-radius : 15px;
+	}
+	#crown {
+		width:20px;
+	}
+	.member-search {
+		margin-right : 1.8em;
+		background-color:transparent;
+	}
+	.btn-join {
+		display : none;
+	}
+	.profile-img {
+		width : 60px;
+		border-radius : 50%;
+	}
+	
    .div-member-profile {
       width: 70px;
       height: 70px;
@@ -121,60 +145,37 @@
 
 
 <div class = "container-fluid mt-3">
-   
-   <div class = "row">
+	<div class = "row">
+		
+		<div class = "col-8 offset-2 main">
+			
+			<div class = "row">
          
       <%-- 왼쪽 사이드바 --%>
-      <div class = "col col-3" style="background-color: #dff9fb;">
-         <h1>왼쪽 사이드바</h1> 
-      
-         <br>
-         
-         <div class = "row">
-           <%--아지트 프로필 사진 --%>
-         <c:if test="${attachmentList.isEmpty()}"> <%--미설정시 기본 프로필 --%>
-             <img src = "/images/bg_default.jpg" class="ahzit-img">
-         </c:if>
-            <c:forEach var = "list" items = "${attachmentList}">  <%--설정한 프로필 --%>
-              <img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img"  >                
-             </c:forEach>   
-            아지트 이름 : ${ahzitVO.getAhzitName()} <br>
-            아지트 소개 : ${ahzitVO.getAhzitInfo()}<br>
-            아지트 멤버 : ${ahzitVO.getAhzitHead()} 명<br>
-            아지트 종류 : ${ahzitVO.getAhzitSort()}<br>
-            아지트 리더 : ${ahzitVO.getAhzitLeader()}<br>
-                  
-            
-         </div>
-               
-         <div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
-            로그인 중인 회원 번호 : ${ahzitMemberDto.memberNo}<br>
-            회원이 가입한 아지트 번호 : ${ahzitMemberDto.memberAhzitNo}<br>
-            로그인 중인 회원 아이디 : ${ahzitMemberDto.memberId}<br>
-            로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberId}<br>
-            로그인 중인 회원 등급 : ${ahzitMemberDto.memberGrade}<br>
-            로그인 중인 회원 활동 점수 : ${ahzitMemberDto.memberGrade}<br>
-            소모임 가입일 : ${ahzitMemberDto.memberJoindate}
-         </div>
-         
-         <c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
-         <a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i></i><span>아지트 수정</span></a><br>
-      </c:if>
-      </div>
+				<div class = "col-3">
+          			<jsp:include page="/WEB-INF/views/template/ahzit_left_side.jsp"></jsp:include>
+				</div>
             
       <%-- 가운데 내용 --%>
-      <div class = "col col-6">
+      <div class = "col-6">
          <div class="row">
+         	<div class = "col">
+         
+         <div class = "col col-6  shadow div-member-info-list w-100 p-3 bg-white">
+         	<h3>아지트 가입하기</h3>
+         	
+         <div>
             <form id="ahzitJoin" action="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert" method="post" enctype ="multipart/form-data">
             
-            <p>아지트에서 사용할 프로필 이미지를 등록해 주세요</p>
+            <p class="fs-5">아지트에서 사용할 프로필 이미지를 등록해 주세요</p>
             <input type="file" name="attachment" id="input-file" class="thumbnail">
             <img class="preview" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br>
                 <div class="row img-btns">
                        <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
-                       <label class="delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</label><br><br>
+                  <!--      <label class="delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</label><br><br> -->
                 </div>
                 
+           <div class="fs-5 mt-4">아지트 닉네임 설정하기</div>
             <input type="hidden" name="memberAhzitNo" value="${ahzitNo}">
             <input type="hidden" name="memberId" value="${loginId}">
             <input type="text" name="memberNick">
@@ -184,16 +185,34 @@
             <button id="submitBtn" type="button" onclick="submitChk();">소모임 가입</button>
             </form>
          </div>
+        </div>
 
       </div>
-                 
-          
-            
-      <%-- 오른쪽 사이드바 --%>
-      <div class = "col-3" style="background-color: #dff9fb;">
+	</div>
+</div>
+ 
+     <%-- 오른쪽 사이드바 --%>
+				<div class = "col-3">
+					<div class = "row">
+						<div class = "div-right-side p-3 shadow bg-white" >
 
-         <%-- 공지사항 목록 --%>
-         <div>
+						 	<div style="height:43px;">
+								다가오는 일정
+								<hr />
+							</div>
+							<div>
+								<c:forEach var="scheduleListRownum" items="${scheduleListRownum}">	
+									<div style="margin-bottom: 10px;">	
+										<span style="font-size:20px;">${scheduleListRownum.scheduleTitle}</span>
+										<br>
+										<span style="font-size:12px;">${fn:substring(scheduleListRownum.scheduleStart, 2, 4)}년 ${fn:substring(scheduleListRownum.scheduleStart, 5, 7)}월 ${fn:substring(scheduleListRownum.scheduleStart, 8, 10)}일 ${fn:substring(scheduleListRownum.scheduleStart, 11, 16)}</span>
+									</div>	
+								</c:forEach>
+							</div>
+
+						</div>
+					</div>
+				</div>
                
          </div>
       </div>

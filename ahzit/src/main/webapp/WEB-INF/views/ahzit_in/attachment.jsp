@@ -57,17 +57,17 @@
 			
 				<%-- 왼쪽 사이드바 --%>
 				<div class = "col-3">
-          <jsp:include page="/WEB-INF/views/template/ahzit_left_side.jsp"></jsp:include>
+          			<jsp:include page="/WEB-INF/views/template/ahzit_left_side.jsp"></jsp:include>
 				</div>
 				
 				<%-- 가운데 내용 --%>
-								<div class = "col-6">
+				<div class = "col-6">
 					<div class = "row">
 						<div class = "col">
 						
 					<div class = "col col-6  shadow div-member-info-list w-100 p-3 bg-white">
 						<h3>첨부 모아보기</h3>
-						<div>
+						<div class="mt-4 mb-4">
 							<form action="attachment" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="ahzitNo" value="${ahzitMemberDto.memberAhzitNo}">
  								<input type="hidden" name="ahzitInMemberNo" value=" ${ahzitMemberDto.memberNo}">
