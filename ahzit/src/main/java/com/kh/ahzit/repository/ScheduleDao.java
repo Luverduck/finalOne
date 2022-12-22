@@ -13,4 +13,6 @@ public interface ScheduleDao {
 	boolean delete(int scheduleNo);//일정 삭제
 	
 	List<ScheduleDto> scheduleListSysdate(int scheduleAhzitNo);//sysdate보다 시작일이 빠른 스케줄은 포함하지 않는 목록
+
+	List<ScheduleDto> scheduleListRownum(int scheduleAhzitNo);//sysdate보다 시작일이 빠른 스케줄은 포함하지 않는 목록 rownum<=3
 }
