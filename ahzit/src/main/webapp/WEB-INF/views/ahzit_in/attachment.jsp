@@ -117,8 +117,8 @@
 				</div>
 				
 				<%-- 가운데 내용 --%>
-				<div class = "col col-6">
-						<h2>첨부 모아보기</h2>
+				<div class = "col col-6  shadow div-member-info-list bg-white">
+						<h3>첨부 모아보기</h3>
 						<div>
 							<form action="attachment" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="ahzitNo" value="${ahzitMemberDto.memberAhzitNo}">
