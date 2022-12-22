@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
@@ -27,7 +28,6 @@
 		height : 300px;
 		border-radius : 15px;
 	}
-
 	.pagination{
 	justify-content : center
 	}
@@ -58,9 +58,7 @@
 			
 				<%-- 왼쪽 사이드바 --%>
 				<div class = "col-3">
-					
-					<jsp:include page="/WEB-INF/views/template/ahzit_left_side.jsp"></jsp:include>
-					
+          <jsp:include page="/WEB-INF/views/template/ahzit_left_side.jsp"></jsp:include>
 				</div>
 				
 				<%-- 가운데 내용 --%>
@@ -87,16 +85,6 @@
 									회원 가입일 : ${ahzitMemberList.memberJoindate} <br>
 									회원 닉네임 : ${ahzitMemberList.memberNick} <br>
 									회원 프로필 번호 : ${ahzitMemberList.memberAttachmentNo} <br> --%>
-									
-									<%-- <div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
-										로그인 중인 회원 번호 : ${ahzitMemberDto.memberNo}<br>
-										회원이 가입한 아지트 번호 : ${ahzitMemberDto.memberAhzitNo}<br>
-										로그인 중인 회원 아이디 : ${ahzitMemberDto.memberId}<br>
-										로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberNick}<br>
-										로그인 중인 회원 등급 : ${ahzitMemberDto.memberGrade}<br>
-										로그인 중인 회원 활동 점수 : ${ahzitMemberDto.memberGrade}<br>
-										소모임 가입일 : ${ahzitMemberDto.memberJoindate}
-									</div> --%>
 									<hr>	
 								</div> 
 							</c:forEach>
@@ -110,9 +98,24 @@
 					<div class = "row">
 						<div class = "div-right-side p-3 shadow bg-white" >
 						 	
+						 	<div style="height:43px;">
+								다가오는 일정
+								<hr />
+							</div>
+							<div>
+								<c:forEach var="scheduleListRownum" items="${scheduleListRownum}">	
+									<div style="margin-bottom: 10px;">	
+										<span style="font-size:20px;">${scheduleListRownum.scheduleTitle}</span>
+										<br>
+										<span style="font-size:12px;">${fn:substring(scheduleListRownum.scheduleStart, 2, 4)}년 ${fn:substring(scheduleListRownum.scheduleStart, 5, 7)}월 ${fn:substring(scheduleListRownum.scheduleStart, 8, 10)}일 ${fn:substring(scheduleListRownum.scheduleStart, 11, 16)}</span>
+									</div>	
+								</c:forEach>
+							</div>
+						 	
 						</div>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -197,7 +200,6 @@
 </div>
 <script>
 var ahzitNo = $(".div-member-info").data("data-ahzitno");
-
    // 초기 검색시 조회되는 페이지를 1페이지로
    var p = 1;
    
@@ -216,5 +218,3 @@ var ahzitNo = $(".div-member-info").data("data-ahzitno");
       });
    });
  </script>
-<%-- footer --%>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

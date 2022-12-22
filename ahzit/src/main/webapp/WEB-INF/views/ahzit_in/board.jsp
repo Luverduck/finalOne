@@ -14,14 +14,9 @@
 </jsp:include>
 
 <style>
-	* {
-		border: gray 1px dotted;
-	}
-	
 	a {
 		text-decoration: none;
 	}
-	
 	body {
 		background-color: rgba(230, 230, 230, 100);
 	}
@@ -200,6 +195,15 @@
 	.profile-img {
 		width : 60px;
 		border-radius : 50%;
+	}
+	.img-member-profile {
+		width : 50px;
+		height : 50px;
+		margin-left : 10px;
+	}
+	.reply-profile {
+		width : 40px;
+		height : 40px;
 	}
 </style>
 
@@ -677,7 +681,7 @@
 							var div_reply_insert_inner_container = $("<div>").attr("class", "d-flex justify-content-center align-items-center px-2 py-2 w-100 rounded-pill bg-white border border-1");
 							
 							var span_reply_insert_container = $("<span>").attr("class", "me-3 ms-1 span-reply-writer-profile");
-							var img_reply_insert = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + memberAttachmentNo);
+							var img_reply_insert = $("<img>").attr("class", "img-member-profile member-profile reply-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + memberAttachmentNo);
 							var span_reply_insert = span_reply_insert_container.append(img_reply_insert);
 							
 							var input_reply_insert = $("<input>").attr("class", "d-flex flex-fill me-3 ps-2 py-1 border-0 rounded align-self-center btn-reply-input").attr("placeholder", "댓글을 남겨주세요");
