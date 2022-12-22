@@ -59,12 +59,12 @@ $(function(){
 		</div>
  	</div>
  	
-	<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+	<div class="mb-4 row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 		<div class=" col">
-			<a href="list?inquireId=${inquireDto.inquireId}" class="btn w-100 btn-outline-secondary" role=button>목록</a>
+			<a href="list?inquireId=${inquireDto.inquireId}" style="background-color : #E6E6E6; color:#3E4684;" class="btn w-100" role=button>목록</a>
 		</div>
 		<div class=" col" >
-		<button class="btn w-100 btn-outline-warning" type="submit">수정하기</button>
+		<button class="btn w-100 " type="submit" style="background-color : #E6E6E6; color:#3E4684;">수정하기</button>
 		</div>
 	</div>
 	

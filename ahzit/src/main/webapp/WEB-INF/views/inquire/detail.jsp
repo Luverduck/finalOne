@@ -16,7 +16,7 @@ justify-content : center
 
 	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<div class="p-4 text-dark bg-Light rounded">
+			<div class="p-4 rounded">
 				<h1 class="text-center">문의 글 상세보기</h1>	
 			</div>
 		</div>
@@ -75,23 +75,60 @@ justify-content : center
 	
 	<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 		<c:if test = "${loginId == inquireDto.inquireId}">
-			<div class=" col" >
-				<a href="edit?inquireNo=${inquireDto.inquireNo}"  class="btn btn-outline-warning w-100" role=button>수정</a>
+			<div class=" col " >
+				<a href="edit?inquireNo=${inquireDto.inquireNo}"  style="background-color : #E6E6E6; color:#3E4684;" class="btn w-100" role=button>수정</a>
 			</div>
 			<div class=" col" >
-				<a href="delete?inquireNo=${inquireDto.inquireNo}"  class="btn btn-outline-warning w-100" role=button>삭제</a>
+				<a href="delete?inquireNo=${inquireDto.inquireNo}"  style="background-color : #E6E6E6; color:#3E4684;" class="btn w-100" role=button>삭제</a>
 			</div>
 		</c:if>
 		<div class=" col" >
-			<a href="list?inquireId=${inquireDto.inquireId}"  class="btn btn-outline-warning w-100" role=button>목록</a>
+			<a href="list?inquireId=${inquireDto.inquireId}"  style="background-color : #E6E6E6; color:#3E4684;"  class="btn w-100" role=button>목록</a>
 		</div>
 	</div>	
 	
 <hr>
 
+<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+	<table class="table-reply-list ">
+		<c:forEach var = "inquireReplyList" items = "${inquireReplyList}">
+		<tbody >
+			<tr class="view">
+				<td>
+					답변자 :  (${inquireReplyList.inquireReplyWriter})
+					<br>
+					<pre>${inquireReplyList.inquireReplyContent}</pre>
+					<br>
+					답변일 : <fmt:formatDate value="${inquireReplyList.inquireReplyWritedate}" pattern="yyyy-MM-dd HH:mm"/>
+					<c:if test = "${loginGrade == '관리자' || loginGrade == '운영자'}">
+					<a  class="edit-btn"><button>수정</button></a>
+					<a class="delete-btn" data-reply-origin ="${inquireReplyList.inquireOriginNo}" data-reply-no ="${inquireReplyList.inquireReplyNo}" ><button>삭제</button></a>
+					</c:if>
+					<hr>
+				</td>
+			</tr>
+			
+		
+			<c:if test = "${loginGrade == '관리자' || loginGrade == '운영자'}">
+				<tr class="editor">
+					<th colspan="2">
+						<form action="/inquireReply/edit"  method="post">
+							<input type = "hidden" name = "inquireReplyNo" value = "${inquireReplyList.inquireReplyNo}">
+							<input type = "hidden" name = "inquireOriginNo" value = "${inquireDto.inquireNo}">
+							<input type = "text" class = "w-100" name = "inquireReplyContent" value = "${inquireReplyList.inquireReplyContent}">
+							<button type="submit">변경</button>
+							<a class="cancel-btn">취소</a>
+						</form>
+					</th>
+				</tr>
+			</c:if>
+		</c:forEach>
+		</tbody>
+	</table>
+</div>
 
 <c:if test = "${loginGrade == '관리자' || loginGrade == '운영자'}">
-	<div class="text-center">
+	<div class="text-center mt-5">
 	<h4>답변 작성</h4>
 		<div>
 			<form class="reply-insert-form" action = "/inquireReply/insert" method = "post">
@@ -100,9 +137,9 @@ justify-content : center
 				<div class="row mt-4">
 					<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 form-group">
 						<div class="d-flex justify-content-center align-items-center flex-fill mb-3">
-							<input type="text" name="inquireReplyContent" class="form-control rounded " placeholder="답변" required>
-			                <button class="btn btn-outline-warning"  type ="submit">작성</button>
-			                <a href="/admin/inquire" class="btn btn-outline-warning"  type ="submit">목록</a>
+							<input type="text" name="inquireReplyContent" class="form-control rounded " placeholder="답변을 작성해주세요." required>
+			                <button class="btn"   style="background-color : #E6E6E6; color:#3E4684;"  type ="submit">작성</button>
+			                <a href="/admin/inquire" class="btn"   style="background-color : #E6E6E6; color:#3E4684;"  type ="submit">목록</a>
 						</div>
 					</div>
 				 </div>
@@ -110,45 +147,6 @@ justify-content : center
 		</div>
 	</div>
 </c:if>
-
-
-<table class="table-reply-list">
-	<c:forEach var = "inquireReplyList" items = "${inquireReplyList}">
-	<tbody>
-		<tr class="view">
-			<td>
-				답변자 :  (${inquireReplyList.inquireReplyWriter})
-				<br>
-				<pre>${inquireReplyList.inquireReplyContent}</pre>
-				<br>
-				답변일 : <fmt:formatDate value="${inquireReplyList.inquireReplyWritedate}" pattern="yyyy-MM-dd HH:mm"/>
-				
-				<c:if test = "${loginGrade == '관리자'}">
-				<a  class="edit-btn"><button>수정</button></a>
-				<a class="delete-btn" data-reply-origin ="${inquireReplyList.inquireOriginNo}" data-reply-no ="${inquireReplyList.inquireReplyNo}" ><button>삭제</button></a>
-				</c:if>
-				<hr>
-			</td>
-		</tr>
-		
-	
-		<c:if test = "${loginGrade == '관리자'}">
-			<tr class="editor">
-				<th colspan="2">
-					<form action="/inquireReply/edit"  method="post">
-						<input type = "hidden" name = "inquireReplyNo" value = "${inquireReplyList.inquireReplyNo}">
-						<input type = "hidden" name = "inquireOriginNo" value = "${inquireDto.inquireNo}">
-						<input type = "text" class = "w-100" name = "inquireReplyContent" value = "${inquireReplyList.inquireReplyContent}">
-						<button type="submit">변경</button>
-						<a class="cancel-btn">취소</a>
-					</form>
-				</th>
-			</tr>
-		</c:if>
-	</c:forEach>
-	</tbody>
-</table>
-
 <%-- 페이지 네비게이터 --%>
 <ul class="pagination">
 	<c:choose>

@@ -62,10 +62,10 @@
 						<div class = "div-ahzit-info shadow p-3" style="background-color: white;">
 							<div class = "d-flex div-ahzit-img justify-content-center align-items-center">
 							
-							<c:if test="${attachmentList.isEmpty()}">
+							<c:if test="${InAttachmentList.isEmpty()}">
 						    	<img src = "/images/bg_default.jpg" class="flex-fill ahzit-profile">
 					    	</c:if>
-				      		<c:forEach var = "list" items = "${attachmentList}"> <!-- 설정한 프로필 -->
+				      		<c:forEach var = "list" items = "${InAttachmentList}"> <!-- 설정한 프로필 -->
 				        		<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="flex-fill ahzit-profile">  					
 				      		</c:forEach>
 							</div>

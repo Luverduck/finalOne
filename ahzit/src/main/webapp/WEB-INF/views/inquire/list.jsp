@@ -16,13 +16,13 @@ justify-content : center
 </style>
 
 <div class="container-fluid mt-5 mb-5">
-	<div class="">
+	<div>
 		<div class="col-8 offset-2">
-			<div class="">
+			<div>
 
 				<div class=" mt-4">
 					<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-						<div class="p-4 text-dark bg-Light rounded">
+						<div class="p-4 rounded">
 							<h1 class="text-center">문의 게시판</h1>	
 						</div>
 					</div>

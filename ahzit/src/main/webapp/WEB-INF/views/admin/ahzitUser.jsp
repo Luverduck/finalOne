@@ -16,7 +16,7 @@ justify-content : center
 
 	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<div class="p-4 text-dark bg-Light rounded">
+			<div class="p-4 rounded">
 				<h1 class="text-center">회원 관리</h1>	
 			</div>
 		</div>
@@ -40,7 +40,7 @@ justify-content : center
             <div class="col-md-10 offset-md-1">
                 <table class="table table-hover">
                     <thead class="text-center">
-                        <tr class="bg-dark text-light">
+                        <tr >
 							<th>아이디</th>
 							<th>닉네임</th>
 							<th>등급</th>

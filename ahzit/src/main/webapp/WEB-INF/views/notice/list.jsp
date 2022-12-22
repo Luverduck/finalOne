@@ -23,20 +23,18 @@
 
 
 <div class="container-fluid mt-5 mb-5">
-	<div class="">
+	<div>
 		<div class="col-8 offset-2">
-			<div class="">
-			
+			<div>
 			
 				<!-- 게시판 이름 -->
-				<div class="row mt-4">
+				<div class="mt-4">
 					<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-						<div class="p-4 text-dark bg-Light rounded">
+						<div class="p-4 rounded">
 							<h1 class="text-center">NOTICE</h1>
 						</div>
 					</div>
 				</div>
-
 
 				<div class="row justify-content-end">
 					<div class="col-2">
@@ -49,57 +47,48 @@
 					</div>
 				</div>
 
-
-				<div class="row mt-4">
-					
-					<table class="table table-hover">
-
-						 <thead class="text-center">
-							<tr>
-								<th>번호</th>
-								<th width="45%">제목</th>
-								<th>작성자</th>
-								<th>작성일</th>
-								<th>조회수</th>
-
-							</tr>
-						</thead>
-						<tbody class="text-center" >
-							<c:forEach var="noticeDto" items="${list}">
+				<div class="mt-4">
+					<div class="col-md-10 offset-md-1">
+						<table class="table table-hover">
+							 <thead class=text-center>
 								<tr>
-
-
-									<td>${noticeDto.noticeNo}</td>
-									<td align="left">
-										<!-- 제목을 누르면 상세 페이지로 이동하도록 처리 --> <a
-										href="detail?noticeNo=${noticeDto.noticeNo}">
-											${noticeDto.noticeTitle} </a>
-
-
-
-									</td>
-									<td>${noticeDto.noticeWriter}</td>
-									<td><c:set var="current">
-											<fmt:formatDate value="${noticeDto.noticeWritedate}"
-												pattern="yyyy-MM-dd" />
-										</c:set> <c:choose>
-											<c:when test="${today == current}">
-												<fmt:formatDate value="${noticeDto.noticeWritedate}"
-													pattern="HH:mm" />
-											</c:when>
-											<c:otherwise>
+									<th>번호</th>
+									<th width="45%">제목</th>
+									<th>작성자</th>
+									<th>작성일</th>
+									<th>조회수</th>
+								</tr>
+							</thead>
+							<tbody class="text-center" >
+								<c:forEach var="noticeDto" items="${list}">
+									<tr>
+										<td>${noticeDto.noticeNo}</td>
+										<td>
+											<!-- 제목을 누르면 상세 페이지로 이동하도록 처리 --> <a
+											href="detail?noticeNo=${noticeDto.noticeNo}">
+												${noticeDto.noticeTitle} </a>
+										</td>
+										<td>${noticeDto.noticeWriter}</td>
+										<td><c:set var="current">
 												<fmt:formatDate value="${noticeDto.noticeWritedate}"
 													pattern="yyyy-MM-dd" />
-											</c:otherwise>
-										</c:choose></td>
-									<td>${noticeDto.noticeRead}</td>
-
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+											</c:set> <c:choose>
+												<c:when test="${today == current}">
+													<fmt:formatDate value="${noticeDto.noticeWritedate}"
+														pattern="HH:mm" />
+												</c:when>
+												<c:otherwise>
+													<fmt:formatDate value="${noticeDto.noticeWritedate}"
+														pattern="yyyy-MM-dd" />
+												</c:otherwise>
+											</c:choose></td>
+										<td>${noticeDto.noticeRead}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
 				</div>
-
 
 				<!-- 페이징 -->
 				<div class="row align-items-center mt-2">
