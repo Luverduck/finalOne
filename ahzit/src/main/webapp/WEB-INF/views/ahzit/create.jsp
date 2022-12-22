@@ -263,7 +263,7 @@
 
 			<div class="col align-self-end img-btns">
 				<label class="col input-file-upload img-lab" for="input-file" type="button">사진변경</label>
-				<label class="col delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</label>
+				<!-- <label class="col delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</label> -->
 			</div>
 			
 		</div>
