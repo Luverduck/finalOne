@@ -1,16 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
 <%-- header --%>
+<%-- header --%>
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="소모임 회원" name="title"/>
+</jsp:include>
+
 <jsp:include page="/WEB-INF/views/template/ahzit_header.jsp">
-	<jsp:param value="소모임 앨범" name="title"/>
+	<jsp:param value="소모임 일정" name="title"/>
 </jsp:include>
 
 <style>
 	body {
-		background-color: rgba(230, 230, 230, 100);
+		background-color: #F5F5F5;	
 	}
+	
+	
+.tippy-box[data-theme~='custom']{background-color:#FFFFFF;}
+	
+	#rightbar{height:75vh;}
 </style>
 
 <!-- jquery CDN -->
@@ -22,6 +33,11 @@
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 
+<!-- 풀캘린더 툴팁 -->
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+
+
 <!-- moment CDN (format사용하기 위해)-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script type="text/javascript"></script>
@@ -30,49 +46,15 @@
 <div class = "container-fluid mt-3">
 	<div class = "row">
 		
-		<div class = "col-10 offset-1 main">
+		<div class = "col-8 offset-2 main">
 			
 			<div class = "row">
 			
-				<%-- 왼쪽 사이드바 --%>
-				<div class = "col col-3" style="background-color: #dff9fb;">
-					<h1>왼쪽 사이드바</h1> 
+				<%-- 왼쪽 사이드바 삭제--%>
 				
-					<br>
-					
-					<div class = "row">
-						<%-- 아지트 정보 --%>
-						아지트 이름 : ${ahzitVO.getAhzitName()} <br>
-						아지트 소개 : ${ahzitVO.getAhzitInfo()}<br>
-						아지트 멤버 : ${ahzitVO.getAhzitHead()} 명<br>
-						아지트 종류 : ${ahzitVO.getAhzitSort()}<br>
-						아지트 리더 : ${ahzitVO.getAhzitLeader()}<br>
-						
-		            	<%-- 아지트 가입 버튼 --%>
-			            <c:choose>
-						<c:when test="${ahzitMemberDto.getMemberId() == null}"><%-- 소모임 회원이 아니면 --%>
-						<button type="button" onclick="location.href='${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert'">아지트 가입</button>
-						</c:when>
-						<c:otherwise>
-						<button type="button"  disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
-						</c:otherwise>
-						</c:choose>
-         
-					</div>
-					
-					<div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
-						로그인 중인 회원 번호 : ${ahzitMemberDto.memberNo}<br>
-						회원이 가입한 아지트 번호 : ${ahzitMemberDto.memberAhzitNo}<br>
-						로그인 중인 회원 아이디 : ${ahzitMemberDto.memberId}<br>
-						로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberId}<br>
-						로그인 중인 회원 등급 : ${ahzitMemberDto.memberGrade}<br>
-						로그인 중인 회원 활동 점수 : ${ahzitMemberDto.memberGrade}<br>
-						소모임 가입일 : ${ahzitMemberDto.memberJoindate}
-					</div>
-				</div>
 				
 				<%-- 가운데 내용 --%>
-				<div class = "col col-6">
+				<div class = "col col-9">
 					
 						<div class="row">
 							<div id="calendar"></div>
@@ -86,16 +68,30 @@
 				</div>
 				
 				<%-- 오른쪽 사이드바 --%>
-				<div class = "col-3" style="background-color: #dff9fb;">
+				<div class = "col-3">
 				
-					<div class="row" style="overflow:auto; height:580px;">
+					<div class="row">
 						
-						<c:forEach var="scheduleList" items="${scheduleList}">
-						<div class="row">
-							일정 제목: ${scheduleList.scheduleTitle} <br>
-							시작 시간: ${scheduleList.scheduleStart} <br>
+						<div class="col-10 offset-1">
+							<div id="rightbar" class="row p-2 shadow" style="border-radius : 15px; overflow-y:scroll; background-color:white;">
+								
+								<div class="row">
+								다가오는 일정
+								<hr>
+								</div>
+								
+								<c:forEach var="scheduleListSysdate" items="${scheduleListSysdate}">
+								
+								<div class="row" style="border-radius : 15px;margin-bottom: 10px;">
+
+									<span style="font-size:20px;">${scheduleListSysdate.scheduleTitle}</span>
+									<br>
+									<span style="font-size:12px;">${fn:substring(scheduleListSysdate.scheduleStart, 2, 4)}년 ${fn:substring(scheduleListSysdate.scheduleStart, 5, 7)}월 ${fn:substring(scheduleListSysdate.scheduleStart, 8, 10)}일 ${fn:substring(scheduleListSysdate.scheduleStart, 11, 16)}</span>
+								</div>
+								
+								</c:forEach>
+							</div>
 						</div>
-						</c:forEach>
 					
 					</div>
 				
@@ -126,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
+      
       navLinks: true, // can click day/week names to navigate views
       selectable: true,
       selectMirror: true,
@@ -213,6 +210,13 @@ document.addEventListener('DOMContentLoaded', function() {
       editable: false,
       dayMaxEvents: true,
       locale:"ko",
+      eventDidMount: function(info) {
+          tippy(info.el, {
+              content:  info.event.title,
+              placement:'top',
+              theme:'custom'//이벤트 타이틀
+          });
+      },
       //================ ajax데이터 불러올 부분 =====================//
       events: [
     	  $.ajax({
