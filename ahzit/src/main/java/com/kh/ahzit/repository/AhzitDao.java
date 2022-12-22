@@ -7,9 +7,9 @@ import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AhzitUserDto;
 import com.kh.ahzit.vo.AhzitMemberInfoRequestVO;
 import com.kh.ahzit.vo.AhzitMemberInfoVO;
-import com.kh.ahzit.vo.AhzitSearchKeywordListSearchVO;
 import com.kh.ahzit.vo.AhzitSearchListRequestVO;
 import com.kh.ahzit.vo.AhzitSearchListResponseVO;
+import com.kh.ahzit.vo.MyAhzitVO;
 
 public interface AhzitDao {
 	int sequence();//ahzit_no 시퀀스 번호 발행
@@ -87,6 +87,9 @@ public interface AhzitDao {
 	
 	// 추상 메소드 - 찾기 페이지에서 특정 카테고리 소모임 갯수
 	public int coutntSelectAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO); 
+	
+	// 회원 수 순으로 아지트 정렬 - 3개
+	List<MyAhzitVO>ahzitHeadCount();
 
 
 }
