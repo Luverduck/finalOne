@@ -12,14 +12,9 @@
 </jsp:include>
 
 <style>
-/* 	div {
-		border : 1px dotted gray;	
-	} */
-
 	body {
 		background-color: #F5F5F5;	
 	}
-	
 	.div-ahzit-info,
 	.div-member-info-list,
 	.div-right-side,
@@ -65,14 +60,14 @@
 				<div class = "col-3">
 					<%--아지트 프로필 사진 --%>
 					<div class = "row">
-						<div class = "div-ahzit-info shadow p-3" style="background-color: white;">
+						<div class = "div-ahzit-info shadow p-3 bg-white" >
 							<div class = "d-flex div-ahzit-img justify-content-center align-items-center">
-							<c:if test="${attachmentList.isEmpty()}">
-						    	<img src = "/images/bg_default.jpg" class="flex-fill ahzit-profile">
-					    	</c:if>
-				      		<c:forEach var = "list" items = "${attachmentList}"> <!-- 설정한 프로필 -->
-				        		<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="flex-fill ahzit-profile">  					
-				      		</c:forEach>
+								<c:if test="${attachmentList.isEmpty()}">
+							    	<img src = "/images/bg_default.jpg" class="flex-fill ahzit-profile">
+						    	</c:if>
+					      		<c:forEach var = "list" items = "${attachmentList}"> <!-- 설정한 프로필 -->
+					        		<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="flex-fill ahzit-profile">  					
+					      		</c:forEach>
 							</div>
 						
 			      		
@@ -125,7 +120,7 @@
 				<div class = "col-6">
 					<div class = "row">
 						<div class = "col">
-							<div class = "d-flex px-3 py-2 mb-2 shadow div-search-member-input search-bar" style="background-color:white;">
+							<div class = "d-flex px-3 py-2 mb-2 shadow div-search-member-input search-bar bg-white">
 								<input class = "flex-fill input-search-member search-box" type = "text" placeholder= "회원 검색">
 								<button class = "btn-search-member-submit header-btn member-search" type = "button"><i class="fa-solid fa-magnifying-glass" ></i></button>
 							</div>
@@ -156,16 +151,8 @@
 				<%-- 오른쪽 사이드바 --%>
 				<div class = "col-3">
 					<div class = "row">
-						<div class = "div-right-side p-3 shadow" style="background-color: white;">
-						 	반가워요<br>
-						 	반가워요<br>
-						 	반가워요<br>
-						 	반가워요<br>
-						 	반가워요<br>
-						 	반가워요<br>
-						 	반가워요<br>
-						 	반가워요<br>
-						 	반가워요<br>
+						<div class = "div-right-side p-3 shadow bg-white" >
+						 	
 						</div>
 					</div>
 				</div>

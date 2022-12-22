@@ -55,52 +55,70 @@
 			<div class = "row">
 			
 				<%-- 왼쪽 사이드바 --%>
-				<div class = "col col-3" style="background-color: #EDEEF0;">
-					<h1>왼쪽 사이드바</h1> 
-				
-					<br>
-					
+
+				<div class = "col-3">
+					<%--아지트 프로필 사진 --%>
 					<div class = "row">
-						<%-- 아지트 정보 --%>
-						<%--아지트 프로필 사진 --%>
-						<c:if test="${attachmentList.isEmpty()}"> <%--미설정시 기본 프로필 --%>
-							 <img src = "/images/bg_default.jpg" class="ahzit-img">
-						</c:if>
-						<c:forEach var = "list" items = "${InAttachmentList}">  <%--설정한 프로필--%>
-			              <img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="ahzit-img"  > 					
-			             </c:forEach>
-						아지트 이름 : ${ahzitVO.getAhzitName()} <br>
-						아지트 소개 : ${ahzitVO.getAhzitInfo()}<br>
-						아지트 멤버 : ${ahzitVO.getAhzitHead()} 명<br>
-						아지트 종류 : ${ahzitVO.getAhzitSort()}<br>
-						아지트 리더 : ${ahzitVO.getAhzitLeader()}<br>
+						<div class = "div-ahzit-info shadow p-3" style="background-color: white;">
+							<div class = "d-flex div-ahzit-img justify-content-center align-items-center">
+							
+							<c:if test="${attachmentList.isEmpty()}">
+						    	<img src = "/images/bg_default.jpg" class="flex-fill ahzit-profile">
+					    	</c:if>
+				      		<c:forEach var = "list" items = "${attachmentList}"> <!-- 설정한 프로필 -->
+				        		<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="flex-fill ahzit-profile">  					
+				      		</c:forEach>
+							</div>
 						
-			            <%-- 아지트 가입 버튼 --%>
-			            <c:choose>
-						<c:when test="${ahzitMemberDto.getMemberId() == null}"><%-- 소모임 회원이 아니면 --%>
-						<button type="button" onclick="location.href='${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert'">아지트 가입</button>
-						</c:when>
-						<c:otherwise>
-						<button type="button"  disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
-						</c:otherwise>
-						</c:choose>
-         
-					</div>
-					
-					<div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
-						로그인 중인 회원 번호 : ${ahzitMemberDto.memberNo}<br>
-						회원이 가입한 아지트 번호 : ${ahzitMemberDto.memberAhzitNo}<br>
-						로그인 중인 회원 아이디 : ${ahzitMemberDto.memberId}<br>
-						로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberId}<br>
-						로그인 중인 회원 등급 : ${ahzitMemberDto.memberGrade}<br>
-						로그인 중인 회원 활동 점수 : ${ahzitMemberDto.memberGrade}<br>
-						소모임 가입일 : ${ahzitMemberDto.memberJoindate}
+			      		
+				      		<%-- 아지트 정보 --%>  
+				      		<div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
+								<span class="ahzit-side ahzit-name mt-1">${ahzitVO.getAhzitName()}</span><%--아지트 이름 --%>
+								<span class="ahzit-side mt-1">멤버 ${ahzitVO.getAhzitHead()}  · ${ahzitVO.getAhzitSort()} </span>
+								<span class="ahzit-side mt-1 mb-1">${ahzitVO.getAhzitInfo()}<br> <%--아지트 소개 --%></span>
+								<span class="ahzit-side mt-1">아지트 리더 : ${ahzitVO.getAhzitLeader()} <img src = "/images/crown.png"  id="crown"></span>
+							</div>
+							
+							<div class = "row mt-1">
+								<div class = "col">
+									<c:choose>
+								    <c:when test="${ahzitMemberDto.getMemberId() != loginId}"><%-- 소모임 회원이 아니면 --%>
+								    	<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert'">아지트 가입</button>
+								    </c:when>
+								    <c:otherwise>
+								    	<button type="button" class="btn btn-join" disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
+								    </c:otherwise>
+								    </c:choose>
+								    <c:if test="${ahzitMemberDto.memberId==sessionScope.loginId}">
+										<a href="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/editMyInfo"><span>내 정보 수정</span></a>
+								 	</c:if>	
+								</div>
+								<div class = "col">
+									<%-- 소모임 수정 --%>
+								 	<c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
+										<a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i><span>아지트 수정</span></a>					
+									</c:if>
+									
+								</div>
+							</div>
+						</div>
+						
+						<%-- <div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
+							로그인 중인 회원 번호 : ${ahzitMemberDto.memberNo}<br>
+							회원이 가입한 아지트 번호 : ${ahzitMemberDto.memberAhzitNo}<br>
+							로그인 중인 회원 아이디 : ${ahzitMemberDto.memberId}<br>
+							로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberNick}<br>
+							로그인 중인 회원 등급 : ${ahzitMemberDto.memberGrade}<br>
+							로그인 중인 회원 활동 점수 : ${ahzitMemberDto.memberGrade}<br>
+							소모임 가입일 : ${ahzitMemberDto.memberJoindate}
+						</div> --%>
+	       
 					</div>
 				</div>
 				
 				<%-- 가운데 내용 --%>
-				<div class = "col col-6">
-						<h2>첨부 모아보기</h2>
+				<div class = "col col-6  shadow div-member-info-list bg-white">
+						<h3>첨부 모아보기</h3>
 						<div>
 							<form action="attachment" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="ahzitNo" value="${ahzitMemberDto.memberAhzitNo}">
@@ -130,11 +148,21 @@
 				</div>
 				
 				<%-- 오른쪽 사이드바 --%>
-				<div class = "col-3" style="background-color: #EDEEF0;">
-					
-					오른쪽
+				<div class = "col-3">
+					<div class = "row">
+						<div class = "div-right-side p-3 shadow bg-white" >
+						 	반가워요<br>
+						 	반가워요<br>
+						 	반가워요<br>
+						 	반가워요<br>
+						 	반가워요<br>
+						 	반가워요<br>
+						 	반가워요<br>
+						 	반가워요<br>
+						 	반가워요<br>
+						</div>
+					</div>
 				</div>
-				
 				
 			</div>
 		</div>
