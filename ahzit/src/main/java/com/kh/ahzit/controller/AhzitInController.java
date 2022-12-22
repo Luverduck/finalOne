@@ -82,6 +82,9 @@ public class AhzitInController {
 		
 		//입력받은 아지트번호로 연결되는 첨부파일 조회
 		model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
+		
+		//1222 추가: 아지트 번호로 스케줄 rownum<=3 조회하여 model에 추가
+		model.addAttribute("scheduleListRownum",scheduleDao.scheduleListRownum(ahzitNo));
 
 		// 편의를 위해 ahzitNo를 model에 추가
 		model.addAttribute("ahzitNo", ahzitNo);
