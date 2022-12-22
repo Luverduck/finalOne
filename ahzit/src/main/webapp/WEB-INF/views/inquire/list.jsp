@@ -16,11 +16,11 @@ justify-content : center
 </style>
 
 <div class="container-fluid mt-5 mb-5">
-	<div class="row">
+	<div class="">
 		<div class="col-8 offset-2">
-			<div class="row">
+			<div class="">
 
-				<div class="row mt-4">
+				<div class=" mt-4">
 					<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 						<div class="p-4 text-dark bg-Light rounded">
 							<h1 class="text-center">문의 게시판</h1>	
@@ -41,7 +41,7 @@ justify-content : center
 				</form>
 				</div>
 			
-				 <div class="row mt-4">
+				 <div class=" mt-4">
 			            <div class="col-md-10 offset-md-1">
 			                <table class="table table-hover">
 			                    <thead class="text-center">

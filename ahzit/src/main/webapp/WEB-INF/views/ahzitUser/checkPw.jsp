@@ -25,7 +25,7 @@ font-size: 0.85rem;
 
 <form action="checkPw" method="post" autocomplete="off">
 
- 	<div class="row mt-4">
+ 	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="p-4 rounded text-center">
 				<h1 class="text-center">비밀번호 찾기</h1>
@@ -36,7 +36,7 @@ font-size: 0.85rem;
 		</div>
 	</div>
 	
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating ">
 				<input type="text" name="userId" class="form-control rounded" placeholder="아이디" required>
@@ -47,7 +47,7 @@ font-size: 0.85rem;
 		</div>
 	 </div>
 		
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating ">
 				<input type="text" name="userEmail" class="form-control rounded" placeholder="이메일" required>
@@ -58,7 +58,7 @@ font-size: 0.85rem;
 		</div>
 	 </div>
 	 
-	 <div class="row mt-4">
+	 <div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mb-3">
 			<button class="send-btn btn rounded w-100 btn-lg btn-m" style="background-color : #E6E6E6; color:#3E4684;" type="submit">인증하기</button>
 			<div class="cert"></div>

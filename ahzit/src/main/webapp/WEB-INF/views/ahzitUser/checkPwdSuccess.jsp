@@ -8,7 +8,7 @@
 	<jsp:param value="비밀번호 변경 완료" name="title"/>
 </jsp:include>
 
- 	<div class="row mt-4">
+ 	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="p-4 rounded">
 				<h2 class="text-center">비밀번호 변경이 완료되었습니다</h2>

@@ -283,7 +283,7 @@
 
 <form action="join" method="post" >
   	
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="p-4  rounded">
 				<h1 class="text-center">회원 가입</h1>
@@ -292,7 +292,7 @@
 	</div>
   	
   	
-  	<div class="row mt-4">
+  	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
 				<input type="text" name="userId" class="form-control rounded" placeholder="아이디" required>
@@ -308,7 +308,7 @@
 	 </div>
             
 		
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
 				<input type="password" name="userPw" class="form-control rounded" placeholder="비밀번호" required>
@@ -323,7 +323,7 @@
 		</div>
 		
 
-	 <div class="row mt-4">
+	 <div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
 				<input type="password" id="userPw-re" class="form-control rounded" placeholder="비밀번호 확인" required>
@@ -337,7 +337,7 @@
 		</div>
 	</div>
     
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
     			<input type="text" name="userNick" class="form-control rounded" placeholder="닉네임" required >
@@ -353,7 +353,7 @@
 		
 		<input type="hidden" name="certificationId" value="${certificationId}">
 			
-		<div class="row mt-4">
+		<div class="mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			
 				<div class="d-flex justify-content-center align-items-center flex-wrap mb-3">
@@ -521,7 +521,7 @@
 		</div>
 	</div>
 	    
-	<div class="row mt-4">
+	<div class="mt-4">
 	<div class="col-8 offset-2 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 		<div class="mb-5">
 		<input class="btn btn-lg rounded w-100 join-btn" style="background-color : #E6E6E6; color:#3E4684;" type="button" value="가입하기" onclick="submitChk();"/>
