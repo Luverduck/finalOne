@@ -138,12 +138,20 @@
 
 
 <style>
-
+div {
+	border : 1px dotted gray;
+}
+#radio {
+	color : #3E4684;
+}
 </style>
 
 
 
-<div class="container mt-5 mb-5">
+<div class="container-fluid ">
+	<div class = "row">
+		<div class = "col-8 offset-2">
+		
 	<form action="create" method="post" enctype="multipart/form-data">
 		<input name="ahzitLeader" value="${sessionScope.loginId}"
 			type="hidden">
@@ -156,7 +164,7 @@
 			<p class="fs-3">만들고 싶은 아지트를 선택하세요</p>
 			<div class="row justify-content-center">
 			
-				<div class="col-4 fs-4">
+				<div class="fs-4">
 					<input type="radio" name="ahzitSort" id="ex_rd1" value="취미" checked>
 					<label for="ex_rd1">취미</label><br> 
 					
@@ -175,7 +183,7 @@
 				
 				</div>
 				
-				<div class="col-4 fs-4">
+				<div class=" fs-4">
 					<input type="radio" name="ahzitSort" id="ex_rd5" value="음악">
 					<label for="ex_rd5">음악</label><br>
 					
@@ -234,12 +242,12 @@
 		<div class="row justify-content-center mt-5">
 			<p class="fs-3">아지트의 공개 여부를 선택하세요</p>
 			
-			<div class="col">
+			<div class="fs-4">
 				<input type="radio" name="ahzitIspublic" value="N" checked>
 				<label>비공개 아지트</label> 
 			</div>
 			
-			<div class="col">
+			<div class="fs-4">
 				<input type="radio" name="ahzitIspublic" value="Y">
 				<label>공개 아지트</label><br>
 			</div>
@@ -274,6 +282,7 @@
 		</div>
 </div>
 </form>
+</div>
 </div>
 
 
