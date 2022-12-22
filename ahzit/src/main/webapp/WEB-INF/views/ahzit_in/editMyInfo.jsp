@@ -59,7 +59,7 @@
 		      	<%-- 가운데 내용 --%>
 		     	<div class = "col-6">
 		     		<div class = "col p-2 div-info-editor">
-		     		<form id="ahzitJoin" action="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/editMyInfo" method="post">
+		     		<form id="ahzitJoin" action="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/editMyInfo" method="post" enctype ="multipart/form-data">
 		     			<div class = "row">
 		     				<input type="hidden" name="memberAhzitNo" value="${ahzitNo}">
 				      		<input type="hidden" name="memberId" value="${loginId}">
@@ -110,8 +110,10 @@
 		     					<button id="submitBtn" type="button" class="mt-2" onclick="submitChk();">변경 완료</button>
 		     				</div>
 		     				<div class = "col">
-		     					<i class="fa-solid fa-trash" style="color:red;"></i>
-					      		<span style="color:red">아지트 탈퇴</span>
+			     				<a href="${pageContext.request.contextPath}/ahzit_in/${ahzitMemberDto.memberNo}/deleteCommonMember">
+			     					<i class="fa-solid fa-trash" style="color:red;"></i>
+						      		<span style="color:red">아지트 탈퇴</span>
+						      	</a>
 		     				</div>
 		     			</div>
 		     		</form>
@@ -240,7 +242,6 @@
 			contentType : false,
 	        processData : false,
 			success:function(data){
-				alert("프로필 변경이 완료되었습니다");
 				window.location=("${pageContext.request.contextPath}/ahzit_in/"+memberAhzitNo);
 			},
 			error: function (e) { 
