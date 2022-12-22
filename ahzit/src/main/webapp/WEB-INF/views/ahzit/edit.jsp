@@ -24,7 +24,7 @@
 <div class="container mt-5 mb-5">
 
 <form action="edit" method="post" enctype = "multipart/form-data">
-	<%-- <input type="text"  name = "ahzitNo" value="${ahzitDto.ahzitNo}"> --%>
+	<input type="text"  name = "ahzitNo" value="${ahzitDto.ahzitNo}">
 	
 	<div class="row mt-3">
 		<p class="fs-3">이 아지트 리더는 ${ahzitDto.ahzitLeader} 입니다</p>
