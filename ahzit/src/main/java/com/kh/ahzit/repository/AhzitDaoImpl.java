@@ -145,11 +145,20 @@ public class AhzitDaoImpl implements AhzitDao {
 
 	// 추상 메소드 오버라이딩 - 내가 가입한 소모임인지 조회
 	@Override
-	public int alreadyJoin(String userId, int ahzitNo) {
+	public boolean alreadyJoin(String userId, int ahzitNo) {
 		Map<String, String> param = new HashMap<>();	
 		param.put("userId", userId);
-		param.put("ahzitNo", String.valueOf(ahzitNo));
-		return sqlSession.selectOne("ahzit.joinAlready", param);
+		param.put("memberAhzitNo", String.valueOf(ahzitNo));
+		Integer isMember = sqlSession.selectOne("ahzit.joinAlready", param);
+		if(isMember == null) {
+			return false;
+		} else {
+			if(isMember == 0) {
+				return false;
+			} else {
+				return true;
+			}
+		}
 	}
 
 	// 추상 메소드 오버라이딩 - 소모임 내 회원 통합 조회
