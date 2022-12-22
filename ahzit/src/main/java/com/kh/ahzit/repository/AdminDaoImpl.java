@@ -156,7 +156,7 @@ public class AdminDaoImpl implements AdminDao{
 
 		@Override
 		public AhzitDto selectOne(int ahzitNo) {
-			return sqlSession.selectOne("ahzit.one", ahzitNo);
+			return sqlSession.selectOne("admin.one", ahzitNo);
 		}
 
 		@Override

@@ -162,7 +162,7 @@
 			</div>
 			
 			<div class = "col d-flex justify-content-center align-items-center">
-				<a href = "${pageContext.request.contextPath}/admin/ahzit" class = "d-flex align-items-center header-style">소모임 관리</a>
+				<a href = "${pageContext.request.contextPath}/admin/ahzit" class = "d-flex align-items-center header-style">아지트 관리</a>
 			</div>
 				
 			<div class ="col d-flex justify-content-center align-items-center">
