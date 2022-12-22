@@ -41,4 +41,9 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		return count>0;
 	}
 	
+	@Override
+	public List<ScheduleDto> scheduleListSysdate(int scheduleAhzitNo) {
+		return sqlSession.selectList("schedule.listSysdate", scheduleAhzitNo);
+	}
+	
 }

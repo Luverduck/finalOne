@@ -23,9 +23,9 @@
 
 
 <div class="container-fluid mt-5 mb-5">
-	<div class="row">
+	<div class="">
 		<div class="col-8 offset-2">
-			<div class="row">
+			<div class="">
 			
 			
 				<!-- 게시판 이름 -->

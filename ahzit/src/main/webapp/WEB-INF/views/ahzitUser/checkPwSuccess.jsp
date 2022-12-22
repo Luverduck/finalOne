@@ -55,7 +55,7 @@ font-size: 0.85rem;
 
  <form action="checkPwSuccess" method="post">
 	
- 	<div class="row mt-4">
+ 	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="p-4 rounded text-center">
 				<h1 class="text-center">비밀번호 변경</h1>	
@@ -68,7 +68,7 @@ font-size: 0.85rem;
 	
 	<input type="hidden" name="userId" value="${userId}" >
 	
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
 				<input type="password" name="userPw" class="form-control rounded" placeholder="비밀번호" required>
@@ -82,7 +82,7 @@ font-size: 0.85rem;
 		</div>
 		
 
-	 <div class="row mt-4">
+	 <div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
 				<input type="password" id="userPw-re" class="form-control rounded" placeholder="비밀번호 확인" required>
@@ -95,7 +95,7 @@ font-size: 0.85rem;
 		</div>
 	</div>
 	
-	 <div class="row mt-4">
+	 <div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mb-4">
 			<button class="btn rounded w-100 btn-lg" style="background-color : #E6E6E6; color:#3E4684;" type="submit">변경</button>
 		 </div>

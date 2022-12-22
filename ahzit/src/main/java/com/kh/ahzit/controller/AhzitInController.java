@@ -119,6 +119,12 @@ public class AhzitInController {
 		List<ScheduleDto> scheduleList=scheduleDao.scheduleList(ahzitNo);
 		//1219 추가) 검색결과목록을 model에 추가
 		model.addAttribute("scheduleList", scheduleList);
+		
+		//1222 추가)sysdate보다 시작일이 빠른 일정은 제외한 목록
+		List<ScheduleDto> scheduleListSysdate=scheduleDao.scheduleListSysdate(ahzitNo);
+		//1222 추가) 검색결과목록을 model에 추가
+		model.addAttribute("scheduleListSysdate",scheduleListSysdate);
+		
 		//개설한 아지트 정보를 조회
 		model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));
 		// 편의를 위해 ahzitNo를 model에 추가

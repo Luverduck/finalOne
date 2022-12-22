@@ -73,10 +73,10 @@
 		<p class="fs-4">현재 상태 
 			: 
 			<c:if test="${ahzitDto.ahzitIspublic == 'N'}">
-			 	비공개
+			 	공개
 			</c:if>
 			<c:if test="${ahzitDto.ahzitIspublic == 'Y'}">
-			 	공개
+			 	비공개
 			</c:if>
 			<%-- ${ahzitDto.ahzitIspublic} --%>
 		</p>
@@ -92,6 +92,7 @@
 			<input type="radio" name="ahzitIsPublic" value="Y"><label>공개 아지트</label>
 	
 		</div> -->
+
 
 
 		<%--아지트 이미지--%>

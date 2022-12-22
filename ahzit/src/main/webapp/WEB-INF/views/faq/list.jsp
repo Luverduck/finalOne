@@ -33,9 +33,9 @@
 
 
 <div class="container-fluid mt-3">
-	<div class="row">
+	<div class="">
 		<div class="col-8 offset-2 main">
-			<div class="row">
+			<div class="">
 
 				<div class="row mt-4">
 					<div

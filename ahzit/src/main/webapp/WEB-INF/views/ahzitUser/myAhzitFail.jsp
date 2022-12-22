@@ -10,11 +10,11 @@
 </jsp:include>
 
 <div class = "container-fluid mt-3">
-	<div class = "row">
+	<div class = "">
 		<div class = "col-8 offset-2 main">
-			<div class = "row">
+			<div class = "">
 
-				<div class="row mt-4">
+				<div class=" mt-4">
 					<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 						<div class="p-4 rounded">
 							<h1 class="text-center">My Ahzit</h1>	

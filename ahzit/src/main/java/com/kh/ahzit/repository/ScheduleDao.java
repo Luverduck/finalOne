@@ -11,4 +11,6 @@ public interface ScheduleDao {
 	void insert2(ScheduleDto scheduleDto);//일정등록(시퀀스번호미리발행한것을 따로 사용)
 	int sequence();//시퀀스 번호 	발행
 	boolean delete(int scheduleNo);//일정 삭제
+	
+	List<ScheduleDto> scheduleListSysdate(int scheduleAhzitNo);//sysdate보다 시작일이 빠른 스케줄은 포함하지 않는 목록
 }

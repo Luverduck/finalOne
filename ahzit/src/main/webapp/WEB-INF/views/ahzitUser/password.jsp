@@ -48,7 +48,7 @@
  
  <form action="password" method="post">
  
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="p-4 rounded  text-center">
 				<h1 class="text-center">비밀번호 변경</h1>
@@ -58,7 +58,7 @@
 		
 	<input type = "hidden" name = "userId" value = "${userId}">
 		
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
     			<input type="password" name="beforePw" class="form-control rounded" placeholder="기존 비밀번호" required >
@@ -69,7 +69,7 @@
 		</div>
  	</div>
 		
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
     			<input type="password" name="afterPw" class="form-control rounded" placeholder="변경 비밀번호" required>
@@ -82,7 +82,7 @@
 		</div>
  	</div>
  	
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="form-floating">
     			<input type="password" name="afterPwCheck" class="form-control rounded" placeholder="변경 비밀번호" required>
@@ -95,7 +95,7 @@
 		</div>
  	</div>
 
-	<div class="row mt-4">
+	<div class="mt-4">
 		<div class="col-8 offset-2 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 			<div class="mb-5">
 			<button class="btn rounded w-100 btn-lg"  style="background-color : #E6E6E6; color:#3E4684;" type="submit">변경</button>
