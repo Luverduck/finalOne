@@ -14,7 +14,7 @@
 	* {
 		border: 1px dotted gray;
 	}
-</style>
+</style> 
  <footer>
       <!-- Grid container -->
       <div class="container-fluid p-0">
