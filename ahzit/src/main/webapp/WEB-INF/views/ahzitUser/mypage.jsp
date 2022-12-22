@@ -30,7 +30,7 @@
           <div class="col-6 mb-5">
 			<div class="mt-4">
 				<div class="mt-4">
-		            <div class="col-md-10 offset-md-1">
+		            <div class="col-md-10 offset-md-2">
 		                <table class="table table-hover ">
 		                  
 		                    <tbody class="text-center" >
