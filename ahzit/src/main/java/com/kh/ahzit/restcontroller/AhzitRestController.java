@@ -30,13 +30,18 @@ public class AhzitRestController {
 		AhzitSearchListRequestVO ahzitSearchListRequestVO = new AhzitSearchListRequestVO();
 		ahzitSearchListRequestVO.setP(p);
 		ahzitSearchListRequestVO.setCntRow(cntRow);
+		
+		List<AhzitSearchListResponseVO> ahzitInfoList;
 		if(keyword != null) {
 			ahzitSearchListRequestVO.setKeyword(keyword);
+			int total = ahzitDao.searchMemberCount(p, keyword);
+			ahzitSearchListRestResponseVO.setInfoCount(total);
+			ahzitInfoList = ahzitDao.allSortAhzit(ahzitSearchListRequestVO);
+		} else {
+			int total = ahzitDao.allMemberCount(p);
+			ahzitSearchListRestResponseVO.setInfoCount(total);
+			ahzitInfoList = ahzitDao.searchSortAhzit(ahzitSearchListRequestVO);
 		}
-		int total = ahzitDao.countselectAhzit(ahzitSearchListRequestVO);;
-		// 반환 VO에 조회한 총 소모임 갯수 설정
-		ahzitSearchListRestResponseVO.setInfoCount(total);
-		List<AhzitSearchListResponseVO> ahzitInfoList = ahzitDao.selectSortAhzit(ahzitSearchListRequestVO);
 		// 반환 VO에 조회 결과를 설정
 		ahzitSearchListRestResponseVO.setAhzitInfoList(ahzitInfoList);
 		// 반환 VO에 조회한 총 소모임의 마지막 페이지 블럭 설정
