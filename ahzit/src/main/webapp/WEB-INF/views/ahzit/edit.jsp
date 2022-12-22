@@ -24,7 +24,7 @@
 <div class="container mt-5 mb-5">
 
 <form action="edit" method="post" enctype = "multipart/form-data">
-	<input type="text"  name = "ahzitNo" value="${ahzitDto.ahzitNo}">
+	<input type="hidden"  name = "ahzitNo" value="${ahzitDto.ahzitNo}">
 	
 	<div class="row mt-3">
 		<p class="fs-3">이 아지트 리더는 ${ahzitDto.ahzitLeader} 입니다</p>
@@ -126,10 +126,10 @@
 		<div class="row justify-content-center mt-5 mb-5">
 			<button type="submit" class="col btn-edit-cancel btn btn-outline-secondary rounded" >취소</button>
             <button type="submit" class="col btn rounded" style="background-color : #E6E6E6; color:#3E4684;">수정하기</button>
-			<a class="btn rounded" href="/ahzit/delete?ahzitNo= ${ahzitDto.ahzitNo}" onclick="return checkout();">
+			<a type="submit" class="btn rounded" href="/ahzit/delete?ahzitNo= ${ahzitDto.ahzitNo}" onclick="return checkout();" role=button>
 				<i class="fa-solid fa-trash" style="color:red;"></i>
 				<span style="color:red">아지트 삭제</span>
-			</button>
+			</a>
 		</div>	
 		
 	</form>
@@ -199,7 +199,13 @@ function ahzitInfo1(){
 	//소모임 삭제 확인창(javascript)
 	function checkout(){
 	    var choice = confirm("정말 삭제하시겠습니까? 해당 아지트의 모든 정보가 삭제됩니다");
-	    return choice;
+	    if(choice){
+            return true;
+            
+        }
+        else{
+            return false;
+        }
 	}
 	
     // 이미지 (jquery)
