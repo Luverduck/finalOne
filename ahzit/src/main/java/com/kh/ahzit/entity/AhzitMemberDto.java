@@ -21,4 +21,7 @@ public class AhzitMemberDto {
 	private String memberGrade;
 	private int memberScore;
 	private Date memberJoindate;
+	
+	// (추가)
+	private int memberAttachmentNo;
 }
