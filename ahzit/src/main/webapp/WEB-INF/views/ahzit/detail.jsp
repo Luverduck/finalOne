@@ -55,11 +55,11 @@
 				아지트 종류 : ${ahzitVO.getAhzitSort()}<br>
 				아지트 리더 : ${ahzitVO.getAhzitLeader()}<br>
       		</div>
-		</div>
+		</div>  
 		
 		<%-- 가운데 내용 --%>
 		<div class = "col-6">
-			dd
+			비회원용 소모임 정보 페이지ㄴ
 		</div>
 		
 		<%-- 오른쪽 사이드바 --%>
