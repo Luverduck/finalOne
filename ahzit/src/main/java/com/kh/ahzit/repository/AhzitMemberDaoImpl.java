@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ahzit.entity.AhzitMemberDto;
+import com.kh.ahzit.vo.AhzitMemberInfoVO;
 import com.kh.ahzit.vo.AhzitMemberListVO;
 
 @Repository
@@ -56,5 +57,12 @@ public class AhzitMemberDaoImpl implements AhzitMemberDao {
 		return sqlSession.selectOne("ahzitMember.findMember",memberNo);
 	}
 
-
+	// 추상 메소드 오버라이딩 - 소모임 번호와 회원 번호로 소모임 내 회원 정보 조회 (모달창)
+	@Override
+	public AhzitMemberInfoVO selectOneMemberInfo(int ahzitNo, int memberNo) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("memberAhzitNo", ahzitNo);
+		param.put("memberNo", memberNo);
+		return sqlSession.selectOne("ahzitMember.selectOneMember", param);
+	}
 }

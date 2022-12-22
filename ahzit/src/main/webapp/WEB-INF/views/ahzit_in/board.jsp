@@ -437,7 +437,7 @@
 				
 				// 2-1) span 태그
 				var span_reply_member_img_container = $("<span>").attr("class", "div-reply-member-profile");
-				var img_reply_member_img = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.memberAttachmentNo).attr("writerno", response.data.replyWriterNo);
+				var img_reply_member_img = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.memberAttachmentNo).attr("data-writerno", response.data.replyWriterNo);
 				var span_reply_member_img = span_reply_member_img_container.append(img_reply_member_img);
 				
 				// 2-2) 
@@ -543,7 +543,7 @@
 					
 					// 2-1) span 태그
 					var span_reply_member_img_container = $("<span>").attr("class", "div-reply-member-profile");
-					var img_reply_member_img = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.replyList[i].memberAttachmentNo).attr("writerno", response.data.replyList[i].replyWriterNo);
+					var img_reply_member_img = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.replyList[i].memberAttachmentNo).attr("data-writerno", response.data.replyList[i].replyWriterNo);
 					var span_reply_member_img = span_reply_member_img_container.append(img_reply_member_img);
 					
 					// 2-2) 
@@ -701,7 +701,7 @@
 								
 								// 2-1) span 태그
 								var span_reply_member_img_container = $("<span>").attr("class", "div-reply-member-profile");
-								var img_reply_member_img = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.replyList[i].memberAttachmentNo).attr("writerno", response.data.replyList[i].replyWriterNo);
+								var img_reply_member_img = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.replyList[i].memberAttachmentNo).attr("data-writerno", response.data.replyList[i].replyWriterNo);
 								var span_reply_member_img = span_reply_member_img_container.append(img_reply_member_img);
 								
 								// 2-2) 
@@ -888,7 +888,7 @@
 				var divtop_outer = $("<div>").attr("class", "d-flex align-items-start px-3 pt-3 mt-3 div-board div-board-top")
 				
 				var divtop_span = $("<span>").attr("class", "div-member-profile");
-				var divtop_img_member = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.memberAttachmentNo).attr("writerno", response.data.boardWriterNo); // 임시 주소
+				var divtop_img_member = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.memberAttachmentNo).attr("data-writerno", response.data.boardWriterNo); // 임시 주소
 				var divtop_img = divtop_span.append(divtop_img_member);
 				
 				var divtop_writer_outer = $("<div>").attr("class", "ms-3 w-100");
@@ -1090,7 +1090,7 @@
 					var divtop_outer = $("<div>").attr("class", "d-flex align-items-start px-3 pt-3 mt-3 div-board div-board-top")
 					
 					var divtop_span = $("<span>").attr("class", "div-member-profile");
-					var divtop_img_member = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.boardList[i].memberAttachmentNo).attr("writerno", response.data.boardList[i].boardWriterNo); // 임시 주소
+					var divtop_img_member = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.boardList[i].memberAttachmentNo).attr("data-writerno", response.data.boardList[i].boardWriterNo); // 임시 주소
 					var divtop_img = divtop_span.append(divtop_img_member);
 					
 					var divtop_writer_outer = $("<div>").attr("class", "ms-3 w-100");
@@ -1195,7 +1195,7 @@
 					var divtop_outer = $("<div>").attr("class", "d-flex align-items-start px-3 pt-3 mt-3 div-board div-board-top");
 					
 					var divtop_span = $("<span>").attr("class", "div-member-profile");
-					var divtop_img_member = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.boardList[i].memberAttachmentNo).attr("writerno", response.data.boardList[i].boardWriterNo); // 임시 주소
+					var divtop_img_member = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.boardList[i].memberAttachmentNo).attr("data-writerno", response.data.boardList[i].boardWriterNo); // 임시 주소
 					var divtop_img = divtop_span.append(divtop_img_member);
 					
 					var divtop_writer_outer = $("<div>").attr("class", "ms-3 w-100");
@@ -1301,7 +1301,7 @@
 				var divtop_outer = $("<div>").attr("class", "d-flex align-items-start px-3 pt-3 mt-3 div-board div-board-top");
 				
 				var divtop_span = $("<span>").attr("class", "div-member-profile");
-				var divtop_img_member = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.boardList[i].memberAttachmentNo).attr("writerno", response.data.boardList[i].boardWriterNo); // 임시 주소
+				var divtop_img_member = $("<img>").attr("class", "img-member-profile member-profile").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.boardList[i].memberAttachmentNo).attr("data-writerno", response.data.boardList[i].boardWriterNo); // 임시 주소
 				var divtop_img = divtop_span.append(divtop_img_member);
 				
 				var divtop_writer_outer = $("<div>").attr("class", "ms-3 w-100");
