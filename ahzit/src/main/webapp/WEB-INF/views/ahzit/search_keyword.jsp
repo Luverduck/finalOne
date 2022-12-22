@@ -8,17 +8,17 @@
 </jsp:include>
 
 <style>
-* {
-	 border: 1px dotted gray; 
-	ont-family: font-family : 'Gothic A1', sans-serif;
-}
-.pagination{
-justify-content : center
-}
-.ahzit-img {
-	width: 200px;
-	height: 200px;
-}
+	* {
+	/* 	 border: 1px dotted gray;  */
+		ont-family: font-family : 'Gothic A1', sans-serif;
+	}
+	.pagination{
+	justify-content : center
+	}
+	.ahzit-img {
+		width: 200px;
+		height: 200px;
+	}
 </style>
 
 <div class="container-fluid mt-5 mb-5">

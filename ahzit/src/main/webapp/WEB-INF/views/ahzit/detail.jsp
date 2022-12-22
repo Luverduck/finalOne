@@ -8,10 +8,6 @@
 </jsp:include>
 
 <style>
-	/* 	div {
-		border : 1px dotted gray;	
-	} */
-
 	body {
 		background-color: #F5F5F5;	
 	}
@@ -41,6 +37,10 @@
 	.profile-img {
 		width : 60px;
 		border-radius : 50%;
+	}
+	.member-only {
+		width : 160px;
+		height : 160px;
 	}
 
 </style>
@@ -93,9 +93,9 @@
 								</div>
 								<div class = "col">
 									<%-- 소모임 수정 --%>
-								 	<c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
+<%-- 							<c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
 										<a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i><span>아지트 수정</span></a>					
-									</c:if>
+									</c:if> --%>
 									
 								</div>
 							</div>
@@ -120,15 +120,39 @@
 					<div class = "row">
 						<div class = "col">
 							<div class = "shadow div-member-info-list p-3 bg-white">
+								
 								<h3>소모임 소개</h3>
-									<span class="ahzit-side mt-1 mb-2 fs-4">멤버 ${ahzitVO.getAhzitHead()}  · ${ahzitVO.getAhzitSort()}<br> </span>
-									<span class="ahzit-side mt-1 mb-2 fs-5">${ahzitVO.getAhzitInfo()}<br> <%--아지트 소개 --%></span>
-							
+									<span class="ahzit-side fs-5">멤버 ${ahzitVO.getAhzitHead()}  · ${ahzitVO.getAhzitSort()}<br> </span>
+									<span class="ahzit-side  fs-6">${ahzitVO.getAhzitInfo()}<br> <%--아지트 소개 --%></span>
+									
+									<%--members-only icon --%>
+									<div class="mt-4">
+										 <img src = "/images/members-only.png" class="member-only mx-auto d-block">
+									</div>
+									
+									<%--아지트 가입하기 버튼 --%>
+									<div class="mt-4">
+										<c:choose>
+									    <c:when test="${ahzitMemberDto.getMemberId() == null}"><%-- 소모임 회원이 아니면 --%>
+									    	<button type="button" class="btn mx-auto d-block" onclick="location.href='${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert'" style="background-color : #E6E6E6; color:#3E4684;">아지트 가입하러가기 &nbsp;<i class="fa-solid fa-angles-right"></i> </button>
+									    </c:when>
+									    <c:otherwise>
+									    	<button type="button" class="btn btn-join" disabled>아지트 가입하러 가기</button><%-- 소모임 회원이라면 --%>
+									    </c:otherwise>
+									    </c:choose>
+								    </div>
+			    
+			    	<%--회원가입 버튼 --%>
+<%-- 						<c:if test="${login == null}">
+							<div class="mt-3 mb-3 fs-3">
+								<a type="button" href="${pageContext.request.contextPath}/ahzitUser/login" >로그인하러 가기 <i class="fa-solid fa-angles-right"></i></a>
+							</div>
+						</c:if> --%>
+									
 						</div>
 					</div>
 				</div>
-				
-				</div>
+			</div>
 				
 				<%-- 오른쪽 사이드바 --%>
 <!-- 				<div class = "col-3">
