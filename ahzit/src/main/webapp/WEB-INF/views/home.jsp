@@ -167,7 +167,7 @@
 		<p class="text-center ahzit-title-name">소모임 추천</p> <%--추후 바꾸기 --%>
 	</div>
            
-           
+            
 
 	<c:if test="${login}">
 	<div>
