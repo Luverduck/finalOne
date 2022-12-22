@@ -120,11 +120,12 @@
 
 
 <div class = "container-fluid mt-3">
+
    
-   <div class = "row">
+   <div class = "col">
          
       <%-- 왼쪽 사이드바 --%>
-      <div class = "col col-3" style="background-color: #dff9fb;">
+      <div class = "col-3" style="background-color: #dff9fb;">
          <h1>왼쪽 사이드바</h1> 
       
          <br>

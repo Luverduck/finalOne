@@ -19,11 +19,6 @@
 		</c:choose>
 	</title>
 	
-	<!-- Font CDN - Noto Sans Korean -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-
 	<!-- Font Awesome Link -->
 	<link rel="stylesheet" type = "text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 
@@ -36,27 +31,24 @@
 	<!-- jQuery CDN -->
     <script src = "https://code.jquery.com/jquery-3.6.1.js"></script>
     
+   	<!-- AXIOS CDN -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  	<!-- Lodash CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
     <!-- Summer Note CDN -->
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.js"></script>
 	
 	<!-- Summer Note CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.css" rel="stylesheet">
   	
-
   	<!-- 폰트(이사만루체) CDN -->
   	 <link href="https://webfontworld.github.io/gonggames/EsaManru.css" rel="stylesheet">
-  	
-  	<!-- AXIOS CDN -->
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-  	<!-- Lodash CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-   
 
     <style>
         * {
         	 /* border : 1px dotted gray;   */
-           /*  font-family: 'Noto Sans KR', sans-serif;  */
             font-family: 'EsaManru';
             color :#3E4684;
             /* font-size : 16px !important; */

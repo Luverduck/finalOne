@@ -228,7 +228,7 @@
 					<%-- 게시글 검색창 --%>
 					<div class = "row">
 						<div class = "col">
-							<div class = "d-flex ps-3 py-3 bg-white div-editor-opener">
+							<div class = "d-flex ps-3 py-3 bg-white div-editor-opener shadow">
 								<input type = "text" class = "input-search col-11 d-flex flex-fill div-editor-input py-1 px-2" placeholder = "검색어 입력">
 								<button class="col-1 d-flex align-items-center justify-content-center border-0 bg-white icon-editor-opener btn-search-submit">
 									<i class="fa-solid fa-magnifying-glass w-100"></i>
@@ -240,7 +240,7 @@
 					<%-- 게시글 작성창 --%>
 					<div class = "row mt-3 div-editor-insert">
 						<div class = "col">
-							<div class = "d-flex ps-3 py-3 bg-white div-editor-opener">
+							<div class = "d-flex ps-3 py-3 bg-white div-editor-opener shadow">
 								<button class="col-11 d-flex flex-fill div-editor-opener editor-open-insert py-1 px-2" data-bs-toggle="modal" data-bs-target="#modal-insert">새 소식을 남겨보세요</button>
 								<button class="col-1 d-flex align-items-center justify-content-center border-0 bg-white icon-editor-opener editor-open-insert" data-bs-toggle="modal-insert" data-bs-target="#modal-insert">
 									<i class = "fa-solid fa-pen-to-square w-100"></i>
