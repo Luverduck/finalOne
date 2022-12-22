@@ -44,8 +44,11 @@ public class HomeController {
  	public String searchKeyword(Model model, @ModelAttribute AhzitSearchListRequestVO ahzitSearchListRequestVO) {
  		//System.out.println(ahzitSearchListRequestVO.getKeyword());
  		//System.out.println(ahzitDao.selectAhzit(ahzitSearchListRequestVO));
- 		model.addAttribute("ahzitList", ahzitDao.selectAhzit(ahzitSearchListRequestVO));
+ 		int total = ahzitDao.searchAhzitCount(ahzitSearchListRequestVO);
+ 		ahzitSearchListRequestVO.setTotal(total);
  		model.addAttribute("keyword", ahzitSearchListRequestVO.getKeyword());
+ 		model.addAttribute("ahzitList", ahzitDao.selectAhzit(ahzitSearchListRequestVO));
+ 		
  		return "ahzit/search_keyword";
  	}
  	

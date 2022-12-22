@@ -7,6 +7,7 @@ import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AhzitUserDto;
 import com.kh.ahzit.vo.AhzitMemberInfoRequestVO;
 import com.kh.ahzit.vo.AhzitMemberInfoVO;
+import com.kh.ahzit.vo.AhzitSearchKeywordListSearchVO;
 import com.kh.ahzit.vo.AhzitSearchListRequestVO;
 import com.kh.ahzit.vo.AhzitSearchListResponseVO;
 
@@ -23,6 +24,7 @@ public interface AhzitDao {
 	public boolean updateAhzitPerson(int ahzitNo); //아지트 참가자 인원수 증가
 	
 	List<AhzitDto> selectList();//아지트 목록
+	
 	AhzitDto selectOne(int ahzitNo);//아지트 단일조회
 
 	boolean update(AhzitDto ahzitDto);//아지트 정보 수정
@@ -43,6 +45,9 @@ public interface AhzitDao {
 	
 	// 추상 메소드 - 홈 화면 검색창 검색 : 검색 조회(검색어가 있는 경우)
 	List<AhzitSearchListRequestVO> searchAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+
+	// 검색 시 아지트 개수
+	int searchAhzitCount(AhzitSearchListRequestVO ahzitSearchListRequestVO);
 	
 	// 추상 메소드 - 내가 가입한 소모임인지 조회
 	public boolean alreadyJoin(String userId, int ahzitNo);
