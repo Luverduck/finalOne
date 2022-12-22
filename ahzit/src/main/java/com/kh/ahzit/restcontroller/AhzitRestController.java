@@ -30,27 +30,20 @@ public class AhzitRestController {
 		AhzitSearchListRequestVO ahzitSearchListRequestVO = new AhzitSearchListRequestVO();
 		ahzitSearchListRequestVO.setP(p);
 		ahzitSearchListRequestVO.setCntRow(cntRow);
-		int total;
+		
 		List<AhzitSearchListResponseVO> ahzitInfoList;
 		if(keyword != null) {
 			ahzitSearchListRequestVO.setKeyword(keyword);
-			total = ahzitDao.countselectAhzit(ahzitSearchListRequestVO);
-			// 총 갯수를 요청 VO의 총 갯수에 설정에 설정
-			ahzitSearchListRequestVO.setTotal(total);
-			// 조회 결고 반환
-			ahzitInfoList = ahzitDao.selectSortAhzit(ahzitSearchListRequestVO);
-		}
-		else {
-			total = ahzitDao.countAllAhzit(ahzitSearchListRequestVO);
-			// 총 갯수를 요청 VO의 총 갯수에 설정에 설정
-			ahzitSearchListRequestVO.setTotal(total);
-			// 조회 결고 반환
+			int total = ahzitDao.searchMemberCount(p, keyword);
+			ahzitSearchListRestResponseVO.setInfoCount(total);
 			ahzitInfoList = ahzitDao.allSortAhzit(ahzitSearchListRequestVO);
+		} else {
+			int total = ahzitDao.allMemberCount(p);
+			ahzitSearchListRestResponseVO.setInfoCount(total);
+			ahzitInfoList = ahzitDao.searchSortAhzit(ahzitSearchListRequestVO);
 		}
 		// 반환 VO에 조회 결과를 설정
 		ahzitSearchListRestResponseVO.setAhzitInfoList(ahzitInfoList);
-		// 반환 VO에 조회한 총 소모임 갯수 설정
-		ahzitSearchListRestResponseVO.setInfoCount(total);
 		// 반환 VO에 조회한 총 소모임의 마지막 페이지 블럭 설정
 		ahzitSearchListRestResponseVO.setPLast(ahzitSearchListRequestVO.blockLast());		
 		// 설정된 반환 VO를 반환

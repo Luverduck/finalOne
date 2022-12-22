@@ -87,7 +87,7 @@
 			    select tmp.*, rownum rn from (
 			        select am.*, ma.member_attachment_no from ahzit_member am left outer join member_attachment ma on am.member_no = ma.member_origin_no where am.member_ahzit_no = #{memberAhzitNo} order by am.member_no asc
 			    )tmp
-			) where rn between #{rownumStart} and #{rownumEnd}
+			) where rn between #{startRow} and #{endRow}
 		</select>
 		
 		<!-- 소모임에 가입한 회원 정보 검색 조회 -->
@@ -96,7 +96,7 @@
 			    select tmp.*, rownum rn from (
 			        select am.*, ma.member_attachment_no from ahzit_member am left outer join member_attachment ma on am.member_no = ma.member_origin_no where am.member_ahzit_no = #{memberAhzitNo} and instr(am.member_nick, #{keyword}) > 0 order by am.member_no asc
 			    )tmp
-			) where rn between #{rownumStart} and #{rownumEnd}
+			) where rn between #{startRow} and #{endRow}
 		</select>
 		
 		<!-- 소모임에 가입한 전체 회원 수 반환 -->

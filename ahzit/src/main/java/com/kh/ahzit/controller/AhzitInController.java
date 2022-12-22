@@ -225,7 +225,7 @@ public class AhzitInController {
 		// 조회 유형에 따른 회원 수 반환
 		int memberCount = ahzitDao.selectMemberCount(ahzitMemberInfoRequestVO);
 		// 조회한 회원 수를 VO에 설정
-		ahzitMemberInfoRequestVO.setMemberCount(memberCount);
+		ahzitMemberInfoRequestVO.setCount(memberCount);
 		// 조회 유형에 따른 회원 정보 조회
 		List<AhzitMemberInfoVO> memberInfoList = ahzitDao.selectMemberInfo(ahzitMemberInfoRequestVO);
 		// 조회 결과를 model에 추가

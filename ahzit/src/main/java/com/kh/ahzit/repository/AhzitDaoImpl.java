@@ -168,8 +168,8 @@ public class AhzitDaoImpl implements AhzitDao {
 	public List<AhzitMemberInfoVO> allMemberInfo(AhzitMemberInfoRequestVO ahzitMemberInfoRequestVO) {
 		Map<String, String> param = new HashMap<>();	
 		param.put("memberAhzitNo", String.valueOf(ahzitMemberInfoRequestVO.getAhzitNo()));
-		param.put("rownumStart", String.valueOf(ahzitMemberInfoRequestVO.rownumStart()));
-		param.put("rownumEnd", String.valueOf(ahzitMemberInfoRequestVO.rownumEnd()));
+		param.put("startRow", String.valueOf(ahzitMemberInfoRequestVO.startRow()));
+		param.put("endRow", String.valueOf(ahzitMemberInfoRequestVO.endRow()));
 		return sqlSession.selectList("ahzit.allMember", param);
 	}
 
@@ -179,9 +179,8 @@ public class AhzitDaoImpl implements AhzitDao {
 		Map<String, String> param = new HashMap<>();	
 		param.put("memberAhzitNo", String.valueOf(ahzitMemberInfoRequestVO.getAhzitNo()));
 		param.put("keyword", ahzitMemberInfoRequestVO.getKeyword());
-		param.put("rownumStart", String.valueOf(ahzitMemberInfoRequestVO.rownumStart()));
-		param.put("rownumEnd", String.valueOf(ahzitMemberInfoRequestVO.rownumEnd()));
-		// TODO Auto-generated method stub
+		param.put("startRow", String.valueOf(ahzitMemberInfoRequestVO.startRow()));
+		param.put("endRow", String.valueOf(ahzitMemberInfoRequestVO.endRow()));
 		return sqlSession.selectList("ahzit.searchMember", param);
 	}
 	

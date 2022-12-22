@@ -6,24 +6,20 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
   <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
-	<%-- header.jsp 불러오기 --%>
-	<jsp:include page="/WEB-INF/views/template/header.jsp">
-		<jsp:param value="메인페이지" name="title"/>
-	</jsp:include>
+<%-- header.jsp 불러오기 --%>
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+   <jsp:param value="메인페이지" name="title"/>
+</jsp:include>
 
 <style>
-	* {
-		border: 1px dotted gray;
-	}
-
-   	.ahzit-img {
-   		width:100%;
-   		height:300px;
-   	}
+      .ahzit-img {
+         width:100%;
+         height:300px;
+      }
    /* 이미지 슬라이더 */
    .main-img {
-    	height: 100%;
-    	width: 100%;
+       height: 100%; 
+       width: 100%;
    }
     .swiper {
         width: 800px;
@@ -54,7 +50,7 @@
     .swiper-button-next, .swiper-button-prev {
         color : white;
     }
-	.swiper-button-next::after,
+   .swiper-button-next::after,
     .swiper-button-prev::after {
         display: none;
     } 
@@ -114,13 +110,13 @@
         background-color: #1D3461;
         color: #fff;
     }
- 	@-webkit-keyframes pulse {
-	    0% {
-	        -moz-transform: scale(0.9);
-	        -ms-transform: scale(0.9);
-	        -webkit-transform: scale(0.9);
-	        transform: scale(0.9);
-	    }
+    @-webkit-keyframes pulse {
+       0% {
+           -moz-transform: scale(0.9);
+           -ms-transform: scale(0.9);
+           -webkit-transform: scale(0.9);
+           transform: scale(0.9);
+       }
     70% {
         -moz-transform: scale(1);
         -ms-transform: scale(1);
@@ -134,8 +130,8 @@
         -webkit-transform: scale(0.9);
         transform: scale(0.9);
         box-shadow: 0 0 0 0 rgba(90, 153, 212, 0);
-	    }
-	} 
+       }
+   } 
     .sort-img {
       width:40px;
     }
@@ -143,118 +139,107 @@
       width:20px;
     }
     .ahzit-title-name {
-      font-size : 30px;
+      font-size : 40px;
       color : #3E4684;
-    }
-    .recommend {
-    	font-size : 20px;
-    	background-color: #D8D8D8;
-    	border-radius: 15px;
     }
 </style>
 
 <c:set var="login" value="${loginId != null}"></c:set>
 
 <div class = "container-fulid mt-3">
-	<div class = "row">
 
-		<div class = "col-8 offset-2 ">
-		   <%-- 홈 화면 내용 영역 --%>
-		   <%--이미지 슬라이더 --%>
-			<div class="swiper mb-4">
-                <div class="swiper-wrapper">
-                	<div class="swiper-slide"><img src="images/main-img-1.png" class="main-img"></div>
-                	<div class="swiper-slide"><img src="images/main-img-2.png" class="main-img"></div>
-                	<div class="swiper-slide"><img src="images/main-img-3.png" class="main-img"></div>
-                	<div class="swiper-slide"><img src="images/main-img-4.png" class="main-img"></div>
-                </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-            </div>
-       
-       <a href = "/search">
-	      	<div class="text-center shadow recommend mb-4 mt-4 p-2">
-				새로운 소모임에 참여해보세요 ! &nbsp; <i class="fa-solid fa-angles-right "></i>
-			</div>
-		</a>
+   <div class = "col-8 offset-2 ">
+      <%-- 홈 화면 내용 영역 --%>
+      <%--이미지 슬라이더 --%>
+      <div class="swiper mb-3">
+               <div class="swiper-wrapper">
+                  <div class="swiper-slide"><img src="images/main-img-1.png" class="main-img"></div>
+                  <div class="swiper-slide"><img src="images/main-img-2.png" class="main-img"></div>
+                  <div class="swiper-slide"><img src="images/main-img-3.png" class="main-img"></div>
+                  <div class="swiper-slide"><img src="images/main-img-4.png" class="main-img"></div>
+               </div>
+               <div class="swiper-pagination"></div>
+               <div class="swiper-button-prev"></div>
+               <div class="swiper-button-next"></div>
+           </div>
+           
+        <div>
+      <p class="text-center ahzit-title-name">소모임 추천</p> <%--추후 바꾸기 --%>
+   </div>
+           
+            
 
-		<c:if test="${login}">
-		<div class="mt-4 mb-4">
-			<p class="text-center ahzit-title-name">내가 가입한 소모임</p> 
-		</div>
-		
-		 <div class="row mb-3"> 
-		<%--card--%>
-		<a href="ahzitUser/myAhzit" class="text-end">가입한 소모임 전부보기<i class="fa-solid fa-angles-right"></i></a>
-		<c:forEach var="myAhzitTopN" items="${myAhzitTopN}">
-		 <div class="mt-4 col-xl-4 col-lg-6 col-md-6 col-sm-6">
-              <div class="card-sl">
-                  <div class="card-image">  <%--아지트 이미지 --%>
-                      <img src = "/attachment/download/ahzit?attachmentNo=${myAhzitTopN.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">
-                  </div>
-                  <a class="card-action" href="${pageContext.request.contextPath}/ahzit_in/${myAhzitTopN.ahzitNo}">
-                  <%--아지트 종류에 따른 아이콘 --%>
-                  <c:if test="${myAhzitTopN.ahzitSort == '취미'}"><img src="/images/hobbies.png"  class="sort-img"></c:if>
-                  <c:if test="${myAhzitTopN.ahzitSort == '스터디'}"><img src="/images/study.png"  class="sort-img"></c:if>
-                  <c:if test="${myAhzitTopN.ahzitSort == '일상'}"><img src="/images/life-smile.png"  class="sort-img"></c:if>
-                  <c:if test="${myAhzitTopN.ahzitSort == '팬클럽'}"><img src="/images/fanclub.png"  class="sort-img"></c:if>
-                  <c:if test="${myAhzitTopN.ahzitSort == '음악'}"><img src="/images/music.png"  class="sort-img"></c:if>
-                  <c:if test="${myAhzitTopN.ahzitSort == '스포츠'}"><img src="/images/sports.png"  class="sort-img"></c:if>
-                  <c:if test="${myAhzitTopN.ahzitSort == '여행'}"><img src="/images/travel.png"  class="sort-img"></c:if>
-                  <c:if test="${myAhzitTopN.ahzitSort == '맛집'}"><img src="/images/eat.png"  class="sort-img"></c:if>
-                  <c:if test="${myAhzitTopN.ahzitSort == '영화'}"><img src="/images/movie.png"  class="sort-img"></c:if>
-                  </a>
-                  <div class="card-heading"> <%--아지트 이름 --%>
-                      ${myAhzitTopN.ahzitName} 
-                  </div>
-                  <div class="card-text-1">  <%--아지트 멤버 수 , 종류 --%>
-                       <span class = "span-ahzit-head">${myAhzitTopN.ahzitHead}</span> 
-	                    /
-	                   <span class = "span-ahzit-headmax">${myAhzitTopN.ahzitHeadMax}</span>
-	                    &nbsp; 
-	                   <span class = "span-ahzit-sort">#${myAhzitTopN.ahzitSort}</span>
-                  </div>
-                  <div class="card-text-2"> <%--아지트 지역 --%>
-                    <i class="fa-solid fa-location-dot"></i> ${myAhzitTopN.ahzitRegionHigh} ${myAhzitTopN.ahzitRegionLow} 
-                  </div>
-              </div>
+   <c:if test="${login}">
+   <div>
+      <p class="text-center ahzit-title-name">내가 가입한 소모임</p> 
+   </div>
+   
+    <div class="row mb-3">
+   <%--card--%>
+   <a href="ahzitUser/myAhzit" class="text-end">가입한 소모임 전부보기<i class="fa-solid fa-angles-right"></i></a>
+   <c:forEach var="myAhzitTopN" items="${myAhzitTopN}">
+    <div class="mt-4 col-xl-4 col-lg-6 col-md-6 col-sm-6">
+             <div class="card-sl">
+                 <div class="card-image">  <%--아지트 이미지 --%>
+                     <img src = "/attachment/download/ahzit?attachmentNo=${myAhzitTopN.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">
+                 </div>
+                 <a class="card-action" href="${pageContext.request.contextPath}/ahzit_in/${myAhzitTopN.ahzitNo}">
+                 <%--아지트 종류에 따른 아이콘 --%>
+                 <c:if test="${myAhzitTopN.ahzitSort == '취미'}"><img src="/images/hobbies.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '스터디'}"><img src="/images/study.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '일상'}"><img src="/images/life-smile.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '팬클럽'}"><img src="/images/fanclub.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '음악'}"><img src="/images/music.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '스포츠'}"><img src="/images/sports.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '여행'}"><img src="/images/travel.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '맛집'}"><img src="/images/eat.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '영화'}"><img src="/images/movie.png"  class="sort-img"></c:if>
+                 </a>
+                 <div class="card-heading"> <%--아지트 이름 --%>
+                     ${myAhzitTopN.ahzitName} 
+                 </div>
+                 <div class="card-text-1">  <%--아지트 멤버 수 , 종류 --%>
+                     멤버${myAhzitTopN.ahzitHead} &nbsp;${myAhzitTopN.ahzitSort}
+                 </div>
+                 <div class="card-text-2"> <%--아지트 지역 --%>
+                   <i class="fa-solid fa-location-dot"></i> ${myAhzitTopN.ahzitRegionHigh} ${myAhzitTopN.ahzitRegionLow} 
+                 </div>
              </div>
-		 </c:forEach>
-          </div>
-          </c:if>
-		<%--홈 내용영역 끝 --%>
-		</div>
-	</div>
+            </div>
+    </c:forEach>
+         </div>
+         </c:if>
+   <%--홈 내용영역 끝 --%>
+   </div>
 </div>
 
 
 <!-- jQuery CDN -->
 <script src = "https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
-	$(function(){
-	  //이미지가 없으면 기본 이미지로 대체
-	  $(".ahzit-img").on("error", function(){
-	    $(this).attr("src", "/images/bg_default.jpg");
-	  });
-	  
-	  //이미지 슬라이더
-	     var swiper = new Swiper('.swiper', {
-	         loop: true,
-	         
-	         pagination: {
-	             el: '.swiper-pagination',
-	             clickable: true,
-	         },
-	         navigation: {
-	             nextEl: '.swiper-button-next',
-	             prevEl: '.swiper-button-prev',
-	         },
-	         autoplay: {
-	             delay:2000 //2초마다 자동 넘김
-	         }
-	     });
-	});
+   $(function(){
+     //이미지가 없으면 기본 이미지로 대체
+     $(".ahzit-img").on("error", function(){
+       $(this).attr("src", "/images/bg_default.jpg");
+     });
+     
+     //이미지 슬라이더
+        var swiper = new Swiper('.swiper', {
+            loop: true,
+            
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay:2000 //2초마다 자동 넘김
+            }
+        });
+   });
 </script>
 
 <%-- footer --%>
