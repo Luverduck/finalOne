@@ -164,7 +164,6 @@ public class AhzitController {
 					attachmentDao.ahzitAttachment(ahzitNo, attachmentNo);
 				}
 			}
-    		
     		return "redirect:/ahzit_in/" +ahzitDto.getAhzitNo();
     	}
     	else {//실패했다면 오류 발생

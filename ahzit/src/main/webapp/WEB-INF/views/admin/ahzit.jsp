@@ -36,11 +36,11 @@ justify-content : center
 	
 	<div class="text-center mt-3 mb-4">
 
-<div class="row mt-4">
+					<div class="row mt-4">
 			            <div class="col-md-10 offset-md-1">
 			                <table class="table table-hover">
 			                    <thead class="text-center">
-			                        <tr class="bg-dark text-light">
+			                        <tr>
 										<th>소모임 번호</th>
 										<th width="35%">소모임명</th>
 										<th>소모임 주제</th>

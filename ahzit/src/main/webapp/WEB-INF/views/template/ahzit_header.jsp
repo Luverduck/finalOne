@@ -136,18 +136,4 @@
 
 <script>
 
-    //로그아웃 버튼 클릭 시 알람
-	$(function(){
-		
-		// 로그아웃 시 경고창
-		$(".logout").click(function(e){
-            var choice = confirm("로그아웃 하시겠습니까?");
-            if(choice){
-                return true;
-            }
-            else{
-                return false;
-            }
-		});
-	});
 </script>

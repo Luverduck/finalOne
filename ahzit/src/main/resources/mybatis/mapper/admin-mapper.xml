@@ -50,6 +50,10 @@
 		)TMP)where rn between #{startRow} and #{endRow}
 	</select>
 	
+	<select id="one" parameterType="int" resultType="AhzitDto">
+		select * from ahzit where ahzit_no = #{ahzitNo}
+	</select>
+	
 	<!-- 소모임 검색 조회 -->
 	<select id="ahzitSearchList" parameterType="map" resultType="AhzitDto">
 	select * from (select tmp.*,  rownum rn from (select * from ahzit where instr(${type}, #{keyword}) > 0
