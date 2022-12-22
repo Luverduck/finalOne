@@ -141,9 +141,7 @@
 div {
 	border : 1px dotted gray;
 }
-#radio {
-	color : #3E4684;
-}
+
 </style>
 
 
