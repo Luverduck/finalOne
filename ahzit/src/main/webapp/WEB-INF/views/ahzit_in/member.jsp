@@ -78,7 +78,7 @@
 								<span class="ahzit-side ahzit-name mt-1">${ahzitVO.getAhzitName()}</span><%--아지트 이름 --%>
 								<span class="ahzit-side mt-1">멤버 ${ahzitVO.getAhzitHead()}  · ${ahzitVO.getAhzitSort()} </span>
 								<span class="ahzit-side mt-1 mb-1">${ahzitVO.getAhzitInfo()}<br> <%--아지트 소개 --%></span>
-								<span class="ahzit-side mt-1">아지트 리더 : ${ahzitVO.getAhzitLeader()} <img src = "/images/crown.png"  id="crown"></span>
+								<span class="ahzit-side mt-1">아지트 리더 : ${ahzitVO.memberNick} <img src = "/images/crown.png"  id="crown"></span>
 							</div>
 							
 							<div class = "row mt-1">
