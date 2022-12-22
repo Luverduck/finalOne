@@ -9,7 +9,7 @@
 
 <style>
 	* {
-	/* 	 border: 1px dotted gray;  */
+	/* 	border: 1px dotted gray;   */
 		ont-family: font-family : 'Gothic A1', sans-serif;
 	}
 	.pagination{
@@ -18,6 +18,10 @@
 	.ahzit-img {
 		width: 200px;
 		height: 200px;
+		border-radius : 15px;
+	}
+	.div-thumnail-size {
+		width : 220px;
 	}
 </style>
 
@@ -35,21 +39,33 @@
 								
 									<div class="mt-4 mb-4">
 										<div class="cover">
-											<img src="/attachment/download/ahzit?attachmentNo=${ahzitList.ahzitAttachmentNo}"class="ahzit-img">
-											
-												<div class="fs-4">
+										
+									<div class="container">
+										<div class="row align-items-center">
+											<div class="col-3 div-thumnail-size">
+												<img src="/attachment/download/ahzit?attachmentNo=${ahzitList.ahzitAttachmentNo}"class="ahzit-img">
+											</div>
+										
+										<div class="col-9">
+											<div class="fs-4 mb-5">
 												<a href="ahzit_in/${ahzitList.ahzitNo}">
 													<span>${ahzitList.ahzitName}</span>
 												</a>
-												</div>
+											</div>
 												
-												<div class="info">${ahzitList.ahzitInfo}</div>
+											<div class="info">${ahzitList.ahzitInfo}</div>
 										
-											<span class="leader"> 리더 <strong class="leaderName">${ahzitList.ahzitLeader}&nbsp;&#183;&nbsp;
-											</strong>
-											</span> <span class="total"> 멤버 <strong class="totalNumber">${ahzitList.ahzitHead}&nbsp;&#183;&nbsp;</strong>
-											</span> <i class="fa-solid fa-heart"></i> ${ahzitList.ahzitLike}&nbsp;&#183;&nbsp;
-											등급 : ${ahzitList.ahzitGrade}&nbsp;&#183;&nbsp;카테고리 : ${ahzitList.ahzitSort}
+												<span class="leader"> 리더 <strong class="leaderName">${ahzitList.ahzitLeader}&nbsp;&#183;&nbsp;
+												</strong>
+												</span> <span class="total"> 멤버 <strong class="totalNumber">${ahzitList.ahzitHead}&nbsp;&#183;&nbsp;</strong>
+												</span> <i class="fa-solid fa-heart"></i> ${ahzitList.ahzitLike}&nbsp;&#183;&nbsp;
+												등급 : ${ahzitList.ahzitGrade}&nbsp;&#183;&nbsp;카테고리 : ${ahzitList.ahzitSort}
+											</div>
+
+											
+									</div>
+								</div>
+										
 										</div>
 									</div>
 								
