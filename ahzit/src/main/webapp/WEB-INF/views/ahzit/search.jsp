@@ -8,9 +8,10 @@
 </jsp:include>
 
 <style>
-/*    * { 
-   		font-family: 'NanumSquareAc', sans-serif ;
-   	}  */
+	* {
+		border: 1px dotted gray;
+	}
+	
    	.ahzit-img {
    		width:100%;
    		height:300px;
@@ -54,8 +55,7 @@
     } 
     /*카드*/
     body {
-        font-family: Varela Round;
-        background: #f1f1f1;
+        background: #F5F5F5;
     }
     .card-sl {
         border-radius: 15px;
@@ -81,7 +81,7 @@
     }
     .card-action:hover {
         color: #fff;
-        background: #FFA91C;
+        background: #3E4684;
         -webkit-animation: pulse 1.5s infinite;
     }
     .card-heading {
@@ -141,7 +141,7 @@
 		<div class = "col-8 offset-2">
 
 			<div class="row mt-4">
-				<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+				<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 div-search-plast" data-plast = "${pLast}">
 					<div class="p-4 rounded">
 						<h1 class="text-center">아지트</h1>	
 					</div>
@@ -150,82 +150,113 @@
 			
 			<div class = "row mt-4">
 				<div class = "col">
-					<a href="search"><img src="/images/hobby.png" class="sort-img me-2">전체</a>
-				</div>
-		
+					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search';" data-keyword = "">
+						<img src="/images/search.png" class="sort-img mb-1">
+						<p class="text-center">전체</p>
+					</div>
+				</div>	
 				<div class = "col">
-					<a href="search?keyword=취미"><img src="/images/hobby.png" class="sort-img me-2">취미</a>
+					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=취미';" data-keyword="취미">
+						<img src="/images/hobbies.png" class="sort-img mb-1">
+						<p class="text-center">취미</p>
+					</div>
 				</div>
 			
 				<div class = "col">
-					<a href="search?keyword=스터디"> <img src="/images/study.png" class="sort-img me-2">스터디</a>
+					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=스터디';" data-keyword="스터디">
+						<img src="/images/study.png" class="sort-img mb-1">
+						<p class="text-center">스터디</p>
+					</div>
 				</div>
 				
 				<div class = "col">
-          			<a href="search?keyword=일상"><img src="/images/life-smile.png" class="sort-img me-2">일상</a>
+					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=스터디';" data-keyword="일상">
+						<img src="/images/life-smile.png" class="sort-img mb-1">
+						<p class="text-center">일상</p>
+					</div>
 				</div>
 				
 				<div class = "col">
-					<a href="search?keyword=팬클럽"><img src="/images/fanclub.png" class="sort-img me-2">팬클럽</a>
+					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=팬클럽';" data-keyword="팬클럽">
+						<img src="/images/fanclub.png" class="sort-img mb-1">
+						<p class="text-center">팬클럽</p>
+					</div>
 				</div>
 				
 				<div class = "col">
-					<a href="search?keyword=음악"><img src="/images/music.png" class="sort-img me-2">음악</a>
+					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=음악';" data-keyword="음악">
+						<img src="/images/music.png" class="sort-img mb-1">
+						<p class="text-center">음악</p>
+					</div>
 				</div>
 				
 				<div class = "col">
-					<a href="search?keyword=스포츠"><img src="/images/sports.png" class="sort-img me-2">스포츠</a>
+					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=스포츠';" data-keyword="스포츠">
+						<img src="/images/sports.png" class="sort-img mb-1">
+						<p class="text-center">스포츠</p>
+					</div>
 				</div>
 				
 				<div class = "col">
-					<a href="search?keyword=여행"><img src="/images/travel.png" class="sort-img me-2">여행</a>
+					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=여행';" data-keyword="여행">
+						<img src="/images/travel.png" class="sort-img mb-1">
+						<p class="text-center">여행</p>
+					</div>
 				</div>
 				
 				<div class = "col">
-					<a href="search?keyword=맛집"><img src="/images/eat.png" class="sort-img me-2">맛집</a>
+					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=맛집';" data-keyword="맛집">
+						<img src="/images/eat.png" class="sort-img mb-1">
+						<p class="text-center">맛집</p>
+					</div>
 				</div>
 				
 				<div class = "col">
-					<a href="search?keyword=영화">영화</a>
+					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=영화';" data-keyword="영화">
+						<img src="/images/movie.png" class="sort-img mb-1">
+						<p class="text-center">영화</p>
+					</div>	
 				</div>	
 			</div>
 				
 					
 	
-		 <div class="row">
-			<c:forEach var="searchSortAhzit" items="${searchSortAhzit}"> <!-- 반복문 시작 -->
-			 <div class="mt-4 col-xl-4 col-lg-6 col-md-6 col-sm-6" id="div-ahzit-info">
-	              <div class="card-sl">
-	                  <div class="card-image">  <%--아지트 이미지 --%>
-	                      <img src = "/attachment/download/ahzit?attachmentNo=${searchSortAhzit.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">
-	                  </div>
-	                  <a class="card-action" href="${pageContext.request.contextPath}/ahzit_in/${searchSortAhzit.ahzitNo}">
-	                  <%--아지트 종류에 따른 아이콘 --%>
-	                  <c:if test="${searchSortAhzit.ahzitSort == '취미'}"><img src="/images/hobby.png"  class="sort-img"></c:if>
-	                  <c:if test="${searchSortAhzit.ahzitSort == '스터디'}"><img src="/images/study.png"  class="sort-img"></c:if>
-	                  <c:if test="${searchSortAhzit.ahzitSort == '일상'}"><img src="/images/life-smile.png"  class="sort-img"></c:if>
-	                  <c:if test="${searchSortAhzit.ahzitSort == '팬클럽'}"><img src="/images/fanclub.png"  class="sort-img"></c:if>
-	                  <c:if test="${searchSortAhzit.ahzitSort == '음악'}"><img src="/images/music.png"  class="sort-img"></c:if>
-	                  <c:if test="${searchSortAhzit.ahzitSort == '스포츠'}"><img src="/images/sports.png"  class="sort-img"></c:if>
-	                  <c:if test="${searchSortAhzit.ahzitSort == '여행'}"><img src="/images/travel.png"  class="sort-img"></c:if>
-	                  <c:if test="${searchSortAhzit.ahzitSort == '맛집'}"><img src="/images/eat.png"  class="sort-img"></c:if>
-	                  </a>
-	                  <div class="card-heading"> <%--아지트 이름 --%>
-	                      ${searchSortAhzit.ahzitName} 
-	                  </div>
-	                  <div class="card-text-1">  <%--아지트 멤버 수 , 종류 --%>
-	                      <span class = "span-ahzit-head">${searchSortAhzit.ahzitHead}</span> 
-	                      /
-	                      <span class = "span-ahzit-headmax">${searchSortAhzit.ahzitHeadmax}</span>
-	                      &nbsp; 
-	                      <span class = "span-ahzit-sort">#${searchSortAhzit.ahzitSort}</span>
-	                  </div>
-	                  <div class="card-text-2"> <%--아지트 지역 --%>
-	                    <i class="fa-solid fa-location-dot"></i> ${searchSortAhzit.ahzitRegionHigh} ${searchSortAhzit.ahzitRegionLow} 
-	                  </div>
-	              </div>
-             </div>
-			 </c:forEach> <!-- 반복문 끝 -->
+			 <div class="row div-ahzit-list"> <%-- 태그 붙이는 타겟 --%>
+				<c:forEach var="searchSortAhzit" items="${searchSortAhzit}"> <!-- 반복문 시작 -->
+				<div class="mt-4 col-xl-4 col-lg-6 col-md-6 col-sm-6" id="div-ahzit-info">
+		        	<div class="card-sl">
+		            	<div class="card-image">  <%--아지트 이미지 --%>
+		                	<img src = "/attachment/download/ahzit?attachmentNo=${searchSortAhzit.ahzitAttachmentNo}" onerror="this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">
+		               	</div>
+		                <a class="card-action" href="${pageContext.request.contextPath}/ahzit_in/${searchSortAhzit.ahzitNo}">
+		                <%--아지트 종류에 따른 아이콘 --%>
+		                <c:if test="${searchSortAhzit.ahzitSort == '취미'}"><img src="/images/hobbies.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '스터디'}"><img src="/images/study.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '일상'}"><img src="/images/life-smile.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '팬클럽'}"><img src="/images/fanclub.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '음악'}"><img src="/images/music.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '스포츠'}"><img src="/images/sports.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '여행'}"><img src="/images/travel.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '맛집'}"><img src="/images/eat.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '영화'}"><img src="/images/movie.png"  class="sort-img"></c:if>
+		                </a>
+		                <div class="card-heading"> <%--아지트 이름 --%>
+		                    ${searchSortAhzit.ahzitName} 
+		                </div>
+		                <div class="card-text-1">  <%--아지트 멤버 수 , 종류 --%>
+		                    <span class = "span-ahzit-head">${searchSortAhzit.ahzitHead}</span> 
+		                    /
+		                    <span class = "span-ahzit-headmax">${searchSortAhzit.ahzitHeadmax}</span>
+		                    &nbsp; 
+		                    <span class = "span-ahzit-sort">#${searchSortAhzit.ahzitSort}</span>
+		                </div>
+		            	<div class="card-text-2"> <%--아지트 지역 --%>
+		                  	<i class="fa-solid fa-location-dot"></i> 
+		                  	<span class = "span-ahzit-location">${searchSortAhzit.ahzitRegionHigh} ${searchSortAhzit.ahzitRegionLow}</span>
+		            	</div>
+		        	</div>
+	            </div>
+				</c:forEach> <!-- 반복문 끝 -->
 			</div>
 		</div>
 	</div>
@@ -234,14 +265,23 @@
 
 <script type="text/javascript">
 	
-	//초기 1페이지
+	//현재 주소
+	var url_href = window.location.href;
+	var url = new URL(url_href);
+	
+	// 요청 파라미터 변수화
+	var keyword = url.searchParams.get("keyword");
+	console.log(keyword);
+	
+	// 초기 1페이지
 	var p = 1;
 	
-	// 초기 검색어
-	var keyword = "";
+	// 특정 카테고리의 총 소모임 수
+	var pLast = $(".div-search-plast").data("plast");
+	//console.log(pLast);
 	
-	// 총 소모임 수
-	var pLast;
+	// 무한스크롤 시 3개씩만 불러오기
+	var cntRow = 3;
 	
 	$(function(){
 		
@@ -254,13 +294,100 @@
 			
 			// 화면 총 길이의 80%에 도달했을 때
 			if(percentage > 80) {
-				// 페이지 수 증가
-				p = p + 1;
-				var ahzitNo = $("#div-member-info").data("ahzitno");
-				var memberNo = $("#div-member-info").data("memberno");
+				
+				// 태그 붙일 타겟 지정
+				var target = $(".div-ahzit-list");
+				
+				var url;
+				if(keyword != null) {
+					url = "http://localhost:8888/rest_ahzit/search?p=" + p + "&cntRow=" + cntRow + "keyword=" + keyword;
+				} else {
+					url = "http://localhost:8888/rest_ahzit/search?p=" + p + "&cntRow=" + cntRow;
+				}
+				
+				axios({
+					url : url,
+					method : "get"
+				})
+				.then(function(response){
+					// 페이지 수 증가
+					p = p + 1;
+					console.log(response);
+					for(var i = 0 ; i < response.data.ahzitInfoList.length ; i ++) {
+						// 1
+						var div_outer_container = $("<div>").attr("class", "mt-4 col-xl-4 col-lg-6 col-md-6 col-sm-6");
+						// 2
+						var div_inner_container = $("<div>").attr("class", "card-sl");
+						
+						var div_ahzit_img_container = $("<div>").attr("class", "card-image");
+						
+						var img_ahzit_img_img;
+						if(response.data.ahzitInfoList[i].ahzitAttachmentNo != 0) {
+							img_ahzit_img_img = $("<img>").attr("src", "/attachment/download/ahzit?attachmentNo=" + response.data.ahzitInfoList[i].ahzitAttachmentNo).attr("class", "ahzit-img");
+						} else {
+							img_ahzit_img_img = $("<img>").attr("src", "${pageContext.request.contextPath}/images/bg_default.jpg").attr("class", "ahzit-img");
+						}
+						// 3-1)
+						var div_ahzit_img = div_ahzit_img_container.append(img_ahzit_img_img);
+						
+						var a_ahzit_href_container = $("<a>").attr("class", "card-action").attr("href", "${pageContext.request.contextPath}/ahzit_in/" + response.data.ahzitInfoList[i].ahzitNo);
+						
+						var img_ahzit_category;
+						if(response.data.ahzitInfoList[i].ahzitSort == "취미") {
+							img_ahzit_category = $("<img>").attr("src", "/images/hobbies.png").attr("class", "sort-img");
+						} else if(response.data.ahzitInfoList[i].ahzitSort == "스터디") {
+							img_ahzit_category = $("<img>").attr("src", "/images/study.png").attr("class", "sort-img");
+						} else if(response.data.ahzitInfoList[i].ahzitSort == "일상") {
+							img_ahzit_category = $("<img>").attr("src", "/images/life-smile.png").attr("class", "sort-img");
+						} else if(response.data.ahzitInfoList[i].ahzitSort == "팬클럽") {
+							img_ahzit_category = $("<img>").attr("src", "/images/fanclub.png").attr("class", "sort-img");
+						} else if(response.data.ahzitInfoList[i].ahzitSort == "음악") {
+							img_ahzit_category = $("<img>").attr("src", "/images/music.png").attr("class", "sort-img");
+						} else if(response.data.ahzitInfoList[i].ahzitSort == "스포츠") {
+							img_ahzit_category = $("<img>").attr("src", "/images/sports.png").attr("class", "sort-img");
+						} else if(response.data.ahzitInfoList[i].ahzitSort == "여행") {
+							img_ahzit_category = $("<img>").attr("src", "/images/eat.png").attr("class", "sort-img");
+						}
+						
+						// 3-2)
+						var a_ahzit_href = a_ahzit_href_container.append(img_ahzit_category);
+						
+						// 3-3)
+						var div_card_heading = $("<div>").attr("class", "card-heading").text(response.data.ahzitInfoList[i].ahzitName);
+						
+						var div_card_text_1_container = $("<div>").attr("class", "card-text-1");
+						var span_ahzit_head = $("<span>").attr("class", "ahzit-head").text(response.data.ahzitInfoList[i].ahzitHead + " / ");
+						var span_ahzit_headmax = $("<span>").attr("class", "ahzit_headmax").text(response.data.ahzitInfoList[i].ahzitHeadmax + " ");
+						var span_ahzit_sort = $("<span>").attr("class", "span-ahzit-sort").text("#" + response.data.ahzitInfoList[i].ahzitSort);
+						// 3-3)
+						var div_card_text_1 = div_card_text_1_container.append(span_ahzit_head).append(span_ahzit_headmax).append(span_ahzit_sort);
+						
+						var div_card_text_2_container = $("<div>").attr("class", "card-text-2");
+						var i_ahzit_location = $("<i>").attr("class", "fa-solid fa-location-dot");
+						var span_ahzit_location = $("<span>").attr("class", "span-ahzit-location").text(response.data.ahzitInfoList[i].ahzitRegionHigh + " " + response.data.ahzitInfoList[i].ahzitRegionLow);
+						// 3-4) 
+						var div_card_text_2 = div_card_text_2_container.append(i_ahzit_location).append(span_ahzit_location);
+						
+						var div_inner = div_inner_container.append(div_ahzit_img).append(a_ahzit_href).append(div_card_heading).append(div_card_text_1).append(div_card_text_2);
+						
+						var div_outer = div_outer_container.append(div_inner);
+						
+						div_outer.css({
+							position:"relative",
+							top:"50px",
+							opacity:0
+						});
+						div_outer.animate({
+							top:"0px",
+							opacity:1
+						}, 500);
+
+						$(".div-ahzit-list").append(div_outer);
+					}
+				}); 
 			}
-			
-		});
+		}, 100));
+		
 		
 	});
 	

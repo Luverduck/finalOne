@@ -90,7 +90,7 @@ justify-content : center
 <hr>
 
 
-<c:if test = "${loginGrade == '관리자'}">
+<c:if test = "${loginGrade == '관리자' || loginGrade == '운영자'}">
 	<div class="text-center">
 	<h4>답변 작성</h4>
 		<div>
@@ -102,6 +102,7 @@ justify-content : center
 						<div class="d-flex justify-content-center align-items-center flex-fill mb-3">
 							<input type="text" name="inquireReplyContent" class="form-control rounded " placeholder="답변" required>
 			                <button class="btn btn-outline-warning"  type ="submit">작성</button>
+			                <a href="/admin/inquire" class="btn btn-outline-warning"  type ="submit">목록</a>
 						</div>
 					</div>
 				 </div>

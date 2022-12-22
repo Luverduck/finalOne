@@ -46,6 +46,8 @@
   	<!-- 폰트(이사만루체) CDN -->
   	 <link href="https://webfontworld.github.io/gonggames/EsaManru.css" rel="stylesheet">
   	
+  	<!-- AXIOS CDN -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   	<!-- Lodash CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -110,6 +112,28 @@
 		.header-style {
 		 	background-color : #EDEEF0; 
 		}
+		 .fixed {
+            position: fixed;
+            bottom:40px;
+            right:40px;
+        }
+         .btn-create {
+            width: 80px;
+            height: 80px;
+            border-radius : 50%;
+            background-color: #3E4684;
+            z-index : 99999;
+        }
+        .create-img {
+        	 width:40px;
+        	 margin : 0.9em 0.7em;
+        }
+		.create {
+			color : white;
+			font-size : 12px;
+			margin:-1em;
+			padding:0;
+		}
     </style>
 </head>
 <body>
@@ -119,7 +143,7 @@
 <div class = "container-fluid py-2 header-style"> <!-- container 시작 -->
 	<div class = "row mt-1"> <!-- row mt-1 시작 -->
 		<div class = "col-1 offset-2 d-flex justify-content-center">
-			<a href="/" class = "d-flex align-items-center"><img src="images/logo.png" class="logo-img"></a>
+			<a href="/" class = "d-flex align-items-center"><img src="${pageContext.request.contextPath}/images/logo.png" class="logo-img"></a>
 		</div>
 		
 	<div class = "col-2">
@@ -129,7 +153,12 @@
 			</div>
 		</div>
 	
-		<div class = "col-3 offset-2 d-flex">
+		<div class = "col-4 offset-1 d-flex">
+			<c:if test = "${loginGrade == '관리자' || loginGrade == '운영자'}">
+			<div class = "col d-flex justify-content-center align-items-center">
+				<a href = "${pageContext.request.contextPath}/admin/" class = "d-flex align-items-center header-style">관리자홈</a>
+			</div>
+			</c:if>
 			<div class = "col d-flex justify-content-center align-items-center">
 				<a href = "/search" class = "d-flex align-items-center header-style">찾기</a>
 			</div>
@@ -139,15 +168,15 @@
 					<a href="/ahzitUser/logout" class = "d-flex align-items-center logout header-style">로그아웃</a>
 				</div>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/mypage" class = "d-flex align-items-center header-style">마이페이지</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/mypage" class = "d-flex align-items-center header-style">마이페이지</a>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/login" class = "d-flex align-items-center header-style">로그인</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/login" class = "d-flex align-items-center header-style">로그인</a>
 				</div>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/join" class = "d-flex align-items-center header-style">회원가입</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/join" class = "d-flex align-items-center header-style">회원가입</a>
 				</div>
 			</c:otherwise>
 			</c:choose>
@@ -170,6 +199,14 @@
 			</c:if>
 		</div>
 	</div> --%>
+	
+	<%--개설 하기 버튼 --%>
+	 <div class="row" >
+		<a href="${pageContext.request.contextPath}/ahzit/create" class="hover-text">
+	           <div class="btn-create fixed text-center"><img src="/images/create.png" class="create-img"><p class="create">개설</p></div>
+	     </a>
+      </div>
+        
 </div> <!-- container 끝 -->
 
 

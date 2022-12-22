@@ -4,6 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <%-- header --%>
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="소모임 회원" name="title"/>
+</jsp:include>
+
 <jsp:include page="/WEB-INF/views/template/ahzit_header.jsp">
 	<jsp:param value="소모임 게시글" name="title"/>
 </jsp:include>
@@ -1275,6 +1279,8 @@
 			} */
 		})
 		.then(function(response){
+			console.log(response);
+			if(response.data.boardList[0] == null) return;
 			pLast = response.data.plast; // 끝 페이지에 도달하면 비동기 조회를 막기 위해 페이지 끝 번호 설정
 			//console.log(pLast);
 			

@@ -10,7 +10,7 @@
 <style>
 * {
 	/* border: 1px dotted gray; */
-	font-family: font-family : 'Gothic A1', sans-serif;
+	/*  */font-family: font-family : 'Gothic A1', sans-serif;
 }
 
 .ahzit-img {

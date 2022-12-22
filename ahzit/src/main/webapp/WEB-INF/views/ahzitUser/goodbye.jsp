@@ -18,7 +18,7 @@ font-size: 0.85rem;
 
 	<div class="row mt-4">
 		<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<div class="p-4 text-dark rounded text-center">
+			<div class="p-4 rounded text-center">
 				<h1 class="text-center">회원 탈퇴</h1>
 				<i class="fa-solid fa-circle-exclamation"></i>
 				탈퇴를 원하시면 기존 비밀번호를 입력하세요
@@ -36,14 +36,15 @@ font-size: 0.85rem;
 			</div>
 		</div>
 	</div>
-	
-	
-	<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-		<div class=" col">
-			<a href="mypage" class="btn w-100 btn-outline-warning" role=button>취소하기</a>
-		</div>
-		<div class=" col" >
-		<button class="btn w-100 btn-outline-secondary" type="submit">탈퇴하기</button>
+
+	<div class="row mt-4 mb-4">
+		<div class="row mt-4 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class=" col">
+				<a href="mypage" class="btn rounded w-100 " style="background-color : #E6E6E6; color:#3E4684;"  role=button>취소하기</a>
+			</div>
+			<div class=" col" >
+			<button class="btn w-100 rounded" style="background-color : #E6E6E6; color:#3E4684;"  type="submit">탈퇴하기</button>
+			</div>
 		</div>
 	</div>
 	

@@ -65,6 +65,7 @@ public class AhzitInController {
 	}
 
 	private final File dir = new File("D:/upload/kh10f");
+	//private final File dir = new File(System.getProperty("user.home")+"/upload/main");
 	
 	// 소모임 홈 화면 Mapping
 	@GetMapping("/{ahzitNo}")
@@ -170,6 +171,8 @@ public class AhzitInController {
 		
 		//파일저장
 		File directory = new File("D:/upload/kh10f/ahzit");
+		//File directory = new File(System.getProperty("user.home")+"/upload/main");
+		
 		directory.mkdirs();
 		File target = new File(directory, String.valueOf(attachmentNo));
 		
@@ -192,6 +195,9 @@ public class AhzitInController {
 		
 		// 첨부파일 경로 설정
 		File directory = new File("D:/upload/kh10f/ahzit");
+		//File directory = new File(System.getProperty("user.home")+"/upload/main");
+
+		
 		directory.mkdirs();
 		File target = new File(directory, String.valueOf(attachmentNo));
 		
@@ -219,7 +225,7 @@ public class AhzitInController {
 		// 조회 유형에 따른 회원 수 반환
 		int memberCount = ahzitDao.selectMemberCount(ahzitMemberInfoRequestVO);
 		// 조회한 회원 수를 VO에 설정
-		ahzitMemberInfoRequestVO.setMemberCount(memberCount);
+		ahzitMemberInfoRequestVO.setCount(memberCount);
 		// 조회 유형에 따른 회원 정보 조회
 		List<AhzitMemberInfoVO> memberInfoList = ahzitDao.selectMemberInfo(ahzitMemberInfoRequestVO);
 		// 조회 결과를 model에 추가

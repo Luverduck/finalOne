@@ -33,7 +33,10 @@ public class AdminController {
 	private AdminDao adminDao;
 	
 	@GetMapping("/")
-	public String home() {
+	public String home(Model model) {
+		model.addAttribute("noticeList", adminDao.noticeListForMain());
+		//System.out.println(adminDao.noticeListForMain());
+		model.addAttribute("inquireList", adminDao.inquireListForMain());
 		return "admin/home";
 	}
 	
@@ -111,4 +114,5 @@ public class AdminController {
 		model.addAttribute("inquireList", inquireList);
 		return "admin/inquire";
 	}
+	
 }
