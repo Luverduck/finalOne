@@ -17,10 +17,6 @@
 	a {
 		text-decoration: none;
 	}
-	div {
-		border : 1px dotted gray;
-	}
-	
 	body {
 		background-color: rgba(230, 230, 230, 100);
 	}
