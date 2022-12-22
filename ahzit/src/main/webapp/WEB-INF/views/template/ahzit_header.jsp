@@ -67,8 +67,8 @@
 </head>
 <body>
 
-<%-- <c:set var="login" value="${loginId != null}"></c:set>
-
+<c:set var="login" value="${loginId != null}"></c:set>
+<%-- 
 <div class = "container-fluid py-2" style="background-color:#FFA91C;">
 
 	<div class = "row mt-1">

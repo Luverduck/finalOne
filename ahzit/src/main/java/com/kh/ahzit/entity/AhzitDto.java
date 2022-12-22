@@ -24,4 +24,6 @@ public class AhzitDto {
 	private String ahzitState;
 	private int cnt;
 	private int rn;
+	
+	private String memberNick;
 }
