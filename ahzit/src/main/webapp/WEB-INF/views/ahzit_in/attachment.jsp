@@ -117,7 +117,11 @@
 				</div>
 				
 				<%-- 가운데 내용 --%>
-				<div class = "col col-6  shadow div-member-info-list bg-white">
+								<div class = "col-6">
+					<div class = "row">
+						<div class = "col">
+						
+					<div class = "col col-6  shadow div-member-info-list w-100 p-3 bg-white">
 						<h3>첨부 모아보기</h3>
 						<div>
 							<form action="attachment" method="post" enctype="multipart/form-data">
@@ -144,22 +148,18 @@
 					</ul>
 				</c:forEach>
 				</c:if>
-				
+
 				</div>
+				
+			</div>
+		</div>
+	</div>
 				
 				<%-- 오른쪽 사이드바 --%>
 				<div class = "col-3">
 					<div class = "row">
 						<div class = "div-right-side p-3 shadow bg-white" >
-						 	반가워요<br>
-						 	반가워요<br>
-						 	반가워요<br>
-						 	반가워요<br>
-						 	반가워요<br>
-						 	반가워요<br>
-						 	반가워요<br>
-						 	반가워요<br>
-						 	반가워요<br>
+
 						</div>
 					</div>
 				</div>

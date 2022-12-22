@@ -228,7 +228,7 @@
 		            	<div class="card-image">  <%--아지트 이미지 --%>
 		                	<img src = "/attachment/download/ahzit?attachmentNo=${searchSortAhzit.ahzitAttachmentNo}" onerror="this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">
 		               	</div>
-		                <a class="card-action" href="${pageContext.request.contextPath}/ahzit_in/${searchSortAhzit.ahzitNo}">
+		                <a class="card-action" href="${pageContext.request.contextPath}/ahzit/detail/${searchSortAhzit.ahzitNo}">
 		                <%--아지트 종류에 따른 아이콘 --%>
 		                <c:if test="${searchSortAhzit.ahzitSort == '취미'}"><img src="/images/hobbies.png"  class="sort-img"></c:if>
 		                <c:if test="${searchSortAhzit.ahzitSort == '스터디'}"><img src="/images/study.png"  class="sort-img"></c:if>

@@ -48,7 +48,7 @@
 
 		<!-- 로그인 중인 회원이 가입한 소모임인지 조회 -->
 		<select id = "joinAlready" parameterType = "map" resultType = "int">
-			select * from ahzit_user inner join ahzit_member on user_id = member_id where member_no = #{memberNo} and user_id = #{userId}
+			select count(*) from ahzit_user inner join ahzit_member on user_id = member_id where member_ahzit_no = #{memberAhzitNo} and user_id = #{userId}
 		</select>
 		
 		<!-- 찾기 페이지에서 전체 소모임 조회 -->
