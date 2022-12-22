@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
@@ -14,8 +15,9 @@
 
 <style>
 	body {
-		background-color: #F5F5F5;	
+		background-color: #F5F5F5 !important;
 	}
+	
 	.div-ahzit-info,
 	.div-member-info-list,
 	.div-right-side,
@@ -141,7 +143,14 @@
         animation-duration: 1s;
         animation-iteration-count: 1;
    }
-
+	.valid-feedback {
+		color : green;
+		font-size : 18px;
+	}
+	.invalid-feedback, #duplicate {
+		color : red;
+		font-size : 18px;
+	}
 </style>
 
 
@@ -154,62 +163,7 @@
 			
 				<%-- 왼쪽 사이드바 --%>
 				<div class = "col-3">
-					<%--아지트 프로필 사진 --%>
-					<div class = "row">
-						<div class = "div-ahzit-info shadow p-3 bg-white">
-							<div class = "d-flex div-ahzit-img justify-content-center align-items-center">
-							
-							<c:if test="${attachmentList.isEmpty()}">
-						    	<img src = "/images/bg_default.jpg" class="flex-fill ahzit-profile">
-					    	</c:if>
-				      		<c:forEach var = "list" items = "${attachmentList}"> <!-- 설정한 프로필 -->
-				        		<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="flex-fill ahzit-profile">  					
-				      		</c:forEach>
-							</div>
-						
-				      		<%-- 아지트 정보 --%>  
-				      		<div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
-								<span class="ahzit-side ahzit-name mt-1">${ahzitVO.getAhzitName()}</span><%--아지트 이름 --%>
-								<span class="ahzit-side mt-1">멤버 ${ahzitVO.getAhzitHead()}  · ${ahzitVO.getAhzitSort()} </span>
-								<span class="ahzit-side mt-1 mb-1">${ahzitVO.getAhzitInfo()}<br> <%--아지트 소개 --%></span>
-								<span class="ahzit-side mt-1">아지트 리더 : ${ahzitVO.getAhzitLeader()} <img src = "/images/crown.png"  id="crown"></span>
-							</div>
-							
-							<div class = "row mt-1">
-								<div class = "col">
-									<c:choose>
-								    <c:when test="${ahzitMemberDto.getMemberId() != loginId}"><%-- 소모임 회원이 아니면 --%>
-								    	<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert'">아지트 가입</button>
-								    </c:when>
-								    <c:otherwise>
-								    	<button type="button" class="btn btn-join" disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
-								    </c:otherwise>
-								    </c:choose>
-								    <c:if test="${ahzitMemberDto.memberId==sessionScope.loginId}">
-										<a href="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/editMyInfo"><span>내 정보 수정</span></a>
-								 	</c:if>	
-								</div>
-								<div class = "col">
-									<%-- 소모임 수정 --%>
-								 	<c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
-										<a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i><span>아지트 수정</span></a>					
-									</c:if>
-									
-								</div>
-							</div>
-						</div>
-						
-						<%-- <div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
-							로그인 중인 회원 번호 : ${ahzitMemberDto.memberNo}<br>
-							회원이 가입한 아지트 번호 : ${ahzitMemberDto.memberAhzitNo}<br>
-							로그인 중인 회원 아이디 : ${ahzitMemberDto.memberId}<br>
-							로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberNick}<br>
-							로그인 중인 회원 등급 : ${ahzitMemberDto.memberGrade}<br>
-							로그인 중인 회원 활동 점수 : ${ahzitMemberDto.memberGrade}<br>
-							소모임 가입일 : ${ahzitMemberDto.memberJoindate}
-						</div> --%>
-	       
-					</div>
+					<jsp:include page="/WEB-INF/views/template/ahzit_left_side.jsp"></jsp:include>
 				</div>
             
       <%-- 가운데 내용 --%>
@@ -222,7 +176,8 @@
 			
 				<c:choose>
 			      	<c:when test="${memberAttachmentList.isEmpty()}"><!-- 프로필 이미지를 등록하지 않았을 경우 -->
-			      		<p>아지트에서 사용할 프로필 이미지를 등록해 주세요</p>
+			      		<p class="fs-3 mb-3">아지트 내 정보 수정</p>
+			      		<p class="fs-5">아지트에서 사용할 프로필 이미지를 등록해 주세요</p>
 			      	</c:when>
 			      	<c:otherwise>
 			      		<p>프로필 이미지를 수정할 수 있습니다</p>
@@ -245,12 +200,13 @@
                  	<label class="input-file-upload img-lab" for="input-file">사진변경</label> 
 	      		</div>
 	
+			<span class="fs-5 mb-3">닉네임 변경</span><br>
 				<input type="hidden" name="memberAhzitNo" value="${ahzitNo}">
 	      		<input type="hidden" name="memberId" value="${loginId}">
 	      		<input type="hidden" name="memberNo" value="${ahzitMemberDto.memberNo}">
 	      		<input type="text" name="memberNick" value="${ahzitMemberDto.memberNick}" class="rounded">
-	      		<div class="valid-feedback">사용할 수 있는 닉네임입니다</div>
-	            <div class="invalid-feedback">닉네임은 한글 3~10글자로 작성하세요</div>
+	      		<div class="valid-feedback" >사용할 수 있는 닉네임입니다</div>
+	            <div class="invalid-feedback" >닉네임은 한글 3~10글자로 작성하세요</div>
 	      		<div id="duplicate" class="NNNNN">이미 사용 중인 닉네임입니다</div><br>
       			<button id="submitBtn" type="button" class="mt-2" onclick="submitChk();">변경 완료</button>
       			
@@ -268,6 +224,20 @@
 				<div class = "col-3">
 					<div class = "row">
 						<div class = "div-right-side p-3 shadow bg-white">
+
+								<div style="height:43px;">
+								다가오는 일정
+								<hr />
+							</div>
+							<div>
+								<c:forEach var="scheduleListRownum" items="${scheduleListRownum}">	
+									<div style="margin-bottom: 10px;">	
+										<span style="font-size:20px;">${scheduleListRownum.scheduleTitle}</span>
+										<br>
+										<span style="font-size:12px;">${fn:substring(scheduleListRownum.scheduleStart, 2, 4)}년 ${fn:substring(scheduleListRownum.scheduleStart, 5, 7)}월 ${fn:substring(scheduleListRownum.scheduleStart, 8, 10)}일 ${fn:substring(scheduleListRownum.scheduleStart, 11, 16)}</span>
+									</div>	
+								</c:forEach>
+							</div>
 
 						</div>
 					</div>
@@ -413,6 +383,3 @@
 	      });	  
 	  });
 </script>
-
-<%-- footer --%>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
