@@ -110,13 +110,12 @@
 						<a href="list">목록으로</a>
 					</div>
 
-
 				</div>
 			</div>
 		</div>
 	</div>
+	</div>
 </div>
-
 
 <%-- footer --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
