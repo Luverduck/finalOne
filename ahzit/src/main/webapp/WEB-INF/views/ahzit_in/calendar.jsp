@@ -19,9 +19,12 @@
 	}
 	
 	
-.tippy-box[data-theme~='custom']{background-color:#FFFFFF;}
+	.tippy-box[data-theme~='custom']{background-color:#FFFFFF;}
 	
-	#rightbar{height:75vh;}
+	#rightbar{max-height:70vh;}
+	
+	.fc-icon{color:#FFFFFF;}
+	
 </style>
 
 <!-- jquery CDN -->
@@ -73,23 +76,24 @@
 					<div class="row">
 						
 						<div class="col-10 offset-1">
+							
 							<div id="rightbar" class="row p-2 shadow" style="border-radius : 15px; overflow-y:scroll; background-color:white;">
 								
-								<div class="row">
+								<div style="height:43px;">
 								다가오는 일정
-								<hr>
+								<hr />
 								</div>
-								
-								<c:forEach var="scheduleListSysdate" items="${scheduleListSysdate}">
-								
-								<div class="row" style="border-radius : 15px;margin-bottom: 10px;">
 
-									<span style="font-size:20px;">${scheduleListSysdate.scheduleTitle}</span>
-									<br>
-									<span style="font-size:12px;">${fn:substring(scheduleListSysdate.scheduleStart, 2, 4)}년 ${fn:substring(scheduleListSysdate.scheduleStart, 5, 7)}월 ${fn:substring(scheduleListSysdate.scheduleStart, 8, 10)}일 ${fn:substring(scheduleListSysdate.scheduleStart, 11, 16)}</span>
-								</div>
-								
-								</c:forEach>
+							<div>
+								<c:forEach var="scheduleListSysdate" items="${scheduleListSysdate}">		
+									<div style="margin-bottom: 10px;">	
+										<span style="font-size:20px;">${scheduleListSysdate.scheduleTitle}</span>
+										<br>
+										<span style="font-size:12px;">${fn:substring(scheduleListSysdate.scheduleStart, 2, 4)}년 ${fn:substring(scheduleListSysdate.scheduleStart, 5, 7)}월 ${fn:substring(scheduleListSysdate.scheduleStart, 8, 10)}일 ${fn:substring(scheduleListSysdate.scheduleStart, 11, 16)}</span>
+									</div>
+								</c:forEach>		
+							</div>
+							
 							</div>
 						</div>
 					

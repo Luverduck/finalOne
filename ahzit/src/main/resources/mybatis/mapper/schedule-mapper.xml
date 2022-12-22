@@ -34,6 +34,19 @@
   			and schedule_start>=sysdate order by schedule_start asc
   		</select>
   		
+  		<!-- 스케줄 출력 리스트(board 페이지에서 상위 3개 노출) -->
+  		<select id="listRownum" parameterType="int" resultType="ScheduleDto">
+  		 <![CDATA[
+  			select*from (
+			select schedule_no, schedule_member_no, schedule_ahzit_no, schedule_title, 
+			  			to_char(schedule_start, 'YYYY-MM-DD HH24:MI:SS') schedule_start, 
+			  			to_char(schedule_end, 'YYYY-MM-DD HH24:MI:SS') schedule_end,  
+			  			schedule_allday from schedule where schedule_ahzit_no=#{scheduleAhzitNo} and schedule_start>=sysdate order by schedule_start asc
+  			) 
+  			where rownum<=3
+  			 ]]>
+  		</select>
+  		
   		<!-- 로그인한 유저가 일정페이지에서 스케줄 입력 -->
   		<insert id="insert" parameterType="ScheduleDto">
   			insert into schedule values(schedule_seq.nextval, #{scheduleMemberNo}, #{scheduleAhzitNo}, #{scheduleTitle}, to_date(#{scheduleStart},'YYYY-MM-DD HH24:MI:SS'), to_date(#{scheduleEnd},'YYYY-MM-DD HH24:MI:SS'), #{scheduleAllday});
