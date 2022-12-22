@@ -163,20 +163,54 @@
                <div class="swiper-button-next"></div>
            </div>
            
-        <div>
-      <p class="text-center ahzit-title-name">소모임 추천</p> <%--추후 바꾸기 --%>
+    <div class="row mt-3">
+      <p class="text-center ahzit-title-name">지금 HOT한 AHZIT <i class="fa-solid fa-fire"></i></p> <%--추후 바꾸기 --%>
    </div>
+   
+   <div class="row mb-3">
+      <a href="ahzitUser/myAhzit" class="text-end">AHZIT 전부보기<i class="fa-solid fa-angles-right"></i></a>
+   <c:forEach var="ahzitHeadCount" items="${ahzitHeadCount}">
+    <div class="mt-4 col-xl-4 col-lg-6 col-md-6 col-sm-6">
+             <div class="card-sl">
+                 <div class="card-image">  <%--아지트 이미지 --%>
+                     <img src = "/attachment/download/ahzit?attachmentNo=${ahzitHeadCount.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">
+                 </div>
+                 <a class="card-action" href="${pageContext.request.contextPath}/ahzit_in/${ahzitHeadCount.ahzitNo}">
+                 <%--아지트 종류에 따른 아이콘 --%>
+                 <c:if test="${ahzitHeadCount.ahzitSort == '취미'}"><img src="${pageContext.request.contextPath}/images/hobbies.png"  class="sort-img"></c:if>
+                 <c:if test="${ahzitHeadCount.ahzitSort == '스터디'}"><img src="${pageContext.request.contextPath}/images/study.png"  class="sort-img"></c:if>
+                 <c:if test="${ahzitHeadCount.ahzitSort == '일상'}"><img src="${pageContext.request.contextPath}/images/life-smile.png"  class="sort-img"></c:if>
+                 <c:if test="${ahzitHeadCount.ahzitSort == '팬클럽'}"><img src="${pageContext.request.contextPath}/images/fanclub.png"  class="sort-img"></c:if>
+                 <c:if test="${ahzitHeadCount.ahzitSort == '음악'}"><img src="${pageContext.request.contextPath}/images/music.png"  class="sort-img"></c:if>
+                 <c:if test="${ahzitHeadCount.ahzitSort == '스포츠'}"><img src="${pageContext.request.contextPath}/images/sports.png"  class="sort-img"></c:if>
+                 <c:if test="${ahzitHeadCount.ahzitSort == '여행'}"><img src="${pageContext.request.contextPath}/images/travel.png"  class="sort-img"></c:if>
+                 <c:if test="${ahzitHeadCount.ahzitSort == '맛집'}"><img src="${pageContext.request.contextPath}/images/eat.png"  class="sort-img"></c:if>
+                 <c:if test="${ahzitHeadCount.ahzitSort == '영화'}"><img src="${pageContext.request.contextPath}/images/movie.png"  class="sort-img"></c:if>
+                 </a>
+                 <div class="card-heading"> <%--아지트 이름 --%>
+                     ${ahzitHeadCount.ahzitName} 
+                 </div>
+                 <div class="card-text-1">  <%--아지트 멤버 수 , 종류 --%>
+                     멤버${ahzitHeadCount.ahzitHead} &nbsp;${ahzitHeadCount.ahzitSort}
+                 </div>
+                 <div class="card-text-2"> <%--아지트 지역 --%>
+                   <i class="fa-solid fa-location-dot"></i> ${ahzitHeadCount.ahzitRegionHigh} ${ahzitHeadCount.ahzitRegionLow} 
+                 </div>
+             </div>
+            </div>
+    </c:forEach>
+         </div>
            
             
 
    <c:if test="${login}">
    <div>
-      <p class="text-center ahzit-title-name">내가 가입한 소모임</p> 
+      <p class="text-center ahzit-title-name">내가 가입한 AHZIT <i class="fa-solid fa-house"></i></p> 
    </div>
    
     <div class="row mb-3">
    <%--card--%>
-   <a href="ahzitUser/myAhzit" class="text-end">가입한 소모임 전부보기<i class="fa-solid fa-angles-right"></i></a>
+   <a href="ahzitUser/myAhzit" class="text-end">가입한 AHZIT 전부보기<i class="fa-solid fa-angles-right"></i></a>
    <c:forEach var="myAhzitTopN" items="${myAhzitTopN}">
     <div class="mt-4 col-xl-4 col-lg-6 col-md-6 col-sm-6">
              <div class="card-sl">

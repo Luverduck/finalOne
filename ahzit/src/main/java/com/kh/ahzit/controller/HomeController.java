@@ -7,14 +7,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.ahzit.constant.SessionConstant;
+import com.kh.ahzit.entity.AhzitDto;
+import com.kh.ahzit.entity.InquireDto;
 import com.kh.ahzit.repository.AhzitDao;
 import com.kh.ahzit.repository.AhzitUserDao;
 import com.kh.ahzit.vo.AhzitSearchListRequestVO;
 import com.kh.ahzit.vo.AhzitSearchListResponseVO;
+import com.kh.ahzit.vo.InquireListSearchVO;
 import com.kh.ahzit.vo.MyAhzitVO;
 
 
@@ -36,6 +40,9 @@ public class HomeController {
 			List<MyAhzitVO> myAhzitTopN = ahzitUserDao.myAhzitTopN(loginId); //내가 가입한 아지트 목록
 			model.addAttribute("myAhzitTopN", myAhzitTopN); //내가 가입한 아지트 목록 조회
 		}
+		
+		List<MyAhzitVO>ahzitHeadCount = ahzitDao.ahzitHeadCount();
+		model.addAttribute("ahzitHeadCount", ahzitHeadCount);
 		return "home";
 	}	
 	
@@ -65,4 +72,14 @@ public class HomeController {
  		model.addAttribute("searchSortAhzit", searchSortAhzit);
  		return "ahzit/search";
  	}
+ 	
+// 	@GetMapping("/list")	
+//	public String list(Model model) {
+// 		List<AhzitDto>ahzitHeadCount = ahzitDao.ahzitHeadCount();
+//		// 조회 결과를 model에 추가
+//		model.addAttribute("ahzitHeadCount", ahzitHeadCount);
+//		
+//		return "inquire/list";
+//	
+//	}
 }

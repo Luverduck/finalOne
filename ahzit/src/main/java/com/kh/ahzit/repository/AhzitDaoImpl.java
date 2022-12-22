@@ -13,9 +13,9 @@ import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.AhzitUserDto;
 import com.kh.ahzit.vo.AhzitMemberInfoRequestVO;
 import com.kh.ahzit.vo.AhzitMemberInfoVO;
-import com.kh.ahzit.vo.AhzitSearchKeywordListSearchVO;
 import com.kh.ahzit.vo.AhzitSearchListRequestVO;
 import com.kh.ahzit.vo.AhzitSearchListResponseVO;
+import com.kh.ahzit.vo.MyAhzitVO;
 
 
 @Repository
@@ -276,6 +276,11 @@ public class AhzitDaoImpl implements AhzitDao {
 	@Override
 	public int searchAhzitCount(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
 		return sqlSession.selectOne("ahzit.searchAhzitCount", ahzitSearchListRequestVO);
+	}
+
+	@Override
+	public List<MyAhzitVO> ahzitHeadCount() {
+		return sqlSession.selectList("ahzit.ahzitHeadCount");
 	}
 
 	
