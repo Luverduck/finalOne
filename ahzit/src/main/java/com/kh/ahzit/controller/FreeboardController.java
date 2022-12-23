@@ -193,16 +193,7 @@ public class FreeboardController {
 			// 문제는 첨부파일을 수정하지 않으려고 할 때 첨부파일에 아무것도 입력하지 않으면 NullPointException 발생
 			// List<MultipartFile>에 대하여 isEmpty()의 결과는 false이며 List에는 length()가 없어서 null에 대한 판별을 할 수가 없었음
 			// - (해결) List<MultipartFile>의 첫 번째 원소에 대해 isEmpty()의 결과는 true가 나옴 -> 판정 기준
-//			System.out.println("비었나 "+freeboardAttachment.isEmpty());
 //			for(MultipartFile file : freeboardAttachment) {
-//				System.out.println("bytes "+file.getBytes());
-//				System.out.println("contenttype"+file.getContentType());
-//				System.out.println("inputstream "+file.getInputStream());
-//				System.out.println("name "+file.getName());
-//				System.out.println("originalname "+file.getOriginalFilename());
-//				System.out.println("resource "+file.getResource());
-//				System.out.println("size "+file.getSize());
-//				System.out.println("isempty "+file.isEmpty());
 //			}
 			
 			// 첨부파일에 대한 처리

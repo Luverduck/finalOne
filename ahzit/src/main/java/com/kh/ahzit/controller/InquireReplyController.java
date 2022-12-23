@@ -37,7 +37,6 @@ public class InquireReplyController {
 		int inquireNo = inquireReplyDto.getInquireOriginNo();
 		
 		 boolean result = inquireReplyDao.insert(inquireReplyDto);
-		//	System.out.println("댓글등록");
 		 if(result) {
 			 inquireReplyDao.updateReply(inquireReplyDto);
 		 }
@@ -71,11 +70,9 @@ public class InquireReplyController {
 		public String delete(@ModelAttribute InquireReplyDto inquireReplyDto, HttpSession session,RedirectAttributes attr) {
 		//	String loginId = (String) session.getAttribute(SessionConstant.ID);
 			boolean result =inquireReplyDao.delete(inquireReplyDto);
-		//	System.out.println("1111");
 			if(result) {
 				int inquireNo = inquireReplyDto.getInquireOriginNo();
 				attr.addAttribute("inquireNo", inquireNo);
-		//		System.out.println(inquireNo);
 				return "redirect:/inquire/detail";
 			}
 			else {

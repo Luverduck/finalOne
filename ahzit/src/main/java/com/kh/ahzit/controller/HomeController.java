@@ -43,15 +43,12 @@ public class HomeController {
 		
 		List<MyAhzitVO>ahzitHeadCount = ahzitDao.ahzitHeadCount();
 		model.addAttribute("ahzitHeadCount", ahzitHeadCount);
-		System.out.println("@@@@@"+ahzitHeadCount);
 		return "home";
 	}	
 	
 	// 홈 화면 검색창에서 검색시 소모임 검색 결과 Mapping
  	@RequestMapping("/search_keyword")
  	public String searchKeyword(Model model, @ModelAttribute AhzitSearchListRequestVO ahzitSearchListRequestVO) {
- 		//System.out.println(ahzitSearchListRequestVO.getKeyword());
- 		//System.out.println(ahzitDao.selectAhzit(ahzitSearchListRequestVO));
  		int total = ahzitDao.searchAhzitCount(ahzitSearchListRequestVO);
  		ahzitSearchListRequestVO.setTotal(total);
  		model.addAttribute("keyword", ahzitSearchListRequestVO.getKeyword());
@@ -67,8 +64,6 @@ public class HomeController {
  		int total = ahzitDao.countselectAhzit(ahzitSearchListRequestVO);
  		ahzitSearchListRequestVO.setTotal(total);
  		List<AhzitSearchListResponseVO> searchSortAhzit = ahzitDao.selectSortAhzit(ahzitSearchListRequestVO);
- 		//System.out.println(searchSortAhzit);
- 	//	System.out.println(total);
  		model.addAttribute("pLast", ahzitSearchListRequestVO.blockLast());
  		model.addAttribute("searchSortAhzit", searchSortAhzit);
  		return "ahzit/search";

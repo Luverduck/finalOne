@@ -38,7 +38,6 @@ public class AdminController {
 	@GetMapping("/")
 	public String home(Model model) {
 		model.addAttribute("noticeList", adminDao.noticeListForMain());
-		//System.out.println(adminDao.noticeListForMain());
 		model.addAttribute("inquireList", adminDao.inquireListForMain());
 		return "admin/home";
 	}
@@ -75,10 +74,9 @@ public class AdminController {
 	
 	@PostMapping("/change")
 	public String edit(HttpSession session, @ModelAttribute AhzitUserDto ahzitUserDto, Model model,  RedirectAttributes attr) {
-	//	System.out.println("ahzit = "+ ahzitUserDto);
+
 		// 관리자 등급 변경 
 		boolean result = 	adminDao.change(ahzitUserDto);
-	//	System.out.println(ahzitUserDto);
 		adminDao.change2(ahzitUserDto);
 		// 관리자 변경시 운영자로 업데이트
 		if(result) {

@@ -16,7 +16,6 @@ public class RandomGeneratorImpl implements RandomGenerator{
 		//Math.pow 제곱 구하는 식
 		int range = (int)Math.pow(10, size);
 		int number = r.nextInt(range);
-		System.out.println(number);
 		
 		StringBuffer buffer = new StringBuffer();
 		for (int i = 0; i < size; i++) {

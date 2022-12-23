@@ -35,7 +35,6 @@ public class AhzitBoardReplyRestController {
 		ahzitBoardReplyDao.insertReply(ahzitBoardReplyRestRequestVO);
 		// 해당 게시글에 달린 댓글 수 반환
 		int replyCount = ahzitBoardReplyDao.countReply(ahzitBoardReplyRestRequestVO.getBoardNo());
-		System.out.println(replyCount);
 		AhzitBoardReplyVO ahzitBoardReplyVO =  ahzitBoardReplyDao.selectReply(replyNo);
 		ahzitBoardReplyVO.setReplyCount(replyCount);
 		// 등록한 댓글 정보를 조회하여 반환
