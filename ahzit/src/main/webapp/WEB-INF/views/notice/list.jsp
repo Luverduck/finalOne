@@ -14,12 +14,11 @@
 	<jsp:param value="notice" name="title" />
 </jsp:include>
 
-<!-- <style>
+<style>
 * {
-	border: 1px dotted gray;
 	font-family: font-family : 'Gothic A1', sans-serif;
 }
-</style> -->
+</style>
 
 
 <div class="container-fluid mt-5 mb-5">

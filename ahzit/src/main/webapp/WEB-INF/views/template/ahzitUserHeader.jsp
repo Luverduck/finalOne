@@ -3,11 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <style>
         * {
-        	 /* border : 1px dotted gray;   */
-           /*  font-family: 'Noto Sans KR', sans-serif;  */
             font-family: 'EsaManru';
             color :#3E4684;
-            /* font-size : 16px !important; */
         }
         a {
 			text-decoration: none;

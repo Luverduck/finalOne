@@ -74,7 +74,7 @@ public class KakaoController {
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute AhzitUserDto ahzitUserDto ,HttpSession session) {
 		String userId = (String) session.getAttribute(SessionConstant.kakaoId);
-		System.out.println(userId);
+	//	System.out.println(userId);
 		ahzitUserDto.setUserId(userId);
 		
 		kakaoDao.edit(ahzitUserDto);

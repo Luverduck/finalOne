@@ -198,6 +198,7 @@ public class AhzitController {
  		// HttpSession에서 로그인 중인 회원 아이디 반환
 		String userId = (String)session.getAttribute("loginId");
 		if(userId == null) { // 비로그인인지
+			model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
 			// 소모임 정보를 조회
 		 	model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));
 		 	// 편의를 위해 ahzitNo를 model에 추가
@@ -208,6 +209,7 @@ public class AhzitController {
 			// 내가 가입한 소모임인지 반환
 			boolean isMember = ahzitDao.alreadyJoin(userId, ahzitNo);
 			if(isMember) {
+				model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
 				// 소모임 정보를 조회
 			 	model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));
 				// 편의를 위해 ahzitNo를 model에 추가
@@ -216,6 +218,7 @@ public class AhzitController {
 				return "redirect:/ahzit_in/" + ahzitNo;
 			}
 			else {
+				model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
 				// 소모임 정보를 조회
 			 	model.addAttribute("ahzitVO", ahzitDao.selectOne(ahzitNo));
 			 	// 편의를 위해 ahzitNo를 model에 추가

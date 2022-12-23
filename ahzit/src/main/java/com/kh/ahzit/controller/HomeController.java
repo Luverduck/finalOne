@@ -43,6 +43,7 @@ public class HomeController {
 		
 		List<MyAhzitVO>ahzitHeadCount = ahzitDao.ahzitHeadCount();
 		model.addAttribute("ahzitHeadCount", ahzitHeadCount);
+		System.out.println("@@@@@"+ahzitHeadCount);
 		return "home";
 	}	
 	

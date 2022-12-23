@@ -136,14 +136,13 @@
 	});
 </script>
 
-
 <style>
 
 </style>
 
 <div class="container-fluid ">
 	<div class = "row">
-		<div class = "col-8 offset-2">
+		<div class = "col-8 offset-2 mt-5">
 		
 	<form action="create" method="post" enctype="multipart/form-data">
 		<input name="ahzitLeader" value="${sessionScope.loginId}"
@@ -153,7 +152,9 @@
 			<span name="ahzitLeader">${sessionScope.loginId}</span>
 		</div> --%>
 
-		<div class="row mt-3">
+		<span class="fs-2">아지트  개설</span>
+		
+		<div class="row mt-4">
 			<p class="fs-3">만들고 싶은 아지트를 선택하세요</p>
 			<div class="row justify-content-center">
 			

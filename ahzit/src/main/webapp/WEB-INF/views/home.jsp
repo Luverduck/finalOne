@@ -12,13 +12,12 @@
 </jsp:include>
 
 <style>
-div {
- 	border : 1px dotted gray;
-}
-      .ahzit-img {
-         width:100%;
-         height:300px;
-      }
+
+   .ahzit-img {
+      width:100%;
+      height:300px;
+   }
+   
    /* 이미지 슬라이더 */
    .main-img {
        height: 100%; 
@@ -275,7 +274,7 @@ div {
                 prevEl: '.swiper-button-prev',
             },
             autoplay: {
-                delay:2000 //2초마다 자동 넘김
+                delay:3000 //3초마다 자동 넘김
             }
         });
    });
