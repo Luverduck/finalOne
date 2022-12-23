@@ -79,13 +79,13 @@
 				<c:if test="${not InAttachmentList.isEmpty()}">
 				<c:forEach var="attachmentDto" items="${InAttachmentList}">
 					<ul>
-						<a href="/attachment/download?attachmentNo=${attachmentDto.attachmentNo}">
+						<a href="${pageContext.request.contextPath}/attachment/download?attachmentNo=${attachmentDto.attachmentNo}">
 							<li>${attachmentDto.attachmentName} <br>
 							(${attachmentDto.attachmentSize} bytes) &nbsp; · &nbsp;
 							 ${attachmentDto.attachmentDate} &nbsp; · &nbsp; ${ahzitMemberDto.memberId}
 							 <%--아지트 내 첨부파일 삭제 --%>
 							<c:if test="${sessionScope.loginId == ahzitMemberDto.getMemberId()}">
-								<a href="/ahzit_in/ ${ahzitMemberDto.memberAhzitNo}/attachment/delete?attachmentNo=${attachmentDto.attachmentNo}&memberAhzitNo=${ahzitMemberDto.memberNo}" onclick="return checkout();"><i class="fa-solid fa-trash" style="color:red;"></i><span style="color:red">삭제</span></a>	
+								<a href="${pageContext.request.contextPath}/ahzit_in/ ${ahzitMemberDto.memberAhzitNo}/attachment/delete?attachmentNo=${attachmentDto.attachmentNo}&memberAhzitNo=${ahzitMemberDto.memberNo}" onclick="return checkout();"><i class="fa-solid fa-trash" style="color:red;"></i><span style="color:red">삭제</span></a>	
 							</c:if>
 							</li>
 						</a>

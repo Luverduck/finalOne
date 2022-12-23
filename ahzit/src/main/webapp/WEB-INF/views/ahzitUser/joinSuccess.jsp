@@ -20,7 +20,7 @@
 				<a href="login" class="btn w-100" style="background-color : #E6E6E6; color:#3E4684;" role=button>로그인 하기</a>
 			</div>
 			<div class=" col" >
-				<a href="/"  class="btn w-100" style="background-color : #E6E6E6; color:#3E4684;" role=button>메인화면으로 이동</a>
+				<a href="${pageContext.request.contextPath}/"  class="btn w-100" style="background-color : #E6E6E6; color:#3E4684;" role=button>메인화면으로 이동</a>
 			</div>
 		</div>	
 	</div>

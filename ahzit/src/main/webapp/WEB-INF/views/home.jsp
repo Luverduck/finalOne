@@ -177,7 +177,7 @@
     <div class="mt-4 col-xl-4 col-lg-6 col-md-6 col-sm-6">
              <div class="card-sl">
                  <div class="card-image">  아지트 이미지
-                     <img src = "/attachment/download/ahzit?attachmentNo=${ahzitHeadCount.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">
+                     <img src = "${pageContext.request.contextPath}/attachment/download/ahzit?attachmentNo=${ahzitHeadCount.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">
                  </div>
                  <a class="card-action" href="${pageContext.request.contextPath}/ahzit_in/${ahzitHeadCount.ahzitNo}">
                  아지트 종류에 따른 아이콘
@@ -219,19 +219,19 @@
     <div class="mt-4 col-xl-4 col-lg-6 col-md-6 col-sm-6">
              <div class="card-sl">
                  <div class="card-image">  <%--아지트 이미지 --%>
-                     <img src = "/attachment/download/ahzit?attachmentNo=${myAhzitTopN.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">
+                     <img src = "${pageContext.request.contextPath}/attachment/download/ahzit?attachmentNo=${myAhzitTopN.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">
                  </div>
                  <a class="card-action" href="${pageContext.request.contextPath}/ahzit_in/${myAhzitTopN.ahzitNo}">
                  <%--아지트 종류에 따른 아이콘 --%>
-                 <c:if test="${myAhzitTopN.ahzitSort == '취미'}"><img src="/images/hobbies.png"  class="sort-img"></c:if>
-                 <c:if test="${myAhzitTopN.ahzitSort == '스터디'}"><img src="/images/study.png"  class="sort-img"></c:if>
-                 <c:if test="${myAhzitTopN.ahzitSort == '일상'}"><img src="/images/life-smile.png"  class="sort-img"></c:if>
-                 <c:if test="${myAhzitTopN.ahzitSort == '팬클럽'}"><img src="/images/fanclub.png"  class="sort-img"></c:if>
-                 <c:if test="${myAhzitTopN.ahzitSort == '음악'}"><img src="/images/music.png"  class="sort-img"></c:if>
-                 <c:if test="${myAhzitTopN.ahzitSort == '스포츠'}"><img src="/images/sports.png"  class="sort-img"></c:if>
-                 <c:if test="${myAhzitTopN.ahzitSort == '여행'}"><img src="/images/travel.png"  class="sort-img"></c:if>
-                 <c:if test="${myAhzitTopN.ahzitSort == '맛집'}"><img src="/images/eat.png"  class="sort-img"></c:if>
-                 <c:if test="${myAhzitTopN.ahzitSort == '영화'}"><img src="/images/movie.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '취미'}"><img src="${pageContext.request.contextPath}/images/hobbies.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '스터디'}"><img src="${pageContext.request.contextPath}/images/study.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '일상'}"><img src="${pageContext.request.contextPath}/images/life-smile.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '팬클럽'}"><img src="${pageContext.request.contextPath}/images/fanclub.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '음악'}"><img src="${pageContext.request.contextPath}/images/music.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '스포츠'}"><img src="${pageContext.request.contextPath}/images/sports.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '여행'}"><img src="${pageContext.request.contextPath}/images/travel.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '맛집'}"><img src="${pageContext.request.contextPath}/images/eat.png"  class="sort-img"></c:if>
+                 <c:if test="${myAhzitTopN.ahzitSort == '영화'}"><img src="${pageContext.request.contextPath}/images/movie.png"  class="sort-img"></c:if>
                  </a>
                  <div class="card-heading"> <%--아지트 이름 --%>
                      ${myAhzitTopN.ahzitName} 
@@ -258,7 +258,7 @@
    $(function(){
      //이미지가 없으면 기본 이미지로 대체
      $(".ahzit-img").on("error", function(){
-       $(this).attr("src", "/images/bg_default.jpg");
+       $(this).attr("src", "${pageContext.request.contextPath}/images/bg_default.jpg");
      });
      
      //이미지 슬라이더

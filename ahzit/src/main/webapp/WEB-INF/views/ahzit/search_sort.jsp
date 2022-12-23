@@ -152,35 +152,35 @@
 			<div class = "row mt-4">
 		
 				<div class = "col-1">
-					<a href="search_sort?keyword=취미"><img src="/images/hobby.png"  class="sort-img">취미</a>
+					<a href="search_sort?keyword=취미"><img src="${pageContext.request.contextPath}/images/hobby.png"  class="sort-img">취미</a>
 				</div>
 			
 				<div class = "col-1">
-					<a href="search_sort?keyword=스터디"> <img src="/images/study.png"  class="sort-img">스터디</a>
+					<a href="search_sort?keyword=스터디"> <img src="${pageContext.request.contextPath}/images/study.png"  class="sort-img">스터디</a>
 				</div>
 				
 				<div class = "col-1">
-					<a href="search_sort?keyword=일상"><img src="/images/life-smile.png"  class="sort-img">일상</a>
+					<a href="search_sort?keyword=일상"><img src="${pageContext.request.contextPath}/images/life-smile.png"  class="sort-img">일상</a>
 				</div>
 				
 				<div class = "col-1">
-					<a href="search_sort?keyword=팬클럽"><img src="/images/fanclub.png"  class="sort-img">팬클럽</a>
+					<a href="search_sort?keyword=팬클럽"><img src="${pageContext.request.contextPath}/images/fanclub.png"  class="sort-img">팬클럽</a>
 				</div>
 				
 				<div class = "col-1">
-					<a href="search_sort?keyword=음악"><img src="/images/music.png"  class="sort-img">음악</a>
+					<a href="search_sort?keyword=음악"><img src="${pageContext.request.contextPath}/images/music.png"  class="sort-img">음악</a>
 				</div>
 				
 				<div class = "col-1">
-					<a href="search_sort?keyword=스포츠"><img src="/images/sports.png"  class="sort-img">스포츠</a>
+					<a href="search_sort?keyword=스포츠"><img src="${pageContext.request.contextPath}/images/sports.png"  class="sort-img">스포츠</a>
 				</div>
 				
 				<div class = "col-1">
-					<a href="search_sort?keyword=여행"><img src="/images/travel.png"  class="sort-img">여행</a>
+					<a href="search_sort?keyword=여행"><img src="${pageContext.request.contextPath}/images/travel.png"  class="sort-img">여행</a>
 				</div>
 				
 				<div class = "col-1">
-					<a href="search_sort?keyword=맛집"><img src="/images/eat.png"  class="sort-img">맛집</a>
+					<a href="search_sort?keyword=맛집"><img src="${pageContext.request.contextPath}/images/eat.png"  class="sort-img">맛집</a>
 				</div>
 				
 				<div class = "col-1">
@@ -194,18 +194,18 @@
 		 <div class="mt-4 col-xl-4 col-lg-6 col-md-6 col-sm-6">
               <div class="card-sl">
                   <div class="card-image">  <%--아지트 이미지 --%>
-                      <img src = "/attachment/download/ahzit?attachmentNo=${searchSortAhzit.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">
+                      <img src = "${pageContext.request.contextPath}/attachment/download/ahzit?attachmentNo=${searchSortAhzit.ahzitAttachmentNo}"  onerror=" this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">
                   </div>
                   <a class="card-action" href="${pageContext.request.contextPath}/ahzit_in/${searchSortAhzit.ahzitNo}">
                   <%--아지트 종류에 따른 아이콘 --%>
-                  <c:if test="${searchSortAhzit.ahzitSort == '취미'}"><img src="/images/hobby.png"  class="sort-img"></c:if>
-                  <c:if test="${searchSortAhzit.ahzitSort == '스터디'}"><img src="/images/study.png"  class="sort-img"></c:if>
-                  <c:if test="${searchSortAhzit.ahzitSort == '일상'}"><img src="/images/life-smile.png"  class="sort-img"></c:if>
-                  <c:if test="${searchSortAhzit.ahzitSort == '팬클럽'}"><img src="/images/fanclub.png"  class="sort-img"></c:if>
-                  <c:if test="${searchSortAhzit.ahzitSort == '음악'}"><img src="/images/music.png"  class="sort-img"></c:if>
-                  <c:if test="${searchSortAhzit.ahzitSort == '스포츠'}"><img src="/images/sports.png"  class="sort-img"></c:if>
-                  <c:if test="${searchSortAhzit.ahzitSort == '여행'}"><img src="/images/travel.png"  class="sort-img"></c:if>
-                  <c:if test="${searchSortAhzit.ahzitSort == '맛집'}"><img src="/images/eat.png"  class="sort-img"></c:if>
+                  <c:if test="${searchSortAhzit.ahzitSort == '취미'}"><img src="${pageContext.request.contextPath}/images/hobby.png"  class="sort-img"></c:if>
+                  <c:if test="${searchSortAhzit.ahzitSort == '스터디'}"><img src="${pageContext.request.contextPath}/images/study.png"  class="sort-img"></c:if>
+                  <c:if test="${searchSortAhzit.ahzitSort == '일상'}"><img src="${pageContext.request.contextPath}/images/life-smile.png"  class="sort-img"></c:if>
+                  <c:if test="${searchSortAhzit.ahzitSort == '팬클럽'}"><img src="${pageContext.request.contextPath}/images/fanclub.png"  class="sort-img"></c:if>
+                  <c:if test="${searchSortAhzit.ahzitSort == '음악'}"><img src="${pageContext.request.contextPath}/images/music.png"  class="sort-img"></c:if>
+                  <c:if test="${searchSortAhzit.ahzitSort == '스포츠'}"><img src="${pageContext.request.contextPath}/images/sports.png"  class="sort-img"></c:if>
+                  <c:if test="${searchSortAhzit.ahzitSort == '여행'}"><img src="${pageContext.request.contextPath}/images/travel.png"  class="sort-img"></c:if>
+                  <c:if test="${searchSortAhzit.ahzitSort == '맛집'}"><img src="${pageContext.request.contextPath}/images/eat.png"  class="sort-img"></c:if>
                   </a>
                   <div class="card-heading"> <%--아지트 이름 --%>
                       ${searchSortAhzit.ahzitName} 

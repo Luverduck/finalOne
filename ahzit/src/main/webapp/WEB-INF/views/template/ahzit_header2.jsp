@@ -67,7 +67,7 @@
 
 	<div class = "row mt-1">
 		<div class = "col-1 offset-2 d-flex justify-content-center">
-			<a href="/" class = "d-flex align-items-center" style="color:white;" >홈(로고)</a>
+			<a href="${pageContext.request.contextPath}/" class = "d-flex align-items-center" style="color:white;" >홈(로고)</a>
 		</div>
 		
 		<div class = "col-2 d-flex bg-white rounded py-1">
@@ -84,26 +84,26 @@
 		<div class = "col-3 offset-2 d-flex">
 			<div class = "col d-flex justify-content-center align-items-center">
 
-				<a href = "/search" class = "d-flex align-items-center" style="color:white;">찾기</a>
+				<a href = "${pageContext.request.contextPath}/search" class = "d-flex align-items-center" style="color:white;">찾기</a>
 
 			</div>
 			<c:choose>
 			<c:when test="${login}">
 				<div class = "col d-flex justify-content-center">
         
-					<a href="/ahzitUser/logout" class = "d-flex align-items-center logout" style="color:white;">로그아웃</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/logout" class = "d-flex align-items-center logout" style="color:white;">로그아웃</a>
 
 				</div>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/mypage" class = "d-flex align-items-center" style="color:white;">마이페이지</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/mypage" class = "d-flex align-items-center" style="color:white;">마이페이지</a>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/login" class = "d-flex align-items-center" style="color:white;">로그인</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/login" class = "d-flex align-items-center" style="color:white;">로그인</a>
 				</div>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/join" class = "d-flex align-items-center" style="color:white;">회원가입</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/join" class = "d-flex align-items-center" style="color:white;">회원가입</a>
 				</div>
 			</c:otherwise>
 			</c:choose>
@@ -112,17 +112,17 @@
 	
 	<div class = "row mt-3">
 		<div class = "col-2 offset-2 d-flex justify-content-center">
-			<a href = "/ahzit_in/${ahzitNo}" class = "p-2">게시글</a>
-			<!-- <a href = "/ahzit_in/${ahzitDto.ahzitNo}">게시글</a> -->
+			<a href = "${pageContext.request.contextPath}/ahzit_in/${ahzitNo}" class = "p-2">게시글</a>
+			<!-- <a href = "${pageContext.request.contextPath}/ahzit_in/${ahzitDto.ahzitNo}">게시글</a> -->
 		</div>
 		<div class = "col-2 d-flex justify-content-center">
-			<a href = "/ahzit_in/${ahzitNo}/calendar" class = "p-2">일정</a>
+			<a href = "${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/calendar" class = "p-2">일정</a>
 		</div>
 		<div class = "col-2 d-flex justify-content-center">
-			<a href = "/ahzit_in/${ahzitNo}/attachment" class = "p-2">첨부</a>
+			<a href = "${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/attachment" class = "p-2">첨부</a>
 		</div>
 		<div class = "col-2 d-flex justify-content-center">
-			<a href = "/ahzit_in/${ahzitNo}/member" class = "p-2">멤버</a>
+			<a href = "${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/member" class = "p-2">멤버</a>
 		</div>
 	</div>
 	

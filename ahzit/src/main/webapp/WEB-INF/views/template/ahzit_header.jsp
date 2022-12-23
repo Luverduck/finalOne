@@ -61,7 +61,7 @@
 
 	<div class = "row mt-1">
 		<div class = "col-1 offset-2 d-flex justify-content-center">
-			<a href="/" class = "d-flex align-items-center" style="color:white;" >홈(로고)</a>
+			<a href="${pageContext.request.contextPath}/" class = "d-flex align-items-center" style="color:white;" >홈(로고)</a>
 		</div>
 		
 		<div class = "col-2 d-flex bg-white rounded py-1">
@@ -78,26 +78,26 @@
 		<div class = "col-3 offset-2 d-flex">
 			<div class = "col d-flex justify-content-center align-items-center">
 
-				<a href = "/search" class = "d-flex align-items-center" style="color:white;">찾기</a>
+				<a href = "${pageContext.request.contextPath}/search" class = "d-flex align-items-center" style="color:white;">찾기</a>
 
 			</div>
 			<c:choose>
 			<c:when test="${login}">
 				<div class = "col d-flex justify-content-center">
         
-					<a href="/ahzitUser/logout" class = "d-flex align-items-center logout" style="color:white;">로그아웃</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/logout" class = "d-flex align-items-center logout" style="color:white;">로그아웃</a>
 
 				</div>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/mypage" class = "d-flex align-items-center" style="color:white;">마이페이지</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/mypage" class = "d-flex align-items-center" style="color:white;">마이페이지</a>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/login" class = "d-flex align-items-center" style="color:white;">로그인</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/login" class = "d-flex align-items-center" style="color:white;">로그인</a>
 				</div>
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/join" class = "d-flex align-items-center" style="color:white;">회원가입</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/join" class = "d-flex align-items-center" style="color:white;">회원가입</a>
 				</div>
 			</c:otherwise>
 			</c:choose>
@@ -107,17 +107,17 @@
 <div class = "container-fluid">	
 	<div class = "row mt-1 ahzit-header-style">
 		<div class = "col-2 offset-2 d-flex justify-content-center">
-			<a href = "/ahzit_in/${ahzitNo}" class = "p-2">게시글</a>
-			<!-- <a href = "/ahzit_in/${ahzitDto.ahzitNo}">게시글</a> -->
+			<a href = "${pageContext.request.contextPath}/ahzit_in/${ahzitNo}" class = "p-2">게시글</a>
+			<!-- <a href = "${pageContext.request.contextPath}/ahzit_in/${ahzitDto.ahzitNo}">게시글</a> -->
 		</div>
 		<div class = "col-2 d-flex justify-content-center">
-			<a href = "/ahzit_in/${ahzitNo}/calendar" class = "p-2">일정</a>
+			<a href = "${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/calendar" class = "p-2">일정</a>
 		</div>
 		<div class = "col-2 d-flex justify-content-center">
-			<a href = "/ahzit_in/${ahzitNo}/attachment" class = "p-2">첨부</a>
+			<a href = "${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/attachment" class = "p-2">첨부</a>
 		</div>
 		<div class = "col-2 d-flex justify-content-center">
-			<a href = "/ahzit_in/${ahzitNo}/member" class = "p-2">멤버</a>
+			<a href = "${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/member" class = "p-2">멤버</a>
 		</div>
 	</div>
 	
@@ -173,7 +173,7 @@
 				
 				var div_img_inner_container = $("<div>").attr("class", "d-flex align-itmes-center justify-content-center mt-3 div-member-pircutre");
 				
-				var img_member_picture = $("<img>").attr("class", "img-member-picture").attr("src", "/attachment/download/ahzitMember?attachmentNo=" + response.data.memberAttachmentNo);
+				var img_member_picture = $("<img>").attr("class", "img-member-picture").attr("src", "${pageContext.request.contextPath}/attachment/download/ahzitMember?attachmentNo=" + response.data.memberAttachmentNo);
 				var div_img_inner = div_img_inner_container.append(img_member_picture);
 				// 1)
 				var div_img = div_img_outer_container.append(div_img_inner);
@@ -185,7 +185,7 @@
 				
 				var div_member_info = $("<div>").attr("class", "col-12 d-flex justify-content-center align-items-center mb-2");
 				if(response.data.memberGrade == "개설자") {
-					var img_member = $("<img>").attr("class", "modal-i-member-grade-leader me-2").attr("src", "/images/crown.png");	
+					var img_member = $("<img>").attr("class", "modal-i-member-grade-leader me-2").attr("src", "${pageContext.request.contextPath}/images/crown.png");	
 					div_member_info.append(img_member);
 				}
 				var span_member_grade = $("<span>").attr("class", "modal-member-grade").text(response.data.memberGrade);

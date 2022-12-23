@@ -397,7 +397,7 @@
 						<label for="sort1">
                				<input  type="checkbox" name="userInterestSort" value="취미" id ="sort1" >
 							<span>
-							<img src="/images/hobbies.png" class="join-img-sort">
+							<img src="${pageContext.request.contextPath}/images/hobbies.png" class="join-img-sort">
 							</span>
 						</label>
 					</div>
@@ -411,7 +411,7 @@
 						<label for="sort2">
                 				<input  type="checkbox" name="userInterestSort" value="스터디" id ="sort2" >
 								<span>
-								<img src="/images/study.png" class="join-img-sort">
+								<img src="${pageContext.request.contextPath}/images/study.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>
@@ -425,7 +425,7 @@
 						<label for="sort3">
                 				<input  type="checkbox" name="userInterestSort" value="일상"  id ="sort3" style="display: none;">
 								<span>
-								<img src="/images/life-smile.png" class="join-img-sort">
+								<img src="${pageContext.request.contextPath}/images/life-smile.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>
@@ -439,7 +439,7 @@
 						<label for="sort4">
                 				<input type="checkbox" name="userInterestSort" value="팬클럽" id ="sort4"  >
 								<span>
-								<img src="/images/fanclub.png" class="join-img-sort">
+								<img src="${pageContext.request.contextPath}/images/fanclub.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>
@@ -453,7 +453,7 @@
 						<label for="sort5">
                 				<input type="checkbox" name="userInterestSort" value="음악" id ="sort5"  >
 								<span>
-								<img src="/images/music.png" class="join-img-sort">
+								<img src="${pageContext.request.contextPath}/images/music.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>
@@ -467,7 +467,7 @@
 						<label for="sort6">
                 				<input type="checkbox" name="userInterestSort" value="스포츠" id ="sort6"  >
 								<span>
-								<img src="/images/sports.png" class="join-img-sort">
+								<img src="${pageContext.request.contextPath}/images/sports.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>
@@ -481,7 +481,7 @@
 						<label for="sort7">
                 				<input type="checkbox" name="userInterestSort" value="여행" id ="sort7"  >
 								<span>
-								<img src="/images/travel.png" class="join-img-sort">
+								<img src="${pageContext.request.contextPath}/images/travel.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>
@@ -495,7 +495,7 @@
 						<label for="sort8">
                 				<input type="checkbox" name="userInterestSort" value="맛집" id ="sort8"  >
 								<span>
-								<img src="/images/eat.png" class="join-img-sort">
+								<img src="${pageContext.request.contextPath}/images/eat.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>
@@ -509,7 +509,7 @@
 						<label for="sort9">
                 				<input type="checkbox" name="userInterestSort" value="영화" id ="sort9"  >
 								<span>
-								<img src="/images/movie.png" class="join-img-sort">
+								<img src="${pageContext.request.contextPath}/images/movie.png" class="join-img-sort">
 								</span>
 						</label>
 					</div>

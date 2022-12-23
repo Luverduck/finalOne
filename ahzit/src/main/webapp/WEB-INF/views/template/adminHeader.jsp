@@ -141,7 +141,7 @@
 	<div class = "row mt-1"> <!-- row mt-1 시작 -->
 	
 		<div class = "col-1 offset-2 d-flex justify-content-center">
-			<a href="/" class = "d-flex align-items-center"><img src="${pageContext.request.contextPath}/images/logo.png" class="logo-img"></a>
+			<a href="${pageContext.request.contextPath}/" class = "d-flex align-items-center"><img src="${pageContext.request.contextPath}/images/logo.png" class="logo-img"></a>
 		</div>
 		
 		<div class = "col-4 offset-1 d-flex">

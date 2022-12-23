@@ -187,7 +187,7 @@
       				</c:when>
       			<c:otherwise><!-- 프로필 이미지를 등록했을 경우 -->
       				<c:forEach var = "memberAttachmentList" items = "${memberAttachmentList}">  <%--설정한 프로필 --%>
-			            <img class="preview" src = "/attachment/download/ahzitMember?attachmentNo=${memberAttachmentList.attachmentNo}" width="200" height="200"> 					
+			            <img class="preview" src = "${pageContext.request.contextPath}/attachment/download/ahzitMember?attachmentNo=${memberAttachmentList.attachmentNo}" width="200" height="200"> 					
 			          </c:forEach>
       			</c:otherwise>
       			</c:choose>
