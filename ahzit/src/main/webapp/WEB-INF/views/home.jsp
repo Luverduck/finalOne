@@ -12,9 +12,9 @@
 </jsp:include>
 
 <style>
-div {
+/* div {
  	border : 1px dotted gray;
-}
+} */
       .ahzit-img {
          width:100%;
          height:300px;
