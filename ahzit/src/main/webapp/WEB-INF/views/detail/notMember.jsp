@@ -246,7 +246,7 @@
             var boardContent = $(".note-editable").html();
          	// 비동기 통신을 이용한 게시글 등록
 			axios({
-				url : "http://localhost:8888/rest_board/write",
+				url : "${pageContext.request.contextPath}/rest_board/write",
 				method : "post",
 				data : {
 					boardWriterNo : boardWriterNo,
@@ -326,7 +326,7 @@
 			var ahzitNo = $("#div-member-info").data("ahzitno");
 			var keyword = $("#input-search").val();
 			axios({
-				url : "http://localhost:8888/rest_board/search?ahzitNo=" + ahzitNo + "&keyword=" + keyword,
+				url : "${pageContext.request.contextPath}/rest_board/search?ahzitNo=" + ahzitNo + "&keyword=" + keyword,
 				method : "get"
 			})
 			.then(function(response){
@@ -356,7 +356,7 @@
 		function loadList(){
 			var ahzitNo = $("#div-member-info").data("ahzitno");
 			axios({
-				url : "http://localhost:8888/rest_board/list?ahzitNo=" + ahzitNo,
+				url : "${pageContext.request.contextPath}/rest_board/list?ahzitNo=" + ahzitNo,
 				method : "get"
 			})
 			.then(function(response){

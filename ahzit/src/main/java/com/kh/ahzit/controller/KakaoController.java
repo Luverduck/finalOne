@@ -43,23 +43,17 @@ public class KakaoController {
 	@ResponseBody
 	@PostMapping("/insert")
 	public String insert(HttpSession session, @ModelAttribute KakaoDto kakaoDto,@RequestParam String kakaoId) {
-		//System.out.println(kakaoDto);
-		//System.out.println(kakaoId);
 		String LoginId= "Y";
 		KakaoDto kakaoDto1 = kakaoDao.selectOne(kakaoId);
 
-	//	System.out.println(kakaoId);
 		session.setAttribute(SessionConstant.kakaoId, kakaoId);
 
 		if(kakaoDto1 == null) {
 			kakaoDao.insert(kakaoDto);
 			LoginId =  "N";
-		//	System.out.println("처음 가입 회원 = "+LoginId);
 			return LoginId;
 		}
-		
-	//	System.out.println("이미 있는 회원 = " + LoginId);
-		//System.out.println("ahzitUserDto? = " + ahzitUserDao.selectOne(kakaoId));
+	
 		AhzitUserDto ahzitUserDto = ahzitUserDao.selectOne(kakaoId);
 		session.setAttribute(SessionConstant.ID, ahzitUserDto.getUserId());
 		session.setAttribute(SessionConstant.GRADE, ahzitUserDto.getUserGrade());
@@ -74,13 +68,11 @@ public class KakaoController {
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute AhzitUserDto ahzitUserDto ,HttpSession session) {
 		String userId = (String) session.getAttribute(SessionConstant.kakaoId);
-		System.out.println(userId);
 		ahzitUserDto.setUserId(userId);
 		
 		kakaoDao.edit(ahzitUserDto);
 	
 		AhzitUserDto ahzitUserDto1 = ahzitUserDao.selectOne(userId);
-		//System.out.println("암호화 전 dto 확인 = "+ ahzitUserDto);
 		String pw = ahzitUserDto.getUserPw(); 
 		String enc = encoder.encode(pw); 
 		ahzitUserDto.setUserPw(enc); 

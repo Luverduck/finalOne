@@ -52,7 +52,6 @@ public class AhzitDaoImpl implements AhzitDao {
 	//아지트 수정 메소드
 	@Override
 	public boolean update(AhzitDto ahzitDto) {
-	//	System.out.println("@@@ 타나?");
 		int count = sqlSession.update("ahzit.update", ahzitDto);
 		return count > 0;
 	}

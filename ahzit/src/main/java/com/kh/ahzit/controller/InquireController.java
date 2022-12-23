@@ -120,8 +120,6 @@ public class InquireController {
 		
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
 		
-		//System.out.println("1번"+inquireListSearchVO.getInquireId());
-		//System.out.println("2번"+inquireListSearchVO);
 		
 		// 게시글 총 갯수 반환
 		int count = inquireDao.countInquire(inquireListSearchVO);

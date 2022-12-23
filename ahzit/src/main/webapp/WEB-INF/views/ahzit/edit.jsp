@@ -246,7 +246,7 @@ function ahzitInfo1(){
            $(".preview").attr("src", "${pageContext.request.contextPath}/images/bg_default.jpg");
            $.ajax({
                 //삭제 메소드 호출
-                url : "/attachment/download/ahzitMember?attachmentNo=${memberAttachmentList.attachmentNo}",
+                url : "${pageContext.request.contextPath}/attachment/download/ahzitMember?attachmentNo=${memberAttachmentList.attachmentNo}",
                 method : "get",
                 dataType : "json",
                 async : false,

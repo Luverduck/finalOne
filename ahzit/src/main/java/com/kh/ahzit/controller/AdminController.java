@@ -2,6 +2,8 @@ package com.kh.ahzit.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.ahzit.constant.SessionConstant;
 import com.kh.ahzit.entity.AhzitDto;
 import com.kh.ahzit.entity.AhzitUserDto;
 import com.kh.ahzit.entity.InquireDto;
@@ -35,7 +38,6 @@ public class AdminController {
 	@GetMapping("/")
 	public String home(Model model) {
 		model.addAttribute("noticeList", adminDao.noticeListForMain());
-		//System.out.println(adminDao.noticeListForMain());
 		model.addAttribute("inquireList", adminDao.inquireListForMain());
 		return "admin/home";
 	}
@@ -71,16 +73,15 @@ public class AdminController {
 	}
 	
 	@PostMapping("/change")
-	public String edit(@ModelAttribute AhzitUserDto ahzitUserDto, Model model,  RedirectAttributes attr) {
-	//	System.out.println("ahzit = "+ ahzitUserDto);
+	public String edit(HttpSession session, @ModelAttribute AhzitUserDto ahzitUserDto, Model model,  RedirectAttributes attr) {
+
 		// 관리자 등급 변경 
 		boolean result = 	adminDao.change(ahzitUserDto);
-		
-	//	System.out.println(ahzitUserDto);
 		adminDao.change2(ahzitUserDto);
 		// 관리자 변경시 운영자로 업데이트
 		if(result) {
 			attr.addAttribute("userId",ahzitUserDto.getUserId());
+			
 			return "redirect:/admin/ahzitUser";
 		}	
 		else {

@@ -30,10 +30,7 @@ public class AhzitUserInterestDaoImpl implements AhzitUserInterestDao{
 
 	@Override
 	public boolean delete(String userInterestId) {
-		//System.out.println("딜리트");
-		//System.out.println(userInterestId);
 		int count = sqlSession.delete("ahzituserinterest.delete", userInterestId);
-		//System.out.println("타나?");
 		return count > 0;
 	}
 

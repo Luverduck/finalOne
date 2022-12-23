@@ -94,7 +94,7 @@ font-size: 0.85rem;
 			btn.prop("disabled", true);
 
 			$.ajax({
-				url:"/ahzitUser/checkPw",
+				url:"${pageContext.request.contextPath}/ahzitUser/checkPw",
 				method:"POST",
 				data:{
 					userEmail:email,

@@ -34,9 +34,6 @@ public class AhzitUserDaoImpl implements AhzitUserDao{
 	public boolean login(AhzitUserDto ahzitUserDto) {
 		AhzitUserDto findDto = sqlSession.selectOne("ahzitUser.get", ahzitUserDto.getUserId());
 		
-	//	System.out.println("find : " + findDto.getUserPw());
-	//	System.out.println("dto : " + ahzitUserDto.getUserPw());
-		
 		if(findDto == null) return false;
 		boolean judge = encoder.matches(ahzitUserDto.getUserPw(), findDto.getUserPw()); // 원본 비밀번호 랑 찾은 비밀번호랑 비교
 		return judge;

@@ -63,27 +63,19 @@ public class AhzitUserController {
 
 	@PostMapping("/join")
 	public String join(@ModelAttribute AhzitUserDto ahzitUserDto, @ModelAttribute AhzitUserInterestDto ahzitUserInterestDto, @RequestParam(value="userInterestSort[]") String[] userInterestSort) {
-		System.out.println("123123" + ahzitUserDto);
 		//회원 정보 회원 테이블 저장
 		ahzitUserDao.join(ahzitUserDto);
-		System.out.println("78788" +Arrays.toString(userInterestSort));
-		System.out.println("dto" + ahzitUserDto);
 		
 		//입력한 회원아이디 추출
 		ahzitUserInterestDto.setUserInterestId(ahzitUserDto.getUserId());
-		
-	//	System.out.println("@@@@@@@@@@@@@@@@@@@@@" + ahzitUserInterestDto.getUserInterestId());
-	
-		System.out.println("ahzitUserInterestDto = " + ahzitUserInterestDto);
+
 		
 //		// 관심사 저장
 		for( int i = 0; i < userInterestSort.length; i++) {	
-//		int userInterestNo = ahzitUserInterestDao.sequence();
-//		ahzitUserInterestDto.setUserInterestNo(userInterestNo);
 		ahzitUserInterestDto.setUserInterestSort(userInterestSort[i]);
 		ahzitUserInterestDao.insert(ahzitUserInterestDto);
 	}	
-//		
+	
 		return "redirect:joinSuccess";
 	}
 	// 가입완료
@@ -146,20 +138,15 @@ public class AhzitUserController {
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute AhzitUserDto ahzitUserDto, HttpSession session, @RequestParam String userInterestId,
 			@ModelAttribute AhzitUserInterestDto ahzitUserInterestDto, RedirectAttributes attr, @RequestParam(value="userInterestSort[]") String[] userInterestSort) {
-	//	System.out.println(userInterestSort);
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
 		boolean result = ahzitUserDao.update(ahzitUserDto);
-	//	System.out.println("result  = " + result );
 		
 		ahzitUserInterestDto.setUserInterestId(loginId);
-	//	System.out.println(ahzitUserInterestDto);
-		
+
 		boolean result1 = ahzitUserInterestDao.delete(loginId);
 	
-	//	System.out.println("result1 = " + result1);
 		
 		if (result&&result1) {
-		//	System.out.println(ahzitUserDto.getUserId());
 			attr.addAttribute("userId", ahzitUserDto.getUserId());
 			
 			
@@ -189,29 +176,19 @@ public class AhzitUserController {
 			AhzitUserDto ahzitUserDto1 = ahzitUserDao.selectOne(userId);
 			
 			boolean passwordMatch = encoder.matches(beforePw, ahzitUserDto1.getUserPw()); // 원본 비밀번호 랑 찾은 비밀번호랑 비교
-//			System.out.println("userId"+ ahzitUserDto1.getUserPw());
-//			System.out.println("beforePw"+ beforePw);
+
 			
 			if (!passwordMatch) {
-				//System.out.println("dddddddddddddddd");
 				return "redirect:password?error&userId=" + userId;
 			}
 			else {
 		//	ahzitUserDto.setUserId(beforePw);
 			ahzitUserDto.setUserPw(afterPw);
-			
-		//	System.out.println("userId"+ userId);
-		//	System.out.println("입력 비밀번호"+afterPw);
-		//	System.out.println("기존 비밀번호"+beforePw);
-		//	System.out.println("getUserId = "+ahzitUserDto.getUserId());
-		//	System.out.println("getUserPw = "+ahzitUserDto.getUserPw());
-			
+				
 			// 암호화 과정
 			String pw = ahzitUserDto.getUserPw(); 
 			String enc = encoder.encode(pw); 
 			ahzitUserDto.setUserPw(enc); 
-		//	System.out.println("22"+userId);
-		//	System.out.println("33"+afterPw);
 			ahzitUserDao.changePw(ahzitUserDto); // 변경
 		
 			return "redirect:mypage";
@@ -229,8 +206,6 @@ public class AhzitUserController {
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 		AhzitUserDto ahzitUserDto = ahzitUserDao.selectOne(userId);
 
-//		System.out.println(userPw);
-//		System.out.println(ahzitUserDto.getUserPw());
 		boolean passwordMatch = encoder.matches(userPw, ahzitUserDto.getUserPw()); // 원본 비밀번호 랑 찾은 비밀번호랑 비교
 	//	boolean passwordMatch = userPw.equals(ahzitUserDto.getUserPw());
 	
@@ -271,7 +246,6 @@ public class AhzitUserController {
 			else {
 				model.addAttribute("checkId", checkId);	
 			}
-			// System.out.println("아이디 값 = " + model.getAttribute("checkId"));
 			return "ahzitUser/checkIdResult";
 	}
 	
@@ -292,16 +266,11 @@ public class AhzitUserController {
 		public Object checkPw(
 				@RequestParam String userEmail, @RequestParam String userId, Model model) {
 			
-			// System.out.println("아이디 확인 = "+userId);
 				Map<String,String>map = new HashMap<String,String>();
 				map.put("userId", userId);
 				map.put("userEmail", userEmail);
 				
-			//	System.out.println("아이디 확인 = "+userId);
-			//	System.out.println("이메일 확인 = "+userEmail);
 				int checkPw = ahzitUserDao.checkPw(map);
-				System.out.println(checkPw);
-		//		System.out.println("아이디, 이메일 확인 = "+checkPw);
 				
 				// 이메일 인증
 				if(checkPw > 0) {
@@ -322,14 +291,11 @@ public class AhzitUserController {
 					
 					map.put("message", "확인");
 					//model.addAttribute("userId", userId);
-					System.out.println("성공");
 					return "redirect:checkPw";
 					}
 				else {
 					map.put("message", "입력된 회원정보가 존재하지 않습니다");
-					System.out.println("실패");
 					model.addAttribute("checkPw", checkPw);
-				//	System.out.println("실패시 " + checkPw);
 					return map;
 				}
 		}
@@ -338,7 +304,6 @@ public class AhzitUserController {
 		// 이메일 인증 후 비밀번호 변경
 		@GetMapping("/checkPwSuccess")
 		public String checkPwSuccess(@RequestParam String userId, Model model) {
-		//	System.out.println("아이디 값 = " + userId);
 			model.addAttribute("userId", userId);
 			return"ahzitUser/checkPwSuccess";
 		}
@@ -373,7 +338,6 @@ public class AhzitUserController {
 			String loginId = (String) session.getAttribute(SessionConstant.ID);
 		
 			List<MyAhzitVO> myAhzit = ahzitUserDao.myAhzit(loginId);
-			System.out.println(myAhzit);
 			if(myAhzit.get(0) == null) {
 			return "redirect:myAhzitFail";
 			}
