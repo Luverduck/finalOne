@@ -73,7 +73,7 @@
 							<div style="font-size:20px;" class="mb-2">총 멤버 : ${ahzitVO.getAhzitHead()}</div>
 							<c:forEach var = "ahzitMemberList" items = "${ahzitMemberList}">
 								<div class = "mb-2 div-member-info">
-										<img src = "/attachment/download/ahzitMember?attachmentNo=${ahzitMemberList.memberAttachmentNo}" onerror=" this.onerror=null; this.src='/images/user.png';" class="member-profile profile-img me-2" data-writerno = "${ahzitMemberList.memberNo}">
+										<img src = "${pageContext.request.contextPath}/attachment/download/ahzitMember?attachmentNo=${ahzitMemberList.memberAttachmentNo}" onerror=" this.onerror=null; this.src='/images/user.png';" class="member-profile profile-img me-2" data-writerno = "${ahzitMemberList.memberNo}">
 										${ahzitMemberList.memberNick}  (${ahzitMemberList.memberGrade})
 										
 <%-- 									(첨부파일 표시 확인 완료)<br>

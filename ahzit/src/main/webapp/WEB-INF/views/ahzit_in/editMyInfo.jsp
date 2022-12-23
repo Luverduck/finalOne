@@ -171,30 +171,30 @@
                   <p class="fs-3 mb-3">아지트 내 정보 수정</p>
                   <form id="ahzitJoin" action="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/editMyInfo" method="post">
 
-            <c:choose>
-                  <c:when test="${memberAttachmentList.isEmpty()}"><!-- 프로필 이미지를 등록하지 않았을 경우 -->
-                     <p class="fs-5">아지트에서 사용할 프로필 이미지를 등록해 주세요</p>
-                  </c:when>
-                  <c:otherwise>
-                     <p>프로필 이미지를 수정할 수 있습니다</p>
-                  </c:otherwise>
-               </c:choose>
-               
-               <input type="file" name="attachment" id="input-file" class="thumbnail">
-               <c:choose>
-                  <c:when test="${memberAttachmentList.isEmpty()}"><!-- 프로필 이미지를 등록하지 않았을 경우 -->
-                     <img class="preview" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br>
-                  </c:when>
-               <c:otherwise><!-- 프로필 이미지를 등록했을 경우 -->
-                  <c:forEach var = "memberAttachmentList" items = "${memberAttachmentList}">  <%--설정한 프로필 --%>
-                     <img class="preview" src = "/attachment/download/ahzitMember?attachmentNo=${memberAttachmentList.attachmentNo}" width="200" height="200">                
-                   </c:forEach>
-               </c:otherwise>
-               </c:choose>
-               
-                <div class="row img-btns mb-4">
-                    <label class="input-file-upload img-lab" for="input-file">사진변경</label> 
-               </div>
+				<c:choose>
+			      	<c:when test="${memberAttachmentList.isEmpty()}"><!-- 프로필 이미지를 등록하지 않았을 경우 -->
+			      		<p class="fs-5">아지트에서 사용할 프로필 이미지를 등록해 주세요</p>
+			      	</c:when>
+			      	<c:otherwise>
+			      		<p>프로필 이미지를 수정할 수 있습니다</p>
+			      	</c:otherwise>
+		      	</c:choose>
+		      	
+		      	<input type="file" name="attachment" id="input-file" class="thumbnail">
+      			<c:choose>
+      				<c:when test="${memberAttachmentList.isEmpty()}"><!-- 프로필 이미지를 등록하지 않았을 경우 -->
+      					<img class="preview" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br>
+      				</c:when>
+      			<c:otherwise><!-- 프로필 이미지를 등록했을 경우 -->
+      				<c:forEach var = "memberAttachmentList" items = "${memberAttachmentList}">  <%--설정한 프로필 --%>
+			            <img class="preview" src = "${pageContext.request.contextPath}/attachment/download/ahzitMember?attachmentNo=${memberAttachmentList.attachmentNo}" width="200" height="200"> 					
+			          </c:forEach>
+      			</c:otherwise>
+      			</c:choose>
+      			
+	      		 <div class="row img-btns mb-4">
+                 	<label class="input-file-upload img-lab" for="input-file">사진변경</label> 
+	      		</div>
 
          <span class="fs-5 mb-3">닉네임 변경</span><br>
             <input type="hidden" name="memberAhzitNo" value="${ahzitNo}">

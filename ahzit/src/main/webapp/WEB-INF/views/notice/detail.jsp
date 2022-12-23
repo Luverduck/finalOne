@@ -84,7 +84,7 @@
 												<li>${attachmentDto.attachmentName}
 													(${attachmentDto.attachmentSize} bytes) -
 													[${attachmentDto.attachmentType}] <a
-													href="/attachment/download/${attachmentDto.attachmentNo}"><i
+													href="${pageContext.request.contextPath}/attachment/download/${attachmentDto.attachmentNo}"><i
 														class="fa-solid fa-cloud-arrow-down"></i></a>
 												</li>
 											</c:forEach>

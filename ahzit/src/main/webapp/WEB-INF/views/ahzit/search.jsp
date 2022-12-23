@@ -153,63 +153,63 @@
 				</div>	 -->
 				<div class = "col">
 					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=취미';" data-keyword="취미">
-						<img src="/images/hobbies.png" class="sort-img mb-1">
+						<img src="${pageContext.request.contextPath}/images/hobbies.png" class="sort-img mb-1">
 						<p class="text-center">취미</p>
 					</div>
 				</div>
 			
 				<div class = "col">
 					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=스터디';" data-keyword="스터디">
-						<img src="/images/study.png" class="sort-img mb-1">
+						<img src="${pageContext.request.contextPath}/images/study.png" class="sort-img mb-1">
 						<p class="text-center">스터디</p>
 					</div>
 				</div>
 				
 				<div class = "col">
 					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=일상';" data-keyword="일상">
-						<img src="/images/life-smile.png" class="sort-img mb-1">
+						<img src="${pageContext.request.contextPath}/images/life-smile.png" class="sort-img mb-1">
 						<p class="text-center">일상</p>
 					</div>
 				</div>
 				
 				<div class = "col">
 					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=팬클럽';" data-keyword="팬클럽">
-						<img src="/images/fanclub.png" class="sort-img mb-1">
+						<img src="${pageContext.request.contextPath}/images/fanclub.png" class="sort-img mb-1">
 						<p class="text-center">팬클럽</p>
 					</div>
 				</div>
 				
 				<div class = "col">
 					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=음악';" data-keyword="음악">
-						<img src="/images/music.png" class="sort-img mb-1">
+						<img src="${pageContext.request.contextPath}/images/music.png" class="sort-img mb-1">
 						<p class="text-center">음악</p>
 					</div>
 				</div>
 				
 				<div class = "col">
 					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=스포츠';" data-keyword="스포츠">
-						<img src="/images/sports.png" class="sort-img mb-1">
+						<img src="${pageContext.request.contextPath}/images/sports.png" class="sort-img mb-1">
 						<p class="text-center">스포츠</p>
 					</div>
 				</div>
 				
 				<div class = "col">
 					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=여행';" data-keyword="여행">
-						<img src="/images/travel.png" class="sort-img mb-1">
+						<img src="${pageContext.request.contextPath}/images/travel.png" class="sort-img mb-1">
 						<p class="text-center">여행</p>
 					</div>
 				</div>
 				
 				<div class = "col">
 					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=맛집';" data-keyword="맛집">
-						<img src="/images/eat.png" class="sort-img mb-1">
+						<img src="${pageContext.request.contextPath}/images/eat.png" class="sort-img mb-1">
 						<p class="text-center">맛집</p>
 					</div>
 				</div>
 				
 				<div class = "col">
 					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=영화';" data-keyword="영화">
-						<img src="/images/movie.png" class="sort-img mb-1">
+						<img src="${pageContext.request.contextPath}/images/movie.png" class="sort-img mb-1">
 						<p class="text-center">영화</p>
 					</div>	
 				</div>	
@@ -222,19 +222,19 @@
 				<div class="mt-4 col-xl-4 col-lg-6 col-md-6 col-sm-6" id="div-ahzit-info">
 		        	<div class="card-sl">
 		            	<div class="card-image">  <%--아지트 이미지 --%>
-		                	<img src = "/attachment/download/ahzit?attachmentNo=${searchSortAhzit.ahzitAttachmentNo}" onerror="this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">
+		                	<img src = "${pageContext.request.contextPath}/attachment/download/ahzit?attachmentNo=${searchSortAhzit.ahzitAttachmentNo}" onerror="this.onerror=null; this.src='/images/bg_default.jpg';" class="ahzit-img">
 		               	</div>
 		                <a class="card-action" href="${pageContext.request.contextPath}/ahzit/detail/${searchSortAhzit.ahzitNo}">
 		                <%--아지트 종류에 따른 아이콘 --%>
-		                <c:if test="${searchSortAhzit.ahzitSort == '취미'}"><img src="/images/hobbies.png"  class="sort-img"></c:if>
-		                <c:if test="${searchSortAhzit.ahzitSort == '스터디'}"><img src="/images/study.png"  class="sort-img"></c:if>
-		                <c:if test="${searchSortAhzit.ahzitSort == '일상'}"><img src="/images/life-smile.png"  class="sort-img"></c:if>
-		                <c:if test="${searchSortAhzit.ahzitSort == '팬클럽'}"><img src="/images/fanclub.png"  class="sort-img"></c:if>
-		                <c:if test="${searchSortAhzit.ahzitSort == '음악'}"><img src="/images/music.png"  class="sort-img"></c:if>
-		                <c:if test="${searchSortAhzit.ahzitSort == '스포츠'}"><img src="/images/sports.png"  class="sort-img"></c:if>
-		                <c:if test="${searchSortAhzit.ahzitSort == '여행'}"><img src="/images/travel.png"  class="sort-img"></c:if>
-		                <c:if test="${searchSortAhzit.ahzitSort == '맛집'}"><img src="/images/eat.png"  class="sort-img"></c:if>
-		                <c:if test="${searchSortAhzit.ahzitSort == '영화'}"><img src="/images/movie.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '취미'}"><img src="${pageContext.request.contextPath}/images/hobbies.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '스터디'}"><img src="${pageContext.request.contextPath}/images/study.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '일상'}"><img src="${pageContext.request.contextPath}/images/life-smile.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '팬클럽'}"><img src="${pageContext.request.contextPath}/images/fanclub.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '음악'}"><img src="${pageContext.request.contextPath}/images/music.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '스포츠'}"><img src="${pageContext.request.contextPath}/images/sports.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '여행'}"><img src="${pageContext.request.contextPath}/images/travel.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '맛집'}"><img src="${pageContext.request.contextPath}/images/eat.png"  class="sort-img"></c:if>
+		                <c:if test="${searchSortAhzit.ahzitSort == '영화'}"><img src="${pageContext.request.contextPath}/images/movie.png"  class="sort-img"></c:if>
 		                </a>
 		                <div class="card-heading"> <%--아지트 이름 --%>
 		                    ${searchSortAhzit.ahzitName} 
@@ -321,7 +321,7 @@
 						
 						var img_ahzit_img_img;
 						if(response.data.ahzitInfoList[i].ahzitAttachmentNo != 0) {
-							img_ahzit_img_img = $("<img>").attr("src", "/attachment/download/ahzit?attachmentNo=" + response.data.ahzitInfoList[i].ahzitAttachmentNo).attr("class", "ahzit-img");
+							img_ahzit_img_img = $("<img>").attr("src", "${pageContext.request.contextPath}/attachment/download/ahzit?attachmentNo=" + response.data.ahzitInfoList[i].ahzitAttachmentNo).attr("class", "ahzit-img");
 						} else {
 							img_ahzit_img_img = $("<img>").attr("src", "${pageContext.request.contextPath}/images/bg_default.jpg").attr("class", "ahzit-img");
 						}
@@ -332,19 +332,19 @@
 						
 						var img_ahzit_category;
 						if(response.data.ahzitInfoList[i].ahzitSort == "취미") {
-							img_ahzit_category = $("<img>").attr("src", "/images/hobbies.png").attr("class", "sort-img");
+							img_ahzit_category = $("<img>").attr("src", "${pageContext.request.contextPath}/images/hobbies.png").attr("class", "sort-img");
 						} else if(response.data.ahzitInfoList[i].ahzitSort == "스터디") {
-							img_ahzit_category = $("<img>").attr("src", "/images/study.png").attr("class", "sort-img");
+							img_ahzit_category = $("<img>").attr("src", "${pageContext.request.contextPath}/images/study.png").attr("class", "sort-img");
 						} else if(response.data.ahzitInfoList[i].ahzitSort == "일상") {
-							img_ahzit_category = $("<img>").attr("src", "/images/life-smile.png").attr("class", "sort-img");
+							img_ahzit_category = $("<img>").attr("src", "${pageContext.request.contextPath}/images/life-smile.png").attr("class", "sort-img");
 						} else if(response.data.ahzitInfoList[i].ahzitSort == "팬클럽") {
-							img_ahzit_category = $("<img>").attr("src", "/images/fanclub.png").attr("class", "sort-img");
+							img_ahzit_category = $("<img>").attr("src", "${pageContext.request.contextPath}/images/fanclub.png").attr("class", "sort-img");
 						} else if(response.data.ahzitInfoList[i].ahzitSort == "음악") {
-							img_ahzit_category = $("<img>").attr("src", "/images/music.png").attr("class", "sort-img");
+							img_ahzit_category = $("<img>").attr("src", "${pageContext.request.contextPath}/images/music.png").attr("class", "sort-img");
 						} else if(response.data.ahzitInfoList[i].ahzitSort == "스포츠") {
-							img_ahzit_category = $("<img>").attr("src", "/images/sports.png").attr("class", "sort-img");
+							img_ahzit_category = $("<img>").attr("src", "${pageContext.request.contextPath}/images/sports.png").attr("class", "sort-img");
 						} else if(response.data.ahzitInfoList[i].ahzitSort == "여행") {
-							img_ahzit_category = $("<img>").attr("src", "/images/eat.png").attr("class", "sort-img");
+							img_ahzit_category = $("<img>").attr("src", "${pageContext.request.contextPath}/images/eat.png").attr("class", "sort-img");
 						}
 						
 						// 3-2)

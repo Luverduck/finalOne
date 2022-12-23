@@ -45,7 +45,7 @@
 	</div>
 	<div class = "row">
 		<c:forEach var = "list" items = "${attachmentList}">
-			<img src = "/attachment/download/freeboard?attachmentNo=${list.attachmentNo}">
+			<img src = "${pageContext.request.contextPath}/attachment/download/freeboard?attachmentNo=${list.attachmentNo}">
 		</c:forEach>
 	</div>
 </div>
@@ -80,7 +80,7 @@
 	</div>
 	<c:if test = "${loginId == freeboardReplyList.freeboardReplyWriter}">
 	<div class = "row div-input">
-		<form action = "/freeboard_reply/edit" method = "post">
+		<form action = "${pageContext.request.contextPath}/freeboard_reply/edit" method = "post">
 			<div class = "col-9">
 				<input type = "hidden" name = "freeboardReplyNo" value = "${freeboardReplyList.freeboardReplyNo}">
 				<input type = "hidden" name = "freeboardOriginNo" value = "${freeboardDto.freeboardNo}">
@@ -161,7 +161,7 @@
 <%-- 댓글 작성창 --%>
 <div class = "container">
 	<h3>댓글 작성</h3>
-	<form action = "/freeboard_reply/write" method = "post">
+	<form action = "${pageContext.request.contextPath}/freeboard_reply/write" method = "post">
 		<input type = "hidden" name = "freeboardOriginNo" value = "${freeboardDto.freeboardNo}">
 		<input type = "text" name = "freeboardReplyContent">
 		<button type = "submit">작성</button>

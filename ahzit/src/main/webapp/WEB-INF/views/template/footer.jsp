@@ -32,7 +32,7 @@
               </h6>
               <br>
               <p>
-                	<img src="/images/people.png" class="ms-3" width="70px;", height="70px;" >
+                	<img src="${pageContext.request.contextPath}/images/people.png" class="ms-3" width="70px;", height="70px;" >
               </p>
             </div>
             <!-- Grid column -->

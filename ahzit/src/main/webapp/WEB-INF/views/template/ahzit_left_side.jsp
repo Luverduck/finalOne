@@ -8,10 +8,10 @@
 		<div class = "d-flex div-ahzit-img justify-content-center align-items-center">
 		
 		<c:if test="${attachmentList.isEmpty()}">
-	    	<img src = "/images/bg_default.jpg" class="flex-fill ahzit-profile">
+	    	<img src = "${pageContext.request.contextPath}/images/bg_default.jpg" class="flex-fill ahzit-profile">
     	</c:if>
      		<c:forEach var = "list" items = "${attachmentList}"> <!-- 설정한 프로필 -->
-       		<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="flex-fill ahzit-profile">  					
+       		<img src = "${pageContext.request.contextPath}/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="flex-fill ahzit-profile">  					
      		</c:forEach>
 		</div>
 
@@ -20,7 +20,7 @@
 			<span class="ahzit-side ahzit-name mt-1">${ahzitVO.getAhzitName()}</span><%--아지트 이름 --%>
 			<span class="ahzit-side mt-1">멤버 ${ahzitVO.getAhzitHead()}  · ${ahzitVO.getAhzitSort()} </span>
 			<span class="ahzit-side mt-1 mb-1">${ahzitVO.getAhzitInfo()}<br> <%--아지트 소개 --%></span>
-			<span class="ahzit-side mt-1">아지트 리더 : ${ahzitVO.memberNick} <img src = "/images/crown.png"  id="crown"></span>
+			<span class="ahzit-side mt-1">아지트 리더 : ${ahzitVO.memberNick} <img src = "${pageContext.request.contextPath}/images/crown.png"  id="crown"></span>
 		</div>
 		
 		<div class = "row mt-1">
@@ -35,7 +35,7 @@
 			<div class = "col">
 				<!-- 소모임 수정 -->
 			 	<c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
-					<a href="/ahzit/edit?ahzitNo=${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i><span>아지트 수정</span></a>					
+					<a href="${pageContext.request.contextPath}/ahzit/edit?ahzitNo=${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i><span>아지트 수정</span></a>					
 				</c:if>
 				
 			</div>

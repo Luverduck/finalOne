@@ -133,7 +133,7 @@
 <div class = "container-fluid py-2 header-style"> <!-- container 시작 -->
 	<div class = "row mt-1"> <!-- row mt-1 시작 -->
 		<div class = "col-1 offset-2 d-flex justify-content-center">
-			<a href="/" class = "d-flex align-items-center"><img src="${pageContext.request.contextPath}/images/logo.png" class="logo-img"></a>
+			<a href="${pageContext.request.contextPath}/" class = "d-flex align-items-center"><img src="${pageContext.request.contextPath}/images/logo.png" class="logo-img"></a>
 		</div>
 		
 	<div class = "col-2">
@@ -150,12 +150,12 @@
 			</div>
 			</c:if>
 			<div class = "col d-flex justify-content-center align-items-center">
-				<a href = "/search?keyword=취미" class = "d-flex align-items-center header-style">찾기</a>
+				<a href = "${pageContext.request.contextPath}/search?keyword=취미" class = "d-flex align-items-center header-style">찾기</a>
 			</div>
 			<c:choose>
 			<c:when test="${login}">
 				<div class = "col d-flex justify-content-center">
-					<a href="/ahzitUser/logout" class = "d-flex align-items-center logout header-style">로그아웃</a>
+					<a href="${pageContext.request.contextPath}/ahzitUser/logout" class = "d-flex align-items-center logout header-style">로그아웃</a>
 				</div>
 				<div class = "col d-flex justify-content-center">
 					<a href="${pageContext.request.contextPath}/ahzitUser/mypage" class = "d-flex align-items-center header-style">마이페이지</a>
@@ -177,14 +177,14 @@
 <%-- 	<div class = "row mt-3">
 		<div class = "col-8 offset-2 d-flex align-items-center justify-content-left">
 			<div class = "col-3">
-				<a href = "/freeboard/list">자유게시판</a>
+				<a href = "${pageContext.request.contextPath}/freeboard/list">자유게시판</a>
 			</div>
 			<div class = "col-3">
-				<a href = "/ahzit_in/84">소모임 84번 - tester111</a>
+				<a href = "${pageContext.request.contextPath}/ahzit_in/84">소모임 84번 - tester111</a>
 			</div>
 			<c:if test="${login}">
 			<div class = "col-3">
-				<a href="/ahzit/create">아지트 개설</a>
+				<a href="${pageContext.request.contextPath}/ahzit/create">아지트 개설</a>
 			</div>
 			</c:if>
 		</div>
@@ -193,7 +193,7 @@
 	<%--개설 하기 버튼 --%>
 	 <div class="row" >
 		<a href="${pageContext.request.contextPath}/ahzit/create" class="hover-text">
-	           <div class="btn-create fixed text-center"><img src="/images/create.png" class="create-img"><p class="create">개설</p></div>
+	           <div class="btn-create fixed text-center"><img src="${pageContext.request.contextPath}/images/create.png" class="create-img"><p class="create">개설</p></div>
 	     </a>
       </div>
         
@@ -210,7 +210,7 @@
 			// 검색 입력창의 값을 변수로 설정
 			var keyword = $(".input-allsearch").val();
 			// form을 생성하여 조회
-			var form = $("<form>").attr("action", "/search_keyword").attr("method", "get");
+			var form = $("<form>").attr("action", "${pageContext.request.contextPath}/search_keyword").attr("method", "get");
 			var input = $("<input>").attr("type", "hidden").attr("name", "keyword").attr("value", keyword);
 			form.append(input);
 			$("body").append(form);

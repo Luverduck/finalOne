@@ -48,7 +48,7 @@ justify-content : center
 						<th>첨부파일</th>
 						<td>
 						<c:forEach var = "list" items = "${attachmentList}">
-						<img src = "/attachment/download/inquire?attachmentNo=${list.attachmentNo}" width="300">
+						<img src = "${pageContext.request.contextPath}/attachment/download/inquire?attachmentNo=${list.attachmentNo}" width="300">
 						</c:forEach>
 						</td>
 					</tr>
@@ -112,7 +112,7 @@ justify-content : center
 			<c:if test = "${loginGrade == '관리자' || loginGrade == '운영자'}">
 				<tr class="editor">
 					<th colspan="2">
-						<form action="/inquireReply/edit"  method="post">
+						<form action="${pageContext.request.contextPath}/inquireReply/edit"  method="post">
 							<input type = "hidden" name = "inquireReplyNo" value = "${inquireReplyList.inquireReplyNo}">
 							<input type = "hidden" name = "inquireOriginNo" value = "${inquireDto.inquireNo}">
 							<input type = "text" class = "w-100" name = "inquireReplyContent" value = "${inquireReplyList.inquireReplyContent}">
@@ -131,7 +131,7 @@ justify-content : center
 	<div class="text-center mt-5">
 	<h4>답변 작성</h4>
 		<div>
-			<form class="reply-insert-form" action = "/inquireReply/insert" method = "post">
+			<form class="reply-insert-form" action = "${pageContext.request.contextPath}/inquireReply/insert" method = "post">
 				<input type = "hidden" name = "inquireOriginNo" value = "${inquireDto.inquireNo}">
 			
 				<div class="row mt-4">
@@ -139,7 +139,7 @@ justify-content : center
 						<div class="d-flex justify-content-center align-items-center flex-fill mb-3">
 							<input type="text" name="inquireReplyContent" class="form-control rounded " placeholder="답변을 작성해주세요." required>
 			                <button class="btn"   style="background-color : #E6E6E6; color:#3E4684;"  type ="submit">작성</button>
-			                <a href="/admin/inquire" class="btn"   style="background-color : #E6E6E6; color:#3E4684;"  type ="submit">목록</a>
+			                <a href="${pageContext.request.contextPath}/admin/inquire" class="btn"   style="background-color : #E6E6E6; color:#3E4684;"  type ="submit">목록</a>
 						</div>
 					</div>
 				 </div>

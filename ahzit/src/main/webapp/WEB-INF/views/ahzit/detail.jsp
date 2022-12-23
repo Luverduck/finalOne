@@ -61,10 +61,10 @@
 							<div class = "d-flex div-ahzit-img justify-content-center align-items-center">
 							
 							<c:if test="${attachmentList.isEmpty()}">
-						    	<img src = "/images/bg_default.jpg" class="flex-fill ahzit-profile">
+						    	<img src = "${pageContext.request.contextPath}/images/bg_default.jpg" class="flex-fill ahzit-profile">
 					    	</c:if>
 				      		<c:forEach var = "list" items = "${attachmentList}"> <!-- 설정한 프로필 -->
-				        		<img src = "/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="flex-fill ahzit-profile">  					
+				        		<img src = "${pageContext.request.contextPath}/attachment/download/ahzit?attachmentNo=${list.attachmentNo}" class="flex-fill ahzit-profile">  					
 				      		</c:forEach>
 							</div>
 						
@@ -74,7 +74,7 @@
 								<span class="ahzit-side ahzit-name mt-1">${ahzitVO.getAhzitName()}</span><%--아지트 이름 --%>
 								<span class="ahzit-side mt-1">멤버 ${ahzitVO.getAhzitHead()}  · ${ahzitVO.getAhzitSort()} </span>
 								<span class="ahzit-side mt-1 mb-1">${ahzitVO.getAhzitInfo()}<br> <%--아지트 소개 --%></span>
-								<span class="ahzit-side mt-1">아지트 리더 : ${ahzitVO.getAhzitLeader()} <img src = "/images/crown.png"  id="crown"></span>
+								<span class="ahzit-side mt-1">아지트 리더 : ${ahzitVO.getAhzitLeader()} <img src = "${pageContext.request.contextPath}/images/crown.png"  id="crown"></span>
 							</div>
 							
 							<div class = "row mt-1">
@@ -92,25 +92,11 @@
 								 	</c:if>	
 								</div>
 								<div class = "col">
-									<%-- 소모임 수정 --%>
-<%-- 							<c:if test="${ahzitVO.getAhzitLeader() == sessionScope.loginId}">
-										<a href="/ahzit/edit?ahzitNo= ${ahzitVO.getAhzitNo()}"><i class="fa-solid fa-gear"></i><span>아지트 수정</span></a>					
-									</c:if> --%>
 									
 								</div>
 							</div>
 						</div>
 						
-						<%-- <div class = "row" id = "div-member-info" data-memberno = "${ahzitMemberDto.memberNo}" data-ahzitno = "${ahzitMemberDto.memberAhzitNo}" data-membergrade="${ahzitMemberDto.memberGrade}">
-							로그인 중인 회원 번호 : ${ahzitMemberDto.memberNo}<br>
-							회원이 가입한 아지트 번호 : ${ahzitMemberDto.memberAhzitNo}<br>
-							로그인 중인 회원 아이디 : ${ahzitMemberDto.memberId}<br>
-							로그인 중인 회원 닉네임 : ${ahzitMemberDto.memberNick}<br>
-							로그인 중인 회원 등급 : ${ahzitMemberDto.memberGrade}<br>
-							로그인 중인 회원 활동 점수 : ${ahzitMemberDto.memberGrade}<br>
-							소모임 가입일 : ${ahzitMemberDto.memberJoindate}
-						</div> --%>
-	       
 					</div>
 				</div>
 				
@@ -127,7 +113,7 @@
 									
 									<%--members-only icon --%>
 									<div class="mt-4">
-										 <img src = "/images/members-only.png" class="member-only mx-auto d-block">
+										 <img src = "${pageContext.request.contextPath}/images/members-only.png" class="member-only mx-auto d-block">
 									</div>
 									
 									<%--아지트 가입하기 버튼 --%>
@@ -168,20 +154,6 @@
 	</div>
 </div>
 
-<!-- 지우지마세요!! -->
-<%-- <c:forEach var = "ahzitMemberList" items = "${ahzitMemberList}">
-	<div class = "mb-2 div-member-info">
-		회원 번호 : ${ahzitMemberList.memberNo} <br>
-		소모임 번호 : ${ahzitMemberList.memberAhzitNo} <br>
-		회원 아이디 : ${ahzitMemberList.memberId} <br>
-		회원 등급 : ${ahzitMemberList.memberGrade} <br>
-		회원 활동점수 : ${ahzitMemberList.memberScore} <br>
-		회원 가입일 : ${ahzitMemberList.memberJoindate} <br>
-		회원 닉네임 : ${ahzitMemberList.memberNick} <br>
-		회원 프로필 번호 : ${ahzitMemberList.memberAttachmentNo} <br>
-		<hr>	
-	</div> 
-</c:forEach> --%>
 
 <script type="text/javascript">
 

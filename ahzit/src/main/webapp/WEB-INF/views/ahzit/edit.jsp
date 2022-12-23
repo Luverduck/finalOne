@@ -107,11 +107,10 @@
       				</c:when>
       			<c:otherwise><!-- 프로필 이미지를 등록했을 경우 -->
       				<c:forEach var = "ahzitAttachmentList" items = "${memberAttachmentList}">  <%--설정한 프로필 --%>
-			            <img class="preview" src = "/attachment/download/ahzitNo?attachmentNo=${ahzitAttachmentList.attachmentNo}" width="200" height="200"> 					
+			            <img class="preview" src = "${pageContext.request.contextPath}/attachment/download/ahzitNo?attachmentNo=${ahzitAttachmentList.attachmentNo}" width="200" height="200"> 					
 			         </c:forEach>
       			</c:otherwise>
       			</c:choose>
-	           <!--  <img class="preview" src="/images/bg_default.jpg" width="250px" height="200px"> -->
 	      </div>
 	      
 	      
@@ -123,7 +122,7 @@
 		<div class="row justify-content-center mt-5 mb-5">
 			<button type="submit" class="col btn-edit-cancel btn btn-outline-secondary rounded" >취소</button>
             <button type="submit" class="col btn rounded" style="background-color : #E6E6E6; color:#3E4684;">수정하기</button>
-			<a type="submit" class="btn rounded" href="/ahzit/delete?ahzitNo= ${ahzitDto.ahzitNo}" onclick="return checkout();" role=button>
+			<a type="submit" class="btn rounded" href="${pageContext.request.contextPath}/ahzit/delete?ahzitNo= ${ahzitDto.ahzitNo}" onclick="return checkout();" role=button>
 				<i class="fa-solid fa-trash" style="color:red;"></i>
 				<span style="color:red">아지트 삭제</span>
 			</a>
@@ -131,10 +130,6 @@
 		
 	</form>
 	
-	<%--아지트 삭제 --%>
-<%-- 		<a href="/ahzit/delete?ahzitNo= ${ahzitDto.ahzitNo}" onclick="return checkout();"><i class="fa-solid fa-trash" style="color:red;"></i><span style="color:red">아지트 삭제</span></a>	
- --%>
- 
  </div>
  
  

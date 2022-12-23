@@ -155,7 +155,7 @@ function kakaoLogout() {
    
    <div class="row mt-2 col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mb-3">
       <div onclick="kakaoLogin();" class="text-center btn btn-warning rounded btn-lg w-100" >
-         <a href="javascript:void(0)" ><img src="/images/kakao-logo.png" class="kakao-logo"> 카카오계정으로 로그인</button>
+         <a href="javascript:void(0)" ><img src="${pageContext.request.contextPath}/images/kakao-logo.png" class="kakao-logo"> 카카오계정으로 로그인</button>
        </div>
    </div>
 

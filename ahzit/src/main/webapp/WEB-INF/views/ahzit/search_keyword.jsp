@@ -48,7 +48,7 @@
 									<div class="container mt-3 md-3">
 										<div class="row align-items-center shadow ">
 											<div class="col-3 div-thumnail-size p-3">
-												<img src="/attachment/download/ahzit?attachmentNo=${ahzitList.ahzitAttachmentNo}"class="ahzit-img">
+												<img src="${pageContext.request.contextPath}/attachment/download/ahzit?attachmentNo=${ahzitList.ahzitAttachmentNo}"class="ahzit-img">
 											</div>
 										
 										<div class="col-9">
