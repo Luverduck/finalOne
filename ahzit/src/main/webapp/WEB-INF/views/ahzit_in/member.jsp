@@ -70,10 +70,10 @@
 								<button class = "btn-search-member-submit header-btn member-search" type = "button"><i class="fa-solid fa-magnifying-glass" ></i></button>
 							</div>
 							<div class = "shadow div-member-info-list p-3" style="background-color:white;">
-							<div style="font-size:20px;" class="mb-2">멤버 ${ahzitVO.getAhzitHead()}</div>
+							<div style="font-size:20px;" class="mb-2">총 멤버 : ${ahzitVO.getAhzitHead()}</div>
 							<c:forEach var = "ahzitMemberList" items = "${ahzitMemberList}">
 								<div class = "mb-2 div-member-info">
-										<img src = "/attachment/download/ahzitMember?attachmentNo=${ahzitMemberList.memberAttachmentNo}" onerror=" this.onerror=null; this.src='/images/user.png';" class="profile-img me-2">
+										<img src = "/attachment/download/ahzitMember?attachmentNo=${ahzitMemberList.memberAttachmentNo}" onerror=" this.onerror=null; this.src='/images/user.png';" class="member-profile profile-img me-2" data-writerno = "${ahzitMemberList.memberNo}">
 										${ahzitMemberList.memberNick}  (${ahzitMemberList.memberGrade})
 										
 <%-- 									(첨부파일 표시 확인 완료)<br>

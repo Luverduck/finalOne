@@ -9,9 +9,6 @@
 </jsp:include>
 
 <style>
-	.row, .col {
-		border: gray dotted;
-	}
 	
 	.input-group-text {
 		background-color: #FED164;

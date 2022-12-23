@@ -147,10 +147,10 @@ public class AhzitInController {
 		model.addAttribute("ahzitMemberDto", ahzitMemberDto);
 		
 		//입력받은 아지트번호로 연결되는 첨부파일 조회
-		//model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
+		model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
 		
 		//입력받은 아지트번호로 연결되는 첨부파일 조회(최근)
-		model.addAttribute("attachmentList", attachmentDao.selectAhzitInAttachment(ahzitNo));
+		model.addAttribute("InAttachmentList", attachmentDao.selectAhzitInAttachment(ahzitNo));
 		
 		//첨부파일 목록 조회
 		model.addAttribute("list", attachmentDao.selectList());
@@ -217,7 +217,7 @@ public class AhzitInController {
 		// 실제 첨부파일 삭제 - delete();
 		target.delete();
 		
-		return  "redirect:/ahzit_in/"+ahzitNo+"attachment";
+		return  "redirect:/ahzit_in/"+ahzitNo+"/attachment";
 	}
 	
 	// 소모임 멤버 Mapping
@@ -334,7 +334,7 @@ public class AhzitInController {
 		if(result) {
 			ahzitDao.updateAhzitHead2(ahzitNo);//탈퇴 성공시 ahzit_head 변경
 			attr.addAttribute("ahzitNo",ahzitNo);
-			return "redirect:/ahzit_in/{ahzitNo}";
+			return "redirect:/ahzit_in/" + ahzitNo;
 		}
 		else {
 			throw new TargetNotFoundException();

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <%-- 하단 정보 --%>
 <style>
@@ -13,6 +15,8 @@
 	}
 
 </style>
+
+<c:set var="login" value="${loginId != null}"></c:set>
 
  <footer>
       <!-- Grid container -->
@@ -38,15 +42,18 @@
             <!-- Grid column -->
             <div class="col-md-2 col-lg-2 col-xl-2  mt-3 mx-auto">
               <h6 class="text-uppercase mb-4 font-weight-bold">Enjoy</h6>
+              	
               <p>
                 <a href="${pageContext.request.contextPath}/search"><i class="fa-solid fa-chevron-right"></i>Search</a>
               </p>
-              <p>
-                <a href="${pageContext.request.contextPath}/ahzitUser/join"><i class="fa-solid fa-chevron-right"></i>Join</a>
-              </p>
-              <p>
-                <a href="${pageContext.request.contextPath}/ahzitUser/login"><i class="fa-solid fa-chevron-right"></i>Login</a>
-              </p>
+              <c:if test ="${loginId == null}">
+	              <p>
+	                <a href="${pageContext.request.contextPath}/ahzitUser/join"><i class="fa-solid fa-chevron-right"></i>Join</a>
+	              </p>
+	              <p>
+	                <a href="${pageContext.request.contextPath}/ahzitUser/login"><i class="fa-solid fa-chevron-right"></i>Login</a>
+	              </p>
+              </c:if>
             </div>
             
              <!-- Grid column -->
@@ -81,21 +88,21 @@
         <hr class="my-3 col-8 offset-2">
   
         <!-- Section: Copyright -->
-        <section class="pt-0 ">
+        <!-- <section class="pt-0 ">
           <div class="d-flex align-items-center">
-            <!-- Grid column -->
+            Grid column
             <div class="col-md-7 col-lg-8 text-center text-md-start col-8 offset-2">
-              <!-- Copyright -->
+              Copyright
               <div>
                 © 2020 Copyright:
                 <a href="https://mdbootstrap.com/">MDBootstrap.com</a>
               </div>
-              <!-- Copyright -->
+              Copyright
             </div>
-            <!-- Grid column -->
+            Grid column
   			</div>
           </div>
-        </section>
+        </section> -->
         <!-- Section: Copyright -->
       <!-- Grid container -->
     </footer>
