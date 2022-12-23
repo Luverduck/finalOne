@@ -163,7 +163,7 @@
 			
 			// 비동기 조회
 			axios({
-				url : "http://localhost:8888/rest/ahzitMember/member_info?memberNo=" + memberNo + "&ahzitNo=" + ahzitNo,
+				url : "${pageContext.request.contextPath}/rest/ahzitMember/member_info?memberNo=" + memberNo + "&ahzitNo=" + ahzitNo,
 				method : "get"
 			})
 			.then(function(response){
