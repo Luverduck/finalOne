@@ -1,22 +1,20 @@
 package com.kh.ahzit.restcontroller;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ahzit.entity.AhzitMemberDto;
 import com.kh.ahzit.entity.ScheduleDto;
 import com.kh.ahzit.repository.AhzitMemberDao;
 import com.kh.ahzit.repository.ScheduleDao;
+import com.kh.ahzit.vo.AhzitMemberInfoVO;
 
 @CrossOrigin
 @RestController
@@ -51,7 +49,9 @@ public class AhzitMemberRestController {
 		
 	}
 	
-	
-	
-
+	// 비동기 회원 정보 조회
+	@GetMapping("/member_info")
+	public AhzitMemberInfoVO selectOneMemberInfo(@RequestParam int memberNo, @RequestParam int ahzitNo) {
+		return ahzitMemberDao.selectOneMemberInfo(ahzitNo, memberNo);
+	}
 }

@@ -89,7 +89,8 @@ public interface AhzitDao {
 	public int coutntSelectAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO); 
 	
 	// 회원 수 순으로 아지트 정렬 - 3개
-	List<MyAhzitVO>ahzitHeadCount();
+	List<MyAhzitVO> ahzitHeadCount();
 
-
+	// 
+	
 }

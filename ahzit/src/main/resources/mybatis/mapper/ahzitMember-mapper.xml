@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="ahzitMember">
+  
+<mapper namespace="ahzitMember">
   
   	<!-- 시퀀스 번호 발행  -->
   	<select id="sequence" resultType="int">
@@ -15,47 +16,52 @@
   			member_no, member_ahzit_no, member_id, member_joindate, member_nick )
   		values (
   			ahzit_member_seq.nextval, #{memberAhzitNo}, #{memberId}, sysdate, #{memberNick} )
-   </insert>
+   	</insert>
    
-   <!-- 소모임 가입(회원번호 시퀀스 미리 발행 후 사용) -->
-   <insert id="insert2" parameterType="AhzitMemberDto" >
+   	<!-- 소모임 가입(회원번호 시퀀스 미리 발행 후 사용) -->
+   	<insert id="insert2" parameterType="AhzitMemberDto" >
   		insert into ahzit_member(
   			member_no, member_ahzit_no, member_id, member_joindate, member_nick )
   		values (
   			#{memberNo}, #{memberAhzitNo}, #{memberId}, sysdate, #{memberNick} )
-   </insert>
+   	</insert>
    
-   <!-- 소모임 가입 시 소모임 회원수 +1 증가 -->
-   <update id="update" parameterType="AhzitMemberDto">
+   	<!-- 소모임 가입 시 소모임 회원수 +1 증가 -->
+   	<update id="update" parameterType="AhzitMemberDto">
    		update ahzit
    			set
    		ahzit_head = ahzit_head + 1 where ahzit_no = #{ahzitNo}
-   </update>
+   	</update>
    
   	<!-- 소모임 내부 사용 닉네임 수정 -->
-   <update id="updateMember" parameterType="AhzitMemberDto">
+   	<update id="updateMember" parameterType="AhzitMemberDto">
    		update ahzit_member set member_nick = #{memberNick} where member_no = #{memberNo}
-   </update>
+   	</update>
    
    
-   <!-- 소모임 내부 닉네임 중복 확인 -->
-   <select id="nicknameCheck" parameterType="AhzitMemberDto" resultType="int">
-   		select count(*) member_nick from ahzit_member where member_ahzit_no=#{memberAhzitNo} and member_nick=#{memberNick}
-   </select>
+   	<!-- 소모임 내부 닉네임 중복 확인 -->
+   	<select id="nicknameCheck" parameterType="AhzitMemberDto" resultType="int">
+   		select count(*) member_nick from ahzit_member where member_ahzit_no = #{memberAhzitNo} and member_nick=#{memberNick}
+   	</select>
    
-   <!-- 소모임 회원번호로 검색 -->
-   <select id="findMember" parameterType="int" resultType="AhzitMemberDto">
-   		select*from ahzit_member where member_no=#{memberNo}
-   </select>
+   	<!-- 소모임 회원번호로 검색 -->
+   	<select id="findMember" parameterType="int" resultType="AhzitMemberDto">
+   		select * from ahzit_member where member_no = #{memberNo}
+   	</select>
    
-   <!-- 소모임 회원수 카운트(ahzitNo로 count한 결과값을 ahzit_head칼럼에 저장) -->
-   <update id="updateAhzitHead2" parameterType="int">
-   		update ahzit set ahzit_head=(select count(*) from ahzit_member where member_ahzit_no=#{ahzitNo}) where ahzit_no=#{ahzitNo}
-   </update>
+   	<!-- 소모임 회원수 카운트(ahzitNo로 count한 결과값을 ahzit_head칼럼에 저장) -->
+  	<update id="updateAhzitHead2" parameterType="int">
+   		update ahzit set ahzit_head=(select count(*) from ahzit_member where member_ahzit_no = #{ahzitNo}) where ahzit_no=#{ahzitNo}
+   	</update>
    
-   <!-- 일반 회원 탈퇴 메소드 -->
-   <delete id="deleteCommonMember" parameterType="int">
+   	<!-- 일반 회원 탈퇴 메소드 -->
+   	<delete id="deleteCommonMember" parameterType="int">
    		delete ahzit_member where member_no=#{memberNo} and member_grade='일반'
-   </delete>
-
-  </mapper>
+   	</delete>
+   
+	<!-- 회원 번호로 회원 정보 조회 -->
+	<select id = "selectOneMember" parameterType = "map" resultType = "AhzitMemberInfoVO">
+		select * from ahzit_member am left outer join member_attachment aa on am.member_no = aa.member_origin_no where am.member_no = #{memberNo} and am.member_ahzit_no = #{memberAhzitNo}
+	</select>
+		
+</mapper>
