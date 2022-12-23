@@ -48,6 +48,9 @@
         .div-modal-body-member-info{
             border  : 50px #3E4684 !important;
         }
+        .member-profile {
+        	cursor: pointer;
+        }
     </style>
 </head>
 <body>

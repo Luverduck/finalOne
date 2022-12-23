@@ -13,10 +13,7 @@
 </jsp:include>
 
 <style>
-/* * {
-	border: 1px dotted gray;
-	font-family: font-family : 'Gothic A1', sans-serif;
-} */
+
 </style>
 	         
 <%-- 소모임 수정(소모임이름, 소개, 최대멤버수, 공개여부, 프로필사진)--%>

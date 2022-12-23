@@ -136,11 +136,8 @@
 	});
 </script>
 
-
 <style>
-/* div {
-	border: 1px dotted gray;
-} */
+
 </style>
 
 <div class="container-fluid ">

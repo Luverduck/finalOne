@@ -12,7 +12,6 @@
 		 background-color: #F5F5F5;	 
 	}
 	* {
-	 	/* border: 1px dotted gray;   */
 		ont-family: font-family : 'Gothic A1', sans-serif;
 	}
 	.pagination{
