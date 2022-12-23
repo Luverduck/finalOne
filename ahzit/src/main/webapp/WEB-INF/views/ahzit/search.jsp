@@ -300,9 +300,9 @@
 				
 				var url;
 				if(param != null) {
-					url = "http://localhost:8888/rest_ahzit/search?p=" + p + "&cntRow=" + cntRow + "&keyword=" + param;
+					url = "${pageContext.request.contextPath}/rest_ahzit/search?p=" + p + "&cntRow=" + cntRow + "&keyword=" + param;
 				} else {
-					url = "http://localhost:8888/rest_ahzit/search?p=" + p + "&cntRow=" + cntRow;
+					url = "${pageContext.request.contextPath}/rest_ahzit/search?p=" + p + "&cntRow=" + cntRow;
 				}
 				
 				axios({

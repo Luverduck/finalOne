@@ -73,9 +73,6 @@ public class AhzitController {
 		ahzitDto.setAhzitLeader(ahzitLeader);
 		//AhzitService에서 번호를 미리 생성 후 등록, 첨부파일 업로드(저장)까지 처리
 		int ahzitNo = ahzitService.create(ahzitDto, ahzitMemberDto,  attachment, ahzitLeader);
-		
-	System.out.println();
-	
 	
 		return "redirect:/ahzit_in/" + ahzitNo;
 	}
@@ -106,7 +103,6 @@ public class AhzitController {
     @GetMapping("/edit")
     public String ahzitEdit(@RequestParam int ahzitNo, Model model) {
     	model.addAttribute("ahzitDto", ahzitDao.selectOne(ahzitNo));
-    	System.out.println(ahzitDao.selectOne(ahzitNo));
 //    	//입력받은 아지트번호로 연결되는 첨부파일 조회
 //		model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
     	return "ahzit/edit";
@@ -117,7 +113,6 @@ public class AhzitController {
     	boolean result = ahzitDao.update(ahzitDto);
     	if(result) {
     		// 첨부파일에 대한 처리
-    		//System.out.println(ahzitAttachment.get(0));
     		if(!ahzitAttachment.get(0).isEmpty()) { // 첨부파일 변화가 있다면
 			// 기존 첨부파일 조회
 			List<AttachmentDto> attachmentList = attachmentDao.selectAhzitAttachment(ahzitDto.getAhzitNo());

@@ -172,7 +172,6 @@ public class NoticeController {
 		//첨부파일
 		for(MultipartFile file : attachment) {
 			if(!file.isEmpty()) {
-				System.out.println("첨부파일 발견");
 
 				//DB 등록
 				int attachmentNo = attachmentDao.nextAttachmentNo();
@@ -186,7 +185,6 @@ public class NoticeController {
 				
 				//파일 저장
 				File target = new File(directory, String.valueOf(attachmentNo));
-				//System.out.println(target.getAbsolutePath());
 				file.transferTo(target);
 
 				//+ 연결 테이블에 연결 정보를 저장(게시글번호, 첨부파일번호)

@@ -172,7 +172,6 @@
             <img class="preview" src="${pageContext.request.contextPath}/images/bg_default.jpg" width="200" height="200"><br>
                 <div class="row img-btns">
                        <label class="input-file-upload img-lab" for="input-file">사진변경</label>        
-                  <!--      <label class="delete-file-upload img-btn" name="thumbnail-delete" type="button">삭제</label><br><br> -->
                 </div>
                 
            <div class="fs-5 mt-4">아지트 닉네임 설정하기</div>

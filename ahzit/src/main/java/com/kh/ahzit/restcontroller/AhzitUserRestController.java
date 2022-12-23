@@ -20,11 +20,9 @@ public class AhzitUserRestController {
 	@PostMapping("/userId")
 	private String userId (@RequestParam String value) {
 		if(ahzitUserDao.selectOne(value) == null) {
-			//System.out.println("NNNNY 중복 없음");
 			return "NNNNY";
 		}
 		else {
-			//System.out.println("NNNNN 중복 있음");
 			return "NNNNN";
 		}
 	}

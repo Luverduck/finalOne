@@ -347,7 +347,7 @@
 			var replyNo = $(this).data("replyno");
 			// 댓글 삭제 DB 처리
 			axios({
-				url : "http://localhost:8888/rest_reply/delete?replyNo=" + replyNo,
+				url : "${pageContext.request.contextPath}/rest_reply/delete?replyNo=" + replyNo,
 				method : "delete"
 			})
 			.then(function(response){
@@ -388,7 +388,7 @@
 				var replyContent = editor_input.val();
 				//console.log(replyContent);
 				axios({
-					url : "http://localhost:8888/rest_reply/edit",
+					url : "${pageContext.request.contextPath}/rest_reply/edit",
 					method : "put",
 					data : {
 						replyNo : replyNo,
@@ -422,7 +422,7 @@
 			var target = $(this).parents(".div-reply-input");
 			
 			axios({
-				url : "http://localhost:8888/rest_reply/write",
+				url : "${pageContext.request.contextPath}/rest_reply/write",
 				method : "post",
 				data : {
 					memberNo : memberNo,
@@ -536,7 +536,7 @@
 			}
 			
 			axios({
-				url : "http://localhost:8888/rest_reply/list",
+				url : "${pageContext.request.contextPath}/rest_reply/list",
 				method : "post",
 				data : {
 					boardNo : boardNo,
@@ -662,7 +662,7 @@
 					$(this).attr("data-replylist", "1"); // 조회한 상태로 변경
 					
 					axios({
-						url : "http://localhost:8888/rest_reply/list",
+						url : "${pageContext.request.contextPath}/rest_reply/list",
 						method : "post",
 						data : {
 							boardNo : boardNo,
@@ -821,7 +821,7 @@
 			// 좋아요를 누른 게시글의 이전 좋아요 여부
 			var isLike = $(this).data("islike");
 			axios({
-				url : "http://localhost:8888/rest_board/is_like?memberNo=" + memberNo + "&boardNo=" + boardNo + "&boardLike=" + boardLike + "&isLike=" + isLike,
+				url : "${pageContext.request.contextPath}/rest_board/is_like?memberNo=" + memberNo + "&boardNo=" + boardNo + "&boardLike=" + boardLike + "&isLike=" + isLike,
 				method : "get"
 				/* data : {
 					memberNo : memberNo,
@@ -880,7 +880,7 @@
 	        var boardContent = $(".note-editable").html();
 	     	// 비동기 통신을 이용한 게시글 등록
 			axios({
-				url : "http://localhost:8888/rest_board/write",
+				url : "${pageContext.request.contextPath}/rest_board/write",
 				method : "post",
 				data : {
 					memberNo : memberNo,
@@ -1019,7 +1019,7 @@
                 //var editorContent = $(".note-editable").html();
                 // 비동기 통신을 이용한 게시글 수정
                 axios({
-    				url : "http://localhost:8888/rest_board/edit",
+    				url : "${pageContext.request.contextPath}/rest_board/edit",
     				method : "put",
     				data : {
     					boardNo : boardNo,
@@ -1059,7 +1059,7 @@
 			var boardWriterNo = $(this).data("boardwriterno");
 			// 비동기 통신을 이용한 게시글 삭제
 			axios({
-				url : "http://localhost:8888/rest_board/delete?boardNo=" + boardNo + "&boardWriterNo=" + boardWriterNo,
+				url : "${pageContext.request.contextPath}/rest_board/delete?boardNo=" + boardNo + "&boardWriterNo=" + boardWriterNo,
 				method : "delete"
 			})
 			.then(function(response){
@@ -1082,7 +1082,7 @@
 			var memberNo = $("#div-member-info").data("memberno");
 			keyword = $(".input-search").val();
 			axios({
-				url : "http://localhost:8888/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&keyword=" + keyword + "&p=" + p,
+				url : "${pageContext.request.contextPath}/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&keyword=" + keyword + "&p=" + p,
 				method : "get"
 				/*data : {
 					ahzitNo : ahzitNo,
@@ -1192,7 +1192,7 @@
 			var memberNo = $("#div-member-info").data("memberno");
 			
 			axios({
-				url : "http://localhost:8888/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&keyword=" + keyword + "&p=" + p,
+				url : "${pageContext.request.contextPath}/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&keyword=" + keyword + "&p=" + p,
 				method : "get"
 				/* data : {
 					ahzitNo : ahzitNo,
@@ -1291,7 +1291,7 @@
 		keyword = "";
 		p = 1;
 		axios({
-			url : "http://localhost:8888/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&keyword=" + keyword + "&p=" + p,
+			url : "${pageContext.request.contextPath}/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&keyword=" + keyword + "&p=" + p,
 			method : "get"
 			/* data : {
 				ahzitNo : ahzitNo,

@@ -29,20 +29,15 @@ public class AsyncController {
 	@ResponseBody
 	public void async2(@RequestParam String certificationId) {
 		emailService.sendCertMail(certificationId);
-		//System.out.println("타나?");
 	}
 	
 	@PostMapping("/async3")
 	@ResponseBody
 	public boolean async3(@ModelAttribute CertificationDto certificationDto) {
 	//CertificationDto certificationDto1 = certificationDao.selectOne(certificationId);
-	//System.out.println(certificationDto1);
 	//String key = certificationDto1.getCertificationKey();
 	
-	//System.out.println(key);
-	//System.out.println(certificationKey);
 	//boolean passwordMatch = key.equals(certificationKey);
-	//System.out.println(passwordMatch);
 
 		return emailService.checkCert(certificationDto);
 	}

@@ -246,7 +246,7 @@ justify-content : center
 			var inquireReplyNo =$(this).find("[name=inquireOriginNo]").val();
 			//정상적으로 입력되었다면 비동기 통신으로 등록 요청
 			$.ajax({
-				url:"http://localhost:8888/inquireReply/insert",
+				url:"${pageContext.request.contextPath}/inquireReply/insert",
 				method:"post",
 				//data:{
 				//	replyOrigin:$(this).find("[name=replyOrigin]").val(),
@@ -271,7 +271,7 @@ justify-content : center
 			var inquireReplyNo= $(this).data("reply-no")
 			
 			$.ajax({
-				url:"http://localhost:8888/inquireReply/delete",
+				url:"${pageContext.request.contextPath}/inquireReply/delete",
 				method:"get",
 				data:{
 					inquireOriginNo:inquireOriginNo,
