@@ -145,12 +145,12 @@
 			</div>
 			
 			<div class = "row mt-4">
-				<div class = "col">
+				<!-- <div class = "col">
 					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search';" data-keyword = "">
 						<img src="/images/search.png" class="sort-img mb-1">
 						<p class="text-center">전체</p>
 					</div>
-				</div>	
+				</div>	 -->
 				<div class = "col">
 					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=취미';" data-keyword="취미">
 						<img src="/images/hobbies.png" class="sort-img mb-1">
@@ -166,7 +166,7 @@
 				</div>
 				
 				<div class = "col">
-					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=스터디';" data-keyword="일상">
+					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search?keyword=일상';" data-keyword="일상">
 						<img src="/images/life-smile.png" class="sort-img mb-1">
 						<p class="text-center">일상</p>
 					</div>
@@ -277,7 +277,7 @@
 	//console.log(pLast);
 	
 	// 무한스크롤 시 3개씩만 불러오기
-	var cntRow = 3;
+	var cntRow = 6;
 	
 	$(function(){
 		
@@ -286,17 +286,21 @@
 			var percentage = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100;
 			
 			// 페이지 끝 번호에 도달하면 비동기 조회 요청을 보내지 않도록 설정
-			if(p == pLast) return; 
-			
+			//if(p == pLast) return; 
 			// 화면 총 길이의 80%에 도달했을 때
 			if(percentage > 80) {
+				
+				// 페이지 수 증가
+				p = p + 1;
 				
 				// 태그 붙일 타겟 지정
 				var target = $(".div-ahzit-list");
 				
+				var param = keyword;
+				
 				var url;
-				if(keyword != "") {
-					url = "http://localhost:8888/rest_ahzit/search?p=" + p + "&cntRow=" + cntRow + "&keyword=" + keyword;
+				if(param != null) {
+					url = "http://localhost:8888/rest_ahzit/search?p=" + p + "&cntRow=" + cntRow + "&keyword=" + param;
 				} else {
 					url = "http://localhost:8888/rest_ahzit/search?p=" + p + "&cntRow=" + cntRow;
 				}
@@ -306,8 +310,6 @@
 					method : "get"
 				})
 				.then(function(response){
-					// 페이지 수 증가
-					p = p + 1;
 					console.log(response);
 					for(var i = 0 ; i < response.data.ahzitInfoList.length ; i ++) {
 						// 1
