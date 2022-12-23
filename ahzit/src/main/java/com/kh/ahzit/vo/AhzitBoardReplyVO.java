@@ -18,4 +18,6 @@ public class AhzitBoardReplyVO {
 	private String memberNick;
 	private String memberGrade;
 	private int memberAttachmentNo;
+	
+	private int replyCount;
 }

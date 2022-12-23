@@ -199,7 +199,7 @@
 	.img-member-profile {
 		width : 50px;
 		height : 50px;
-		margin-left : 10px;
+		margin-left : 7px;
 	}
 	.reply-profile {
 		width : 40px;
@@ -406,6 +406,9 @@
 		
 		// 댓글 등록
 		$(document).on("click", ".btn-reply-submit", function(){
+			
+			var btnThis = $(this);
+			
 			// 댓글 원본글 번호
 			var replyOriginNo = $(this).data("boardno");
 			
@@ -428,7 +431,7 @@
 				}
 			})
 			.then(function(response){
-				//console.log(response);
+				console.log(response);
 				// 댓글 리스트
 				// 1) 댓글 외부 컨테이너
 				var div_reply_outer_container = $("<div>").attr("class", "d-flex flex-column align-items-start px-3 py-1 border-top div-board div-reply div-reply-container");
@@ -499,6 +502,15 @@
 				target.before(div_reply_outer);
 				
 				input.val("");
+				
+				var target_replyCount = target.parents(".div-reply-list").prevAll(".div-reply-button").children(".btn-reply-write");
+				
+				target_replyCount.empty();
+				
+				var i_reply = $("<i>").attr("class", "fa-regular fa-comment-dots icon-board");
+				var div_reply_count = $("<div>").attr("class", "ps-1 align-middle").text(response.data.replyCount);
+				
+				target_replyCount.append(i_reply).append(div_reply_count); 
 			});
 		});
 		

@@ -25,14 +25,9 @@
 		
 		<div class = "row mt-1">
 			<div class = "col">
-				<c:choose>
-			    <c:when test="${ahzitMemberDto.getMemberId() != loginId}"><%-- 소모임 회원이 아니면 --%>
+			    <c:if test="${ahzitMemberDto.getMemberId() != loginId}"><%-- 소모임 회원이 아니면 --%>
 			    	<button type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/insert'">아지트 가입</button>
-			    </c:when>
-			    <c:otherwise>
-			    	<button type="button" class="btn btn-join" disabled>아지트 가입</button><%-- 소모임 회원이라면 --%>
-			    </c:otherwise>
-			    </c:choose>
+			    </c:if>
 			    <c:if test="${ahzitMemberDto.memberId==sessionScope.loginId}">
 					<a href="${pageContext.request.contextPath}/ahzit_in/${ahzitNo}/editMyInfo"><span>내 정보 수정</span></a>
 			 	</c:if>	
