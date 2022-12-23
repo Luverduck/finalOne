@@ -23,7 +23,7 @@ public class AhzitRestController {
 	
 	// 찾기 페이지에서 소모임 조회
 	@GetMapping("/search")
-	public AhzitSearchListRestResponseVO searchAhzit(@RequestParam(required=false) String keyword, @RequestParam int cntRow, @RequestParam int p){
+	public AhzitSearchListRestResponseVO searchAhzit(@RequestParam String keyword, @RequestParam int cntRow, @RequestParam int p){
 		// 반환 VO 생성
 		AhzitSearchListRestResponseVO ahzitSearchListRestResponseVO = new AhzitSearchListRestResponseVO();
 		// 요청 VO 생성
@@ -36,11 +36,11 @@ public class AhzitRestController {
 			ahzitSearchListRequestVO.setKeyword(keyword);
 			int total = ahzitDao.searchMemberCount(p, keyword);
 			ahzitSearchListRestResponseVO.setInfoCount(total);
-			ahzitInfoList = ahzitDao.allSortAhzit(ahzitSearchListRequestVO);
+			ahzitInfoList = ahzitDao.searchSortAhzit(ahzitSearchListRequestVO);
 		} else {
 			int total = ahzitDao.allMemberCount(p);
 			ahzitSearchListRestResponseVO.setInfoCount(total);
-			ahzitInfoList = ahzitDao.searchSortAhzit(ahzitSearchListRequestVO);
+			ahzitInfoList = ahzitDao.allSortAhzit(ahzitSearchListRequestVO);
 		}
 		// 반환 VO에 조회 결과를 설정
 		ahzitSearchListRestResponseVO.setAhzitInfoList(ahzitInfoList);
