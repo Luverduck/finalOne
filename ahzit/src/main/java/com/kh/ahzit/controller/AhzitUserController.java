@@ -1,13 +1,11 @@
 package com.kh.ahzit.controller;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -69,7 +67,6 @@ public class AhzitUserController {
 		//입력한 회원아이디 추출
 		ahzitUserInterestDto.setUserInterestId(ahzitUserDto.getUserId());
 
-		
 //		// 관심사 저장
 		for( int i = 0; i < userInterestSort.length; i++) {	
 		ahzitUserInterestDto.setUserInterestSort(userInterestSort[i]);
