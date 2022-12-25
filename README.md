@@ -8,8 +8,8 @@
 
 #### :moneybag: 시장 조사   
 * 코로나 19와 같은 상황에서 온라인 기반의 언텍트 소비가 높은 성장세를 보였음
-* 코로나 19로 언택트 문화가 시작되면서 비대면 서비스에 대한 연령별 만족도 또한 가파르게 증가하고 있는 추세
-출처 : https://www.sedaily.com/NewsView/lZHTT7IWY, https://inews.ewha.ac.kr/news/articleView.html?idxno=32451   
+* 코로나 19로 언택트 문화가 시작되면서 비대면 서비스에 대한 연령별 만족도 또한 가파르게 증가하고 있는 추세   
+  - 출처 : https://www.sedaily.com/NewsView/lZHTT7IWY, https://inews.ewha.ac.kr/news/articleView.html?idxno=32451   
 
 #### :calendar: 개발 일정   
 * 기간 : 22.11.11 ~ 22.12.23 (약 6주)
