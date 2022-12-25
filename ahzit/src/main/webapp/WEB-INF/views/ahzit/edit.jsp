@@ -78,8 +78,8 @@
 			<%-- ${ahzitDto.ahzitIspublic} --%>
 		</p>
 		<div  class="fs-5">
-			<input type="radio" name="ahzitIspublic" value="N"><label>공개 아지트</label><br><%-- 공개를 N으로 하기로 함 --%>
-			<input type="radio" name="ahzitIspublic" value="Y" checked><label>비공개 아지트</label>
+			<input type="radio" name="ahzitIspublic" value="N" checked><label>공개 아지트</label><br><%-- 공개를 N으로 하기로 함 --%>
+			<input type="radio" name="ahzitIspublic" value="Y"><label>비공개 아지트</label>
 		</div>
 	</div>
  	<!-- 	<div class="col">
