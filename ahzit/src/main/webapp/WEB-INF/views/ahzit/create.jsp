@@ -230,12 +230,12 @@
 			
 			<div class="fs-4">
 				<input type="radio" name="ahzitIspublic" value="N" checked>
-				<label>비공개 아지트</label> 
+				<label>공개 아지트</label> 
 			</div>
 			
 			<div class="fs-4">
 				<input type="radio" name="ahzitIspublic" value="Y">
-				<label>공개 아지트</label><br>
+				<label>비공개 아지트</label><br>
 			</div>
 
 
