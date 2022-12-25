@@ -80,13 +80,13 @@ public interface AhzitDao {
 	List<AhzitSearchListResponseVO> searchSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
 		
 	// 추상 메소드 - 찾기 페이지에서 소모임 갯수
-	public int countselectAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
+	public int countSelectAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
 	
 	// 추상 메소드 - 찾기 페이지에서 전체 소모임 갯수
 	public int countAllAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO);
 	
 	// 추상 메소드 - 찾기 페이지에서 특정 카테고리 소모임 갯수
-	public int coutntSelectAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO); 
+	public int countSearchAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO); 
 	
 	// 회원 수 순으로 아지트 정렬 - 3개
 	List<MyAhzitVO> ahzitHeadCount();

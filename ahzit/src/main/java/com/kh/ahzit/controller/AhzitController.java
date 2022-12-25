@@ -78,31 +78,33 @@ public class AhzitController {
 	}
 	
 	//소모임 가입
-		@GetMapping("/insert")
-		public String insert() {
-			return "ahzit/insert";
-		}
-		@ResponseBody
-		@PostMapping("/insert")
-		public String insert(
-				@ModelAttribute AhzitMemberDto ahzitMemberDto,
-				HttpSession session,
-				RedirectAttributes attr			
-				) {
-			attr.addAttribute("ahzitNo", ahzitMemberDto.getMemberAhzitNo());
-			String userId = (String) session.getAttribute(SessionConstant.ID);
-			ahzitMemberDto.setMemberId(userId);
-			ahzitDao.insertMember(ahzitMemberDto);
-			int ahzitNo = ahzitMemberDto.getMemberAhzitNo();		
-			//소모임가입자 증가 메소드
-			ahzitDao.updateAhzitPerson(ahzitMemberDto.getMemberAhzitNo());
-			return "redirect:/ahzit_in/" + ahzitNo;
-		}
+	@GetMapping("/insert")
+	public String insert() {
+		return "ahzit/insert";
+	}
+	
+	@ResponseBody
+	@PostMapping("/insert")
+	public String insert(
+			@ModelAttribute AhzitMemberDto ahzitMemberDto,
+			HttpSession session,
+			RedirectAttributes attr			
+			) {
+		attr.addAttribute("ahzitNo", ahzitMemberDto.getMemberAhzitNo());
+		String userId = (String) session.getAttribute(SessionConstant.ID);
+		ahzitMemberDto.setMemberId(userId);
+		ahzitDao.insertMember(ahzitMemberDto);
+		int ahzitNo = ahzitMemberDto.getMemberAhzitNo();		
+		//소모임가입자 증가 메소드
+		ahzitDao.updateAhzitPerson(ahzitMemberDto.getMemberAhzitNo());
+		return "redirect:/ahzit_in/" + ahzitNo;
+	}
 	
     //소모임 관리 페이지(수정)
     @GetMapping("/edit")
     public String ahzitEdit(@RequestParam int ahzitNo, Model model) {
     	model.addAttribute("ahzitDto", ahzitDao.selectOne(ahzitNo));
+    	model.addAttribute("ahzitNo", ahzitNo);
 //    	//입력받은 아지트번호로 연결되는 첨부파일 조회
 //		model.addAttribute("attachmentList", attachmentDao.selectAhzitAttachment(ahzitNo));
     	return "ahzit/edit";

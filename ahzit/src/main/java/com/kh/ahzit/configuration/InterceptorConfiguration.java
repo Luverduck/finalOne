@@ -23,13 +23,37 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		
+		// 관리자 여부 인터셉터
+		registry.addInterceptor(adminInterceptor)
+		 	.addPathPatterns(
+		 			"/admin/**", // 관리자 페이지 전체
+		 			"/faq/write",
+		 			"/faq/edit",
+		 			"/faq/delete",
+		 			"/notice/write",
+		 			"/notice/delete",
+		 			"/notice/edit"
+		 			) 
+		 	.excludePathPatterns("");
+		
 		// 로그인 여부 인터셉터 경로
 		registry.addInterceptor(memberLoginInterceptor)
-			.addPathPatterns("/ahzit_in/**") // 소모임 내 전체
-			.excludePathPatterns("");
-		
-		 registry.addInterceptor(adminInterceptor)
-		 	.addPathPatterns("/admin/**") // 관리자 페이지 전체
-		 	.excludePathPatterns("");
+			.addPathPatterns(	
+					"/ahzit/**", 
+					"/ahzit_in/**", // 소모임 내 전체
+					"/ahzitUser/**",
+					"/inquire/**",
+					"/inquireReply/**"
+					) 
+			.excludePathPatterns(
+					"/ahzit/detail/**",
+					"/ahzitUser/join",
+					"/ahzitUser/joinSuccess",
+					"/ahzitUser/login",
+					"/ahzitUser/checkId",
+					"/ahzitUser/checkId_result",
+					"/ahzitUser/checkPw",
+					"/ahzitUser/checkPwSuccess"
+					);
 	}
 }

@@ -61,7 +61,7 @@ public class HomeController {
  	@RequestMapping("/search") 
  	public String search(Model model, @ModelAttribute AhzitSearchListRequestVO ahzitSearchListRequestVO) {
 
- 		int total = ahzitDao.countselectAhzit(ahzitSearchListRequestVO);
+ 		int total = ahzitDao.countSelectAhzit(ahzitSearchListRequestVO);
  		ahzitSearchListRequestVO.setTotal(total);
  		List<AhzitSearchListResponseVO> searchSortAhzit = ahzitDao.selectSortAhzit(ahzitSearchListRequestVO);
  		model.addAttribute("pLast", ahzitSearchListRequestVO.blockLast());

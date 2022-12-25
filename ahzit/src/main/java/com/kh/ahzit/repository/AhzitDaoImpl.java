@@ -222,7 +222,7 @@ public class AhzitDaoImpl implements AhzitDao {
 	// 추상 메소드 - 찾기 페이지에서 소모임 조회
 	@Override
 	public List<AhzitSearchListResponseVO> selectSortAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
-		if(ahzitSearchListRequestVO.isSearch()) {
+		if(ahzitSearchListRequestVO.getKeyword() != null) {
 			return searchSortAhzit(ahzitSearchListRequestVO);
 		}
 		else {
@@ -251,9 +251,9 @@ public class AhzitDaoImpl implements AhzitDao {
 
 	// 추상 메소드 오버라이딩 - 찾기 페이지에서 소모임 갯수
 	@Override
-	public int countselectAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
-		if(ahzitSearchListRequestVO.isSearch()) {
-			return coutntSelectAhzit(ahzitSearchListRequestVO);
+	public int countSelectAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+		if(ahzitSearchListRequestVO.getKeyword() != null) {
+			return countSearchAhzit(ahzitSearchListRequestVO);
 		} else {
 			return countAllAhzit(ahzitSearchListRequestVO);
 		}
@@ -267,7 +267,7 @@ public class AhzitDaoImpl implements AhzitDao {
 	
 	// 추상 메소드 오버라이딩 - 찾기 페이지에서 특정 카테고리 소모임 갯수
 	@Override
-	public int coutntSelectAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
+	public int countSearchAhzit(AhzitSearchListRequestVO ahzitSearchListRequestVO) {
 		return sqlSession.selectOne("ahzit.sortCount", ahzitSearchListRequestVO);
 	}
 

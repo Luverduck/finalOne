@@ -150,7 +150,7 @@
 			</div>
 			</c:if>
 			<div class = "col d-flex justify-content-center align-items-center">
-				<a href = "${pageContext.request.contextPath}/search?keyword=취미" class = "d-flex align-items-center header-style">찾기</a>
+				<a href = "${pageContext.request.contextPath}/search" class = "d-flex align-items-center header-style">찾기</a>
 			</div>
 			<c:choose>
 			<c:when test="${login}">
