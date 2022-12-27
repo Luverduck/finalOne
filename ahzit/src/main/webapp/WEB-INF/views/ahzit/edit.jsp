@@ -5,12 +5,10 @@
     
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="소모임 정보 수정" name="title"/>
+	<jsp:param value="${ahzitDto.ahzitName} 정보 수정" name="title"/>
 </jsp:include>
 
-<jsp:include page="/WEB-INF/views/template/ahzit_header.jsp">
-	<jsp:param value="소모임 정보 수정" name="title"/>
-</jsp:include>
+<jsp:include page="/WEB-INF/views/template/ahzit_header.jsp"></jsp:include>
 
 <style>
 

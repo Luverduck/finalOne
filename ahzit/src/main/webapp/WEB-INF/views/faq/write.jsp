@@ -11,7 +11,7 @@
 
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="faq" name="title" />
+	<jsp:param value="FAQ 작성" name="title" />
 </jsp:include>
 
 

@@ -9,9 +9,7 @@
    <jsp:param value="소모임 가입" name="title"/>
 </jsp:include>
 
-<jsp:include page="/WEB-INF/views/template/ahzit_header.jsp">
-   <jsp:param value="소모임 가입" name="title"/>
-</jsp:include>
+<jsp:include page="/WEB-INF/views/template/ahzit_header.jsp"></jsp:include>
 
 <style>
 

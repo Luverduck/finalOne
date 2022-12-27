@@ -4,7 +4,7 @@
     
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="소모임 회원" name="title"/>
+	<jsp:param value="${ahzitVO.getAhzitName()}" name="title"/>
 </jsp:include>
 
 <style>

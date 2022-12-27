@@ -5,7 +5,7 @@
 
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="마이페이지 비밀번호 변경" name="title"/>
+	<jsp:param value="비밀번호 변경" name="title"/>
 </jsp:include>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>

@@ -5,7 +5,7 @@
 
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="1:1 문의글 수정" name="title"/>
+	<jsp:param value="1:1 문의 수정" name="title"/>
 </jsp:include>
 
 <script>

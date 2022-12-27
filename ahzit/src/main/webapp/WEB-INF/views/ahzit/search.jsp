@@ -4,7 +4,7 @@
 
 <%-- header.jsp 불러오기 --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="메인페이지" name="title"/>
+	<jsp:param value="아지트 찾기" name="title"/>
 </jsp:include>
 
 <style>
@@ -147,7 +147,7 @@
 			<div class = "row mt-4">
 				<div class = "col">
 					<div class = "d-flex justify-content-top align-items-center flex-column div-search-keyword" onclick="location.href='search';" data-keyword = "">
-						<img src="/images/search.png" class="sort-img mb-1">
+						<img src="${pageContext.request.contextPath}/images/search.png" class="sort-img mb-1">
 						<p class="text-center">전체</p>
 					</div>
 				</div>
@@ -328,7 +328,7 @@
 						// 3-1)
 						var div_ahzit_img = div_ahzit_img_container.append(img_ahzit_img_img);
 						
-						var a_ahzit_href_container = $("<a>").attr("class", "card-action").attr("href", "${pageContext.request.contextPath}/ahzit_in/" + response.data.ahzitInfoList[i].ahzitNo);
+						var a_ahzit_href_container = $("<a>").attr("class", "card-action").attr("href", "${pageContext.request.contextPath}/ahzit/detail/" + response.data.ahzitInfoList[i].ahzitNo);
 						
 						var img_ahzit_category;
 						if(response.data.ahzitInfoList[i].ahzitSort == "취미") {

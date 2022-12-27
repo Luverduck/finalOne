@@ -3,7 +3,7 @@
 
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="카카오 입력" name="title"/>
+	<jsp:param value="카카오 로그인" name="title"/>
 </jsp:include>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
