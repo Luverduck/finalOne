@@ -328,7 +328,7 @@
 						// 3-1)
 						var div_ahzit_img = div_ahzit_img_container.append(img_ahzit_img_img);
 						
-						var a_ahzit_href_container = $("<a>").attr("class", "card-action").attr("href", "${pageContext.request.contextPath}/ahzit_in/" + response.data.ahzitInfoList[i].ahzitNo);
+						var a_ahzit_href_container = $("<a>").attr("class", "card-action").attr("href", "${pageContext.request.contextPath}/ahzit/detail/" + response.data.ahzitInfoList[i].ahzitNo);
 						
 						var img_ahzit_category;
 						if(response.data.ahzitInfoList[i].ahzitSort == "취미") {
