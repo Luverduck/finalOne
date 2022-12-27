@@ -1,4 +1,4 @@
-:city_sunset: 아지트(Ahzit)
+![poster](./logo-ahzit.png)
 ===========================
 
 :information_desk_person: 아지트(Ahzit) 소개
