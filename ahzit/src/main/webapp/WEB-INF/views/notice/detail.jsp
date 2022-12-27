@@ -11,12 +11,8 @@
 
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="notice" name="title" />
+	<jsp:param value="공지사항" name="title" />
 </jsp:include>
-
-
-
-
 
 <div class="container-fluid mt-5 mb-5">
 	<div>

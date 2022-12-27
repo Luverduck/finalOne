@@ -6,7 +6,7 @@
   
 <%-- header --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="my page" name="title"/>
+	<jsp:param value="My Page" name="title"/>
 </jsp:include>
   
   <div class="container-fluid mt-3">

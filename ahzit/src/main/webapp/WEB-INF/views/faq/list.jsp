@@ -26,7 +26,7 @@
 </script>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="faq" name="title" />
+	<jsp:param value="FAQ 게시판" name="title" />
 </jsp:include>
 
 

@@ -4,7 +4,7 @@
 
 <%-- header.jsp 불러오기 --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="메인페이지" name="title" />
+	<jsp:param value="아지트 검색" name="title" />
 </jsp:include>
 
 <style>
