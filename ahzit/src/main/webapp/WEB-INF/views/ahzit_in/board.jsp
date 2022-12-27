@@ -1129,7 +1129,7 @@
 					var boardWriterGrade = response.data.boardList[i].memberGrade;
 					
 					var divtop_ul;
-					if(boardWriterGrade == '개설자' || memberNo == boardWriterNo) {
+					if(memberNo == boardWriterNo) {
 						divtop_ul = divtop_dropdown_ul.append(divtop_li_edit).append(divtop_li_delete);
 					} else {
 						divtop_ul = divtop_dropdown_ul.append(divtop_li_report);
@@ -1235,7 +1235,7 @@
 					var boardWriterGrade = response.data.boardList[i].memberGrade;
 					
 					var divtop_ul;
-					if(boardWriterGrade == '개설자' || memberNo == boardWriterNo) {
+					if(memberNo == boardWriterNo) {
 						divtop_ul = divtop_dropdown_ul.append(divtop_li_edit).append(divtop_li_delete);
 					} else {
 						divtop_ul = divtop_dropdown_ul.append(divtop_li_report);
@@ -1337,11 +1337,11 @@
 				// 로그인 중인 회원의 회원 번호
 				var memberNo = $("#div-member-info").data("memberno");
 				var memberGrade = $("#div-member-info").data("memberGrade");
-				var boardWriterNo = response.data.boardList[i].memberNo;
+				var boardWriterNo = response.data.boardList[i].boardWriterNo;
 				var boardWriterGrade = response.data.boardList[i].memberGrade;
 				
 				var divtop_ul;
-				if(boardWriterGrade == '개설자' || memberNo == boardWriterNo) {
+				if(memberGrade == '개설자' || memberNo == boardWriterNo) {
 					divtop_ul = divtop_dropdown_ul.append(divtop_li_edit).append(divtop_li_delete);
 				} else {
 					divtop_ul = divtop_dropdown_ul.append(divtop_li_report);
