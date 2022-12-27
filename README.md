@@ -1,4 +1,4 @@
-![poster](./logo-ahzit.png)
+<img src = "./logo-ahzit.png", width = "30%">
 ===========================
 
 :information_desk_person: 아지트(Ahzit) 소개
