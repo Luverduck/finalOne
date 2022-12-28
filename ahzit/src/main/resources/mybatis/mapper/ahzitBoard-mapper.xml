@@ -71,7 +71,7 @@
 		                select * from (
 		                    select * from (
 		                        select * from (
-		                            select * from ahzit_board ab inner join ahzit_member am on ab.board_writer_no = am.member_no where member_ahzit_no = 84 and ab.board_state != 'Y' and instr(ab.board_content, #{keyword}) > 0
+		                            select * from ahzit_board ab inner join ahzit_member am on ab.board_writer_no = am.member_no where member_ahzit_no = #{memberAhzitNo} and ab.board_state != 'Y' and instr(ab.board_content, #{keyword}) > 0
 		                        )abam left outer join board_attachment ba on abam.board_no = ba.board_origin_no
 		                    )abamba left outer join ahzit_reply ar on abamba.board_no = ar.reply_origin_no
 		                ) abambaar left outer join ahzit_board_like abl on abambaar.board_no = abl.board_like_no
@@ -83,8 +83,13 @@
 	</select>
 	
 	<!-- 특정 소모임 내 게시글 총 갯수 -->
-	<select id = "countBoard" parameterType = "int" resultType = "int">
+	<select id = "countAllBoard" parameterType = "int" resultType = "int">
 		select count(*) from ahzit_board where board_ahzit_no = #{boardAhzitNo}
+	</select>
+	
+	<!-- 특정 소모임 내 게시글 검색 결과 갯수 -->
+	<select id = "countSearchBoard" parameterType = "map" resultType = "int">
+		select count(*) from ahzit_board where board_ahzit_no = #{boardAhzitNo} and instr(board_content, #{keyword}) > 0
 	</select>
 	
 	<!-- 소모임 게시글 수정 -->

@@ -60,10 +60,10 @@ public class AhzitBoardDaoImpl implements AhzitBoardDao {
 	@Override
 	public List<AhzitBoardVO> selectBoardList(AhzitBoardListRestRequestVO ahzitBoardListRestRequestVO) {
 		// 검색어 존재 여부에 따라 다른 처리
-		if(ahzitBoardListRestRequestVO.getKeyword().equals("")) { // 검색어가 없을 경우
-			return allBoardList(ahzitBoardListRestRequestVO); // 전체 조회
-		} else { // 검색어가 있을 경우
+		if(ahzitBoardListRestRequestVO.getKeyword() != null) { // 검색어가 있을 경우
 			return searchBoardList(ahzitBoardListRestRequestVO); // 검색 조회
+		} else { // 검색어가 있을 경우
+			return allBoardList(ahzitBoardListRestRequestVO); // 전체 조회
 		}
 	}
 
@@ -94,10 +94,31 @@ public class AhzitBoardDaoImpl implements AhzitBoardDao {
 		return sqlSession.selectList("ahzitBoard.searchList", param);
 	}
 	
+	// 추상 메소드 오버라이딩 - 특정 소모임 내 게시글 갯수
+	@Override
+	public int countBoard(AhzitBoardListRestRequestVO ahzitBoardListRestRequestVO) {
+		if(ahzitBoardListRestRequestVO.getKeyword() != null) {
+			return countSearchBoard(ahzitBoardListRestRequestVO.getAhzitNo(), ahzitBoardListRestRequestVO.getKeyword());
+		} else {
+			return countAllBoard(ahzitBoardListRestRequestVO.getAhzitNo());
+		}
+	}
+	
 	// 추상 메소드 오버라이딩 - 특정 소모임 내 게시글 총 갯수
 	@Override
-	public int countBoard(int ahzitNo) {
-		return sqlSession.selectOne("ahzitBoard.countBoard", ahzitNo);
+	public int countAllBoard(int ahzitNo) {
+		return sqlSession.selectOne("ahzitBoard.countAllBoard", ahzitNo);
+	}
+	
+	// 추상 메소드 오버라이딩 - 특정 소모임 내 게시글 검색 결과 총 갯수
+	@Override
+	public int countSearchBoard(int ahzitNo, String keyword) {
+		// 바인딩 변수를 저장할 Map 생성
+		Map<String, String> param = new HashMap<>();
+		// 바인딩 변수로 사용할 값 저장
+		param.put("boardAhzitNo", String.valueOf(ahzitNo));
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("ahzitBoard.countSearchBoard", param);
 	}
 
 	// 추상 메소드 오버라이딩 - 소모임 게시글 수정

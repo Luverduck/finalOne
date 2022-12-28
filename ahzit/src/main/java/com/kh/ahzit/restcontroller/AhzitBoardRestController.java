@@ -66,19 +66,19 @@ public class AhzitBoardRestController {
 	
 	// 소모임 게시글 조회 Mapping
 	@GetMapping("/search")
-	public AhzitBoardListRestResponseVO selectList(@RequestParam int ahzitNo, @RequestParam int memberNo, @RequestParam String keyword, @RequestParam int p
-			//@RequestBody AhzitBoardListRestRequestVO ahzitBoardListRestRequestVO
-			) {
+	public AhzitBoardListRestResponseVO selectList(@RequestParam int ahzitNo, @RequestParam int memberNo, @RequestParam(required=false) String keyword, @RequestParam int p) {
 		// REST 응답 VO 생성
 		AhzitBoardListRestResponseVO ahzitBoardListRestResponseVO = new AhzitBoardListRestResponseVO();
 		// Rest 요청을 받아 처리하는 VO 생성
 		AhzitBoardListRestRequestVO ahzitBoardListRestRequestVO = new AhzitBoardListRestRequestVO();
 		ahzitBoardListRestRequestVO.setAhzitNo(ahzitNo);
 		ahzitBoardListRestRequestVO.setMemberNo(memberNo);
-		ahzitBoardListRestRequestVO.setKeyword(keyword);
 		ahzitBoardListRestRequestVO.setP(p);
+		if(keyword != null) {
+			ahzitBoardListRestRequestVO.setKeyword(keyword);
+		}
 		// 소모임 내 모든 게시글 갯수 반환
-		int boardCount = ahzitBoardDao.countBoard(ahzitBoardListRestRequestVO.getAhzitNo());
+		int boardCount = ahzitBoardDao.countBoard(ahzitBoardListRestRequestVO);
 		// 소모임 내 게시글 마지막 페이지를 반환
 		ahzitBoardListRestRequestVO.setTotal(boardCount);
 		int pLast = ahzitBoardListRestRequestVO.blockLast();

@@ -349,7 +349,6 @@
 				method : "delete"
 			})
 			.then(function(response){
-				//console.log("삭제 성공");
 				target.remove();
 			});
 		});
@@ -358,12 +357,10 @@
 		$(document).on("click", ".li-reply-edit", function(){
 			// 댓글 번호
 			var replyNo = $(this).data("replyno");
-			//console.log(replyNo);
 			
 			var content = $(this).parents(".div-icon-dropdown").prev().children(".div-reply-content").children();
 			
 			var reply_content = content.text();
-			console.log(reply_content);
 			
 			var editor = $(this).parents(".div-icon-dropdown").prev().children(".div-reply-editor");
 			
@@ -384,7 +381,6 @@
 			// 댓글 수정 - 댓글 수정 DB 처리
 			$(document).on("click", ".btn-reply-edit-submit", function(){
 				var replyContent = editor_input.val();
-				//console.log(replyContent);
 				axios({
 					url : "${pageContext.request.contextPath}/rest_reply/edit",
 					method : "put",
@@ -429,7 +425,6 @@
 				}
 			})
 			.then(function(response){
-				console.log(response);
 				// 댓글 리스트
 				// 1) 댓글 외부 컨테이너
 				var div_reply_outer_container = $("<div>").attr("class", "d-flex flex-column align-items-start px-3 py-1 border-top div-board div-reply div-reply-container");
@@ -542,7 +537,6 @@
 				}
 			})
 			.then(function(response){
-				//console.log(response);
 				
 				for(var i = 0 ; i < response.data.replyList.length ; i ++){
 					// 댓글 리스트
@@ -630,16 +624,13 @@
 			var boardNo = $(this).data("boardno"); // 댓글 원본 번호
 			
 			//var targetMore = $(this).parents(".div-reply-button").nextAll(".div-reply-more");
-			//console.log("1 = " + targetMore);
 			
 			//var targetMore = $(this).parents(".div-reply-button");
 			var target = $(this).parents(".div-reply-button").nextAll(".div-reply-list");
-			//console.log("2 = " + target);
+
 			
 			var fold_state = $(this).attr("data-fold");
 			var reply_list_state = $(this).attr("data-replylist");
-			
-			//console.log("현재 상태 = " + fold_state);
 			
 			if(fold_state == "1") { // 펼친 상태이면(1)
 				$(this).attr("data-fold", "0"); // 접힌 상태로 바꾸기(0)
@@ -669,13 +660,8 @@
 					})
 					.then(function(response){
 						
-						//console.log(response);
-						//rpLast = response.data.rpLast;
-						
 						if(response.data.length != 0) {
 							// 더보기 버튼
-							console.log("replyLenght = " + response.data.replyList.length)
-							console.log("replyCount = " + response.data.replyCount)
 							replyCount = response.data.replyCount;
 							if(response.data.replyList.length < response.data.replyCount) {
 								var div_reply_more_container = $("<div>").attr("class", "d-flex justify-content-center align-items-center border-top border-bottom div-reply-more");
@@ -787,9 +773,6 @@
 	
 	// 초기 1페이지
 	var p = 1;
-	
-	// 초기 검색어
-	var keyword = "";
 	
 	// 총 게시글 수
 	var pLast;
@@ -979,7 +962,6 @@
 		// 게시글 수정 비동기 처리
         // - 게시글 수정 클릭시 게시글 수정 Modal 열기
         $(document).on("click", ".editor-open-edit", function(e){
-        	console.log($(this));
         	// 게시글 수정 Modal 열기
             $("#modal-edit").modal("show");
         	// - 클릭한 게시글 수정 버튼의 data 값을 Modal의 data 값으로 설정
@@ -1027,11 +1009,8 @@
     				}
     			})
     			.then(function(response){
-    				console.log(response);
-    				console.log(boardContent);
     				// 새로운 내용으로 교체
     				boardContent.html(editorContent);
-    				console.log(boardContent.html());
     	         	// 게시글 수정 Modal 닫기
     	            $("#modal-edit").modal("hide");
     			});
@@ -1072,25 +1051,30 @@
 		});
 	});
 	
+	var keyword = "";
+	
 	// 정적 태그에 대한 이벤트 - 하나의 function 안에 정적 이벤트와 동적 이벤트가 같이 있으면 동작하지 않는지?
 	$(function(){
 		// 게시글 검색 비동기 처리
-    	$(".btn-search-submit").click(function(){
+    	$(document).on("click", ".btn-search-submit", function(){
 			var ahzitNo = $("#div-member-info").data("ahzitno");
 			var memberNo = $("#div-member-info").data("memberno");
+			
+			// 1페이지로 초기화
+			p = 1;
+			
+			// 검색어
 			keyword = $(".input-search").val();
+			
+			console.log(keyword);
+			
+			var url = "${pageContext.request.contextPath}/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&p=" + p + "&keyword=" + keyword;
+			
 			axios({
-				url : "${pageContext.request.contextPath}/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&keyword=" + keyword + "&p=" + p,
+				url : url,
 				method : "get"
-				/*data : {
-					ahzitNo : ahzitNo,
-					memberNo : memberNo,
-					keyword : keyword,
-					p : p
-				}*/
 			})
 			.then(function(response){
-				console.log(response);
 				// 게시글 작성 영역 삭제 (게시글 작성시 검색 목록이 아닌 전체 목록의 가장 상단에 붙여야 하지만 페이지를 갱신하지 않고는 어려운 것 같다)
 				$(".div-editor-insert").remove();
 				$("#div-board-list").empty();
@@ -1173,7 +1157,7 @@
 		            $("#div-board-list").append(div_container);
 				}
 				
-				$(".input-search").val("");
+				$(".input-search").val(keyword);
 			});
 		});
 	});
@@ -1189,15 +1173,19 @@
 			var ahzitNo = $("#div-member-info").data("ahzitno");
 			var memberNo = $("#div-member-info").data("memberno");
 			
+			keyword = $(".input-search").val();
+			console.log(keyword);
+
+			var url;
+			if(keyword != "") {
+				url = "${pageContext.request.contextPath}/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&keyword=" + keyword + "&p=" + p;
+			} else {
+				url = "${pageContext.request.contextPath}/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&p=" + p;
+			}
+			
 			axios({
-				url : "${pageContext.request.contextPath}/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&keyword=" + keyword + "&p=" + p,
+				url : url,
 				method : "get"
-				/* data : {
-					ahzitNo : ahzitNo,
-					memberNo : memberNo,
-					keyword : keyword,
-					p : p
-				} */
 			})
 			.then(function(response){
 				
@@ -1286,23 +1274,16 @@
 	function loadList(){
 		var ahzitNo = $("#div-member-info").data("ahzitno");
 		var memberNo = $("#div-member-info").data("memberno");
-		keyword = "";
-		p = 1;
+		
+		var url = "${pageContext.request.contextPath}/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&p=" + p;
+		
 		axios({
-			url : "${pageContext.request.contextPath}/rest_board/search?ahzitNo=" + ahzitNo + "&memberNo=" + memberNo + "&keyword=" + keyword + "&p=" + p,
+			url : url,
 			method : "get"
-			/* data : {
-				ahzitNo : ahzitNo,
-				memberNo : memberNo,
-				keyword : keyword,
-				p : p
-			} */
 		})
 		.then(function(response){
-			console.log(response);
 			if(response.data.boardList[0] == null) return;
 			pLast = response.data.plast; // 끝 페이지에 도달하면 비동기 조회를 막기 위해 페이지 끝 번호 설정
-			//console.log(pLast);
 			
 			$("#div-board-list").empty();
 			for(var i = 0 ; i < response.data.boardList.length ; i ++){

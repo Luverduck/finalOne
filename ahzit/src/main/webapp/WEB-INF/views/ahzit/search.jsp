@@ -132,7 +132,7 @@
     }
 </style>
 
-<div class = "container-fluid mt-3">
+<div class = "container-fluid mt-3 mb-5">
 	<div class = "row">
 		<div class = "col-8 offset-2">
 
@@ -390,6 +390,3 @@
 	});
 	
 </script>
-
-<%-- footer --%>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
