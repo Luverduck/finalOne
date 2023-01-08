@@ -88,12 +88,12 @@
 
 #### 최승리 https://github.com/seungrii
 * 공지사항 게시판 구현
-  - 공지사항 게시글 CRUD 및 페이징 구현
+  - 공지사항 게시글 CRUD 및 페이징 구현(Summer Note 에디터 적용)
   - 공지사항 첨부파일 CRUD 구현
   - 공지사항 상세 조회시 조회수 중복 증가 방지 구현
   - 공지사항 첨부파일
 * FAQ 게시판 구현
-  - FAQ CRUD 및 페이징 구현
+  - FAQ CRUD 및 페이징 구현(Summer Note 에디터 적용)
 * UI 구현
   - 메인 페이지
   - 검색 결과 페이지
